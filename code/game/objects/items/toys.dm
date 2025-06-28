@@ -951,7 +951,7 @@
 
 /obj/item/toy/figure/bartender
 	name = "\improper Bartender action figure"
-	icon_state = "bartender"
+	icon_state = "Lounge Steward"
 	toysay = "Where is Pun Pun?"
 
 /obj/item/toy/figure/borg
@@ -992,7 +992,7 @@
 
 /obj/item/toy/figure/chemist
 	name = "\improper Chemist action figure"
-	icon_state = "chemist"
+	icon_state = "Pharmacologist"
 	toysay = "Get your pills!"
 
 /obj/item/toy/figure/clown
@@ -1057,7 +1057,7 @@
 	toysay = "One day while..."
 
 /obj/item/toy/figure/md
-	name = "\improper " + JOB_ACOLYTE + "action figure"
+	name = "\improper " + JOB_MEDICAE_TECHNICIAN + "action figure"
 	icon_state = "md"
 	toysay = "The patient is already dead!"
 
