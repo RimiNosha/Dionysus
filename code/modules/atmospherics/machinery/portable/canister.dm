@@ -564,11 +564,36 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 /obj/machinery/portable_atmospherics/canister/ui_state(mob/user)
 	return GLOB.physical_state
 
-/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "Canister", name)
+// /obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, datum/tgui/ui)
+// 	ui = SStgui.try_update_ui(user, src, ui)
+// 	if(!ui)
+// 		ui = new(user, src, "Canister", name)
+// 		ui.open()
+
+/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", datum/dioui/ui, force_open = TRUE)
+	ui = SSdioui.try_update_ui(user, src, ui_key, ui, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "canister.nj", "Canister", 480, 400)
+		ui.set_initial_data(dioui_data(user, ui_monkey_back))
 		ui.open()
+		ui.set_auto_update(TRUE)
+
+/obj/machinery/portable_atmospherics/canister/dioui_data(mob/user, ui_key)
+	var/list/data = ..(user, ui_key)
+	data["name"] = name
+	data["canLabel"] = TRUE
+	data["portConnected"] = !!connected_port
+	data["tankPressure"] = round(air_contents.returnPressure() ? air_contents.returnPressure() : 0)
+	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
+	data["minReleasePressure"] = round(0.1 * ONE_ATMOSPHERE)
+	data["maxReleasePressure"] = round(10 * ONE_ATMOSPHERE)
+	data["valveOpen"] = valve_open ? 1 : 0
+
+	data["hasHoldingTank"] = holding ? 1 : 0
+	if (holding)
+		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.returnPressure()))
+
+	return data
 
 /obj/machinery/portable_atmospherics/canister/ui_static_data(mob/user)
 	return list(
