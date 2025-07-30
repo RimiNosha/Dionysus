@@ -20,6 +20,7 @@
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_GRILLE
 	canSmoothWith = SMOOTH_GROUP_GRILLE
+	var/icon/broken_icon = 'icons/obj/smooth_structures/grille_broken.dmi'
 	var/rods_type = /obj/item/stack/rods
 	var/rods_amount = 2
 	var/rods_broken = TRUE
@@ -41,6 +42,7 @@
 /obj/structure/grille/update_icon_state()
 	. = ..()
 	if(broken)
+		icon = broken_icon
 		icon_state = "brokengrille"
 
 /obj/structure/grille/set_smoothed_icon_state(new_junction)
