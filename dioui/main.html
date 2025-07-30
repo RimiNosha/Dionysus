@@ -20,12 +20,6 @@
 				//}
 			}
 		</script>
-		<script type="module">
-			import { nunjucks } from "./{{:nunjucks_location}}";
-
-			nunjucks.configure(".", { autoescape: true });
-			document.getElementById("uiLayout").innerHTML = nunjucks.render("{{:target_template}}", {{:initial_data_json}});
-		</script>
 	</head>
 	<body scroll="auto" data-url-parameters="{{:url_parameters_json}}">
 		<div id="uiLayout"></div>
@@ -40,5 +34,11 @@
 				</p>
 			</div>
 		</noscript>
+		<script type="module">
+			document.querySelector("body").onload = function() {
+				nunjucks.configure(".", { autoescape: true });
+				document.getElementById("uiLayout").innerHTML = nunjucks.render("{{:template_location}}", {{:initial_data_json}});
+			};
+		</script>
 	</body>
 </html>

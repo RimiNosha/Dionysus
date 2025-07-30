@@ -1,6 +1,6 @@
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 /datum/asset/dioui
-	// early = TRUE
+	early = TRUE
 
 	var/list/common = list()
 	var/list/uncommon = list()
@@ -73,7 +73,7 @@
 
 /datum/asset/dioui/send(client, uncommon)
 	// . = SSassets.transport.send_assets(client, DIOUI_TEMPLATE_FILE_NAME)
-	. = . && SSassets.transport.send_assets(client, templates)
+	. = SSassets.transport.send_assets(client, templates)
 	. = . && SSassets.transport.send_assets(client, common)
 	. = . && SSassets.transport.send_assets(client, uncommon)
 

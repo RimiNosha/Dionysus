@@ -4,7 +4,7 @@
 		Tank Label:
 	</div>
 	<div class="itemContent">
-		<div style="float: left; width: 180px;">{{ name }}</div> {{ helper.link('Relabel', 'pencil', {'relabel' : 1}, canLabel ? null : 'disabled') }}
+		<div style="float: left; width: 180px;">{{ name }}</div> {# {{ helper.link('Relabel', 'pencil', {'relabel' : 1}, canLabel ? null : 'disabled') }} #}
 	</div>
 </div>
 
@@ -22,18 +22,18 @@
 		Port Status:
 	</div>
 	<div class="itemContent">
-		{{ portConnected ? '<span class="good">Connected</span>' : '<span class="average">Disconnected</span>' }}
+		{# {{ portConnected ? '<span class="good">Connected</span>' : '<span class="average">Disconnected</span>' }} #}
 	</div>
 </div>
 
 <h3>Holding Tank Status</h3>
-{{if hasHoldingTank }}
+{% if hasHoldingTank %}
 	<div class="item">
 		<div class="itemLabel">
 			Tank Label:
 		</div>
 		<div class="itemContent">
-			<div style="float: left; width: 180px;">{{ holdingTank.name }}</div> {{ helper.link('Eject', 'eject', {'remove_tank' : 1}) }}
+			<div style="float: left; width: 180px;">{{ holdingTank.name }}</div> {# {{ helper.link('Eject', 'eject', {'remove_tank' : 1}) }} #}
 		</div>
 	</div>
 
@@ -45,10 +45,10 @@
 			{{ holdingTank.tankPressure }} kPa
 		</div>
 	</div>
-{{else }}
+{% else %}
 	<div class="item"><span class="average"><i>No holding tank inserted.</i></span></div>
 	<div class="item">&nbsp;</div>
-{{/if }}
+{% endif %}
 
 
 <h3>Release Valve Status</h3>
@@ -77,7 +77,7 @@
 		Release Valve:
 	</div>
 	<div class="itemContent">
-		{{ helper.link('Open', 'unlocked', {'toggle' : 1}, valveOpen ? 'selected' : null) }}{{ helper.link('Close', 'locked', {'toggle' : 1}, valveOpen ? null : 'selected') }}
+		{# {{ helper.link('Open', 'unlocked', {'toggle' : 1}, valveOpen ? 'selected' : null) }}{{ helper.link('Close', 'locked', {'toggle' : 1}, valveOpen ? null : 'selected') }} #}
 	</div>
 </div>
 

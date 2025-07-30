@@ -370,7 +370,7 @@ dioui is used to open and update dio browser uis
 	var/url_parameters_json = json_encode(list("src" = "\ref[src]"))
 
 	var/main_template = rustg_file_read("dioui/main.html")
-	var/replacelist = list("head_content" = head_content, "target_template" = target_template, "initial_data_json" = initial_data_json, "url_parameters_json" = url_parameters_json, "nunjucks_location" = SSassets.transport.get_asset_url("nunjucks.3.2.4.min.js"))
+	var/replacelist = list("head_content" = head_content, "target_template" = target_template, "initial_data_json" = initial_data_json, "url_parameters_json" = url_parameters_json, "nunjucks_location" = SSassets.transport.get_asset_url("nunjucks.3.2.4.min.js"), "template_location" = SSassets.transport.get_asset_url(target_template))
 	for(var/string in replacelist)
 		main_template = replacetext(main_template, "{{:[string]}}", replacelist[string])
 	return main_template
@@ -393,7 +393,6 @@ dioui is used to open and update dio browser uis
 	if(update_status(0))
 		return // Will be closed by update_status().
 
-	load_asset_datum(/datum/asset/dioui)
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
