@@ -116,6 +116,7 @@ dioui is used to open and update dio browser uis
 
 	add_script("htmx.2.0.6.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
 	add_script("nunjucks.3.2.4.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
+	add_script("jquery.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
 	// add_script("dio_utility.js") // The DioUtility JS, this is used to store utility functions.
 	// add_script("dio_template.js") // The DioTemplate JS, this is used to render templates.
 	// add_script("dio_state_manager.js") // The DioStateManager JS, it handles updates from the server and passes data to the current state

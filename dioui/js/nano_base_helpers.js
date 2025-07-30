@@ -245,78 +245,6 @@ export const NanoBaseHelpers = (function () {
 				"</div></div>"
 			);
 		},
-		// Display DNA Blocks (for the DNA Modifier UI)
-		displayDNABlocks: function (
-			dnaString,
-			selectedBlock,
-			selectedSubblock,
-			blockSize,
-			paramKey,
-		) {
-			if (!dnaString) {
-				return '<div class="notice">Please place a valid subject into the DNA modifier.</div>';
-			}
-
-			var characters = dnaString.split("");
-
-			var html =
-				'<div class="dnaBlock"><div class="link dnaBlockNumber">1</div>';
-			var block = 1;
-			var subblock = 1;
-			for (index in characters) {
-				if (
-					!characters.hasOwnProperty(index) ||
-					typeof characters[index] === "object"
-				) {
-					continue;
-				}
-
-				var parameters;
-				if (paramKey.toUpperCase() == "UI") {
-					parameters = {
-						selectUIBlock: block,
-						selectUISubblock: subblock,
-					};
-				} else {
-					parameters = {
-						selectSEBlock: block,
-						selectSESubblock: subblock,
-					};
-				}
-
-				var status = "linkActive";
-				if (block == selectedBlock && subblock == selectedSubblock) {
-					status = "selected";
-				}
-
-				html +=
-					'<div class="link ' +
-					status +
-					' dnaSubBlock" data-href="' +
-					NanoUtility.generateHref(parameters) +
-					'" id="dnaBlock' +
-					index +
-					'">' +
-					characters[index] +
-					"</div>";
-
-				index++;
-				if (index % blockSize == 0 && index < characters.length) {
-					block++;
-					subblock = 1;
-					html +=
-						'</div><div class="dnaBlock"><div class="link dnaBlockNumber">' +
-						block +
-						"</div>";
-				} else {
-					subblock++;
-				}
-			}
-
-			html += "</div>";
-
-			return html;
-		},
 		byondTimeOfDay: function _byondTimeOfDay() {
 			if (typeof _byondTimeOfDay.midnight == "undefined") {
 				_byondTimeOfDay.midnight = new Date().setUTCHours(0, 0, 0, 0);
@@ -326,15 +254,6 @@ export const NanoBaseHelpers = (function () {
 	};
 
 	return {
-		addHelpers: function () {
-			NanoTemplate.addHelpers(_baseHelpers);
-		},
-		removeHelpers: function () {
-			for (var helperKey in _baseHelpers) {
-				if (_baseHelpers.hasOwnProperty(helperKey)) {
-					NanoTemplate.removeHelper(helperKey);
-				}
-			}
-		},
+		helpers: _baseHelpers,
 	};
 })();

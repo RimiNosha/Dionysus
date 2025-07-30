@@ -34,10 +34,13 @@
 				</p>
 			</div>
 		</noscript>
-		<script type="module">
-			document.querySelector("body").onload = function() {
+		<script>
+			document.querySelector("body").onload = function () {
 				nunjucks.configure(".", { autoescape: true });
-				document.getElementById("uiLayout").innerHTML = nunjucks.render("{{:template_location}}", {{:initial_data_json}});
+				document.getElementById("uiLayout").innerHTML = nunjucks.render(
+					"{{:template_location}}",
+					JSON.parse("{{:initial_data_json}}"),
+				);
 			};
 		</script>
 	</body>
