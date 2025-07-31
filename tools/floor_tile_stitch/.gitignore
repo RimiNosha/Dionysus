@@ -1,4 +1,3 @@
 # Let's ignore people's converted sprites.
 *.png
 *.dmi
-!template.dmi
