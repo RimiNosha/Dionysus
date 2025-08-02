@@ -570,15 +570,15 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 // 		ui = new(user, src, "Canister", name)
 // 		ui.open()
 
-/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", datum/dioui/ui, force_open = TRUE)
-	ui = SSdioui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "canister.nj", "Canister", 480, 400)
-		ui.set_initial_data(dioui_data(user, ui_monkey_back))
+		ui = new(user, src, ui_key, "canister.tmpl", "Canister", 480, 400)
+		ui.set_initial_data(nanoui_data(user, ui_monkey_back))
 		ui.open()
 		ui.set_auto_update(TRUE)
 
-/obj/machinery/portable_atmospherics/canister/dioui_data(mob/user, ui_key)
+/obj/machinery/portable_atmospherics/canister/nanoui_data(mob/user, ui_key)
 	var/list/data = ..(user, ui_key)
 	data["name"] = name
 	data["canLabel"] = TRUE
