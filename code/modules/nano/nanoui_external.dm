@@ -69,3 +69,58 @@
  **/
 /datum/proc/nanoui_data(mob/user, ui_key = "main")
 	return list()
+
+/datum/proc/nanoui_act(action, list/params, list/href_list, datum/nanoui/ui)
+	return FALSE
+
+
+/**
+ * Middleware for /client/Topic.
+ *
+ * return bool If TRUE, prevents propagation of the topic call.
+ */
+/proc/nanoui_Topic(href_list)
+	var/mob/user = usr
+	// Skip non-nanoui topics
+	if(!href_list["nanoui"] || !istype(user))
+		return FALSE
+	var/type = href_list["type"]
+	// // Unconditionally collect tgui logs
+	// if(type == "log")
+	// 	var/context = href_list["window_id"]
+	// 	if (href_list["ns"])
+	// 		context += " ([href_list["ns"]])"
+	// 	log_tgui(usr, href_list["message"],
+	// 		context = context)
+	// // Reload all tgui windows
+	// if(type == "cacheReloaded")
+	// 	if(!check_rights(R_ADMIN) || usr.client.tgui_cache_reloaded)
+	// 		return TRUE
+	// 	// Mark as reloaded
+	// 	usr.client.tgui_cache_reloaded = TRUE
+	// 	// Notify windows
+	// 	var/list/windows = usr.client.tgui_windows
+	// 	for(var/window_id in windows)
+	// 		var/datum/tgui_window/window = windows[window_id]
+	// 		if (window.status == TGUI_WINDOW_READY)
+	// 			window.on_message(type, null, href_list)
+	// 	return TRUE
+	// Locate window
+	var/window_id = href_list["window_id"]
+	var/datum/nanoui/window
+	if(window_id)
+		window = locate(window_id)
+		if(!window)
+			// log_tgui(usr,
+			// 	"Error: Couldn't find the window datum, force closing.",
+			// 	context = window_id)
+			usr.client.uiclose(window_id)
+			return TRUE
+	// Decode payload
+	var/payload
+	if(href_list["payload"])
+		payload = json_decode(href_list["payload"])
+	// Pass message to window
+	if(window)
+		window.on_message(type, payload, href_list)
+	return TRUE

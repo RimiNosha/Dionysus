@@ -4,7 +4,7 @@
 		Tank Label:
 	</div>
 	<div class="itemContent">
-		<input type="text" id="label" value="{{:data.name}}">
+		<input type="text" id="label" value="{{:data.name}}" onkeyup="byond_sendMessage('act/relabel', {name: $(this).val()})" onkeydown="byond_sendMessage('act/relabel', {name: $(this).val()})">
 		<!-- <div style="float: left; width: 180px;">{{:data.name}}</div> {{:helper.link('Relabel', 'pencil', {'relabel' : 1}, data.canLabel ? null : 'disabled')}} -->
 	</div>
 </div>

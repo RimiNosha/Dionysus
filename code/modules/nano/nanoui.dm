@@ -113,8 +113,11 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/add_common_assets()
-	add_script("morphdom.js") //for partial dom updates
+	add_script("morphdom.2.2.7.js") //for partial dom updates
 	add_script("libraries.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
+	add_script("nano_byond.js") // The NanoUtility JS, this is used to store utility functions.
+	add_script("nano_global_events.js") // The NanoUtility JS, this is used to store utility functions.
+	add_script("nano_input_passthrough.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_utility.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_template.js") // The NanoTemplate JS, this is used to render templates.
 	add_script("nano_state_manager.js") // The NanoStateManager JS, it handles updates from the server and passes data to the current state
@@ -153,7 +156,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return 1 if closed, null otherwise.
   */
-/datum/nanoui/proc/update_status(var/push_update = 0)
+/datum/nanoui/proc/update_status(push_update = FALSE)
 	var/atom/host = src_object
 	if(!host)
 		close()
@@ -394,7 +397,7 @@ nanoui is used to open and update nano browser uis
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
-	if(update_status(0))
+	if(update_status())
 		return // Will be closed by update_status().
 
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
@@ -453,38 +456,24 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/push_data(data, force_push = 0)
-	if(update_status(0))
+	if(update_status())
 		return // Closed
 	if (status == UI_DISABLED && !force_push)
 		return // Cannot update UI, no visibility
 
 	user << output(list2params(list(/*strip_improper(*/json_encode(get_send_data(data))/*)*/)),"[window_id].browser:receiveUpdateData")
 
- /**
-  * This Topic() proc is called whenever a user clicks on a link within a Nano UI
-  * If the UI status is currently UI_INTERACTIVE then call the src_object Topic()
-  * If the src_object Topic() returns 1 (true) then update all UIs attached to src_object
-  *
-  * @return nothing
-  */
-/datum/nanoui/Topic(href, href_list)
-	update_status(0) // update the status
+/datum/nanoui/proc/on_message(type, list/payload, list/href_list)
+	update_status() // update the status
 	if (status != UI_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
 		return
 
-	// // This is used to toggle the nano map ui
-	// var/map_update = 0
-	// if(href_list["showMap"])
-	// 	set_show_map(text2num(href_list["showMap"]))
-	// 	map_update = 1
+	if(!type || copytext(type, 1, 5) != "act/")
+		return
 
-	// if(href_list["mapZLevel"])
-	// 	var/map_z = text2num(href_list["mapZLevel"])
-	// 	if(isMapLevel(map_z))
-	// 		set_map_z_level(map_z)
-	// 		map_update = 1
+	var/act_type = copytext(type, 5)
 
-	if ((src_object && src_object.ui_act(href, href_list, null, state))/* || map_update*/)
+	if ((src_object && src_object.nanoui_act(act_type, payload, href_list, src))/* || map_update*/)
 		SSnanoui.update_uis(src_object) // update all UIs attached to src_object
 
  /**

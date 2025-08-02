@@ -4,24 +4,32 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=\"utf-8\"">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		{{:head_content}}
+
 		<script type='text/javascript'>
-			function receiveUpdateData(jsonString)
-			{
+			var byond_windowId;
+
+			function receiveUpdateData(jsonString) {
 				// We need both jQuery and NanoStateManager to be able to recieve data
 				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoStateManager != 'undefined' && typeof jQuery != 'undefined')
 				{
 					NanoStateManager.receiveUpdateData(jsonString);
 				}
-				//else
-				//{
-				//	alert('browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
-				//}
+				else
+				{
+					alert('browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
+				}
+			}
+
+			function nanoUIInit() {
+				byond_windowId = $("body").data("urlParameters")["src"];
+				setupGlobalEvents();
+				setupHotKeys();
 			}
 		</script>
-		{{:head_content}}
 	</head>
-	<body scroll=auto data-template-data='{{:template_data_json}}' data-url-parameters='{{:url_parameters_json}}' data-initial-data='{{:initial_data_json}}'>
+	<body scroll=auto data-template-data='{{:template_data_json}}' data-url-parameters='{{:url_parameters_json}}' data-initial-data='{{:initial_data_json}}' onload="nanoUIInit()">
 		<div id='uiLayout'>
 		</div>
 		<noscript>

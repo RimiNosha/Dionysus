@@ -83,6 +83,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
 			return
 
+	if(nanoui_Topic(href_list))
+		return
 	// Tgui Topic middleware
 	if(tgui_Topic(href_list))
 		return

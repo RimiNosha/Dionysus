@@ -640,25 +640,28 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 		"cell_charge" = internal_cell?.percent()
 	)
 
-/obj/machinery/portable_atmospherics/canister/ui_act(action, params)
+/obj/machinery/portable_atmospherics/canister/nanoui_act(action, params)
 	. = ..()
 	if(.)
 		return
 	switch(action)
+		// if("relabel")
+		// 	var/label = tgui_input_list(usr, "New canister label", "Canister", GLOB.gas_id_to_canister)
+		// 	if(isnull(label))
+		// 		return
+		// 	if(!..())
+		// 		var/newtype = GLOB.gas_id_to_canister[label]
+		// 		if(newtype)
+		// 			var/obj/machinery/portable_atmospherics/canister/replacement = newtype
+		// 			investigate_log("was relabelled to [initial(replacement.name)] by [key_name(usr)].", INVESTIGATE_ATMOS)
+		// 			name = initial(replacement.name)
+		// 			desc = initial(replacement.desc)
+		// 			icon_state = initial(replacement.icon_state)
+		// 			base_icon_state = icon_state
+		// 			set_greyscale(initial(replacement.greyscale_colors), initial(replacement.greyscale_config))
 		if("relabel")
-			var/label = tgui_input_list(usr, "New canister label", "Canister", GLOB.gas_id_to_canister)
-			if(isnull(label))
-				return
-			if(!..())
-				var/newtype = GLOB.gas_id_to_canister[label]
-				if(newtype)
-					var/obj/machinery/portable_atmospherics/canister/replacement = newtype
-					investigate_log("was relabelled to [initial(replacement.name)] by [key_name(usr)].", INVESTIGATE_ATMOS)
-					name = initial(replacement.name)
-					desc = initial(replacement.desc)
-					icon_state = initial(replacement.icon_state)
-					base_icon_state = icon_state
-					set_greyscale(initial(replacement.greyscale_colors), initial(replacement.greyscale_config))
+			name = params["name"]
+			. = TRUE
 		if("restricted")
 			restricted = !restricted
 			if(restricted)

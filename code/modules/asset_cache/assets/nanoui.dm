@@ -80,7 +80,7 @@
 			SSassets.transport.send_assets(C, TEMPLATE_FILE_NAME)
 			to_chat(C, span_warning("Nanoui templates have been updated. Please close and reopen any browser windows."))
 
-/client/proc/resend_nanoui_templates()
+/client/verb/resend_nanoui_templates()
 	set category = "Debug"
 	set name = "Resend Nanoui Templates"
 	if(!check_rights(R_DEBUG))
@@ -97,7 +97,7 @@
 			send(C)
 			to_chat(C, span_warning("Nanoui assets have been updated. Please close and reopen any browser windows."))
 
-/client/proc/resend_nanoui_assets()
+/client/verb/resend_nanoui_assets()
 	set category = "Debug"
 	set name = "Resend Nanoui Assets"
 	if(!check_rights(R_DEBUG))

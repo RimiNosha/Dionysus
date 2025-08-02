@@ -85,12 +85,6 @@ NanoStateClass.prototype.onUpdate = function (data) {
 		);
 		return;
 	}
-
-	$("[id]").each(function (_, e) {
-		e.onKeydown = function (e) {
-			$(e).attr("userEdited", true);
-		};
-	});
 };
 
 NanoStateClass.prototype.onAfterUpdate = function (data) {
