@@ -24,7 +24,7 @@ Juke.setup({ file: import.meta.url }).then((code) => {
   process.exit(code);
 });
 
-const DME_NAME = "daedalus";
+const DME_NAME = "dionysus";
 const CUTTER_SUFFIX = ".png.toml";
 
 // Stores the contents of dependencies.sh as a key value pair
@@ -47,8 +47,6 @@ const getCutterPath = () => {
   const file_ver = ver.split(".").join("-");
   return `tools/icon_cutter/cache/hypnagogic${file_ver}${suffix}`;
 };
-
-const cutter_path = getCutterPath();
 
 export const DefineParameter = new Juke.Parameter({
   type: "string[]",
