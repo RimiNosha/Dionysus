@@ -28554,7 +28554,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "12"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/service,
+/obj/effect/mapping_helpers/access/all/service/general/airlock,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/service)
 "kCX" = (
@@ -44889,7 +44889,7 @@
 /obj/machinery/door/airlock{
 	name = "Service Hall"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/service,
+/obj/effect/mapping_helpers/access/all/service/general/airlock,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/greater)
 "qFh" = (
