@@ -122,6 +122,10 @@
 /obj/effect/mapping_helpers/airlock/access/any/security/hos : /obj/effect/mapping_helpers/access/any/security/hos/airlock
 /obj/effect/mapping_helpers/windoor/access/all/security/hos : /obj/effect/mapping_helpers/access/all/security/hos/windoor
 /obj/effect/mapping_helpers/windoor/access/any/security/hos : /obj/effect/mapping_helpers/access/any/security/hos/windoor
+/obj/effect/mapping_helpers/airlock/access/all/service : /obj/effect/mapping_helpers/access/all/service/general/airlock
+/obj/effect/mapping_helpers/airlock/access/any/service : /obj/effect/mapping_helpers/access/any/service/general/airlock
+/obj/effect/mapping_helpers/windoor/access/all/service : /obj/effect/mapping_helpers/access/all/service/general/windoor
+/obj/effect/mapping_helpers/windoor/access/any/service : /obj/effect/mapping_helpers/access/any/service/general/windoor
 /obj/effect/mapping_helpers/airlock/access/all/service/general : /obj/effect/mapping_helpers/access/all/service/general/airlock
 /obj/effect/mapping_helpers/airlock/access/any/service/general : /obj/effect/mapping_helpers/access/any/service/general/airlock
 /obj/effect/mapping_helpers/windoor/access/all/service/general : /obj/effect/mapping_helpers/access/all/service/general/windoor
