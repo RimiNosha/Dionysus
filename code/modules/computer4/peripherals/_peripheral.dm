@@ -9,10 +9,11 @@
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 
-	custom_materials = list(/datum/material/glass = 1000)
 	grind_results = list(/datum/reagent/silicon = 20)
 
 	w_class = WEIGHT_CLASS_SMALL
+
+	custom_materials = list(/datum/material/glass = 1000)
 
 	var/peripheral_type = ""
 
@@ -44,7 +45,7 @@
 /// Call peripheral_input after a specified amount of time
 /obj/item/peripheral/proc/deferred_peripheral_input(command, datum/signal/packet, time, completed)
 	if(!completed)
-		addtimer(CALLBACK(src, PROC_REF(deferred_peripheral_input), packet, 0, TRUE), time)
+		addtimer(CALLBACK(src, PROC_REF(deferred_peripheral_input), command, packet, 0, TRUE), time)
 		return
 
 	master_pc?.peripheral_input(src, command, packet)
