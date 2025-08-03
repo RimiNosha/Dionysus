@@ -2,6 +2,7 @@
 	name = "low wall"
 	desc = "A low wall, with space to mount windows or grilles on top of it."
 	icon = 'icons/obj/smooth_structures/low_wall.dmi'
+	var/icon/shine = 'icons/obj/smooth_structures/low_wall_shine.dmi'
 	icon_state = "wall-0"
 	base_icon_state = "wall"
 	color = "#57575c" //To display in mapping softwares
