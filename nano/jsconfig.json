@@ -1,0 +1,9 @@
+{
+	"__comment": "This file isn't actually used by anything other than VSCode. This is so you get proper typehinting in templates and JS files.",
+	"__comment2": "We are also using es2021 because all known versions of edge that work with byond support it.",
+	"__comment3": ".min.js files are ignored by VSCode, so make sure to include a non-min version in libraries.",
+	"compilerOptions": {
+		"module": "es2020",
+		"target": "es2021"
+	}
+}

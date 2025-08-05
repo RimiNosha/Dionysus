@@ -112,21 +112,21 @@ const handlePassthrough = (key) => {
 	const macro = byondMacros[byondKeyCode];
 	if (macro) {
 		// logger.debug("macro", macro);
-		return byond_command(macro);
+		return Byond.command(macro);
 	}
 	// KeyDown
 	if (key.isDown() && !keyState[byondKeyCode]) {
 		keyState[byondKeyCode] = true;
 		const command = `KeyDown "${byondKeyCode}"`;
 		// logger.debug(command);
-		return byond_command(command);
+		return Byond.command(command);
 	}
 	// KeyUp
 	if (key.isUp() && keyState[byondKeyCode]) {
 		keyState[byondKeyCode] = false;
 		const command = `KeyUp "${byondKeyCode}"`;
 		// logger.debug(command);
-		return byond_command(command);
+		return Byond.command(command);
 	}
 };
 
@@ -153,19 +153,19 @@ const releaseHeldKeys = () => {
 		if (keyState[byondKeyCode]) {
 			keyState[byondKeyCode] = false;
 			// logger.log(`releasing key "${byondKeyCode}"`);
-			byond_command(`KeyUp "${byondKeyCode}"`);
+			Byond.command(`KeyUp "${byondKeyCode}"`);
 		}
 	}
 };
 
 const updateHotkeyMode = () =>
-	byond_winget("mainwindow", "macro").then((macro) => {
+	Byond.winget("mainwindow", "macro").then((macro) => {
 		hotkeyMode = macro !== "old_default";
 	});
 
 const setupHotKeys = () => {
 	// Read macros
-	byond_winget("default.*").then((data) => {
+	Byond.winget("default.*").then((data) => {
 		// Group each macro by ref
 		const groupedByRef = {};
 		for (let key of Object.keys(data)) {

@@ -1,8 +1,5 @@
 // NanoStateManager handles data from the server and uses it to render templates
 NanoStateManager = (function () {
-	// _isInitialised is set to true when all of this ui's templates have been processed/rendered
-	var _isInitialised = false;
-
 	// the data for this ui
 	var _data = null;
 
@@ -16,12 +13,12 @@ NanoStateManager = (function () {
 
 	var _currentState = null;
 
+	var _template = null;
+
 	// the init function is called when the ui has loaded
 	// this function sets up the templates and base functionality
-	var init = function () {
-		// We store initialData and templateData in the body tag, it's as good a place as any
-		_data = $("body").data("initialData");
-
+	var init = function (template, _data) {
+		_template = template;
 		if (
 			_data == null ||
 			!_data.hasOwnProperty("config") ||
@@ -39,12 +36,6 @@ NanoStateManager = (function () {
 		}
 
 		NanoStateManager.setCurrentState(stateKey);
-
-		$(document).on("templatesLoaded", function () {
-			doUpdate(_data);
-
-			_isInitialised = true;
-		});
 	};
 
 	// Receive update data from the server
@@ -54,16 +45,17 @@ NanoStateManager = (function () {
 		//alert("recieveUpdateData called." + "<br>Type: " + typeof jsonString); //debug hook
 		try {
 			// parse the JSON string from the server into a JSON object
-			updateData = jQuery.parseJSON(jsonString);
+			updateData = JSON.parse(jsonString);
 		} catch (error) {
-			alert(
-				"recieveUpdateData failed. " +
-					"<br>Error name: " +
-					error.name +
-					"<br>Error Message: " +
-					error.message,
-			);
-			return;
+			reportError(error);
+			// alert(
+			// 	"recieveUpdateData failed. " +
+			// 		"<br>Error name: " +
+			// 		error.name +
+			// 		"<br>Error Message: " +
+			// 		error.message,
+			// );
+			// return;
 		}
 
 		//alert("recieveUpdateData passed trycatch block."); //debug hook
@@ -76,12 +68,7 @@ NanoStateManager = (function () {
 			}
 		}
 
-		if (_isInitialised) {
-			// all templates have been registered, so render them
-			doUpdate(updateData);
-		} else {
-			_data = updateData; // all templates have not been registered. We set _data directly here which will be applied after the template is loaded with the initial data
-		}
+		doUpdate(updateData);
 	};
 
 	// This function does the update by calling the methods on the current state
@@ -90,10 +77,12 @@ NanoStateManager = (function () {
 			return;
 		}
 
+		data["helper"] = _baseHelpers;
+
 		data = _currentState.onBeforeUpdate(data);
 
 		if (data === false) {
-			alert("data is false, return");
+			// alert("data is false, return");
 			return; // A beforeUpdateCallback returned a false value, this prevents the render from occuring
 		}
 
@@ -119,8 +108,8 @@ NanoStateManager = (function () {
 	};
 
 	return {
-		init: function () {
-			init();
+		init: function (template, data) {
+			init(template, data);
 		},
 		receiveUpdateData: function (jsonString) {
 			receiveUpdateData(jsonString);
@@ -171,29 +160,46 @@ NanoStateManager = (function () {
 		},
 		addState: function (state) {
 			if (!(state instanceof NanoStateClass)) {
-				alert(
-					"ERROR: Attempted to add a state which is not instanceof NanoStateClass",
+				reportError(
+					new Error(
+						"Attempted to add a state which is not instanceof NanoStateClass",
+					),
 				);
+				// alert(
+				// 	"ERROR: Attempted to add a state which is not instanceof NanoStateClass",
+				// );
 				return;
 			}
 			if (!state.key) {
-				alert(
-					"ERROR: Attempted to add a state with an invalid stateKey",
+				reportError(
+					new Error(
+						"Attempted to add a state with an invalid stateKey",
+					),
 				);
+				// alert(
+				// 	"ERROR: Attempted to add a state with an invalid stateKey",
+				// );
 				return;
 			}
 			_states[state.key] = state;
 		},
 		setCurrentState: function (stateKey) {
 			if (typeof stateKey == "undefined" || !stateKey) {
-				alert("ERROR: No state key was passed!");
+				reportError(new Error("No state key was passed"));
+				// alert("ERROR: No state key was passed!");
 				return false;
 			}
 			if (!_states.hasOwnProperty(stateKey)) {
-				alert(
-					"ERROR: Attempted to set a current state which does not exist: " +
-						stateKey,
+				reportError(
+					new Error(
+						"Attempted to set a current state which does not exist: " +
+							stateKey,
+					),
 				);
+				// alert(
+				// 	"ERROR: Attempted to set a current state which does not exist: " +
+				// 		stateKey,
+				// );
 				return false;
 			}
 
@@ -211,6 +217,9 @@ NanoStateManager = (function () {
 		},
 		getCurrentState: function () {
 			return _currentState;
+		},
+		getTemplate: function () {
+			return _template;
 		},
 	};
 })();

@@ -18,6 +18,8 @@
 	var/template_dir = "nano/templates/"
 	var/template_temp_dir = "data/"
 
+	var/list/all_assets
+
 /datum/asset/nanoui/register()
 	uncommon = list()
 	common = list()
@@ -28,8 +30,6 @@
 			if(copytext(filename, length(filename)) != "/") // Ignore directories.
 				var/full_path = path + filename
 				if(fexists(full_path))
-					if(SSassets.cache[filename]) // ARTEA TODO: Remove duplicate assets, or remove TGUI. Whichever comes first.
-						continue
 					common[filename] = file(full_path)
 
 	for (var/path in uncommon_dirs)
@@ -38,18 +38,22 @@
 			if(copytext(filename, length(filename)) != "/") // Ignore directories.
 				var/full_path = path + filename
 				if(fexists(full_path))
-					if(SSassets.cache[filename])
-						continue
 					uncommon[filename] = file(full_path)
 
-	var/list/assets = list(TEMPLATE_FILE_NAME = merge_and_register_templates()) + uncommon + common
+	merge_and_register_templates()
+	var/list/assets = uncommon + common
+
+	// Yeet any existing NUI assets
+	if (length(all_assets))
+		for (var/datum/asset_cache_item/item)
+			SSassets.cache.Remove(item.name)
 
 	for(var/asset_name in assets)
-		var/datum/asset_cache_item/ACI = SSassets.transport.register_asset(asset_name, assets[asset_name])
-		if (!ACI)
-			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[ACI]")
+		var/datum/asset_cache_item/item = SSassets.transport.register_asset(asset_name, assets[asset_name])
+		if (!item)
+			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[item]")
 			continue
-		ACI.keep_local_name = TRUE
+		item.keep_local_name = TRUE
 
 /datum/asset/nanoui/send(client, uncommon)
 	. = SSassets.transport.send_assets(client, TEMPLATE_FILE_NAME)
@@ -61,7 +65,7 @@
 	var/list/templates = flist(template_dir)
 	for(var/filename in templates)
 		if(copytext(filename, length(filename)) != "/")
-			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
+			templates[filename] = file2text(template_dir + filename)
 		else
 			templates -= filename
 	var/full_file_name = template_temp_dir + TEMPLATE_FILE_NAME
@@ -69,6 +73,9 @@
 		fdel(file(full_file_name))
 	var/template_file = file(full_file_name)
 	WRITE_FILE(template_file, json_encode(templates))
+
+	var/datum/asset_cache_item/cache_item = SSassets.transport.register_asset(TEMPLATE_FILE_NAME, full_file_name)
+	cache_item.keep_local_name = TRUE
 
 	return template_file
 

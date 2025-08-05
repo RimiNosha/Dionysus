@@ -13,7 +13,6 @@ function NanoStateClass() {
 }
 
 NanoStateClass.prototype.key = null;
-NanoStateClass.prototype.layoutRendered = false;
 NanoStateClass.prototype.contentRendered = false;
 NanoStateClass.prototype.mapInitialised = false;
 
@@ -25,14 +24,12 @@ NanoStateClass.prototype.onAdd = function (previousState) {
 	// Do not add code here, add it to the 'default' state (nano_state_defaut.js) or create a new state and override this function
 
 	NanoBaseCallbacks.addCallbacks();
-	NanoBaseHelpers.addHelpers();
 };
 
 NanoStateClass.prototype.onRemove = function (nextState) {
 	// Do not add code here, add it to the 'default' state (nano_state_defaut.js) or create a new state and override this function
 
 	NanoBaseCallbacks.removeCallbacks();
-	NanoBaseHelpers.removeHelpers();
 };
 
 NanoStateClass.prototype.onBeforeUpdate = function (data) {
@@ -45,44 +42,31 @@ NanoStateClass.prototype.onBeforeUpdate = function (data) {
 
 NanoStateClass.prototype.onUpdate = function (data) {
 	// Do not add code here, add it to the 'default' state (nano_state_defaut.js) or create a new state and override this function
-
 	try {
-		if (
-			!this.layoutRendered ||
-			(data["config"].hasOwnProperty("autoUpdateLayout") &&
-				data["config"]["autoUpdateLayout"])
-		) {
-			// render the 'mail' template to the #mainTemplate div
-			$("#uiLayout").html(NanoTemplate.parse("layout", data)); // render the 'mail' template to the #mainTemplate div
-			this.layoutRendered = true;
-		}
 		if (
 			!this.contentRendered ||
 			(data["config"].hasOwnProperty("autoUpdateContent") &&
 				data["config"]["autoUpdateContent"])
 		) {
 			let elem = document.createElement("div");
-			elem.innerHTML = NanoTemplate.parse("main", data);
+			elem.innerHTML = swig.renderFile(
+				NanoStateManager.getTemplate(),
+				data,
+			);
 
-			morphdom(document.getElementById("uiContent"), elem, {
+			morphdom(document.getElementById("uiLayout"), elem, {
 				childrenOnly: true,
 				onBeforeElUpdated: function (e) {
 					return !$(e).attr("userEdited");
 				},
 			});
-
-			if (NanoTemplate.templateExists("layoutHeader")) {
-				$("#uiHeaderContent").html(
-					NanoTemplate.parse("layoutHeader", data),
-				);
-			}
 			this.contentRendered = true;
 		}
 	} catch (error) {
 		reportError(error);
-		alert(
-			"ERROR: An error occurred while rendering the UI: " + error.message,
-		);
+		// alert(
+		// 	"ERROR: An error occurred while rendering the UI: " + error.message,
+		// );
 		return;
 	}
 };
@@ -93,8 +77,9 @@ NanoStateClass.prototype.onAfterUpdate = function (data) {
 	NanoStateManager.executeAfterUpdateCallbacks(data);
 };
 
-NanoStateClass.prototype.alertText = function (text) {
-	// Do not add code here, add it to the 'default' state (nano_state_defaut.js) or create a new state and override this function
+// Ew. Probably will outright remove, this is terrible UX. - Rimi
+// NanoStateClass.prototype.alertText = function (text) {
+// 	// Do not add code here, add it to the 'default' state (nano_state_defaut.js) or create a new state and override this function
 
-	alert(text);
-};
+// 	alert(text);
+// };

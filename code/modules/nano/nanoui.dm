@@ -31,8 +31,8 @@ nanoui is used to open and update nano browser uis
 	var/list/stylesheets = list()
 	// the list of javascript scripts to use for this ui
 	var/list/scripts = list()
-	// a list of templates which can be used with this ui
-	var/templates[0]
+	// the template currently used by this ui
+	var/template
 	// the layout key for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
 	var/layout_key = "default"
 	// optional layout key for additional ui header content to include
@@ -84,8 +84,7 @@ nanoui is used to open and update nano browser uis
 		master_ui.children += src
 	state = src_object.ui_state(user)
 
-	// add the passed template filename as the "main" template, this is required
-	add_template("main", ntemplate_filename)
+	template = ntemplate_filename
 
 	if (ntitle)
 		title = sanitize(ntitle)
@@ -98,7 +97,7 @@ nanoui is used to open and update nano browser uis
 
 	add_common_assets()
 	var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
-	assets.send(user, ntemplate_filename)
+	assets.send(user)
 
 //Do not qdel nanouis. Use close() instead.
 /datum/nanoui/Destroy()
@@ -113,13 +112,15 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/add_common_assets()
+	// NOTE: This is order sensitive! Some scripts depend on ones above them!
+	add_script("nano_global_events.js") // Contains global window events, used to make passthrough work.
+	add_script("nano_input_passthrough.js") // Contains the code that handles allowing users to move while focused on a window.
 	add_script("morphdom.2.2.7.js") //for partial dom updates
+	add_script("swig.min.js")
 	add_script("libraries.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
-	add_script("nano_byond.js") // The NanoUtility JS, this is used to store utility functions.
-	add_script("nano_global_events.js") // The NanoUtility JS, this is used to store utility functions.
-	add_script("nano_input_passthrough.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_utility.js") // The NanoUtility JS, this is used to store utility functions.
-	add_script("nano_template.js") // The NanoTemplate JS, this is used to render templates.
+	add_script("nano_byond.js") // The Byond JS, contains functions for interacting with byond.
+	add_script("nano_swig.js") // This handles setting up of the templating engine.
 	add_script("nano_state_manager.js") // The NanoStateManager JS, it handles updates from the server and passes data to the current state
 	add_script("nano_state.js") // The NanoState JS, this is the base state which all states must inherit from
 	add_script("nano_state_default.js") // The NanoStateDefault JS, this is the "default" state (used by all UIs by default), which inherits from NanoState
@@ -259,19 +260,6 @@ nanoui is used to open and update nano browser uis
 	scripts.Add(SSassets.transport.get_asset_url(file))
 
  /**
-  * Add a template for this UI
-  * Templates are combined with the data sent to the UI to create the rendered view
-  * These must be added before the UI has been opened, adding after that will have no effect
-  *
-  * @param key string The key which is used to reference this template in the frontend
-  * @param filename string The name of the template file from /nano/templates (e.g. "my_template.tmpl")
-  *
-  * @return nothing
-  */
-/datum/nanoui/proc/add_template(key, filename)
-	templates[key] = filename
-
- /**
   * Set the layout key for use in the frontend Javascript
   * The layout key is the basic layout key for the page
   * Two files are loaded on the client based on the layout key varable:
@@ -354,9 +342,6 @@ nanoui is used to open and update nano browser uis
 
 	// before the UI opens, add the layout files based on the layout key
 	add_stylesheet("layout_[layout_key].css")
-	add_template("layout", "layout_[layout_key].tmpl")
-	if (layout_header_key)
-		add_template("layoutHeader", "layout_[layout_header_key].tmpl")
 
 	var/head_content = ""
 
@@ -366,21 +351,15 @@ nanoui is used to open and update nano browser uis
 	for (var/filename in stylesheets)
 		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'> "
 
-	var/template_data_json = "{}" // An empty JSON object
-	if (templates.len > 0)
-		template_data_json = /*strip_improper(*/json_encode(templates)//) // Hmmmmmm
-
 	var/list/send_data = get_send_data(initial_data)
 	var/initial_data_json = replacetext(replacetext(json_encode(send_data), "&#34;", "&amp;#34;"), "'", "&#39;")
 	// initial_data_json = strip_improper(initial_data_json); // Hmmmmm
 
-	var/url_parameters_json = json_encode(list("src" = "\ref[src]"))
-
-	var/main_template = rustg_file_read("nano/main.tmpl")
-	var/replacelist = list("head_content" = head_content, "template_data_json" = template_data_json, "initial_data_json" = initial_data_json, "url_parameters_json" = url_parameters_json)
+	var/html_template = rustg_file_read("nano/main.njk")
+	var/replacelist = list("head_content" = head_content, "initial_data_json" = initial_data_json, "templates_file" = TEMPLATE_FILE_NAME, "template" = template, "window_id" = window_id, "window_handler_ref" = "\ref[src]")
 	for(var/string in replacelist)
-		main_template = replacetext(main_template, "{{:[string]}}", replacelist[string])
-	return main_template
+		html_template = replacetext(html_template, "{{:[string]}}", replacelist[string])
+	return html_template
 
  /**
   * Open this UI
@@ -413,7 +392,7 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/reinitialise(template, new_initial_data)
 	if(template)
-		add_template("main", template)
+		src.template = template
 	if(new_initial_data)
 		set_initial_data(new_initial_data)
 	open()

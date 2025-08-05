@@ -30,7 +30,14 @@ hr {
 	height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton, .greenButton{
+.link,
+.linkOn,
+.linkOff,
+.selected,
+.disabled,
+.yellowButton,
+.redButton,
+.greenButton {
 	float: left;
 	min-width: 15px;
 	height: 16px;
@@ -45,13 +52,14 @@ hr {
 	cursor: pointer;
 }
 
-.link:hover, .greenButton:hover{
+.link:hover,
+.greenButton:hover {
 	background: #009c00 !important;
 }
-.redButton:hover{
+.redButton:hover {
 	background: #9c0202 !important;
 }
-.yellowButton:hover{
+.yellowButton:hover {
 	background: #848601 !important;
 }
 
@@ -63,16 +71,22 @@ hr {
 	padding: 0px 0px 4px 0px;
 }
 
-a:hover, .zoomLink:hover, .linkActive:hover {
+a:hover,
+.zoomLink:hover,
+.linkActive:hover {
 	background: #003300;
 }
 
-.linkPending, .linkPending:hover {
+.linkPending,
+.linkPending:hover {
 	color: #ffffff;
 	background: #003300;
 }
 
-a.white, a.white:link, a.white:visited, a.white:active {
+a.white,
+a.white:link,
+a.white:visited,
+a.white:active {
 	color: #40628a;
 	text-decoration: none;
 	background: #ffffff;
@@ -91,24 +105,51 @@ a.white:hover {
 	display: none;
 }
 
-.linkOn, a.linkOn:link, a.linkOn:visited, a.linkOn:active, a.linkOn:hover, .selected, a.selected:link, a.selected:visited, a.selected:active, a.selected:hover {
+.linkOn,
+a.linkOn:link,
+a.linkOn:visited,
+a.linkOn:active,
+a.linkOn:hover,
+.selected,
+a.selected:link,
+a.selected:visited,
+a.selected:active,
+a.selected:hover {
 	color: #ffffff;
 	background: #2f943c;
 }
 
-.linkOff, a.linkOff:link, a.linkOff:visited, a.linkOff:active, a.linkOff:hover, .disabled, .disabled:hover, a.disabled:link, a.disabled:visited, a.disabled:active, a.disabled:hover {
+.linkOff,
+a.linkOff:link,
+a.linkOff:visited,
+a.linkOff:active,
+a.linkOff:hover,
+.disabled,
+.disabled:hover,
+a.disabled:link,
+a.disabled:visited,
+a.disabled:active,
+a.disabled:hover {
 	color: #ffffff;
 	background: #999999 !important;
 	border-color: #666666;
 	cursor: default;
 }
 
-a.icon, .linkOn.icon, .linkOff.icon, .selected.icon, .disabled.icon {
+a.icon,
+.linkOn.icon,
+.linkOff.icon,
+.selected.icon,
+.disabled.icon {
 	position: relative;
 	padding: 1px 4px 2px 20px;
 }
 
-a.icon img, .linkOn.icon img, .linkOff.icon img, .selected.icon img, .disabled.icon img {
+a.icon img,
+.linkOn.icon img,
+.linkOff.icon img,
+.selected.icon img,
+.disabled.icon img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -116,7 +157,10 @@ a.icon img, .linkOn.icon img, .linkOff.icon img, .selected.icon img, .disabled.i
 	height: 18px;
 }
 
-.linkDanger, a.linkDanger:link, a.linkDanger:visited, a.linkDanger:active {
+.linkDanger,
+a.linkDanger:link,
+a.linkDanger:visited,
+a.linkDanger:active {
 	color: #ffffff;
 	background-color: #ff0000;
 	border-color: #aa0000;
@@ -136,14 +180,20 @@ li {
 	padding: 0 0 2px 0;
 }
 
-img, a img {
+img,
+a img {
 	border-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: 0;
 	padding: 12px 0 6px 0;
-	color: #FFFFFF;
+	color: #ffffff;
 	clear: both;
 }
 
@@ -164,7 +214,7 @@ h4 {
 }
 
 abbr {
-	border-bottom: .1em dotted;
+	border-bottom: 0.1em dotted;
 }
 
 .white {
@@ -210,7 +260,7 @@ abbr {
 }
 
 .highlight {
-	color: #8BA5C4;
+	color: #8ba5c4;
 }
 
 .dark {
@@ -279,7 +329,8 @@ div.notice {
 	overflow: auto;
 }
 
-.itemContentNarrow, .itemContent {
+.itemContentNarrow,
+.itemContent {
 	float: left;
 }
 
@@ -291,7 +342,11 @@ div.notice {
 	width: 69%;
 }
 
-.itemLabelNarrow, .itemLabel, .itemLabelWide, .itemLabelWider, .itemLabelWidest {
+.itemLabelNarrow,
+.itemLabel,
+.itemLabelWide,
+.itemLabelWider,
+.itemLabelWidest {
 	float: left;
 	color: #00ff00;
 }
@@ -376,7 +431,7 @@ div.notice {
 	width: 138px;
 	float: left;
 	overflow: hidden;
-	color: #98B0C3;
+	color: #98b0c3;
 }
 
 .statusValue {
@@ -405,7 +460,9 @@ div.notice {
 	background: #000000;
 }
 
-.displayBarText, .displayBarVerticalText, .displayBarBeakerText{
+.displayBarText,
+.displayBarVerticalText,
+.displayBarBeakerText {
 	position: absolute;
 	top: -2px;
 	left: 5px;
@@ -486,7 +543,7 @@ div.notice {
 
 .displayBarFill.highlight {
 	color: #ffffff;
-	background: #8BA5C4;
+	background: #8ba5c4;
 }
 
 .clearBoth {
@@ -506,7 +563,11 @@ div.notice {
 	clear: both;
 }
 
-.inactive, a.inactive:link, a.inactive:visited, a.inactive:active, a.inactive:hover {
+.inactive,
+a.inactive:link,
+a.inactive:visited,
+a.inactive:active,
+a.inactive:hover {
 	color: #ffffff;
 	background: #999999;
 	border-color: #666666;
@@ -606,7 +667,7 @@ div.notice {
 }
 
 table.fixed {
-	table-layout:fixed;
+	table-layout: fixed;
 }
 
 table.fixed td {
@@ -618,7 +679,8 @@ table.pmon {
 	border: 2px solid RoyalBlue;
 }
 
-table.pmon td, table.pmon th {
+table.pmon td,
+table.pmon th {
 	border-bottom: 1px dotted black;
 	padding: 0px 5px 0px 5px;
 }
@@ -626,7 +688,7 @@ table.pmon td, table.pmon th {
 /* Table Stuffs for manifest*/
 
 th.command {
-	background: #3333FF;
+	background: #3333ff;
 	font-weight: bold;
 	color: #ffffff;
 }
@@ -744,77 +806,78 @@ th.bot {
 
 /* [Tooltips of description] */
 .ToolTip span {
-	visibility		: hidden;
-	opacity			: 0;
-	transition		: opacity 0.3s linear;
-	padding			: 10px;
-	margin-left		: 8px;
-	width			: 200px;
-	z-index			: 999;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s linear;
+	padding: 10px;
+	margin-left: 8px;
+	width: 200px;
+	z-index: 999;
 }
 .ToolTip:hover span {
-	visibility		: visible;
-	opacity			: 1;
-	position		: absolute;
-	background		: #717177;
-	border			: 4px solid #666;
-	border-radius	: 5px;
-	color			: #d1d1dd;
-	text-align		: center;
-	white-space		: pre-line;
+	visibility: visible;
+	opacity: 1;
+	position: absolute;
+	background: #717177;
+	border: 4px solid #666;
+	border-radius: 5px;
+	color: #d1d1dd;
+	text-align: center;
+	white-space: pre-line;
 }
 
 /*Forms UI templates (For use with forms controls)*/
-.textBox{
+.textBox {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #000000;
-	color:inherit;
+	color: inherit;
 }
-.textBox:disabled{
+.textBox:disabled {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #3d3d3d;
-	color:#1b3015;
+	color: #1b3015;
 }
 
-.numBox{
+.numBox {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #000000;
-	color:inherit;
+	color: inherit;
 }
-.numBox:disabled{
+.numBox:disabled {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #3d3d3d;
-	color:#1b3015;
+	color: #1b3015;
 }
 
-.button{
+.button {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #303030;
-	color:inherit;
+	color: inherit;
+	user-select: none;
 }
-.button:disabled{
+.button:disabled {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #3d3d3d;
-	color:#1b3015;
+	color: #1b3015;
 }
 
-.listBox{
+.listBox {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #000000;
-	color:inherit;
+	color: inherit;
 }
-.listBox:disabled{
+.listBox:disabled {
 	border: 1px solid #666666;
 	margin: 0 1em 0 0;
 	background: #3d3d3d;
-	color:#1b3015;
+	color: #1b3015;
 }
 
 .rect {
@@ -838,7 +901,7 @@ th.bot {
 	float: none;
 	min-width: 1em;
 	height: 1em;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	text-align: center;
 	text-decoration: none;
 	text-shadow: none;
@@ -851,9 +914,9 @@ th.bot {
 	outline-offset: -4px;
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 16%),
-		inset  1px  1px hsl(0, 0%, 80%),
+		inset 1px 1px hsl(0, 0%, 80%),
 		inset -2px -2px hsl(0, 0%, 62%),
-		inset  2px  2px hsl(0, 0%, 80%);
+		inset 2px 2px hsl(0, 0%, 80%);
 	padding: 0.5em 1em;
 	margin: 0 2px 2px 0;
 }
@@ -861,9 +924,9 @@ th.bot {
 .linkBtnOS:active {
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 80%),
-		inset  1px  1px hsl(0, 0%, 16%),
+		inset 1px 1px hsl(0, 0%, 16%),
 		inset -2px -2px hsl(0, 0%, 80%),
-		inset  2px  2px hsl(0, 0%, 62%);
+		inset 2px 2px hsl(0, 0%, 62%);
 }
 /**Button disabled */
 .linkBtnOS.disabled,
@@ -874,40 +937,40 @@ th.bot {
 	outline: 1px dotted hsl(0, 0%, 40%);
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 36%),
-		inset  1px  1px hsl(0, 0%, 70%),
+		inset 1px 1px hsl(0, 0%, 70%),
 		inset -2px -2px hsl(0, 0%, 52%),
-		inset  2px  2px hsl(0, 0%, 70%);
+		inset 2px 2px hsl(0, 0%, 70%);
 }
 /**Button pressed + disabled */
 .linkBtnOS.disabled:active,
 .linkBtnOS.inactive:active {
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 70%),
-		inset  1px  1px hsl(0, 0%, 16%),
+		inset 1px 1px hsl(0, 0%, 16%),
 		inset -2px -2px hsl(0, 0%, 70%),
-		inset  2px  2px hsl(0, 0%, 30%);
+		inset 2px 2px hsl(0, 0%, 30%);
 }
 
 /*****************
  * Darker variant
  *****************/
 .linkBtnOSDark,
-.linkBtnOSDark:hover{
+.linkBtnOSDark:hover {
 	color: hsl(0, 0%, 65%);
 	background: hsl(0, 0%, 35%);
 	outline: 1px dotted hsl(0, 0%, 45%);
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 8%),
-		inset  1px  1px hsl(0, 0%, 60%),
+		inset 1px 1px hsl(0, 0%, 60%),
 		inset -2px -2px hsl(0, 0%, 32%),
-		inset  2px  2px hsl(0, 0%, 60%);
+		inset 2px 2px hsl(0, 0%, 60%);
 }
 .linkBtnOSDark:active {
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 60%),
-		inset  1px  1px hsl(0, 0%, 8%),
+		inset 1px 1px hsl(0, 0%, 8%),
 		inset -2px -2px hsl(0, 0%, 60%),
-		inset  2px  2px hsl(0, 0%, 32%);
+		inset 2px 2px hsl(0, 0%, 32%);
 }
 .linkBtnOSDark.disabled,
 .linkBtnOSDark.inactive,
@@ -917,39 +980,39 @@ th.bot {
 	outline: 1px dotted hsl(0, 0%, 60%);
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 8%),
-		inset  1px  1px hsl(0, 0%, 50%),
+		inset 1px 1px hsl(0, 0%, 50%),
 		inset -2px -2px hsl(0, 0%, 32%),
-		inset  2px  2px hsl(0, 0%, 50%);
+		inset 2px 2px hsl(0, 0%, 50%);
 }
 .linkBtnOSDark.disabled:active,
 .linkBtnOSDark.inactive:active {
 	box-shadow:
 		inset -1px -1px hsl(0, 0%, 50%),
-		inset  1px  1px hsl(0, 0%, 8%),
+		inset 1px 1px hsl(0, 0%, 8%),
 		inset -2px -2px hsl(0, 0%, 50%),
-		inset  2px  2px hsl(0, 0%, 25%);
+		inset 2px 2px hsl(0, 0%, 25%);
 }
 
 /*******************
  * Dark Red Variant
  *******************/
 .linkBtnOSRed,
-.linkBtnOSRed:hover{
+.linkBtnOSRed:hover {
 	color: hsl(20, 50%, 65%);
 	background: hsl(20, 70%, 35%);
 	outline: 1px dotted hsl(20, 40%, 45%);
 	box-shadow:
 		inset -1px -1px hsl(20, 50%, 8%),
-		inset  1px  1px hsl(20, 50%, 60%),
+		inset 1px 1px hsl(20, 50%, 60%),
 		inset -2px -2px hsl(20, 50%, 32%),
-		inset  2px  2px hsl(20, 50%, 60%);
+		inset 2px 2px hsl(20, 50%, 60%);
 }
 .linkBtnOSRed:active {
 	box-shadow:
 		inset -1px -1px hsl(20, 50%, 60%),
-		inset  1px  1px hsl(20, 50%, 8%),
+		inset 1px 1px hsl(20, 50%, 8%),
 		inset -2px -2px hsl(20, 50%, 60%),
-		inset  2px  2px hsl(20, 50%, 32%);
+		inset 2px 2px hsl(20, 50%, 32%);
 }
 .linkBtnOSRed.disabled,
 .linkBtnOSRed.inactive,
@@ -959,15 +1022,15 @@ th.bot {
 	outline: 1px dotted hsl(20, 20%, 40%);
 	box-shadow:
 		inset -1px -1px hsl(20, 20%, 8%),
-		inset  1px  1px hsl(20, 20%, 50%),
+		inset 1px 1px hsl(20, 20%, 50%),
 		inset -2px -2px hsl(20, 20%, 32%),
-		inset  2px  2px hsl(20, 20%, 50%);
+		inset 2px 2px hsl(20, 20%, 50%);
 }
 .linkBtnOSRed.disabled:active,
 .linkBtnOSRed.inactive:active {
 	box-shadow:
 		inset -1px -1px hsl(20, 20%, 50%),
-		inset  1px  1px hsl(20, 20%, 8%),
+		inset 1px 1px hsl(20, 20%, 8%),
 		inset -2px -2px hsl(20, 20%, 50%),
-		inset  2px  2px hsl(20, 20%, 25%);
+		inset 2px 2px hsl(20, 20%, 25%);
 }
