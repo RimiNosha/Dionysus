@@ -45,7 +45,7 @@
 
 	// Yeet any existing NUI assets
 	if (length(all_assets))
-		for (var/datum/asset_cache_item/item)
+		for (var/datum/asset_cache_item/item in all_assets)
 			SSassets.cache.Remove(item.name)
 
 	for(var/asset_name in assets)

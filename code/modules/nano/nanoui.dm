@@ -26,7 +26,7 @@ nanoui is used to open and update nano browser uis
 	// an extra ref to use when the window is closed, usually null
 	var/datum/ref = null
 	// options for modifying window behaviour
-	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
+	var/window_options = "can-close=1;can-minimize=1;can-maximize=0;can-resize=1;titlebar=1;app-region=1;" // window option is set using window_id
 	// the list of stylesheets to apply to this ui
 	var/list/stylesheets = list()
 	// the list of javascript scripts to use for this ui
