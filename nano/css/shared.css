@@ -85,7 +85,6 @@ a:hover,
 
 a.white,
 a.white:link,
-a.white:visited,
 a.white:active {
 	color: #40628a;
 	text-decoration: none;
@@ -107,7 +106,6 @@ a.white:hover {
 
 .linkOn,
 a.linkOn:link,
-a.linkOn:visited,
 a.linkOn:active,
 a.linkOn:hover,
 .selected,
