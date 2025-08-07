@@ -26,7 +26,7 @@ nanoui is used to open and update nano browser uis
 	// an extra ref to use when the window is closed, usually null
 	var/datum/ref = null
 	// options for modifying window behaviour
-	var/window_options = "can-close=1;can-minimize=1;can-maximize=0;can-resize=1;titlebar=1;app-region=1;" // window option is set using window_id
+	var/base_window_options = "can-close=1;can-minimize=0;can-maximize=0;app-region=1;" // window option is set using window_id
 	// the list of stylesheets to apply to this ui
 	var/list/stylesheets = list()
 	// the list of javascript scripts to use for this ui
@@ -234,8 +234,8 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/set_window_options(nwindow_options)
-	window_options = nwindow_options
+/datum/nanoui/proc/set_base_window_options(nwindow_options)
+	base_window_options = nwindow_options
 
  /**
   * Add a CSS stylesheet to this UI
@@ -355,8 +355,8 @@ nanoui is used to open and update nano browser uis
 	var/initial_data_json = replacetext(replacetext(json_encode(send_data), "&#34;", "&amp;#34;"), "'", "&#39;")
 	// initial_data_json = strip_improper(initial_data_json); // Hmmmmm
 
-	var/html_template = rustg_file_read("nano/main.njk")
-	var/replacelist = list("head_content" = head_content, "initial_data_json" = initial_data_json, "templates_file" = TEMPLATE_FILE_NAME, "template" = template, "window_id" = window_id, "window_handler_ref" = "\ref[src]")
+	var/html_template = rustg_file_read("nano/main.swig")
+	var/replacelist = list("head_content" = head_content, "initial_data_json" = initial_data_json, "templates_file" = TEMPLATE_FILE_NAME, "template" = "[template].swig", "window_id" = window_id, "window_handler_ref" = "\ref[src]")
 	for(var/string in replacelist)
 		html_template = replacetext(html_template, "{{:[string]}}", replacelist[string])
 	return html_template
@@ -378,6 +378,10 @@ nanoui is used to open and update nano browser uis
 		window_size = "size=[width]x[height];"
 	if(update_status())
 		return // Will be closed by update_status().
+
+	var/window_options = base_window_options
+	if (user.client.byond_build > 1664) // app-region was added, which means we can use fancy mode without fucking over performance for people at long last.
+		window_options += "can-resize=0;titlebar=0;"
 
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	// winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map

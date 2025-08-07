@@ -556,6 +556,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	fully_created = TRUE
 	SSlobby.client_login(src)
 
+	if (persistent_client.byond_build < 1665)
+		to_chat(src, span_warning("Your BYOND version is too old to use fancy NanoUI windows. Consider updating to at least version 516.1666."))
+
 //////////////
 //DISCONNECT//
 //////////////
