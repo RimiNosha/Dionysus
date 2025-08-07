@@ -7,6 +7,8 @@
 		"stylemistake.auto-comment-blocks",
 		"Donkie.vscode-tgstation-test-adapter",
 		"anturk.dmi-editor",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"ronnidc.nunjucks", // Required if you want autocomplete on templates.
+		"formulahendry.auto-close-tag"
 	]
 }

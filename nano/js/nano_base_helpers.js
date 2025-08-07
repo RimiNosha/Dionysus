@@ -1,141 +1,74 @@
 // NanoBaseHelpers is where the base template helpers (common to all templates) are stored
 
 var _baseHelpers = {
-	// change ui styling to "syndicate mode"
-	syndicateMode: function () {
-		$("body").css("background-color", "#330404");
-		$("body").css("background-image", "url('uiBackground-Syndicate.png')");
-		$("body").css("background-position", "50% 0");
-		$("body").css("background-repeat", "repeat");
-		$("body").css("color", "#ff0000");
+	// WHO THOUGHT THIS WAS GOOD? USE CSS VARS AND SWAP OUT THE COLOURS USING A CLASS OH MY GOD - Rimi
+	// // change ui styling to "syndicate mode"
+	// syndicateMode: function () {
+	// 	$("body").css("background-color", "#330404");
+	// 	$("body").css("background-image", "url('uiBackground-Syndicate.png')");
+	// 	$("body").css("background-position", "50% 0");
+	// 	$("body").css("background-repeat", "repeat");
+	// 	$("body").css("color", "#ff0000");
 
-		$("hr").css("background-color", "#551414");
-		$("a").css("background", "#551414");
-		$("a:link").css("background", "#551414");
-		$("a:visited").css("background", "#551414");
-		$("a:active").css("background", "#551414");
-		$("linkOn").css("background", "#551414");
-		$("linkOff").css("background", "#551414");
-		$("input").css("background", "#551414");
-		$("a:hover").css("color", "#551414");
-		$("a.white").css("color", "#551414");
-		$("a.white:link").css("color", "#551414");
-		$("a.white:visited").css("color", "#551414");
-		$("a.white:active").css("color", "#551414");
-		$("a.white:hover").css("background", "#551414");
-		$("linkOn").css("background", "#771414");
-		$("a.linkOn:link").css("background", "#771414");
-		$("a.linkOn:visited").css("background", "#771414");
-		$("a.linkOn:active").css("background", "#771414");
-		$("a.linkOn:hover").css("background", "#771414");
-		$("statusDisplay").css("border", "1px solid #551414");
-		$("block").css("border", "1px solid #551414");
-		$("progressFill").css("background", "#551414");
-		$("statusDisplay").css("border", "1px solid #551414");
+	// 	$("hr").css("background-color", "#551414");
+	// 	$("a").css("background", "#551414");
+	// 	$("a:link").css("background", "#551414");
+	// 	$("a:visited").css("background", "#551414");
+	// 	$("a:active").css("background", "#551414");
+	// 	$("linkOn").css("background", "#551414");
+	// 	$("linkOff").css("background", "#551414");
+	// 	$("input").css("background", "#551414");
+	// 	$("a:hover").css("color", "#551414");
+	// 	$("a.white").css("color", "#551414");
+	// 	$("a.white:link").css("color", "#551414");
+	// 	$("a.white:visited").css("color", "#551414");
+	// 	$("a.white:active").css("color", "#551414");
+	// 	$("a.white:hover").css("background", "#551414");
+	// 	$("linkOn").css("background", "#771414");
+	// 	$("a.linkOn:link").css("background", "#771414");
+	// 	$("a.linkOn:visited").css("background", "#771414");
+	// 	$("a.linkOn:active").css("background", "#771414");
+	// 	$("a.linkOn:hover").css("background", "#771414");
+	// 	$("statusDisplay").css("border", "1px solid #551414");
+	// 	$("block").css("border", "1px solid #551414");
+	// 	$("progressFill").css("background", "#551414");
+	// 	$("statusDisplay").css("border", "1px solid #551414");
 
-		$("itemLabelNarrow").css("color", "#ff0000");
-		$("itemLabel").css("color", "#ff0000");
-		$("itemLabelWide").css("color", "#ff0000");
-		$("itemLabelWider").css("color", "#ff0000");
-		$("itemLabelWidest").css("color", "#ff0000");
+	// 	$("itemLabelNarrow").css("color", "#ff0000");
+	// 	$("itemLabel").css("color", "#ff0000");
+	// 	$("itemLabelWide").css("color", "#ff0000");
+	// 	$("itemLabelWider").css("color", "#ff0000");
+	// 	$("itemLabelWidest").css("color", "#ff0000");
 
-		$("link").css("border", "1px solid #ff0000");
-		$("linkOn").css("border", "1px solid #ff0000");
-		$("linkOff").css("border", "1px solid #ff0000");
-		$("selected").css("border", "1px solid #ff0000");
-		$("disabled").css("border", "1px solid #ff0000");
-		$("yellowButton").css("border", "1px solid #ff0000");
-		$("redButton").css("border", "1px solid #ff0000");
+	// 	$("link").css("border", "1px solid #ff0000");
+	// 	$("linkOn").css("border", "1px solid #ff0000");
+	// 	$("linkOff").css("border", "1px solid #ff0000");
+	// 	$("selected").css("border", "1px solid #ff0000");
+	// 	$("disabled").css("border", "1px solid #ff0000");
+	// 	$("yellowButton").css("border", "1px solid #ff0000");
+	// 	$("redButton").css("border", "1px solid #ff0000");
 
-		$("link").css("background", "#330000");
-		$("linkOn").css("background", "#330000");
-		$("linkOff").css("background", "#330000");
-		$("selected").css("background", "#330000");
-		$("disabled").css("background", "#330000");
-		$("yellowButton").css("background", "#330000");
-		$("redButton").css("background", "#330000");
+	// 	$("link").css("background", "#330000");
+	// 	$("linkOn").css("background", "#330000");
+	// 	$("linkOff").css("background", "#330000");
+	// 	$("selected").css("background", "#330000");
+	// 	$("disabled").css("background", "#330000");
+	// 	$("yellowButton").css("background", "#330000");
+	// 	$("redButton").css("background", "#330000");
 
-		$(".average").css("color", "#ff0000");
+	// 	$(".average").css("color", "#ff0000");
 
-		$("#uiTitleFluff").css(
-			"background-image",
-			"url('uiTitleFluff-Syndicate.png')",
-		);
-		$("#uiTitleFluff").css("background-position", "50% 50%");
-		$("#uiTitleFluff").css("background-repeat", "no-repeat");
+	// 	$("#uiTitleFluff").css(
+	// 		"background-image",
+	// 		"url('uiTitleFluff-Syndicate.png')",
+	// 	);
+	// 	$("#uiTitleFluff").css("background-position", "50% 50%");
+	// 	$("#uiTitleFluff").css("background-repeat", "no-repeat");
 
-		return "";
-	},
-	// Generate a Byond link
-	link: function (
-		text,
-		icon,
-		action,
-		parameters,
-		status,
-		elementClass,
-		elementId,
-	) {
-		var iconHtml = "";
-		var iconClass = "noIcon";
-		if (typeof icon != "undefined" && icon) {
-			iconHtml =
-				'<div class="uiLinkPendingIcon"></div><div class="uiIcon16 icon-' +
-				icon +
-				'"></div>';
-			iconClass = text ? "hasIcon" : "onlyIcon";
-		}
-
-		if (typeof elementClass == "undefined" || !elementClass) {
-			elementClass = "link";
-		}
-
-		var elementIdHtml = "";
-		if (typeof elementId != "undefined" && elementId) {
-			elementIdHtml = 'id="' + elementId + '"';
-		}
-
-		if (typeof status != "undefined" && status) {
-			return (
-				'<div class="link ' +
-				iconClass +
-				" " +
-				elementClass +
-				'" href="?" onclick="Byond.sendMessage(\'' +
-				action +
-				"', " +
-				JSON.stringify(parameters)
-					.replaceAll('"', "&quot;")
-					.replaceAll("'", "&apos;") +
-				')" ' +
-				status +
-				'" ' +
-				elementIdHtml +
-				">" +
-				iconHtml +
-				text +
-				"</div>"
-			);
-		}
-
-		return (
-			'<div class="linkActive ' +
-			iconClass +
-			" " +
-			elementClass +
-			'" href="?" onclick="Byond.sendMessage(\'' +
-			action +
-			"', " +
-			JSON.stringify(parameters)
-				.replaceAll('"', "&quot;")
-				.replaceAll("'", "&apos;") +
-			')" ' +
-			elementIdHtml +
-			">" +
-			iconHtml +
-			text +
-			"</div>"
-		);
+	// 	return "";
+	// },
+	percentage: function (number, min, max) {
+		return ((number - min) / (max - min)) * 100;
 	},
 	// Round a number to the nearest integer
 	round: function (number) {
@@ -259,6 +192,7 @@ var _baseHelpers = {
 		}
 		return (new Date() - _byondTimeOfDay.midnight) / 100; // deciseconds since midnight
 	},
+	// Regrettably, swig doesn't have any built in ternary syntax. Unfortunately, nunjucks' API is borderline undocumented and stupid overengineered, so I can't use that.
 	ternary: function (condition, a, b) {
 		return condition ? a : b;
 	},

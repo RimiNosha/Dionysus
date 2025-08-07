@@ -20,5 +20,9 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
-	"css.validate": false // This is such a garbage workaround to suppressing a fucking warning - Rimi
+	"css.validate": false, // This is such a garbage workaround to suppressing a fucking warning - Rimi
+
+	// Quality of life for making UIs, cause VSC doesn't have autoclose outside of certain files cause ????
+	// Requires the related extension, which is in the recommendations.
+	"auto-close-tag.activationOnLanguage": ["swig", "nunjucks"]
 }

@@ -60,14 +60,21 @@
 	. = . && SSassets.transport.send_assets(client, common)
 	. = . && SSassets.transport.send_assets(client, uncommon)
 
+/datum/asset/nanoui/proc/merge_template_folder(base_path, list/templates)
+	var/list/found_templates = flist(base_path)
+	for(var/filename in found_templates)
+		var/full_name = base_path + filename
+		if(copytext(filename, length(filename)) != "/")
+			templates[copytext(full_name, length(template_dir) + 1)] = file2text(full_name)
+		else
+			merge_template_folder(full_name, templates)
+
 /datum/asset/nanoui/proc/merge_and_register_templates()
 	SSassets.cache -= TEMPLATE_FILE_NAME
-	var/list/templates = flist(template_dir)
-	for(var/filename in templates)
-		if(copytext(filename, length(filename)) != "/")
-			templates[filename] = file2text(template_dir + filename)
-		else
-			templates -= filename
+
+	var/list/templates = list()
+	merge_template_folder(template_dir, templates)
+
 	var/full_file_name = template_temp_dir + TEMPLATE_FILE_NAME
 	if(fexists(full_file_name))
 		fdel(file(full_file_name))

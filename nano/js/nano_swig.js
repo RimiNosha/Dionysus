@@ -1,5 +1,3 @@
-var __uncompTemplateData__ = new Object();
-
 swig.setDefaults({
 	loader: {
 		resolve: function (a, b) {
@@ -10,8 +8,3 @@ swig.setDefaults({
 		},
 	},
 });
-
-function setupTemplating(templates) {
-	__uncompTemplateData__ = templates;
-	$(document).trigger("templatesLoaded");
-}

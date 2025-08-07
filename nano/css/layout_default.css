@@ -12,7 +12,7 @@ body {
 #uiTitleWrapper {
 	position: relative;
 	height: 30px;
-	background-color: gray;
+	background: gray url(uiTitleBackground.png) repeat;
 	box-shadow: 0px 0px 5px 5px #000;
 	app-region: drag;
 }

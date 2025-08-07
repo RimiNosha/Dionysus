@@ -5,6 +5,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<style>
+			/* Inlined cause errors could happen at any time. */
 			#onerror {
 				display: none;
 				position: absolute;
@@ -44,6 +45,7 @@
 			}
 		</style>
 		<script>
+			var __uncompTemplateData__ = {}
 			var __byond_window_id__ = "{{:window_id}}";
 			var __byond_window_handler_ref__ = "{{:window_handler_ref}}";
 			window.onerror = function(_, _, _, _, e) {
@@ -97,7 +99,7 @@
 					}),
 				)
 					.done(function (allTemplates) {
-						setupTemplating(allTemplates);
+						__uncompTemplateData__ = allTemplates;
 						NanoStateManager.init("{{:template}}", {{:initial_data_json}});
 					})
 					.fail(function () {
