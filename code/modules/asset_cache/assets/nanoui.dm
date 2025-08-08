@@ -48,6 +48,8 @@
 		for (var/datum/asset_cache_item/item in all_assets)
 			SSassets.cache.Remove(item.name)
 
+	all_assets = assets
+
 	for(var/asset_name in assets)
 		var/datum/asset_cache_item/item = SSassets.transport.register_asset(asset_name, assets[asset_name])
 		if (!item)
