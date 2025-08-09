@@ -53,6 +53,7 @@
 				document.getElementById("onerrorStacktrace").innerText = e.stack.replace(/https?:\/\/127\.0\.0\.1:[0-9]*?\//g, "/");
 				window.onerror = function() {} // Don't catch further errors, otherwise copy paste will be a pain in the ass
 				try {
+					Byond.winset(__byond_window_id__, { "can-resize": true, size: "500x500", "can-close": true, "titlebar": true }) // Make it (potentially) bigger and then make it so people can resize it for easier reading
 					Byond.winset(__byond_window_id__, { "can-resize": true, size: "500x500" }) // Make it (potentially) bigger and then make it so people can resize it for easier reading
 				}
 				catch (e) {
@@ -103,7 +104,7 @@
 						NanoStateManager.init("{{:template}}", {{:initial_data_json}});
 					})
 					.fail(function () {
-						alert("ERROR: Failed to locate or parse templates file.");
+						reportError(new Error("Failed to locate or parse templates file."));
 					});
 			}
 		</script>

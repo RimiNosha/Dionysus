@@ -446,6 +446,11 @@ nanoui is used to open and update nano browser uis
 
 	user << output(list2params(list(/*strip_improper(*/json_encode(get_send_data(data))/*)*/)),"[window_id].browser:receiveUpdateData")
 
+/**
+ * Handles messages sent from the UI to the datum.
+ *
+ * @return nothing
+ */
 /datum/nanoui/proc/on_message(type, list/payload, list/href_list)
 	update_status() // update the status
 	if (status != UI_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
@@ -455,6 +460,12 @@ nanoui is used to open and update nano browser uis
 		return
 
 	var/act_type = copytext(type, 5)
+
+	switch (act_type)
+		if ("close")
+			close()
+		if ("crashed")
+			winset(user, window_id, "can-close=1;titlebar=1")
 
 	if ((src_object && src_object.nanoui_act(act_type, payload, href_list, src))/* || map_update*/)
 		SSnanoui.update_uis(src_object) // update all UIs attached to src_object
