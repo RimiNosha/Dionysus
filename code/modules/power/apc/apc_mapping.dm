@@ -10,13 +10,13 @@
 /obj/machinery/power/apc/highcap/five_k
 	cell_type = /obj/item/stock_parts/cell/upgraded/plus
 
-/obj/machinery/power/apc/highcap/five_k/autoname
+/obj/machinery/power/apc/highcap/five_k/auto_name
 	auto_name = TRUE
 
 /obj/machinery/power/apc/highcap/ten_k
 	cell_type = /obj/item/stock_parts/cell/high
 
-/obj/machinery/power/apc/highcap/ten_k/autoname
+/obj/machinery/power/apc/highcap/ten_k/auto_name
 	auto_name = TRUE
 
 /obj/machinery/power/apc/auto_name
@@ -30,9 +30,9 @@
 
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_name)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k)
-APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k/autoname)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k/auto_name)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k)
-APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k/autoname)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k/auto_name)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/sm_apc)
 
 #undef APC_DIRECTIONAL_HELPERS

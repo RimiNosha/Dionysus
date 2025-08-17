@@ -189,7 +189,7 @@
 /obj/structure/chair{
 	dir = 1
 	},
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south,
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/hotel/dock)
 "bY" = (
@@ -801,7 +801,7 @@
 /area/ruin/space/has_grav/hotel/bar)
 "hT" = (
 /obj/structure/cable/smart_cable/color/yellow,
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south,
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/has_grav/hotel/bar)
 "hU" = (
@@ -1383,7 +1383,7 @@
 /area/ruin/space/has_grav/hotel/pool)
 "mh" = (
 /obj/structure/cable/smart_cable/color/yellow,
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south{
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south{
 	name = "Guest Room APC"
 	},
 /turf/open/floor/carpet/red,
@@ -1811,7 +1811,7 @@
 	},
 /obj/item/reagent_containers/spray/cleaner,
 /obj/structure/overfloor_catwalk,
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south{
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south{
 	name = "Guest Room APC"
 	},
 /turf/open/floor/plating,
@@ -3085,7 +3085,7 @@
 /area/ruin/space/has_grav/hotel)
 "Gd" = (
 /obj/structure/cable/smart_cable/color/yellow,
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/north,
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/north,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/hotel/power)
 "Gg" = (
@@ -3548,7 +3548,7 @@
 /area/ruin/space/has_grav/hotel)
 "MQ" = (
 /obj/structure/cable/smart_cable/color/yellow,
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south,
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south,
 /turf/open/floor/iron/freezer,
 /area/ruin/space/has_grav/hotel/pool)
 "MS" = (
@@ -4278,7 +4278,7 @@
 /obj/item/gps/spaceruin{
 	name = "hotel gps"
 	},
-/obj/machinery/power/apc/highcap/five_k/autoname/directional/south,
+/obj/machinery/power/apc/highcap/five_k/auto_name/directional/south,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hotel/workroom)
 "VP" = (
