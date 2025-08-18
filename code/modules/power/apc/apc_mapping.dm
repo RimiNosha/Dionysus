@@ -28,11 +28,15 @@
 
 #define APC_DIRECTIONAL_HELPERS(apc) MAPPING_DIRECTIONAL_HELPERS_ROBUST(apc, APC_PIXEL_OFFSET, -APC_SOUTH_PIXEL_OFFSET, APC_PIXEL_OFFSET, -APC_PIXEL_OFFSET)
 
-APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_name)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/unlocked)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/syndicate)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/away)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k/auto_name)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k/auto_name)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc)
+APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_name)
 APC_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/sm_apc)
 
 #undef APC_DIRECTIONAL_HELPERS
