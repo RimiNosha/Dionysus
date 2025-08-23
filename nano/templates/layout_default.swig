@@ -3,7 +3,6 @@
   <div id="uiStatusIcon" class="icon24 uiStatusGood"></div>
   <div id="uiTitleText">{{ config.title }}</div>
   <div id="uiTitleFluff"></div>
-  <div id="uiCloseButton" onclick="Byond.sendMessage('act/close', {})">×</div>
 </div>
 <div id="uiContent">
   {% block content %}

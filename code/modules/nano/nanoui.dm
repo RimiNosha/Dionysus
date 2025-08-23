@@ -380,14 +380,8 @@ nanoui is used to open and update nano browser uis
 	if(update_status())
 		return // Will be closed by update_status().
 
-	var/window_options = base_window_options
-	if (user.client.byond_build > 1664) // app-region was added, which means we can use fancy mode without fucking over performance for people at long last.
-		window_options += "can-resize=0;titlebar=0;"
-
-	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
-	// winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
+	user << browse(get_html(), "window=[window_id];[window_size][base_window_options]")
 	on_close_winset()
-	//onclose(user, window_id)
 	SSnanoui.ui_opened(src)
 
  /**
