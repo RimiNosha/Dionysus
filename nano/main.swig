@@ -1,7 +1,7 @@
 <!-- NOT A TEMPLATE! -->
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="Content-Type" content="text/html; charset=\"utf-8\"">
+	<meta http-equiv="Content-Type" content="text/html; charset='utf-8'">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<style>
@@ -43,6 +43,20 @@
 				white-space: pre-wrap;
 				word-break: break-all;
 			}
+
+			.blinkingCursor {
+				width: 1rem;
+				animation: blink-animation 1.5s steps(1) infinite;
+			}
+
+			@keyframes blink-animation {
+				0%, 100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0;
+				}
+			}
 		</style>
 		<script>
 			var __uncompTemplateData__ = {}
@@ -54,7 +68,7 @@
 				window.onerror = function() {} // Don't catch further errors, otherwise copy paste will be a pain in the ass
 				try {
 					Byond.winset(__byond_window_id__, { "can-resize": true, size: "500x500", "can-close": true, "titlebar": true }) // Make it (potentially) bigger and then make it so people can resize it for easier reading
-					Byond.winset(__byond_window_id__, { "can-resize": true, size: "500x500" }) // Make it (potentially) bigger and then make it so people can resize it for easier reading
+					Byond.sendMessage("act/crashed", {})
 				}
 				catch (e) {
 					console.log("byond ded")
@@ -84,7 +98,6 @@
 							"browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable",
 						),
 					);
-					//alert('browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
 				}
 			}
 
@@ -133,7 +146,7 @@
   | | | ' \| | ' \| / / |) | (_) \__ \ \__ \/ -_) _` |  _/ _` | || | |  _|
   |_| |_||_|_|_||_|_\_\___/ \___/|___/ |___/\___\__, |_| \__,_|\_,_|_|\__|
                                                 |___/
-Time to go make a coffee.
+Time to go make a coffee.<span class="blinkingCursor">_</span>
 			</div>
 			<div id="onerrorStacktrace"></div>
 		</div>
