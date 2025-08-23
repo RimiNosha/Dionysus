@@ -2,6 +2,8 @@
 #define TEMPLATE_FILE_NAME "nanoui_templates.json"
 
 /datum/asset/nanoui
+	early = TRUE
+
 	var/list/common = list()
 	var/list/uncommon = list()
 
