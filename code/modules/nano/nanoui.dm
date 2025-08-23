@@ -117,7 +117,8 @@ nanoui is used to open and update nano browser uis
 	add_script("nano_input_passthrough.js") // Contains the code that handles allowing users to move while focused on a window.
 	add_script("morphdom.2.2.7.js") //for partial dom updates
 	add_script("swig.min.js")
-	add_script("libraries.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
+	add_script("jquery.3.7.1.min.js")
+	add_script("jquery.timers.1.2.min.js") // jQuery Timers
 	add_script("nano_utility.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_byond.js") // The Byond JS, contains functions for interacting with byond.
 	add_script("nano_swig.js") // This handles setting up of the templating engine.
