@@ -12,7 +12,7 @@ And while it'd be nice to pin to a specific version of TGUI, it'd end up as a me
 
 So that's why I'm dunking significant time initially into upgrading NanoUI, as it's a framework that's simple enough to be understood by anyone with basic byond and html+css+js knowledge, and with these upgrades, it'll be powerful enough to actually do everything TGUI could do.
 
-## NanoUI Static Files
+## This Folder Contains NanoUI Static Files
 
 These never change while the game is running, and reloading of these files is not supported while the server is live.
 

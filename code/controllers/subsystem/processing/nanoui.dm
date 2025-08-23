@@ -60,7 +60,7 @@ PROCESSING_SUBSYSTEM_DEF(nanoui)
 	for (var/ui_key in open_nanouis[src_object_key])
 		for (var/datum/nanoui/ui in open_nanouis[src_object_key][ui_key])
 			if(ui.src_object && ui.user)
-				ui.try_update(1)
+				ui.try_update(TRUE)
 				.++
 			else
 				ui.close()
@@ -102,7 +102,7 @@ PROCESSING_SUBSYSTEM_DEF(nanoui)
 
 	for (var/datum/nanoui/ui in user.open_nanouis)
 		if ((isnull(src_object) || ui.src_object == src_object) && (isnull(ui_key) || ui.ui_key == ui_key))
-			ui.try_update(1)
+			ui.try_update(TRUE)
 			.++
 
  /**

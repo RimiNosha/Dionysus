@@ -1,7 +1,3 @@
-if (typeof jQuery == "undefined") {
-	alert("ERROR: Javascript library failed to load!");
-}
-
 (function () {
 	var _alert = window.alert;
 	window.alert = function (str) {

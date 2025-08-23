@@ -1,58 +1,51 @@
-/**********************************************************
-NANO UI FRAMEWORK
-
-nanoui class (or whatever Byond calls classes)
-
-nanoui is used to open and update nano browser uis
-**********************************************************/
-
+/**
+ * NANO UI FRAMEWORK
+ *
+ * nanoui class (or whatever Byond calls classes)
+ *
+ * nanoui is used to open and update nano browser uis
+*/
 /datum/nanoui
-	// the user who opened this ui
+	/// the user who opened this ui
 	var/mob/user
-	// the object this ui "belongs" to
+	/// the object this ui "belongs" to
 	var/datum/src_object
-	// the title of this ui
+	/// the title of this ui
 	var/title
-	// the key of this ui, this is to allow multiple (different) uis for each src_object
+	/// the key of this ui, this is to allow multiple (different) uis for each src_object
 	var/ui_key
-	// window_id is used as the window name/identifier for browse and onclose
+	/// window_id is used as the window name/identifier for browse and onclose
 	var/window_id
-	// the browser window width
+	/// the browser window width
 	var/width = 0
-	// the browser window height
+	/// the browser window height
 	var/height = 0
-	// whether to use extra logic when window closes
+	/// whether to use extra logic when window closes
 	var/on_close_logic = 1
-	// an extra ref to use when the window is closed, usually null
+	/// an extra ref to use when the window is closed, usually null
 	var/datum/ref = null
-	// options for modifying window behaviour
-	var/base_window_options = "can-close=1;can-minimize=0;can-maximize=0;app-region=1;" // window option is set using window_id
-	// the list of stylesheets to apply to this ui
+	/// options for modifying window behaviour
+	var/base_window_options = "can-close=1;can-minimize=0;can-maximize=0;" // window option is set using window_id
+	/// the list of stylesheets to apply to this ui
 	var/list/stylesheets = list()
-	// the list of javascript scripts to use for this ui
+	/// the list of javascript scripts to use for this ui
 	var/list/scripts = list()
-	// the template currently used by this ui
+	/// the template currently used by this ui
 	var/template
-	// the layout key for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
+	/// the layout key for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
 	var/layout_key = "default"
-	// optional layout key for additional ui header content to include
+	/// optional layout key for additional ui header content to include
 	var/layout_header_key = "default_header"
-	// this sets whether to re-render the ui layout with each update (default 0, turning on will break the map ui if it's in use)
-	var/auto_update_layout = 0
-	// this sets whether to re-render the ui content with each update (default 1)
-	var/auto_update_content = 1
-	// the default state to use for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
+	/// the default state to use for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
 	var/state_key = "default"
-	// show the map ui, this is used by the default layout
-	var/show_map = 0
-	// the map z level to display
-	var/map_z_level = 1
-	// initial data, containing the full data structure, must be sent to the ui (the data structure cannot be extended later on)
+	/// initial data, containing the full data structure, must be sent to the ui (the data structure cannot be extended later on)
 	var/list/initial_data[0]
-	// set to 1 to update the ui automatically every master_controller tick
-	var/is_auto_updating = 0
-	// the current status/visibility of the ui
+	/// set to 1 to update the ui automatically every master_controller tick
+	var/is_auto_updating = FALSE
+	/// the current status/visibility of the ui
 	var/status = UI_INTERACTIVE
+	/// has the ui crashed?
+	var/crashed
 
 	// Relationship between a master interface and its children. Used in update_status
 	var/datum/nanoui/master_ui
@@ -205,8 +198,6 @@ nanoui is used to open and update nano browser uis
 			"srcObject" = list("name" = name),
 			"stateKey" = state_key,
 			"status" = status,
-			"autoUpdateLayout" = auto_update_layout,
-			"autoUpdateContent" = auto_update_content,
 			"templateFileName" = SSassets.transport.get_asset_url(TEMPLATE_FILE_NAME)
 		)
 	return config_data
@@ -275,26 +266,6 @@ nanoui is used to open and update nano browser uis
 	layout_key = lowertext(nlayout_key)
 
  /**
-  * Set the ui to update the layout (re-render it) on each update, turning this on will break the map ui (if it's being used)
-  *
-  * @param state int (bool) Set update to 1 or 0 (true/false) (default 0)
-  *
-  * @return nothing
-  */
-/datum/nanoui/proc/set_auto_update_layout(nstate)
-	auto_update_layout = nstate
-
- /**
-  * Set the ui to update the main content (re-render it) on each update
-  *
-  * @param state int (bool) Set update to 1 or 0 (true/false) (default 1)
-  *
-  * @return nothing
-  */
-/datum/nanoui/proc/set_auto_update_content(nstate)
-	auto_update_content = nstate
-
- /**
   * Set the state key for use in the frontend Javascript
   *
   * @param nstate_key string The key of the state to use
@@ -303,26 +274,6 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/set_state_key(nstate_key)
 	state_key = nstate_key
-
- /**
-  * Toggle showing the map ui
-  *
-  * @param nstate_key boolean 1 to show map, 0 to hide (default is 0)
-  *
-  * @return nothing
-  */
-/datum/nanoui/proc/set_show_map(nstate)
-	show_map = nstate
-
- /**
-  * Toggle showing the map ui
-  *
-  * @param nstate_key boolean 1 to show map, 0 to hide (default is 0)
-  *
-  * @return nothing
-  */
-/datum/nanoui/proc/set_map_z_level(nz)
-	map_z_level = nz
 
  /**
   * Set whether or not to use the "old" on close logic (mainly unset_machine())
@@ -461,8 +412,9 @@ nanoui is used to open and update nano browser uis
 			close()
 		if ("crashed")
 			winset(user, window_id, "can-close=1;titlebar=1")
+			crashed = FALSE
 
-	if ((src_object && src_object.nanoui_act(act_type, payload, href_list, src))/* || map_update*/)
+	if (src_object && src_object.nanoui_act(act_type, payload, href_list, src))
 		SSnanoui.update_uis(src_object) // update all UIs attached to src_object
 
  /**
@@ -472,12 +424,12 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/try_update(update = 0)
+/datum/nanoui/proc/try_update(update = FALSE)
 	if (!src_object || !user)
 		close()
 		return
 
-	if (status && (update || is_auto_updating))
+	if (status && (update || is_auto_updating) && !crashed)
 		update() // Update the UI (update_status() is called whenever a UI is updated)
 	else
 		update_status(1) // Not updating UI, so lets check here if status has changed
@@ -487,7 +439,7 @@ nanoui is used to open and update nano browser uis
   * Use try_update() to make manual updates.
   */
 /datum/nanoui/process()
-	try_update(0)
+	try_update()
 
  /**
   * Update the UI
