@@ -84,21 +84,13 @@ const SnowflakeExtinguisher = (props: { module: MechaUtility }) => {
   const { act, data } = useBackend<OperatorData>();
   return (
     <>
-      <ProgressBar
-        value={props.module.snowflake.reagents}
-        minValue={0}
-        maxValue={props.module.snowflake.total_reagents}
-      >
+      <ProgressBar value={props.module.snowflake.reagents} minValue={0} maxValue={props.module.snowflake.total_reagents}>
         {props.module.snowflake.reagents}
       </ProgressBar>
       <Button
         tooltip={'ACTIVATE'}
         color={'red'}
-        disabled={
-          props.module.snowflake.reagents < props.module.snowflake.minimum_requ
-            ? 1
-            : 0
-        }
+        disabled={props.module.snowflake.reagents < props.module.snowflake.minimum_requ ? 1 : 0}
         icon={'fire-extinguisher'}
         onClick={() =>
           act('equip_act', {

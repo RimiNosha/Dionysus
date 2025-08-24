@@ -1,18 +1,7 @@
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-  Stack,
-  Table,
-  Tabs,
-} from '../components';
+import { Box, Button, Icon, LabeledList, NoticeBox, ProgressBar, Section, Stack, Table, Tabs } from '../components';
 import { Window } from '../layouts';
 
 type PaiInterfaceData = {
@@ -77,28 +66,21 @@ of your ability.`;
 
 const SOFTWARE_DESC = {
   'crew manifest': 'A tool that allows you to view the crew manifest.',
-  'digital messenger':
-    'A tool that allows you to send messages to other crew members.',
-  'atmosphere sensor':
-    'A tool that allows you to analyze local atmospheric contents.',
-  'photography module':
-    'A portable camera module. Engage, then click to shoot.',
+  'digital messenger': 'A tool that allows you to send messages to other crew members.',
+  'atmosphere sensor': 'A tool that allows you to analyze local atmospheric contents.',
+  'photography module': 'A portable camera module. Engage, then click to shoot.',
   'camera zoom': 'A tool that allows you to zoom in on your camera.',
   'printer module': 'A portable printer module for photographs.',
-  'remote signaler':
-    'A remote signalling device to transmit and receive codes.',
+  'remote signaler': 'A remote signalling device to transmit and receive codes.',
   'medical records': 'A tool that allows you to view station medical records.',
-  'security records':
-    'A tool that allows you to view station security records, warrants.',
+  'security records': 'A tool that allows you to view station security records, warrants.',
   'host scan': 'A portable health analyzer. Must be held to use.',
   'medical HUD': 'Allows you to view medical status using an overlay HUD.',
   'security HUD': 'Allows you to view security records using an overlay HUD.',
-  'loudness booster':
-    'Synthesizes instruments, plays sounds and imported songs.',
+  'loudness booster': 'Synthesizes instruments, plays sounds and imported songs.',
   newscaster: 'A tool that allows you to broadcast news to other crew members.',
   'door jack': 'A tool that allows you to open doors.',
-  'encryption keys':
-    'A tool that allows you to decrypt and speak on other radio frequencies.',
+  'encryption keys': 'A tool that allows you to decrypt and speak on other radio frequencies.',
   'internal gps': 'A tool that allows you to track your location.',
   'universal translator': 'Translation module for non-common languages.',
 };
@@ -146,32 +128,16 @@ const TabDisplay = (props) => {
 
   return (
     <Tabs fluid>
-      <Tabs.Tab
-        icon="list"
-        onClick={() => onTabClick(Tab.System)}
-        selected={tab === Tab.System}
-      >
+      <Tabs.Tab icon="list" onClick={() => onTabClick(Tab.System)} selected={tab === Tab.System}>
         System
       </Tabs.Tab>
-      <Tabs.Tab
-        icon="list"
-        onClick={() => onTabClick(Tab.Directive)}
-        selected={tab === Tab.Directive}
-      >
+      <Tabs.Tab icon="list" onClick={() => onTabClick(Tab.Directive)} selected={tab === Tab.Directive}>
         Directives
       </Tabs.Tab>
-      <Tabs.Tab
-        icon="list"
-        onClick={() => onTabClick(Tab.Installed)}
-        selected={tab === Tab.Installed}
-      >
+      <Tabs.Tab icon="list" onClick={() => onTabClick(Tab.Installed)} selected={tab === Tab.Installed}>
         Installed
       </Tabs.Tab>
-      <Tabs.Tab
-        icon="list"
-        onClick={() => onTabClick(Tab.Available)}
-        selected={tab === Tab.Available}
-      >
+      <Tabs.Tab icon="list" onClick={() => onTabClick(Tab.Available)} selected={tab === Tab.Available}>
         Download
       </Tabs.Tab>
     </Tabs>
@@ -245,19 +211,10 @@ const SystemInfo = (_) => {
     <Section
       buttons={
         <>
-          <Button
-            disabled={!master.dna}
-            icon="dna"
-            onClick={() => act('check_dna')}
-            tooltip="Verifies your master's DNA. Must be carried in hand."
-          >
+          <Button disabled={!master.dna} icon="dna" onClick={() => act('check_dna')} tooltip="Verifies your master's DNA. Must be carried in hand.">
             Verify
           </Button>
-          <Button
-            icon={ICON_MAP[image] || 'meh-blank'}
-            onClick={() => act('change_image')}
-            tooltip="Change your display image."
-          >
+          <Button icon={ICON_MAP[image] || 'meh-blank'} onClick={() => act('change_image')} tooltip="Change your display image.">
             Display
           </Button>
         </>
@@ -267,9 +224,7 @@ const SystemInfo = (_) => {
       title="System Info"
     >
       <LabeledList>
-        <LabeledList.Item label="Master">
-          {master.name || 'None.'}
-        </LabeledList.Item>
+        <LabeledList.Item label="Master">{master.name || 'None.'}</LabeledList.Item>
         <LabeledList.Item label="DNA">{master.dna || 'None.'}</LabeledList.Item>
       </LabeledList>
     </Section>
@@ -299,9 +254,7 @@ const DirectiveDisplay = (_) => {
             'None.'
           ) : (
             <LabeledList>
-              <LabeledList.Item label="Prime">
-                Serve your master.
-              </LabeledList.Item>
+              <LabeledList.Item label="Prime">Serve your master.</LabeledList.Item>
               <LabeledList.Item label="Supplemental">
                 <Box>{directives}</Box>
               </LabeledList.Item>
@@ -349,9 +302,7 @@ const InstalledSoftware = (props) => {
         installed.map((software) => {
           return (
             <Button key={software} onClick={() => onInstallClick(software)}>
-              {software.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-                letter.toUpperCase(),
-              )}
+              {software.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())}
             </Button>
           );
         })
@@ -371,17 +322,7 @@ const InstalledInfo = (props) => {
     return <RecordsDisplay record_type="security" />;
   } else {
     return (
-      <Section
-        fill
-        scrollable
-        title={
-          !software
-            ? 'Select a Program'
-            : software.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-                letter.toUpperCase(),
-              )
-        }
-      >
+      <Section fill scrollable title={!software ? 'Select a Program' : software.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())}>
         {software && (
           <Stack fill vertical>
             <Stack.Item>{SOFTWARE_DESC[software] || ''}</Stack.Item>
@@ -408,11 +349,7 @@ const RecordsDisplay = (props) => {
       buttons={
         <Stack>
           <Stack.Item>
-            <Button
-              disabled={refresh_spam}
-              onClick={() => act('refresh', { list: record_type })}
-              tooltip="Refresh"
-            >
+            <Button disabled={refresh_spam} onClick={() => act('refresh', { list: record_type })} tooltip="Refresh">
               <Icon mr={-0.7} name="sync" spin={refresh_spam} />
             </Button>
           </Stack.Item>
@@ -440,12 +377,8 @@ const RecordLabels = (props) => {
   return (
     <Table>
       <Table.Row>
-        <Table.Cell>
-          {record_type === 'medical' ? 'Physical Health' : 'Arrest Status'}
-        </Table.Cell>
-        <Table.Cell>
-          {record_type === 'medical' ? 'Mental Health' : 'Total Crimes'}
-        </Table.Cell>
+        <Table.Cell>{record_type === 'medical' ? 'Physical Health' : 'Arrest Status'}</Table.Cell>
+        <Table.Cell>{record_type === 'medical' ? 'Mental Health' : 'Total Crimes'}</Table.Cell>
       </Table.Row>
     </Table>
   );
@@ -478,25 +411,13 @@ const SoftwareButtons = (props) => {
     case 'digital messenger':
       return (
         <>
-          <Button
-            icon="power-off"
-            onClick={() => act('pda', { pda: 'power' })}
-            selected={pda.power}
-          >
+          <Button icon="power-off" onClick={() => act('pda', { pda: 'power' })} selected={pda.power}>
             Power
           </Button>
-          <Button
-            icon="volume-mute"
-            onClick={() => act('pda', { pda: 'silent' })}
-            selected={pda.silent}
-          >
+          <Button icon="volume-mute" onClick={() => act('pda', { pda: 'silent' })} selected={pda.silent}>
             Silent
           </Button>
-          <Button
-            disabled={!pda.power}
-            icon="envelope"
-            onClick={() => act('pda', { pda: 'message' })}
-          >
+          <Button disabled={!pda.power} icon="envelope" onClick={() => act('pda', { pda: 'message' })}>
             Message
           </Button>
         </>
@@ -504,26 +425,13 @@ const SoftwareButtons = (props) => {
     case 'door jack':
       return (
         <>
-          <Button
-            disabled={door_jack}
-            icon="plug"
-            onClick={() => act('door_jack', { jack: 'cable' })}
-          >
+          <Button disabled={door_jack} icon="plug" onClick={() => act('door_jack', { jack: 'cable' })}>
             Extend Cable
           </Button>
-          <Button
-            color="bad"
-            disabled={!door_jack}
-            icon="door-open"
-            onClick={() => act('door_jack', { jack: 'jack' })}
-          >
+          <Button color="bad" disabled={!door_jack} icon="door-open" onClick={() => act('door_jack', { jack: 'jack' })}>
             Hack Door
           </Button>
-          <Button
-            disabled={!door_jack}
-            icon="unlink"
-            onClick={() => act('door_jack', { jack: 'cancel' })}
-          >
+          <Button disabled={!door_jack} icon="unlink" onClick={() => act('door_jack', { jack: 'cancel' })}>
             Cancel
           </Button>
         </>
@@ -531,22 +439,13 @@ const SoftwareButtons = (props) => {
     case 'host scan': {
       return (
         <>
-          <Button
-            icon="search"
-            onClick={() => act('host_scan', { scan: 'scan' })}
-          >
+          <Button icon="search" onClick={() => act('host_scan', { scan: 'scan' })}>
             Host Scan
           </Button>
-          <Button
-            icon="cog"
-            onClick={() => act('host_scan', { scan: 'wounds' })}
-          >
+          <Button icon="cog" onClick={() => act('host_scan', { scan: 'wounds' })}>
             Toggle Wounds
           </Button>
-          <Button
-            icon="cog"
-            onClick={() => act('host_scan', { scan: 'limbs' })}
-          >
+          <Button icon="cog" onClick={() => act('host_scan', { scan: 'limbs' })}>
             Toggle Limbs
           </Button>
         </>
@@ -554,21 +453,13 @@ const SoftwareButtons = (props) => {
     }
     case 'universal translator':
       return (
-        <Button
-          icon="download"
-          onClick={() => act(software.toLowerCase().replace(/ /g, '_'))}
-          disabled={!!languages}
-        >
+        <Button icon="download" onClick={() => act(software.toLowerCase().replace(/ /g, '_'))} disabled={!!languages}>
           {!languages ? 'Install' : 'Installed'}
         </Button>
       );
     default:
       return (
-        <Button
-          icon="power-off"
-          onClick={() => act(software.toLowerCase().replace(/ /g, '_'))}
-          tooltip="Attempts to toggle the module's power."
-        >
+        <Button icon="power-off" onClick={() => act(software.toLowerCase().replace(/ /g, '_'))} tooltip="Attempts to toggle the module's power.">
           Toggle
         </Button>
       );
@@ -577,12 +468,7 @@ const SoftwareButtons = (props) => {
 
 const AvailableDisplay = () => {
   return (
-    <Section
-      buttons={<AvailableMemory />}
-      fill
-      scrollable
-      title="Available Software"
-    >
+    <Section buttons={<AvailableMemory />} fill scrollable title="Available Software">
       <AvailableSoftware />
     </Section>
   );
@@ -646,27 +532,15 @@ const AvailableRow = (props) => {
   return (
     <Table.Row className="candystripe">
       <Table.Cell collapsible>
-        <Box color="label">
-          {software.name.replace(/^\w/, (c) => c.toUpperCase())}
-        </Box>
+        <Box color="label">{software.name.replace(/^\w/, (c) => c.toUpperCase())}</Box>
       </Table.Cell>
       <Table.Cell collapsible>
         <Box color={ram < software.value && 'bad'} textAlign="right">
-          {!purchased && software.value}{' '}
-          <Icon
-            color={purchased || ram >= software.value ? 'purple' : 'bad'}
-            name={purchased ? 'check' : 'microchip'}
-          />
+          {!purchased && software.value} <Icon color={purchased || ram >= software.value ? 'purple' : 'bad'} name={purchased ? 'check' : 'microchip'} />
         </Box>
       </Table.Cell>
       <Table.Cell collapsible>
-        <Button
-          fluid
-          mb={0.5}
-          disabled={ram < software.value || purchased}
-          onClick={() => act('buy', { selection: software.name })}
-          tooltip={SOFTWARE_DESC[software.name] || ''}
-        >
+        <Button fluid mb={0.5} disabled={ram < software.value || purchased} onClick={() => act('buy', { selection: software.name })} tooltip={SOFTWARE_DESC[software.name] || ''}>
           <Icon ml={1} mr={-2} name="download" />
         </Button>
       </Table.Cell>

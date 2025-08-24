@@ -3,11 +3,7 @@ import { exhaustiveCheck } from 'common/exhaustive';
 import { Dropdown, Icon } from '../../components';
 import { RandomSetting } from './data';
 
-export const RandomizationButton = (props: {
-  dropdownProps?: Record<string, unknown>;
-  setValue: (newValue: RandomSetting) => void;
-  value: RandomSetting;
-}) => {
+export const RandomizationButton = (props: { dropdownProps?: Record<string, unknown>; setValue: (newValue: RandomSetting) => void; value: RandomSetting }) => {
   const { dropdownProps = {}, setValue, value } = props;
 
   let color;

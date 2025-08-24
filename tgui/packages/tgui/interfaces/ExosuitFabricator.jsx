@@ -3,22 +3,10 @@ import { createSearch } from 'common/string';
 import { Fragment } from 'react';
 
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  Input,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Icon, Input, ProgressBar, Section, Stack } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
-import {
-  MaterialAmount,
-  MaterialFormatting,
-  Materials,
-} from './common/Materials';
+import { MaterialAmount, MaterialFormatting, Materials } from './common/Materials';
 
 const COLOR_NONE = 0;
 const COLOR_AVERAGE = 1;
@@ -82,11 +70,7 @@ const queueCondFormat = (materials, queue) => {
       materialTally[mat] = materialTally[mat] || 0;
       missingMatTally[mat] = missingMatTally[mat] || 0;
 
-      matFormat[mat] = partBuildColor(
-        part.cost[mat],
-        materialTally[mat],
-        materials[mat],
-      );
+      matFormat[mat] = partBuildColor(part.cost[mat], materialTally[mat], materials[mat]);
 
       if (matFormat[mat].color !== COLOR_NONE) {
         if (textColors[i] < matFormat[mat].color) {
@@ -106,10 +90,7 @@ const searchFilter = (search, allparts) => {
   if (!search.length) {
     return;
   }
-  const resultFilter = createSearch(
-    search,
-    (part) => (part.name || '') + (part.desc || '') + (part.searchMeta || ''),
-  );
+  const resultFilter = createSearch(search, (part) => (part.name || '') + (part.desc || '') + (part.searchMeta || ''));
   let searchResults = [];
   Object.keys(allparts).forEach((category) => {
     allparts[category].filter(resultFilter).forEach((e) => {
@@ -124,14 +105,8 @@ export const ExosuitFabricator = (props) => {
   const { act, data } = useBackend();
   const queue = data.queue || [];
   const materialAsObj = materialArrayToObj(data.materials || []);
-  const { materialTally, missingMatTally, textColors } = queueCondFormat(
-    materialAsObj,
-    queue,
-  );
-  const [displayMatCost, setDisplayMatCost] = useSharedState(
-    'display_mats',
-    false,
-  );
+  const { materialTally, missingMatTally, textColors } = queueCondFormat(materialAsObj, queue);
+  const [displayMatCost, setDisplayMatCost] = useSharedState('display_mats', false);
   return (
     <Window title="Exosuit Fabricator" width={1100} height={640}>
       <Window.Content>
@@ -153,10 +128,7 @@ export const ExosuitFabricator = (props) => {
               </Stack.Item>
               <Stack.Item>
                 <Section fill title="Settings">
-                  <Button.Checkbox
-                    onClick={() => setDisplayMatCost(!displayMatCost)}
-                    checked={displayMatCost}
-                  >
+                  <Button.Checkbox onClick={() => setDisplayMatCost(!displayMatCost)} checked={displayMatCost}>
                     Display Material Costs
                   </Button.Checkbox>
                 </Section>
@@ -166,31 +138,15 @@ export const ExosuitFabricator = (props) => {
           <Stack.Item grow>
             <Stack fill>
               <Stack.Item>
-                <Section
-                  fill
-                  title="Categories"
-                  buttons={
-                    <Button
-                      content="R&D Sync"
-                      onClick={() => act('sync_rnd')}
-                    />
-                  }
-                >
+                <Section fill title="Categories" buttons={<Button content="R&D Sync" onClick={() => act('sync_rnd')} />}>
                   <PartSets />
                 </Section>
               </Stack.Item>
               <Stack.Item grow>
-                <PartLists
-                  queueMaterials={materialTally}
-                  materials={materialAsObj}
-                />
+                <PartLists queueMaterials={materialTally} materials={materialAsObj} />
               </Stack.Item>
               <Stack.Item width="420px">
-                <Queue
-                  queueMaterials={materialTally}
-                  missingMaterials={missingMatTally}
-                  textColors={textColors}
-                />
+                <Queue queueMaterials={materialTally} missingMaterials={missingMatTally} textColors={textColors} />
               </Stack.Item>
             </Stack>
           </Stack.Item>
@@ -204,20 +160,11 @@ const PartSets = (props) => {
   const { data } = useBackend();
   const partSets = data.partSets || [];
   const buildableParts = data.buildableParts || {};
-  const [selectedPartTab, setSelectedPartTab] = useSharedState(
-    'part_tab',
-    partSets.length ? buildableParts[0] : '',
-  );
+  const [selectedPartTab, setSelectedPartTab] = useSharedState('part_tab', partSets.length ? buildableParts[0] : '');
   return partSets
     .filter((set) => buildableParts[set])
     .map((set) => (
-      <Button
-        key={set}
-        fluid
-        color="transparent"
-        selected={set === selectedPartTab}
-        onClick={() => setSelectedPartTab(set)}
-      >
+      <Button key={set} fluid color="transparent" selected={set === selectedPartTab} onClick={() => setSelectedPartTab(set)}>
         {set}
       </Button>
     ));
@@ -240,10 +187,7 @@ const PartLists = (props) => {
 
   const { queueMaterials, materials } = props;
 
-  const [selectedPartTab, setSelectedPartTab] = useSharedState(
-    'part_tab',
-    getFirstValidPartSet(partSets),
-  );
+  const [selectedPartTab, setSelectedPartTab] = useSharedState('part_tab', getFirstValidPartSet(partSets));
 
   const [searchText, setSearchText] = useSharedState('search_text', '');
 
@@ -288,32 +232,15 @@ const PartLists = (props) => {
               <Icon name="search" />
             </Stack.Item>
             <Stack.Item grow>
-              <Input
-                fluid
-                placeholder="Search for..."
-                onInput={(e, v) => setSearchText(v)}
-              />
+              <Input fluid placeholder="Search for..." onInput={(e, v) => setSearchText(v)} />
             </Stack.Item>
           </Stack>
         </Section>
       </Stack.Item>
       <Stack.Item grow>
         <Section fill scrollable>
-          {(!!searchText && (
-            <PartCategory
-              name={'Search Results'}
-              parts={partsList}
-              forceShow
-              placeholder="No matching results..."
-            />
-          )) ||
-            Object.keys(partsList).map((category) => (
-              <PartCategory
-                key={category}
-                name={category}
-                parts={partsList[category]}
-              />
-            ))}
+          {(!!searchText && <PartCategory name={'Search Results'} parts={partsList} forceShow placeholder="No matching results..." />) ||
+            Object.keys(partsList).map((category) => <PartCategory key={category} name={category} parts={partsList[category]} />)}
         </Section>
       </Stack.Item>
     </Stack>
@@ -351,41 +278,22 @@ const PartCategory = (props) => {
         <Fragment key={part.name}>
           <Stack align="center">
             <Stack.Item>
-              <Button
-                disabled={buildingPart || part.format.textColor === COLOR_BAD}
-                color="good"
-                icon="play"
-                onClick={() => act('build_part', { id: part.id })}
-              />
+              <Button disabled={buildingPart || part.format.textColor === COLOR_BAD} color="good" icon="play" onClick={() => act('build_part', { id: part.id })} />
             </Stack.Item>
             <Stack.Item>
-              <Button
-                color="average"
-                icon="plus-circle"
-                onClick={() => act('add_queue_part', { id: part.id })}
-              />
+              <Button color="average" icon="plus-circle" onClick={() => act('add_queue_part', { id: part.id })} />
             </Stack.Item>
             <Stack.Item grow color={COLOR_KEYS[part.format.textColor]}>
               {part.name}
             </Stack.Item>
             <Stack.Item>
-              <Button
-                icon="question-circle"
-                tooltip={
-                  'Build Time: ' + part.printTime + 's. ' + (part.desc || '')
-                }
-                tooltipPosition="left"
-              />
+              <Button icon="question-circle" tooltip={'Build Time: ' + part.printTime + 's. ' + (part.desc || '')} tooltipPosition="left" />
             </Stack.Item>
           </Stack>
           {displayMatCost && (
             <Stack mb={2}>
               {Object.keys(part.cost).map((material) => (
-                <Stack.Item
-                  key={material}
-                  width="50px"
-                  color={COLOR_KEYS[part.format[material].color]}
-                >
+                <Stack.Item key={material} width="50px" color={COLOR_KEYS[part.format[material].color]}>
                   <MaterialAmount
                     formatting={MaterialFormatting.Money}
                     style={{
@@ -418,27 +326,9 @@ const Queue = (props) => {
           title="Queue"
           buttons={
             <>
-              <Button.Confirm
-                disabled={!queue.length}
-                color="bad"
-                icon="minus-circle"
-                content="Clear Queue"
-                onClick={() => act('clear_queue')}
-              />
-              {(!!isProcessingQueue && (
-                <Button
-                  disabled={!queue.length}
-                  content="Stop"
-                  icon="stop"
-                  onClick={() => act('stop_queue')}
-                />
-              )) || (
-                <Button
-                  disabled={!queue.length}
-                  content="Build Queue"
-                  icon="play"
-                  onClick={() => act('build_queue')}
-                />
+              <Button.Confirm disabled={!queue.length} color="bad" icon="minus-circle" content="Clear Queue" onClick={() => act('clear_queue')} />
+              {(!!isProcessingQueue && <Button disabled={!queue.length} content="Stop" icon="stop" onClick={() => act('stop_queue')} />) || (
+                <Button disabled={!queue.length} content="Build Queue" icon="play" onClick={() => act('build_queue')} />
               )}
             </>
           }
@@ -456,10 +346,7 @@ const Queue = (props) => {
       {!!queue.length && (
         <Stack.Item>
           <Section title="Material Cost">
-            <QueueMaterials
-              queueMaterials={queueMaterials}
-              missingMaterials={missingMaterials}
-            />
+            <QueueMaterials queueMaterials={queueMaterials} missingMaterials={missingMaterials} />
           </Section>
         </Stack.Item>
       )}
@@ -473,14 +360,8 @@ const QueueMaterials = (props) => {
     <Stack wrap>
       {Object.keys(queueMaterials).map((material) => (
         <Stack.Item key={material} textAlign="center">
-          <MaterialAmount
-            formatting={MaterialFormatting.Money}
-            name={material}
-            amount={queueMaterials[material]}
-          />
-          {!!missingMaterials[material] && (
-            <Box color="bad">{formatMoney(missingMaterials[material])}</Box>
-          )}
+          <MaterialAmount formatting={MaterialFormatting.Money} name={material} amount={queueMaterials[material]} />
+          {!!missingMaterials[material] && <Box color="bad">{formatMoney(missingMaterials[material])}</Box>}
         </Stack.Item>
       ))}
     </Stack>
@@ -501,15 +382,9 @@ const QueueList = (props) => {
   return queue.map((part, index) => (
     <Stack key={part.name} wrap align="baseline">
       <Stack.Item>
-        <Button
-          icon="minus-circle"
-          color="bad"
-          onClick={() => act('del_queue_part', { index: index + 1 })}
-        />
+        <Button icon="minus-circle" color="bad" onClick={() => act('del_queue_part', { index: index + 1 })} />
       </Stack.Item>
-      <Stack.Item textColor={COLOR_KEYS[textColors[index]]}>
-        {part.name}
-      </Stack.Item>
+      <Stack.Item textColor={COLOR_KEYS[textColors[index]]}>{part.name}</Stack.Item>
     </Stack>
   ));
 };
@@ -537,9 +412,7 @@ const BeingBuilt = (props) => {
       <ProgressBar minValue={0} maxValue={printTime} value={duration}>
         <Stack>
           <Stack.Item grow>{name}</Stack.Item>
-          <Stack.Item>
-            {(timeLeft >= 0 && timeLeft + 's') || 'Dispensing...'}
-          </Stack.Item>
+          <Stack.Item>{(timeLeft >= 0 && timeLeft + 's') || 'Dispensing...'}</Stack.Item>
         </Stack>
       </ProgressBar>
     );

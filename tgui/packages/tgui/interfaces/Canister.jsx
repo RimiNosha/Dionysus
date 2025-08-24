@@ -2,17 +2,7 @@ import { toFixed } from 'common/math';
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Knob,
-  LabeledControls,
-  LabeledList,
-  RoundGauge,
-  Section,
-} from '../components';
+import { Box, Button, Flex, Icon, Knob, LabeledControls, LabeledList, RoundGauge, Section } from '../components';
 import { formatSiUnit } from '../format';
 import { Window } from '../layouts';
 
@@ -51,13 +41,7 @@ export const Canister = (props) => {
               buttons={
                 <>
                   {!!isPrototype && (
-                    <Button
-                      mr={1}
-                      icon={restricted ? 'lock' : 'unlock'}
-                      color="caution"
-                      content={restricted ? 'Engineering' : 'Public'}
-                      onClick={() => act('restricted')}
-                    />
+                    <Button mr={1} icon={restricted ? 'lock' : 'unlock'} color="caution" content={restricted ? 'Engineering' : 'Public'} onClick={() => act('restricted')} />
                   )}
                   <Button
                     icon={data.shielding ? 'power-off' : 'times'}
@@ -65,11 +49,7 @@ export const Canister = (props) => {
                     selected={data.shielding}
                     onClick={() => act('shielding')}
                   />
-                  <Button
-                    icon="pencil-alt"
-                    content="Relabel"
-                    onClick={() => act('relabel')}
-                  />
+                  <Button icon="pencil-alt" content="Relabel" onClick={() => act('relabel')} />
                 </>
               }
             >
@@ -140,57 +120,33 @@ export const Canister = (props) => {
                     width="50px"
                     lineHeight={2}
                     fontSize="11px"
-                    color={
-                      valveOpen ? (hasHoldingTank ? 'caution' : 'danger') : null
-                    }
+                    color={valveOpen ? (hasHoldingTank ? 'caution' : 'danger') : null}
                     content={valveOpen ? 'Open' : 'Closed'}
                     onClick={() => act('valve')}
                   />
                 </LabeledControls.Item>
                 <LabeledControls.Item mr={1} label="Port">
-                  <Tooltip
-                    content={portConnected ? 'Connected' : 'Disconnected'}
-                    position="top"
-                  >
+                  <Tooltip content={portConnected ? 'Connected' : 'Disconnected'} position="top">
                     <Box position="relative">
-                      <Icon
-                        size={1.25}
-                        name={portConnected ? 'plug' : 'times'}
-                        color={portConnected ? 'good' : 'bad'}
-                      />
+                      <Icon size={1.25} name={portConnected ? 'plug' : 'times'} color={portConnected ? 'good' : 'bad'} />
                     </Box>
                   </Tooltip>
                 </LabeledControls.Item>
               </LabeledControls>
             </Section>
             <Section>
-              <Box>
-                {data.has_cell
-                  ? 'Cell charge at: ' + data.cell_charge + '%'
-                  : 'Missing Cell'}
-              </Box>
+              <Box>{data.has_cell ? 'Cell charge at: ' + data.cell_charge + '%' : 'Missing Cell'}</Box>
             </Section>
           </Flex.Item>
           <Flex.Item grow={1}>
             <Section
               height="100%"
               title="Holding Tank"
-              buttons={
-                !!hasHoldingTank && (
-                  <Button
-                    icon="eject"
-                    color={valveOpen && 'danger'}
-                    content="Eject"
-                    onClick={() => act('eject')}
-                  />
-                )
-              }
+              buttons={!!hasHoldingTank && <Button icon="eject" color={valveOpen && 'danger'} content="Eject" onClick={() => act('eject')} />}
             >
               {!!hasHoldingTank && (
                 <LabeledList>
-                  <LabeledList.Item label="Label">
-                    {holdingTank.name}
-                  </LabeledList.Item>
+                  <LabeledList.Item label="Label">{holdingTank.name}</LabeledList.Item>
                   <LabeledList.Item label="Pressure">
                     <RoundGauge
                       value={holdingTank.tankPressure}
@@ -199,14 +155,8 @@ export const Canister = (props) => {
                       alertAfter={holdingTankLeakPressure}
                       ranges={{
                         good: [0, holdingTankLeakPressure],
-                        average: [
-                          holdingTankLeakPressure,
-                          holdingTankFragPressure,
-                        ],
-                        bad: [
-                          holdingTankFragPressure,
-                          holdingTankFragPressure * 1.15,
-                        ],
+                        average: [holdingTankLeakPressure, holdingTankFragPressure],
+                        bad: [holdingTankFragPressure, holdingTankFragPressure * 1.15],
                       }}
                       format={formatPressure}
                       size={1.75}

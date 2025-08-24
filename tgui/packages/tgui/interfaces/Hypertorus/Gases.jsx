@@ -3,14 +3,7 @@ import { flow } from 'common/fp';
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../../components';
+import { Box, Button, LabeledList, NumberInput, ProgressBar, Section } from '../../components';
 import { getGasColor, getGasLabel } from '../../constants';
 import { HelpDummy, HoverHelp } from './helpers';
 
@@ -24,15 +17,12 @@ const moderator_gases_help = {
   plasma:
     'Produces basic gases. Has a modest heat bonus to help kick start the early fusion process. When added in large quantities, its high heat capacity can help to slow down temperature changes to manageable speeds.',
   bz: 'Produces intermediate gases at Fusion Level 3 or higher. Massively increases radiation, and induces hallucinations in bystanders.',
-  proto_nitrate:
-    'Produces advanced gases. Massively increases radiation, and accelerates the rate of temperature change. Make sure you have enough cooling.',
+  proto_nitrate: 'Produces advanced gases. Massively increases radiation, and accelerates the rate of temperature change. Make sure you have enough cooling.',
   o2: 'When added in high quantities, rapidly purges iron content. Does not purge iron content fast enough to keep up with damage at high Fusion Levels.',
-  healium:
-    'Directly heals a heavily damaged HFR core at high Fusion Levels, but is rapidly consumed in the process.',
+  healium: 'Directly heals a heavily damaged HFR core at high Fusion Levels, but is rapidly consumed in the process.',
   antinoblium:
     'Provides huge amounts of energy and radiation. Can cause dangerous electrical storms even from a healthy HFR core when present in more than trace amounts. Wear appropriate electrical protection when handling.',
-  freon:
-    'Saps most forms of energy expression. Slows the rate of temperature change.',
+  freon: 'Saps most forms of energy expression. Slows the rate of temperature change.',
 };
 
 const moderator_gases_sticky_order = ['plasma', 'bz', 'proto_nitrate'];
@@ -52,22 +42,9 @@ const ensure_gases = (gas_array, gasids) => {
 
 const GasList = (props) => {
   const { act, data } = useBackend();
-  const {
-    input_max,
-    input_min,
-    input_rate,
-    input_switch,
-    gases: raw_gases,
-    minimumScale,
-    prepend,
-    rateHelp,
-    stickyGases,
-  } = props;
+  const { input_max, input_min, input_rate, input_switch, gases: raw_gases, minimumScale, prepend, rateHelp, stickyGases } = props;
 
-  const gases = flow([
-    filter((gas) => gas.amount >= 0.01),
-    sortBy((gas) => -gas.amount),
-  ])(raw_gases || []);
+  const gases = flow([filter((gas) => gas.amount >= 0.01), sortBy((gas) => -gas.amount)])(raw_gases || []);
 
   if (stickyGases) {
     ensure_gases(gases, stickyGases);
@@ -90,14 +67,7 @@ const GasList = (props) => {
           selected={data[input_switch]}
           onClick={() => act(input_switch)}
         />
-        <NumberInput
-          animated
-          value={parseFloat(data[input_rate])}
-          unit="mol/s"
-          minValue={input_min}
-          maxValue={input_max}
-          onDrag={(_, v) => act(input_rate, { [input_rate]: v })}
-        />
+        <NumberInput animated value={parseFloat(data[input_rate])} unit="mol/s" minValue={input_min} maxValue={input_max} onDrag={(_, v) => act(input_rate, { [input_rate]: v })} />
       </LabeledList.Item>
       {gases.map((gas) => {
         let labelPrefix;
@@ -114,12 +84,7 @@ const GasList = (props) => {
               </>
             }
           >
-            <ProgressBar
-              color={getGasColor(gas.id)}
-              value={gas.amount}
-              minValue={0}
-              maxValue={minimumScale}
-            >
+            <ProgressBar color={getGasColor(gas.id)} value={gas.amount} minValue={0} maxValue={minimumScale}>
               {toFixed(gas.amount, 2) + ' moles'}
             </ProgressBar>
           </LabeledList.Item>
@@ -134,9 +99,7 @@ export const HypertorusGases = (props) => {
 
   const { fusion_gases, moderator_gases } = data;
 
-  const selected_fuel = (data.selectable_fuel || []).filter(
-    (d) => d.id === data.selected,
-  )[0];
+  const selected_fuel = (data.selectable_fuel || []).filter((d) => d.id === data.selected)[0];
 
   return (
     <>
@@ -150,11 +113,7 @@ export const HypertorusGases = (props) => {
             gases={fusion_gases}
             minimumScale={500}
             prepend={() => <HelpDummy />}
-            rateHelp={
-              'The rate at which new fuel is added from the fuel input port.' +
-              ' This rate affects the rate of production,' +
-              ' even when input is not active.'
-            }
+            rateHelp={'The rate at which new fuel is added from the fuel input port.' + ' This rate affects the rate of production,' + ' even when input is not active.'}
             stickyGases={selected_fuel.requirements}
           />
         ) : (
@@ -171,17 +130,9 @@ export const HypertorusGases = (props) => {
           input_min={0.5}
           gases={moderator_gases}
           minimumScale={500}
-          rateHelp={
-            'The rate at which new moderator gas is added from the moderator port.'
-          }
+          rateHelp={'The rate at which new moderator gas is added from the moderator port.'}
           stickyGases={moderator_gases_sticky_order}
-          prepend={(gas) =>
-            moderator_gases_help[gas.id] ? (
-              <HoverHelp content={moderator_gases_help[gas.id]} />
-            ) : (
-              <HelpDummy />
-            )
-          }
+          prepend={(gas) => (moderator_gases_help[gas.id] ? <HoverHelp content={moderator_gases_help[gas.id]} /> : <HelpDummy />)}
         />
       </Section>
     </>

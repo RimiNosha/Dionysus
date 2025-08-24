@@ -27,12 +27,7 @@ export const MalfunctionModulePicker = (props) => {
   return (
     <Window width={620} height={525} theme="malfunction">
       <Window.Content scrollable>
-        <GenericUplink
-          categories={categoriesList}
-          items={items}
-          currency={`${processingTime} PT`}
-          handleBuy={(item) => act('buy', { name: item.name })}
-        />
+        <GenericUplink categories={categoriesList} items={items} currency={`${processingTime} PT`} handleBuy={(item) => act('buy', { name: item.name })} />
       </Window.Content>
     </Window>
   );

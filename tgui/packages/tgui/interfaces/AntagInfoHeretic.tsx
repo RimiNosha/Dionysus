@@ -90,8 +90,7 @@ const FlavorSection = () => {
             <span style={hereticBlue}>shimmer</span>
             &nbsp;around you, as a realization of something&nbsp;
             <span style={hereticRed}>strange</span>
-            &nbsp;in the air unfolds. You look inwards and discover something
-            that will change your life.
+            &nbsp;in the air unfolds. You look inwards and discover something that will change your life.
           </i>
         </Stack.Item>
         <Stack.Item>
@@ -114,39 +113,30 @@ const GuideSection = () => {
           <span style={hereticPurple}>influences</span>
           &nbsp;around the station invisible to the normal eye and&nbsp;
           <b>right click</b> on them to harvest them for&nbsp;
-          <span style={hereticBlue}>knowledge points</span>. Tapping them makes
-          them visible to all after a short time.
+          <span style={hereticBlue}>knowledge points</span>. Tapping them makes them visible to all after a short time.
         </Stack.Item>
         <Stack.Item>
           - Use your&nbsp;
           <span style={hereticRed}>Living Heart action</span>
           &nbsp;to track down&nbsp;
-          <span style={hereticRed}>sacrifice targets</span>, but be careful:
-          Pulsing it will produce a heartbeat sound that nearby people may hear.
-          This action is tied to your <b>heart</b> - if you lose it, you must
-          complete a ritual to regain it.
+          <span style={hereticRed}>sacrifice targets</span>, but be careful: Pulsing it will produce a heartbeat sound that nearby people may hear. This action is tied to your{' '}
+          <b>heart</b> - if you lose it, you must complete a ritual to regain it.
         </Stack.Item>
         <Stack.Item>
           - Draw a&nbsp;
-          <span style={hereticGreen}>transmutation rune</span> by using a
-          drawing tool (a pen or crayon) on the floor while having&nbsp;
+          <span style={hereticGreen}>transmutation rune</span> by using a drawing tool (a pen or crayon) on the floor while having&nbsp;
           <span style={hereticGreen}>Mansus Grasp</span>
-          &nbsp;active in your other hand. This rune allows you to complete
-          rituals and sacrifices.
+          &nbsp;active in your other hand. This rune allows you to complete rituals and sacrifices.
         </Stack.Item>
         <Stack.Item>
-          - Follow your <span style={hereticRed}>Living Heart</span> to find
-          your targets. Bring them back to a&nbsp;
+          - Follow your <span style={hereticRed}>Living Heart</span> to find your targets. Bring them back to a&nbsp;
           <span style={hereticGreen}>transmutation rune</span> to&nbsp;
           <span style={hereticRed}>sacrifice</span> them for&nbsp;
-          <span style={hereticBlue}>knowledge points</span>. The Mansus{' '}
-          <b>ONLY</b> accepts targets pointed to by the&nbsp;
+          <span style={hereticBlue}>knowledge points</span>. The Mansus <b>ONLY</b> accepts targets pointed to by the&nbsp;
           <span style={hereticRed}>Living Heart</span>.
         </Stack.Item>
         <Stack.Item>
-          - Accomplish all of your objectives to be able to learn the{' '}
-          <span style={hereticYellow}>final ritual</span>. Complete the ritual
-          to become all powerful!
+          - Accomplish all of your objectives to be able to learn the <span style={hereticYellow}>final ritual</span>. Complete the ritual to become all powerful!
         </Stack.Item>
       </Stack>
     </Stack.Item>
@@ -174,10 +164,7 @@ const InformationSection = (props) => {
         )}
         <Stack.Item>
           You have <b>{charges || 0}</b>&nbsp;
-          <span style={hereticBlue}>
-            knowledge point{charges !== 1 ? 's' : ''}
-          </span>
-          .
+          <span style={hereticBlue}>knowledge point{charges !== 1 ? 's' : ''}</span>.
         </Stack.Item>
         <Stack.Item>
           You have made a total of&nbsp;
@@ -195,9 +182,7 @@ const ObjectivePrintout = (props) => {
   return (
     <Stack.Item>
       <Stack vertical fill>
-        <Stack.Item bold>
-          In order to ascend, you have these tasks to fulfill:
-        </Stack.Item>
+        <Stack.Item bold>In order to ascend, you have these tasks to fulfill:</Stack.Item>
         <Stack.Item>
           {(!objectives && 'None!') ||
             objectives.map((objective) => (
@@ -222,12 +207,7 @@ const ResearchedKnowledge = (props) => {
           {(!learnedKnowledge.length && 'None!') ||
             learnedKnowledge.map((learned) => (
               <Stack.Item key={learned.name}>
-                <Button
-                  width="100%"
-                  color={learned.color}
-                  content={`${learned.hereticPath} - ${learned.name}`}
-                  tooltip={learned.desc}
-                />
+                <Button width="100%" color={learned.color} content={`${learned.hereticPath} - ${learned.name}`} tooltip={learned.desc} />
               </Stack.Item>
             ))}
         </Stack>
@@ -281,10 +261,7 @@ const ResearchInfo = (props) => {
         <Stack vertical height="100%">
           <Stack.Item fontSize="20px" textAlign="center">
             You have <b>{charges || 0}</b>&nbsp;
-            <span style={hereticBlue}>
-              knowledge point{charges !== 1 ? 's' : ''}
-            </span>{' '}
-            to spend.
+            <span style={hereticBlue}>knowledge point{charges !== 1 ? 's' : ''}</span> to spend.
           </Stack.Item>
           <Stack.Item grow>
             <Stack height="100%">
@@ -317,25 +294,15 @@ export const AntagInfoHeretic = (props) => {
         <Stack vertical fill>
           <Stack.Item>
             <Tabs fluid>
-              <Tabs.Tab
-                icon="info"
-                selected={currentTab === 0}
-                onClick={() => setTab(0)}
-              >
+              <Tabs.Tab icon="info" selected={currentTab === 0} onClick={() => setTab(0)}>
                 Information
               </Tabs.Tab>
-              <Tabs.Tab
-                icon={currentTab === 1 ? 'book-open' : 'book'}
-                selected={currentTab === 1}
-                onClick={() => setTab(1)}
-              >
+              <Tabs.Tab icon={currentTab === 1 ? 'book-open' : 'book'} selected={currentTab === 1} onClick={() => setTab(1)}>
                 Research
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow>
-            {(currentTab === 0 && <IntroductionSection />) || <ResearchInfo />}
-          </Stack.Item>
+          <Stack.Item grow>{(currentTab === 0 && <IntroductionSection />) || <ResearchInfo />}</Stack.Item>
         </Stack>
       </Window.Content>
     </Window>

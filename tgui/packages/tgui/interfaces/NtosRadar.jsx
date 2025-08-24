@@ -22,28 +22,14 @@ export const NtosRadarContent = (props) => {
       <Flex.Item position="relative" width={20.5} hight="100%">
         <NtosWindow.Content scrollable>
           <Section>
-            <Button
-              icon="redo-alt"
-              content={scanning ? 'Scanning...' : 'Scan'}
-              color="blue"
-              disabled={scanning}
-              onClick={() => act('scan')}
-            />
-            {!object.length && !scanning && (
-              <div>No trackable signals found</div>
-            )}
+            <Button icon="redo-alt" content={scanning ? 'Scanning...' : 'Scan'} color="blue" disabled={scanning} onClick={() => act('scan')} />
+            {!object.length && !scanning && <div>No trackable signals found</div>}
             {!scanning &&
               object.map((object) => (
                 <div
                   key={object.dev}
                   title={object.name}
-                  className={classes([
-                    'Button',
-                    'Button--fluid',
-                    'Button--color--transparent',
-                    'Button--ellipsis',
-                    object.ref === selected && 'Button--selected',
-                  ])}
+                  className={classes(['Button', 'Button--fluid', 'Button--color--transparent', 'Button--ellipsis', object.ref === selected && 'Button--selected'])}
                   onClick={() => {
                     act('selecttarget', {
                       ref: object.ref,
@@ -58,8 +44,7 @@ export const NtosRadarContent = (props) => {
       </Flex.Item>
       <Flex.Item
         style={{
-          backgroundImage:
-            'url("' + resolveAsset('ntosradarbackground.png') + '")',
+          backgroundImage: 'url("' + resolveAsset('ntosradarbackground.png') + '")',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           top: '20px',
@@ -71,14 +56,7 @@ export const NtosRadarContent = (props) => {
       >
         {Object.keys(target).length === 0
           ? !!selected && (
-              <NoticeBox
-                position="absolute"
-                top={20.6}
-                left={1.35}
-                width={42}
-                fontSize="30px"
-                textAlign="center"
-              >
+              <NoticeBox position="absolute" top={20.6} left={1.35} width={42} fontSize="30px" textAlign="center">
                 {sig_err}
               </NoticeBox>
             )
@@ -93,16 +71,7 @@ export const NtosRadarContent = (props) => {
                   transform: `rotate(${target.rot}deg)`,
                 }}
               />
-            )) || (
-              <Icon
-                name={target.pointer}
-                position="absolute"
-                size={2}
-                color={target.color}
-                top={target.locy * 10 + 19 + 'px'}
-                left={target.locx * 10 + 16 + 'px'}
-              />
-            )}
+            )) || <Icon name={target.pointer} position="absolute" size={2} color={target.color} top={target.locy * 10 + 19 + 'px'} left={target.locx * 10 + 16 + 'px'} />}
       </Flex.Item>
     </Flex>
   );

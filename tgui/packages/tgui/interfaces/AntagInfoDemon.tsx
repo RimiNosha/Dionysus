@@ -42,11 +42,7 @@ export const AntagInfoDemon = (props) => {
               <Stack.Item grow>
                 <Section fill scrollable={objectives.length > 2}>
                   <Stack vertical>
-                    <Stack.Item
-                      textAlign="center"
-                      textColor="red"
-                      fontSize="20px"
-                    >
+                    <Stack.Item textAlign="center" textColor="red" fontSize="20px">
                       {fluff}
                     </Stack.Item>
                     <Stack.Item>
@@ -60,20 +56,13 @@ export const AntagInfoDemon = (props) => {
                   <Section fill title="Demonic Powers">
                     <Stack vertical>
                       <Stack.Item>
-                        <span style={jauntstyle}>Blood Jaunt:</span> You can
-                        dive in and out of blood to travel anywhere you need to
-                        be. You will gain a speed boost upon leaving the jaunt
-                        for surprise attacks. You can drag victims you have
-                        disabled through the blood, consuming them and restoring
-                        health.
+                        <span style={jauntstyle}>Blood Jaunt:</span> You can dive in and out of blood to travel anywhere you need to be. You will gain a speed boost upon leaving
+                        the jaunt for surprise attacks. You can drag victims you have disabled through the blood, consuming them and restoring health.
                       </Stack.Item>
                       <Stack.Divider />
                       <Stack.Item>
-                        <span style={injurestyle}>Monstrous strike:</span> You
-                        can launch a devastating slam attack by right-clicking,
-                        capable of smashing bones in one strike. Great for
-                        preventing the escape of your victims, as their wounds
-                        will slow them.
+                        <span style={injurestyle}>Monstrous strike:</span> You can launch a devastating slam attack by right-clicking, capable of smashing bones in one strike.
+                        Great for preventing the escape of your victims, as their wounds will slow them.
                       </Stack.Item>
                     </Stack>
                   </Section>
@@ -95,9 +84,7 @@ const ObjectivePrintout = (props) => {
   const { objectives } = data;
   return (
     <Stack vertical>
-      <Stack.Item bold>
-        It is in your nature to accomplish these goals:
-      </Stack.Item>
+      <Stack.Item bold>It is in your nature to accomplish these goals:</Stack.Item>
       <Stack.Item>
         {(!objectives && 'None!') ||
           objectives.map((objective) => (

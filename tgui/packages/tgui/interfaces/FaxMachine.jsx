@@ -1,14 +1,5 @@
 import { useBackend, useLocalState, useSharedState } from '../backend';
-import {
-  BlockQuote,
-  Box,
-  Button,
-  Divider,
-  Dropdown,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { BlockQuote, Box, Button, Divider, Dropdown, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 export const FaxMachine = (props) => {
@@ -28,15 +19,9 @@ export const FaxMachine = (props) => {
 
   const [tab, setTab] = useSharedState('tab', 1);
 
-  const [selectedPaperTab, setSelectedPaper] = useLocalState(
-    'ref',
-    received_paperwork[0]?.ref,
-  );
+  const [selectedPaperTab, setSelectedPaper] = useLocalState('ref', received_paperwork[0]?.ref);
 
-  const [destination, setDestination] = useLocalState(
-    'dest',
-    default_destination,
-  );
+  const [destination, setDestination] = useLocalState('dest', default_destination);
 
   const selectedPaper = received_paperwork.find((paper) => {
     return paper.ref === selectedPaperTab;
@@ -52,31 +37,15 @@ export const FaxMachine = (props) => {
         <Section
           title="Nanotrasen Fax Device"
           height={6.5}
-          buttons={
-            !!emagged && (
-              <Button
-                color="bad"
-                content="Restore Routing Information"
-                onClick={() => act('un_emag_machine')}
-              />
-            )
-          }
+          buttons={!!emagged && <Button color="bad" content="Restore Routing Information" onClick={() => act('un_emag_machine')} />}
         >
-          Hello, {display_name}!{' '}
-          {emagged
-            ? 'ERR- ERRoR. ERROR.'
-            : 'Welcome to the Nanotrasen Approved Faxing Device!'}
+          Hello, {display_name}! {emagged ? 'ERR- ERRoR. ERROR.' : 'Welcome to the Nanotrasen Approved Faxing Device!'}
         </Section>
         <Section title="Faxed Papers">
           <Stack vertical height={15}>
             <Stack.Item height={2}>
               <Tabs>
-                <Tabs.Tab
-                  width="50%"
-                  icon="copy"
-                  selected={tab === 1}
-                  onClick={() => setTab(1)}
-                >
+                <Tabs.Tab width="50%" icon="copy" selected={tab === 1} onClick={() => setTab(1)}>
                   <b>Send A Fax</b>
                 </Tabs.Tab>
                 <Tabs.Tab
@@ -117,18 +86,13 @@ export const FaxMachine = (props) => {
                   </Box>
                 ) : (
                   <Box>
-                    <i>
-                      Insert a paper into the machine to fax its contents
-                      somewhere.
-                    </i>
+                    <i>Insert a paper into the machine to fax its contents somewhere.</i>
                   </Box>
                 ))}
               {tab === 2 &&
                 (received_paper ? (
                   <Box mt={1}>
-                    <span style={{ color: 'gold', fontWeight: 'bold' }}>
-                      Message from {received_paper.source}:
-                    </span>
+                    <span style={{ color: 'gold', fontWeight: 'bold' }}>Message from {received_paper.source}:</span>
                     <BlockQuote mt={1}>{received_paper.contents}</BlockQuote>
                   </Box>
                 ) : (
@@ -146,11 +110,7 @@ export const FaxMachine = (props) => {
                       icon="fax"
                       color={emagged ? 'bad' : 'good'}
                       content="Send to: "
-                      disabled={
-                        tab !== 1 ||
-                        !stored_paper ||
-                        !(can_send_cc_messages || emagged)
-                      }
+                      disabled={tab !== 1 || !stored_paper || !(can_send_cc_messages || emagged)}
                       tooltip={
                         'Send the contents of the paper currently inserted \
                       in the machine to the destination specified. Response not guaranteed. \
@@ -179,12 +139,7 @@ export const FaxMachine = (props) => {
               {tab === 2 && received_paper && (
                 <Stack>
                   <Stack.Item>
-                    <Button
-                      disabled={!received_paper}
-                      content="Print received Fax"
-                      tooltip="Print the last received fax."
-                      onClick={() => act('print_received_paper')}
-                    />
+                    <Button disabled={!received_paper} content="Print received Fax" tooltip="Print the last received fax." onClick={() => act('print_received_paper')} />
                   </Stack.Item>
                 </Stack>
               )}
@@ -211,13 +166,7 @@ export const FaxMachine = (props) => {
               {received_paperwork.length > 0 ? (
                 <Tabs>
                   {received_paperwork.map((paper) => (
-                    <Tabs.Tab
-                      width="12.5%"
-                      key={paper}
-                      textAlign="center"
-                      selected={paper.ref === selectedPaperTab}
-                      onClick={() => setSelectedPaper(paper.ref)}
-                    >
+                    <Tabs.Tab width="12.5%" key={paper} textAlign="center" selected={paper.ref === selectedPaperTab} onClick={() => setSelectedPaper(paper.ref)}>
                       Paper {paper.num}
                     </Tabs.Tab>
                   ))}
@@ -227,23 +176,14 @@ export const FaxMachine = (props) => {
               )}
             </Stack.Item>
             <Stack.Item height={8}>
-              {selectedPaper ? (
-                <BlockQuote fontSize="14px">
-                  {selectedPaper.contents}
-                </BlockQuote>
-              ) : (
-                received_paperwork.length > 0 && 'No paper selected.'
-              )}
+              {selectedPaper ? <BlockQuote fontSize="14px">{selectedPaper.contents}</BlockQuote> : received_paperwork.length > 0 && 'No paper selected.'}
             </Stack.Item>
             <Divider />
             <Stack.Item height={3} mb={1}>
               {!!selectedPaper && (
                 <Stack vertical align="center">
                   <Stack.Item>
-                    <b>
-                      To fulfill this paperwork, stamp accurately and answer the
-                      following:
-                    </b>
+                    <b>To fulfill this paperwork, stamp accurately and answer the following:</b>
                   </Stack.Item>
                   <Stack.Item>
                     <BlockQuote>{selectedPaper.required_answer}</BlockQuote>
@@ -296,14 +236,8 @@ export const FaxMachine = (props) => {
                 </Stack.Item>
                 <Stack.Item>
                   <Button
-                    color={
-                      !received_paperwork || received_paperwork.length === 0
-                        ? 'good'
-                        : 'caution'
-                    }
-                    disabled={
-                      !received_paperwork || received_paperwork.length === 0
-                    }
+                    color={!received_paperwork || received_paperwork.length === 0 ? 'good' : 'caution'}
+                    disabled={!received_paperwork || received_paperwork.length === 0}
                     content="Print All Papers"
                     tooltip="Print out all the paperwork stored in the machine."
                     onClick={() => act('print_all_paperwork')}

@@ -10,12 +10,7 @@ export const AiVoiceChanger = (props) => {
       <Section>
         <LabeledList>
           <LabeledList.Item label="Power">
-            <Button
-              icon={data.on ? 'power-off' : 'times'}
-              content={data.on ? 'On' : 'Off'}
-              selected={data.on}
-              onClick={() => act('power')}
-            />
+            <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} onClick={() => act('power')} />
           </LabeledList.Item>
           <LabeledList.Item label="Accent">
             <Dropdown
@@ -38,12 +33,7 @@ export const AiVoiceChanger = (props) => {
             />
           </LabeledList.Item>
           <LabeledList.Item label="Volume">
-            <Button
-              icon={data.loud ? 'power-off' : 'times'}
-              content={data.loud ? 'Loudmode on' : 'Loudmode Off'}
-              selected={data.loud}
-              onClick={() => act('loud')}
-            />
+            <Button icon={data.loud ? 'power-off' : 'times'} content={data.loud ? 'Loudmode on' : 'Loudmode Off'} selected={data.loud} onClick={() => act('loud')} />
           </LabeledList.Item>
           <LabeledList.Item label="Fake name">
             <Input

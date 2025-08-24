@@ -21,23 +21,10 @@ export const NtosRevelation = (props) => {
           <LabeledList>
             <LabeledList.Item
               label="Payload Status"
-              buttons={
-                <Button
-                  content={data.armed ? 'ARMED' : 'DISARMED'}
-                  color={data.armed ? 'bad' : 'average'}
-                  onClick={() => act('PRG_arm')}
-                />
-              }
+              buttons={<Button content={data.armed ? 'ARMED' : 'DISARMED'} color={data.armed ? 'bad' : 'average'} onClick={() => act('PRG_arm')} />}
             />
           </LabeledList>
-          <Button
-            fluid
-            bold
-            content="ACTIVATE"
-            textAlign="center"
-            color="bad"
-            disabled={!data.armed}
-          />
+          <Button fluid bold content="ACTIVATE" textAlign="center" color="bad" disabled={!data.armed} />
         </Section>
       </NtosWindow.Content>
     </NtosWindow>

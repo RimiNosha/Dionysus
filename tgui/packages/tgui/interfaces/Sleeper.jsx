@@ -66,41 +66,20 @@ export const Sleeper = (props) => {
               <LabeledList>
                 {damageTypes.map((type) => (
                   <LabeledList.Item key={type.type} label={type.label}>
-                    <ProgressBar
-                      value={occupant[type.type]}
-                      minValue={0}
-                      maxValue={occupant.maxHealth}
-                      color="bad"
-                    />
+                    <ProgressBar value={occupant[type.type]} minValue={0} maxValue={occupant.maxHealth} color="bad" />
                   </LabeledList.Item>
                 ))}
-                <LabeledList.Item
-                  label="Cells"
-                  color={occupant.cloneLoss ? 'bad' : 'good'}
-                >
+                <LabeledList.Item label="Cells" color={occupant.cloneLoss ? 'bad' : 'good'}>
                   {occupant.cloneLoss ? 'Damaged' : 'Healthy'}
                 </LabeledList.Item>
-                <LabeledList.Item
-                  label="Brain"
-                  color={occupant.brainLoss ? 'bad' : 'good'}
-                >
+                <LabeledList.Item label="Brain" color={occupant.brainLoss ? 'bad' : 'good'}>
                   {occupant.brainLoss ? 'Abnormal' : 'Healthy'}
                 </LabeledList.Item>
               </LabeledList>
             </>
           )}
         </Section>
-        <Section
-          title="Medicines"
-          minHeight="205px"
-          buttons={
-            <Button
-              icon={open ? 'door-open' : 'door-closed'}
-              content={open ? 'Open' : 'Closed'}
-              onClick={() => act('door')}
-            />
-          }
-        >
+        <Section title="Medicines" minHeight="205px" buttons={<Button icon={open ? 'door-open' : 'door-closed'} content={open ? 'Open' : 'Closed'} onClick={() => act('door')} />}>
           {chems.map((chem) => (
             <Button
               key={chem.name}

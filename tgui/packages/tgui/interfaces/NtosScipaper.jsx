@@ -1,21 +1,7 @@
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
-import {
-  BlockQuote,
-  Box,
-  Button,
-  Collapsible,
-  Dropdown,
-  Icon,
-  Input,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-  Table,
-  Tabs,
-} from '../components';
+import { BlockQuote, Box, Button, Collapsible, Dropdown, Icon, Input, LabeledList, NoticeBox, Section, Stack, Table, Tabs } from '../components';
 import { TableCell, TableRow } from '../components/Table';
 import { NtosWindow } from '../layouts';
 
@@ -127,10 +113,7 @@ const PaperPublishing = (props) => {
                 />
               </Stack.Item>
               <Stack.Item align="center">
-                <Tooltip
-                  position="left"
-                  content="The topic we want to publish our paper on. Different topics unlock different technologies and possible partners."
-                >
+                <Tooltip position="left" content="The topic we want to publish our paper on. Different topics unlock different technologies and possible partners.">
                   <Icon size={1.15} name="info-circle" />
                 </Tooltip>
               </Stack.Item>
@@ -151,10 +134,7 @@ const PaperPublishing = (props) => {
                 />
               </Stack.Item>
               <Stack.Item align="center">
-                <Tooltip
-                  position="left"
-                  content="The tier we want to publish on. Higher tiers can confer better rewards but means our data will be judged more harshly."
-                >
+                <Tooltip position="left" content="The tier we want to publish on. Higher tiers can confer better rewards but means our data will be judged more harshly.">
                   <Icon size={1.15} name="info-circle" />
                 </Tooltip>
               </Stack.Item>
@@ -175,10 +155,7 @@ const PaperPublishing = (props) => {
                 />
               </Stack.Item>
               <Stack.Item align="center">
-                <Tooltip
-                  position="left"
-                  content="Which organization to partner with. We can obtain research boosts in techs related to the partner's interests."
-                >
+                <Tooltip position="left" content="Which organization to partner with. We can obtain research boosts in techs related to the partner's interests.">
                   <Icon size={1.15} name="info-circle" />
                 </Tooltip>
               </Stack.Item>
@@ -189,20 +166,14 @@ const PaperPublishing = (props) => {
       <Section title="Expected Results" key="rewards">
         <Stack fill>
           <Stack.Item grow>
-            <Tooltip
-              position="top"
-              content="How much will our relation improve with the particular partner. Cooperation will be used to unlock boosts."
-            >
+            <Tooltip position="top" content="How much will our relation improve with the particular partner. Cooperation will be used to unlock boosts.">
               <Icon size={1.15} name="info-circle" />
             </Tooltip>
             {' Cooperation: '}
             <BlockQuote>{gains[coopIndex - 1]}</BlockQuote>
           </Stack.Item>
           <Stack.Item grow>
-            <Tooltip
-              position="top"
-              content="How much grant will we be endowed with upon the publication of this paper."
-            >
+            <Tooltip position="top" content="How much grant will we be endowed with upon the publication of this paper.">
               <Icon size={1.15} name="info-circle" />
             </Tooltip>
             {' Funding: '}
@@ -210,13 +181,7 @@ const PaperPublishing = (props) => {
           </Stack.Item>
         </Stack>
         <br />
-        <Button
-          icon="upload"
-          textAlign="center"
-          fluid
-          onClick={() => act('publish')}
-          content="Publish Paper"
-        />
+        <Button icon="upload" textAlign="center" fluid onClick={() => act('publish')} content="Publish Paper" />
       </Section>
     </>
   );
@@ -229,34 +194,19 @@ const PaperBrowser = (props) => {
     return <NoticeBox> No Published Papers! </NoticeBox>;
   } else {
     return publishedPapers.map((paper) => (
-      <Collapsible
-        key={String(paper['experimentName'] + paper['tier'])}
-        title={paper['title']}
-      >
+      <Collapsible key={String(paper['experimentName'] + paper['tier'])} title={paper['title']}>
         <Section>
           <LabeledList>
-            <LabeledList.Item label="Topic">
-              {paper['experimentName'] + ' - ' + paper['tier']}
-            </LabeledList.Item>
-            <LabeledList.Item label="Author">
-              {paper['author'] + (paper.etAlia ? ' et al.' : '')}
-            </LabeledList.Item>
-            <LabeledList.Item label="Partner">
-              {paper['partner']}
-            </LabeledList.Item>
+            <LabeledList.Item label="Topic">{paper['experimentName'] + ' - ' + paper['tier']}</LabeledList.Item>
+            <LabeledList.Item label="Author">{paper['author'] + (paper.etAlia ? ' et al.' : '')}</LabeledList.Item>
+            <LabeledList.Item label="Partner">{paper['partner']}</LabeledList.Item>
             <LabeledList.Item label="Yield">
               <LabeledList>
-                <LabeledList.Item label="Cooperation">
-                  {paper['gains'][coopIndex - 1]}
-                </LabeledList.Item>
-                <LabeledList.Item label="Funding">
-                  {paper['gains'][fundingIndex - 1]}
-                </LabeledList.Item>
+                <LabeledList.Item label="Cooperation">{paper['gains'][coopIndex - 1]}</LabeledList.Item>
+                <LabeledList.Item label="Funding">{paper['gains'][fundingIndex - 1]}</LabeledList.Item>
               </LabeledList>
             </LabeledList.Item>
-            <LabeledList.Item label="Abstract">
-              {paper['abstract']}
-            </LabeledList.Item>
+            <LabeledList.Item label="Abstract">{paper['abstract']}</LabeledList.Item>
           </LabeledList>
         </Section>
       </Collapsible>
@@ -272,15 +222,7 @@ const ExperimentBrowser = (props) => {
       <br />
       <LabeledList>
         {Object.keys(experiment.target).map((tier) => (
-          <LabeledList.Item
-            key={tier}
-            label={
-              'Optimal ' +
-              experiment.prefix +
-              ' Amount - Tier ' +
-              String(Number(tier) + 1)
-            }
-          >
+          <LabeledList.Item key={tier} label={'Optimal ' + experiment.prefix + ' Amount - Tier ' + String(Number(tier) + 1)}>
             {experiment.target[tier] + ' ' + experiment.suffix}
           </LabeledList.Item>
         ))}
@@ -291,30 +233,15 @@ const ExperimentBrowser = (props) => {
 
 const PartnersBrowser = (props) => {
   const { act, data } = useBackend();
-  const {
-    partnersInformation,
-    coopIndex,
-    fundingIndex,
-    purchaseableBoosts = [],
-    relations = [],
-    visibleNodes = [],
-  } = data;
+  const { partnersInformation, coopIndex, fundingIndex, purchaseableBoosts = [], relations = [], visibleNodes = [] } = data;
   return partnersInformation.map((partner) => (
     <Section title={partner.name} key={partner.path}>
       <Collapsible title={'Relations: ' + relations[partner.path]}>
         <LabeledList>
-          <LabeledList.Item label="Description">
-            {partner.flufftext}
-          </LabeledList.Item>
-          <LabeledList.Item label="Relations">
-            {relations[partner.path]}
-          </LabeledList.Item>
-          <LabeledList.Item label="Cooperation Bonus">
-            {partner.multipliers[coopIndex - 1] + 'x'}
-          </LabeledList.Item>
-          <LabeledList.Item label="Funding Bonus">
-            {partner.multipliers[fundingIndex - 1] + 'x'}
-          </LabeledList.Item>
+          <LabeledList.Item label="Description">{partner.flufftext}</LabeledList.Item>
+          <LabeledList.Item label="Relations">{relations[partner.path]}</LabeledList.Item>
+          <LabeledList.Item label="Cooperation Bonus">{partner.multipliers[coopIndex - 1] + 'x'}</LabeledList.Item>
+          <LabeledList.Item label="Funding Bonus">{partner.multipliers[fundingIndex - 1] + 'x'}</LabeledList.Item>
           <LabeledList.Item label="Accepted Experiments">
             {partner.acceptedExperiments.map((experiment_name) => (
               <Box key={experiment_name}>{experiment_name}</Box>
@@ -324,19 +251,13 @@ const PartnersBrowser = (props) => {
             <Table>
               {partner.boostedNodes.map((node) => (
                 <TableRow key={node.id}>
-                  <TableCell>
-                    {visibleNodes.includes(node.id)
-                      ? node.name
-                      : 'Unknown Technology'}
-                  </TableCell>
+                  <TableCell>{visibleNodes.includes(node.id) ? node.name : 'Unknown Technology'}</TableCell>
                   <TableCell>
                     <Button
                       fluid
                       tooltipPosition="left"
                       textAlign="center"
-                      disabled={
-                        !purchaseableBoosts[partner.path].includes(node.id)
-                      }
+                      disabled={!purchaseableBoosts[partner.path].includes(node.id)}
                       content="Purchase"
                       tooltip={'Discount: ' + node.discount}
                       onClick={() =>

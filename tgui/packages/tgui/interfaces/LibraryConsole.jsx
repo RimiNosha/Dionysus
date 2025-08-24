@@ -3,20 +3,7 @@ import { flow } from 'common/fp';
 import { classes } from 'common/react';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Flex,
-  Input,
-  LabeledList,
-  Modal,
-  NoticeBox,
-  NumberInput,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Box, Button, Dropdown, Flex, Input, LabeledList, Modal, NoticeBox, NumberInput, Section, Stack, Table } from '../components';
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
 
@@ -24,12 +11,7 @@ export const LibraryConsole = (props) => {
   const { act, data } = useBackend();
   const { display_lore } = data;
   return (
-    <Window
-      theme={display_lore ? 'spookyconsole' : ''}
-      title="Library Terminal"
-      width={880}
-      height={520}
-    >
+    <Window theme={display_lore ? 'spookyconsole' : ''} title="Library Terminal" width={880} height={520}>
       <Window.Content m="0">
         <Flex height="100%">
           <Flex.Item>
@@ -65,15 +47,7 @@ export const PopoutMenu = (props) => {
         <PopoutEntry id={3} icon="server" text="Archive" />
         <PopoutEntry id={4} icon="upload" text="Upload" />
         <PopoutEntry id={5} icon="print" text="Print" />
-        {!!display_lore && (
-          <PopoutEntry
-            id={6}
-            icon="question"
-            text={screen_state === 6 ? 'Gur Fbeprere' : 'Forbidden Lore'}
-            color="black"
-            font="copperplate"
-          />
-        )}
+        {!!display_lore && <PopoutEntry id={6} icon="question" text={screen_state === 6 ? 'Gur Fbeprere' : 'Forbidden Lore'} color="black" font="copperplate" />}
       </Stack>
     </Section>
   );
@@ -105,17 +79,12 @@ export const Inventory = (props) => {
   const { act, data } = useBackend();
   const { inventory_page_count, inventory_page, has_inventory } = data;
   if (!has_inventory) {
-    return (
-      <NoticeBox>No Book Records detected. Update your inventory!</NoticeBox>
-    );
+    return <NoticeBox>No Book Records detected. Update your inventory!</NoticeBox>;
   }
   return (
     <Stack vertical justify="space-between" height="100%">
       <Stack.Item grow>
-        <ScrollableSection
-          header="Library Inventory"
-          contents={<InventoryDetails />}
-        />
+        <ScrollableSection header="Library Inventory" contents={<InventoryDetails />} />
       </Stack.Item>
       <Stack.Item align="center">
         <PageSelect
@@ -185,10 +154,7 @@ export const Checkout = (props) => {
       <Stack.Item grow>
         <Stack vertical height="100%">
           <Stack.Item grow>
-            <ScrollableSection
-              header="Checked Out Books"
-              contents={<CheckoutEntries />}
-            />
+            <ScrollableSection header="Checked Out Books" contents={<CheckoutEntries />} />
           </Stack.Item>
           <Stack.Item align="center">
             <PageSelect
@@ -205,13 +171,7 @@ export const Checkout = (props) => {
         </Stack>
       </Stack.Item>
       <Stack.Item>
-        <Button
-          fluid
-          icon="barcode"
-          content="Check-Out Book"
-          fontSize="20px"
-          onClick={() => setCheckoutBook(true)}
-        />
+        <Button fluid icon="barcode" content="Check-Out Book" fontSize="20px" onClick={() => setCheckoutBook(true)} />
       </Stack.Item>
       {!!checkoutBook && <CheckoutModal />}
     </Stack>
@@ -249,9 +209,7 @@ export const CheckoutEntries = (props) => {
           <Table.Cell>{entry.title}</Table.Cell>
           <Table.Cell>{entry.author}</Table.Cell>
           <Table.Cell>{entry.borrower}</Table.Cell>
-          <Table.Cell backgroundColor={entry.overdue ? 'bad' : 'good'}>
-            {entry.overdue ? 'Overdue' : entry.due_in_minutes + ' Minutes'}
-          </Table.Cell>
+          <Table.Cell backgroundColor={entry.overdue ? 'bad' : 'good'}>{entry.overdue ? 'Overdue' : entry.due_in_minutes + ' Minutes'}</Table.Cell>
         </Table.Row>
       ))}
     </Table>
@@ -263,15 +221,9 @@ const CheckoutModal = (props) => {
 
   const { checking_out } = data;
   const [checkoutBook, setCheckoutBook] = useLocalState('CheckoutBook', false);
-  const [bookName, setBookName] = useLocalState(
-    'CheckoutBookName',
-    checking_out || 'Book',
-  );
+  const [bookName, setBookName] = useLocalState('CheckoutBookName', checking_out || 'Book');
   const [checkoutee, setCheckoutee] = useLocalState('Checkoutee', 'Recipient');
-  const [checkoutPeriod, setCheckoutPeriod] = useLocalState(
-    'CheckoutPeriod',
-    5,
-  );
+  const [checkoutPeriod, setCheckoutPeriod] = useLocalState('CheckoutPeriod', 5);
 
   return (
     <Modal width="500px">
@@ -280,27 +232,13 @@ const CheckoutModal = (props) => {
       </Box>
       <LabeledList>
         <LabeledList.Item label="Book Name">
-          <Input
-            width="250px"
-            value={bookName}
-            onChange={(e, value) => setBookName(value)}
-          />
+          <Input width="250px" value={bookName} onChange={(e, value) => setBookName(value)} />
         </LabeledList.Item>
         <LabeledList.Item label="Loan To">
-          <Input
-            width="160px"
-            value={checkoutee}
-            onChange={(e, value) => setCheckoutee(value)}
-          />
+          <Input width="160px" value={checkoutee} onChange={(e, value) => setCheckoutee(value)} />
         </LabeledList.Item>
         <LabeledList.Item label="Loan Period">
-          <NumberInput
-            value={checkoutPeriod}
-            unit=" Minutes"
-            minValue={1}
-            stepPixelSize={10}
-            onChange={(value) => setCheckoutPeriod(value)}
-          />
+          <NumberInput value={checkoutPeriod} unit=" Minutes" minValue={1} stepPixelSize={10} onChange={(value) => setCheckoutPeriod(value)} />
         </LabeledList.Item>
       </LabeledList>
       <Stack justify="center" align="center" pt={1}>
@@ -322,14 +260,7 @@ const CheckoutModal = (props) => {
           />
         </Stack.Item>
         <Stack.Item>
-          <Button
-            icon="times"
-            content="Return"
-            fontSize="16px"
-            color="bad"
-            onClick={() => setCheckoutBook(false)}
-            lineHeight={2}
-          />
+          <Button icon="times" content="Return" fontSize="16px" color="bad" onClick={() => setCheckoutBook(false)} lineHeight={2} />
         </Stack.Item>
       </Stack>
     </Modal>
@@ -340,20 +271,12 @@ export const Archive = (props) => {
   const { act, data } = useBackend();
   const { can_connect, can_db_request, page_count, our_page } = data;
   if (!can_connect) {
-    return (
-      <NoticeBox>
-        Unable to retrieve book listings. Please contact your system
-        administrator for assistance.
-      </NoticeBox>
-    );
+    return <NoticeBox>Unable to retrieve book listings. Please contact your system administrator for assistance.</NoticeBox>;
   }
   return (
     <Stack vertical justify="space-between" height="100%">
       <Stack.Item grow>
-        <ScrollableSection
-          header="Remote Archive"
-          contents={<SearchAndDisplay />}
-        />
+        <ScrollableSection header="Remote Archive" contents={<SearchAndDisplay />} />
       </Stack.Item>
       <Stack.Item align="center">
         <PageSelect
@@ -374,14 +297,7 @@ export const Archive = (props) => {
 
 export const SearchAndDisplay = (props) => {
   const { act, data } = useBackend();
-  const {
-    search_categories = [],
-    title,
-    category,
-    author,
-    params_changed,
-    can_db_request,
-  } = data;
+  const { search_categories = [], title, category, author, params_changed, can_db_request } = data;
   const records = flow([
     map((record, i) => ({
       ...record,
@@ -434,22 +350,10 @@ export const SearchAndDisplay = (props) => {
           </Stack>
         </Stack.Item>
         <Stack.Item>
-          <Button
-            disabled={!can_db_request}
-            textAlign="right"
-            onClick={() => act('search')}
-            color={params_changed ? 'good' : ''}
-            icon="book"
-          >
+          <Button disabled={!can_db_request} textAlign="right" onClick={() => act('search')} color={params_changed ? 'good' : ''} icon="book">
             Search
           </Button>
-          <Button
-            disabled={!can_db_request}
-            textAlign="right"
-            onClick={() => act('clear_data')}
-            color="bad"
-            icon="fire"
-          >
+          <Button disabled={!can_db_request} textAlign="right" onClick={() => act('clear_data')} color="bad" icon="fire">
             Reset Search
           </Button>
         </Stack.Item>
@@ -487,21 +391,10 @@ export const SearchAndDisplay = (props) => {
 
 export const Upload = (props) => {
   const { act, data } = useBackend();
-  const {
-    can_db_request,
-    has_scanner,
-    has_cache,
-    cache_title,
-    cache_author,
-    cache_content,
-  } = data;
+  const { can_db_request, has_scanner, has_cache, cache_title, cache_author, cache_content } = data;
   const [uploadToDB, setUploadToDB] = useLocalState('UploadDB', false);
   if (!has_scanner) {
-    return (
-      <NoticeBox>
-        No nearby scanner detected, construct one to continue.
-      </NoticeBox>
-    );
+    return <NoticeBox>No nearby scanner detected, construct one to continue.</NoticeBox>;
   }
   if (!has_cache) {
     return <NoticeBox>Scan in a book to upload.</NoticeBox>;
@@ -561,13 +454,7 @@ export const Upload = (props) => {
               </Stack>
             </Stack.Item>
             <Stack.Item grow>
-              <Section
-                fill
-                scrollable
-                preserveWhitespace
-                fontSize="15px"
-                title="Content:"
-              >
+              <Section fill scrollable preserveWhitespace fontSize="15px" title="Content:">
                 <Box dangerouslySetInnerHTML={contentHtml} />
               </Section>
             </Stack.Item>
@@ -576,27 +463,10 @@ export const Upload = (props) => {
         <Stack.Item>
           <Stack>
             <Stack.Item grow>
-              <Button
-                fluid
-                icon="newspaper"
-                content="Newscaster"
-                fontSize="30px"
-                lineHeight={2}
-                textAlign="center"
-                onClick={() => act('news_post')}
-              />
+              <Button fluid icon="newspaper" content="Newscaster" fontSize="30px" lineHeight={2} textAlign="center" onClick={() => act('news_post')} />
             </Stack.Item>
             <Stack.Item grow>
-              <Button
-                disabled={!can_db_request}
-                fluid
-                icon="server"
-                content="Archive"
-                fontSize="30px"
-                lineHeight={2}
-                textAlign="center"
-                onClick={() => setUploadToDB(true)}
-              />
+              <Button disabled={!can_db_request} fluid icon="server" content="Archive" fontSize="30px" lineHeight={2} textAlign="center" onClick={() => setUploadToDB(true)} />
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -621,11 +491,7 @@ const UploadModal = (props) => {
       </Box>
       <LabeledList>
         <LabeledList.Item label="Category">
-          <Dropdown
-            options={upload_categories}
-            selected={display_category}
-            onSelected={(value) => setUploadCategory(value)}
-          />
+          <Dropdown options={upload_categories} selected={display_category} onSelected={(value) => setUploadCategory(value)} />
         </LabeledList.Item>
       </LabeledList>
       <Stack justify="center" align="center" pt={2}>
@@ -646,14 +512,7 @@ const UploadModal = (props) => {
           />
         </Stack.Item>
         <Stack.Item>
-          <Button
-            icon="times"
-            content="Return"
-            fontSize="18px"
-            color="bad"
-            onClick={() => setUploadToDB(false)}
-            lineHeight={2}
-          />
+          <Button icon="times" content="Return" fontSize="18px" color="bad" onClick={() => setUploadToDB(false)} lineHeight={2} />
         </Stack.Item>
       </Stack>
     </Modal>
@@ -663,10 +522,7 @@ const UploadModal = (props) => {
 export const Print = (props) => {
   const { act, data } = useBackend();
   const { deity, religion, bible_name, bible_sprite, posters } = data;
-  const [selectedPoster, setSelectedPoster] = useLocalState(
-    'selected_poster',
-    posters[0],
-  );
+  const [selectedPoster, setSelectedPoster] = useLocalState('selected_poster', posters[0]);
 
   return (
     <Stack vertical fill>
@@ -683,9 +539,7 @@ export const Print = (props) => {
                     'Button--fluid',
                     'Button--color--transparent',
                     'Button--ellipsis',
-                    selectedPoster &&
-                      poster === selectedPoster &&
-                      'Button--selected',
+                    selectedPoster && poster === selectedPoster && 'Button--selected',
                   ])}
                   onClick={() => setSelectedPoster(poster)}
                 >
@@ -696,13 +550,7 @@ export const Print = (props) => {
           </Stack.Item>
           <Stack.Item>
             <Stack vertical height="100%">
-              <Stack.Item
-                textAlign="center"
-                fontSize="25px"
-                italic
-                bold
-                textColor="#0b94c4"
-              >
+              <Stack.Item textAlign="center" fontSize="25px" italic bold textColor="#0b94c4">
                 {bible_name}
               </Stack.Item>
               <Stack.Item textAlign="center" fontSize="22px" textColor="purple">
@@ -736,15 +584,7 @@ export const Print = (props) => {
             />
           </Stack.Item>
           <Stack.Item grow>
-            <Button
-              fluid
-              icon="cross"
-              content="Bible"
-              fontSize="30px"
-              lineHeight={2}
-              textAlign="center"
-              onClick={() => act('print_bible')}
-            />
+            <Button fluid icon="cross" content="Bible" fontSize="30px" lineHeight={2} textAlign="center" onClick={() => act('print_bible')} />
           </Stack.Item>
         </Stack>
       </Stack.Item>
@@ -767,28 +607,10 @@ const ForbiddenModal = (props) => {
       </Box>
       <Stack justify="center" align="center">
         <Stack.Item>
-          <Button
-            className="LibraryComputer__CultText"
-            fluid
-            icon="check"
-            content="Assent"
-            color="good"
-            fontSize="20px"
-            onClick={() => act('lore_spawn')}
-            lineHeight={2}
-          />
+          <Button className="LibraryComputer__CultText" fluid icon="check" content="Assent" color="good" fontSize="20px" onClick={() => act('lore_spawn')} lineHeight={2} />
         </Stack.Item>
         <Stack.Item>
-          <Button
-            className="LibraryComputer__CultText"
-            fluid
-            icon="times"
-            content="Decline"
-            color="bad"
-            fontSize="20px"
-            onClick={() => act('lore_deny')}
-            lineHeight={2}
-          />
+          <Button className="LibraryComputer__CultText" fluid icon="times" content="Decline" color="bad" fontSize="20px" onClick={() => act('lore_deny')} lineHeight={2} />
         </Stack.Item>
       </Stack>
     </Modal>
@@ -849,13 +671,7 @@ export const PopoutEntry = (props) => {
 };
 
 export const PageSelect = (props) => {
-  const {
-    minimum_page_count,
-    page_count,
-    current_page,
-    call_on_change,
-    disabled,
-  } = props;
+  const { minimum_page_count, page_count, current_page, call_on_change, disabled } = props;
 
   if (page_count === 1) {
     return;
@@ -864,18 +680,10 @@ export const PageSelect = (props) => {
   return (
     <Stack>
       <Stack.Item>
-        <Button
-          disabled={current_page === minimum_page_count || disabled}
-          icon="angle-double-left"
-          onClick={() => call_on_change(minimum_page_count)}
-        />
+        <Button disabled={current_page === minimum_page_count || disabled} icon="angle-double-left" onClick={() => call_on_change(minimum_page_count)} />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          disabled={current_page === minimum_page_count || disabled}
-          icon="chevron-left"
-          onClick={() => call_on_change(current_page - 1)}
-        />
+        <Button disabled={current_page === minimum_page_count || disabled} icon="chevron-left" onClick={() => call_on_change(current_page - 1)} />
       </Stack.Item>
       <Stack.Item>
         <Input
@@ -890,18 +698,10 @@ export const PageSelect = (props) => {
         />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          disabled={current_page === page_count || disabled}
-          icon="chevron-right"
-          onClick={() => call_on_change(current_page + 1)}
-        />
+        <Button disabled={current_page === page_count || disabled} icon="chevron-right" onClick={() => call_on_change(current_page + 1)} />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          disabled={current_page === page_count || disabled}
-          icon="angle-double-right"
-          onClick={() => call_on_change(page_count)}
-        />
+        <Button disabled={current_page === page_count || disabled} icon="angle-double-right" onClick={() => call_on_change(page_count)} />
       </Stack.Item>
     </Stack>
   );

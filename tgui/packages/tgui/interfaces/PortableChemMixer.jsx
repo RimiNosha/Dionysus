@@ -2,13 +2,7 @@ import { sortBy } from 'common/collections';
 import { toTitleCase } from 'common/string';
 
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  LabeledList,
-  Section,
-} from '../components';
+import { AnimatedNumber, Box, Button, LabeledList, Section } from '../components';
 import { Window } from '../layouts';
 
 export const PortableChemMixer = (props) => {
@@ -65,50 +59,27 @@ export const PortableChemMixer = (props) => {
         <Section
           title="Disposal controls"
           buttons={beakerTransferAmounts.map((amount) => (
-            <Button
-              key={amount}
-              icon="minus"
-              disabled={recording}
-              content={amount}
-              onClick={() => act('remove', { amount })}
-            />
+            <Button key={amount} icon="minus" disabled={recording} content={amount} onClick={() => act('remove', { amount })} />
           ))}
         >
           <LabeledList>
             <LabeledList.Item
               label="Beaker"
-              buttons={
-                !!data.isBeakerLoaded && (
-                  <Button
-                    icon="eject"
-                    content="Eject"
-                    disabled={!data.isBeakerLoaded}
-                    onClick={() => act('eject')}
-                  />
-                )
-              }
+              buttons={!!data.isBeakerLoaded && <Button icon="eject" content="Eject" disabled={!data.isBeakerLoaded} onClick={() => act('eject')} />}
             >
               {(recording && 'Virtual beaker') ||
                 (data.isBeakerLoaded && (
                   <>
-                    <AnimatedNumber
-                      initial={0}
-                      value={data.beakerCurrentVolume}
-                    />
-                    /{data.beakerMaxVolume} units
+                    <AnimatedNumber initial={0} value={data.beakerCurrentVolume} />/{data.beakerMaxVolume} units
                   </>
                 )) ||
                 'No beaker'}
             </LabeledList.Item>
             <LabeledList.Item label="Contents">
-              <Box color="label">
-                {(!data.isBeakerLoaded && !recording && 'N/A') ||
-                  (beakerContents.length === 0 && 'Nothing')}
-              </Box>
+              <Box color="label">{(!data.isBeakerLoaded && !recording && 'N/A') || (beakerContents.length === 0 && 'Nothing')}</Box>
               {beakerContents.map((chemical) => (
                 <Box key={chemical.name} color="label">
-                  <AnimatedNumber initial={0} value={chemical.volume} /> units
-                  of {chemical.name}
+                  <AnimatedNumber initial={0} value={chemical.volume} /> units of {chemical.name}
                 </Box>
               ))}
               {beakerContents.length > 0 && !!data.showpH && (

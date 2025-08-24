@@ -7,14 +7,7 @@
 import { classes } from 'common/react';
 import { RefObject } from 'react';
 
-import {
-  computeFlexClassName,
-  computeFlexItemClassName,
-  computeFlexItemProps,
-  computeFlexProps,
-  FlexItemProps,
-  FlexProps,
-} from './Flex';
+import { computeFlexClassName, computeFlexItemClassName, computeFlexItemProps, computeFlexProps, FlexItemProps, FlexProps } from './Flex';
 
 type StackProps = FlexProps & {
   fill?: boolean;
@@ -26,14 +19,7 @@ export const Stack = (props: StackProps) => {
   const { className, vertical, fill, zebra, ...rest } = props;
   return (
     <div
-      className={classes([
-        'Stack',
-        fill && 'Stack--fill',
-        vertical ? 'Stack--vertical' : 'Stack--horizontal',
-        zebra && 'Stack--zebra',
-        className,
-        computeFlexClassName(props),
-      ])}
+      className={classes(['Stack', fill && 'Stack--fill', vertical ? 'Stack--vertical' : 'Stack--horizontal', zebra && 'Stack--zebra', className, computeFlexClassName(props)])}
       {...computeFlexProps({
         direction: vertical ? 'column' : 'row',
         ...rest,
@@ -48,17 +34,7 @@ type StackItemProps = FlexItemProps & {
 
 const StackItem = (props: StackItemProps) => {
   const { className, innerRef, ...rest } = props;
-  return (
-    <div
-      className={classes([
-        'Stack__item',
-        className,
-        computeFlexItemClassName(rest),
-      ])}
-      ref={innerRef}
-      {...computeFlexItemProps(rest)}
-    />
-  );
+  return <div className={classes(['Stack__item', className, computeFlexItemClassName(rest)])} ref={innerRef} {...computeFlexItemProps(rest)} />;
 };
 
 Stack.Item = StackItem;
@@ -70,16 +46,7 @@ type StackDividerProps = FlexItemProps & {
 const StackDivider = (props: StackDividerProps) => {
   const { className, hidden, ...rest } = props;
   return (
-    <div
-      className={classes([
-        'Stack__item',
-        'Stack__divider',
-        hidden && 'Stack__divider--hidden',
-        className,
-        computeFlexItemClassName(rest),
-      ])}
-      {...computeFlexItemProps(rest)}
-    />
+    <div className={classes(['Stack__item', 'Stack__divider', hidden && 'Stack__divider--hidden', className, computeFlexItemClassName(rest)])} {...computeFlexItemProps(rest)} />
   );
 };
 

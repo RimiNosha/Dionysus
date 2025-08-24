@@ -2,15 +2,7 @@ import { sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Knob,
-  LabeledControls,
-  LabeledList,
-  Section,
-} from '../components';
+import { Box, Button, Dropdown, Knob, LabeledControls, LabeledList, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Jukebox = (props) => {
@@ -20,17 +12,7 @@ export const Jukebox = (props) => {
   return (
     <Window width={370} height={313}>
       <Window.Content>
-        <Section
-          title="Song Player"
-          buttons={
-            <Button
-              icon={active ? 'pause' : 'play'}
-              content={active ? 'Stop' : 'Play'}
-              selected={active}
-              onClick={() => act('toggle')}
-            />
-          }
-        >
+        <Section title="Song Player" buttons={<Button icon={active ? 'pause' : 'play'} content={active ? 'Stop' : 'Play'} selected={active} onClick={() => act('toggle')} />}>
           <LabeledList>
             <LabeledList.Item label="Track Selected">
               <Dropdown
@@ -46,16 +28,8 @@ export const Jukebox = (props) => {
                 }
               />
             </LabeledList.Item>
-            <LabeledList.Item label="Track Length">
-              {track_selected ? track_length : 'No Track Selected'}
-            </LabeledList.Item>
-            <LabeledList.Item label="Author">
-              {track_selected
-                ? track_author
-                  ? track_author
-                  : 'Priapus Company Band'
-                : 'No Track Selected'}
-            </LabeledList.Item>
+            <LabeledList.Item label="Track Length">{track_selected ? track_length : 'No Track Selected'}</LabeledList.Item>
+            <LabeledList.Item label="Author">{track_selected ? (track_author ? track_author : 'Priapus Company Band') : 'No Track Selected'}</LabeledList.Item>
           </LabeledList>
         </Section>
         <Section title="Machine Settings">

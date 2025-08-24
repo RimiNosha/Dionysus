@@ -1,13 +1,7 @@
 import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
-import {
-  Button,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Button, LabeledList, NumberInput, ProgressBar, Section } from '../components';
 import { formatSiUnit } from '../format';
 import { Window } from '../layouts';
 
@@ -24,25 +18,14 @@ type PumpData = {
 
 export const AtmosPump = (props) => {
   const { act, data } = useBackend<PumpData>();
-  const {
-    pressure = 0,
-    max_pressure = 0,
-    max_rate = 0,
-    rate = 0,
-    regulate_mode = 0,
-  } = data;
+  const { pressure = 0, max_pressure = 0, max_rate = 0, rate = 0, regulate_mode = 0 } = data;
   return (
     <Window width={335} height={129}>
       <Window.Content>
         <Section>
           <LabeledList>
             <LabeledList.Item label="Power">
-              <Button
-                icon={data.on ? 'power-off' : 'times'}
-                content={data.on ? 'On' : 'Off'}
-                selected={data.on}
-                onClick={() => act('power')}
-              />
+              <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} onClick={() => act('power')} />
             </LabeledList.Item>
             {max_rate ? (
               <LabeledList.Item label="Transfer Rate">
@@ -103,29 +86,15 @@ export const AtmosPump = (props) => {
             )}
             {data.max_power ? (
               <LabeledList.Item label="Power Usage">
-                <ProgressBar
-                  value={data.last_draw}
-                  maxValue={data.max_power}
-                  color="yellow"
-                >
+                <ProgressBar value={data.last_draw} maxValue={data.max_power} color="yellow">
                   {formatSiUnit(data.last_draw, 0, 'W')}
                 </ProgressBar>
               </LabeledList.Item>
             ) : null}
             {regulate_mode ? (
               <LabeledList.Item label="Pressure Regulator">
-                <Button
-                  icon="sign-in-alt"
-                  content="Input"
-                  selected={regulate_mode === 1}
-                  onClick={() => act('regulate')}
-                />
-                <Button
-                  icon="sign-out-alt"
-                  content="Output"
-                  selected={regulate_mode === 2}
-                  onClick={() => act('regulate')}
-                />
+                <Button icon="sign-in-alt" content="Input" selected={regulate_mode === 1} onClick={() => act('regulate')} />
+                <Button icon="sign-out-alt" content="Output" selected={regulate_mode === 2} onClick={() => act('regulate')} />
               </LabeledList.Item>
             ) : null}
           </LabeledList>

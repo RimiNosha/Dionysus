@@ -1,12 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  AnimatedNumber,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-  Tabs,
-} from '../components';
+import { AnimatedNumber, LabeledList, NoticeBox, ProgressBar, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
 const damageTypes = [
@@ -42,9 +35,7 @@ export const OperatingComputer = (props) => {
           <Tabs.Tab selected={tab === 2} onClick={() => setTab(2)}>
             Surgery Procedures
           </Tabs.Tab>
-          <Tabs.Tab onClick={() => act('open_experiments')}>
-            Experiments
-          </Tabs.Tab>
+          <Tabs.Tab onClick={() => act('open_experiments')}>Experiments</Tabs.Tab>
         </Tabs>
         {tab === 1 && <PatientStateView />}
         {tab === 2 && <SurgeryProceduresView />}
@@ -67,25 +58,15 @@ const PatientStateView = (props) => {
             <LabeledList.Item label="State" color={patient.statstate}>
               {patient.stat}
             </LabeledList.Item>
-            <LabeledList.Item label="Blood Type">
-              {patient.blood_type}
-            </LabeledList.Item>
+            <LabeledList.Item label="Blood Type">{patient.blood_type}</LabeledList.Item>
             <LabeledList.Item label="Health">
-              <ProgressBar
-                value={patient.health}
-                minValue={patient.minHealth}
-                maxValue={patient.maxHealth}
-                color={patient.health >= 0 ? 'good' : 'average'}
-              >
+              <ProgressBar value={patient.health} minValue={patient.minHealth} maxValue={patient.maxHealth} color={patient.health >= 0 ? 'good' : 'average'}>
                 <AnimatedNumber value={patient.health} />
               </ProgressBar>
             </LabeledList.Item>
             {damageTypes.map((type) => (
               <LabeledList.Item key={type.type} label={type.label}>
-                <ProgressBar
-                  value={patient[type.type] / patient.maxHealth}
-                  color="bad"
-                >
+                <ProgressBar value={patient[type.type] / patient.maxHealth} color="bad">
                   <AnimatedNumber value={patient[type.type]} />
                 </ProgressBar>
               </LabeledList.Item>

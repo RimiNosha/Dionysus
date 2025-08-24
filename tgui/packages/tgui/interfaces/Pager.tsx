@@ -24,12 +24,7 @@ export const Pager = (_) => {
         </Section>
         <Flex fill justify="center">
           <Flex.Item>
-            <Button
-              width="120px"
-              selected={receiving}
-              textAlign="center"
-              onClick={() => act('ToggleReceiving')}
-            >
+            <Button width="120px" selected={receiving} textAlign="center" onClick={() => act('ToggleReceiving')}>
               {receiving ? 'Receiving' : 'Not Receiving'}
             </Button>
           </Flex.Item>

@@ -67,11 +67,7 @@ const IntroductionSection = (props) => {
   const { act, data } = useBackend<Info>();
   const { hive_name, objectives } = data;
   return (
-    <Section
-      fill
-      title="Intro"
-      scrollable={!!objectives && objectives.length > 4}
-    >
+    <Section fill title="Intro" scrollable={!!objectives && objectives.length > 4}>
       <Stack vertical fill>
         <Stack.Item fontSize="25px">
           You are the Changeling from the
@@ -94,19 +90,15 @@ const AbilitiesSection = (props) => {
           <Stack fill vertical>
             <Stack.Item basis={0} textColor="label" grow>
               Your
-              <span style={absorbstyle}>&ensp;Absorb DNA</span> ability allows
-              you to steal the DNA and memories of a victim. Your
-              <span style={absorbstyle}>&ensp;Extract DNA Sting</span> ability
-              also steals the DNA of a victim, and is undetectable, but does not
-              grant you their memories or speech patterns.
+              <span style={absorbstyle}>&ensp;Absorb DNA</span> ability allows you to steal the DNA and memories of a victim. Your
+              <span style={absorbstyle}>&ensp;Extract DNA Sting</span> ability also steals the DNA of a victim, and is undetectable, but does not grant you their memories or speech
+              patterns.
             </Stack.Item>
             <Stack.Divider />
             <Stack.Item basis={0} textColor="label" grow>
               Your
-              <span style={revivestyle}>&ensp;Reviving Stasis</span> ability
-              allows you to revive. It means nothing short of a complete body
-              destruction can stop you! Obviously, this is loud and so should
-              not be done in front of people you are not planning on silencing.
+              <span style={revivestyle}>&ensp;Reviving Stasis</span> ability allows you to revive. It means nothing short of a complete body destruction can stop you! Obviously,
+              this is loud and so should not be done in front of people you are not planning on silencing.
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -115,18 +107,14 @@ const AbilitiesSection = (props) => {
           <Stack fill vertical>
             <Stack.Item basis={0} textColor="label" grow>
               Your
-              <span style={transformstyle}>&ensp;Transform</span> ability allows
-              you to change into the form of those you have collected DNA from,
-              lethally and nonlethally. It will also mimic (NOT REAL CLOTHING)
-              the clothing they were wearing for every slot you have open.
+              <span style={transformstyle}>&ensp;Transform</span> ability allows you to change into the form of those you have collected DNA from, lethally and nonlethally. It will
+              also mimic (NOT REAL CLOTHING) the clothing they were wearing for every slot you have open.
             </Stack.Item>
             <Stack.Divider />
             <Stack.Item basis={0} textColor="label" grow>
               The
-              <span style={storestyle}>&ensp;Cellular Emporium</span> is where
-              you purchase more abilities beyond your starting kit. You have 10
-              genetic points to spend on abilities and you are able to readapt
-              after absorbing a body, refunding your points for different kits.
+              <span style={storestyle}>&ensp;Cellular Emporium</span> is where you purchase more abilities beyond your starting kit. You have 10 genetic points to spend on
+              abilities and you are able to readapt after absorbing a body, refunding your points for different kits.
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -138,10 +126,7 @@ const AbilitiesSection = (props) => {
 const MemoriesSection = (props) => {
   const { act, data } = useBackend<Info>();
   const { memories, stolen_antag_info } = data;
-  const [selectedMemory, setSelectedMemory] = useSharedState(
-    'memory',
-    (!!memories && memories[0]) || null,
-  );
+  const [selectedMemory, setSelectedMemory] = useSharedState('memory', (!!memories && memories[0]) || null);
   const memoryMap = {};
   for (const index in memories) {
     const memory = memories[index];
@@ -195,11 +180,7 @@ const VictimPatternsSection = (props) => {
   const { data } = useBackend<Info>();
   const { stolen_antag_info } = data;
   return (
-    <Section
-      fill
-      scrollable={!!stolen_antag_info}
-      title="Additional Stolen Information"
-    >
+    <Section fill scrollable={!!stolen_antag_info} title="Additional Stolen Information">
       {!!stolen_antag_info && stolen_antag_info}
     </Section>
   );

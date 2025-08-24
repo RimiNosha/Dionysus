@@ -14,9 +14,7 @@ type PreferenceChild = {
   name: string;
 };
 
-const binaryInsertPreference = binaryInsertWith<PreferenceChild>(
-  (child) => child.name,
-);
+const binaryInsertPreference = binaryInsertWith<PreferenceChild>((child) => child.name);
 
 const sortByName = sortBy<[string, PreferenceChild[]]>(([name]) => name);
 
@@ -25,9 +23,7 @@ export const GamePreferencesPage = (props) => {
 
   const gamePreferences: Record<string, PreferenceChild[]> = {};
 
-  for (const [featureId, value] of Object.entries(
-    data.character_preferences.game_preferences,
-  )) {
+  for (const [featureId, value] of Object.entries(data.character_preferences.game_preferences)) {
     const feature = features[featureId];
 
     let nameInner: ReactNode = feature?.name || featureId;
@@ -64,14 +60,7 @@ export const GamePreferencesPage = (props) => {
         {name}
 
         <Flex.Item grow={1} basis={0}>
-          {(feature && (
-            <FeatureValueInput
-              feature={feature}
-              featureId={featureId}
-              value={value}
-              act={act}
-            />
-          )) || (
+          {(feature && <FeatureValueInput feature={feature} featureId={featureId} value={value} act={act} />) || (
             <Box as="b" color="red">
               ...is not filled out properly!!!
             </Box>
@@ -87,15 +76,10 @@ export const GamePreferencesPage = (props) => {
 
     const category = feature?.category || 'ERROR';
 
-    gamePreferences[category] = binaryInsertPreference(
-      gamePreferences[category] || [],
-      entry,
-    );
+    gamePreferences[category] = binaryInsertPreference(gamePreferences[category] || [], entry);
   }
 
-  const gamePreferenceEntries: [string, ReactNode][] = sortByName(
-    Object.entries(gamePreferences),
-  ).map(([category, preferences]) => {
+  const gamePreferenceEntries: [string, ReactNode][] = sortByName(Object.entries(gamePreferences)).map(([category, preferences]) => {
     return [category, preferences.map((entry) => entry.children)];
   });
 

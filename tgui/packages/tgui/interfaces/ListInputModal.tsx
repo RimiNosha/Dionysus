@@ -1,11 +1,4 @@
-import {
-  KEY_A,
-  KEY_DOWN,
-  KEY_ENTER,
-  KEY_ESCAPE,
-  KEY_UP,
-  KEY_Z,
-} from '../../common/keycodes';
+import { KEY_A, KEY_DOWN, KEY_ENTER, KEY_ESCAPE, KEY_UP, KEY_Z } from '../../common/keycodes';
 import { useBackend, useLocalState } from '../backend';
 import { Button, Input, Section, Stack } from '../components';
 import { Window } from '../layouts';
@@ -23,26 +16,10 @@ type ListInputData = {
 
 export const ListInputModal = (_) => {
   const { act, data } = useBackend<ListInputData>();
-  const {
-    items = [],
-    message = '',
-    init_value,
-    large_buttons,
-    timeout,
-    title,
-  } = data;
-  const [selected, setSelected] = useLocalState<number>(
-    'selected',
-    items.indexOf(init_value),
-  );
-  const [searchBarVisible, setSearchBarVisible] = useLocalState<boolean>(
-    'searchBarVisible',
-    items.length > 9,
-  );
-  const [searchQuery, setSearchQuery] = useLocalState<string>(
-    'searchQuery',
-    '',
-  );
+  const { items = [], message = '', init_value, large_buttons, timeout, title } = data;
+  const [selected, setSelected] = useLocalState<number>('selected', items.indexOf(init_value));
+  const [searchBarVisible, setSearchBarVisible] = useLocalState<boolean>('searchBarVisible', items.length > 9);
+  const [searchQuery, setSearchQuery] = useLocalState<string>('searchQuery', '');
   // User presses up or down on keyboard
   // Simulates clicking an item
   const onArrowKey = (key: number) => {
@@ -103,12 +80,9 @@ export const ListInputModal = (_) => {
     setSearchBarVisible(!searchBarVisible);
     setSearchQuery('');
   };
-  const filteredItems = items.filter((item) =>
-    item?.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const filteredItems = items.filter((item) => item?.toLowerCase().includes(searchQuery.toLowerCase()));
   // Dynamically changes the window height based on the message.
-  const windowHeight =
-    325 + Math.ceil(message.length / 3) + (large_buttons ? 5 : 0);
+  const windowHeight = 325 + Math.ceil(message.length / 3) + (large_buttons ? 5 : 0);
   // Grabs the cursor when no search bar is visible.
   if (!searchBarVisible) {
     setTimeout(() => document!.getElementById(selected.toString())?.focus(), 1);
@@ -145,9 +119,7 @@ export const ListInputModal = (_) => {
               icon={searchBarVisible ? 'search' : 'font'}
               selected
               tooltip={
-                searchBarVisible
-                  ? 'Search Mode. Type to search or use arrow keys to select manually.'
-                  : 'Hotkey Mode. Type a letter to jump to the first match. Enter to select.'
+                searchBarVisible ? 'Search Mode. Type to search or use arrow keys to select manually.' : 'Hotkey Mode. Type a letter to jump to the first match. Enter to select.'
               }
               tooltipPosition="left"
               onClick={() => onSearchBarToggle()}
@@ -159,22 +131,9 @@ export const ListInputModal = (_) => {
         >
           <Stack fill vertical>
             <Stack.Item grow>
-              <ListDisplay
-                filteredItems={filteredItems}
-                onClick={onClick}
-                onFocusSearch={onFocusSearch}
-                searchBarVisible={searchBarVisible}
-                selected={selected}
-              />
+              <ListDisplay filteredItems={filteredItems} onClick={onClick} onFocusSearch={onFocusSearch} searchBarVisible={searchBarVisible} selected={selected} />
             </Stack.Item>
-            {searchBarVisible && (
-              <SearchBar
-                filteredItems={filteredItems}
-                onSearch={onSearch}
-                searchQuery={searchQuery}
-                selected={selected}
-              />
-            )}
+            {searchBarVisible && <SearchBar filteredItems={filteredItems} onSearch={onSearch} searchQuery={searchQuery} selected={selected} />}
             <Stack.Item>
               <InputButtons input={filteredItems[selected]} />
             </Stack.Item>
@@ -191,8 +150,7 @@ export const ListInputModal = (_) => {
  */
 const ListDisplay = (props) => {
   const { act } = useBackend<ListInputData>();
-  const { filteredItems, onClick, onFocusSearch, searchBarVisible, selected } =
-    props;
+  const { filteredItems, onClick, onFocusSearch, searchBarVisible, selected } = props;
 
   return (
     <Section fill scrollable>

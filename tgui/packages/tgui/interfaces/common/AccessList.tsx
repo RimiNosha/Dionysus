@@ -33,21 +33,9 @@ type ParsedAccessGroup = {
 };
 
 export const AccessList = (props: AccessListProps) => {
-  const {
-    accessGroups = [],
-    selectedList = [],
-    accessMod,
-    trimAccess = [],
-    extraButtons,
-    showBasic,
-  } = props;
+  const { accessGroups = [], selectedList = [], accessMod, trimAccess = [], extraButtons, showBasic } = props;
 
-  const { parsedGroups, selectedTrimAccess } = parseAccessGroups(
-    accessGroups,
-    showBasic,
-    trimAccess,
-    selectedList,
-  );
+  const { parsedGroups, selectedTrimAccess } = parseAccessGroups(accessGroups, showBasic, trimAccess, selectedList);
 
   return (
     <Section title="Access" buttons={extraButtons}>
@@ -59,28 +47,15 @@ export const AccessList = (props: AccessListProps) => {
           <RegionTabList parsedAccessGroups={parsedGroups} />
         </Flex.Item>
         <Flex.Item grow={1} style={{ paddingLeft: '1rem' }}>
-          <RegionAccessList
-            parsedAccessGroups={parsedGroups}
-            selectedList={selectedList}
-            accessMod={accessMod}
-            trimAccess={trimAccess}
-          />
+          <RegionAccessList parsedAccessGroups={parsedGroups} selectedList={selectedList} accessMod={accessMod} trimAccess={trimAccess} />
         </Flex.Item>
       </Flex>
     </Section>
   );
 };
 // Parse out access groups. A ParsedAccessGroup contains the additional values hasSelected and allSelected.
-function parseAccessGroups(
-  accessGroups: AccessGroup[],
-  showBasic: BooleanLike,
-  trimAccess: string[],
-  selectedList: string[],
-) {
-  const [wildcardTab, setWildcardTab] = useSharedState(
-    'wildcardSelected',
-    showBasic ? 'None' : 'All',
-  );
+function parseAccessGroups(accessGroups: AccessGroup[], showBasic: BooleanLike, trimAccess: string[], selectedList: string[]) {
+  const [wildcardTab, setWildcardTab] = useSharedState('wildcardSelected', showBasic ? 'None' : 'All');
 
   const parsedGroups: ParsedAccessGroup[] = [];
   const selectedTrimAccess: string[] = [];
@@ -104,11 +79,7 @@ function parseAccessGroups(
         // the card itself contains the selected access, and
         // does not contain the selected access,
         // add it to the virtual trim's access.
-        if (
-          trimAccess.includes(access.ref) &&
-          selectedList.includes(access.ref) &&
-          !selectedTrimAccess.includes(access.ref)
-        ) {
+        if (trimAccess.includes(access.ref) && selectedList.includes(access.ref) && !selectedTrimAccess.includes(access.ref)) {
           selectedTrimAccess.push(access.ref);
         }
       });
@@ -168,10 +139,7 @@ type WildcardProps = {
 
 export const FormatWildcards = (props: WildcardProps) => {
   const { showBasic } = props;
-  const [wildcardTab, setWildcardTab] = useSharedState(
-    'wildcardSelected',
-    showBasic ? 'None' : 'All',
-  );
+  const [wildcardTab, setWildcardTab] = useSharedState('wildcardSelected', showBasic ? 'None' : 'All');
 
   // if (wildcardTab !== 'None') {
   //   selectedWildcard = showBasic ? 'None' : 'All';
@@ -183,18 +151,12 @@ export const FormatWildcards = (props: WildcardProps) => {
   return (
     <Tabs>
       {showBasic && (
-        <Tabs.Tab
-          selected={wildcardTab === 'None'}
-          onClick={() => setWildcardTab('None')}
-        >
+        <Tabs.Tab selected={wildcardTab === 'None'} onClick={() => setWildcardTab('None')}>
           Template
         </Tabs.Tab>
       )}
 
-      <Tabs.Tab
-        selected={wildcardTab === 'All'}
-        onClick={() => setWildcardTab('All')}
-      >
+      <Tabs.Tab selected={wildcardTab === 'All'} onClick={() => setWildcardTab('All')}>
         Other
       </Tabs.Tab>
     </Tabs>
@@ -208,27 +170,14 @@ type RegionTabListProps = {
 const RegionTabList = (props: RegionTabListProps) => {
   const { parsedAccessGroups } = props;
 
-  const [selectedAccessName, setSelectedAccessName] = useSharedState(
-    'accessName',
-    parsedAccessGroups[0]?.name,
-  );
+  const [selectedAccessName, setSelectedAccessName] = useSharedState('accessName', parsedAccessGroups[0]?.name);
 
   return (
     <Tabs vertical>
       {parsedAccessGroups.map((access) => {
-        const icon =
-          (access.allSelected && 'check') ||
-          (access.hasSelected && 'minus') ||
-          'times';
+        const icon = (access.allSelected && 'check') || (access.hasSelected && 'minus') || 'times';
         return (
-          <Tabs.Tab
-            key={access.name}
-            icon={icon}
-            minWidth={'100%'}
-            altSelection
-            selected={access.name === selectedAccessName}
-            onClick={() => setSelectedAccessName(access.name)}
-          >
+          <Tabs.Tab key={access.name} icon={icon} minWidth={'100%'} altSelection selected={access.name === selectedAccessName} onClick={() => setSelectedAccessName(access.name)}>
             {access.name}
           </Tabs.Tab>
         );
@@ -245,42 +194,19 @@ type RegionAccessListProps = {
 };
 
 const RegionAccessList = (props: RegionAccessListProps) => {
-  const {
-    parsedAccessGroups = [],
-    selectedList = [],
-    accessMod,
-    trimAccess = [],
-  } = props;
+  const { parsedAccessGroups = [], selectedList = [], accessMod, trimAccess = [] } = props;
 
-  const [selectedAccessName] = useSharedState(
-    'accessName',
-    parsedAccessGroups[0]?.name,
-  );
+  const [selectedAccessName] = useSharedState('accessName', parsedAccessGroups[0]?.name);
 
-  const selectedGroup = parsedAccessGroups.find(
-    (access) => access.name === selectedAccessName,
-  );
+  const selectedGroup = parsedAccessGroups.find((access) => access.name === selectedAccessName);
 
   logger.log(`Selected group: ${selectedGroup?.name}`);
-  logger.log(
-    `Available groups: ${parsedAccessGroups.map((group) => group.name).join(',')}`,
-  );
-  const selectedGroupEntries = sortBy((entry: AccessInstance) => entry.desc)(
-    selectedGroup?.accesses || [],
-  );
+  logger.log(`Available groups: ${parsedAccessGroups.map((group) => group.name).join(',')}`);
+  const selectedGroupEntries = sortBy((entry: AccessInstance) => entry.desc)(selectedGroup?.accesses || []);
 
   return selectedGroupEntries.map((entry) => {
     const id = entry.ref;
 
-    return (
-      <Button.Checkbox
-        ml={1}
-        fluid
-        key={entry.desc}
-        content={entry.desc}
-        checked={selectedList.includes(entry.ref)}
-        onClick={() => accessMod(entry.ref)}
-      />
-    );
+    return <Button.Checkbox ml={1} fluid key={entry.desc} content={entry.desc} checked={selectedList.includes(entry.ref)} onClick={() => accessMod(entry.ref)} />;
   });
 };

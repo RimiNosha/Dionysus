@@ -128,12 +128,7 @@ export class ObjectComponent extends Component {
         onComponentWillUnmount={this.handleDrag}
         {...rest}
       >
-        <Box
-          backgroundColor={color}
-          py={1}
-          px={1}
-          className="ObjectComponent__Titlebar"
-        >
+        <Box backgroundColor={color} py={1} px={1} className="ObjectComponent__Titlebar">
           <Stack>
             <Stack.Item grow={1} unselectable="on">
               {name}
@@ -170,36 +165,18 @@ export class ObjectComponent extends Component {
             </Stack.Item>
             {!!removable && (
               <Stack.Item>
-                <Button
-                  color="transparent"
-                  icon="times"
-                  compact
-                  onClick={() =>
-                    act('detach_component', { component_id: index })
-                  }
-                />
+                <Button color="transparent" icon="times" compact onClick={() => act('detach_component', { component_id: index })} />
               </Stack.Item>
             )}
           </Stack>
         </Box>
-        <Box
-          className="ObjectComponent__Content"
-          unselectable="on"
-          py={1}
-          px={1}
-        >
+        <Box className="ObjectComponent__Content" unselectable="on" py={1} px={1}>
           <Stack>
             <Stack.Item>
               <Stack vertical fill>
                 {input_ports.map((port, portIndex) => (
                   <Stack.Item key={portIndex}>
-                    <Port
-                      port={port}
-                      portIndex={portIndex + 1}
-                      componentId={index}
-                      act={act}
-                      {...PortOptions}
-                    />
+                    <Port port={port} portIndex={portIndex + 1} componentId={index} act={act} {...PortOptions} />
                   </Stack.Item>
                 ))}
               </Stack>
@@ -208,14 +185,7 @@ export class ObjectComponent extends Component {
               <Stack vertical>
                 {output_ports.map((port, portIndex) => (
                   <Stack.Item key={portIndex}>
-                    <Port
-                      act={act}
-                      port={port}
-                      portIndex={portIndex + 1}
-                      componentId={index}
-                      {...PortOptions}
-                      isOutput
-                    />
+                    <Port act={act} port={port} portIndex={portIndex + 1} componentId={index} {...PortOptions} isOutput />
                   </Stack.Item>
                 ))}
               </Stack>

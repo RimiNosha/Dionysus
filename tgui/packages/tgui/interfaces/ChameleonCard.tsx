@@ -15,8 +15,7 @@ type ChameleonCardData = {
 export const ChameleonCard = (props) => {
   const { act, data } = useBackend<ChameleonCardData>();
 
-  const { accessGroups, ourTrimAccess, accessOnCard, showBasic, theftAccess } =
-    data;
+  const { accessGroups, ourTrimAccess, accessOnCard, showBasic, theftAccess } = data;
 
   const parsedAccessGroups: AccessGroup[] = [];
   accessGroups.forEach((region: AccessGroup) => {
@@ -34,10 +33,7 @@ export const ChameleonCard = (props) => {
       }
       // Add anything not part of our trim that's an access
       // Also add any access on the ID card we're stealing from.
-      if (
-        accessOnCard.includes(access.ref) ||
-        theftAccess.includes(access.ref)
-      ) {
+      if (accessOnCard.includes(access.ref) || theftAccess.includes(access.ref)) {
         return true;
       }
       return false;

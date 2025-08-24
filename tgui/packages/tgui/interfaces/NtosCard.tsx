@@ -1,17 +1,7 @@
 import { BooleanLike } from 'common/react';
 
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Input,
-  NoticeBox,
-  NumberInput,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, Dropdown, Input, NoticeBox, NumberInput, Section, Stack, Tabs } from '../components';
 import { NtosWindow } from '../layouts';
 import { AccessGroup, AccessList } from './common/AccessList';
 export const NtosCard = (props) => {
@@ -38,23 +28,10 @@ type NtosCardContentData = {
 
 export const NtosCardContent = (props) => {
   const { act, data } = useBackend<NtosCardContentData>();
-  const {
-    authenticatedUser,
-    accessGroups = [],
-    access_on_card = [],
-    has_id,
-    have_id_slot,
-    trimAccess,
-    showBasic,
-    templates = {},
-  } = data;
+  const { authenticatedUser, accessGroups = [], access_on_card = [], has_id, have_id_slot, trimAccess, showBasic, templates = {} } = data;
 
   if (!have_id_slot) {
-    return (
-      <NoticeBox>
-        This program requires an ID slot in order to function
-      </NoticeBox>
-    );
+    return <NoticeBox>This program requires an ID slot in order to function</NoticeBox>;
   }
 
   const [selectedTab] = useSharedState('selectedTab', 'login');
@@ -65,29 +42,15 @@ export const NtosCardContent = (props) => {
         <Stack.Item>
           <IDCardTabs />
         </Stack.Item>
-        <Stack.Item width="100%">
-          {(selectedTab === 'login' && <IDCardLogin />) ||
-            (selectedTab === 'modify' && <IDCardTarget />)}
-        </Stack.Item>
+        <Stack.Item width="100%">{(selectedTab === 'login' && <IDCardLogin />) || (selectedTab === 'modify' && <IDCardTarget />)}</Stack.Item>
       </Stack>
       {!!has_id && !!authenticatedUser && (
         <Section
           title="Templates"
           mt={1}
-          buttons={
-            <Button
-              icon="question-circle"
-              tooltip={
-                'Will attempt to apply all access for the template to the ID card.\n'
-              }
-              tooltipPosition="left"
-            />
-          }
+          buttons={<Button icon="question-circle" tooltip={'Will attempt to apply all access for the template to the ID card.\n'} tooltipPosition="left" />}
         >
-          <TemplateDropdown
-            templates={templates}
-            selected_template={data.id_rank}
-          />
+          <TemplateDropdown templates={templates} selected_template={data.id_rank} />
         </Section>
       )}
       <Stack mt={1}>
@@ -99,14 +62,7 @@ export const NtosCardContent = (props) => {
                 selectedList={access_on_card}
                 trimAccess={trimAccess}
                 showBasic={!!showBasic}
-                extraButtons={
-                  <Button.Confirm
-                    content="Terminate Employment"
-                    confirmContent="Fire Employee?"
-                    color="bad"
-                    onClick={() => act('PRG_terminate')}
-                  />
-                }
+                extraButtons={<Button.Confirm content="Terminate Employment" confirmContent="Fire Employee?" color="bad" onClick={() => act('PRG_terminate')} />}
                 accessMod={(ref) =>
                   act('PRG_access', {
                     access_target: ref,
@@ -126,22 +82,10 @@ const IDCardTabs = (props) => {
 
   return (
     <Tabs vertical fill>
-      <Tabs.Tab
-        minWidth={'100%'}
-        altSelection
-        selected={'login' === selectedTab}
-        color={'login' === selectedTab ? 'green' : 'default'}
-        onClick={() => setSelectedTab('login')}
-      >
+      <Tabs.Tab minWidth={'100%'} altSelection selected={'login' === selectedTab} color={'login' === selectedTab ? 'green' : 'default'} onClick={() => setSelectedTab('login')}>
         Login ID
       </Tabs.Tab>
-      <Tabs.Tab
-        minWidth={'100%'}
-        altSelection
-        selected={'modify' === selectedTab}
-        color={'modify' === selectedTab ? 'green' : 'default'}
-        onClick={() => setSelectedTab('modify')}
-      >
+      <Tabs.Tab minWidth={'100%'} altSelection selected={'modify' === selectedTab} color={'modify' === selectedTab ? 'green' : 'default'} onClick={() => setSelectedTab('modify')}>
         Target ID
       </Tabs.Tab>
     </Tabs>
@@ -164,12 +108,7 @@ export const IDCardLogin = (props) => {
       title="Login"
       buttons={
         <>
-          <Button
-            icon="print"
-            content="Print"
-            disabled={!have_printer || !has_id}
-            onClick={() => act('PRG_print')}
-          />
+          <Button icon="print" content="Print" disabled={!have_printer || !has_id} onClick={() => act('PRG_print')} />
           <Button
             icon={authenticatedUser ? 'sign-out-alt' : 'sign-in-alt'}
             content={authenticatedUser ? 'Log Out' : 'Log In'}
@@ -183,13 +122,7 @@ export const IDCardLogin = (props) => {
     >
       <Stack wrap="wrap">
         <Stack.Item width="100%">
-          <Button
-            fluid
-            ellipsis
-            icon="eject"
-            content={authIDName}
-            onClick={() => act('PRG_ejectauthid')}
-          />
+          <Button fluid ellipsis icon="eject" content={authIDName} onClick={() => act('PRG_ejectauthid')} />
         </Stack.Item>
         <Stack.Item width="100%" mt={1} ml={0}>
           Login: {authenticatedUser || '-----'}
@@ -210,17 +143,10 @@ type IDCardTargetData = {
 
 const IDCardTarget = (props) => {
   const { act, data } = useBackend<IDCardTargetData>();
-  const { authenticatedUser, id_rank, id_owner, has_id, id_name, id_age } =
-    data;
+  const { authenticatedUser, id_rank, id_owner, has_id, id_name, id_age } = data;
   return (
     <Section title="Modify ID">
-      <Button
-        width="100%"
-        ellipsis
-        icon="eject"
-        content={id_name}
-        onClick={() => act('PRG_ejectmodid')}
-      />
+      <Button width="100%" ellipsis icon="eject" content={id_name} onClick={() => act('PRG_ejectmodid')} />
       {!!(has_id && authenticatedUser) && (
         <>
           <Stack mt={1}>
@@ -293,9 +219,7 @@ const TemplateDropdown = (props: TemplateDropdownProps) => {
       <Stack.Item grow>
         <Dropdown
           width="100%"
-          displayText={
-            (!!display_selected && selected_template) || 'Select a template...'
-          }
+          displayText={(!!display_selected && selected_template) || 'Select a template...'}
           options={templateKeys.map((path) => {
             return templates[path];
           })}

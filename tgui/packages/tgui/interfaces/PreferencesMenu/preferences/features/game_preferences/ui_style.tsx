@@ -1,16 +1,9 @@
 import { classes } from 'common/react';
 
 import { Box, Dropdown, Stack } from '../../../../../components';
-import {
-  FeatureChoiced,
-  FeatureChoicedServerData,
-  FeatureValueProps,
-  sortChoices,
-} from '../base';
+import { FeatureChoiced, FeatureChoicedServerData, FeatureValueProps, sortChoices } from '../base';
 
-const UIStyleInput = (
-  props: FeatureValueProps<string, string, FeatureChoicedServerData>,
-) => {
+const UIStyleInput = (props: FeatureValueProps<string, string, FeatureChoicedServerData>) => {
   const { serverData, value } = props;
   if (!serverData) {
     return null;
@@ -49,14 +42,12 @@ const UIStyleInput = (
       displayText={choices[value]}
       onSelected={props.handleSetValue}
       width="100%"
-      options={sortChoices(Object.entries(choices)).map(
-        ([dataValue, label]) => {
-          return {
-            displayText: label,
-            value: dataValue,
-          };
-        },
-      )}
+      options={sortChoices(Object.entries(choices)).map(([dataValue, label]) => {
+        return {
+          displayText: label,
+          value: dataValue,
+        };
+      })}
     />
   );
 };

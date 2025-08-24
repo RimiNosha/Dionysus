@@ -11,12 +11,7 @@ export const Electrolyzer = (props) => {
           title="Power"
           buttons={
             <>
-              <Button
-                icon="eject"
-                content="Eject Cell"
-                disabled={!data.hasPowercell || !data.open}
-                onClick={() => act('eject')}
-              />
+              <Button icon="eject" content="Eject Cell" disabled={!data.hasPowercell || !data.open} onClick={() => act('eject')} />
               <Button
                 icon={data.on ? 'power-off' : 'times'}
                 content={data.on ? 'On' : 'Off'}

@@ -1,42 +1,20 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  Modal,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, Modal, NumberInput, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const TurbineComputer = (props) => {
   const { act, data } = useBackend();
   const parts_not_connected = !data.parts_linked && (
     <Modal>
-      <Box
-        style={{ margin: 'auto' }}
-        width="200px"
-        textAlign="center"
-        minHeight="39px"
-      >
-        {
-          'Parts not connected, use a multitool on the core rotor before trying again'
-        }
+      <Box style={{ margin: 'auto' }} width="200px" textAlign="center" minHeight="39px">
+        {'Parts not connected, use a multitool on the core rotor before trying again'}
       </Box>
     </Modal>
   );
   const parts_not_ready = data.parts_linked && !data.parts_ready && (
     <Modal>
-      <Box
-        style={{ margin: 'auto' }}
-        width="200px"
-        textAlign="center"
-        minHeight="39px"
-      >
-        {
-          'Some parts have open maintenance hatchet, please close them before starting'
-        }
+      <Box style={{ margin: 'auto' }} width="200px" textAlign="center" minHeight="39px">
+        {'Some parts have open maintenance hatchet, please close them before starting'}
       </Box>
     </Modal>
   );
@@ -86,21 +64,11 @@ export const TurbineComputer = (props) => {
                 {data.integrity + ' %'}
               </ProgressBar>
             </LabeledList.Item>
-            <LabeledList.Item label="Turbine Speed">
-              {data.rpm} RPM
-            </LabeledList.Item>
-            <LabeledList.Item label="Max Turbine Speed">
-              {data.max_rpm} RPM
-            </LabeledList.Item>
-            <LabeledList.Item label="Input Temperature">
-              {data.temp} K
-            </LabeledList.Item>
-            <LabeledList.Item label="Max Temperature">
-              {data.max_temperature} K
-            </LabeledList.Item>
-            <LabeledList.Item label="Generated Power">
-              {data.power * 4 * 0.001} kW
-            </LabeledList.Item>
+            <LabeledList.Item label="Turbine Speed">{data.rpm} RPM</LabeledList.Item>
+            <LabeledList.Item label="Max Turbine Speed">{data.max_rpm} RPM</LabeledList.Item>
+            <LabeledList.Item label="Input Temperature">{data.temp} K</LabeledList.Item>
+            <LabeledList.Item label="Max Temperature">{data.max_temperature} K</LabeledList.Item>
+            <LabeledList.Item label="Generated Power">{data.power * 4 * 0.001} kW</LabeledList.Item>
           </LabeledList>
         </Section>
       </Window.Content>

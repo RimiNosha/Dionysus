@@ -31,9 +31,7 @@ export const ReagentLookup = (props) => {
       </LabeledList.Item>
       <LabeledList.Item label="Properties">
         <LabeledList>
-          {!!reagent.OD && (
-            <LabeledList.Item label="Overdose">{reagent.OD}u</LabeledList.Item>
-          )}
+          {!!reagent.OD && <LabeledList.Item label="Overdose">{reagent.OD}u</LabeledList.Item>}
           {reagent.addictions[0] && (
             <LabeledList.Item label="Addiction">
               {reagent.addictions.map((addiction) => (
@@ -41,9 +39,7 @@ export const ReagentLookup = (props) => {
               ))}
             </LabeledList.Item>
           )}
-          <LabeledList.Item label="Metabolization rate">
-            {reagent.metaRate}u/s
-          </LabeledList.Item>
+          <LabeledList.Item label="Metabolization rate">{reagent.metaRate}u/s</LabeledList.Item>
         </LabeledList>
       </LabeledList.Item>
       <LabeledList.Item label="Impurities">
@@ -96,11 +92,7 @@ export const ReagentLookup = (props) => {
         </LabeledList>
         {reagent.isImpure && <Box>This reagent is created by impurity.</Box>}
         {reagent.deadProcess && <Box>This reagent works on the dead.</Box>}
-        {!reagent.failedReagent &&
-          !reagent.inverseReagent &&
-          !reagent.impureReagent && (
-            <Box>This reagent has no impure reagents.</Box>
-          )}
+        {!reagent.failedReagent && !reagent.inverseReagent && !reagent.impureReagent && <Box>This reagent has no impure reagents.</Box>}
       </LabeledList.Item>
       <LabeledList.Item>
         <Button

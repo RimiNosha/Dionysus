@@ -31,11 +31,7 @@ const shiftRegex = /(.*)(Shift)(.*)/;
 const ctrlRegex = /(.*)(Ctrl)(.*)/;
 const altRegex = /(.*)(Alt)(.*)/;
 
-const addColorModifier = (
-  content: string,
-  regex: RegExp,
-  color: string,
-): JSX.Element | null => {
+const addColorModifier = (content: string, regex: RegExp, color: string): JSX.Element | null => {
   const match = content.match(regex);
 
   if (match) {
@@ -86,9 +82,7 @@ const processColorModifiers = (content: string): string | JSX.Element => {
     .replace('Numpad', 'Numpad ');
 };
 
-const KeyBinding = (props: KeyBindingBoxProps) => (
-  <>{processColorModifiers(props.keycode)}</>
-);
+const KeyBinding = (props: KeyBindingBoxProps) => <>{processColorModifiers(props.keycode)}</>;
 
 export const HotkeysHelp = (_) => {
   const { data } = useBackend<HotkeysHelpData>();
@@ -114,23 +108,13 @@ export const HotkeysHelp = (_) => {
                 <Table.Cell style={{ position: 'relative' }}>
                   {hotkey.bindings.map((binding) =>
                     binding.desc ? (
-                      <Tooltip
-                        key={binding.name}
-                        content={binding.desc}
-                        position="bottom"
-                      >
+                      <Tooltip key={binding.name} content={binding.desc} position="bottom">
                         <Box p={1} m={1} inline className="HotkeysHelp__pill">
                           {binding.name}
                         </Box>
                       </Tooltip>
                     ) : (
-                      <Box
-                        key={binding.name}
-                        p={1}
-                        m={1}
-                        inline
-                        className="HotkeysHelp__pill"
-                      >
+                      <Box key={binding.name} p={1} m={1} inline className="HotkeysHelp__pill">
                         {binding.name}
                       </Box>
                     ),

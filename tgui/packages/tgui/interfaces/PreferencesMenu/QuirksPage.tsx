@@ -122,14 +122,7 @@ const QuirkList = (props: {
 
 const StatDisplay = (props) => {
   return (
-    <Box
-      backgroundColor="#eee"
-      bold
-      color="black"
-      fontSize="1.2em"
-      px={3}
-      py={0.5}
-    >
+    <Box backgroundColor="#eee" bold color="black" fontSize="1.2em" px={3} py={0.5}>
       {props.children}
     </Box>
   );
@@ -138,10 +131,7 @@ const StatDisplay = (props) => {
 export const QuirksPage = (props) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
-  const [selectedQuirks, setSelectedQuirks] = useLocalState(
-    `selectedQuirks_${data.active_slot}`,
-    data.selected_quirks,
-  );
+  const [selectedQuirks, setSelectedQuirks] = useLocalState(`selectedQuirks_${data.active_slot}`, data.selected_quirks);
 
   return (
     <ServerPreferencesFetcher
@@ -150,11 +140,7 @@ export const QuirksPage = (props) => {
           return <Box>Loading quirks...</Box>;
         }
 
-        const {
-          max_positive_quirks: maxPositiveQuirks,
-          quirk_blacklist: quirkBlacklist,
-          quirk_info: quirkInfo,
-        } = data.quirks;
+        const { max_positive_quirks: maxPositiveQuirks, quirk_blacklist: quirkBlacklist, quirk_info: quirkInfo } = data.quirks;
 
         const quirks = Object.entries(quirkInfo);
         quirks.sort(([_, quirkA], [__, quirkB]) => {
@@ -202,10 +188,7 @@ export const QuirksPage = (props) => {
             }
 
             for (const incompatibleQuirk of blacklist) {
-              if (
-                incompatibleQuirk !== quirk.name &&
-                selectedQuirkNames.indexOf(incompatibleQuirk) !== -1
-              ) {
+              if (incompatibleQuirk !== quirk.name && selectedQuirkNames.indexOf(incompatibleQuirk) !== -1) {
                 return `This is incompatible with ${incompatibleQuirk}!`;
               }
             }
@@ -300,11 +283,7 @@ export const QuirksPage = (props) => {
                         return;
                       }
 
-                      setSelectedQuirks(
-                        selectedQuirks.filter(
-                          (otherQuirk) => quirkName !== otherQuirk,
-                        ),
-                      );
+                      setSelectedQuirks(selectedQuirks.filter((otherQuirk) => quirkName !== otherQuirk));
 
                       act('remove_quirk', { quirk: quirk.name });
                     }}

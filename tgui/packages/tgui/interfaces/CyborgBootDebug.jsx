@@ -40,16 +40,7 @@ export const CyborgBootDebug = (props) => {
       <Window.Content>
         <Section title="Basic Settings">
           <LabeledList>
-            <LabeledList.Item
-              label="Designation"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_NAME}
-                  tooltipPosition="left"
-                />
-              }
-            >
+            <LabeledList.Item label="Designation" buttons={<Button icon="info" tooltip={TOOLTIP_NAME} tooltipPosition="left" />}>
               <Input
                 fluid
                 value={designation || 'Default Cyborg'}
@@ -60,69 +51,20 @@ export const CyborgBootDebug = (props) => {
                 }
               />
             </LabeledList.Item>
-            <LabeledList.Item
-              label="Servo Motor Functions"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_LOCOMOTION}
-                  tooltipPosition="left"
-                />
-              }
-            >
-              <Button
-                icon={locomotion ? 'unlock' : 'lock'}
-                content={locomotion ? 'Free' : 'Restricted'}
-                color={locomotion ? 'good' : 'bad'}
-                onClick={() => act('locomotion')}
-              />
+            <LabeledList.Item label="Servo Motor Functions" buttons={<Button icon="info" tooltip={TOOLTIP_LOCOMOTION} tooltipPosition="left" />}>
+              <Button icon={locomotion ? 'unlock' : 'lock'} content={locomotion ? 'Free' : 'Restricted'} color={locomotion ? 'good' : 'bad'} onClick={() => act('locomotion')} />
             </LabeledList.Item>
-            <LabeledList.Item
-              label="Cover Panel"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_PANEL}
-                  tooltipPosition="left"
-                />
-              }
-            >
-              <Button
-                icon={panel ? 'lock' : 'unlock'}
-                content={panel ? 'Locked' : 'Unlocked'}
-                onClick={() => act('panel')}
-              />
+            <LabeledList.Item label="Cover Panel" buttons={<Button icon="info" tooltip={TOOLTIP_PANEL} tooltipPosition="left" />}>
+              <Button icon={panel ? 'lock' : 'unlock'} content={panel ? 'Locked' : 'Unlocked'} onClick={() => act('panel')} />
             </LabeledList.Item>
           </LabeledList>
         </Section>
         <Section title="AI Settings">
           <LabeledList>
-            <LabeledList.Item
-              label="AI Connection Port"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_AISYNC}
-                  tooltipPosition="left"
-                />
-              }
-            >
-              <Button
-                icon={aisync ? 'unlock' : 'lock'}
-                content={aisync ? 'Open' : 'Closed'}
-                onClick={() => act('aisync')}
-              />
+            <LabeledList.Item label="AI Connection Port" buttons={<Button icon="info" tooltip={TOOLTIP_AISYNC} tooltipPosition="left" />}>
+              <Button icon={aisync ? 'unlock' : 'lock'} content={aisync ? 'Open' : 'Closed'} onClick={() => act('aisync')} />
             </LabeledList.Item>
-            <LabeledList.Item
-              label="Master AI"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_AI}
-                  tooltipPosition="left"
-                />
-              }
-            >
+            <LabeledList.Item label="Master AI" buttons={<Button icon="info" tooltip={TOOLTIP_AI} tooltipPosition="left" />}>
               <Button
                 icon={!aisync ? 'times' : master ? 'edit' : 'sync'}
                 content={!aisync ? 'None' : master || 'Automatic'}
@@ -131,16 +73,7 @@ export const CyborgBootDebug = (props) => {
                 onClick={() => act('set_ai')}
               />
             </LabeledList.Item>
-            <LabeledList.Item
-              label="LawSync Port"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_LAWSYNC}
-                  tooltipPosition="top-start"
-                />
-              }
-            >
+            <LabeledList.Item label="LawSync Port" buttons={<Button icon="info" tooltip={TOOLTIP_LAWSYNC} tooltipPosition="top-start" />}>
               <Button
                 icon={!aisync ? 'lock' : lawsync ? 'unlock' : 'lock'}
                 content={!aisync ? 'Closed' : lawsync ? 'Open' : 'Closed'}

@@ -7,12 +7,7 @@ import { Window } from '../layouts';
 // defined this so the code is more readable
 const STAKES_HOLY_MATCH = 1;
 
-const weaponlist = [
-  'Fist Fight',
-  'Ceremonial Weapons',
-  'Melee Only',
-  'Any Weapons',
-];
+const weaponlist = ['Fist Fight', 'Ceremonial Weapons', 'Melee Only', 'Any Weapons'];
 
 const stakelist = ['No Stakes', 'Holy Match', 'Money Match', 'Your Soul'];
 
@@ -43,16 +38,7 @@ type Info = {
 
 export const SparringContract = (props) => {
   const { data, act } = useBackend<Info>();
-  const {
-    set_weapon,
-    set_area,
-    set_stakes,
-    possible_areas,
-    left_sign,
-    right_sign,
-    in_area,
-    no_chaplains,
-  } = data;
+  const { set_weapon, set_area, set_stakes, possible_areas, left_sign, right_sign, in_area, no_chaplains } = data;
   const [weapon, setWeapon] = useLocalState('weapon', set_weapon);
   const [area, setArea] = useLocalState('area', set_area);
   const [stakes, setStakes] = useLocalState('stakes', set_stakes);
@@ -91,11 +77,7 @@ export const SparringContract = (props) => {
                     width="100%"
                     selected={weaponlist[weapon - 1]}
                     options={weaponlist}
-                    onSelected={(value) =>
-                      setWeapon(
-                        weaponlist.findIndex((title) => title === value) + 1,
-                      )
-                    }
+                    onSelected={(value) => setWeapon(weaponlist.findIndex((title) => title === value) + 1)}
                   />
                 </Stack.Item>
                 <Stack.Item>
@@ -107,18 +89,10 @@ export const SparringContract = (props) => {
               <Stack vertical>
                 <Stack.Item fontSize="16px">Arena:</Stack.Item>
                 <Stack.Item>
-                  <Dropdown
-                    width="100%"
-                    selected={area}
-                    options={possible_areas}
-                    onSelected={(value) => setArea(value)}
-                  />
+                  <Dropdown width="100%" selected={area} options={possible_areas} onSelected={(value) => setArea(value)} />
                 </Stack.Item>
                 <Stack.Item>
-                  <BlockQuote>
-                    This fight will take place in the {area}. Leaving the arena
-                    mid-fight is a violation.
-                  </BlockQuote>
+                  <BlockQuote>This fight will take place in the {area}. Leaving the arena mid-fight is a violation.</BlockQuote>
                 </Stack.Item>
               </Stack>
             </Stack.Item>
@@ -130,11 +104,7 @@ export const SparringContract = (props) => {
                     width="100%"
                     selected={stakelist[stakes - 1]}
                     options={stakelist}
-                    onSelected={(value) =>
-                      setStakes(
-                        stakelist.findIndex((title) => title === value) + 1,
-                      )
-                    }
+                    onSelected={(value) => setStakes(stakelist.findIndex((title) => title === value) + 1)}
                   />
                 </Stack.Item>
                 <Stack.Item>
@@ -185,14 +155,7 @@ export const SparringContract = (props) => {
             <Stack.Item mb={-0.5}>
               <Stack fill>
                 <Stack.Item grow>
-                  <Button
-                    disabled={
-                      !in_area ||
-                      (no_chaplains && set_stakes === STAKES_HOLY_MATCH)
-                    }
-                    icon="fist-raised"
-                    onClick={() => act('fight')}
-                  >
+                  <Button disabled={!in_area || (no_chaplains && set_stakes === STAKES_HOLY_MATCH)} icon="fist-raised" onClick={() => act('fight')}>
                     FIGHT!
                   </Button>
                   <Button
@@ -209,11 +172,7 @@ export const SparringContract = (props) => {
                 </Stack.Item>
                 <Stack.Item>
                   <Button
-                    tooltip={
-                      (in_area &&
-                        'Both participants are present in the ' + area + '.') ||
-                      'Both participants need to be in the arena!'
-                    }
+                    tooltip={(in_area && 'Both participants are present in the ' + area + '.') || 'Both participants need to be in the arena!'}
                     color={(in_area && 'green') || 'red'}
                     icon="ring"
                   >
@@ -221,27 +180,15 @@ export const SparringContract = (props) => {
                   </Button>
                   <Button
                     tooltip={
-                      (left_sign !== 'none' &&
-                        right_sign !== 'none' &&
-                        'Both signatures present, terms agreed upon.') ||
-                      'You need signatures from both fighters on the terms!'
+                      (left_sign !== 'none' && right_sign !== 'none' && 'Both signatures present, terms agreed upon.') || 'You need signatures from both fighters on the terms!'
                     }
-                    color={
-                      (left_sign !== 'none' &&
-                        right_sign !== 'none' &&
-                        'green') ||
-                      'red'
-                    }
+                    color={(left_sign !== 'none' && right_sign !== 'none' && 'green') || 'red'}
                     icon="file-signature"
                   >
                     Signatures
                   </Button>
                   <Button
-                    tooltip={
-                      (!no_chaplains &&
-                        'At least one chaplain is present. Holy matches allowed.') ||
-                      'No chaplain present for this fight. No Holy Matches!'
-                    }
+                    tooltip={(!no_chaplains && 'At least one chaplain is present. Holy matches allowed.') || 'No chaplain present for this fight. No Holy Matches!'}
                     color={(!no_chaplains && 'green') || 'yellow'}
                     icon="cross"
                   >

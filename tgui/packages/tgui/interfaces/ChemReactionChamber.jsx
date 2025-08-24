@@ -1,37 +1,16 @@
 import { round, toFixed } from 'common/math';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Input,
-  LabeledList,
-  NumberInput,
-  RoundGauge,
-  Section,
-  Stack,
-} from '../components';
+import { AnimatedNumber, Box, Button, Input, LabeledList, NumberInput, RoundGauge, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 export const ChemReactionChamber = (props) => {
   const { act, data } = useBackend();
 
   const [reagentName, setReagentName] = useLocalState('reagentName', '');
-  const [reagentQuantity, setReagentQuantity] = useLocalState(
-    'reagentQuantity',
-    1,
-  );
+  const [reagentQuantity, setReagentQuantity] = useLocalState('reagentQuantity', 1);
 
-  const {
-    emptying,
-    temperature,
-    ph,
-    targetTemp,
-    isReacting,
-    reagentAcidic,
-    reagentAlkaline,
-  } = data;
+  const { emptying, temperature, ph, targetTemp, isReacting, reagentAcidic, reagentAlkaline } = data;
   const reagents = data.reagents || [];
   return (
     <Window width={290} height={400}>
@@ -65,14 +44,9 @@ export const ChemReactionChamber = (props) => {
               <Stack vertical>
                 <Stack.Item>
                   <Stack fill>
-                    <Stack.Item textColor="label">
-                      Current Temperature:
-                    </Stack.Item>
+                    <Stack.Item textColor="label">Current Temperature:</Stack.Item>
                     <Stack.Item grow>
-                      <AnimatedNumber
-                        value={temperature}
-                        format={(value) => toFixed(value) + ' K'}
-                      />
+                      <AnimatedNumber value={temperature} format={(value) => toFixed(value) + ' K'} />
                     </Stack.Item>
                     <Stack.Item grow>
                       <RoundGauge
@@ -135,12 +109,7 @@ export const ChemReactionChamber = (props) => {
                     {'Reacting'}
                   </Box>
                 )) || (
-                  <Box
-                    fontSize="16px"
-                    inline
-                    bold
-                    color={emptying ? 'bad' : 'good'}
-                  >
+                  <Box fontSize="16px" inline bold color={emptying ? 'bad' : 'good'}>
                     {emptying ? 'Emptying' : 'Filling'}
                   </Box>
                 )
@@ -185,23 +154,10 @@ export const ChemReactionChamber = (props) => {
                 <Stack.Item>
                   <Stack fill>
                     <Stack.Item grow>
-                      <Input
-                        fluid
-                        value=""
-                        placeholder="Reagent Name"
-                        onInput={(e, value) => setReagentName(value)}
-                      />
+                      <Input fluid value="" placeholder="Reagent Name" onInput={(e, value) => setReagentName(value)} />
                     </Stack.Item>
                     <Stack.Item>
-                      <NumberInput
-                        value={reagentQuantity}
-                        minValue={1}
-                        maxValue={100}
-                        step={1}
-                        stepPixelSize={3}
-                        width="39px"
-                        onDrag={(value) => setReagentQuantity(value)}
-                      />
+                      <NumberInput value={reagentQuantity} minValue={1} maxValue={100} step={1} stepPixelSize={3} width="39px" onDrag={(value) => setReagentQuantity(value)} />
                       <Box inline mr={1} />
                     </Stack.Item>
                     <Stack.Item>

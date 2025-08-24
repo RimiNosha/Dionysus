@@ -2,16 +2,7 @@ import { map, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Input,
-  NoticeBox,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Box, Button, Dropdown, Input, NoticeBox, Section, Stack, Table } from '../components';
 import { Window } from '../layouts';
 import { PageSelect } from './LibraryConsole';
 
@@ -27,12 +18,7 @@ const BookListing = (props) => {
   const { act, data } = useBackend();
   const { can_connect, can_db_request, our_page, page_count } = data;
   if (!can_connect) {
-    return (
-      <NoticeBox>
-        Unable to retrieve book listings. Please contact your system
-        administrator for assistance.
-      </NoticeBox>
-    );
+    return <NoticeBox>Unable to retrieve book listings. Please contact your system administrator for assistance.</NoticeBox>;
   }
   return (
     <Stack fill vertical justify="space-between">
@@ -62,14 +48,7 @@ const BookListing = (props) => {
 
 const SearchAndDisplay = (props) => {
   const { act, data } = useBackend();
-  const {
-    can_db_request,
-    categories = [],
-    title,
-    category,
-    author,
-    params_changed,
-  } = data;
+  const { can_db_request, categories = [], title, category, author, params_changed } = data;
   const records = flow([
     map((record, i) => ({
       ...record,
@@ -121,22 +100,10 @@ const SearchAndDisplay = (props) => {
           </Stack>
         </Stack.Item>
         <Stack.Item>
-          <Button
-            disabled={!can_db_request}
-            textAlign="right"
-            onClick={() => act('search')}
-            color={params_changed ? 'good' : ''}
-            icon="book"
-          >
+          <Button disabled={!can_db_request} textAlign="right" onClick={() => act('search')} color={params_changed ? 'good' : ''} icon="book">
             Search
           </Button>
-          <Button
-            disabled={!can_db_request}
-            textAlign="right"
-            onClick={() => act('clear_data')}
-            color="bad"
-            icon="fire"
-          >
+          <Button disabled={!can_db_request} textAlign="right" onClick={() => act('clear_data')} color="bad" icon="fire">
             Reset Search
           </Button>
         </Stack.Item>

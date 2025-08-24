@@ -1,14 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, ProgressBar, Section, Stack, Tabs } from '../components';
 import { NtosWindow } from '../layouts';
 
 export const NtosCyborgRemoteMonitor = (props) => {
@@ -52,20 +43,10 @@ export const NtosCyborgRemoteMonitorContent = (props) => {
     <Stack fill vertical>
       <Stack.Item>
         <Tabs>
-          <Tabs.Tab
-            icon="robot"
-            lineHeight="23px"
-            selected={tab_main === 1}
-            onClick={() => setTab_main(1)}
-          >
+          <Tabs.Tab icon="robot" lineHeight="23px" selected={tab_main === 1} onClick={() => setTab_main(1)}>
             Cyborgs
           </Tabs.Tab>
-          <Tabs.Tab
-            icon="clipboard"
-            lineHeight="23px"
-            selected={tab_main === 2}
-            onClick={() => setTab_main(2)}
-          >
+          <Tabs.Tab icon="clipboard" lineHeight="23px" selected={tab_main === 2} onClick={() => setTab_main(2)}>
             Stored Log File
           </Tabs.Tab>
         </Tabs>
@@ -99,64 +80,22 @@ export const NtosCyborgRemoteMonitorContent = (props) => {
                 >
                   <LabeledList>
                     <LabeledList.Item label="Status">
-                      <Box
-                        color={
-                          cyborg.status
-                            ? 'bad'
-                            : cyborg.locked_down
-                              ? 'average'
-                              : 'good'
-                        }
-                      >
-                        {cyborg.status
-                          ? 'Not Responding'
-                          : cyborg.locked_down
-                            ? 'Locked Down'
-                            : cyborg.shell_discon
-                              ? 'Nominal/Disconnected'
-                              : 'Nominal'}
+                      <Box color={cyborg.status ? 'bad' : cyborg.locked_down ? 'average' : 'good'}>
+                        {cyborg.status ? 'Not Responding' : cyborg.locked_down ? 'Locked Down' : cyborg.shell_discon ? 'Nominal/Disconnected' : 'Nominal'}
                       </Box>
                     </LabeledList.Item>
                     <LabeledList.Item label="Condition">
-                      <Box
-                        color={
-                          cyborg.integ <= 25
-                            ? 'bad'
-                            : cyborg.integ <= 75
-                              ? 'average'
-                              : 'good'
-                        }
-                      >
-                        {cyborg.integ === 0
-                          ? 'Hard Fault'
-                          : cyborg.integ <= 25
-                            ? 'Functionality Disrupted'
-                            : cyborg.integ <= 75
-                              ? 'Functionality Impaired'
-                              : 'Operational'}
+                      <Box color={cyborg.integ <= 25 ? 'bad' : cyborg.integ <= 75 ? 'average' : 'good'}>
+                        {cyborg.integ === 0 ? 'Hard Fault' : cyborg.integ <= 25 ? 'Functionality Disrupted' : cyborg.integ <= 75 ? 'Functionality Impaired' : 'Operational'}
                       </Box>
                     </LabeledList.Item>
                     <LabeledList.Item label="Charge">
-                      <Box
-                        color={
-                          cyborg.charge <= 30
-                            ? 'bad'
-                            : cyborg.charge <= 70
-                              ? 'average'
-                              : 'good'
-                        }
-                      >
-                        {typeof cyborg.charge === 'number'
-                          ? cyborg.charge + '%'
-                          : 'Not Found'}
+                      <Box color={cyborg.charge <= 30 ? 'bad' : cyborg.charge <= 70 ? 'average' : 'good'}>
+                        {typeof cyborg.charge === 'number' ? cyborg.charge + '%' : 'Not Found'}
                       </Box>
                     </LabeledList.Item>
-                    <LabeledList.Item label="Model">
-                      {cyborg.module}
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Upgrades">
-                      {cyborg.upgrades}
-                    </LabeledList.Item>
+                    <LabeledList.Item label="Model">{cyborg.module}</LabeledList.Item>
+                    <LabeledList.Item label="Upgrades">{cyborg.upgrades}</LabeledList.Item>
                   </LabeledList>
                 </Section>
               ))}
@@ -169,9 +108,7 @@ export const NtosCyborgRemoteMonitorContent = (props) => {
           <Stack.Item>
             <Section>
               Scan a cyborg to download stored logs.
-              <ProgressBar value={DL_progress / 100}>
-                {ProgressSwitch(DL_progress)}
-              </ProgressBar>
+              <ProgressBar value={DL_progress / 100}>{ProgressSwitch(DL_progress)}</ProgressBar>
             </Section>
           </Stack.Item>
           <Stack.Item grow={1}>

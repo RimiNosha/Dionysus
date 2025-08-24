@@ -30,11 +30,7 @@
 @function OLD_lighten($color, $percent) {
   $old-lightness: color.channel($color, 'lightness', $space: hsl);
   $scaled-lightness: ($old-lightness) * (1 + num($percent));
-  $scaled: hsl(
-    color.channel($color, 'hue', $space: hsl),
-    color.channel($color, 'saturation', $space: hsl),
-    $scaled-lightness
-  );
+  $scaled: hsl(color.channel($color, 'hue', $space: hsl), color.channel($color, 'saturation', $space: hsl), $scaled-lightness);
   $mixed: color.mix(#ffffff, $color, 100% * num($percent));
   @return color.mix($scaled, $mixed, 75%);
 }
@@ -75,18 +71,13 @@
     );
   }
 
-  @return (map.get($colors, 'red') * 0.2126) +
-    (map.get($colors, 'green') * 0.7152) + (map.get($colors, 'blue') * 0.0722);
+  @return (map.get($colors, 'red') * 0.2126) + (map.get($colors, 'green') * 0.7152) + (map.get($colors, 'blue') * 0.0722);
 }
 
 // Blends an RGBA color with a static background color based on its
 // alpha channel. Returns an RGB color, which is compatible with IE8.
 @function fake-alpha($color-rgba, $color-background) {
-  @return color.mix(
-    color.change($color-rgba, $alpha: 1),
-    $color-background,
-    color.channel($color-rgba, 'alpha') * 100%
-  );
+  @return color.mix(color.change($color-rgba, $alpha: 1), $color-background, color.channel($color-rgba, 'alpha') * 100%);
 }
 
 // Multiplies our viewport units by the DPI scaling amount

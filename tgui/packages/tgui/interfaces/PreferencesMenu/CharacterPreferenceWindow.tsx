@@ -19,11 +19,7 @@ enum Page {
   Quirks,
 }
 
-const CharacterProfiles = (props: {
-  activeSlot: number;
-  onClick: (index: number) => void;
-  profiles: (string | null)[];
-}) => {
+const CharacterProfiles = (props: { activeSlot: number; onClick: (index: number) => void; profiles: (string | null)[] }) => {
   const { profiles, activeSlot, onClick } = props;
 
   return (
@@ -60,15 +56,11 @@ export const CharacterPreferenceWindow = (props) => {
       pageContents = <JobsPage />;
       break;
     case Page.Main:
-      pageContents = (
-        <MainPage openSpecies={() => setCurrentPage(Page.Species)} />
-      );
+      pageContents = <MainPage openSpecies={() => setCurrentPage(Page.Species)} />;
 
       break;
     case Page.Species:
-      pageContents = (
-        <SpeciesPage closeSpecies={() => setCurrentPage(Page.Main)} />
-      );
+      pageContents = <SpeciesPage closeSpecies={() => setCurrentPage(Page.Main)} />;
 
       break;
     case Page.Quirks:
@@ -79,12 +71,7 @@ export const CharacterPreferenceWindow = (props) => {
   }
 
   return (
-    <Window
-      title="Character Preferences"
-      theme="rounded_base"
-      width={920}
-      height={770}
-    >
+    <Window title="Character Preferences" theme="rounded_base" width={920} height={770}>
       <Window.Content scrollable>
         <Stack vertical fill>
           <Stack.Item>
@@ -99,33 +86,20 @@ export const CharacterPreferenceWindow = (props) => {
             />
           </Stack.Item>
 
-          {!data.content_unlocked && (
-            <Stack.Item align="center">
-              Buy BYOND premium for more slots!
-            </Stack.Item>
-          )}
+          {!data.content_unlocked && <Stack.Item align="center">Buy BYOND premium for more slots!</Stack.Item>}
 
           <Stack.Divider />
 
           <Stack.Item>
             <Stack fill>
               <Stack.Item grow>
-                <PageButton
-                  currentPage={currentPage}
-                  page={Page.Main}
-                  setPage={setCurrentPage}
-                  otherActivePages={[Page.Species]}
-                >
+                <PageButton currentPage={currentPage} page={Page.Main} setPage={setCurrentPage} otherActivePages={[Page.Species]}>
                   Character
                 </PageButton>
               </Stack.Item>
 
               <Stack.Item grow>
-                <PageButton
-                  currentPage={currentPage}
-                  page={Page.Jobs}
-                  setPage={setCurrentPage}
-                >
+                <PageButton currentPage={currentPage} page={Page.Jobs} setPage={setCurrentPage}>
                   {/*
                     Fun fact: This isn't "Jobs" so that it intentionally
                     catches your eyes, because it's really important!
@@ -135,21 +109,13 @@ export const CharacterPreferenceWindow = (props) => {
               </Stack.Item>
 
               <Stack.Item grow>
-                <PageButton
-                  currentPage={currentPage}
-                  page={Page.Antags}
-                  setPage={setCurrentPage}
-                >
+                <PageButton currentPage={currentPage} page={Page.Antags} setPage={setCurrentPage}>
                   Antagonists
                 </PageButton>
               </Stack.Item>
 
               <Stack.Item grow>
-                <PageButton
-                  currentPage={currentPage}
-                  page={Page.Quirks}
-                  setPage={setCurrentPage}
-                >
+                <PageButton currentPage={currentPage} page={Page.Quirks} setPage={setCurrentPage}>
                   Quirks
                 </PageButton>
               </Stack.Item>

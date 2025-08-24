@@ -3,13 +3,7 @@ import { flow } from 'common/fp';
 
 import { useBackend } from '../../backend';
 import { Box, Button, Divider, Dropdown, LabeledList } from '../../components';
-import {
-  CHROMOSOME_NEVER,
-  CHROMOSOME_NONE,
-  CHROMOSOME_USED,
-  MUT_COLORS,
-  MUT_EXTRA,
-} from './constants';
+import { CHROMOSOME_NEVER, CHROMOSOME_NONE, CHROMOSOME_USED, MUT_COLORS, MUT_EXTRA } from './constants';
 
 /**
  * The following predicate tests if two mutations are functionally
@@ -36,11 +30,7 @@ const ChromosomeInfo = (props) => {
           width="240px"
           options={mutation.ValidStoredChromos}
           disabled={mutation.ValidStoredChromos.length === 0}
-          selected={
-            mutation.ValidStoredChromos.length === 0
-              ? 'No Suitable Chromosomes'
-              : 'Select a chromosome'
-          }
+          selected={mutation.ValidStoredChromos.length === 0 ? 'No Suitable Chromosomes' : 'Select a chromosome'}
           onSelected={(e) =>
             act('apply_chromo', {
               chromo: e,
@@ -55,9 +45,7 @@ const ChromosomeInfo = (props) => {
     );
   }
   if (mutation.CanChromo === CHROMOSOME_USED) {
-    return (
-      <Box color="label">Applied chromosome: {mutation.AppliedChromo}</Box>
-    );
+    return <Box color="label">Applied chromosome: {mutation.AppliedChromo}</Box>;
   }
   return null;
 };
@@ -90,14 +78,7 @@ const MutationCombiner = (props) => {
 export const MutationInfo = (props) => {
   const { mutation } = props;
   const { data, act } = useBackend();
-  const {
-    diskCapacity,
-    diskReadOnly,
-    hasDisk,
-    isInjectorReady,
-    isCrisprReady,
-    crisprCharges,
-  } = data;
+  const { diskCapacity, diskReadOnly, hasDisk, isInjectorReady, isCrisprReady, crisprCharges } = data;
   const diskMutations = data.storage.disk ?? [];
   const mutationStorage = data.storage.console ?? [];
   const advInjectors = data.storage.injector ?? [];
@@ -111,14 +92,9 @@ export const MutationInfo = (props) => {
       </LabeledList>
     );
   }
-  const savedToConsole = mutationStorage.find((x) =>
-    isSameMutation(x, mutation),
-  );
+  const savedToConsole = mutationStorage.find((x) => isSameMutation(x, mutation));
   const savedToDisk = diskMutations.find((x) => isSameMutation(x, mutation));
-  const combinedMutations = flow([
-    uniqBy((mutation) => mutation.Name),
-    filter((x) => x.Name !== mutation.Name),
-  ])([...diskMutations, ...mutationStorage]);
+  const combinedMutations = flow([uniqBy((mutation) => mutation.Name), filter((x) => x.Name !== mutation.Name)])([...diskMutations, ...mutationStorage]);
   return (
     <>
       <LabeledList>
@@ -127,25 +103,13 @@ export const MutationInfo = (props) => {
             {mutation.Name}
           </Box>
         </LabeledList.Item>
-        <LabeledList.Item label="Description">
-          {mutation.Description}
-        </LabeledList.Item>
-        <LabeledList.Item label="Instability">
-          {mutation.Instability}
-        </LabeledList.Item>
+        <LabeledList.Item label="Description">{mutation.Description}</LabeledList.Item>
+        <LabeledList.Item label="Instability">{mutation.Instability}</LabeledList.Item>
       </LabeledList>
       <Divider />
       <Box>
-        {mutation.Source === 'disk' && (
-          <MutationCombiner
-            disabled={!hasDisk || diskCapacity <= 0 || diskReadOnly}
-            mutations={combinedMutations}
-            source={mutation}
-          />
-        )}
-        {mutation.Source === 'console' && (
-          <MutationCombiner mutations={combinedMutations} source={mutation} />
-        )}
+        {mutation.Source === 'disk' && <MutationCombiner disabled={!hasDisk || diskCapacity <= 0 || diskReadOnly} mutations={combinedMutations} source={mutation} />}
+        {mutation.Source === 'console' && <MutationCombiner mutations={combinedMutations} source={mutation} />}
         {['occupant', 'disk', 'console'].includes(mutation.Source) && (
           <>
             <Dropdown
@@ -215,13 +179,7 @@ export const MutationInfo = (props) => {
       {['console', 'occupant'].includes(mutation.Source) && (
         <Button
           icon="save"
-          disabled={
-            savedToDisk ||
-            !hasDisk ||
-            diskCapacity <= 0 ||
-            diskReadOnly ||
-            !mutation.Active
-          }
+          disabled={savedToDisk || !hasDisk || diskCapacity <= 0 || diskReadOnly || !mutation.Active}
           content="Save to Disk"
           onClick={() =>
             act('save_disk', {
@@ -243,8 +201,7 @@ export const MutationInfo = (props) => {
           }
         />
       )}
-      {(mutation.Class === MUT_EXTRA ||
-        (!!mutation.Scrambled && mutation.Source === 'occupant')) && (
+      {(mutation.Class === MUT_EXTRA || (!!mutation.Scrambled && mutation.Source === 'occupant')) && (
         <Button
           content="Nullify"
           onClick={() =>
@@ -255,10 +212,7 @@ export const MutationInfo = (props) => {
         />
       )}
       <Divider />
-      <ChromosomeInfo
-        disabled={mutation.Source !== 'occupant'}
-        mutation={mutation}
-      />
+      <ChromosomeInfo disabled={mutation.Source !== 'occupant'} mutation={mutation} />
     </>
   );
 };

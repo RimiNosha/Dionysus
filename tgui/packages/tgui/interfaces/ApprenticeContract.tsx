@@ -10,8 +10,7 @@ export const ApprenticeContract = (props) => {
         <Stack vertical fill>
           <Stack.Item>
             <Section textColor="lightgreen" fontSize="15px">
-              If you cannot reach any of your apprentices today, you can feed
-              the contract back into your spellbook to refund it.
+              If you cannot reach any of your apprentices today, you can feed the contract back into your spellbook to refund it.
             </Section>
           </Stack.Item>
           <Stack.Item grow>

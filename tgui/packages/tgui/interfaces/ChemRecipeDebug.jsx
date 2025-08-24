@@ -1,18 +1,7 @@
 import { round } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Flex,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  RoundGauge,
-  Section,
-  Table,
-} from '../components';
+import { AnimatedNumber, Box, Button, Flex, LabeledList, NumberInput, ProgressBar, RoundGauge, Section, Table } from '../components';
 import { Window } from '../layouts';
 import { BeakerContents } from './common/BeakerContents';
 
@@ -48,18 +37,8 @@ export const ChemRecipeDebug = (props) => {
           title="Controls"
           buttons={
             <>
-              <Button
-                icon={beakerSpawn ? 'power-off' : 'times'}
-                selected={beakerSpawn}
-                content={'Spawn beaker'}
-                onClick={() => act('beakerSpawn')}
-              />
-              <Button
-                icon={processAll ? 'power-off' : 'times'}
-                selected={processAll}
-                content={'All'}
-                onClick={() => act('all')}
-              />
+              <Button icon={beakerSpawn ? 'power-off' : 'times'} selected={beakerSpawn} content={'Spawn beaker'} onClick={() => act('beakerSpawn')} />
+              <Button icon={processAll ? 'power-off' : 'times'} selected={processAll} content={'All'} onClick={() => act('all')} />
             </>
           }
         >
@@ -68,12 +47,7 @@ export const ChemRecipeDebug = (props) => {
               <Button icon="plus" onClick={() => act('setTargetList')} />
             </LabeledList.Item>
             <LabeledList.Item label="Queued">
-              {(processAll && <Box>All</Box>) || (
-                <Box>
-                  {queuedReactions.length &&
-                    queuedReactions.map((entry) => entry.name + ', ')}
-                </Box>
-              )}
+              {(processAll && <Box>All</Box>) || <Box>{queuedReactions.length && queuedReactions.map((entry) => entry.name + ', ')}</Box>}
             </LabeledList.Item>
             <LabeledList.Item label="Temp">
               {currentTemp}K
@@ -91,18 +65,8 @@ export const ChemRecipeDebug = (props) => {
                   })
                 }
               />
-              <Button
-                icon={forceTemp ? 'power-off' : 'times'}
-                selected={forceTemp}
-                content={'Force'}
-                onClick={() => act('forceTemp')}
-              />
-              <Button
-                icon={minTemp ? 'power-off' : 'times'}
-                selected={minTemp}
-                content={'MinTemp'}
-                onClick={() => act('minTemp')}
-              />
+              <Button icon={forceTemp ? 'power-off' : 'times'} selected={forceTemp} content={'Force'} onClick={() => act('forceTemp')} />
+              <Button icon={minTemp ? 'power-off' : 'times'} selected={minTemp} content={'MinTemp'} onClick={() => act('minTemp')} />
             </LabeledList.Item>
             <LabeledList.Item label="Vol multi">
               <NumberInput
@@ -135,43 +99,21 @@ export const ChemRecipeDebug = (props) => {
                   })
                 }
               />
-              <Button
-                icon={forcepH ? 'power-off' : 'times'}
-                selected={forcepH}
-                content={'Force'}
-                onClick={() => act('forcepH')}
-              />
+              <Button icon={forcepH ? 'power-off' : 'times'} selected={forcepH} content={'Force'} onClick={() => act('forcepH')} />
             </LabeledList.Item>
             <LabeledList.Item label="Index">
               {index} of {endIndex}
             </LabeledList.Item>
             <LabeledList.Item label="Start">
-              <Button
-                icon={processing ? 'power-off' : 'times'}
-                selected={!!processing}
-                content={'Start'}
-                onClick={() => act('start')}
-              />
-              <Button
-                icon={processing ? 'times' : 'power-off'}
-                color="red"
-                content={'Stop'}
-                onClick={() => act('stop')}
-              />
+              <Button icon={processing ? 'power-off' : 'times'} selected={!!processing} content={'Start'} onClick={() => act('start')} />
+              <Button icon={processing ? 'times' : 'power-off'} color="red" content={'Stop'} onClick={() => act('stop')} />
             </LabeledList.Item>
           </LabeledList>
         </Section>
         <Section title="Recipe edit">
           <LabeledList>
-            <LabeledList.Item
-              label={editRecipeName ? editRecipeName : 'lookup'}
-            >
-              <Button
-                icon={'flask'}
-                color="purple"
-                content={'Select recipe'}
-                onClick={() => act('setEdit')}
-              />
+            <LabeledList.Item label={editRecipeName ? editRecipeName : 'lookup'}>
+              <Button icon={'flask'} color="purple" content={'Select recipe'} onClick={() => act('setEdit')} />
             </LabeledList.Item>
             {!!editRecipe && (
               <>
@@ -209,12 +151,7 @@ export const ChemRecipeDebug = (props) => {
               </>
             )}
             <LabeledList.Item label="Export">
-              <Button
-                icon={'save'}
-                color="green"
-                content={'export'}
-                onClick={() => act('export')}
-              />
+              <Button icon={'save'} color="green" content={'export'} onClick={() => act('export')} />
             </LabeledList.Item>
           </LabeledList>
         </Section>
@@ -223,10 +160,7 @@ export const ChemRecipeDebug = (props) => {
           buttons={
             <Flex>
               <Flex.Item color="label">
-                <AnimatedNumber
-                  value={currentpH}
-                  format={(value) => 'pH: ' + round(value, 3)}
-                />
+                <AnimatedNumber value={currentpH} format={(value) => 'pH: ' + round(value, 3)} />
               </Flex.Item>
               <Flex.Item>
                 <AnimatedNumber value={currentpH}>
@@ -258,9 +192,7 @@ export const ChemRecipeDebug = (props) => {
             </Flex>
           }
         >
-          {(activeReactions.length === 0 && (
-            <Box color="label">No active reactions.</Box>
-          )) || (
+          {(activeReactions.length === 0 && <Box color="label">No active reactions.</Box>) || (
             <Table>
               <Table.Row>
                 <Table.Cell bold color="label">
@@ -320,13 +252,8 @@ export const ChemRecipeDebug = (props) => {
             </Table>
           )}
         </Section>
-        <Section
-          title="Chamber"
-          buttons={<Box>{isActive ? 'Reacting' : 'Waiting'}</Box>}
-        >
-          {(chamberContents.length && (
-            <BeakerContents beakerLoaded beakerContents={chamberContents} />
-          )) || <Box>Nothing</Box>}
+        <Section title="Chamber" buttons={<Box>{isActive ? 'Reacting' : 'Waiting'}</Box>}>
+          {(chamberContents.length && <BeakerContents beakerLoaded beakerContents={chamberContents} />) || <Box>Nothing</Box>}
         </Section>
       </Window.Content>
     </Window>

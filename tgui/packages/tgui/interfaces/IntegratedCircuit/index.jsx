@@ -7,11 +7,7 @@ import { Window } from '../../layouts';
 import { CircuitInfo } from './CircuitInfo';
 import { ComponentMenu } from './ComponentMenu';
 import { Connections } from './Connections';
-import {
-  ABSOLUTE_Y_OFFSET,
-  MOUSE_BUTTON_LEFT,
-  TIME_UNTIL_PORT_RELEASE_WORKS,
-} from './constants';
+import { ABSOLUTE_Y_OFFSET, MOUSE_BUTTON_LEFT, TIME_UNTIL_PORT_RELEASE_WORKS } from './constants';
 import { ObjectComponent } from './ObjectComponent';
 import { VariableMenu } from './VariableMenu';
 
@@ -76,13 +72,7 @@ export class IntegratedCircuit extends Component {
     const position = this.getPosition(dom);
     position.color = port.color;
 
-    if (
-      isNaN(position.x) ||
-      isNaN(position.y) ||
-      (lastPosition &&
-        lastPosition.x === position.x &&
-        lastPosition.y === position.y)
-    ) {
+    if (isNaN(position.x) || isNaN(position.y) || (lastPosition && lastPosition.x === position.x && lastPosition.y === position.y)) {
       return;
     }
     locations[port.ref] = position;
@@ -111,8 +101,7 @@ export class IntegratedCircuit extends Component {
 
     this.handlePortDrag(event);
 
-    this.timeUntilPortReleaseTimesOut =
-      Date.now() + TIME_UNTIL_PORT_RELEASE_WORKS;
+    this.timeUntilPortReleaseTimesOut = Date.now() + TIME_UNTIL_PORT_RELEASE_WORKS;
 
     window.addEventListener('mousemove', this.handlePortDrag);
     window.addEventListener('mouseup', this.handlePortRelease);
@@ -151,12 +140,7 @@ export class IntegratedCircuit extends Component {
     act('add_connection', data);
 
     const { components } = uiData;
-    const {
-      input_component_id,
-      input_port_id,
-      output_component_id,
-      output_port_id,
-    } = data;
+    const { input_component_id, input_port_id, output_component_id, output_port_id } = data;
 
     const input_comp = components[input_component_id - 1];
     const input_port = input_comp.input_ports[input_port_id - 1];
@@ -273,13 +257,7 @@ export class IntegratedCircuit extends Component {
 
   handleVarDropped(event) {
     const { data, act } = useBackend();
-    const {
-      draggingVariable,
-      variableIsSetter,
-      backgroundX,
-      backgroundY,
-      zoom,
-    } = this.state;
+    const { draggingVariable, variableIsSetter, backgroundX, backgroundY, zoom } = this.state;
     const { screen_x, screen_y } = data;
 
     const xPos = event.clientX - (backgroundX || screen_x);
@@ -350,8 +328,7 @@ export class IntegratedCircuit extends Component {
       global_basic_types,
       stored_designs,
     } = data;
-    const { locations, selectedPort, variableMenuOpen, componentMenuOpen } =
-      this.state;
+    const { locations, selectedPort, variableMenuOpen, componentMenuOpen } = this.state;
     const connections = [];
 
     for (const comp of components) {
@@ -394,14 +371,7 @@ export class IntegratedCircuit extends Component {
           <Box width="160px" position="absolute" top="5px" height="22px">
             <Stack>
               <Stack.Item grow>
-                <Input
-                  fluid
-                  placeholder="Name"
-                  value={display_name}
-                  onChange={(e, value) =>
-                    act('set_display_name', { display_name: value })
-                  }
-                />
+                <Input fluid placeholder="Name" value={display_name} onChange={(e, value) => act('set_display_name', { display_name: value })} />
               </Stack.Item>
               <Stack.Item basis="24px">
                 <Button
@@ -433,13 +403,7 @@ export class IntegratedCircuit extends Component {
               </Stack.Item>
               {!!is_admin && (
                 <Stack.Item>
-                  <Button
-                    position="absolute"
-                    top={0}
-                    color="transparent"
-                    onClick={() => act('save_circuit')}
-                    icon="save"
-                  />
+                  <Button position="absolute" top={0} color="transparent" onClick={() => act('save_circuit')} icon="save" />
                 </Stack.Item>
               )}
             </Stack>
@@ -544,9 +508,7 @@ export class IntegratedCircuit extends Component {
               unselectable="on"
             >
               <ComponentMenu
-                components={
-                  (stored_designs && Object.keys(stored_designs)) || []
-                }
+                components={(stored_designs && Object.keys(stored_designs)) || []}
                 onClose={(event) => this.setState({ componentMenuOpen: false })}
                 onMouseDownComponent={this.handleMouseDownComponent}
                 showAll={is_admin}

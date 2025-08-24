@@ -34,13 +34,9 @@ export const filter =
   };
 
 type MapFunction = {
-  <T, U>(
-    iterateeFn: (value: T, index: number, collection: T[]) => U,
-  ): (collection: T[]) => U[];
+  <T, U>(iterateeFn: (value: T, index: number, collection: T[]) => U): (collection: T[]) => U[];
 
-  <T, U, K extends string | number>(
-    iterateeFn: (value: T, index: K, collection: Record<K, T>) => U,
-  ): (collection: Record<K, T>) => U[];
+  <T, U, K extends string | number>(iterateeFn: (value: T, index: K, collection: Record<K, T>) => U): (collection: Record<K, T>) => U[];
 };
 
 /**
@@ -75,10 +71,7 @@ export const map: MapFunction =
  * Given a collection, will run each element through an iteratee function.
  * Will then filter out undefined values.
  */
-export const filterMap = <T, U>(
-  collection: T[],
-  iterateeFn: (value: T) => U | undefined,
-): U[] => {
+export const filterMap = <T, U>(collection: T[], iterateeFn: (value: T) => U | undefined): U[] => {
   const finalCollection: U[] = [];
 
   for (const value of collection) {
@@ -152,8 +145,7 @@ export const sortStrings = sortBy<string>();
  * Returns a range of numbers from start to end, exclusively.
  * For example, range(0, 5) will return [0, 1, 2, 3, 4].
  */
-export const range = (start: number, end: number): number[] =>
-  new Array(end - start).fill(null).map((_, index) => index + start);
+export const range = (start: number, end: number): number[] => new Array(end - start).fill(null).map((_, index) => index + start);
 
 /**
  * A fast implementation of reduce.
@@ -259,11 +251,7 @@ export const zipWith =
     return map((values: T[]) => iterateeFn(...values))(zip(...arrays));
   };
 
-const binarySearch = <T, U = unknown>(
-  getKey: (value: T) => U,
-  collection: readonly T[],
-  inserting: T,
-): number => {
+const binarySearch = <T, U = unknown>(getKey: (value: T) => U, collection: readonly T[], inserting: T): number => {
   if (collection.length === 0) {
     return 0;
   }
@@ -294,9 +282,7 @@ const binarySearch = <T, U = unknown>(
   return compare > insertingKey ? middle : middle + 1;
 };
 
-export const binaryInsertWith = <T, U = unknown>(
-  getKey: (value: T) => U,
-): ((collection: readonly T[], value: T) => T[]) => {
+export const binaryInsertWith = <T, U = unknown>(getKey: (value: T) => U): ((collection: readonly T[], value: T) => T[]) => {
   return (collection, value) => {
     const copy = [...collection];
     copy.splice(binarySearch(getKey, collection, value), 0, value);

@@ -1,13 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Knob,
-  LabeledControls,
-  Section,
-} from '../components';
+import { Box, Button, Divider, Flex, Knob, LabeledControls, Section } from '../components';
 import { Window } from '../layouts';
 
 export const TrainingMachine = (props) => {
@@ -30,16 +22,7 @@ export const TrainingMachine = (props) => {
               />
             </LabeledControls.Item>
             <LabeledControls.Item label="Range">
-              <Knob
-                inline
-                size={1.2}
-                step={1}
-                stepPixelSize={50}
-                value={data.range}
-                minValue={1}
-                maxValue={7}
-                onDrag={(e, value) => act('range', { range: value })}
-              />
+              <Knob inline size={1.2} step={1} stepPixelSize={50} value={data.range} minValue={1} maxValue={7} onDrag={(e, value) => act('range', { range: value })} />
             </LabeledControls.Item>
             <Flex.Item>
               <Divider vertical />

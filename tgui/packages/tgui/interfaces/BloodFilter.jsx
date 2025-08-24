@@ -12,12 +12,7 @@ export const BloodFilter = (props) => {
       <Window.Content scrollable>
         <Stack>
           <Stack.Item grow>
-            <ChemFilterPane
-              title="Whitelist"
-              list={whitelist}
-              reagentName={chemName}
-              onReagentInput={(value) => setChemName(value)}
-            />
+            <ChemFilterPane title="Whitelist" list={whitelist} reagentName={chemName} onReagentInput={(value) => setChemName(value)} />
           </Stack.Item>
         </Stack>
       </Window.Content>

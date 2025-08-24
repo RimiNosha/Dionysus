@@ -2,14 +2,7 @@ import { toFixed } from 'common/math';
 import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
-import {
-  Button,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Button, LabeledList, ProgressBar, Section, Stack, Table } from '../components';
 import { getGasColor, getGasLabel } from '../constants';
 import { Window } from '../layouts';
 
@@ -55,42 +48,18 @@ export function SupermatterMonitor() {
 
 export function SupermatterMonitorContent(props) {
   const { act, data } = useBackend<Data>();
-  const {
-    active,
-    singlecrystal,
-    SM_uid,
-    SM_area_name,
-    SM_integrity,
-    SM_power,
-    SM_ambienttemp,
-    SM_ambientpressure,
-    SM_moles,
-    SM_bad_moles_amount,
-  } = data;
+  const { active, singlecrystal, SM_uid, SM_area_name, SM_integrity, SM_power, SM_ambienttemp, SM_ambientpressure, SM_moles, SM_bad_moles_amount } = data;
 
   if (!active) {
     return <SupermatterList />;
   }
 
-  const gases = data.gases
-    .filter((gas) => gas.amount >= 0.01)
-    .sort((a, b) => -a.amount + b.amount);
+  const gases = data.gases.filter((gas) => gas.amount >= 0.01).sort((a, b) => -a.amount + b.amount);
 
   const gasMaxAmount = Math.max(1, ...gases.map((gas) => gas.amount));
 
   return (
-    <Section
-      title={SM_uid + '. ' + SM_area_name}
-      buttons={
-        !singlecrystal && (
-          <Button
-            icon="arrow-left"
-            content="Back"
-            onClick={() => act('PRG_clear')}
-          />
-        )
-      }
-    >
+    <Section title={SM_uid + '. ' + SM_area_name} buttons={!singlecrystal && <Button icon="arrow-left" content="Back" onClick={() => act('PRG_clear')} />}>
       <Stack>
         <Stack.Item width="270px">
           <Section title="Metrics">
@@ -141,10 +110,7 @@ export function SupermatterMonitorContent(props) {
                   maxValue={logScale(50000)}
                   ranges={{
                     good: [-Infinity, logScale(SM_bad_moles_amount * 0.75)],
-                    average: [
-                      logScale(SM_bad_moles_amount * 0.75),
-                      logScale(SM_bad_moles_amount),
-                    ],
+                    average: [logScale(SM_bad_moles_amount * 0.75), logScale(SM_bad_moles_amount)],
                     bad: [logScale(SM_bad_moles_amount), Infinity],
                   }}
                 >
@@ -173,12 +139,7 @@ export function SupermatterMonitorContent(props) {
             <LabeledList>
               {gases.map((gas) => (
                 <LabeledList.Item key={gas.name} label={getGasLabel(gas.name)}>
-                  <ProgressBar
-                    color={getGasColor(gas.name)}
-                    value={gas.amount}
-                    minValue={0}
-                    maxValue={gasMaxAmount}
-                  >
+                  <ProgressBar color={getGasColor(gas.name)} value={gas.amount} minValue={0} maxValue={gasMaxAmount}>
                     {toFixed(gas.amount, 2) + '%'}
                   </ProgressBar>
                 </LabeledList.Item>
@@ -196,16 +157,7 @@ function SupermatterList(props) {
   const { supermatters = [] } = data;
 
   return (
-    <Section
-      title="Detected Supermatters"
-      buttons={
-        <Button
-          icon="sync"
-          content="Refresh"
-          onClick={() => act('PRG_refresh')}
-        />
-      }
-    >
+    <Section title="Detected Supermatters" buttons={<Button icon="sync" content="Refresh" onClick={() => act('PRG_refresh')} />}>
       <Table>
         {supermatters.map((sm) => (
           <Table.Row key={sm.uid}>

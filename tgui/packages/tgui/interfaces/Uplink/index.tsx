@@ -7,12 +7,7 @@ import { useBackend } from '../../backend';
 import { Box, Button, Section, Stack, Tabs } from '../../components';
 import { fetchRetry } from '../../http';
 import { Window } from '../../layouts';
-import {
-  calculateProgression,
-  calculateReputationLevel,
-  reputationDefault,
-  reputationLevelsTooltip,
-} from './calculateReputationLevel';
+import { calculateProgression, calculateReputationLevel, reputationDefault, reputationLevelsTooltip } from './calculateReputationLevel';
 import { GenericUplink, Item } from './GenericUplink';
 import { Objective, ObjectiveMenu } from './ObjectiveMenu';
 
@@ -93,9 +88,7 @@ export class Uplink extends Component<{}, UplinkState> {
 
   async populateServerData() {
     if (!fetchServerData) {
-      fetchServerData = fetchRetry(resolveAsset('uplink.json')).then(
-        (response) => response.json(),
-      );
+      fetchServerData = fetchRetry(resolveAsset('uplink.json')).then((response) => response.json());
     }
     const { data } = useBackend<UplinkData>();
 
@@ -116,16 +109,10 @@ export class Uplink extends Component<{}, UplinkState> {
 
     const availableCategories: string[] = [];
     uplinkData.items = uplinkData.items.filter((value) => {
-      if (
-        value.restricted_roles.length > 0 &&
-        !value.restricted_roles.includes(uplinkRole)
-      ) {
+      if (value.restricted_roles.length > 0 && !value.restricted_roles.includes(uplinkRole)) {
         return false;
       }
-      if (
-        value.restricted_species.length > 0 &&
-        !value.restricted_species.includes(uplinkSpecies)
-      ) {
+      if (value.restricted_species.length > 0 && !value.restricted_species.includes(uplinkSpecies)) {
         return false;
       }
       {
@@ -142,9 +129,7 @@ export class Uplink extends Component<{}, UplinkState> {
       }
     });
 
-    uplinkData.categories = uplinkData.categories.filter((value) =>
-      availableCategories.includes(value),
-    );
+    uplinkData.categories = uplinkData.categories.filter((value) => availableCategories.includes(value));
 
     this.setState({
       allItems: uplinkData.items,
@@ -184,8 +169,7 @@ export class Uplink extends Component<{}, UplinkState> {
     }
     for (let i = 0; i < itemsToAdd.length; i++) {
       const item = itemsToAdd[i];
-      const hasEnoughProgression =
-        progression_points >= item.progression_minimum;
+      const hasEnoughProgression = progression_points >= item.progression_minimum;
 
       let stock: number | null = current_stock[item.id];
       if (item.ref) {
@@ -206,9 +190,7 @@ export class Uplink extends Component<{}, UplinkState> {
             {has_progression ? (
               <>
                 ,&nbsp;
-                <Box as="span">
-                  {calculateReputationLevel(item.progression_minimum, true)}
-                </Box>
+                <Box as="span">{calculateReputationLevel(item.progression_minimum, true)}</Box>
               </>
             ) : (
               ''
@@ -223,13 +205,9 @@ export class Uplink extends Component<{}, UplinkState> {
     }
     // Get the difference between the current progression and
     // expected progression
-    let progressionPercentage =
-      current_expected_progression - progression_points;
+    let progressionPercentage = current_expected_progression - progression_points;
     // Clamp it down between 0 and 2
-    progressionPercentage = Math.min(
-      Math.max(progressionPercentage / progression_scaling_deviance, -1),
-      1,
-    );
+    progressionPercentage = Math.min(Math.max(progressionPercentage / progression_scaling_deviance, -1), 1);
     // Round it and convert it into a percentage
     progressionPercentage = Math.round(progressionPercentage * 1000) / 10;
     return (
@@ -257,42 +235,23 @@ export class Uplink extends Component<{}, UplinkState> {
                           (!!has_progression && (
                             <Box>
                               <Box>
-                                Your current level of reputation.&nbsp;
-                                Reputation determines what quality of objective
-                                you get and what items you can purchase.&nbsp;
+                                Your current level of reputation.&nbsp; Reputation determines what quality of objective you get and what items you can purchase.&nbsp;
                                 <Box mt={0.5}>
                                   {/* A minute in deciseconds */}
                                   Reputation passively increases by{' '}
                                   <Box color="green" as="span">
-                                    {calculateProgression(
-                                      current_progression_scaling,
-                                    )}
+                                    {calculateProgression(current_progression_scaling)}
                                   </Box>
                                   &nbsp;every minute
                                 </Box>
                                 {Math.abs(progressionPercentage) > 0 && (
                                   <Box mt={0.5}>
-                                    Because your reputation is{' '}
-                                    {progressionPercentage < 0
-                                      ? 'ahead '
-                                      : 'behind '}
+                                    Because your reputation is {progressionPercentage < 0 ? 'ahead ' : 'behind '}
                                     of where it should be, you are getting
-                                    <Box
-                                      as="span"
-                                      color={
-                                        progressionPercentage < 0
-                                          ? 'red'
-                                          : 'green'
-                                      }
-                                      ml={1}
-                                      mr={1}
-                                    >
+                                    <Box as="span" color={progressionPercentage < 0 ? 'red' : 'green'} ml={1} mr={1}>
                                       {progressionPercentage}%
                                     </Box>
-                                    {progressionPercentage < 0
-                                      ? 'less'
-                                      : 'more'}{' '}
-                                    reputation every minute
+                                    {progressionPercentage < 0 ? 'less' : 'more'} reputation every minute
                                   </Box>
                                 )}
                                 {reputationLevelsTooltip}
@@ -304,9 +263,7 @@ export class Uplink extends Component<{}, UplinkState> {
                       >
                         {/* If we have no progression,
                       just give them a generic title */}
-                        {has_progression
-                          ? calculateReputationLevel(progression_points, false)
-                          : calculateReputationLevel(reputationDefault, false)}
+                        {has_progression ? calculateReputationLevel(progression_points, false) : calculateReputationLevel(reputationDefault, false)}
                       </Tooltip>
                     </Box>
                     <Box color="good" bold fontSize={1.2} textAlign="right">
@@ -322,29 +279,18 @@ export class Uplink extends Component<{}, UplinkState> {
                   <Stack.Item grow={1}>
                     <Tabs fluid textAlign="center">
                       {!!has_objectives && (
-                        <Tabs.Tab
-                          selected={currentTab === 0}
-                          onClick={() => this.setState({ currentTab: 0 })}
-                        >
+                        <Tabs.Tab selected={currentTab === 0} onClick={() => this.setState({ currentTab: 0 })}>
                           Objectives
                         </Tabs.Tab>
                       )}
-                      <Tabs.Tab
-                        selected={currentTab === 1 || !has_objectives}
-                        onClick={() => this.setState({ currentTab: 1 })}
-                      >
+                      <Tabs.Tab selected={currentTab === 1 || !has_objectives} onClick={() => this.setState({ currentTab: 1 })}>
                         Market
                       </Tabs.Tab>
                     </Tabs>
                   </Stack.Item>
                   {!!lockable && (
                     <Stack.Item mr={1}>
-                      <Button
-                        icon="times"
-                        content="Lock"
-                        color="transparent"
-                        onClick={() => act('lock')}
-                      />
+                      <Button icon="times" content="Lock" color="transparent" onClick={() => act('lock')} />
                     </Stack.Item>
                   )}
                 </Stack>

@@ -3,18 +3,7 @@ import { toFixed } from 'common/math';
 
 import { numberOfDecimalDigits } from '../../common/math';
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  ColorBox,
-  Dropdown,
-  Input,
-  LabeledList,
-  NoticeBox,
-  NumberInput,
-  Section,
-} from '../components';
+import { Box, Button, Collapsible, ColorBox, Dropdown, Input, LabeledList, NoticeBox, NumberInput, Section } from '../components';
 import { Window } from '../layouts';
 
 const FilterIntegerEntry = (props) => {
@@ -65,13 +54,7 @@ const FilterFloatEntry = (props) => {
       <Box inline ml={2} mr={1}>
         Step:
       </Box>
-      <NumberInput
-        value={step}
-        step={0.001}
-        format={(value) => toFixed(value, 4)}
-        width="70px"
-        onChange={(value) => setStep(value)}
-      />
+      <NumberInput value={step} step={0.001} format={(value) => toFixed(value, 4)} width="70px" onChange={(value) => setStep(value)} />
     </>
   );
 };
@@ -216,9 +199,7 @@ const FilterEntry = (props) => {
 
   const filterDefaults = data['filter_info'];
 
-  const targetFilterPossibleKeys = Object.keys(
-    filterDefaults[type]['defaults'],
-  );
+  const targetFilterPossibleKeys = Object.keys(filterDefaults[type]['defaults']);
 
   return (
     <Collapsible
@@ -247,10 +228,7 @@ const FilterEntry = (props) => {
             }
             width="90px"
           />
-          <Button.Confirm
-            icon="minus"
-            onClick={() => act('remove_filter', { name: name })}
-          />
+          <Button.Confirm icon="minus" onClick={() => act('remove_filter', { name: name })} />
         </>
       }
     >
@@ -260,16 +238,7 @@ const FilterEntry = (props) => {
             const defaults = filterDefaults[type]['defaults'];
             const value = restOfProps[entryName] || defaults[entryName];
             const hasValue = value !== defaults[entryName];
-            return (
-              <FilterDataEntry
-                key={entryName}
-                filterName={name}
-                filterType={type}
-                name={entryName}
-                value={value}
-                hasValue={hasValue}
-              />
-            );
+            return <FilterDataEntry key={entryName} filterName={name} filterType={type} name={entryName} value={value} hasValue={hasValue} />;
           })}
         </LabeledList>
       </Section>
@@ -288,10 +257,7 @@ export const Filteriffic = (props) => {
   return (
     <Window title="Filteriffic" width={500} height={500}>
       <Window.Content scrollable>
-        <NoticeBox danger>
-          DO NOT MESS WITH EXISTING FILTERS IF YOU DO NOT KNOW THE CONSEQUENCES.
-          YOU HAVE BEEN WARNED.
-        </NoticeBox>
+        <NoticeBox danger>DO NOT MESS WITH EXISTING FILTERS IF YOU DO NOT KNOW THE CONSEQUENCES. YOU HAVE BEEN WARNED.</NoticeBox>
         <Section
           title={
             hiddenSecret ? (
@@ -299,16 +265,8 @@ export const Filteriffic = (props) => {
                 <Box mr={0.5} inline>
                   MASS EDIT:
                 </Box>
-                <Input
-                  value={massApplyPath}
-                  width="100px"
-                  onInput={(e, value) => setMassApplyPath(value)}
-                />
-                <Button.Confirm
-                  content="Apply"
-                  confirmContent="ARE YOU SURE?"
-                  onClick={() => act('mass_apply', { path: massApplyPath })}
-                />
+                <Input value={massApplyPath} width="100px" onInput={(e, value) => setMassApplyPath(value)} />
+                <Button.Confirm content="Apply" confirmContent="ARE YOU SURE?" onClick={() => act('mass_apply', { path: massApplyPath })} />
               </>
             ) : (
               <Box inline onDblClick={() => setHiddenSecret(true)}>
@@ -332,13 +290,7 @@ export const Filteriffic = (props) => {
             />
           }
         >
-          {!hasFilters ? (
-            <Box>No filters</Box>
-          ) : (
-            map((entry, key) => (
-              <FilterEntry filterDataEntry={entry} name={key} key={key} />
-            ))(filters)
-          )}
+          {!hasFilters ? <Box>No filters</Box> : map((entry, key) => <FilterEntry filterDataEntry={entry} name={key} key={key} />)(filters)}
         </Section>
       </Window.Content>
     </Window>

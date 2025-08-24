@@ -1,13 +1,7 @@
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../../backend';
-import {
-  Button,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../../components';
+import { Button, LabeledList, ProgressBar, Section, Stack } from '../../components';
 import { MechWeapon, OperatorData } from './data';
 
 export const ArmPane = (props: { weapon: MechWeapon }) => {
@@ -56,12 +50,8 @@ export const ArmPane = (props: { weapon: MechWeapon }) => {
               }
             />
           </LabeledList.Item>
-          <LabeledList.Item label="Energy per use">
-            {energy_per_use} energy per use
-          </LabeledList.Item>
-          <LabeledList.Item label="Uses left">
-            {power_level ? toFixed(power_level / energy_per_use) : 0} uses left
-          </LabeledList.Item>
+          <LabeledList.Item label="Energy per use">{energy_per_use} energy per use</LabeledList.Item>
+          <LabeledList.Item label="Uses left">{power_level ? toFixed(power_level / energy_per_use) : 0} uses left</LabeledList.Item>
           <BallisticStats weapon={props.weapon} />
         </LabeledList>
       </Stack.Item>
@@ -75,16 +65,7 @@ export const ArmPane = (props: { weapon: MechWeapon }) => {
 
 const BallisticStats = (props: { weapon: MechWeapon }) => {
   const { act, data } = useBackend<OperatorData>();
-  const {
-    isballisticweapon,
-    disabledreload,
-    projectiles,
-    max_magazine,
-    projectiles_cache,
-    projectiles_cache_max,
-    ammo_type,
-    ref,
-  } = props.weapon;
+  const { isballisticweapon, disabledreload, projectiles, max_magazine, projectiles_cache, projectiles_cache_max, ammo_type, ref } = props.weapon;
   if (!isballisticweapon) {
     return null;
   } else {
@@ -147,9 +128,7 @@ const SnowflakeSleeper = (props: { weapon: MechWeapon }) => {
     return (
       <Section title={'Patient ' + patient.patientname}>
         <LabeledList>
-          <LabeledList.Item label={'Status'}>
-            {patient.isdead ? 'DECEASED' : 'ALIVE'}
-          </LabeledList.Item>
+          <LabeledList.Item label={'Status'}>{patient.isdead ? 'DECEASED' : 'ALIVE'}</LabeledList.Item>
           <LabeledList.Item label={'Health'}>
             <ProgressBar
               ranges={{
@@ -190,8 +169,7 @@ const SnowflakeSleeper = (props: { weapon: MechWeapon }) => {
 
 const SnowflakeSyringe = (props: { weapon: MechWeapon }) => {
   const { act, data } = useBackend<OperatorData>();
-  const { mode, syringe, max_syringe, reagents, total_reagents } =
-    props.weapon.snowflake;
+  const { mode, syringe, max_syringe, reagents, total_reagents } = props.weapon.snowflake;
   return (
     <Section title="Syringe gun control">
       <LabeledList>

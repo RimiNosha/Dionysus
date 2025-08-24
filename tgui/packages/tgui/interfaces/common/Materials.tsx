@@ -35,23 +35,12 @@ interface MaterialIconProps extends BoxProps {
 export const MaterialIcon = (props: MaterialIconProps) => {
   const { material, ...rest } = props;
 
-  return (
-    <Box
-      {...rest}
-      className={classes(['sheetmaterials32x32', MATERIAL_KEYS[material]])}
-    />
-  );
+  return <Box {...rest} className={classes(['sheetmaterials32x32', MATERIAL_KEYS[material]])} />;
 };
 
-const EjectMaterial = (props: {
-  material: Material;
-  onEject: (amount: number) => void;
-}) => {
+const EjectMaterial = (props: { material: Material; onEject: (amount: number) => void }) => {
   const { name, removable, sheets } = props.material;
-  const [removeMaterials, setRemoveMaterials] = useSharedState(
-    'remove_mats_' + name,
-    1,
-  );
+  const [removeMaterials, setRemoveMaterials] = useSharedState('remove_mats_' + name, 1);
   if (removeMaterials > 1 && sheets < removeMaterials) {
     setRemoveMaterials(sheets || 1);
   }
@@ -81,19 +70,12 @@ const EjectMaterial = (props: {
   );
 };
 
-export const Materials = (props: {
-  materials: Material[];
-  onEject: (ref: string, amount: number) => void;
-}) => {
+export const Materials = (props: { materials: Material[]; onEject: (ref: string, amount: number) => void }) => {
   return (
     <Flex wrap>
       {props.materials.map((material) => (
         <Flex.Item key={material.name} grow={1} shrink={1}>
-          <MaterialAmount
-            name={material.name}
-            amount={material.amount}
-            formatting={MaterialFormatting.SIUnits}
-          />
+          <MaterialAmount name={material.name} amount={material.amount} formatting={MaterialFormatting.SIUnits} />
           <Box mt={1} textAlign="center">
             <EjectMaterial
               material={material}
@@ -114,13 +96,7 @@ export enum MaterialFormatting {
   Locale,
 }
 
-export const MaterialAmount = (props: {
-  amount: number;
-  color?: string;
-  formatting?: MaterialFormatting;
-  name: keyof typeof MATERIAL_KEYS;
-  style?: Record<string, string>;
-}) => {
+export const MaterialAmount = (props: { amount: number; color?: string; formatting?: MaterialFormatting; name: keyof typeof MATERIAL_KEYS; style?: Record<string, string> }) => {
   const { name, amount, color, style } = props;
 
   let amountDisplay;

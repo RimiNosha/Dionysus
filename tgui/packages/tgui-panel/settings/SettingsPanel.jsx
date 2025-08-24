@@ -7,21 +7,7 @@
 import { toFixed } from 'common/math';
 import { useLocalState } from 'tgui/backend';
 import { useDispatch, useSelector } from 'tgui/backend';
-import {
-  Box,
-  Button,
-  ColorBox,
-  Divider,
-  Dropdown,
-  Flex,
-  Input,
-  LabeledList,
-  NumberInput,
-  Section,
-  Stack,
-  Tabs,
-  TextArea,
-} from 'tgui/components';
+import { Box, Button, ColorBox, Divider, Dropdown, Flex, Input, LabeledList, NumberInput, Section, Stack, Tabs, TextArea } from 'tgui/components';
 
 import { ChatPageSettings } from '../chat';
 import { rebuildChat, saveChatToDisk } from '../chat/actions';
@@ -65,16 +51,7 @@ export const SettingsPanel = (props) => {
 };
 
 export const SettingsGeneral = (props) => {
-  const {
-    theme,
-    fontFamily,
-    fontSize,
-    lineHeight,
-    highlightText,
-    highlightColor,
-    matchWord,
-    matchCase,
-  } = useSelector(selectSettings);
+  const { theme, fontFamily, fontSize, lineHeight, highlightText, highlightColor, matchWord, matchCase } = useSelector(selectSettings);
   const dispatch = useDispatch();
   const [freeFont, setFreeFont] = useLocalState('freeFont', false);
   const [editingPanes, setEditingPanes] = useLocalState('editingPanes', false);

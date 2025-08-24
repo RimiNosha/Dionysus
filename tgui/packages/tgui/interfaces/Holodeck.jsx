@@ -12,16 +12,7 @@ export const Holodeck = (props) => {
       <Window.Content scrollable>
         <Section
           title="Default Programs"
-          buttons={
-            <Button
-              icon={emagged ? 'unlock' : 'lock'}
-              content="Safeties"
-              color="bad"
-              disabled={!can_toggle_safety}
-              selected={!emagged}
-              onClick={() => act('safety')}
-            />
-          }
+          buttons={<Button icon={emagged ? 'unlock' : 'lock'} content="Safeties" color="bad" disabled={!can_toggle_safety} selected={!emagged} onClick={() => act('safety')} />}
         >
           {default_programs.map((def_program) => (
             <Button

@@ -33,25 +33,10 @@ type LabeledListItemProps = {
 };
 
 const LabeledListItem = (props: LabeledListItemProps) => {
-  const {
-    className,
-    label,
-    labelColor = 'label',
-    color,
-    textAlign,
-    buttons,
-    content,
-    children,
-    verticalAlign = 'baseline',
-  } = props;
+  const { className, label, labelColor = 'label', color, textAlign, buttons, content, children, verticalAlign = 'baseline' } = props;
   return (
     <tr className={classes(['LabeledList__row', className])}>
-      <Box
-        as="td"
-        color={labelColor}
-        className={classes(['LabeledList__cell', 'LabeledList__label'])}
-        verticalAlign={verticalAlign}
-      >
+      <Box as="td" color={labelColor} className={classes(['LabeledList__cell', 'LabeledList__label'])} verticalAlign={verticalAlign}>
         {label ? (typeof label === 'string' ? label + ':' : label) : null}
       </Box>
       <Box
@@ -66,9 +51,7 @@ const LabeledListItem = (props: LabeledListItemProps) => {
         {content}
         {children}
       </Box>
-      {buttons && (
-        <td className="LabeledList__cell LabeledList__buttons">{buttons}</td>
-      )}
+      {buttons && <td className="LabeledList__cell LabeledList__buttons">{buttons}</td>}
     </tr>
   );
 };

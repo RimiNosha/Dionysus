@@ -1,13 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import {
-  Button,
-  Dimmer,
-  Icon,
-  LabeledList,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Button, Dimmer, Icon, LabeledList, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 export const PersonalCrafting = (props) => {
@@ -90,16 +82,8 @@ export const PersonalCrafting = (props) => {
               title="Recipes"
               buttons={
                 <>
-                  <Button.Checkbox
-                    content="Compact"
-                    checked={display_compact}
-                    onClick={() => act('toggle_compact')}
-                  />
-                  <Button.Checkbox
-                    content="Craftable Only"
-                    checked={display_craftable_only}
-                    onClick={() => act('toggle_recipes')}
-                  />
+                  <Button.Checkbox content="Compact" checked={display_compact} onClick={() => act('toggle_compact')} />
+                  <Button.Checkbox content="Craftable Only" checked={display_craftable_only} onClick={() => act('toggle_recipes')} />
                 </>
               }
             >
@@ -141,9 +125,7 @@ const CraftingList = (props) => {
               icon="cog"
               content="Craft"
               disabled={!craftability[craftable.ref]}
-              tooltip={
-                craftable.tool_text && 'Tools needed: ' + craftable.tool_text
-              }
+              tooltip={craftable.tool_text && 'Tools needed: ' + craftable.tool_text}
               tooltipPosition="left"
               onClick={() =>
                 act('make', {
@@ -177,21 +159,9 @@ const CraftingList = (props) => {
         }
       >
         <LabeledList>
-          {!!craftable.req_text && (
-            <LabeledList.Item label="Required">
-              {craftable.req_text}
-            </LabeledList.Item>
-          )}
-          {!!craftable.catalyst_text && (
-            <LabeledList.Item label="Catalyst">
-              {craftable.catalyst_text}
-            </LabeledList.Item>
-          )}
-          {!!craftable.tool_text && (
-            <LabeledList.Item label="Tools">
-              {craftable.tool_text}
-            </LabeledList.Item>
-          )}
+          {!!craftable.req_text && <LabeledList.Item label="Required">{craftable.req_text}</LabeledList.Item>}
+          {!!craftable.catalyst_text && <LabeledList.Item label="Catalyst">{craftable.catalyst_text}</LabeledList.Item>}
+          {!!craftable.tool_text && <LabeledList.Item label="Tools">{craftable.tool_text}</LabeledList.Item>}
         </LabeledList>
       </Section>
     );

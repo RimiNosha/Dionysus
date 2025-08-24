@@ -13,14 +13,7 @@ export const Tabs = (props) => {
   const { className, vertical, fill, fluid, children, ...rest } = props;
   return (
     <div
-      className={classes([
-        'Tabs',
-        vertical ? 'Tabs--vertical' : 'Tabs--horizontal',
-        fill && 'Tabs--fill',
-        fluid && 'Tabs--fluid',
-        className,
-        computeBoxClassName(rest),
-      ])}
+      className={classes(['Tabs', vertical ? 'Tabs--vertical' : 'Tabs--horizontal', fill && 'Tabs--fill', fluid && 'Tabs--fluid', className, computeBoxClassName(rest)])}
       {...computeBoxProps(rest)}
     >
       {children}
@@ -29,28 +22,9 @@ export const Tabs = (props) => {
 };
 
 const Tab = (props) => {
-  const {
-    className,
-    selected,
-    color,
-    icon,
-    leftSlot,
-    rightSlot,
-    children,
-    ...rest
-  } = props;
+  const { className, selected, color, icon, leftSlot, rightSlot, children, ...rest } = props;
   return (
-    <div
-      className={classes([
-        'Tab',
-        'Tabs__Tab',
-        'Tab--color--' + color,
-        selected && 'Tab--selected',
-        className,
-        ...computeBoxClassName(rest),
-      ])}
-      {...computeBoxProps(rest)}
-    >
+    <div className={classes(['Tab', 'Tabs__Tab', 'Tab--color--' + color, selected && 'Tab--selected', className, ...computeBoxClassName(rest)])} {...computeBoxProps(rest)}>
       {(canRender(leftSlot) && <div className="Tab__left">{leftSlot}</div>) ||
         (!!icon && (
           <div className="Tab__left">

@@ -1,14 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Flex,
-  Icon,
-  LabeledList,
-  Modal,
-  Section,
-} from '../components';
+import { Box, Button, Dropdown, Flex, Icon, LabeledList, Modal, Section } from '../components';
 import { Window } from '../layouts';
 
 export const ShuttleConsole = (props) => {
@@ -18,15 +9,7 @@ export const ShuttleConsole = (props) => {
   return (
     <Window width={350} height={230}>
       {!!authorization_required && (
-        <Modal
-          ml={1}
-          mt={1}
-          width={26}
-          height={12}
-          fontSize="28px"
-          fontFamily="monospace"
-          textAlign="center"
-        >
+        <Modal ml={1} mt={1} width={26} height={12} fontSize="28px" fontFamily="monospace" textAlign="center">
           <Flex>
             <Flex.Item mt={2}>
               <Icon name="minus-circle" />
@@ -36,13 +19,7 @@ export const ShuttleConsole = (props) => {
             </Flex.Item>
           </Flex>
           <Box fontSize="18px" mt={4}>
-            <Button
-              lineHeight="40px"
-              icon="arrow-circle-right"
-              content="Request Authorization"
-              color="bad"
-              onClick={() => act('request')}
-            />
+            <Button lineHeight="40px" icon="arrow-circle-right" content="Request Authorization" color="bad" onClick={() => act('request')} />
           </Box>
         </Modal>
       )}
@@ -74,15 +51,7 @@ const STATUS_COLOR_KEYS = {
 export const ShuttleConsoleContent = (props) => {
   const { act, data } = useBackend();
   const { type, blind_drop } = props;
-  const {
-    status,
-    locked,
-    authorization_required,
-    destination,
-    docked_location,
-    timer_str,
-    locations = [],
-  } = data;
+  const { status, locked, authorization_required, destination, docked_location, timer_str, locations = [] } = data;
   return (
     <Section>
       <Box bold fontSize="26px" textAlign="center" fontFamily="monospace">
@@ -96,27 +65,16 @@ export const ShuttleConsoleContent = (props) => {
           {status || 'Not Available'}
         </Box>
       </Box>
-      <Section
-        title={type === 'shuttle' ? 'Shuttle Controls' : 'Base Launch Controls'}
-        level={2}
-      >
+      <Section title={type === 'shuttle' ? 'Shuttle Controls' : 'Base Launch Controls'} level={2}>
         <LabeledList>
-          <LabeledList.Item label="Location">
-            {docked_location || 'Not Available'}
-          </LabeledList.Item>
+          <LabeledList.Item label="Location">{docked_location || 'Not Available'}</LabeledList.Item>
           <LabeledList.Item
             label="Destination"
             buttons={
               type !== 'shuttle' &&
               locations.length === 0 &&
               !!blind_drop && (
-                <Button
-                  color="bad"
-                  icon="exclamation-triangle"
-                  disabled={authorization_required || !blind_drop}
-                  content={'Blind Drop'}
-                  onClick={() => act('random')}
-                />
+                <Button color="bad" icon="exclamation-triangle" disabled={authorization_required || !blind_drop} content={'Blind Drop'} onClick={() => act('random')} />
               )
             }
           >
@@ -136,10 +94,7 @@ export const ShuttleConsoleContent = (props) => {
                   width="240px"
                   options={locations.map((location) => location.name)}
                   disabled={locked || authorization_required}
-                  selected={
-                    getLocationNameById(locations, destination) ||
-                    'Select a Destination'
-                  }
+                  selected={getLocationNameById(locations, destination) || 'Select a Destination'}
                   onSelected={(value) =>
                     act('set_destination', {
                       destination: getLocationIdByName(locations, value),
@@ -152,11 +107,7 @@ export const ShuttleConsoleContent = (props) => {
         <Button
           fluid
           content="Depart"
-          disabled={
-            !getLocationNameById(locations, destination) ||
-            locked ||
-            authorization_required
-          }
+          disabled={!getLocationNameById(locations, destination) || locked || authorization_required}
           icon="arrow-up"
           textAlign="center"
           onClick={() =>

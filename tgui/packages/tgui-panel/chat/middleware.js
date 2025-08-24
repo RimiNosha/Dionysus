@@ -9,17 +9,7 @@ import DOMPurify from 'dompurify';
 
 import { loadSettings, updateSettings } from '../settings/actions';
 import { selectSettings } from '../settings/selectors';
-import {
-  addChatPage,
-  changeChatPage,
-  changeScrollTracking,
-  loadChat,
-  rebuildChat,
-  removeChatPage,
-  saveChatToDisk,
-  toggleAcceptedType,
-  updateMessageCount,
-} from './actions';
+import { addChatPage, changeChatPage, changeScrollTracking, loadChat, rebuildChat, removeChatPage, saveChatToDisk, toggleAcceptedType, updateMessageCount } from './actions';
 import { MAX_PERSISTED_MESSAGES, MESSAGE_SAVE_INTERVAL } from './constants';
 import { createMessage, serializeMessage } from './model';
 import { chatRenderer } from './renderer';
@@ -30,22 +20,14 @@ const FORBID_TAGS = ['a', 'iframe', 'link', 'video'];
 
 const saveChatToStorage = async (store) => {
   const state = selectChat(store.getState());
-  const fromIndex = Math.max(
-    0,
-    chatRenderer.messages.length - MAX_PERSISTED_MESSAGES,
-  );
-  const messages = chatRenderer.messages
-    .slice(fromIndex)
-    .map((message) => serializeMessage(message));
+  const fromIndex = Math.max(0, chatRenderer.messages.length - MAX_PERSISTED_MESSAGES);
+  const messages = chatRenderer.messages.slice(fromIndex).map((message) => serializeMessage(message));
   storage.set('chat-state', state);
   storage.set('chat-messages', messages);
 };
 
 const loadChatFromStorage = async (store) => {
-  const [state, messages] = await Promise.all([
-    storage.get('chat-state'),
-    storage.get('chat-messages'),
-  ]);
+  const [state, messages] = await Promise.all([storage.get('chat-state'), storage.get('chat-messages')]);
   // Discard incompatible versions
   if (state && state.version <= 4) {
     store.dispatch(loadChat());
@@ -107,12 +89,7 @@ export const chatMiddleware = (store) => {
       loaded = true;
       return;
     }
-    if (
-      type === changeChatPage.type ||
-      type === addChatPage.type ||
-      type === removeChatPage.type ||
-      type === toggleAcceptedType.type
-    ) {
+    if (type === changeChatPage.type || type === addChatPage.type || type === removeChatPage.type || type === toggleAcceptedType.type) {
       next(action);
       const page = selectCurrentChatPage(store.getState());
       chatRenderer.changePage(page);
@@ -125,12 +102,7 @@ export const chatMiddleware = (store) => {
     if (type === updateSettings.type || type === loadSettings.type) {
       next(action);
       const settings = selectSettings(store.getState());
-      chatRenderer.setHighlight(
-        settings.highlightText,
-        settings.highlightColor,
-        settings.matchWord,
-        settings.matchCase,
-      );
+      chatRenderer.setHighlight(settings.highlightText, settings.highlightColor, settings.matchWord, settings.matchCase);
       return;
     }
     if (type === 'roundrestart') {

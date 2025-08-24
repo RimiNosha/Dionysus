@@ -6,25 +6,16 @@ import { OperatorData } from './data';
 
 export const RadioPane = (props) => {
   const { act, data } = useBackend<OperatorData>();
-  const { microphone, speaker, minfreq, maxfreq, frequency } =
-    data.mech_electronics;
+  const { microphone, speaker, minfreq, maxfreq, frequency } = data.mech_electronics;
   return (
     <LabeledList>
       <LabeledList.Item label="Microphone">
-        <Button
-          onClick={() => act('toggle_microphone')}
-          selected={microphone}
-          icon={microphone ? 'microphone' : 'microphone-slash'}
-        >
+        <Button onClick={() => act('toggle_microphone')} selected={microphone} icon={microphone ? 'microphone' : 'microphone-slash'}>
           {(microphone ? 'En' : 'Dis') + 'abled'}
         </Button>
       </LabeledList.Item>
       <LabeledList.Item label="Speaker">
-        <Button
-          onClick={() => act('toggle_speaker')}
-          selected={speaker}
-          icon={speaker ? 'volume-up' : 'volume-mute'}
-        >
+        <Button onClick={() => act('toggle_speaker')} selected={speaker} icon={speaker ? 'volume-up' : 'volume-mute'}>
           {(speaker ? 'En' : 'Dis') + 'abled'}
         </Button>
       </LabeledList.Item>

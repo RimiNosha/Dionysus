@@ -13,20 +13,9 @@ type AdminhelpData = {
 
 export const Adminhelp = (props) => {
   const { act, data } = useBackend<AdminhelpData>();
-  const {
-    adminCount,
-    urgentAhelpEnabled,
-    bannedFromUrgentAhelp,
-    urgentAhelpPromptMessage,
-  } = data;
-  const [requestForAdmin, setRequestForAdmin] = useLocalState(
-    'request_for_admin',
-    false,
-  );
-  const [currentlyInputting, setCurrentlyInputting] = useLocalState(
-    'confirm_request',
-    false,
-  );
+  const { adminCount, urgentAhelpEnabled, bannedFromUrgentAhelp, urgentAhelpPromptMessage } = data;
+  const [requestForAdmin, setRequestForAdmin] = useLocalState('request_for_admin', false);
+  const [currentlyInputting, setCurrentlyInputting] = useLocalState('confirm_request', false);
   const [ahelpMessage, setAhelpMessage] = useLocalState('ahelp_message', '');
 
   const confirmationText = 'alert admins';
@@ -39,13 +28,7 @@ export const Adminhelp = (props) => {
       >
         <Stack vertical fill>
           <Stack.Item grow>
-            <TextArea
-              autoFocus
-              height="100%"
-              value={ahelpMessage}
-              placeholder="Admin help"
-              onChange={(e, value) => setAhelpMessage(value)}
-            />
+            <TextArea autoFocus height="100%" value={ahelpMessage} placeholder="Admin help" onChange={(e, value) => setAhelpMessage(value)} />
           </Stack.Item>
           {urgentAhelpEnabled && adminCount <= 0 && (
             <Stack.Item>
@@ -88,11 +71,7 @@ export const Adminhelp = (props) => {
                     color={requestForAdmin ? 'orange' : 'blue'}
                     icon={requestForAdmin ? 'check-square-o' : 'square-o'}
                     disabled={bannedFromUrgentAhelp}
-                    tooltip={
-                      bannedFromUrgentAhelp
-                        ? 'You are banned from using urgent ahelps.'
-                        : null
-                    }
+                    tooltip={bannedFromUrgentAhelp ? 'You are banned from using urgent ahelps.' : null}
                     fluid
                     textAlign="center"
                   />

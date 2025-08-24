@@ -2,16 +2,7 @@ import { BooleanLike } from 'common/react';
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Icon,
-  NoticeBox,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, Dimmer, Icon, NoticeBox, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 // 15x crate value
@@ -38,14 +29,8 @@ type Info = {
 
 const CooldownEstimate = (props) => {
   const { cost } = props;
-  const cooldownColor =
-    (cost > COST_UPPER_BOUND * 0.75 && 'red') ||
-    (cost > COST_UPPER_BOUND * 0.25 && 'orange') ||
-    'green';
-  const cooldownText =
-    (cost > COST_UPPER_BOUND * 0.75 && 'long') ||
-    (cost > COST_UPPER_BOUND * 0.25 && 'moderate') ||
-    'short';
+  const cooldownColor = (cost > COST_UPPER_BOUND * 0.75 && 'red') || (cost > COST_UPPER_BOUND * 0.25 && 'orange') || 'green';
+  const cooldownText = (cost > COST_UPPER_BOUND * 0.75 && 'long') || (cost > COST_UPPER_BOUND * 0.25 && 'moderate') || 'short';
   return (
     <Box as="span" textColor={cooldownColor}>
       {cooldownText} cooldown.
@@ -65,11 +50,8 @@ export const DepartmentOrders = (props) => {
               <Stack fill vertical>
                 <Stack.Item>
                   <NoticeBox info>
-                    As employees of Nanotrasen, the selection of orders here are
-                    completely free of charge, only incurring a cooldown on the
-                    service. Cheaper items will make you wait for less time
-                    before Nanotrasen allows another purchase, to encourage
-                    tasteful spending.
+                    As employees of Nanotrasen, the selection of orders here are completely free of charge, only incurring a cooldown on the service. Cheaper items will make you
+                    wait for less time before Nanotrasen allows another purchase, to encourage tasteful spending.
                   </NoticeBox>
                 </Stack.Item>
                 <Stack.Item grow>
@@ -100,11 +82,7 @@ const CooldownDimmer = (props) => {
           <Button
             width="300px"
             lineHeight={2}
-            tooltip={
-              (!!can_override &&
-                'This action requires Head of Staff access!') ||
-              'Crate already shipped! No cancelling now!'
-            }
+            tooltip={(!!can_override && 'This action requires Head of Staff access!') || 'Crate already shipped! No cancelling now!'}
             fontSize="14px"
             color="red"
             disabled={!can_override}
@@ -127,11 +105,7 @@ const DepartmentCatalog = (props) => {
       <Stack.Item>
         <Tabs textAlign="center" fluid>
           {supplies.map((cat) => (
-            <Tabs.Tab
-              key={cat}
-              selected={tabCategory === cat}
-              onClick={() => setTabCategory(cat)}
-            >
+            <Tabs.Tab key={cat} selected={tabCategory === cat} onClick={() => setTabCategory(cat)}>
               {cat.name}
             </Tabs.Tab>
           ))}

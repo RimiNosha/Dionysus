@@ -19,11 +19,7 @@ export const PeripheralsSection = (props: PeripheralsSectionProps) => {
   const { act } = useBackend<TerminalData>();
   const { peripherals } = props;
 
-  const handlePeripheralClick = useCallback(
-    (peripheral: PeripheralData) =>
-      act('buttonPressed', { kind: peripheral.kind }),
-    [act],
-  );
+  const handlePeripheralClick = useCallback((peripheral: PeripheralData) => act('buttonPressed', { kind: peripheral.kind }), [act]);
 
   return (
     <Section fitted>

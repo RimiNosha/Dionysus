@@ -1,14 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Box, Button, Icon, LabeledList, NoticeBox, Section, Stack, Table } from '../components';
 import { DmIcon } from '../components/DMIcon';
 import { Window } from '../layouts';
 
@@ -105,9 +96,7 @@ export const UserDetails = (_) => {
   const { user } = data;
 
   if (!user) {
-    return (
-      <NoticeBox>No ID detected! Contact the Head of Personnel.</NoticeBox>
-    );
+    return <NoticeBox>No ID detected! Contact the Head of Personnel.</NoticeBox>;
   } else {
     return (
       <Section>
@@ -118,9 +107,7 @@ export const UserDetails = (_) => {
           <Stack.Item>
             <LabeledList>
               <LabeledList.Item label="User">{user.name}</LabeledList.Item>
-              <LabeledList.Item label="Occupation">
-                {user.job || 'Unemployed'}
-              </LabeledList.Item>
+              <LabeledList.Item label="Occupation">{user.job || 'Unemployed'}</LabeledList.Item>
             </LabeledList>
           </Stack.Item>
         </Stack>
@@ -132,14 +119,7 @@ export const UserDetails = (_) => {
 /** Displays  products in a section, with user balance at top */
 const ProductDisplay = (_) => {
   const { data } = useBackend<VendingData>();
-  const {
-    onstation,
-    user,
-    product_records = [],
-    coin_records = [],
-    hidden_records = [],
-    stock,
-  } = data;
+  const { onstation, user, product_records = [], coin_records = [], hidden_records = [], stock } = data;
   let inventory;
   let custom = false;
   if (data.vending_machine_input) {
@@ -170,12 +150,7 @@ const ProductDisplay = (_) => {
     >
       <Table>
         {inventory.map((product) => (
-          <VendingRow
-            key={product.name}
-            custom={custom}
-            product={product}
-            productStock={stock[product.name]}
-          />
+          <VendingRow key={product.name} custom={custom} product={product} productStock={stock[product.name]} />
         ))}
       </Table>
     </Section>
@@ -194,38 +169,20 @@ const VendingRow = (props) => {
   const discount = !product.premium && access;
   const remaining = custom ? product.amount : productStock.amount;
   const redPrice = Math.round(product.price * jobDiscount);
-  const disabled =
-    remaining === 0 ||
-    (onstation && !user) ||
-    (onstation &&
-      !access &&
-      (discount ? redPrice : product.price) > user?.cash);
+  const disabled = remaining === 0 || (onstation && !user) || (onstation && !access && (discount ? redPrice : product.price) > user?.cash);
 
   return (
     <Table.Row>
       <Table.Cell collapsing>
         <ProductImage product={product} />
       </Table.Cell>
-      <Table.Cell bold>
-        {product.name.replace(/^\w/, (c) => c.toUpperCase())}
-      </Table.Cell>
-      <Table.Cell>
-        {!!productStock?.colorable && (
-          <ProductColorSelect disabled={disabled} product={product} />
-        )}
-      </Table.Cell>
+      <Table.Cell bold>{product.name.replace(/^\w/, (c) => c.toUpperCase())}</Table.Cell>
+      <Table.Cell>{!!productStock?.colorable && <ProductColorSelect disabled={disabled} product={product} />}</Table.Cell>
       <Table.Cell collapsing textAlign="right">
         <ProductStock custom={custom} product={product} remaining={remaining} />
       </Table.Cell>
       <Table.Cell collapsing textAlign="center">
-        <ProductButton
-          custom={custom}
-          disabled={disabled}
-          discount={discount}
-          free={free}
-          product={product}
-          redPrice={redPrice}
-        />
+        <ProductButton custom={custom} disabled={disabled} discount={discount} free={free} product={product} redPrice={redPrice} />
       </Table.Cell>
     </Table.Row>
   );
@@ -260,31 +217,14 @@ const ProductColorSelect = (props) => {
   const { act } = useBackend<VendingData>();
   const { disabled, product } = props;
 
-  return (
-    <Button
-      icon="palette"
-      tooltip="Change color"
-      disabled={disabled}
-      onClick={() => act('select_colors', { ref: product.ref })}
-    />
-  );
+  return <Button icon="palette" tooltip="Change color" disabled={disabled} onClick={() => act('select_colors', { ref: product.ref })} />;
 };
 
 /** Displays a colored indicator for remaining stock */
 const ProductStock = (props) => {
   const { custom, product, remaining } = props;
 
-  return (
-    <Box
-      color={
-        (remaining <= 0 && 'bad') ||
-        (!custom && remaining <= product.max_amount / 2 && 'average') ||
-        'good'
-      }
-    >
-      {remaining} left
-    </Box>
-  );
+  return <Box color={(remaining <= 0 && 'bad') || (!custom && remaining <= product.max_amount / 2 && 'average') || 'good'}>{remaining} left</Box>;
 };
 
 /** The main button to purchase an item. */

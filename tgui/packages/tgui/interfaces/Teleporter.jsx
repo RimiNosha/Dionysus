@@ -4,14 +4,7 @@ import { Window } from '../layouts';
 
 export const Teleporter = (props) => {
   const { act, data } = useBackend();
-  const {
-    calibrated,
-    calibrating,
-    power_station,
-    regime_set,
-    teleporter_hub,
-    target,
-  } = data;
+  const { calibrated, calibrating, power_station, regime_set, teleporter_hub, target } = data;
   return (
     <Window width={360} height={130}>
       <Window.Content>
@@ -28,32 +21,13 @@ export const Teleporter = (props) => {
             )) || (
               <LabeledList>
                 <LabeledList.Item label="Regime">
-                  <Button
-                    content={regime_set}
-                    onClick={() => act('regimeset')}
-                  />
+                  <Button content={regime_set} onClick={() => act('regimeset')} />
                 </LabeledList.Item>
                 <LabeledList.Item label="Target">
-                  <Button
-                    icon="edit"
-                    content={target}
-                    onClick={() => act('settarget')}
-                  />
+                  <Button icon="edit" content={target} onClick={() => act('settarget')} />
                 </LabeledList.Item>
-                <LabeledList.Item
-                  label="Calibration"
-                  buttons={
-                    <Button
-                      icon="tools"
-                      content="Calibrate"
-                      onClick={() => act('calibrate')}
-                    />
-                  }
-                >
-                  {(calibrating && <Box color="average">In Progress</Box>) ||
-                    (calibrated && <Box color="good">Optimal</Box>) || (
-                      <Box color="bad">Sub-Optimal</Box>
-                    )}
+                <LabeledList.Item label="Calibration" buttons={<Button icon="tools" content="Calibrate" onClick={() => act('calibrate')} />}>
+                  {(calibrating && <Box color="average">In Progress</Box>) || (calibrated && <Box color="good">Optimal</Box>) || <Box color="bad">Sub-Optimal</Box>}
                 </LabeledList.Item>
               </LabeledList>
             )}

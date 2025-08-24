@@ -21,14 +21,7 @@ $text-border-color: #454442;
   font-size: 200%;
   text-align: center;
   hr {
-    background: linear-gradient(
-      to left,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.2) 10%,
-      rgba(0, 0, 0, 0.8) 50%,
-      rgba(0, 0, 0, 0.2) 90%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 0) 100%);
     border: 0;
     border-radius: 5px;
     height: 4px;

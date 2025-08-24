@@ -10,24 +10,10 @@ export const MinigamesMenu = (props) => {
         <Section title="Select Minigame" textAlign="center">
           <Stack>
             <Stack.Item grow>
-              <Button
-                content="CTF"
-                fluid={1}
-                fontSize={3}
-                textAlign="center"
-                lineHeight="3"
-                onClick={() => act('ctf')}
-              />
+              <Button content="CTF" fluid={1} fontSize={3} textAlign="center" lineHeight="3" onClick={() => act('ctf')} />
             </Stack.Item>
             <Stack.Item grow>
-              <Button
-                content="Mafia"
-                fluid={1}
-                fontSize={3}
-                textAlign="center"
-                lineHeight="3"
-                onClick={() => act('mafia')}
-              />
+              <Button content="Mafia" fluid={1} fontSize={3} textAlign="center" lineHeight="3" onClick={() => act('mafia')} />
             </Stack.Item>
           </Stack>
         </Section>

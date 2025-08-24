@@ -117,14 +117,7 @@ export class InfinitePlane extends Component {
   }
 
   render() {
-    const {
-      children,
-      backgroundImage,
-      imageWidth,
-      initialLeft = 0,
-      initialTop = 0,
-      ...rest
-    } = this.props;
+    const { children, backgroundImage, imageWidth, initialLeft = 0, initialTop = 0, ...rest } = this.props;
     const { left, top, zoom } = this.state;
 
     const finalLeft = initialLeft + left;
@@ -174,11 +167,7 @@ export class InfinitePlane extends Component {
             <Button icon="minus" onClick={this.handleZoomDecrease} />
           </Stack.Item>
           <Stack.Item grow={1}>
-            <ProgressBar
-              minValue={ZOOM_MIN_VAL}
-              value={zoom}
-              maxValue={ZOOM_MAX_VAL}
-            >
+            <ProgressBar minValue={ZOOM_MIN_VAL} value={zoom} maxValue={ZOOM_MAX_VAL}>
               {zoom}x
             </ProgressBar>
           </Stack.Item>

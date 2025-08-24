@@ -38,29 +38,15 @@ export const Icon = (props) => {
     // font awesome icon
     const faRegular = FA_OUTLINE_REGEX.test(name);
     const faName = name.replace(FA_OUTLINE_REGEX, '');
-    iconClass =
-      (faRegular ? 'far ' : 'fas ') + 'fa-' + faName + (spin ? ' fa-spin' : '');
+    iconClass = (faRegular ? 'far ' : 'fas ') + 'fa-' + faName + (spin ? ' fa-spin' : '');
   }
-  return (
-    <i
-      className={classes([
-        'Icon',
-        iconClass,
-        className,
-        computeBoxClassName(rest),
-      ])}
-      {...boxProps}
-    />
-  );
+  return <i className={classes(['Icon', iconClass, className, computeBoxClassName(rest)])} {...boxProps} />;
 };
 
 export const IconStack = (props) => {
   const { className, children, ...rest } = props;
   return (
-    <span
-      class={classes(['IconStack', className, computeBoxClassName(rest)])}
-      {...computeBoxProps(rest)}
-    >
+    <span class={classes(['IconStack', className, computeBoxClassName(rest)])} {...computeBoxProps(rest)}>
       {children}
     </span>
   );

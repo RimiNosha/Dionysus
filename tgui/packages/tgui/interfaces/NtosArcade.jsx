@@ -1,14 +1,6 @@
 import { resolveAsset } from '../assets';
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Grid,
-  LabeledList,
-  ProgressBar,
-  Section,
-} from '../components';
+import { AnimatedNumber, Box, Button, Grid, LabeledList, ProgressBar, Section } from '../components';
 import { NtosWindow } from '../layouts';
 
 export const NtosArcade = (props) => {
@@ -53,13 +45,7 @@ export const NtosArcade = (props) => {
                   </LabeledList.Item>
                 </LabeledList>
                 <Box my={1} mx={4} />
-                <Section
-                  backgroundColor={
-                    data.PauseState === 1 ? '#1b3622' : '#471915'
-                  }
-                >
-                  {data.Status}
-                </Section>
+                <Section backgroundColor={data.PauseState === 1 ? '#1b3622' : '#471915'}>{data.Status}</Section>
               </Grid.Column>
               <Grid.Column>
                 <ProgressBar
@@ -125,9 +111,7 @@ export const NtosArcade = (props) => {
               content="Claim Tickets"
             />
           </Box>
-          <Box color={data.TicketCount >= 1 ? 'good' : 'normal'}>
-            Earned Tickets: {data.TicketCount}
-          </Box>
+          <Box color={data.TicketCount >= 1 ? 'good' : 'normal'}>Earned Tickets: {data.TicketCount}</Box>
         </Section>
       </NtosWindow.Content>
     </NtosWindow>

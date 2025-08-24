@@ -26,19 +26,11 @@ export class Collapsible extends Component {
       <Box mb={1}>
         <div className="Table">
           <div className="Table__cell">
-            <Button
-              fluid
-              color={color}
-              icon={open ? 'chevron-down' : 'chevron-right'}
-              onClick={() => this.setState({ open: !open })}
-              {...rest}
-            >
+            <Button fluid color={color} icon={open ? 'chevron-down' : 'chevron-right'} onClick={() => this.setState({ open: !open })} {...rest}>
               {title}
             </Button>
           </div>
-          {buttons && (
-            <div className="Table__cell Table__cell--collapsing">{buttons}</div>
-          )}
+          {buttons && <div className="Table__cell Table__cell--collapsing">{buttons}</div>}
         </div>
         {open && <Box mt={1}>{children}</Box>}
       </Box>

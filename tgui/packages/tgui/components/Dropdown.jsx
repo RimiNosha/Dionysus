@@ -108,10 +108,7 @@ export class Dropdown extends Component {
         style={{
           width: openWidth,
         }}
-        className={classes([
-          (noscroll && 'Dropdown__menu-noscroll') || 'Dropdown__menu',
-          over && 'Dropdown__over',
-        ])}
+        className={classes([(noscroll && 'Dropdown__menu-noscroll') || 'Dropdown__menu', over && 'Dropdown__over'])}
       >
         {this.buildMenu()}
       </div>
@@ -121,13 +118,7 @@ export class Dropdown extends Component {
       <div className="Dropdown" style={dropdownStyle}>
         <Box
           width={this.state.open ? openWidth : width}
-          className={classes([
-            'Dropdown__control',
-            'Button',
-            'Button--color--' + color,
-            disabled && 'Button--disabled',
-            className,
-          ])}
+          className={classes(['Dropdown__control', 'Button', 'Button--color--' + color, disabled && 'Button--disabled', className])}
           {...rest}
           onClick={(event) => {
             if (disabled && !this.state.open) {
@@ -140,9 +131,7 @@ export class Dropdown extends Component {
             }
           }}
         >
-          {icon && (
-            <Icon name={icon} rotation={iconRotation} spin={iconSpin} mr={1} />
-          )}
+          {icon && <Icon name={icon} rotation={iconRotation} spin={iconSpin} mr={1} />}
           <span
             className="Dropdown__selected-text"
             style={{

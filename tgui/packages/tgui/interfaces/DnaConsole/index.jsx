@@ -1,20 +1,7 @@
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Icon,
-  LabeledList,
-  Section,
-} from '../../components';
+import { Box, Button, Dimmer, Icon, LabeledList, Section } from '../../components';
 import { Window } from '../../layouts';
-import {
-  CONSOLE_MODE_ENZYMES,
-  CONSOLE_MODE_FEATURES,
-  CONSOLE_MODE_SEQUENCER,
-  CONSOLE_MODE_STORAGE,
-  STORAGE_MODE_CONSOLE,
-} from './constants';
+import { CONSOLE_MODE_ENZYMES, CONSOLE_MODE_FEATURES, CONSOLE_MODE_SEQUENCER, CONSOLE_MODE_STORAGE, STORAGE_MODE_CONSOLE } from './constants';
 import { DnaConsoleEnzymes } from './DnaConsoleEnzymes';
 import { DnaConsoleSequencer } from './DnaConsoleSequencer';
 import { DnaConsoleStorage } from './DnaConsoleStorage';
@@ -113,20 +100,8 @@ export const DnaConsole = (props) => {
         <DnaConsoleCommands />
         {consoleMode === CONSOLE_MODE_STORAGE && <DnaConsoleStorage />}
         {consoleMode === CONSOLE_MODE_SEQUENCER && <DnaConsoleSequencer />}
-        {consoleMode === CONSOLE_MODE_ENZYMES && (
-          <DnaConsoleEnzymes
-            subjectBlock={subjectUNI}
-            type="ui"
-            name="Enzymes"
-          />
-        )}
-        {consoleMode === CONSOLE_MODE_FEATURES && (
-          <DnaConsoleEnzymes
-            subjectBlock={subjectUF}
-            type="uf"
-            name="Features"
-          />
-        )}
+        {consoleMode === CONSOLE_MODE_ENZYMES && <DnaConsoleEnzymes subjectBlock={subjectUNI} type="ui" name="Enzymes" />}
+        {consoleMode === CONSOLE_MODE_FEATURES && <DnaConsoleEnzymes subjectBlock={subjectUF} type="uf" name="Features" />}
       </Window.Content>
     </Window>
   );

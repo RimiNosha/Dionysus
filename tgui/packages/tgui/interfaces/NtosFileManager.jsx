@@ -48,15 +48,7 @@ export const NtosFileManager = (props) => {
 };
 
 const FileTable = (props) => {
-  const {
-    files = [],
-    usbconnected,
-    usbmode,
-    onUpload,
-    onDelete,
-    onRename,
-    onToggleSilence,
-  } = props;
+  const { files = [], usbconnected, usbmode, onUpload, onDelete, onRename, onToggleSilence } = props;
   return (
     <Table>
       <Table.Row header>
@@ -68,13 +60,7 @@ const FileTable = (props) => {
         <Table.Row key={file.name} className="candystripe">
           <Table.Cell>
             {!file.undeletable ? (
-              <Button.Input
-                fluid
-                content={file.name}
-                currentValue={file.name}
-                tooltip="Rename"
-                onCommit={(e, value) => onRename(file.name, value)}
-              />
+              <Button.Input fluid content={file.name} currentValue={file.name} tooltip="Rename" onCommit={(e, value) => onRename(file.name, value)} />
             ) : (
               file.name
             )}
@@ -92,26 +78,12 @@ const FileTable = (props) => {
             )}
             {!file.undeletable && (
               <>
-                <Button.Confirm
-                  icon="trash"
-                  confirmIcon="times"
-                  confirmContent=""
-                  tooltip="Delete"
-                  onClick={() => onDelete(file.name)}
-                />
+                <Button.Confirm icon="trash" confirmIcon="times" confirmContent="" tooltip="Delete" onClick={() => onDelete(file.name)} />
                 {!!usbconnected &&
                   (usbmode ? (
-                    <Button
-                      icon="download"
-                      tooltip="Download"
-                      onClick={() => onUpload(file.name)}
-                    />
+                    <Button icon="download" tooltip="Download" onClick={() => onUpload(file.name)} />
                   ) : (
-                    <Button
-                      icon="upload"
-                      tooltip="Upload"
-                      onClick={() => onUpload(file.name)}
-                    />
+                    <Button icon="upload" tooltip="Upload" onClick={() => onUpload(file.name)} />
                   ))}
               </>
             )}

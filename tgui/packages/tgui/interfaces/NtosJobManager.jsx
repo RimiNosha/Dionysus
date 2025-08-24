@@ -16,11 +16,7 @@ export const NtosJobManagerContent = (props) => {
   const { act, data } = useBackend();
   const { authed, cooldown, slots = [], prioritized = [] } = data;
   if (!authed) {
-    return (
-      <NoticeBox>
-        Current ID does not have access permissions to change job slots.
-      </NoticeBox>
-    );
+    return <NoticeBox>Current ID does not have access permissions to change job slots.</NoticeBox>;
   }
   return (
     <Section>

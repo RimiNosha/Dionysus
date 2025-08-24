@@ -3,30 +3,15 @@ import { flow } from 'common/fp';
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  Button,
-  Divider,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../components';
+import { Button, Divider, LabeledList, NumberInput, ProgressBar, Section, Stack } from '../components';
 import { getGasColor, getGasLabel } from '../constants';
 import { Window } from '../layouts';
 
 export const BluespaceVendor = (props) => {
   const { act, data } = useBackend();
-  const { on, tank_filling_amount, price_multiplier, pumping, selected_gas } =
-    data;
-  const bluespace_network_gases = flow([
-    filter((gas) => gas.amount >= 0.01),
-    sortBy((gas) => -gas.amount),
-  ])(data.bluespace_network_gases || []);
-  const gasMax = Math.max(
-    1,
-    ...bluespace_network_gases.map((gas) => gas.amount),
-  );
+  const { on, tank_filling_amount, price_multiplier, pumping, selected_gas } = data;
+  const bluespace_network_gases = flow([filter((gas) => gas.amount >= 0.01), sortBy((gas) => -gas.amount)])(data.bluespace_network_gases || []);
+  const gasMax = Math.max(1, ...bluespace_network_gases.map((gas) => gas.amount));
   return (
     <Window title="Bluespace Vendor" width={500} height={600}>
       <Window.Content>
@@ -36,22 +21,8 @@ export const BluespaceVendor = (props) => {
               title="Controls"
               buttons={
                 <>
-                  <Button
-                    ml={1}
-                    icon="plus"
-                    content="Prepare Tank"
-                    disabled={
-                      data.pumping || data.inserted_tank || !data.tank_amount
-                    }
-                    onClick={() => act('tank_prepare')}
-                  />
-                  <Button
-                    ml={1}
-                    icon="minus"
-                    content="Remove Tank"
-                    disabled={data.pumping || !data.inserted_tank}
-                    onClick={() => act('tank_expel')}
-                  />
+                  <Button ml={1} icon="plus" content="Prepare Tank" disabled={data.pumping || data.inserted_tank || !data.tank_amount} onClick={() => act('tank_prepare')} />
+                  <Button ml={1} icon="minus" content="Remove Tank" disabled={data.pumping || !data.inserted_tank} onClick={() => act('tank_expel')} />
                 </>
               }
             >
@@ -109,18 +80,10 @@ export const BluespaceVendor = (props) => {
                   <>
                     <Stack key={gas.name}>
                       <Stack.Item color="label" basis={8} ml={1}>
-                        {getGasLabel(gas.name) +
-                          ' is ' +
-                          gas.price +
-                          ' credits per mole'}
+                        {getGasLabel(gas.name) + ' is ' + gas.price + ' credits per mole'}
                       </Stack.Item>
                       <Stack.Item grow mt={1}>
-                        <ProgressBar
-                          color={getGasColor(gas.name)}
-                          value={gas.amount}
-                          minValue={0}
-                          maxValue={gasMax}
-                        >
+                        <ProgressBar color={getGasColor(gas.name)} value={gas.amount} minValue={0} maxValue={gasMax}>
                           {toFixed(gas.amount, 2) + ' moles'}
                         </ProgressBar>
                       </Stack.Item>

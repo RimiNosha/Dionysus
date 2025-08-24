@@ -7,11 +7,7 @@ import { Box, Button, Divider, Flex, Section, Stack } from '../../components';
 import { Antagonist, Category } from './antagonists/base';
 import { PreferencesMenuData } from './data';
 
-const requireAntag = require.context(
-  './antagonists/antagonists',
-  false,
-  /.ts$/,
-);
+const requireAntag = require.context('./antagonists/antagonists', false, /.ts$/);
 
 const antagsByCategory = new Map<Category, Antagonist[]>();
 
@@ -30,20 +26,14 @@ for (const antagKey of requireAntag.keys()) {
     continue;
   }
 
-  antagsByCategory.set(
-    antag.category,
-    binaryInsertAntag(antagsByCategory.get(antag.category) || [], antag),
-  );
+  antagsByCategory.set(antag.category, binaryInsertAntag(antagsByCategory.get(antag.category) || [], antag));
 }
 
 const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
   const className = 'PreferencesMenu__Antags__antagSelection';
 
-  const [predictedState, setPredictedState] = useLocalState(
-    'AntagSelection_predictedState',
-    new Set(data.selected_antags),
-  );
+  const [predictedState, setPredictedState] = useLocalState('AntagSelection_predictedState', new Set(data.selected_antags));
 
   const enableAntags = (antags: string[]) => {
     const newState = new Set(predictedState);
@@ -94,23 +84,15 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
     >
       <Flex className={className} align="flex-end" wrap>
         {props.antagonists.map((antagonist) => {
-          const isBanned =
-            data.antag_bans && data.antag_bans.indexOf(antagonist.key) !== -1;
+          const isBanned = data.antag_bans && data.antag_bans.indexOf(antagonist.key) !== -1;
 
-          const daysLeft =
-            (data.antag_days_left && data.antag_days_left[antagonist.key]) || 0;
+          const daysLeft = (data.antag_days_left && data.antag_days_left[antagonist.key]) || 0;
 
           return (
             <Flex.Item
               className={classes([
                 `${className}__antagonist`,
-                `${className}__antagonist--${
-                  isBanned || daysLeft > 0
-                    ? 'banned'
-                    : predictedState.has(antagonist.key)
-                      ? 'on'
-                      : 'off'
-                }`,
+                `${className}__antagonist--${isBanned || daysLeft > 0 ? 'banned' : predictedState.has(antagonist.key) ? 'on' : 'off'}`,
               ])}
               key={antagonist.key}
             >
@@ -135,10 +117,7 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
                             return (
                               <div key={antagonist.key + index}>
                                 {text}
-                                {index !==
-                                  antagonist.description.length - 1 && (
-                                  <Divider />
-                                )}
+                                {index !== antagonist.description.length - 1 && <Divider />}
                               </div>
                             );
                           })
@@ -159,13 +138,7 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
                         }
                       }}
                     >
-                      <Box
-                        className={classes([
-                          'antagonists96x96',
-                          antagonist.key,
-                          'antagonist-icon',
-                        ])}
-                      />
+                      <Box className={classes(['antagonists96x96', antagonist.key, 'antagonist-icon'])} />
 
                       {isBanned && <Box className="antagonist-banned-slash" />}
 
@@ -189,20 +162,11 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
 export const AntagsPage = () => {
   return (
     <Box className="PreferencesMenu__Antags">
-      <AntagSelection
-        name="Roundstart"
-        antagonists={antagsByCategory.get(Category.Roundstart)!}
-      />
+      <AntagSelection name="Roundstart" antagonists={antagsByCategory.get(Category.Roundstart)!} />
 
-      <AntagSelection
-        name="Midround"
-        antagonists={antagsByCategory.get(Category.Midround)!}
-      />
+      <AntagSelection name="Midround" antagonists={antagsByCategory.get(Category.Midround)!} />
 
-      <AntagSelection
-        name="Latejoin"
-        antagonists={antagsByCategory.get(Category.Latejoin)!}
-      />
+      <AntagSelection name="Latejoin" antagonists={antagsByCategory.get(Category.Latejoin)!} />
     </Box>
   );
 };

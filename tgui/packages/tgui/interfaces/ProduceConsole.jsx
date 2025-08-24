@@ -1,14 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Divider,
-  Icon,
-  NumberInput,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Dimmer, Divider, Icon, NumberInput, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 const buttonWidth = 2;
@@ -26,37 +17,20 @@ const ShoppingTab = (props) => {
   const { data, act } = useBackend();
   const { order_datums } = data;
   const [shopIndex, setShopIndex] = useLocalState('shop-index', 1);
-  const mapped_food = order_datums.filter(
-    (food) => food && food.cat === shopIndex,
-  );
+  const mapped_food = order_datums.filter((food) => food && food.cat === shopIndex);
   return (
     <Stack fill vertical>
       <Section mb={-0.9}>
         <Stack.Item>
           <Stack textAlign="center">
             <Stack.Item grow>
-              <Button
-                fluid
-                color="green"
-                content="Fruits and Veggies"
-                onClick={() => setShopIndex(1)}
-              />
+              <Button fluid color="green" content="Fruits and Veggies" onClick={() => setShopIndex(1)} />
             </Stack.Item>
             <Stack.Item grow>
-              <Button
-                fluid
-                color="white"
-                content="Milk and Eggs"
-                onClick={() => setShopIndex(2)}
-              />
+              <Button fluid color="white" content="Milk and Eggs" onClick={() => setShopIndex(2)} />
             </Stack.Item>
             <Stack.Item grow>
-              <Button
-                fluid
-                color="olive"
-                content="Sauces and Reagents"
-                onClick={() => setShopIndex(3)}
-              />
+              <Button fluid color="olive" content="Sauces and Reagents" onClick={() => setShopIndex(3)} />
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -72,9 +46,7 @@ const ShoppingTab = (props) => {
                   <Stack.Item mt={-1} color="label" fontSize="10px">
                     {'"' + item.desc + '"'}
                     <br />
-                    <Box textAlign="right">
-                      {item.name + ' costs ' + item.cost + ' per order.'}
-                    </Box>
+                    <Box textAlign="right">{item.name + ' costs ' + item.cost + ' per order.'}</Box>
                   </Stack.Item>
                   <Stack.Item mt={-0.5}>
                     <NumberInput
@@ -132,9 +104,7 @@ const CheckoutTab = (props) => {
                     <Stack.Item mt={-1} color="label" fontSize="10px">
                       {'"' + item.desc + '"'}
                       <br />
-                      <Box textAlign="right">
-                        {item.name + ' costs ' + item.cost + ' per order.'}
-                      </Box>
+                      <Box textAlign="right">{item.name + ' costs ' + item.cost + ' per order.'}</Box>
                     </Stack.Item>
                     <Stack.Item mt={-0.5}>
                       <NumberInput
@@ -228,24 +198,10 @@ export const ProduceConsole = (props) => {
             <Section fill>
               <Stack textAlign="center">
                 <Stack.Item grow={3}>
-                  <Button
-                    fluid
-                    color="green"
-                    lineHeight={buttonWidth}
-                    icon="cart-plus"
-                    content="Shopping"
-                    onClick={() => setTabIndex(1)}
-                  />
+                  <Button fluid color="green" lineHeight={buttonWidth} icon="cart-plus" content="Shopping" onClick={() => setTabIndex(1)} />
                 </Stack.Item>
                 <Stack.Item grow>
-                  <Button
-                    fluid
-                    color="green"
-                    lineHeight={buttonWidth}
-                    icon="dollar-sign"
-                    content="Checkout"
-                    onClick={() => setTabIndex(2)}
-                  />
+                  <Button fluid color="green" lineHeight={buttonWidth} icon="dollar-sign" content="Checkout" onClick={() => setTabIndex(2)} />
                 </Stack.Item>
               </Stack>
             </Section>

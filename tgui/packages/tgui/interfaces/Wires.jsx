@@ -8,16 +8,9 @@ export const Wires = (props) => {
   const wires = data.wires || [];
   const statuses = data.status || [];
   return (
-    <Window
-      width={350}
-      height={150 + wires.length * 30 + (!!proper_name && 30)}
-    >
+    <Window width={350} height={150 + wires.length * 30 + (!!proper_name && 30)}>
       <Window.Content>
-        {!!proper_name && (
-          <NoticeBox textAlign="center">
-            {proper_name} Wire Configuration
-          </NoticeBox>
-        )}
+        {!!proper_name && <NoticeBox textAlign="center">{proper_name} Wire Configuration</NoticeBox>}
         <Section>
           <LabeledList>
             {wires.map((wire) => (

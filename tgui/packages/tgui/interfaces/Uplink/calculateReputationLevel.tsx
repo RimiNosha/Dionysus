@@ -118,10 +118,7 @@ export const getReputation = (progression_points: number) => {
   return ranks[ranks.length - 1];
 };
 
-export const calculateReputationLevel = (
-  progression_points: number,
-  textOnly: boolean,
-) => {
+export const calculateReputationLevel = (progression_points: number, textOnly: boolean) => {
   const minutes = progression_points / 600;
   const displayedProgression = calculateProgression(progression_points);
   const reputation = getReputation(progression_points);

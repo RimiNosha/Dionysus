@@ -26,37 +26,17 @@ const BookScanning = (props) => {
       <Stack.Item>
         <Stack>
           <Stack.Item grow>
-            <Button
-              fluid
-              textAlign="center"
-              icon="eject"
-              onClick={() => act('eject')}
-              disabled={!has_book}
-            >
+            <Button fluid textAlign="center" icon="eject" onClick={() => act('eject')} disabled={!has_book}>
               Eject Book
             </Button>
           </Stack.Item>
           <Stack.Item grow>
-            <Button
-              fluid
-              textAlign="center"
-              onClick={() => act('scan')}
-              color="good"
-              icon="qrcode"
-              disabled={!has_book}
-            >
+            <Button fluid textAlign="center" onClick={() => act('scan')} color="good" icon="qrcode" disabled={!has_book}>
               Scan Book
             </Button>
           </Stack.Item>
           <Stack.Item grow>
-            <Button
-              fluid
-              textAlign="center"
-              icon="fire"
-              onClick={() => act('clear')}
-              color="bad"
-              disabled={!has_cache}
-            >
+            <Button fluid textAlign="center" icon="fire" onClick={() => act('clear')} color="bad" disabled={!has_cache}>
               Clear Cache
             </Button>
           </Stack.Item>

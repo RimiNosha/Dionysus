@@ -34,12 +34,7 @@ export const CrewManifest = (props) => {
     <Window title="Staff Manifest" width={350} height={500}>
       <Window.Content scrollable>
         {Object.entries(manifest).map(([dept, crew]) => (
-          <ManifestDepartment
-            key={dept}
-            all_positions={positions}
-            crew={crew}
-            department={dept}
-          />
+          <ManifestDepartment key={dept} all_positions={positions} crew={crew} department={dept} />
         ))}
       </Window.Content>
     </Window>
@@ -57,61 +52,30 @@ const ManifestDepartment = (props: ManifestDepartmentProps) => {
   return (
     <Section
       className={'CrewManifest--' + department.replace(/\s+/g, '')}
-      title={
-        department +
-        (department !== 'Misc'
-          ? ` (${all_positions[department].open} positions open)`
-          : '')
-      }
+      title={department + (department !== 'Misc' ? ` (${all_positions[department].open} positions open)` : '')}
     >
       <Table>
         {Object.entries(crew).map(([crewIndex, crewMember]) => (
           <Table.Row key={crewIndex}>
-            <Table.Cell className={'CrewManifest__Cell'}>
-              {crewMember.name}
-            </Table.Cell>
-            <Table.Cell
-              className={classes(['CrewManifest__Cell', 'CrewManifest__Icons'])}
-              collapsing
-            >
-              {all_positions[department].exceptions.includes(
-                crewMember.template_rank,
-              ) && (
+            <Table.Cell className={'CrewManifest__Cell'}>{crewMember.name}</Table.Cell>
+            <Table.Cell className={classes(['CrewManifest__Cell', 'CrewManifest__Icons'])} collapsing>
+              {all_positions[department].exceptions.includes(crewMember.template_rank) && (
                 <Tooltip content="No position limit" position="bottom">
                   <Icon className="CrewManifest__Icon" name="infinity" />
                 </Tooltip>
               )}
               {!!crewMember.is_captain && (
                 <Tooltip content="Port Authority" position="bottom">
-                  <Icon
-                    className={classes([
-                      'CrewManifest__Icon',
-                      'CrewManifest__Icon--Command',
-                    ])}
-                    name="star"
-                  />
+                  <Icon className={classes(['CrewManifest__Icon', 'CrewManifest__Icon--Command'])} name="star" />
                 </Tooltip>
               )}
               {!!crewMember.is_faction_leader && (
                 <Tooltip content="Faction Leader" position="bottom">
-                  <Icon
-                    className={classes([
-                      'CrewManifest__Icon',
-                      'CrewManifest__Icon--Command',
-                      'CrewManifest__Icon--Chevron',
-                    ])}
-                    name="chevron-up"
-                  />
+                  <Icon className={classes(['CrewManifest__Icon', 'CrewManifest__Icon--Command', 'CrewManifest__Icon--Chevron'])} name="chevron-up" />
                 </Tooltip>
               )}
             </Table.Cell>
-            <Table.Cell
-              className={classes([
-                'CrewManifest__Cell',
-                'CrewManifest__Cell--Rank',
-              ])}
-              collapsing
-            >
+            <Table.Cell className={classes(['CrewManifest__Cell', 'CrewManifest__Cell--Rank'])} collapsing>
               {crewMember.rank}
             </Table.Cell>
           </Table.Row>

@@ -4,28 +4,12 @@ import { ReactNode } from 'react';
 import { Popper, Tooltip } from 'tgui-core/components';
 
 import { sendAct, useBackend, useLocalState } from '../../backend';
-import {
-  Autofocus,
-  Box,
-  Button,
-  Dropdown,
-  Flex,
-  LabeledList,
-  Stack,
-  TrackOutsideClicks,
-} from '../../components';
+import { Autofocus, Box, Button, Dropdown, Flex, LabeledList, Stack, TrackOutsideClicks } from '../../components';
 import { CharacterPreview } from './CharacterPreview';
-import {
-  createSetPreference,
-  PreferencesMenuData,
-  RandomSetting,
-} from './data';
+import { createSetPreference, PreferencesMenuData, RandomSetting } from './data';
 import { MultiNameInput, NameInput } from './names';
 import features from './preferences/features';
-import {
-  FeatureChoicedServerData,
-  FeatureValueInput,
-} from './preferences/features/base';
+import { FeatureChoicedServerData, FeatureValueInput } from './preferences/features/base';
 import { Gender, GENDERS } from './preferences/gender';
 import { RandomizationButton } from './RandomizationButton';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
@@ -50,54 +34,27 @@ const CharacterControls = (props: {
   return (
     <Stack>
       <Stack.Item>
-        <Button
-          onClick={props.handleRotate}
-          fontSize="22px"
-          icon="undo"
-          tooltip="Rotate"
-          tooltipPosition="top"
-        />
+        <Button onClick={props.handleRotate} fontSize="22px" icon="undo" tooltip="Rotate" tooltipPosition="top" />
       </Stack.Item>
 
       <Stack.Item>
-        <Button
-          onClick={props.handleOpenSpecies}
-          fontSize="22px"
-          icon="paw"
-          tooltip="Species"
-          tooltipPosition="top"
-        />
+        <Button onClick={props.handleOpenSpecies} fontSize="22px" icon="paw" tooltip="Species" tooltipPosition="top" />
       </Stack.Item>
 
       {props.showGender && (
         <Stack.Item>
-          <GenderButton
-            gender={props.gender}
-            handleSetGender={props.setGender}
-          />
+          <GenderButton gender={props.gender} handleSetGender={props.setGender} />
         </Stack.Item>
       )}
       {props.handleLoadout && (
         // PARIAH EDIT ADDITION
         <Stack.Item>
-          <Button
-            onClick={props.handleLoadout}
-            fontSize="22px"
-            icon="suitcase"
-            tooltip="Show Loadout Menu"
-            tooltipPosition="top"
-          />
+          <Button onClick={props.handleLoadout} fontSize="22px" icon="suitcase" tooltip="Show Loadout Menu" tooltipPosition="top" />
         </Stack.Item>
       )}
       {props.handleAppearanceMods && (
         <Stack.Item>
-          <Button
-            onClick={props.handleAppearanceMods}
-            fontSize="22px"
-            icon="user-plus"
-            tooltip="Modify Appearance Mods"
-            tooltipPosition="top"
-          />
+          <Button onClick={props.handleAppearanceMods} fontSize="22px" icon="user-plus" tooltip="Modify Appearance Mods" tooltipPosition="top" />
         </Stack.Item>
       )}
     </Stack>
@@ -127,9 +84,7 @@ const ChoicedSelection = (props: {
         background: 'white',
         padding: '5px',
 
-        height: `${
-          CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER
-        }px`,
+        height: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER}px`,
         width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH}px`,
       }}
     >
@@ -138,13 +93,7 @@ const ChoicedSelection = (props: {
           <Stack fill>
             {supplementalFeature && (
               <Stack.Item>
-                <FeatureValueInput
-                  act={act}
-                  feature={features[supplementalFeature]}
-                  featureId={supplementalFeature}
-                  shrink
-                  value={supplementalValue}
-                />
+                <FeatureValueInput act={act} feature={features[supplementalFeature]} featureId={supplementalFeature} shrink value={supplementalValue} />
               </Stack.Item>
             )}
 
@@ -193,13 +142,7 @@ const ChoicedSelection = (props: {
                         width: `${CLOTHING_SELECTION_CELL_SIZE}px`,
                       }}
                     >
-                      <Box
-                        className={classes([
-                          'preferences32x32',
-                          image,
-                          'centered-image',
-                        ])}
-                      />
+                      <Box className={classes(['preferences32x32', image, 'centered-image'])} />
                     </Button>
                   </Flex.Item>
                 );
@@ -212,14 +155,8 @@ const ChoicedSelection = (props: {
   );
 };
 
-const GenderButton = (props: {
-  gender: Gender;
-  handleSetGender: (gender: Gender) => void;
-}) => {
-  const [genderMenuOpen, setGenderMenuOpen] = useLocalState(
-    'genderMenuOpen',
-    false,
-  );
+const GenderButton = (props: { gender: Gender; handleSetGender: (gender: Gender) => void }) => {
+  const [genderMenuOpen, setGenderMenuOpen] = useLocalState('genderMenuOpen', false);
 
   return (
     <Popper
@@ -277,16 +214,7 @@ const MainFeature = (props: {
 }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
-  const {
-    catalog,
-    currentValue,
-    isOpen,
-    handleOpen,
-    handleClose,
-    handleSelect,
-    randomization,
-    setRandomization,
-  } = props;
+  const { catalog, currentValue, isOpen, handleOpen, handleClose, handleSelect, randomization, setRandomization } = props;
 
   const supplementalFeature = catalog.supplemental_feature;
 
@@ -302,12 +230,7 @@ const MainFeature = (props: {
               catalog={catalog}
               selected={currentValue}
               supplementalFeature={supplementalFeature}
-              supplementalValue={
-                supplementalFeature &&
-                data.character_preferences.supplemental_features[
-                  supplementalFeature
-                ]
-              }
+              supplementalValue={supplementalFeature && data.character_preferences.supplemental_features[supplementalFeature]}
               onClose={handleClose}
               onSelect={handleSelect}
             />
@@ -332,15 +255,9 @@ const MainFeature = (props: {
         tooltipPosition="right"
       >
         <Box
-          className={classes([
-            'preferences32x32',
-            catalog.icons![currentValue],
-            'centered-image',
-          ])}
+          className={classes(['preferences32x32', catalog.icons![currentValue], 'centered-image'])}
           style={{
-            transform: randomization
-              ? 'translateX(-70%) translateY(-70%) scale(1.1)'
-              : 'translateX(-50%) translateY(-50%) scale(1.3)',
+            transform: randomization ? 'translateX(-70%) translateY(-70%) scale(1.1)' : 'translateX(-50%) translateY(-50%) scale(1.3)',
           }}
         />
 
@@ -369,24 +286,19 @@ const MainFeature = (props: {
   );
 };
 
-const createSetRandomization =
-  (act: typeof sendAct, preference: string) => (newSetting: RandomSetting) => {
-    act('set_random_preference', {
-      preference,
-      value: newSetting,
-    });
-  };
+const createSetRandomization = (act: typeof sendAct, preference: string) => (newSetting: RandomSetting) => {
+  act('set_random_preference', {
+    preference,
+    value: newSetting,
+  });
+};
 
 const sortPreferences = sortBy<[string, unknown]>(([featureId, _]) => {
   const feature = features[featureId];
   return feature?.name;
 });
 
-const PreferenceList = (props: {
-  act: typeof sendAct;
-  preferences: Record<string, unknown>;
-  randomizations: Record<string, RandomSetting>;
-}) => {
+const PreferenceList = (props: { act: typeof sendAct; preferences: Record<string, unknown>; randomizations: Record<string, RandomSetting> }) => {
   return (
     <Stack.Item
       basis="50%"
@@ -399,64 +311,50 @@ const PreferenceList = (props: {
       overflowY="scroll"
     >
       <LabeledList>
-        {sortPreferences(Object.entries(props.preferences)).map(
-          ([featureId, value]) => {
-            const feature = features[featureId];
-            const randomSetting = props.randomizations[featureId];
+        {sortPreferences(Object.entries(props.preferences)).map(([featureId, value]) => {
+          const feature = features[featureId];
+          const randomSetting = props.randomizations[featureId];
 
-            if (feature === undefined) {
-              return (
-                <Stack.Item key={featureId}>
-                  <b>Feature {featureId} is not recognized.</b>
-                </Stack.Item>
-              );
-            }
-
-            let name: ReactNode = feature.name;
-            if (feature.description) {
-              name = (
-                <Tooltip content={feature.description} position="bottom-start">
-                  <Box
-                    as="span"
-                    style={{
-                      borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
-                    }}
-                  >
-                    {name}:
-                  </Box>
-                </Tooltip>
-              );
-            }
-
+          if (feature === undefined) {
             return (
-              <LabeledList.Item
-                key={featureId}
-                label={name}
-                verticalAlign="middle"
-              >
-                <Stack fill>
-                  {randomSetting && (
-                    <Stack.Item>
-                      <RandomizationButton
-                        setValue={createSetRandomization(props.act, featureId)}
-                        value={randomSetting}
-                      />
-                    </Stack.Item>
-                  )}
-
-                  <Stack.Item grow>
-                    <FeatureValueInput
-                      act={props.act}
-                      feature={feature}
-                      featureId={featureId}
-                      value={value}
-                    />
-                  </Stack.Item>
-                </Stack>
-              </LabeledList.Item>
+              <Stack.Item key={featureId}>
+                <b>Feature {featureId} is not recognized.</b>
+              </Stack.Item>
             );
-          },
-        )}
+          }
+
+          let name: ReactNode = feature.name;
+          if (feature.description) {
+            name = (
+              <Tooltip content={feature.description} position="bottom-start">
+                <Box
+                  as="span"
+                  style={{
+                    borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
+                  }}
+                >
+                  {name}:
+                </Box>
+              </Tooltip>
+            );
+          }
+
+          return (
+            <LabeledList.Item key={featureId} label={name} verticalAlign="middle">
+              <Stack fill>
+                {randomSetting && (
+                  <Stack.Item>
+                    <RandomizationButton setValue={createSetRandomization(props.act, featureId)} value={randomSetting} />
+                  </Stack.Item>
+                )}
+
+                <Stack.Item grow>
+                  <FeatureValueInput act={props.act} feature={feature} featureId={featureId} value={value} />
+                </Stack.Item>
+              </Stack>
+            </LabeledList.Item>
+          );
+        })}
       </LabeledList>
     </Stack.Item>
   );
@@ -464,56 +362,38 @@ const PreferenceList = (props: {
 
 export const MainPage = (props: { openSpecies: () => void }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
-  const [currentClothingMenu, setCurrentClothingMenu] = useLocalState<
-    string | null
-  >('currentClothingMenu', null);
-  const [multiNameInputOpen, setMultiNameInputOpen] = useLocalState(
-    'multiNameInputOpen',
-    false,
-  );
+  const [currentClothingMenu, setCurrentClothingMenu] = useLocalState<string | null>('currentClothingMenu', null);
+  const [multiNameInputOpen, setMultiNameInputOpen] = useLocalState('multiNameInputOpen', false);
   const [randomToggleEnabled] = useRandomToggleState();
 
   return (
     <ServerPreferencesFetcher
       render={(serverData) => {
-        const currentSpeciesData =
-          serverData &&
-          serverData.species[data.character_preferences.misc.species];
+        const currentSpeciesData = serverData && serverData.species[data.character_preferences.misc.species];
 
-        const contextualPreferences =
-          data.character_preferences.secondary_features || [];
+        const contextualPreferences = data.character_preferences.secondary_features || [];
 
         const mainFeatures = [
           ...Object.entries(data.character_preferences.clothing),
-          ...Object.entries(data.character_preferences.features).filter(
-            ([featureName]) => {
-              if (!currentSpeciesData) {
-                return false;
-              }
+          ...Object.entries(data.character_preferences.features).filter(([featureName]) => {
+            if (!currentSpeciesData) {
+              return false;
+            }
 
-              return (
-                currentSpeciesData.enabled_features.indexOf(featureName) !== -1
-              );
-            },
-          ),
+            return currentSpeciesData.enabled_features.indexOf(featureName) !== -1;
+          }),
         ];
 
-        const randomBodyEnabled =
-          data.character_preferences.non_contextual.random_body !==
-            RandomSetting.Disabled || randomToggleEnabled;
+        const randomBodyEnabled = data.character_preferences.non_contextual.random_body !== RandomSetting.Disabled || randomToggleEnabled;
 
-        const getRandomization = (
-          preferences: Record<string, unknown>,
-        ): Record<string, RandomSetting> => {
+        const getRandomization = (preferences: Record<string, unknown>): Record<string, RandomSetting> => {
           if (!serverData) {
             return {};
           }
 
           return Object.fromEntries(
             filterMap(Object.keys(preferences), (preferenceKey) => {
-              if (
-                serverData.random.randomizable.indexOf(preferenceKey) === -1
-              ) {
+              if (serverData.random.randomizable.indexOf(preferenceKey) === -1) {
                 return undefined;
               }
 
@@ -521,26 +401,19 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                 return undefined;
               }
 
-              return [
-                preferenceKey,
-                data.character_preferences.randomization[preferenceKey] ||
-                  RandomSetting.Disabled,
-              ];
+              return [preferenceKey, data.character_preferences.randomization[preferenceKey] || RandomSetting.Disabled];
             }),
           );
         };
 
-        const randomizationOfMainFeatures = getRandomization(
-          Object.fromEntries(mainFeatures),
-        );
+        const randomizationOfMainFeatures = getRandomization(Object.fromEntries(mainFeatures));
 
         const nonContextualPreferences = {
           ...data.character_preferences.non_contextual,
         };
 
         if (randomBodyEnabled) {
-          nonContextualPreferences['random_species'] =
-            data.character_preferences.randomization['species'];
+          nonContextualPreferences['random_species'] = data.character_preferences.randomization['species'];
         } else {
           // We can't use random_name/is_accessible because the
           // server doesn't know whether the random toggle is on.
@@ -584,9 +457,7 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                         act('appearance_mods');
                       }}
                       setGender={createSetPreference(act, 'gender')}
-                      showGender={
-                        currentSpeciesData ? !!currentSpeciesData.sexes : true
-                      }
+                      showGender={currentSpeciesData ? !!currentSpeciesData.sexes : true}
                     />
                   </Stack.Item>
 
@@ -612,10 +483,7 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                   <Stack.Item position="relative">
                     <NameInput
                       name={data.character_preferences.names[data.name_to_use]}
-                      handleUpdateName={createSetPreference(
-                        act,
-                        data.name_to_use,
-                      )}
+                      handleUpdateName={createSetPreference(act, data.name_to_use)}
                       openMultiNameInput={() => {
                         setMultiNameInputOpen(true);
                       }}
@@ -647,13 +515,8 @@ export const MainPage = (props: { openSpecies: () => void }) => {
                               setCurrentClothingMenu(clothingKey);
                             }}
                             handleSelect={createSetPreference(act, clothingKey)}
-                            randomization={
-                              randomizationOfMainFeatures[clothingKey]
-                            }
-                            setRandomization={createSetRandomization(
-                              act,
-                              clothingKey,
-                            )}
+                            randomization={randomizationOfMainFeatures[clothingKey]}
+                            setRandomization={createSetRandomization(act, clothingKey)}
                           />
                         </Stack.Item>
                       )
@@ -664,17 +527,9 @@ export const MainPage = (props: { openSpecies: () => void }) => {
 
               <Stack.Item grow basis={0}>
                 <Stack vertical fill>
-                  <PreferenceList
-                    act={act}
-                    randomizations={getRandomization(contextualPreferences)}
-                    preferences={contextualPreferences}
-                  />
+                  <PreferenceList act={act} randomizations={getRandomization(contextualPreferences)} preferences={contextualPreferences} />
 
-                  <PreferenceList
-                    act={act}
-                    randomizations={getRandomization(nonContextualPreferences)}
-                    preferences={nonContextualPreferences}
-                  />
+                  <PreferenceList act={act} randomizations={getRandomization(nonContextualPreferences)} preferences={nonContextualPreferences} />
                 </Stack>
               </Stack.Item>
             </Stack>

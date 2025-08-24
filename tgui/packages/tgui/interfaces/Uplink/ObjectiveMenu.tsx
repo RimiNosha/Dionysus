@@ -2,21 +2,8 @@ import { BooleanLike, classes } from 'common/react';
 import { Component } from 'react';
 import { Tooltip } from 'tgui-core/components';
 
-import {
-  Box,
-  Button,
-  Dimmer,
-  Flex,
-  Icon,
-  NoticeBox,
-  Section,
-  Stack,
-} from '../../components';
-import {
-  calculateProgression,
-  getReputation,
-  Rank,
-} from './calculateReputationLevel';
+import { Box, Button, Dimmer, Flex, Icon, NoticeBox, Section, Stack } from '../../components';
+import { calculateProgression, getReputation, Rank } from './calculateReputationLevel';
 import { ObjectiveState } from './constants';
 
 export type Objective = {
@@ -61,10 +48,7 @@ type ObjectiveMenuState = {
 
 let dragClickTimer = 0;
 
-export class ObjectiveMenu extends Component<
-  ObjectiveMenuProps,
-  ObjectiveMenuState
-> {
+export class ObjectiveMenu extends Component<ObjectiveMenuProps, ObjectiveMenuState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,8 +122,7 @@ export class ObjectiveMenu extends Component<
       handleObjectiveAbort,
       handleRequestObjectives,
     } = this.props;
-    const { draggingObjective, objectiveX, objectiveY } = this
-      .state as ObjectiveMenuState;
+    const { draggingObjective, objectiveX, objectiveY } = this.state as ObjectiveMenuState;
 
     potentialObjectives.sort((objA, objB) => {
       if (objA.progression_minimum < objB.progression_minimum) {
@@ -155,51 +138,32 @@ export class ObjectiveMenu extends Component<
           <Stack.Item>
             <Section>
               <Stack>
-                {Array.apply(null, Array(maximumActiveObjectives)).map(
-                  (_, index) => {
-                    if (index >= activeObjectives.length) {
-                      return (
-                        <Stack.Item key={index} minHeight="100px" grow>
-                          <Box
-                            color="label"
-                            className="UplinkObjective__EmptyObjective"
-                            onMouseUp={this.handleObjectiveAdded as any}
-                          >
-                            <Stack textAlign="center" fill align="center">
-                              <Stack.Item textAlign="center" width="100%">
-                                Empty Objective, drop objectives here to take
-                                them
-                              </Stack.Item>
-                            </Stack>
-                          </Box>
-                        </Stack.Item>
-                      );
-                    }
-                    const objective = activeObjectives[index];
+                {Array.apply(null, Array(maximumActiveObjectives)).map((_, index) => {
+                  if (index >= activeObjectives.length) {
                     return (
-                      <Stack.Item key={index} grow>
-                        {ObjectiveFunction(
-                          objective,
-                          true,
-                          handleObjectiveAction,
-                          handleObjectiveCompleted,
-                          handleObjectiveAbort,
-                          true,
-                        )}
+                      <Stack.Item key={index} minHeight="100px" grow>
+                        <Box color="label" className="UplinkObjective__EmptyObjective" onMouseUp={this.handleObjectiveAdded as any}>
+                          <Stack textAlign="center" fill align="center">
+                            <Stack.Item textAlign="center" width="100%">
+                              Empty Objective, drop objectives here to take them
+                            </Stack.Item>
+                          </Stack>
+                        </Box>
                       </Stack.Item>
                     );
-                  },
-                )}
+                  }
+                  const objective = activeObjectives[index];
+                  return (
+                    <Stack.Item key={index} grow>
+                      {ObjectiveFunction(objective, true, handleObjectiveAction, handleObjectiveCompleted, handleObjectiveAbort, true)}
+                    </Stack.Item>
+                  );
+                })}
               </Stack>
             </Section>
           </Stack.Item>
           <Stack.Item grow>
-            <Section
-              title="Potential Objectives"
-              textAlign="center"
-              fill
-              scrollable
-            >
+            <Section title="Potential Objectives" textAlign="center" fill scrollable>
               <Flex wrap="wrap" justify="space-evenly">
                 {potentialObjectives.map((objective) => {
                   return (
@@ -213,15 +177,7 @@ export class ObjectiveMenu extends Component<
                         this.handleObjectiveClick(event, objective);
                       }}
                     >
-                      {(objective.id !== draggingObjective?.id &&
-                        ObjectiveFunction(
-                          objective,
-                          false,
-                          undefined,
-                          undefined,
-                          undefined,
-                          true,
-                        )) || (
+                      {(objective.id !== draggingObjective?.id && ObjectiveFunction(objective, false, undefined, undefined, undefined, true)) || (
                         <Box
                           style={{
                             border: '2px dashed black',
@@ -244,18 +200,9 @@ export class ObjectiveMenu extends Component<
                 )) ||
                   (potentialObjectives.length < maximumPotentialObjectives && (
                     <Flex.Item basis="100%" mb={1} mx="0.5%" minHeight="100px">
-                      <Stack
-                        align="center"
-                        height="100%"
-                        width="100%"
-                        textAlign="center"
-                      >
+                      <Stack align="center" height="100%" width="100%" textAlign="center">
                         <Stack.Item width="100%">
-                          <Button
-                            content="Request More Objectives"
-                            fontSize={2}
-                            onClick={handleRequestObjectives}
-                          />
+                          <Button content="Request More Objectives" fontSize={2} onClick={handleRequestObjectives} />
                         </Stack.Item>
                       </Stack>
                     </Flex.Item>
@@ -303,11 +250,7 @@ const ObjectiveFunction = (
       objectiveState={objective.objective_state}
       originalProgression={objective.original_progression}
       finalObjective={objective.final_objective}
-      canAbort={
-        !!handleAbort &&
-        !objective.final_objective &&
-        objective.objective_state === ObjectiveState.Active
-      }
+      canAbort={!!handleAbort && !objective.final_objective && objective.objective_state === ObjectiveState.Active}
       grow={grow}
       handleCompletion={(event) => {
         if (handleCompletion) {
@@ -379,10 +322,7 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
     ...rest
   } = props;
 
-  const objectiveFinished =
-    objectiveState === ObjectiveState.Completed ||
-    objectiveState === ObjectiveState.Failed ||
-    objectiveState === ObjectiveState.Invalid;
+  const objectiveFinished = objectiveState === ObjectiveState.Completed || objectiveState === ObjectiveState.Failed || objectiveState === ObjectiveState.Invalid;
 
   const objectiveFailed = objectiveState !== ObjectiveState.Completed;
   let objectiveCompletionText;
@@ -398,33 +338,19 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
       break;
   }
 
-  const progressionDiff =
-    Math.round((1 - progressionReward / originalProgression) * 1000) / 10;
+  const progressionDiff = Math.round((1 - progressionReward / originalProgression) * 1000) / 10;
 
   return (
     <Flex height={grow ? '100%' : undefined} direction="column">
       <Flex.Item grow={grow} basis="content">
-        <Box
-          className={classes([
-            'UplinkObjective__Titlebar',
-            reputation.gradient,
-          ])}
-          width="100%"
-          height="100%"
-        >
+        <Box className={classes(['UplinkObjective__Titlebar', reputation.gradient])} width="100%" height="100%">
           <Stack>
             <Stack.Item grow={1}>
-              {name}{' '}
-              {!objectiveFinished ? null : `- ${objectiveCompletionText}`}
+              {name} {!objectiveFinished ? null : `- ${objectiveCompletionText}`}
             </Stack.Item>
             {canAbort && (
               <Stack.Item>
-                <Button
-                  icon="trash"
-                  color="transparent"
-                  tooltip="Abort Objective"
-                  onClick={handleAbort}
-                />
+                <Button icon="trash" color="transparent" tooltip="Abort Objective" onClick={handleAbort} />
               </Stack.Item>
             )}
           </Stack>
@@ -433,16 +359,10 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
       <Flex.Item grow={grow} basis="content">
         <Box className="UplinkObjective__Content" height="100%">
           <Box>{description}</Box>
-          {!finalObjective && (
-            <Box mt={1}>
-              Failing this objective will deduct {telecrystalPenalty} TC.
-            </Box>
-          )}
+          {!finalObjective && <Box mt={1}>Failing this objective will deduct {telecrystalPenalty} TC.</Box>}
           {finalObjective && objectiveState === ObjectiveState.Inactive && (
             <NoticeBox warning mt={1}>
-              Taking this objective will lock you out of getting anymore
-              objectives! Furthermore, you will be unable to abort this
-              objective.
+              Taking this objective will lock you out of getting anymore objectives! Furthermore, you will be unable to abort this objective.
             </NoticeBox>
           )}
         </Box>
@@ -472,38 +392,15 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
                         content={
                           <Box>
                             You will get
-                            <Box
-                              mr={1}
-                              ml={1}
-                              color={
-                                progressionDiff > 0
-                                  ? progressionDiff > 25
-                                    ? 'red'
-                                    : 'orange'
-                                  : 'green'
-                              }
-                              as="span"
-                            >
+                            <Box mr={1} ml={1} color={progressionDiff > 0 ? (progressionDiff > 25 ? 'red' : 'orange') : 'green'} as="span">
                               {Math.abs(progressionDiff)}%
                             </Box>
-                            {progressionDiff > 0 ? 'less' : 'more'} reputation
-                            from this objective. This is because your reputation
-                            is {progressionDiff > 0 ? 'ahead ' : 'behind '}
+                            {progressionDiff > 0 ? 'less' : 'more'} reputation from this objective. This is because your reputation is {progressionDiff > 0 ? 'ahead ' : 'behind '}
                             where it normally should be at.
                           </Box>
                         }
                       >
-                        <Box
-                          ml={1}
-                          color={
-                            progressionDiff > 0
-                              ? progressionDiff > 35
-                                ? 'red'
-                                : 'orange'
-                              : 'green'
-                          }
-                          as="span"
-                        >
+                        <Box ml={1} color={progressionDiff > 0 ? (progressionDiff > 35 ? 'red' : 'orange') : 'green'} as="span">
                           ({progressionDiff > 0 ? '-' : '+'}
                           {Math.abs(progressionDiff)}%)
                         </Box>
@@ -527,18 +424,7 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
                   textAlign="center"
                   bold
                 >
-                  <Box
-                    width="100%"
-                    height="100%"
-                    backgroundColor={
-                      objectiveFailed
-                        ? 'rgba(255, 0, 0, 0.1)'
-                        : 'rgba(0, 255, 0, 0.1)'
-                    }
-                    position="absolute"
-                    left={0}
-                    top={0}
-                  />
+                  <Box width="100%" height="100%" backgroundColor={objectiveFailed ? 'rgba(255, 0, 0, 0.1)' : 'rgba(0, 255, 0, 0.1)'} position="absolute" left={0} top={0} />
                   <Button
                     onClick={handleCompletion}
                     color={objectiveFailed ? 'bad' : 'good'}
@@ -552,9 +438,7 @@ const ObjectiveElement = (props: ObjectiveElementProps) => {
                 </Box>
               ) : null}
             </Stack.Item>
-            {!!uiButtons && !objectiveFinished && (
-              <Stack.Item>{uiButtons}</Stack.Item>
-            )}
+            {!!uiButtons && !objectiveFinished && <Stack.Item>{uiButtons}</Stack.Item>}
           </Stack>
         </Box>
       </Flex.Item>

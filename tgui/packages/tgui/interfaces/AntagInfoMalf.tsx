@@ -137,22 +137,16 @@ const CodewordsSection = (props) => {
       <Stack fill>
         {(!has_codewords && (
           <BlockQuote>
-            You have not been supplied the Syndicate codewords. You will have to
-            use alternative methods to find potential allies. Proceed with
-            caution, however, as everyone is a potential foe.
+            You have not been supplied the Syndicate codewords. You will have to use alternative methods to find potential allies. Proceed with caution, however, as everyone is a
+            potential foe.
           </BlockQuote>
         )) || (
           <>
             <Stack.Item grow basis={0}>
               <BlockQuote>
-                New access to restricted channels has provided you with
-                intercepted syndicate codewords. Syndicate agents will respond
-                as if you&apos;re one of their own. Proceed with caution,
-                however, as everyone is a potential foe.
-                <span style={badstyle}>
-                  &ensp;The speech recognition subsystem has been configured to
-                  flag these codewords.
-                </span>
+                New access to restricted channels has provided you with intercepted syndicate codewords. Syndicate agents will respond as if you&apos;re one of their own. Proceed
+                with caution, however, as everyone is a potential foe.
+                <span style={badstyle}>&ensp;The speech recognition subsystem has been configured to flag these codewords.</span>
               </BlockQuote>
             </Stack.Item>
             <Stack.Divider mr={1} />
@@ -197,27 +191,15 @@ export const AntagInfoMalf = (props) => {
     }
   }
   return (
-    <Window
-      width={660}
-      height={530}
-      theme={(antagInfoTab === 0 && 'hackerman') || 'malfunction'}
-    >
+    <Window width={660} height={530} theme={(antagInfoTab === 0 && 'hackerman') || 'malfunction'}>
       <Window.Content style={{ fontFamily: 'Consolas, monospace' }}>
         <Stack vertical fill>
           <Stack.Item>
             <Tabs fluid>
-              <Tabs.Tab
-                icon="info"
-                selected={antagInfoTab === 0}
-                onClick={() => setAntagInfoTab(0)}
-              >
+              <Tabs.Tab icon="info" selected={antagInfoTab === 0} onClick={() => setAntagInfoTab(0)}>
                 Information
               </Tabs.Tab>
-              <Tabs.Tab
-                icon="code"
-                selected={antagInfoTab === 1}
-                onClick={() => setAntagInfoTab(1)}
-              >
+              <Tabs.Tab icon="code" selected={antagInfoTab === 1} onClick={() => setAntagInfoTab(1)}>
                 Malfunction Modules
               </Tabs.Tab>
             </Tabs>
@@ -241,12 +223,7 @@ export const AntagInfoMalf = (props) => {
           )) || (
             <Stack.Item>
               <Section>
-                <GenericUplink
-                  categories={categoriesList}
-                  items={items}
-                  currency={`${processingTime} PT`}
-                  handleBuy={(item) => act('buy', { name: item.name })}
-                />
+                <GenericUplink categories={categoriesList} items={items} currency={`${processingTime} PT`} handleBuy={(item) => act('buy', { name: item.name })} />
               </Section>
             </Stack.Item>
           )}

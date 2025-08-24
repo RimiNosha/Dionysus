@@ -66,9 +66,7 @@ type OptionalProps = Partial<{
 type Props = OptionalProps & ConditionalProps & BoxProps;
 
 export function toInputValue(value: string | number | undefined) {
-  return typeof value !== 'number' && typeof value !== 'string'
-    ? ''
-    : String(value);
+  return typeof value !== 'number' && typeof value !== 'string' ? '' : String(value);
 }
 
 const inputDebounce = debounce((onInput: () => void) => onInput(), 250);
@@ -80,24 +78,8 @@ const inputDebounce = debounce((onInput: () => void) => onInput(), 250);
  * > it's implemented in CSS. Eventually, this needs to be fixed.
  */
 export function Input(props: Props) {
-  const {
-    autoFocus,
-    autoSelect,
-    className,
-    disabled,
-    expensive,
-    fluid,
-    maxLength,
-    monospace,
-    onChange,
-    onEnter,
-    onEscape,
-    onInput,
-    placeholder,
-    selfClear,
-    value,
-    ...rest
-  } = props;
+  const { autoFocus, autoSelect, className, disabled, expensive, fluid, maxLength, monospace, onChange, onEnter, onEscape, onInput, placeholder, selfClear, value, ...rest } =
+    props;
 
   // The ref to the input field
   const inputRef = useRef<HTMLInputElement>(null);
@@ -156,15 +138,7 @@ export function Input(props: Props) {
   }, []);
 
   return (
-    <Box
-      className={classes([
-        'Input',
-        fluid && 'Input--fluid',
-        monospace && 'Input--monospace',
-        className,
-      ])}
-      {...rest}
-    >
+    <Box className={classes(['Input', fluid && 'Input--fluid', monospace && 'Input--monospace', className])} {...rest}>
       <div className="Input__baseline">.</div>
       <input
         className="Input__input"

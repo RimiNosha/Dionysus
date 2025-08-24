@@ -17,12 +17,7 @@ import { Button, Flex, NoticeBox } from '../../components';
  */
 export const InterfaceLockNoticeBox = (props) => {
   const { act, data } = useBackend();
-  const {
-    siliconUser = data.siliconUser,
-    locked = data.locked,
-    onLockStatusChange = () => act('lock'),
-    accessText = 'an ID card',
-  } = props;
+  const { siliconUser = data.siliconUser, locked = data.locked, onLockStatusChange = () => act('lock'), accessText = 'an ID card' } = props;
   // For silicon users
   if (siliconUser) {
     return (

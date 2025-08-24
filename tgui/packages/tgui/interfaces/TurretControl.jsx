@@ -14,13 +14,7 @@ export const TurretControl = (props) => {
         <Section>
           <LabeledList>
             <LabeledList.Item label="Turret Status">
-              <Button
-                icon={enabled ? 'power-off' : 'times'}
-                content={enabled ? 'Enabled' : 'Disabled'}
-                selected={enabled}
-                disabled={locked}
-                onClick={() => act('power')}
-              />
+              <Button icon={enabled ? 'power-off' : 'times'} content={enabled ? 'Enabled' : 'Disabled'} selected={enabled} disabled={locked} onClick={() => act('power')} />
             </LabeledList.Item>
             <LabeledList.Item label="Turret Mode">
               <Button

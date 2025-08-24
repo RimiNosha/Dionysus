@@ -22,8 +22,7 @@ export const HypertorusParameters = (props) => {
   const energy_minimum_exponent = 12;
   const energy_minimum_suffix = energy_minimum_exponent / 3;
 
-  let activity =
-    heat_output / (heat_output < 0 ? heat_output_min : heat_output_max);
+  let activity = heat_output / (heat_output < 0 ? heat_output_min : heat_output_max);
   if (isNaN(activity) || !isFinite(activity)) {
     activity = 0;
   }
@@ -108,9 +107,7 @@ export const HypertorusParameters = (props) => {
                 value={Math.max(0, Math.log10(data.energy_level))}
                 minValue={energy_minimum_exponent}
                 maxValue={30}
-                format={(v) =>
-                  formatSiUnit(10 ** v, energy_minimum_suffix, 'J')
-                }
+                format={(v) => formatSiUnit(10 ** v, energy_minimum_suffix, 'J')}
                 ranges={{
                   black: [energy_minimum_exponent, 15],
                   grey: [15, 18], // Anything under 1EJ is pretty mediocre
@@ -139,9 +136,7 @@ export const HypertorusParameters = (props) => {
                 value={Math.max(data.instability, 0)}
                 minValue={0}
                 maxValue={10}
-                format={(v) =>
-                  `${data.start_power ? toFixed((v / 8) * 100, 1) : 0}%`
-                }
+                format={(v) => `${data.start_power ? toFixed((v / 8) * 100, 1) : 0}%`}
                 ranges={{
                   orange: [0, 8], // exothermic
                   blue: [8, 10], // endothermic

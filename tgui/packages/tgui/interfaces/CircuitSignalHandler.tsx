@@ -29,10 +29,7 @@ type BitflagToString = {
   [key: number]: string;
 };
 
-export class CircuitSignalHandler extends Component<
-  {},
-  CircuitSignalHandlerState
-> {
+export class CircuitSignalHandler extends Component<{}, CircuitSignalHandlerState> {
   bitflags: BitflagToString;
 
   constructor(props) {
@@ -53,8 +50,7 @@ export class CircuitSignalHandler extends Component<
 
   render() {
     const { act, data } = useBackend<CircuitSignalHandlerData>();
-    const { responseList, parameterList, signal_id, global } = this
-      .state as CircuitSignalHandlerState;
+    const { responseList, parameterList, signal_id, global } = this.state as CircuitSignalHandlerState;
     const { global_port_types } = data;
     return (
       <Window width={600} height={300}>
@@ -63,19 +59,10 @@ export class CircuitSignalHandler extends Component<
             <Stack.Item>
               <Stack fill>
                 <Stack.Item grow>
-                  <Input
-                    placeholder="Signal ID"
-                    value={signal_id}
-                    fluid
-                    onChange={(e, value) => this.setState({ signal_id: value })}
-                  />
+                  <Input placeholder="Signal ID" value={signal_id} fluid onChange={(e, value) => this.setState({ signal_id: value })} />
                 </Stack.Item>
                 <Stack.Item>
-                  <Button.Checkbox
-                    checked={global}
-                    content="Global"
-                    onClick={(e) => this.setState({ global: !global })}
-                  />
+                  <Button.Checkbox checked={global} content="Global" onClick={(e) => this.setState({ global: !global })} />
                 </Stack.Item>
               </Stack>
             </Stack.Item>
@@ -110,9 +97,7 @@ export class CircuitSignalHandler extends Component<
                             // Object.keys returns strings here, even though we
                             // have a number->key assoc array here, so we have
                             // to explicitly cast it to a number[] type.
-                            const bitflag_keys = Object.keys(
-                              this.bitflags,
-                            ) as unknown as number[];
+                            const bitflag_keys = Object.keys(this.bitflags) as unknown as number[];
                             responseList.push({
                               name: 'Response',
                               bitflag: bitflag_keys[responseList.length],
@@ -201,15 +186,7 @@ type EntryProps = {
 };
 
 const Entry = (props: EntryProps) => {
-  const {
-    onRemove,
-    onChange,
-    onSetOption,
-    name,
-    current_option,
-    options = [],
-    ...rest
-  } = props;
+  const { onRemove, onChange, onSetOption, name, current_option, options = [], ...rest } = props;
 
   return (
     <Stack.Item {...rest}>
@@ -218,13 +195,7 @@ const Entry = (props: EntryProps) => {
           <Input placeholder="Name" value={name} onChange={onChange} fluid />
         </Stack.Item>
         <Stack.Item>
-          {(options.length && (
-            <Dropdown
-              displayText={current_option}
-              options={options}
-              onSelected={onSetOption}
-            />
-          )) || (
+          {(options.length && <Dropdown displayText={current_option} options={options} onSelected={onSetOption} />) || (
             <Box textAlign="center" py="2px" px={2}>
               {current_option}
             </Box>

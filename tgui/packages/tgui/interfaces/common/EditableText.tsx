@@ -63,9 +63,7 @@ export const EditableText = (props: Props) => {
           color="transparent"
           icon="backspace"
           ml={1}
-          onClick={() =>
-            act('edit_field', { field: field, ref: target_ref, value: '' })
-          }
+          onClick={() => act('edit_field', { field: field, ref: target_ref, value: '' })}
           tooltip="Clear"
           tooltipPosition="bottom"
         />

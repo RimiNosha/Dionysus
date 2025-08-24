@@ -15,30 +15,11 @@ export const BorgPanel = (props) => {
   return (
     <Window title="Borg Panel" width={700} height={700}>
       <Window.Content scrollable>
-        <Section
-          title={borg.name}
-          buttons={
-            <Button
-              icon="pencil-alt"
-              content="Rename"
-              onClick={() => act('rename')}
-            />
-          }
-        >
+        <Section title={borg.name} buttons={<Button icon="pencil-alt" content="Rename" onClick={() => act('rename')} />}>
           <LabeledList>
             <LabeledList.Item label="Status">
-              <Button
-                icon={borg.emagged ? 'check-square-o' : 'square-o'}
-                content="Emagged"
-                selected={borg.emagged}
-                onClick={() => act('toggle_emagged')}
-              />
-              <Button
-                icon={borg.lockdown ? 'check-square-o' : 'square-o'}
-                content="Locked Down"
-                selected={borg.lockdown}
-                onClick={() => act('toggle_lockdown')}
-              />
+              <Button icon={borg.emagged ? 'check-square-o' : 'square-o'} content="Emagged" selected={borg.emagged} onClick={() => act('toggle_emagged')} />
+              <Button icon={borg.lockdown ? 'check-square-o' : 'square-o'} content="Locked Down" selected={borg.lockdown} onClick={() => act('toggle_lockdown')} />
               <Button
                 icon={borg.scrambledcodes ? 'check-square-o' : 'square-o'}
                 content="Scrambled Codes"
@@ -47,30 +28,11 @@ export const BorgPanel = (props) => {
               />
             </LabeledList.Item>
             <LabeledList.Item label="Charge">
-              {!cell.missing ? (
-                <ProgressBar value={cellPercent}>
-                  {cell.charge + ' / ' + cell.maxcharge}
-                </ProgressBar>
-              ) : (
-                <span className="color-bad">No cell installed</span>
-              )}
+              {!cell.missing ? <ProgressBar value={cellPercent}>{cell.charge + ' / ' + cell.maxcharge}</ProgressBar> : <span className="color-bad">No cell installed</span>}
               <br />
-              <Button
-                icon="pencil-alt"
-                content="Set"
-                onClick={() => act('set_charge')}
-              />
-              <Button
-                icon="eject"
-                content="Change"
-                onClick={() => act('change_cell')}
-              />
-              <Button
-                icon="trash"
-                content="Remove"
-                color="bad"
-                onClick={() => act('remove_cell')}
-              />
+              <Button icon="pencil-alt" content="Set" onClick={() => act('set_charge')} />
+              <Button icon="eject" content="Change" onClick={() => act('change_cell')} />
+              <Button icon="trash" content="Remove" color="bad" onClick={() => act('remove_cell')} />
             </LabeledList.Item>
             <LabeledList.Item label="Radio Channels">
               {channels.map((channel) => (
@@ -91,11 +53,7 @@ export const BorgPanel = (props) => {
               {modules.map((module) => (
                 <Button
                   key={module.type}
-                  icon={
-                    borg.active_module === module.type
-                      ? 'check-square-o'
-                      : 'square-o'
-                  }
+                  icon={borg.active_module === module.type ? 'check-square-o' : 'square-o'}
                   content={module.name}
                   selected={borg.active_module === module.type}
                   onClick={() =>
@@ -140,14 +98,7 @@ export const BorgPanel = (props) => {
         </Section>
         <Section
           title="Laws"
-          buttons={
-            <Button
-              icon={borg.lawupdate ? 'check-square-o' : 'square-o'}
-              content="Lawsync"
-              selected={borg.lawupdate}
-              onClick={() => act('toggle_lawupdate')}
-            />
-          }
+          buttons={<Button icon={borg.lawupdate ? 'check-square-o' : 'square-o'} content="Lawsync" selected={borg.lawupdate} onClick={() => act('toggle_lawupdate')} />}
         >
           {laws.map((law) => (
             <Box key={law}>{law}</Box>

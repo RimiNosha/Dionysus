@@ -2,24 +2,9 @@ import { classes } from 'common/react';
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import {
-  BlockQuote,
-  Box,
-  Button,
-  Divider,
-  Icon,
-  Section,
-  Stack,
-} from '../../components';
+import { BlockQuote, Box, Button, Divider, Icon, Section, Stack } from '../../components';
 import { CharacterPreview } from './CharacterPreview';
-import {
-  createSetPreference,
-  Food,
-  Perk,
-  PreferencesMenuData,
-  ServerData,
-  Species,
-} from './data';
+import { createSetPreference, Food, Perk, PreferencesMenuData, ServerData, Species } from './data';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 const FOOD_ICONS = {
@@ -56,11 +41,7 @@ const FOOD_NAMES: Record<keyof typeof FOOD_ICONS, string> = {
   [Food.Vegetables]: 'Vegetables',
 };
 
-const IGNORE_UNLESS_LIKED: Set<Food> = new Set([
-  Food.Cloth,
-  Food.Gross,
-  Food.Toxic,
-]);
+const IGNORE_UNLESS_LIKED: Set<Food> = new Set([Food.Cloth, Food.Gross, Food.Toxic]);
 
 const notIn = function <T>(set: Set<T>) {
   return (value: T) => {
@@ -68,12 +49,7 @@ const notIn = function <T>(set: Set<T>) {
   };
 };
 
-const FoodList = (props: {
-  className: string;
-  food: Food[];
-  icon: string;
-  name: string;
-}) => {
+const FoodList = (props: { className: string; food: Food[]; icon: string; name: string }) => {
   if (props.food.length === 0) {
     return null;
   }
@@ -101,12 +77,7 @@ const FoodList = (props: {
           return (
             FOOD_ICONS[food] && (
               <Stack.Item>
-                <Icon
-                  className={props.className}
-                  size={1.4}
-                  key={food}
-                  name={FOOD_ICONS[food]}
-                />
+                <Icon className={props.className} size={1.4} key={food} name={FOOD_ICONS[food]} />
               </Stack.Item>
             )
           );
@@ -126,30 +97,15 @@ const Diet = (props: { diet: Species['diet'] }) => {
   return (
     <Stack>
       <Stack.Item>
-        <FoodList
-          food={liked_food}
-          icon="heart"
-          name="Liked food"
-          className="color-pink"
-        />
+        <FoodList food={liked_food} icon="heart" name="Liked food" className="color-pink" />
       </Stack.Item>
 
       <Stack.Item>
-        <FoodList
-          food={disliked_food.filter(notIn(IGNORE_UNLESS_LIKED))}
-          icon="thumbs-down"
-          name="Disliked food"
-          className="color-red"
-        />
+        <FoodList food={disliked_food.filter(notIn(IGNORE_UNLESS_LIKED))} icon="thumbs-down" name="Disliked food" className="color-red" />
       </Stack.Item>
 
       <Stack.Item>
-        <FoodList
-          food={toxic_food.filter(notIn(IGNORE_UNLESS_LIKED))}
-          icon="biohazard"
-          name="Toxic food"
-          className="color-olive"
-        />
+        <FoodList food={toxic_food.filter(notIn(IGNORE_UNLESS_LIKED))} icon="biohazard" name="Toxic food" className="color-olive" />
       </Stack.Item>
     </Stack>
   );
@@ -226,18 +182,13 @@ const SpeciesPerks = (props: { perks: Species['perks'] }) => {
   );
 };
 
-const SpeciesPageInner = (props: {
-  handleClose: () => void;
-  species: ServerData['species'];
-}) => {
+const SpeciesPageInner = (props: { handleClose: () => void; species: ServerData['species'] }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
   const setSpecies = createSetPreference(act, 'species');
 
-  let species: [string, Species][] = Object.entries(props.species).map(
-    ([species, data]) => {
-      return [species, data];
-    },
-  );
+  let species: [string, Species][] = Object.entries(props.species).map(([species, data]) => {
+    return [species, data];
+  });
 
   // Humans are always the top of the list
   const humanIndex = species.findIndex(([species]) => species === 'human');
@@ -252,11 +203,7 @@ const SpeciesPageInner = (props: {
   return (
     <Stack vertical fill>
       <Stack.Item>
-        <Button
-          icon="arrow-left"
-          onClick={props.handleClose}
-          content="Go Back"
-        />
+        <Button icon="arrow-left" onClick={props.handleClose} content="Go Back" />
       </Stack.Item>
 
       <Stack.Item grow>
@@ -268,9 +215,7 @@ const SpeciesPageInner = (props: {
                   <Button
                     key={speciesKey}
                     onClick={() => setSpecies(speciesKey)}
-                    selected={
-                      data.character_preferences.misc.species === speciesKey
-                    }
+                    selected={data.character_preferences.misc.species === speciesKey}
                     tooltip={species.name}
                     style={{
                       display: 'block',
@@ -278,10 +223,7 @@ const SpeciesPageInner = (props: {
                       width: '64px',
                     }}
                   >
-                    <Box
-                      className={classes(['species64x64', species.icon])}
-                      ml={-1}
-                    />
+                    <Box className={classes(['species64x64', species.icon])} ml={-1} />
                   </Button>
                 );
               })}
@@ -298,14 +240,10 @@ const SpeciesPageInner = (props: {
                       buttons={
                         // NOHUNGER species have no diet (diet = null),
                         // so we have nothing to show
-                        currentSpecies.diet && (
-                          <Diet diet={currentSpecies.diet} />
-                        )
+                        currentSpecies.diet && <Diet diet={currentSpecies.diet} />
                       }
                     >
-                      <Section title="Description">
-                        {currentSpecies.desc}
-                      </Section>
+                      <Section title="Description">{currentSpecies.desc}</Section>
 
                       <Section title="Features">
                         <SpeciesPerks perks={currentSpecies.perks} />
@@ -314,10 +252,7 @@ const SpeciesPageInner = (props: {
                   </Stack.Item>
 
                   <Stack.Item width="30%">
-                    <CharacterPreview
-                      id={data.character_preview_view}
-                      height="100%"
-                    />
+                    <CharacterPreview id={data.character_preview_view} height="100%" />
                   </Stack.Item>
                 </Stack>
               </Box>
@@ -352,12 +287,7 @@ export const SpeciesPage = (props: { closeSpecies: () => void }) => {
     <ServerPreferencesFetcher
       render={(serverData) => {
         if (serverData) {
-          return (
-            <SpeciesPageInner
-              handleClose={props.closeSpecies}
-              species={serverData.species}
-            />
-          );
+          return <SpeciesPageInner handleClose={props.closeSpecies} species={serverData.species} />;
         } else {
           return <Box>Loading species...</Box>;
         }

@@ -14,10 +14,7 @@ export enum BodyZone {
   RightLeg = 'r_leg',
 }
 
-const bodyZonePixelToZone: (x: number, y: number) => BodyZone | null = (
-  x,
-  y,
-) => {
+const bodyZonePixelToZone: (x: number, y: number) => BodyZone | null = (x, y) => {
   // TypeScript translation of /atom/movable/screen/zone_sel/proc/get_zone_at
   if (y < 1) {
     return null;
@@ -66,10 +63,7 @@ type BodyZoneSelectorState = {
   hoverZone: BodyZone | null;
 };
 
-export class BodyZoneSelector extends Component<
-  BodyZoneSelectorProps,
-  BodyZoneSelectorState
-> {
+export class BodyZoneSelector extends Component<BodyZoneSelectorProps, BodyZoneSelectorState> {
   ref = createRef<HTMLDivElement>();
   state: BodyZoneSelectorState = {
     hoverZone: null,

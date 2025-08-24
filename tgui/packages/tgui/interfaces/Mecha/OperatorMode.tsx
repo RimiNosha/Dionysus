@@ -17,9 +17,7 @@ export const OperatorMode = (props) => {
       <Stack.Item grow>
         <Stack fill vertical>
           <Stack.Item grow>
-            <Section fill>
-              {left_arm_weapon ? <ArmPane weapon={left_arm_weapon} /> : null}
-            </Section>
+            <Section fill>{left_arm_weapon ? <ArmPane weapon={left_arm_weapon} /> : null}</Section>
           </Stack.Item>
           <Stack.Item>
             <Section title="Power Modules">
@@ -55,9 +53,7 @@ export const OperatorMode = (props) => {
       <Stack.Item grow>
         <Stack fill vertical>
           <Stack.Item grow>
-            <Section fill>
-              {right_arm_weapon ? <ArmPane weapon={right_arm_weapon} /> : null}
-            </Section>
+            <Section fill>{right_arm_weapon ? <ArmPane weapon={right_arm_weapon} /> : null}</Section>
           </Stack.Item>
           <Stack.Item>
             <Section title="Utility Modules">

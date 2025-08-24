@@ -5,14 +5,7 @@
  */
 
 import { useDispatch, useSelector } from 'tgui/backend';
-import {
-  Button,
-  Collapsible,
-  Divider,
-  Input,
-  Section,
-  Stack,
-} from 'tgui/components';
+import { Button, Collapsible, Divider, Input, Section, Stack } from 'tgui/components';
 
 import { removeChatPage, toggleAcceptedType, updateChatPage } from './actions';
 import { MESSAGE_TYPES } from './constants';
@@ -56,9 +49,7 @@ export const ChatPageSettings = (props) => {
       </Stack>
       <Divider />
       <Section title="Messages to display" level={2}>
-        {MESSAGE_TYPES.filter(
-          (typeDef) => !typeDef.important && !typeDef.admin,
-        ).map((typeDef) => (
+        {MESSAGE_TYPES.filter((typeDef) => !typeDef.important && !typeDef.admin).map((typeDef) => (
           <Button.Checkbox
             key={typeDef.type}
             checked={page.acceptedTypes[typeDef.type]}
@@ -75,9 +66,7 @@ export const ChatPageSettings = (props) => {
           </Button.Checkbox>
         ))}
         <Collapsible mt={1} color="transparent" title="Admin stuff">
-          {MESSAGE_TYPES.filter(
-            (typeDef) => !typeDef.important && typeDef.admin,
-          ).map((typeDef) => (
+          {MESSAGE_TYPES.filter((typeDef) => !typeDef.important && typeDef.admin).map((typeDef) => (
             <Button.Checkbox
               key={typeDef.type}
               checked={page.acceptedTypes[typeDef.type]}

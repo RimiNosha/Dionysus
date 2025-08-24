@@ -13,10 +13,7 @@ export const Layout = (props) => {
   document.documentElement.className = `theme-${theme}`;
   return (
     <div className={'theme-' + theme}>
-      <div
-        className={classes(['Layout', className, ...computeBoxClassName(rest)])}
-        {...computeBoxProps(rest)}
-      >
+      <div className={classes(['Layout', className, ...computeBoxClassName(rest)])} {...computeBoxProps(rest)}>
         {children}
       </div>
     </div>
@@ -26,15 +23,7 @@ export const Layout = (props) => {
 const LayoutContent = (props) => {
   const { className, scrollable, children, ...rest } = props;
   return (
-    <div
-      className={classes([
-        'Layout__content',
-        scrollable && 'Layout__content--scrollable',
-        className,
-        ...computeBoxClassName(rest),
-      ])}
-      {...computeBoxProps(rest)}
-    >
+    <div className={classes(['Layout__content', scrollable && 'Layout__content--scrollable', className, ...computeBoxClassName(rest)])} {...computeBoxProps(rest)}>
       {children}
     </div>
   );

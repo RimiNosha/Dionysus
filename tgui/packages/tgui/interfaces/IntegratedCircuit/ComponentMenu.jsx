@@ -26,17 +26,13 @@ export class ComponentMenu extends Component {
 
   async populateServerData() {
     if (!fetchServerData) {
-      fetchServerData = fetchRetry(
-        resolveAsset('circuit_components.json'),
-      ).then((response) => response.json());
+      fetchServerData = fetchRetry(resolveAsset('circuit_components.json')).then((response) => response.json());
     }
 
     const circuitData = await fetchServerData;
 
     this.setState({
-      componentData: circuitData.sort(
-        (a, b) => a.name.toLowerCase() < b.name.toLowerCase(),
-      ),
+      componentData: circuitData.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase()),
     });
   }
 
@@ -51,19 +47,8 @@ export class ComponentMenu extends Component {
   }
 
   render() {
-    const {
-      components = [],
-      showAll = false,
-      onMouseDownComponent,
-      onClose,
-      ...rest
-    } = this.props;
-    const {
-      selectedTab,
-      componentData = [],
-      currentLimit,
-      currentSearch,
-    } = this.state;
+    const { components = [], showAll = false, onMouseDownComponent, onClose, ...rest } = this.props;
+    const { selectedTab, componentData = [], currentLimit, currentSearch } = this.state;
 
     const tabs = ['All'];
     let shownComponents = componentData.filter((val) => {
@@ -73,9 +58,7 @@ export class ComponentMenu extends Component {
           tabs.push(val.category);
         }
         if (currentSearch !== '') {
-          const result = val.name
-            .toLowerCase()
-            .search(currentSearch.toLowerCase());
+          const result = val.name.toLowerCase().search(currentSearch.toLowerCase());
           return result !== -1;
         }
         return selectedTab === 'All' || selectedTab === val.category;
@@ -94,9 +77,7 @@ export class ComponentMenu extends Component {
         title="Component Menu"
         {...rest}
         fill
-        buttons={
-          <Button icon="times" color="transparent" mr={2} onClick={onClose} />
-        }
+        buttons={<Button icon="times" color="transparent" mr={2} onClick={onClose} />}
         onMouseUp={(event) => {
           event.preventDefault();
         }}
@@ -136,38 +117,18 @@ export class ComponentMenu extends Component {
           <Stack.Item>
             <Stack vertical fill>
               {shownComponents.map((val) => (
-                <Stack.Item
-                  key={val.type}
-                  mt={1}
-                  onMouseDown={(e) => onMouseDownComponent(e, val)}
-                >
-                  <Box
-                    backgroundColor={val.color || 'blue'}
-                    py={1}
-                    px={1}
-                    className="ObjectComponent__Titlebar"
-                  >
+                <Stack.Item key={val.type} mt={1} onMouseDown={(e) => onMouseDownComponent(e, val)}>
+                  <Box backgroundColor={val.color || 'blue'} py={1} px={1} className="ObjectComponent__Titlebar">
                     <Stack>
                       <Stack.Item grow={1} unselectable="on">
                         {val.name}
                       </Stack.Item>
                       <Stack.Item>
-                        <Button
-                          color="transparent"
-                          icon="info"
-                          compact
-                          tooltip={val.description}
-                          tooltipPosition="top"
-                        />
+                        <Button color="transparent" icon="info" compact tooltip={val.description} tooltipPosition="top" />
                       </Stack.Item>
                     </Stack>
                   </Box>
-                  <Box
-                    className="ObjectComponent__Content"
-                    unselectable="on"
-                    py={1}
-                    px={1}
-                  >
+                  <Box className="ObjectComponent__Content" unselectable="on" py={1} px={1}>
                     <Stack>
                       <Stack.Item grow>
                         <Stack vertical fill>

@@ -11,27 +11,13 @@ export const TankDispenser = (props) => {
           <LabeledList>
             <LabeledList.Item
               label="Plasma"
-              buttons={
-                <Button
-                  icon={data.plasma ? 'square' : 'square-o'}
-                  content="Dispense"
-                  disabled={!data.plasma}
-                  onClick={() => act('plasma')}
-                />
-              }
+              buttons={<Button icon={data.plasma ? 'square' : 'square-o'} content="Dispense" disabled={!data.plasma} onClick={() => act('plasma')} />}
             >
               {data.plasma}
             </LabeledList.Item>
             <LabeledList.Item
               label="Oxygen"
-              buttons={
-                <Button
-                  icon={data.oxygen ? 'square' : 'square-o'}
-                  content="Dispense"
-                  disabled={!data.oxygen}
-                  onClick={() => act('oxygen')}
-                />
-              }
+              buttons={<Button icon={data.oxygen ? 'square' : 'square-o'} content="Dispense" disabled={!data.oxygen} onClick={() => act('oxygen')} />}
             >
               {data.oxygen}
             </LabeledList.Item>

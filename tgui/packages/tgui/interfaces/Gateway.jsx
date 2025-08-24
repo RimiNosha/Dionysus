@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  NoticeBox,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, Icon, NoticeBox, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Gateway = () => {
@@ -21,12 +14,7 @@ export const Gateway = () => {
 
 const GatewayContent = (props) => {
   const { act, data } = useBackend();
-  const {
-    gateway_present = false,
-    gateway_status = false,
-    current_target = null,
-    destinations = [],
-  } = data;
+  const { gateway_present = false, gateway_status = false, current_target = null, destinations = [] } = data;
   if (!gateway_present) {
     return (
       <Section>
@@ -71,9 +59,7 @@ const GatewayContent = (props) => {
               <Box m={1} textColor="bad">
                 {dest.reason}
               </Box>
-              {!!dest.timeout && (
-                <ProgressBar value={dest.timeout}>Calibrating...</ProgressBar>
-              )}
+              {!!dest.timeout && <ProgressBar value={dest.timeout}>Calibrating...</ProgressBar>}
             </>
           )}
         </Section>

@@ -1,27 +1,12 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Icon,
-  LabeledList,
-  Section,
-  Tabs,
-} from '../components';
+import { Box, Button, Dimmer, Icon, LabeledList, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
 export const Limbgrower = (props) => {
   const { act, data } = useBackend();
-  const {
-    reagents = [],
-    total_reagents,
-    max_reagents,
-    categories = [],
-    busy,
-  } = data;
+  const { reagents = [], total_reagents, max_reagents, categories = [], busy } = data;
   const [tab, setTab] = useSharedState('category', categories[0]?.name);
-  const designList =
-    categories.find((category) => category.name === tab)?.designs || [];
+  const designList = categories.find((category) => category.name === tab)?.designs || [];
 
   return (
     <Window title="Limb Grower" width={400} height={550}>
@@ -63,12 +48,7 @@ export const Limbgrower = (props) => {
         <Section title="Designs">
           <Tabs>
             {categories.map((category) => (
-              <Tabs.Tab
-                fluid
-                key={category.name}
-                selected={tab === category.name}
-                onClick={() => setTab(category.name)}
-              >
+              <Tabs.Tab fluid key={category.name} selected={tab === category.name} onClick={() => setTab(category.name)}>
                 {category.name}
               </Tabs.Tab>
             ))}

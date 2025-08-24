@@ -2,15 +2,7 @@ import { sortBy } from 'common/collections';
 import { createSearch } from 'common/string';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Input,
-  NoticeBox,
-  Section,
-  Table,
-} from '../components';
+import { Box, Button, Collapsible, Input, NoticeBox, Section, Table } from '../components';
 import { Window } from '../layouts';
 
 export const Stack = (props) => {
@@ -44,18 +36,11 @@ export const Stack = (props) => {
           buttons={
             <>
               Search
-              <Input
-                autoFocus
-                value={searchText}
-                onInput={(e, value) => setSearchText(value)}
-                mx={1}
-              />
+              <Input autoFocus value={searchText} onInput={(e, value) => setSearchText(value)} mx={1} />
             </>
           }
         >
-          {(items.length === 0 && <NoticeBox>No recipes found.</NoticeBox>) || (
-            <RecipeList recipes={items} />
-          )}
+          {(items.length === 0 && <NoticeBox>No recipes found.</NoticeBox>) || <RecipeList recipes={items} />}
         </Section>
       </Window.Content>
     </Window>
@@ -98,10 +83,7 @@ const Multipliers = (props) => {
 
   const { recipe, maxMultiplier } = props;
 
-  const maxM = Math.min(
-    maxMultiplier,
-    Math.floor(recipe.max_res_amount / recipe.res_amount),
-  );
+  const maxM = Math.min(maxMultiplier, Math.floor(recipe.max_res_amount / recipe.res_amount));
 
   const multipliers = [5, 10, 25];
 

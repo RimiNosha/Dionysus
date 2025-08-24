@@ -1,16 +1,5 @@
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Dimmer,
-  Divider,
-  Icon,
-  LabeledList,
-  NumberInput,
-  Section,
-  Stack,
-} from '../../components';
+import { Box, Button, Collapsible, Dimmer, Divider, Icon, LabeledList, NumberInput, Section, Stack } from '../../components';
 import { PULSE_DURATION_MAX, PULSE_STRENGTH_MAX } from './constants';
 import { GeneticMakeupInfo } from './GeneticMakeupInfo';
 
@@ -150,14 +139,7 @@ const GeneticMakeupBufferInfo = (props) => {
 
 const GeneticMakeupBuffers = (props) => {
   const { data, act } = useBackend();
-  const {
-    diskHasMakeup,
-    geneticMakeupCooldown,
-    hasDisk,
-    isViableSubject,
-    makeupCapacity = 3,
-    makeupStorage,
-  } = data;
+  const { diskHasMakeup, geneticMakeupCooldown, hasDisk, isViableSubject, makeupCapacity = 3, makeupStorage } = data;
   const elements = [];
   for (let i = 1; i <= makeupCapacity; i++) {
     const makeup = makeupStorage[i];

@@ -3,25 +3,13 @@ import { BooleanLike, classes } from 'common/react';
 import { ComponentType, createElement, ReactNode } from 'react';
 
 import { sendAct, useBackend, useLocalState } from '../../../../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Input,
-  NumberInput,
-  Stack,
-  TextArea,
-} from '../../../../components';
+import { Box, Button, Dropdown, Input, NumberInput, Stack, TextArea } from '../../../../components';
 import { createSetPreference, PreferencesMenuData } from '../../data';
 import { ServerPreferencesFetcher } from '../../ServerPreferencesFetcher';
 
 export const sortChoices = sortBy<[string, ReactNode]>(([name]) => name);
 
-export type Feature<
-  TReceiving,
-  TSending = TReceiving,
-  TServerData = undefined,
-> = {
+export type Feature<TReceiving, TSending = TReceiving, TServerData = undefined> = {
   category?: string;
   component: FeatureValue<TReceiving, TSending, TServerData>;
   description?: string;
@@ -34,17 +22,9 @@ export type Feature<
  * TSending = The type you will be sending
  * TServerData = The data the server sends through preferences.json
  */
-type FeatureValue<
-  TReceiving,
-  TSending = TReceiving,
-  TServerData = undefined,
-> = ComponentType<FeatureValueProps<TReceiving, TSending, TServerData>>;
+type FeatureValue<TReceiving, TSending = TReceiving, TServerData = undefined> = ComponentType<FeatureValueProps<TReceiving, TSending, TServerData>>;
 
-export type FeatureValueProps<
-  TReceiving,
-  TSending = TReceiving,
-  TServerData = undefined,
-> = Readonly<{
+export type FeatureValueProps<TReceiving, TSending = TReceiving, TServerData = undefined> = Readonly<{
   act: typeof sendAct;
   featureId: string;
   handleSetValue: (newValue: TSending) => void;
@@ -66,9 +46,7 @@ export const FeatureColorInput = (props: FeatureValueProps<string>) => {
         <Stack.Item>
           <Box
             style={{
-              background: props.value.startsWith('#')
-                ? props.value
-                : `#${props.value}`,
+              background: props.value.startsWith('#') ? props.value : `#${props.value}`,
               border: '2px solid white',
               boxSizing: 'content-box',
               height: '11px',
@@ -90,9 +68,7 @@ export const FeatureColorInput = (props: FeatureValueProps<string>) => {
 
 export type FeatureToggle = Feature<BooleanLike, boolean>;
 
-export const CheckboxInput = (
-  props: FeatureValueProps<BooleanLike, boolean>,
-) => {
+export const CheckboxInput = (props: FeatureValueProps<BooleanLike, boolean>) => {
   return (
     <Button.Checkbox
       checked={!!props.value}
@@ -103,9 +79,7 @@ export const CheckboxInput = (
   );
 };
 
-export const CheckboxInputInverse = (
-  props: FeatureValueProps<BooleanLike, boolean>,
-) => {
+export const CheckboxInputInverse = (props: FeatureValueProps<BooleanLike, boolean>) => {
   return (
     <Button.Checkbox
       checked={!props.value}
@@ -128,14 +102,12 @@ export const createDropdownInput = <T extends string | number = string>(
         displayText={choices[props.value]}
         onSelected={props.handleSetValue}
         width="100%"
-        options={sortChoices(Object.entries(choices)).map(
-          ([dataValue, label]) => {
-            return {
-              displayText: label,
-              value: dataValue,
-            };
-          },
-        )}
+        options={sortChoices(Object.entries(choices)).map(([dataValue, label]) => {
+          return {
+            displayText: label,
+            value: dataValue,
+          };
+        })}
         {...dropdownProps}
       />
     );
@@ -150,8 +122,7 @@ export type FeatureChoicedServerData = {
 
 export type FeatureChoiced = Feature<string, string, FeatureChoicedServerData>;
 
-const capitalizeFirstLetter = (text: string) =>
-  text.toString().charAt(0).toUpperCase() + text.toString().slice(1);
+const capitalizeFirstLetter = (text: string) => text.toString().charAt(0).toUpperCase() + text.toString().slice(1);
 
 export const StandardizedDropdown = (props: {
   choices: string[];
@@ -189,31 +160,14 @@ export const FeatureDropdownInput = (
     return null;
   }
 
-  const displayNames =
-    serverData.display_names ||
-    Object.fromEntries(
-      serverData.choices.map((choice) => [
-        choice,
-        capitalizeFirstLetter(choice),
-      ]),
-    );
+  const displayNames = serverData.display_names || Object.fromEntries(serverData.choices.map((choice) => [choice, capitalizeFirstLetter(choice)]));
 
   return (
-    <StandardizedDropdown
-      choices={sortStrings(serverData.choices)}
-      disabled={props.disabled}
-      displayNames={displayNames}
-      onSetValue={props.handleSetValue}
-      value={props.value}
-    />
+    <StandardizedDropdown choices={sortStrings(serverData.choices)} disabled={props.disabled} displayNames={displayNames} onSetValue={props.handleSetValue} value={props.value} />
   );
 };
 
-export type FeatureWithIcons<T> = Feature<
-  { value: T },
-  T,
-  FeatureChoicedServerData
->;
+export type FeatureWithIcons<T> = Feature<{ value: T }, T, FeatureChoicedServerData>;
 
 export const FeatureIconnedDropdownInput = (
   props: FeatureValueProps<
@@ -231,14 +185,7 @@ export const FeatureIconnedDropdownInput = (
 
   const icons = serverData.icons;
 
-  const textNames =
-    serverData.display_names ||
-    Object.fromEntries(
-      serverData.choices.map((choice) => [
-        choice,
-        capitalizeFirstLetter(choice),
-      ]),
-    );
+  const textNames = serverData.display_names || Object.fromEntries(serverData.choices.map((choice) => [choice, capitalizeFirstLetter(choice)]));
 
   const displayNames = Object.fromEntries(
     Object.entries(textNames).map(([choice, textName]) => {
@@ -266,14 +213,7 @@ export const FeatureIconnedDropdownInput = (
     }),
   );
 
-  return (
-    <StandardizedDropdown
-      choices={sortStrings(serverData.choices)}
-      displayNames={displayNames}
-      onSetValue={props.handleSetValue}
-      value={props.value.value}
-    />
-  );
+  return <StandardizedDropdown choices={sortStrings(serverData.choices)} displayNames={displayNames} onSetValue={props.handleSetValue} value={props.value.value} />;
 };
 
 export type FeatureNumericData = {
@@ -284,9 +224,7 @@ export type FeatureNumericData = {
 
 export type FeatureNumeric = Feature<number, number, FeatureNumericData>;
 
-export const FeatureNumberInput = (
-  props: FeatureValueProps<number, number, FeatureNumericData>,
-) => {
+export const FeatureNumberInput = (props: FeatureValueProps<number, number, FeatureNumericData>) => {
   if (!props.serverData) {
     return <Box>Loading...</Box>;
   }
@@ -316,10 +254,7 @@ export const FeatureValueInput = (props: {
 
   const feature = props.feature;
 
-  const [predictedValue, setPredictedValue] = useLocalState(
-    `${props.featureId}_predictedValue_${data.active_slot}`,
-    props.value,
-  );
+  const [predictedValue, setPredictedValue] = useLocalState(`${props.featureId}_predictedValue_${data.active_slot}`, props.value);
 
   const changeValue = (newValue: unknown) => {
     setPredictedValue(newValue);
@@ -346,23 +281,11 @@ export const FeatureValueInput = (props: {
 // PARIAH FEATURES
 
 export const FeatureTextInput = (props: FeatureValueProps<string>) => {
-  return (
-    <TextArea
-      height="100px"
-      value={props.value}
-      onChange={(_, value) => props.handleSetValue(value)}
-    />
-  );
+  return <TextArea height="100px" value={props.value} onChange={(_, value) => props.handleSetValue(value)} />;
 };
 
 export const FeatureShortTextInput = (props: FeatureValueProps<string>) => {
-  return (
-    <Input
-      width="100%"
-      value={props.value}
-      onChange={(_, value) => props.handleSetValue(value)}
-    />
-  );
+  return <Input width="100%" value={props.value} onChange={(_, value) => props.handleSetValue(value)} />;
 };
 
 export const FeatureTriColorInput = (props: FeatureValueProps<string[]>) => {
@@ -381,9 +304,7 @@ export const FeatureTriColorInput = (props: FeatureValueProps<string[]>) => {
             <Stack.Item>
               <Box
                 style={{
-                  background: props.value[index].startsWith('#')
-                    ? props.value[index]
-                    : `#${props.value[index]}`,
+                  background: props.value[index].startsWith('#') ? props.value[index] : `#${props.value[index]}`,
                   border: '2px solid white',
                   boxSizing: 'content-box',
                   height: '11px',

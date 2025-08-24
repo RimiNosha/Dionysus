@@ -1,9 +1,4 @@
-import {
-  CheckboxInput,
-  Feature,
-  FeatureNumberInput,
-  FeatureToggle,
-} from '../base';
+import { CheckboxInput, Feature, FeatureNumberInput, FeatureToggle } from '../base';
 
 export const enable_tips: FeatureToggle = {
   name: 'Enable tooltips',

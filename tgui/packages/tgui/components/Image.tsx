@@ -35,13 +35,7 @@ export class Image extends Component<Props> {
   }
 
   render() {
-    const {
-      fixBlur = true,
-      fixErrors = false,
-      objectFit = 'fill',
-      src,
-      ...rest
-    } = this.props;
+    const { fixBlur = true, fixErrors = false, objectFit = 'fill', src, ...rest } = this.props;
 
     const computedProps = computeBoxProps(rest) as Record<string, any>;
     computedProps['style'] = {

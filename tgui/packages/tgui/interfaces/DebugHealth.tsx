@@ -2,15 +2,7 @@ import { toTitleCase } from 'common/string';
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Button,
-  Collapsible,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Button, Collapsible, LabeledList, NoticeBox, Section, Stack, Tabs } from '../components';
 import { TableCell, TableRow } from '../components/Table';
 import { Window } from '../layouts';
 
@@ -27,11 +19,7 @@ export const DebugHealth = (props) => {
           <Stack.Item>
             <Tabs>
               {tabs.map((key) => (
-                <Tabs.Tab
-                  key={key}
-                  selected={currentTab === key}
-                  onClick={() => setCurrentTab(key)}
-                >
+                <Tabs.Tab key={key} selected={currentTab === key} onClick={() => setCurrentTab(key)}>
                   {toTitleCase(key)}
                 </Tabs.Tab>
               ))}
@@ -39,11 +27,7 @@ export const DebugHealth = (props) => {
           </Stack.Item>
           <Stack.Item grow>
             <Section fill scrollable>
-              {currentTab === 'body' ? (
-                <InfoSection data={data[currentTab]} />
-              ) : (
-                <ExpandableSection data={data[currentTab]} />
-              )}
+              {currentTab === 'body' ? <InfoSection data={data[currentTab]} /> : <ExpandableSection data={data[currentTab]} />}
             </Section>
           </Stack.Item>
         </Stack>

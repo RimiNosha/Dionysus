@@ -9,11 +9,7 @@ export const EightBallVote = (props) => {
   const { shaking } = data;
   return (
     <Window width={400} height={600}>
-      <Window.Content>
-        {(!shaking && (
-          <NoticeBox>No question is currently being asked.</NoticeBox>
-        )) || <EightBallVoteQuestion />}
-      </Window.Content>
+      <Window.Content>{(!shaking && <NoticeBox>No question is currently being asked.</NoticeBox>) || <EightBallVoteQuestion />}</Window.Content>
     </Window>
   );
 };

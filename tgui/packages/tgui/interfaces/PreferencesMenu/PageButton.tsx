@@ -11,19 +11,10 @@ export const PageButton = <P extends unknown>(props: {
 
   setPage: (page: P) => void;
 }) => {
-  const pageIsActive =
-    props.currentPage === props.page ||
-    (props.otherActivePages &&
-      props.otherActivePages.indexOf(props.currentPage) !== -1);
+  const pageIsActive = props.currentPage === props.page || (props.otherActivePages && props.otherActivePages.indexOf(props.currentPage) !== -1);
 
   return (
-    <Button
-      align="center"
-      fontSize="1.2em"
-      fluid
-      selected={pageIsActive}
-      onClick={() => props.setPage(props.page)}
-    >
+    <Button align="center" fontSize="1.2em" fluid selected={pageIsActive} onClick={() => props.setPage(props.page)}>
       {props.children}
     </Button>
   );

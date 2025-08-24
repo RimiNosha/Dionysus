@@ -19,21 +19,14 @@ export const BluespaceLocator = (props) => {
     <Window width={300} height={300}>
       <Window.Content scrollable>
         <Tabs>
-          <Tabs.Tab
-            selected={tab === 'implant'}
-            onClick={() => setTab('implant')}
-          >
+          <Tabs.Tab selected={tab === 'implant'} onClick={() => setTab('implant')}>
             Implants
           </Tabs.Tab>
-          <Tabs.Tab
-            selected={tab === 'beacon'}
-            onClick={() => setTab('beacon')}
-          >
+          <Tabs.Tab selected={tab === 'beacon'} onClick={() => setTab('beacon')}>
             Teleporter Beacons
           </Tabs.Tab>
         </Tabs>
-        {(tab === 'beacon' && <TeleporterBeacons />) ||
-          (tab === 'implant' && <TrackingImplants />)}
+        {(tab === 'beacon' && <TeleporterBeacons />) || (tab === 'implant' && <TrackingImplants />)}
       </Window.Content>
     </Window>
   );
@@ -42,27 +35,13 @@ export const BluespaceLocator = (props) => {
 const TeleporterBeacons = (props) => {
   const { data } = useBackend();
   const { telebeacons } = data;
-  return telebeacons.map((beacon) => (
-    <SignalLocator
-      key={beacon.name}
-      name={beacon.name}
-      distance={beacon.distance}
-      direction={directionToIcon[beacon.direction]}
-    />
-  ));
+  return telebeacons.map((beacon) => <SignalLocator key={beacon.name} name={beacon.name} distance={beacon.distance} direction={directionToIcon[beacon.direction]} />);
 };
 
 const TrackingImplants = (props) => {
   const { data } = useBackend();
   const { trackimplants } = data;
-  return trackimplants.map((implant) => (
-    <SignalLocator
-      key={implant.name}
-      name={implant.name}
-      distance={implant.distance}
-      direction={directionToIcon[implant.direction]}
-    />
-  ));
+  return trackimplants.map((implant) => <SignalLocator key={implant.name} name={implant.name} distance={implant.distance} direction={directionToIcon[implant.direction]} />);
 };
 
 const SignalLocator = (props) => {

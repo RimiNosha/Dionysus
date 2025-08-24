@@ -1,11 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Button,
-  LabeledList,
-  NoticeBox,
-  Section,
-} from '../components';
+import { AnimatedNumber, Button, LabeledList, NoticeBox, Section } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 
@@ -29,10 +23,7 @@ export const BankMachine = (props) => {
                 />
               }
             >
-              <AnimatedNumber
-                value={current_balance}
-                format={(value) => formatMoney(value)}
-              />
+              <AnimatedNumber value={current_balance} format={(value) => formatMoney(value)} />
               {' cr'}
             </LabeledList.Item>
           </LabeledList>

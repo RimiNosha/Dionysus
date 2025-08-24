@@ -10,12 +10,7 @@ export const AtmosTempGate = (props) => {
         <Section>
           <LabeledList>
             <LabeledList.Item label="Power">
-              <Button
-                icon={data.on ? 'power-off' : 'times'}
-                content={data.on ? 'On' : 'Off'}
-                selected={data.on}
-                onClick={() => act('power')}
-              />
+              <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} onClick={() => act('power')} />
             </LabeledList.Item>
             <LabeledList.Item label="Heat settings">
               <NumberInput

@@ -1,13 +1,7 @@
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  Button,
-  LabeledControls,
-  NumberInput,
-  RoundGauge,
-  Section,
-} from '../components';
+import { Button, LabeledControls, NumberInput, RoundGauge, Section } from '../components';
 import { formatSiUnit } from '../format';
 import { Window } from '../layouts';
 
@@ -20,16 +14,7 @@ const formatPressure = (value) => {
 
 export const Tank = (props) => {
   const { act, data } = useBackend();
-  const {
-    defaultReleasePressure,
-    minReleasePressure,
-    maxReleasePressure,
-    leakPressure,
-    fragmentPressure,
-    tankPressure,
-    releasePressure,
-    connected,
-  } = data;
+  const { defaultReleasePressure, minReleasePressure, maxReleasePressure, leakPressure, fragmentPressure, tankPressure, releasePressure, connected } = data;
   return (
     <Window width={275} height={120}>
       <Window.Content>

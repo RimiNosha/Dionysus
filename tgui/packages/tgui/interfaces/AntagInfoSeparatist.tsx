@@ -59,30 +59,18 @@ const FrequentlyAskedQuestions = (props) => {
         <Stack.Item fontSize="18px" bold>
           <Icon name="info" color="label" /> Frequently Asked Questions:
         </Stack.Item>
-        <Stack.Item fontSize="16px">
-          &quot;What even IS a Separatist?&quot;
-        </Stack.Item>
+        <Stack.Item fontSize="16px">&quot;What even IS a Separatist?&quot;</Stack.Item>
         <Stack.Item>
-          Separatists are semi-antagonists that every department is filled with
-          when the round starts. They do not have the permission to freely go
-          about and kill, but rather defend the soverignity of their department.
-          You may actually recognize them by their historical mode they existed
-          from: Nations!
+          Separatists are semi-antagonists that every department is filled with when the round starts. They do not have the permission to freely go about and kill, but rather
+          defend the soverignity of their department. You may actually recognize them by their historical mode they existed from: Nations!
         </Stack.Item>
-        <Stack.Item fontSize="16px">
-          &quot;What am I supposed to do?&quot;
-        </Stack.Item>
+        <Stack.Item fontSize="16px">&quot;What am I supposed to do?&quot;</Stack.Item>
         <Stack.Item>
-          Each department (nation) has an objective. It&apos;s a freeform
-          objective, so try your best to follow it as you would a freeform
-          abductor objective. From experience, eventually nations conflict and
-          devolve into war. As long as both departments know what and why
-          conflict is starting, that&apos;s a green light to attack opposing
+          Each department (nation) has an objective. It&apos;s a freeform objective, so try your best to follow it as you would a freeform abductor objective. From experience,
+          eventually nations conflict and devolve into war. As long as both departments know what and why conflict is starting, that&apos;s a green light to attack opposing
           nations.
         </Stack.Item>
-        <Stack.Item fontSize="16px">
-          &quot;Is {nation} the best nation?&quot;
-        </Stack.Item>
+        <Stack.Item fontSize="16px">&quot;Is {nation} the best nation?&quot;</Stack.Item>
         <Stack.Item>Yes.</Stack.Item>
       </Stack>
     </Section>

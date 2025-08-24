@@ -21,12 +21,7 @@ export const NtosNetDosContent = (props) => {
     return (
       <>
         <NoticeBox>{error}</NoticeBox>
-        <Button
-          fluid
-          content="Reset"
-          textAlign="center"
-          onClick={() => act('PRG_reset')}
-        />
+        <Button fluid content="Reset" textAlign="center" onClick={() => act('PRG_reset')} />
       </>
     );
   }
@@ -80,16 +75,7 @@ export const NtosNetDosContent = (props) => {
           ))}
         </LabeledList.Item>
       </LabeledList>
-      <Button
-        fluid
-        bold
-        content="EXECUTE"
-        color="bad"
-        textAlign="center"
-        disabled={!focus}
-        mt={1}
-        onClick={() => act('PRG_execute')}
-      />
+      <Button fluid bold content="EXECUTE" color="bad" textAlign="center" disabled={!focus} mt={1} onClick={() => act('PRG_execute')} />
     </Section>
   );
 };

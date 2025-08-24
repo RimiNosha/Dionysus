@@ -1,9 +1,4 @@
-import {
-  Feature,
-  FeatureChoiced,
-  FeatureColorInput,
-  FeatureDropdownInput,
-} from '../base';
+import { Feature, FeatureChoiced, FeatureColorInput, FeatureDropdownInput } from '../base';
 
 export const screentip_color: Feature<string> = {
   name: 'Screentips color',

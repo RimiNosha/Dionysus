@@ -26,14 +26,9 @@ export class DreamSeeker {
 
   topic(params = {}) {
     const query = Object.keys(params)
-      .map(
-        (key) =>
-          encodeURIComponent(key) + '=' + encodeURIComponent(params[key]),
-      )
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
       .join('&');
-    logger.log(
-      `topic call at ${this.client.defaults.baseURL}/dummy.htm?${query}`,
-    );
+    logger.log(`topic call at ${this.client.defaults.baseURL}/dummy.htm?${query}`);
     return this.client.get('/dummy.htm?' + query);
   }
 }

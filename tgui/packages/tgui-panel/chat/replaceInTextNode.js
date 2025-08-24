@@ -26,9 +26,7 @@ export const replaceInTextNode = (regex, createNode) => (node) => {
     const matchIndex = match.index;
     // Insert previous unmatched chunk
     if (lastIndex < matchIndex) {
-      fragment.appendChild(
-        document.createTextNode(text.substring(lastIndex, matchIndex)),
-      );
+      fragment.appendChild(document.createTextNode(text.substring(lastIndex, matchIndex)));
     }
     lastIndex = matchIndex + matchLength;
     // Create a wrapper node
@@ -37,9 +35,7 @@ export const replaceInTextNode = (regex, createNode) => (node) => {
   if (fragment) {
     // Insert the remaining unmatched chunk
     if (lastIndex < textLength) {
-      fragment.appendChild(
-        document.createTextNode(text.substring(lastIndex, textLength)),
-      );
+      fragment.appendChild(document.createTextNode(text.substring(lastIndex, textLength)));
     }
     // Commit the fragment
     node.parentNode.replaceChild(fragment, node);
@@ -68,11 +64,7 @@ const createHighlightNode = (text) => {
  * @param {(text: string) => Node} createNode Highlight node creator
  * @returns {number} Number of matches
  */
-export const highlightNode = (
-  node,
-  regex,
-  createNode = createHighlightNode,
-) => {
+export const highlightNode = (node, regex, createNode = createHighlightNode) => {
   if (!createNode) {
     createNode = createHighlightNode;
   }
@@ -93,8 +85,7 @@ export const highlightNode = (
 // Linkify
 // --------------------------------------------------------
 
-const URL_REGEX =
-  /(?:(?:https?:\/\/)|(?:www\.))(?:[^ ]*?\.[^ ]*?)+[-A-Za-z0-9+&@#/%?=~_|$!:,.;()]+/gi;
+const URL_REGEX = /(?:(?:https?:\/\/)|(?:www\.))(?:[^ ]*?\.[^ ]*?)+[-A-Za-z0-9+&@#/%?=~_|$!:,.;()]+/gi;
 
 /**
  * Highlights the text in the node based on the provided regular expression.

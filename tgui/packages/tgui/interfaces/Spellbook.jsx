@@ -1,15 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Divider,
-  Icon,
-  NoticeBox,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Dimmer, Divider, Icon, NoticeBox, ProgressBar, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 const TAB2NAME = [
@@ -31,42 +21,35 @@ const TAB2NAME = [
   },
   {
     title: 'Defensive',
-    blurb:
-      "Spells and items geared towards improving your survivability or reducing foes' ability to attack.",
+    blurb: "Spells and items geared towards improving your survivability or reducing foes' ability to attack.",
   },
   {
     title: 'Mobility',
-    blurb:
-      'Spells and items geared towards improving your ability to move. It is a good idea to take at least one.',
+    blurb: 'Spells and items geared towards improving your ability to move. It is a good idea to take at least one.',
   },
   {
     title: 'Assistance',
-    blurb:
-      'Spells and items geared towards bringing in outside forces to aid you or improving upon your other items and abilities.',
+    blurb: 'Spells and items geared towards bringing in outside forces to aid you or improving upon your other items and abilities.',
   },
   {
     title: 'Challenges',
-    blurb:
-      'The Wizard Federation is looking for shows of power. Arming the station against you will increase the danger, but will grant you more charges for your spellbook.',
+    blurb: 'The Wizard Federation is looking for shows of power. Arming the station against you will increase the danger, but will grant you more charges for your spellbook.',
     locked: true,
     noScrollable: 1,
   },
   {
     title: 'Rituals',
-    blurb:
-      'These powerful spells change the very fabric of reality. Not always in your favour.',
+    blurb: 'These powerful spells change the very fabric of reality. Not always in your favour.',
   },
   {
     title: 'Loadouts',
-    blurb:
-      'The Wizard Federation accepts that sometimes, choosing is hard. You can choose from some approved wizard loadouts here.',
+    blurb: 'The Wizard Federation accepts that sometimes, choosing is hard. You can choose from some approved wizard loadouts here.',
     component: () => Loadouts,
     noScrollable: 2,
   },
   {
     title: 'Randomize',
-    blurb:
-      "If you didn't like the loadouts offered, you can embrace chaos. Not recommended for newer wizards.",
+    blurb: "If you didn't like the loadouts offered, you can embrace chaos. Not recommended for newer wizards.",
     component: () => Randomize,
   },
 ];
@@ -82,14 +65,7 @@ const EnscribedName = (props) => {
   const { owner } = data;
   return (
     <>
-      <Box
-        mt={25}
-        mb={-3}
-        fontSize="50px"
-        color="bad"
-        textAlign="center"
-        fontFamily="Ink Free"
-      >
+      <Box mt={25} mb={-3} fontSize="50px" color="bad" textAlign="center" fontFamily="Ink Free">
         {owner}
       </Box>
       <Divider />
@@ -104,80 +80,20 @@ const TableOfContents = (props) => {
   const [tabIndex, setTabIndex] = useLocalState('tab-index', 1);
   return (
     <Box textAlign="center">
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="pen"
-        disabled
-        content="Name Enscription"
-      />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="clipboard"
-        disabled
-        content="Table of Contents"
-      />
+      <Button lineHeight={lineHeightToc} fluid icon="pen" disabled content="Name Enscription" />
+      <Button lineHeight={lineHeightToc} fluid icon="clipboard" disabled content="Table of Contents" />
       <Divider />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="fire"
-        content="Deadly Evocations"
-        onClick={() => setTabIndex(3)}
-      />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="shield-alt"
-        content="Defensive Evocations"
-        onClick={() => setTabIndex(3)}
-      />
+      <Button lineHeight={lineHeightToc} fluid icon="fire" content="Deadly Evocations" onClick={() => setTabIndex(3)} />
+      <Button lineHeight={lineHeightToc} fluid icon="shield-alt" content="Defensive Evocations" onClick={() => setTabIndex(3)} />
       <Divider />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="globe-americas"
-        content="Magical Transportation"
-        onClick={() => setTabIndex(5)}
-      />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="users"
-        content="Assistance and Summoning"
-        onClick={() => setTabIndex(5)}
-      />
+      <Button lineHeight={lineHeightToc} fluid icon="globe-americas" content="Magical Transportation" onClick={() => setTabIndex(5)} />
+      <Button lineHeight={lineHeightToc} fluid icon="users" content="Assistance and Summoning" onClick={() => setTabIndex(5)} />
       <Divider />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="crown"
-        content="Challenges"
-        onClick={() => setTabIndex(7)}
-      />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="magic"
-        content="Rituals"
-        onClick={() => setTabIndex(7)}
-      />
+      <Button lineHeight={lineHeightToc} fluid icon="crown" content="Challenges" onClick={() => setTabIndex(7)} />
+      <Button lineHeight={lineHeightToc} fluid icon="magic" content="Rituals" onClick={() => setTabIndex(7)} />
       <Divider />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="thumbs-up"
-        content="Wizard Approved Loadouts"
-        onClick={() => setTabIndex(9)}
-      />
-      <Button
-        lineHeight={lineHeightToc}
-        fluid
-        icon="dice"
-        content="Arcane Randomizer"
-        onClick={() => setTabIndex(9)}
-      />
+      <Button lineHeight={lineHeightToc} fluid icon="thumbs-up" content="Wizard Approved Loadouts" onClick={() => setTabIndex(9)} />
+      <Button lineHeight={lineHeightToc} fluid icon="dice" content="Arcane Randomizer" onClick={() => setTabIndex(9)} />
     </Box>
   );
 };
@@ -335,8 +251,7 @@ const Randomize = (props) => {
     <Stack fill vertical>
       {points < 10 && <PointLocked />}
       <Stack.Item grow mt={10}>
-        Semi-Randomize will ensure you at least get some mobility and lethality.
-        Guaranteed to have {semi_random_bonus} points worth of spells.
+        Semi-Randomize will ensure you at least get some mobility and lethality. Guaranteed to have {semi_random_bonus} points worth of spells.
       </Stack.Item>
       <Stack.Item>
         <Button.Confirm
@@ -350,10 +265,7 @@ const Randomize = (props) => {
         />
         <Divider />
       </Stack.Item>
-      <Stack.Item>
-        Full Random will give you anything. There&apos;s no going back, either!
-        Guaranteed to have {full_random_bonus} points worth of spells.
-      </Stack.Item>
+      <Stack.Item>Full Random will give you anything. There&apos;s no going back, either! Guaranteed to have {full_random_bonus} points worth of spells.</Stack.Item>
       <Stack.Item>
         <NoticeBox danger>
           <Button.Confirm
@@ -381,18 +293,10 @@ export const Spellbook = (props) => {
   const [tabIndex, setTabIndex] = useLocalState('tab-index', 1);
   const ScrollableCheck = TAB2NAME[tabIndex - 1].noScrollable ? false : true;
   const ScrollableNextCheck = TAB2NAME[tabIndex - 1].noScrollable !== 2;
-  const TabComponent = TAB2NAME[tabIndex - 1].component
-    ? TAB2NAME[tabIndex - 1].component()
-    : null;
-  const TabNextComponent = TAB2NAME[tabIndex].component
-    ? TAB2NAME[tabIndex].component()
-    : null;
-  const TabSpells = entries
-    ? entries.filter((entry) => entry.cat === TAB2NAME[tabIndex - 1].title)
-    : null;
-  const TabNextSpells = entries
-    ? entries.filter((entry) => entry.cat === TAB2NAME[tabIndex].title)
-    : null;
+  const TabComponent = TAB2NAME[tabIndex - 1].component ? TAB2NAME[tabIndex - 1].component() : null;
+  const TabNextComponent = TAB2NAME[tabIndex].component ? TAB2NAME[tabIndex].component() : null;
+  const TabSpells = entries ? entries.filter((entry) => entry.cat === TAB2NAME[tabIndex - 1].title) : null;
+  const TabNextSpells = entries ? entries.filter((entry) => entry.cat === TAB2NAME[tabIndex].title) : null;
   return (
     <Window title="Spellbook" theme="wizard" width={950} height={540}>
       <Window.Content>
@@ -409,13 +313,7 @@ export const Spellbook = (props) => {
                   title={TAB2NAME[tabIndex - 1].title}
                   buttons={
                     <>
-                      <Button
-                        mr={57}
-                        disabled={tabIndex === 1}
-                        icon="arrow-left"
-                        content="Previous Page"
-                        onClick={() => setTabIndex(tabIndex - 2)}
-                      />
+                      <Button mr={57} disabled={tabIndex === 1} icon="arrow-left" content="Previous Page" onClick={() => setTabIndex(tabIndex - 2)} />
                       <Box textAlign="right" bold mt={-3.3} mr={1}>
                         {tabIndex}
                       </Box>
@@ -445,11 +343,7 @@ export const Spellbook = (props) => {
                                 title={entry.name}
                                 buttons={
                                   <>
-                                    <Box
-                                      mr={entry.buyword === 'Learn' ? 6.5 : 2}
-                                    >
-                                      {entry.cost} Points
-                                    </Box>
+                                    <Box mr={entry.buyword === 'Learn' ? 6.5 : 2}>{entry.cost} Points</Box>
                                     {(entry.cat === 'Rituals' &&
                                       ((!!entry.times && (
                                         <Box ml={-104} mt={-2.2}>
@@ -473,17 +367,9 @@ export const Spellbook = (props) => {
                                       <Box mr={-9.5} mt={-3}>
                                         <Button
                                           icon="tshirt"
-                                          color={
-                                            entry.requires_wizard_garb
-                                              ? 'bad'
-                                              : 'green'
-                                          }
+                                          color={entry.requires_wizard_garb ? 'bad' : 'green'}
                                           tooltipPosition="bottom-start"
-                                          tooltip={
-                                            entry.requires_wizard_garb
-                                              ? 'Requires wizard garb.'
-                                              : 'Can be cast without wizard garb.'
-                                          }
+                                          tooltip={entry.requires_wizard_garb ? 'Requires wizard garb.' : 'Can be cast without wizard garb.'}
                                         />
                                       </Box>
                                     )}
@@ -499,9 +385,7 @@ export const Spellbook = (props) => {
                                     <Button
                                       fluid
                                       textAlign="center"
-                                      color={
-                                        points >= entry.cost ? 'green' : 'bad'
-                                      }
+                                      color={points >= entry.cost ? 'green' : 'bad'}
                                       disabled={points < entry.cost}
                                       width={7}
                                       icon={BUYWORD2ICON[entry.buyword]}
@@ -513,9 +397,7 @@ export const Spellbook = (props) => {
                                       }
                                     />
                                     <br />
-                                    {(!entry.refundable && (
-                                      <NoticeBox>No refunds.</NoticeBox>
-                                    )) || (
+                                    {(!entry.refundable && <NoticeBox>No refunds.</NoticeBox>) || (
                                       <Button
                                         textAlign="center"
                                         width={7}
@@ -549,13 +431,7 @@ export const Spellbook = (props) => {
                   title={TAB2NAME[tabIndex].title}
                   buttons={
                     <>
-                      <Button
-                        mr={0}
-                        icon="arrow-right"
-                        disabled={tabIndex === 9}
-                        content="Next Page"
-                        onClick={() => setTabIndex(tabIndex + 2)}
-                      />
+                      <Button mr={0} icon="arrow-right" disabled={tabIndex === 9} content="Next Page" onClick={() => setTabIndex(tabIndex + 2)} />
                       <Box textAlign="left" bold mt={-3.3} ml={-59.8}>
                         {tabIndex + 1}
                       </Box>
@@ -585,11 +461,7 @@ export const Spellbook = (props) => {
                                 title={entry.name}
                                 buttons={
                                   <>
-                                    <Box
-                                      mr={entry.buyword === 'Learn' ? 6.5 : 2}
-                                    >
-                                      {entry.cost} Points
-                                    </Box>
+                                    <Box mr={entry.buyword === 'Learn' ? 6.5 : 2}>{entry.cost} Points</Box>
                                     {(entry.cat === 'Rituals' &&
                                       ((!!entry.times && (
                                         <Box ml={-118} mt={-2.2}>
@@ -613,17 +485,9 @@ export const Spellbook = (props) => {
                                       <Box mr={-9.5} mt={-3}>
                                         <Button
                                           icon="tshirt"
-                                          color={
-                                            entry.requires_wizard_garb
-                                              ? 'bad'
-                                              : 'green'
-                                          }
+                                          color={entry.requires_wizard_garb ? 'bad' : 'green'}
                                           tooltipPosition="bottom-start"
-                                          tooltip={
-                                            entry.requires_wizard_garb
-                                              ? 'Requires wizard garb.'
-                                              : 'Can be cast without wizard garb.'
-                                          }
+                                          tooltip={entry.requires_wizard_garb ? 'Requires wizard garb.' : 'Can be cast without wizard garb.'}
                                         />
                                       </Box>
                                     )}
@@ -639,9 +503,7 @@ export const Spellbook = (props) => {
                                     <Button
                                       fluid
                                       textAlign="center"
-                                      color={
-                                        points >= entry.cost ? 'green' : 'bad'
-                                      }
+                                      color={points >= entry.cost ? 'green' : 'bad'}
                                       disabled={points < entry.cost}
                                       width={7}
                                       icon={BUYWORD2ICON[entry.buyword]}
@@ -653,9 +515,7 @@ export const Spellbook = (props) => {
                                       }
                                     />
                                     <br />
-                                    {(!entry.refundable && (
-                                      <NoticeBox>No refunds.</NoticeBox>
-                                    )) || (
+                                    {(!entry.refundable && <NoticeBox>No refunds.</NoticeBox>) || (
                                       <Button
                                         textAlign="center"
                                         width={7}
@@ -683,9 +543,7 @@ export const Spellbook = (props) => {
           </Stack.Item>
           <Stack.Item>
             <Section>
-              <ProgressBar value={points / 10}>
-                {points + ' points left to spend.'}
-              </ProgressBar>
+              <ProgressBar value={points / 10}>{points + ' points left to spend.'}</ProgressBar>
             </Section>
           </Stack.Item>
         </Stack>

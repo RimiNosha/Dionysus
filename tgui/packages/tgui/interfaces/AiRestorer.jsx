@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const AiRestorer = () => {
@@ -21,28 +14,11 @@ export const AiRestorer = () => {
 
 export const AiRestorerContent = (props) => {
   const { act, data } = useBackend();
-  const {
-    AI_present,
-    error,
-    name,
-    laws,
-    isDead,
-    restoring,
-    health,
-    ejectable,
-  } = data;
+  const { AI_present, error, name, laws, isDead, restoring, health, ejectable } = data;
   return (
     <>
       {error && <NoticeBox textAlign="center">{error}</NoticeBox>}
-      {!!ejectable && (
-        <Button
-          fluid
-          icon="eject"
-          content={AI_present ? name : '----------'}
-          disabled={!AI_present}
-          onClick={() => act('PRG_eject')}
-        />
-      )}
+      {!!ejectable && <Button fluid icon="eject" content={AI_present ? name : '----------'} disabled={!AI_present} onClick={() => act('PRG_eject')} />}
       {!!AI_present && (
         <Section
           title={ejectable ? 'System Status' : name}
@@ -71,14 +47,7 @@ export const AiRestorerContent = (props) => {
               RECONSTRUCTION IN PROGRESS
             </Box>
           )}
-          <Button
-            fluid
-            icon="plus"
-            content="Begin Reconstruction"
-            disabled={restoring}
-            mt={1}
-            onClick={() => act('PRG_beginReconstruction')}
-          />
+          <Button fluid icon="plus" content="Begin Reconstruction" disabled={restoring} mt={1} onClick={() => act('PRG_beginReconstruction')} />
           <Section title="Laws" level={2}>
             {laws.map((law) => (
               <Box key={law} className="candystripe">

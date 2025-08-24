@@ -32,10 +32,7 @@ export class Thermometer extends Component {
           }}
         >
           <Stack.Item ml={1}>
-            <ThermometerIcon
-              temperature={data.Temperature}
-              maxTemperature={1000}
-            />
+            <ThermometerIcon temperature={data.Temperature} maxTemperature={1000} />
           </Stack.Item>
         </Stack>
       </Window>

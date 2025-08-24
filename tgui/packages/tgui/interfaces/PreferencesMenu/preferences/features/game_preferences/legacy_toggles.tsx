@@ -40,16 +40,14 @@ export const deadmin_antagonist: FeatureToggle = {
 export const deadmin_position_head: FeatureToggle = {
   name: 'Auto deadmin - Head of Staff',
   category: 'ADMIN',
-  description:
-    'When enabled, you will automatically deadmin as a head of staff.',
+  description: 'When enabled, you will automatically deadmin as a head of staff.',
   component: CheckboxInput,
 };
 
 export const deadmin_position_security: FeatureToggle = {
   name: 'Auto deadmin - Security',
   category: 'ADMIN',
-  description:
-    'When enabled, you will automatically deadmin as a member of security.',
+  description: 'When enabled, you will automatically deadmin as a member of security.',
   component: CheckboxInput,
 };
 
@@ -70,16 +68,14 @@ export const disable_arrivalrattle: FeatureToggle = {
 export const disable_deathrattle: FeatureToggle = {
   name: 'Notify for deaths',
   category: 'GHOST',
-  description:
-    'When enabled, you will be notified as a ghost whenever someone dies.',
+  description: 'When enabled, you will be notified as a ghost whenever someone dies.',
   component: CheckboxInputInverse,
 };
 
 export const member_public: FeatureToggle = {
   name: 'Publicize BYOND membership',
   category: 'CHAT',
-  description:
-    'When enabled, a BYOND logo will be shown next to your name in OOC.',
+  description: 'When enabled, a BYOND logo will be shown next to your name in OOC.',
   component: CheckboxInput,
 };
 

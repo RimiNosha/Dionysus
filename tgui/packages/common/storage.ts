@@ -10,10 +10,7 @@ export const IMPL_MEMORY = 0;
 export const IMPL_HUB_STORAGE = 1;
 export const IMPL_INDEXED_DB = 2;
 
-type StorageImplementation =
-  | typeof IMPL_MEMORY
-  | typeof IMPL_HUB_STORAGE
-  | typeof IMPL_INDEXED_DB;
+type StorageImplementation = typeof IMPL_MEMORY | typeof IMPL_HUB_STORAGE | typeof IMPL_INDEXED_DB;
 
 const INDEXED_DB_VERSION = 2;
 const INDEXED_DB_NAME = 'tgui-dionysus';
@@ -38,9 +35,7 @@ const testGeneric = (testFn: () => boolean) => (): boolean => {
   }
 };
 
-const testHubStorage = testGeneric(
-  () => window.hubStorage && !!window.hubStorage.getItem,
-);
+const testHubStorage = testGeneric(() => window.hubStorage && !!window.hubStorage.getItem);
 
 // TODO: Remove with 516
 // prettier-ignore
@@ -116,12 +111,7 @@ class IndexedDbBackend implements StorageBackend {
         try {
           req.result.createObjectStore(INDEXED_DB_STORE_NAME);
         } catch (err) {
-          reject(
-            new Error(
-              'Failed to upgrade IDB: ' +
-                (err instanceof Error ? err.message : String(err)),
-            ),
-          );
+          reject(new Error('Failed to upgrade IDB: ' + (err instanceof Error ? err.message : String(err))));
         }
       };
       req.onsuccess = () => resolve(req.result);
@@ -133,9 +123,7 @@ class IndexedDbBackend implements StorageBackend {
 
   private async getStore(mode: IDBTransactionMode): Promise<IDBObjectStore> {
     const db = await this.dbPromise;
-    return db
-      .transaction(INDEXED_DB_STORE_NAME, mode)
-      .objectStore(INDEXED_DB_STORE_NAME);
+    return db.transaction(INDEXED_DB_STORE_NAME, mode).objectStore(INDEXED_DB_STORE_NAME);
   }
 
   async get(key: string): Promise<any> {
@@ -187,9 +175,7 @@ class StorageProxy implements StorageBackend {
           return backend;
         } catch {}
       }
-      console.warn(
-        'No supported storage backend found. Using in-memory storage.',
-      );
+      console.warn('No supported storage backend found. Using in-memory storage.');
       return new MemoryBackend();
     })();
   }

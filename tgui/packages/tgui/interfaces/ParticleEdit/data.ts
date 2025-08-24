@@ -1,9 +1,4 @@
-export const RandTypes = [
-  'UNIFORM_RAND',
-  'NORMAL_RAND',
-  'LINEAR_RAND',
-  'SQUARE_RAND',
-];
+export const RandTypes = ['UNIFORM_RAND', 'NORMAL_RAND', 'LINEAR_RAND', 'SQUARE_RAND'];
 export const RandToNumber = {
   UNIFORM_RAND: 1,
   NORMAL_RAND: 2,
@@ -16,18 +11,9 @@ export const P_DATA_ICON_ADD = 'icon_add';
 export const P_DATA_ICON_REMOVE = 'icon_remove';
 export const P_DATA_ICON_WEIGHT = 'icon_edit';
 
-export const MatrixTypes = [
-  'Simple Matrix',
-  'Complex Matrix',
-  'Projection Matrix',
-];
+export const MatrixTypes = ['Simple Matrix', 'Complex Matrix', 'Projection Matrix'];
 
-export const SpaceTypes = [
-  'COLORSPACE_RGB',
-  'COLORSPACE_HSV',
-  'COLORSPACE_HSL',
-  'COLORSPACE_HCY',
-];
+export const SpaceTypes = ['COLORSPACE_RGB', 'COLORSPACE_HSV', 'COLORSPACE_HSL', 'COLORSPACE_HCY'];
 export const SpaceToNum = {
   COLORSPACE_RGB: 0,
   COLORSPACE_HSV: 1,
@@ -35,25 +21,9 @@ export const SpaceToNum = {
   COLORSPACE_HCY: 3,
 };
 
-export const GeneratorTypes = [
-  'num',
-  'vector',
-  'box',
-  'color',
-  'circle',
-  'sphere',
-  'square',
-  'cube',
-];
+export const GeneratorTypes = ['num', 'vector', 'box', 'color', 'circle', 'sphere', 'square', 'cube'];
 
-export const GeneratorTypesNoVectors = [
-  'num',
-  'color',
-  'circle',
-  'sphere',
-  'square',
-  'cube',
-];
+export const GeneratorTypesNoVectors = ['num', 'color', 'circle', 'sphere', 'square', 'cube'];
 
 export type ParticleUIData = {
   particle_data: ParticleData;

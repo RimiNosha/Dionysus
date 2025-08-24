@@ -2,16 +2,7 @@ import { toFixed } from 'common/math';
 import { Fragment } from 'react';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Flex,
-  Knob,
-  LabeledControls,
-  LabeledList,
-  RoundGauge,
-  Section,
-} from '../components';
+import { Box, Button, Flex, Knob, LabeledControls, LabeledList, RoundGauge, Section } from '../components';
 import { Window } from '../layouts';
 import { Scrubber, Vent } from './common/AtmosControls';
 import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
@@ -33,9 +24,7 @@ export const AirAlarm = (props) => {
 
 const AirAlarmStatus = (props) => {
   const { data } = useBackend();
-  const entries = (data.environment_data || []).filter(
-    (entry) => entry.value >= 0.01,
-  );
+  const entries = (data.environment_data || []).filter((entry) => entry.value >= 0.01);
   const dangerMap = {
     0: {
       color: 'good',
@@ -59,11 +48,7 @@ const AirAlarmStatus = (props) => {
             {entries.map((entry) => {
               const status = dangerMap[entry.danger_level] || dangerMap[0];
               return (
-                <LabeledList.Item
-                  key={entry.name}
-                  label={entry.name}
-                  color={status.color}
-                >
+                <LabeledList.Item key={entry.name} label={entry.name} color={status.color}>
                   {toFixed(entry.value, 2)}
                   {entry.unit}
                 </LabeledList.Item>
@@ -72,13 +57,8 @@ const AirAlarmStatus = (props) => {
             <LabeledList.Item label="Local status" color={localStatus.color}>
               {localStatus.localStatusText}
             </LabeledList.Item>
-            <LabeledList.Item
-              label="Area status"
-              color={data.atmos_alarm || data.fire_alarm ? 'bad' : 'good'}
-            >
-              {(data.atmos_alarm && 'Atmosphere Alarm') ||
-                (data.fire_alarm && 'Fire Alarm') ||
-                'Nominal'}
+            <LabeledList.Item label="Area status" color={data.atmos_alarm || data.fire_alarm ? 'bad' : 'good'}>
+              {(data.atmos_alarm && 'Atmosphere Alarm') || (data.fire_alarm && 'Fire Alarm') || 'Nominal'}
             </LabeledList.Item>
           </>
         )) || (
@@ -98,9 +78,7 @@ const AirAlarmStatus = (props) => {
 
 const ThermostatControl = (props) => {
   const { act, data } = useBackend();
-  const entries = (data.environment_data || []).filter(
-    (entry) => entry.value >= 0.01,
-  );
+  const entries = (data.environment_data || []).filter((entry) => entry.value >= 0.01);
   return (
     <Section title="Thermostat">
       <Flex>
@@ -190,18 +168,7 @@ const AirAlarmControl = (props) => {
   const route = AIR_ALARM_ROUTES[screen] || AIR_ALARM_ROUTES.home;
   const Component = route.component();
   return (
-    <Section
-      title={route.title}
-      buttons={
-        screen && (
-          <Button
-            icon="arrow-left"
-            content="Back"
-            onClick={() => setScreen()}
-          />
-        )
-      }
-    >
+    <Section title={route.title} buttons={screen && <Button icon="arrow-left" content="Back" onClick={() => setScreen()} />}>
       <Component />
     </Section>
   );
@@ -245,29 +212,13 @@ const AirAlarmControlHome = (props) => {
         }
       />
       <Box mt={2} />
-      <Button
-        icon="sign-out-alt"
-        content="Vent Controls"
-        onClick={() => setScreen('vents')}
-      />
+      <Button icon="sign-out-alt" content="Vent Controls" onClick={() => setScreen('vents')} />
       <Box mt={1} />
-      <Button
-        icon="filter"
-        content="Scrubber Controls"
-        onClick={() => setScreen('scrubbers')}
-      />
+      <Button icon="filter" content="Scrubber Controls" onClick={() => setScreen('scrubbers')} />
       <Box mt={1} />
-      <Button
-        icon="cog"
-        content="Operating Mode"
-        onClick={() => setScreen('modes')}
-      />
+      <Button icon="cog" content="Operating Mode" onClick={() => setScreen('modes')} />
       <Box mt={1} />
-      <Button
-        icon="chart-bar"
-        content="Alarm Thresholds"
-        onClick={() => setScreen('thresholds')}
-      />
+      <Button icon="chart-bar" content="Alarm Thresholds" onClick={() => setScreen('thresholds')} />
     </>
   );
 };
@@ -293,9 +244,7 @@ const AirAlarmControlScrubbers = (props) => {
   if (!scrubbers || scrubbers.length === 0) {
     return 'Nothing to show';
   }
-  return scrubbers.map((scrubber) => (
-    <Scrubber key={scrubber.id_tag} scrubber={scrubber} />
-  ));
+  return scrubbers.map((scrubber) => <Scrubber key={scrubber.id_tag} scrubber={scrubber} />);
 };
 
 //  Modes

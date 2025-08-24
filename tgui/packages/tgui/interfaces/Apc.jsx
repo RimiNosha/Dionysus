@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
 
@@ -64,10 +57,8 @@ const malfMap = {
 const ApcContent = (props) => {
   const { act, data } = useBackend();
   const locked = data.locked && !data.siliconUser;
-  const externalPowerStatus =
-    powerStatusMap[data.externalPower] || powerStatusMap[0];
-  const chargingStatus =
-    powerStatusMap[data.chargingStatus] || powerStatusMap[0];
+  const externalPowerStatus = powerStatusMap[data.externalPower] || powerStatusMap[0];
+  const chargingStatus = powerStatusMap[data.chargingStatus] || powerStatusMap[0];
   const channelArray = data.powerChannels || [];
   const malfStatus = malfMap[data.malfStatus] || malfMap[0];
   const adjustedCellChange = data.powerCellStatus / 100;
@@ -80,11 +71,7 @@ const ApcContent = (props) => {
         <i>I/O regulators malfunction detected! Waiting for system reboot...</i>
         <br />
         Automatic reboot in {data.failTime} seconds...
-        <Button
-          icon="sync"
-          content="Reboot Now"
-          onClick={() => act('reboot')}
-        />
+        <Button icon="sync" content="Reboot Now" onClick={() => act('reboot')} />
       </NoticeBox>
     );
   }
@@ -93,14 +80,7 @@ const ApcContent = (props) => {
       <InterfaceLockNoticeBox />
       <Section
         title="Power Status"
-        buttons={
-          <Button
-            icon={data.mainLights ? 'lightbulb' : 'lightbulb-o'}
-            content="Main Lights"
-            color={data.mainLights ? 'green' : 'red'}
-            onClick={() => act('main_lights')}
-          />
-        }
+        buttons={<Button icon={data.mainLights ? 'lightbulb' : 'lightbulb-o'} content="Main Lights" color={data.mainLights ? 'green' : 'red'} onClick={() => act('main_lights')} />}
       >
         <LabeledList>
           <LabeledList.Item
@@ -124,14 +104,7 @@ const ApcContent = (props) => {
           <LabeledList.Item
             label="Charge Mode"
             color={chargingStatus.color}
-            buttons={
-              <Button
-                icon={data.chargeMode ? 'sync' : 'times'}
-                content={data.chargeMode ? 'Auto' : 'Off'}
-                disabled={locked}
-                onClick={() => act('charge')}
-              />
-            }
+            buttons={<Button icon={data.chargeMode ? 'sync' : 'times'} content={data.chargeMode ? 'Auto' : 'Off'} disabled={locked} onClick={() => act('charge')} />}
           >
             [ {chargingStatus.chargingText} ]
           </LabeledList.Item>
@@ -147,37 +120,18 @@ const ApcContent = (props) => {
                 label={channel.title}
                 buttons={
                   <>
-                    <Box
-                      inline
-                      mx={2}
-                      color={channel.status >= 2 ? 'good' : 'bad'}
-                    >
+                    <Box inline mx={2} color={channel.status >= 2 ? 'good' : 'bad'}>
                       {channel.status >= 2 ? 'On' : 'Off'}
                     </Box>
                     <Button
                       icon="sync"
                       content="Auto"
-                      selected={
-                        !locked &&
-                        (channel.status === 1 || channel.status === 3)
-                      }
+                      selected={!locked && (channel.status === 1 || channel.status === 3)}
                       disabled={locked}
                       onClick={() => act('channel', topicParams.auto)}
                     />
-                    <Button
-                      icon="power-off"
-                      content="On"
-                      selected={!locked && channel.status === 2}
-                      disabled={locked}
-                      onClick={() => act('channel', topicParams.on)}
-                    />
-                    <Button
-                      icon="times"
-                      content="Off"
-                      selected={!locked && channel.status === 0}
-                      disabled={locked}
-                      onClick={() => act('channel', topicParams.off)}
-                    />
+                    <Button icon="power-off" content="On" selected={!locked && channel.status === 2} disabled={locked} onClick={() => act('channel', topicParams.on)} />
+                    <Button icon="times" content="Off" selected={!locked && channel.status === 0} disabled={locked} onClick={() => act('channel', topicParams.off)} />
                   </>
                 }
               >
@@ -195,19 +149,8 @@ const ApcContent = (props) => {
         buttons={
           !!data.siliconUser && (
             <>
-              {!!data.malfStatus && (
-                <Button
-                  icon={malfStatus.icon}
-                  content={malfStatus.content}
-                  color="bad"
-                  onClick={() => act(malfStatus.action)}
-                />
-              )}
-              <Button
-                icon="lightbulb-o"
-                content="Overload"
-                onClick={() => act('overload')}
-              />
+              {!!data.malfStatus && <Button icon={malfStatus.icon} content={malfStatus.content} color="bad" onClick={() => act(malfStatus.action)} />}
+              <Button icon="lightbulb-o" content="Overload" onClick={() => act('overload')} />
             </>
           )
         }
@@ -215,14 +158,7 @@ const ApcContent = (props) => {
         <LabeledList>
           <LabeledList.Item
             label="Cover Lock"
-            buttons={
-              <Button
-                icon={data.coverLocked ? 'lock' : 'unlock'}
-                content={data.coverLocked ? 'Engaged' : 'Disengaged'}
-                disabled={locked}
-                onClick={() => act('cover')}
-              />
-            }
+            buttons={<Button icon={data.coverLocked ? 'lock' : 'unlock'} content={data.coverLocked ? 'Engaged' : 'Disengaged'} disabled={locked} onClick={() => act('cover')} />}
           />
           <LabeledList.Item
             label="Emergency Lighting"

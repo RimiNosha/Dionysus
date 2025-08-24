@@ -8,10 +8,7 @@ export const WIZARD_MECHANICAL_DESCRIPTION = `
 const Wizard: Antagonist = {
   key: 'wizard',
   name: 'Wizard',
-  description: [
-    `"GREETINGS. WE'RE THE WIZARDS OF THE WIZARD'S FEDERATION."`,
-    WIZARD_MECHANICAL_DESCRIPTION,
-  ],
+  description: [`"GREETINGS. WE'RE THE WIZARDS OF THE WIZARD'S FEDERATION."`, WIZARD_MECHANICAL_DESCRIPTION],
   category: Category.Roundstart,
 };
 

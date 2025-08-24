@@ -22,12 +22,7 @@ const ApcLoggedOut = (props) => {
   const text = emagged === 1 ? 'Open' : 'Log In';
   return (
     <Window.Content>
-      <Button
-        fluid
-        color={emagged === 1 ? '' : 'good'}
-        content={text}
-        onClick={() => act('log-in')}
-      />
+      <Button fluid color={emagged === 1 ? '' : 'good'} content={text} onClick={() => act('log-in')} />
     </Window.Content>
   );
 };
@@ -95,35 +90,16 @@ const ControlPanel = (props) => {
         <Box inline mr={2} color="label">
           Sort by:
         </Box>
-        <Button.Checkbox
-          checked={sortByField === 'name'}
-          content="Name"
-          onClick={() => setSortByField(sortByField !== 'name' && 'name')}
-        />
-        <Button.Checkbox
-          checked={sortByField === 'charge'}
-          content="Charge"
-          onClick={() => setSortByField(sortByField !== 'charge' && 'charge')}
-        />
-        <Button.Checkbox
-          checked={sortByField === 'draw'}
-          content="Draw"
-          onClick={() => setSortByField(sortByField !== 'draw' && 'draw')}
-        />
+        <Button.Checkbox checked={sortByField === 'name'} content="Name" onClick={() => setSortByField(sortByField !== 'name' && 'name')} />
+        <Button.Checkbox checked={sortByField === 'charge'} content="Charge" onClick={() => setSortByField(sortByField !== 'charge' && 'charge')} />
+        <Button.Checkbox checked={sortByField === 'draw'} content="Draw" onClick={() => setSortByField(sortByField !== 'draw' && 'draw')} />
       </Flex.Item>
       <Flex.Item grow={1} />
       <Flex.Item>
         {emagged === 1 && (
           <>
-            <Button
-              color={logging === 1 ? 'bad' : 'good'}
-              content={logging === 1 ? 'Stop Logging' : 'Restore Logging'}
-              onClick={() => act('toggle-logs')}
-            />
-            <Button
-              content="Reset Console"
-              onClick={() => act('restore-console')}
-            />
+            <Button color={logging === 1 ? 'bad' : 'good'} content={logging === 1 ? 'Stop Logging' : 'Restore Logging'} onClick={() => act('toggle-logs')} />
+            <Button content="Reset Console" onClick={() => act('restore-console')} />
           </>
         )}
         <Button color="bad" content="Log Out" onClick={() => act('log-out')} />
@@ -199,28 +175,13 @@ const ApcControlScene = (props) => {
           </td>
           <td className="Table__cell text-right text-nowrap">{apc.load}</td>
           <td className="Table__cell text-center text-nowrap">
-            <AreaStatusColorButton
-              target="equipment"
-              status={apc.eqp}
-              apc={apc}
-              act={act}
-            />
+            <AreaStatusColorButton target="equipment" status={apc.eqp} apc={apc} act={act} />
           </td>
           <td className="Table__cell text-center text-nowrap">
-            <AreaStatusColorButton
-              target="lighting"
-              status={apc.lgt}
-              apc={apc}
-              act={act}
-            />
+            <AreaStatusColorButton target="lighting" status={apc.lgt} apc={apc} act={act} />
           </td>
           <td className="Table__cell text-center text-nowrap">
-            <AreaStatusColorButton
-              target="environ"
-              status={apc.env}
-              apc={apc}
-              act={act}
-            />
+            <AreaStatusColorButton target="environ" status={apc.env} apc={apc} act={act} />
           </td>
         </tr>
       ))}

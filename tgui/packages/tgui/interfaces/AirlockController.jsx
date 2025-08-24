@@ -4,13 +4,7 @@ import { Window } from '../layouts';
 
 export const AirlockController = (props) => {
   const { act, data } = useBackend();
-  const {
-    airlockState,
-    sensorPressure,
-    pumpStatus,
-    interiorStatus,
-    exteriorStatus,
-  } = data;
+  const { airlockState, sensorPressure, pumpStatus, interiorStatus, exteriorStatus } = data;
   const currentStatus = ['ERROR, REPORT THIS TO CODERS', ''];
   let chamberStatusColor = 'average';
   switch (airlockState) {
@@ -42,54 +36,23 @@ export const AirlockController = (props) => {
         <Section
           title="Airlock Status"
           buttons={
-            ((airlockState === 'pressurize' ||
-              airlockState === 'depressurize') && (
-              <Button
-                icon="stop-circle"
-                content="Abort"
-                onClick={() => act('abort')}
-              />
-            )) ||
+            ((airlockState === 'pressurize' || airlockState === 'depressurize') && <Button icon="stop-circle" content="Abort" onClick={() => act('abort')} />) ||
             (airlockState === 'closed' && (
               <>
-                <Button
-                  icon="lock-open"
-                  content="Open Interior Airlock"
-                  onClick={() => act('cycleInterior')}
-                />
-                <Button
-                  icon="lock-open"
-                  content="Open Exterior Airlock"
-                  onClick={() => act('cycleExterior')}
-                />
+                <Button icon="lock-open" content="Open Interior Airlock" onClick={() => act('cycleInterior')} />
+                <Button icon="lock-open" content="Open Exterior Airlock" onClick={() => act('cycleExterior')} />
               </>
             )) ||
             (airlockState === 'inopen' && (
               <>
-                <Button
-                  icon="lock"
-                  content="Close Interior Airlock"
-                  onClick={() => act('cycleClosed')}
-                />
-                <Button
-                  icon="sync"
-                  content="Cycle to Exterior Airlock"
-                  onClick={() => act('cycleExterior')}
-                />
+                <Button icon="lock" content="Close Interior Airlock" onClick={() => act('cycleClosed')} />
+                <Button icon="sync" content="Cycle to Exterior Airlock" onClick={() => act('cycleExterior')} />
               </>
             )) ||
             (airlockState === 'outopen' && (
               <>
-                <Button
-                  icon="lock"
-                  content="Close Exterior Airlock"
-                  onClick={() => act('cycleClosed')}
-                />
-                <Button
-                  icon="sync"
-                  content="Cycle to Interior Airlock"
-                  onClick={() => act('cycleInterior')}
-                />
+                <Button icon="lock" content="Close Exterior Airlock" onClick={() => act('cycleClosed')} />
+                <Button icon="sync" content="Cycle to Interior Airlock" onClick={() => act('cycleInterior')} />
               </>
             ))
           }
@@ -103,18 +66,10 @@ export const AirlockController = (props) => {
                 {currentStatus[1]}{' '}
               </Box>
             </LabeledList.Item>
-            <LabeledList.Item label="Chamber Pressure">
-              {sensorPressure} kPa
-            </LabeledList.Item>
-            <LabeledList.Item label="Control Pump">
-              {pumpStatus}
-            </LabeledList.Item>
-            <LabeledList.Item label="Interior Door">
-              {interiorStatus}
-            </LabeledList.Item>
-            <LabeledList.Item label="Exterior Door">
-              {exteriorStatus}
-            </LabeledList.Item>
+            <LabeledList.Item label="Chamber Pressure">{sensorPressure} kPa</LabeledList.Item>
+            <LabeledList.Item label="Control Pump">{pumpStatus}</LabeledList.Item>
+            <LabeledList.Item label="Interior Door">{interiorStatus}</LabeledList.Item>
+            <LabeledList.Item label="Exterior Door">{exteriorStatus}</LabeledList.Item>
           </LabeledList>
         </Section>
       </Window.Content>

@@ -1,27 +1,10 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  LabeledList,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, Dropdown, LabeledList, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Mancrowave = (props) => {
   const { act, data } = useBackend();
-  const {
-    open,
-    occupant = {},
-    occupied,
-    on,
-    cook_start,
-    cook_end,
-    now,
-    cook_options = [],
-    current_setting,
-  } = data;
+  const { open, occupant = {}, occupied, on, cook_start, cook_end, now, cook_options = [], current_setting } = data;
   return (
     <Window width={340} height={360}>
       <Window.Content>
@@ -38,10 +21,7 @@ export const Mancrowave = (props) => {
           <>
             <Box mt={1} />
             <LabeledList>
-              <LabeledList.Item
-                label="Core Temperature"
-                color={occupied ? 'good' : 'bad'}
-              >
+              <LabeledList.Item label="Core Temperature" color={occupied ? 'good' : 'bad'}>
                 {occupied ? occupant.core_temperature : 'N/A'}
               </LabeledList.Item>
             </LabeledList>
@@ -52,12 +32,7 @@ export const Mancrowave = (props) => {
             <Box mt={1} />
             <LabeledList>
               <LabeledList.Item label="Timer">
-                <ProgressBar
-                  value={on ? now : 0}
-                  minValue={on ? cook_start : 0}
-                  maxValue={on ? cook_end : 100}
-                  color="good"
-                />
+                <ProgressBar value={on ? now : 0} minValue={on ? cook_start : 0} maxValue={on ? cook_end : 100} color="good" />
               </LabeledList.Item>
             </LabeledList>
             <Box mt={1} />
@@ -73,24 +48,9 @@ export const Mancrowave = (props) => {
               disabled={!!on}
             />
             <Box mt={1} />
-            <Button
-              icon={open ? 'door-open' : 'door-closed'}
-              content={open ? 'Open' : 'Closed'}
-              onClick={() => act('mancrowave-door')}
-              disabled={!!on}
-            />
-            <Button
-              icon={'door-open'}
-              content={'Emergency Stop'}
-              onClick={() => act('mancrowave-emergency-stop')}
-              disabled={!on}
-            />
-            <Button
-              icon={'temperature-up'}
-              content={'Cook'}
-              onClick={() => act('mancrowave-cook')}
-              disabled={!!on}
-            />
+            <Button icon={open ? 'door-open' : 'door-closed'} content={open ? 'Open' : 'Closed'} onClick={() => act('mancrowave-door')} disabled={!!on} />
+            <Button icon={'door-open'} content={'Emergency Stop'} onClick={() => act('mancrowave-emergency-stop')} disabled={!on} />
+            <Button icon={'temperature-up'} content={'Cook'} onClick={() => act('mancrowave-cook')} disabled={!!on} />
           </>
         </Section>
       </Window.Content>

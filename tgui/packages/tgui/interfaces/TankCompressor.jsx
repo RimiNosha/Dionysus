@@ -1,18 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  LabeledList,
-  Modal,
-  NoticeBox,
-  RoundGauge,
-  Section,
-  Slider,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, Flex, Icon, LabeledList, Modal, NoticeBox, RoundGauge, Section, Slider, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 import { GasmixParser } from './common/GasmixParser';
 
@@ -36,29 +23,15 @@ const TankCompressorContent = (props) => {
       {currentTab === 1 && <TankCompressorControls />}
       {currentTab === 2 && <TankCompressorRecords />}
       <Stack.Item>
-        <Section
-          title={disk ? disk + ' (' + storage + ')' : 'No Disk Inserted'}
-        >
+        <Section title={disk ? disk + ' (' + storage + ')' : 'No Disk Inserted'}>
           <Stack>
             <Stack.Item grow>
-              <Button
-                textAlign="center"
-                fluid
-                icon={currentTab === 1 ? 'clipboard-list' : 'times'}
-                onClick={() => (currentTab === 1 ? changeTab(2) : changeTab(1))}
-              >
+              <Button textAlign="center" fluid icon={currentTab === 1 ? 'clipboard-list' : 'times'} onClick={() => (currentTab === 1 ? changeTab(2) : changeTab(1))}>
                 {currentTab === 1 ? 'Open Records' : 'Close Records'}
               </Button>
             </Stack.Item>
             <Stack.Item grow>
-              <Button
-                textAlign="center"
-                fluid
-                icon="eject"
-                content="Eject Disk"
-                disabled={!disk}
-                onClick={() => act('eject_disk')}
-              />
+              <Button textAlign="center" fluid icon="eject" content="Eject Disk" disabled={!disk} onClick={() => act('eject_disk')} />
             </Stack.Item>
           </Stack>
         </Section>
@@ -71,12 +44,7 @@ const AlertBoxes = (props) => {
   const { text_content, icon_name, icon_break, color, active } = props;
   const { act, data } = useBackend();
   return (
-    <Box
-      bold
-      height="100%"
-      fontSize={1.25}
-      backgroundColor={active ? color : '#999999'}
-    >
+    <Box bold height="100%" fontSize={1.25} backgroundColor={active ? color : '#999999'}>
       <Flex height="100%" width="100%" justify="center" direction="column">
         <Flex.Item>
           <Icon name={icon_name} width={2} />
@@ -90,21 +58,8 @@ const AlertBoxes = (props) => {
 
 const TankCompressorControls = (props) => {
   const { act, data } = useBackend();
-  const {
-    tankPresent,
-    leaking,
-    lastPressure,
-    leakPressure,
-    fragmentPressure,
-    tankPressure,
-    maxTransfer,
-    active,
-    transferRate,
-    ejectPressure,
-    inputData,
-    outputData,
-    bufferData,
-  } = data;
+  const { tankPresent, leaking, lastPressure, leakPressure, fragmentPressure, tankPressure, maxTransfer, active, transferRate, ejectPressure, inputData, outputData, bufferData } =
+    data;
   const pressure = tankPresent ? tankPressure : lastPressure;
   const usingLastData = !!(lastPressure && !tankPresent);
   return (
@@ -113,21 +68,13 @@ const TankCompressorControls = (props) => {
         <Section
           title="Tank Integrity"
           buttons={
-            <Button
-              icon="eject"
-              disabled={!tankPresent || tankPressure > ejectPressure}
-              onClick={() => act('eject_tank')}
-            >
+            <Button icon="eject" disabled={!tankPresent || tankPressure > ejectPressure} onClick={() => act('eject_tank')}>
               {'Eject Tank'}
             </Button>
           }
         >
           {!pressure && <Modal>{'No Pressure Detected'}</Modal>}
-          {usingLastData && (
-            <NoticeBox warning>
-              {'Tank destroyed. Displaying last recorded data.'}
-            </NoticeBox>
-          )}
+          {usingLastData && <NoticeBox warning>{'Tank destroyed. Displaying last recorded data.'}</NoticeBox>}
           <Stack fill textAlign="center">
             <Stack.Item>
               <RoundGauge
@@ -146,44 +93,18 @@ const TankCompressorControls = (props) => {
               />
             </Stack.Item>
             <Stack.Item basis={0} grow>
-              <AlertBoxes
-                text_content="Tank Pressure Nominal"
-                icon_name="check"
-                icon_break
-                color="green"
-                active={pressure < leakPressure}
-              />
+              <AlertBoxes text_content="Tank Pressure Nominal" icon_name="check" icon_break color="green" active={pressure < leakPressure} />
             </Stack.Item>
             <Stack.Item basis={0} grow>
-              <AlertBoxes
-                text_content="Tank Integrity Faltering"
-                icon_name="exclamation-triangle"
-                icon_break
-                color="yellow"
-                active={pressure >= leakPressure}
-              />
+              <AlertBoxes text_content="Tank Integrity Faltering" icon_name="exclamation-triangle" icon_break color="yellow" active={pressure >= leakPressure} />
             </Stack.Item>
             <Stack.Item basis={0} grow>
               <Stack vertical fill>
                 <Stack.Item grow>
-                  <AlertBoxes
-                    text_content="Leak Hazard"
-                    icon_name="biohazard"
-                    color="red"
-                    active={
-                      (pressure >= leakPressure &&
-                        pressure < fragmentPressure) ||
-                      leaking
-                    }
-                  />
+                  <AlertBoxes text_content="Leak Hazard" icon_name="biohazard" color="red" active={(pressure >= leakPressure && pressure < fragmentPressure) || leaking} />
                 </Stack.Item>
                 <Stack.Item grow>
-                  <AlertBoxes
-                    text_content="Explosive Hazard"
-                    icon_name="bomb"
-                    color="red"
-                    active={pressure >= fragmentPressure}
-                  />
+                  <AlertBoxes text_content="Explosive Hazard" icon_name="bomb" color="red" active={pressure >= fragmentPressure} />
                 </Stack.Item>
               </Stack>
             </Stack.Item>
@@ -201,16 +122,12 @@ const TankCompressorControls = (props) => {
                 stepPixelSize={12.5}
                 step={0.5}
                 unit="L/S"
-                onDrag={(e, new_rate) =>
-                  act('change_rate', { target: new_rate })
-                }
+                onDrag={(e, new_rate) => act('change_rate', { target: new_rate })}
               />
             </Stack.Item>
             <Stack.Item>
               <Button
-                disabled={
-                  !tankPresent || (!!leaking && pressure < leakPressure)
-                }
+                disabled={!tankPresent || (!!leaking && pressure < leakPressure)}
                 selected={active}
                 icon={active ? 'power-off' : 'times'}
                 onClick={() => act('toggle_injection')}
@@ -260,13 +177,8 @@ const TankCompressorControls = (props) => {
 const TankCompressorRecords = (props) => {
   const { act, data } = useBackend();
   const { records = [], disk } = data;
-  const [activeRecordRef, setActiveRecordRef] = useSharedState(
-    'recordRef',
-    records[0]?.ref,
-  );
-  const activeRecord =
-    !!activeRecordRef &&
-    records.find((record) => activeRecordRef === record.ref);
+  const [activeRecordRef, setActiveRecordRef] = useSharedState('recordRef', records[0]?.ref);
+  const activeRecord = !!activeRecordRef && records.find((record) => activeRecordRef === record.ref);
   if (records.length === 0) {
     return (
       <Stack.Item grow>
@@ -280,12 +192,7 @@ const TankCompressorRecords = (props) => {
           <Stack.Item mr={2}>
             <Tabs vertical>
               {records.map((record) => (
-                <Tabs.Tab
-                  icon="file"
-                  key={record.name}
-                  selected={record.ref === activeRecordRef}
-                  onClick={() => setActiveRecordRef(record.ref)}
-                >
+                <Tabs.Tab icon="file" key={record.name} selected={record.ref === activeRecordRef} onClick={() => setActiveRecordRef(record.ref)}>
                   {record.name}
                 </Tabs.Tab>
               ))}
@@ -323,19 +230,13 @@ const TankCompressorRecords = (props) => {
                 ]}
               >
                 <LabeledList>
-                  <LabeledList.Item label="Timestamp">
-                    {activeRecord.timestamp}
-                  </LabeledList.Item>
-                  <LabeledList.Item label="Source">
-                    {activeRecord.source}
-                  </LabeledList.Item>
+                  <LabeledList.Item label="Timestamp">{activeRecord.timestamp}</LabeledList.Item>
+                  <LabeledList.Item label="Source">{activeRecord.source}</LabeledList.Item>
                   <LabeledList.Item label="Detected Gas">
                     <LabeledList>
                       {Object.keys(activeRecord.gases).map((gas_name) => (
                         <LabeledList.Item label={gas_name} key={gas_name}>
-                          {(activeRecord.gases[gas_name]
-                            ? activeRecord.gases[gas_name].toFixed(2)
-                            : '-') + ' moles'}
+                          {(activeRecord.gases[gas_name] ? activeRecord.gases[gas_name].toFixed(2) : '-') + ' moles'}
                         </LabeledList.Item>
                       ))}
                     </LabeledList>

@@ -6,13 +6,7 @@ import { Tooltip } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { Box, Button, Dropdown, Stack } from '../../components';
 import { logger } from '../../logging';
-import {
-  createSetPreference,
-  Job,
-  JoblessRole,
-  JobPriority,
-  PreferencesMenuData,
-} from './data';
+import { createSetPreference, Job, JoblessRole, JobPriority, PreferencesMenuData } from './data';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 const sortJobs = (entries: [string, Job][], head?: string) =>
@@ -23,22 +17,13 @@ const sortJobs = (entries: [string, Job][], head?: string) =>
 
 const PRIORITY_BUTTON_SIZE = '18px';
 
-const PriorityButton = (props: {
-  color: string;
-  enabled: boolean;
-  modifier?: string;
-  name: string;
-  onClick: () => void;
-}) => {
+const PriorityButton = (props: { color: string; enabled: boolean; modifier?: string; name: string; onClick: () => void }) => {
   const className = `PreferencesMenu__Jobs__departments__priority`;
 
   return (
     // PARIAH EDIT START
     <Button
-      className={classes([
-        className,
-        props.modifier && `${className}--${props.modifier}`,
-      ])}
+      className={classes([className, props.modifier && `${className}--${props.modifier}`])}
       color={props.enabled ? props.color : 'white'}
       circular
       onClick={props.onClick}
@@ -55,9 +40,7 @@ type CreateSetPriority = (priority: JobPriority | null) => () => void;
 
 const createSetPriorityCache: Record<string, CreateSetPriority> = {};
 
-const createCreateSetPriorityFromName = (
-  jobName: string,
-): CreateSetPriority => {
+const createCreateSetPriorityFromName = (jobName: string): CreateSetPriority => {
   if (createSetPriorityCache[jobName] !== undefined) {
     return createSetPriorityCache[jobName];
   }
@@ -106,11 +89,7 @@ const PriorityHeaders = () => {
   );
 };
 
-const PriorityButtons = (props: {
-  createSetPriority: CreateSetPriority;
-  isOverflow: boolean;
-  priority: JobPriority;
-}) => {
+const PriorityButtons = (props: { createSetPriority: CreateSetPriority; isOverflow: boolean; priority: JobPriority }) => {
   const { createSetPriority, isOverflow, priority } = props;
 
   return (
@@ -125,51 +104,19 @@ const PriorityButtons = (props: {
     >
       {isOverflow ? (
         <>
-          <PriorityButton
-            name="Off"
-            modifier="off"
-            color="light-grey"
-            enabled={!priority}
-            onClick={createSetPriority(null)}
-          />
+          <PriorityButton name="Off" modifier="off" color="light-grey" enabled={!priority} onClick={createSetPriority(null)} />
 
-          <PriorityButton
-            name="On"
-            color="green"
-            enabled={!!priority}
-            onClick={createSetPriority(JobPriority.High)}
-          />
+          <PriorityButton name="On" color="green" enabled={!!priority} onClick={createSetPriority(JobPriority.High)} />
         </>
       ) : (
         <>
-          <PriorityButton
-            name="Off"
-            modifier="off"
-            color="light-grey"
-            enabled={!priority}
-            onClick={createSetPriority(null)}
-          />
+          <PriorityButton name="Off" modifier="off" color="light-grey" enabled={!priority} onClick={createSetPriority(null)} />
 
-          <PriorityButton
-            name="Low"
-            color="red"
-            enabled={priority === JobPriority.Low}
-            onClick={createSetPriority(JobPriority.Low)}
-          />
+          <PriorityButton name="Low" color="red" enabled={priority === JobPriority.Low} onClick={createSetPriority(JobPriority.Low)} />
 
-          <PriorityButton
-            name="Medium"
-            color="yellow"
-            enabled={priority === JobPriority.Medium}
-            onClick={createSetPriority(JobPriority.Medium)}
-          />
+          <PriorityButton name="Medium" color="yellow" enabled={priority === JobPriority.Medium} onClick={createSetPriority(JobPriority.Medium)} />
 
-          <PriorityButton
-            name="High"
-            color="green"
-            enabled={priority === JobPriority.High}
-            onClick={createSetPriority(JobPriority.High)}
-          />
+          <PriorityButton name="High" color="green" enabled={priority === JobPriority.High} onClick={createSetPriority(JobPriority.High)} />
         </>
       )}
     </Box> // PARIAH EDIT
@@ -188,14 +135,11 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
   const { act } = useBackend<PreferencesMenuData>();
   // PARIAH EDIT END
 
-  const experienceNeeded =
-    data.job_required_experience && data.job_required_experience[name];
+  const experienceNeeded = data.job_required_experience && data.job_required_experience[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
 
   // PARIAH EDIT
-  const alt_title_selected = data.job_alt_titles[name]
-    ? data.job_alt_titles[name]
-    : name;
+  const alt_title_selected = data.job_alt_titles[name] ? data.job_alt_titles[name] : name;
   // PARIAH EDIT END
 
   let rightSide: ReactNode;
@@ -228,13 +172,7 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
       </Stack>
     );
   } else {
-    rightSide = (
-      <PriorityButtons
-        createSetPriority={createSetPriority}
-        isOverflow={isOverflow}
-        priority={priority}
-      />
-    );
+    rightSide = <PriorityButtons createSetPriority={createSetPriority} isOverflow={isOverflow} priority={priority} />;
   }
   return (
     <Box
@@ -262,14 +200,7 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
               !job.alt_titles ? (
                 name
               ) : (
-                <Dropdown
-                  width="100%"
-                  options={job.alt_titles}
-                  displayText={alt_title_selected}
-                  onSelected={(value) =>
-                    act('set_job_title', { job: name, new_title: value })
-                  }
-                />
+                <Dropdown width="100%" options={job.alt_titles} displayText={alt_title_selected} onSelected={(value) => act('set_job_title', { job: name, new_title: value })} />
               )
               // PARIAH EDIT END
             }
@@ -284,9 +215,7 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
   );
 };
 
-const Department: FC<{ children?: ReactNode; department: string }> = (
-  props,
-) => {
+const Department: FC<{ children?: ReactNode; department: string }> = (props) => {
   const { children, department: name } = props;
   const className = `PreferencesMenu__Jobs__departments--${name}`;
   logger.log(name + ': ' + className);
@@ -320,17 +249,7 @@ const Department: FC<{ children?: ReactNode; department: string }> = (
             {
               jobsForDepartment.map(([name, job]) => {
                 logger.log(name);
-                return (
-                  <JobRow /* PARIAH EDIT START - Fixing alt titles */
-                    className={classes([
-                      className,
-                      name === department.head && 'head',
-                    ])}
-                    key={name}
-                    job={job}
-                    name={name}
-                  />
-                );
+                return <JobRow /* PARIAH EDIT START - Fixing alt titles */ className={classes([className, name === department.head && 'head'])} key={name} job={job} name={name} />;
               }) /* PARIAH EDIT END */
             }
 
@@ -377,11 +296,7 @@ const JoblessRoleDropdown = (props) => {
         selected={selected}
         onSelected={createSetPreference(act, 'joblessrole')}
         options={options}
-        displayText={
-          <Box pr={1}>
-            {options.find((option) => option.value === selected)!.displayText}
-          </Box>
-        }
+        displayText={<Box pr={1}>{options.find((option) => option.value === selected)!.displayText}</Box>}
       />
     </Box>
   );

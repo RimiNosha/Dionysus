@@ -27,12 +27,7 @@ const HypertorusMainControls = (props) => {
         <Stack.Item color="label">
           {'Start cooling: '}
           <Button
-            disabled={
-              data.start_fuel === 1 ||
-              data.start_moderator === 1 ||
-              data.start_power === 0 ||
-              (data.start_cooling && data.power_level > 0)
-            }
+            disabled={data.start_fuel === 1 || data.start_moderator === 1 || data.start_power === 0 || (data.start_cooling && data.power_level > 0)}
             icon={data.start_cooling ? 'power-off' : 'times'}
             content={data.start_cooling ? 'On' : 'Off'}
             selected={data.start_cooling}
@@ -97,11 +92,7 @@ export const Hypertorus = (props) => {
   const height = Math.min(idealHeight, winHeight * 0.8);
 
   return (
-    <Window
-      title="Hypertorus Fusion Reactor control panel"
-      width={width}
-      height={height}
-    >
+    <Window title="Hypertorus Fusion Reactor control panel" width={width} height={height}>
       <Window.Content scrollable>
         <HypertorusLayout />
       </Window.Content>

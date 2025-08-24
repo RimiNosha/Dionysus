@@ -54,16 +54,7 @@ export const RemoteRobotControlContent = (props) => {
       >
         <LabeledList>
           <LabeledList.Item label="Status">
-            <Box
-              inline
-              color={
-                decodeHtmlEntities(robot.mode) === 'Inactive'
-                  ? 'bad'
-                  : decodeHtmlEntities(robot.mode) === 'Idle'
-                    ? 'average'
-                    : 'good'
-              }
-            >
+            <Box inline color={decodeHtmlEntities(robot.mode) === 'Inactive' ? 'bad' : decodeHtmlEntities(robot.mode) === 'Idle' ? 'average' : 'good'}>
               {decodeHtmlEntities(robot.mode)}
             </Box>{' '}
             {(robot.hacked && (

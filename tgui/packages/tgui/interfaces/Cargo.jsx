@@ -2,20 +2,7 @@ import { filter, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 
 import { useBackend, useSharedState } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Input,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-  Table,
-  Tabs,
-} from '../components';
+import { AnimatedNumber, Box, Button, Flex, Icon, Input, LabeledList, NoticeBox, Section, Stack, Table, Tabs } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 
@@ -40,36 +27,18 @@ export const CargoContent = (props) => {
       <CargoStatus />
       <Section fitted>
         <Tabs>
-          <Tabs.Tab
-            icon="list"
-            selected={tab === 'catalog'}
-            onClick={() => setTab('catalog')}
-          >
+          <Tabs.Tab icon="list" selected={tab === 'catalog'} onClick={() => setTab('catalog')}>
             Catalog
           </Tabs.Tab>
-          <Tabs.Tab
-            icon="envelope"
-            textColor={tab !== 'requests' && requests.length > 0 && 'yellow'}
-            selected={tab === 'requests'}
-            onClick={() => setTab('requests')}
-          >
+          <Tabs.Tab icon="envelope" textColor={tab !== 'requests' && requests.length > 0 && 'yellow'} selected={tab === 'requests'} onClick={() => setTab('requests')}>
             Requests ({requests.length})
           </Tabs.Tab>
           {!requestonly && (
             <>
-              <Tabs.Tab
-                icon="shopping-cart"
-                textColor={tab !== 'cart' && cart.length > 0 && 'yellow'}
-                selected={tab === 'cart'}
-                onClick={() => setTab('cart')}
-              >
+              <Tabs.Tab icon="shopping-cart" textColor={tab !== 'cart' && cart.length > 0 && 'yellow'} selected={tab === 'cart'} onClick={() => setTab('cart')}>
                 Checkout ({cart.length})
               </Tabs.Tab>
-              <Tabs.Tab
-                icon="question"
-                selected={tab === 'help'}
-                onClick={() => setTab('help')}
-              >
+              <Tabs.Tab icon="question" selected={tab === 'help'} onClick={() => setTab('help')}>
                 Help
               </Tabs.Tab>
             </>
@@ -86,27 +55,13 @@ export const CargoContent = (props) => {
 
 const CargoStatus = (props) => {
   const { act, data } = useBackend();
-  const {
-    grocery,
-    away,
-    docked,
-    loan,
-    loan_dispatched,
-    location,
-    message,
-    points,
-    requestonly,
-    can_send,
-  } = data;
+  const { grocery, away, docked, loan, loan_dispatched, location, message, points, requestonly, can_send } = data;
   return (
     <Section
       title="Cargo"
       buttons={
         <Box inline bold>
-          <AnimatedNumber
-            value={points}
-            format={(value) => formatMoney(value)}
-          />
+          <AnimatedNumber value={points} format={(value) => formatMoney(value)} />
           {' credits'}
         </Box>
       }
@@ -117,10 +72,7 @@ const CargoStatus = (props) => {
             <Button
               color={(grocery && 'orange') || 'green'}
               content={location}
-              tooltip={
-                (grocery && 'The chef is waiting on their grocery supplies.') ||
-                ''
-              }
+              tooltip={(grocery && 'The chef is waiting on their grocery supplies.') || ''}
               tooltipPosition="right"
               onClick={() => act('send')}
             />
@@ -130,13 +82,7 @@ const CargoStatus = (props) => {
         <LabeledList.Item label="Notice">{message}</LabeledList.Item>
         {!!loan && !requestonly && (
           <LabeledList.Item label="Loan">
-            {(!loan_dispatched && (
-              <Button
-                content="Loan Shuttle"
-                disabled={!(away && docked)}
-                onClick={() => act('loan')}
-              />
-            )) || <Box color="bad">Loaned to Centcom</Box>}
+            {(!loan_dispatched && <Button content="Loan Shuttle" disabled={!(away && docked)} onClick={() => act('loan')} />) || <Box color="bad">Loaned to Centcom</Box>}
           </LabeledList.Item>
         )}
       </LabeledList>
@@ -157,11 +103,7 @@ const searchForSupplies = (supplies, search) => {
 
   return flow([
     (categories) => categories.flatMap((category) => category.packs),
-    filter(
-      (pack) =>
-        pack.name?.toLowerCase().includes(search.toLowerCase()) ||
-        pack.desc?.toLowerCase().includes(search.toLowerCase()),
-    ),
+    filter((pack) => pack.name?.toLowerCase().includes(search.toLowerCase()) || pack.desc?.toLowerCase().includes(search.toLowerCase())),
     sortBy((pack) => pack.name),
     (packs) => packs.slice(0, 25),
   ])(supplies);
@@ -175,17 +117,11 @@ export const CargoCatalog = (props) => {
 
   const supplies = Object.values(data.supplies);
 
-  const [activeSupplyName, setActiveSupplyName] = useSharedState(
-    'supply',
-    supplies[0]?.name,
-  );
+  const [activeSupplyName, setActiveSupplyName] = useSharedState('supply', supplies[0]?.name);
 
   const [searchText, setSearchText] = useSharedState('search_text', '');
 
-  const activeSupply =
-    activeSupplyName === 'search_results'
-      ? { packs: searchForSupplies(supplies, searchText) }
-      : supplies.find((supply) => supply.name === activeSupplyName);
+  const activeSupply = activeSupplyName === 'search_results' ? { packs: searchForSupplies(supplies, searchText) } : supplies.find((supply) => supply.name === activeSupplyName);
 
   return (
     <Section
@@ -194,12 +130,7 @@ export const CargoCatalog = (props) => {
         !express && (
           <>
             <CargoCartButtons />
-            <Button.Checkbox
-              ml={2}
-              content="Buy Privately"
-              checked={self_paid}
-              onClick={() => act('toggleprivate')}
-            />
+            <Button.Checkbox ml={2} content="Buy Privately" checked={self_paid} onClick={() => act('toggleprivate')} />
           </>
         )
       }
@@ -207,10 +138,7 @@ export const CargoCatalog = (props) => {
       <Flex>
         <Flex.Item minWidth="30%" ml={-1} mr={1}>
           <Tabs vertical>
-            <Tabs.Tab
-              key="search_results"
-              selected={activeSupplyName === 'search_results'}
-            >
+            <Tabs.Tab key="search_results" selected={activeSupplyName === 'search_results'}>
               <Stack align="baseline">
                 <Stack.Item>
                   <Icon name="search" />
@@ -286,11 +214,7 @@ export const CargoCatalog = (props) => {
                         })
                       }
                     >
-                      {formatMoney(
-                        (self_paid && !pack.goody) || app_cost
-                          ? Math.round(pack.cost * 1.1)
-                          : pack.cost,
-                      )}
+                      {formatMoney((self_paid && !pack.goody) || app_cost ? Math.round(pack.cost * 1.1) : pack.cost)}
                       {uiCurrency}
                     </Button>
                   </Table.Cell>
@@ -310,19 +234,7 @@ const CargoRequests = (props) => {
   const requests = data.requests || [];
   // Labeled list reimplementation to squeeze extra columns out of it
   return (
-    <Section
-      title="Active Requests"
-      buttons={
-        !requestonly && (
-          <Button
-            icon="times"
-            content="Clear"
-            color="transparent"
-            onClick={() => act('denyall')}
-          />
-        )
-      }
-    >
+    <Section title="Active Requests" buttons={!requestonly && <Button icon="times" content="Clear" color="transparent" onClick={() => act('denyall')} />}>
       {requests.length === 0 && <Box color="good">No Requests</Box>}
       {requests.length > 0 && (
         <Table>
@@ -384,15 +296,9 @@ const CargoCartButtons = (props) => {
       <Box inline mx={1}>
         {cart.length === 0 && 'Cart is empty'}
         {cart.length === 1 && '1 item'}
-        {cart.length >= 2 && cart.length + ' items'}{' '}
-        {total > 0 && `(${formatMoney(total)} cr)`}
+        {cart.length >= 2 && cart.length + ' items'} {total > 0 && `(${formatMoney(total)} cr)`}
       </Box>
-      <Button
-        icon="times"
-        color="transparent"
-        content="Clear"
-        onClick={() => act('clear')}
-      />
+      <Button icon="times" color="transparent" content="Clear" onClick={() => act('clear')} />
     </>
   );
 };
@@ -412,9 +318,7 @@ const CargoCart = (props) => {
                 #{entry.id}
               </Table.Cell>
               <Table.Cell>{entry.object}</Table.Cell>
-              <Table.Cell collapsing>
-                {!!entry.paid && <b>[Paid Privately]</b>}
-              </Table.Cell>
+              <Table.Cell collapsing>{!!entry.paid && <b>[Paid Privately]</b>}</Table.Cell>
               {(entry.dep_order && (
                 <Table.Cell collapsing textAlign="right">
                   {formatMoney(entry.cost)} cr earned on delivery
@@ -465,24 +369,15 @@ const CargoHelp = (props) => {
   return (
     <>
       <Section title="Department Orders">
-        Each department on the station will order crates from their own personal
-        consoles. These orders are ENTIRELY FREE! They do not come out of
-        cargo&apos;s budget, and rather put the consoles on cooldown. So
-        here&apos;s where you come in: The ordered crates will show up on your
-        supply console, and you need to deliver the crates to the orderers.
-        You&apos;ll actually be paid the full value of the department crate on
-        delivery if the crate was not tampered with, making the system a good
-        source of income.
+        Each department on the station will order crates from their own personal consoles. These orders are ENTIRELY FREE! They do not come out of cargo&apos;s budget, and rather
+        put the consoles on cooldown. So here&apos;s where you come in: The ordered crates will show up on your supply console, and you need to deliver the crates to the orderers.
+        You&apos;ll actually be paid the full value of the department crate on delivery if the crate was not tampered with, making the system a good source of income.
         <br />
-        <b>
-          Examine a department order crate to get specific details about where
-          the crate needs to go.
-        </b>
+        <b>Examine a department order crate to get specific details about where the crate needs to go.</b>
       </Section>
       <Section title="MULEbots">
-        MULEbots are slow but loyal delivery bots that will get crates delivered
-        with minimal technician effort required. It is slow, though, and can be
-        tampered with while en route.
+        MULEbots are slow but loyal delivery bots that will get crates delivered with minimal technician effort required. It is slow, though, and can be tampered with while en
+        route.
         <br />
         <b>Setting up a MULEbot is easy:</b>
         <br />
@@ -502,12 +397,9 @@ const CargoHelp = (props) => {
         <b>9.</b> Click <i>Proceed</i>.
       </Section>
       <Section title="Disposals Delivery System">
-        In addition to MULEs and hand-deliveries, you can also make use of the
-        disposals mailing system. Note that a break in the disposal piping could
-        cause your package to be lost (this hardly ever happens), so this is not
-        always the most secure ways to deliver something. You can wrap up a
-        piece of paper and mail it the same way if you (or someone at the desk)
-        wants to mail a letter.
+        In addition to MULEs and hand-deliveries, you can also make use of the disposals mailing system. Note that a break in the disposal piping could cause your package to be
+        lost (this hardly ever happens), so this is not always the most secure ways to deliver something. You can wrap up a piece of paper and mail it the same way if you (or
+        someone at the desk) wants to mail a letter.
         <br />
         <b>Using the Disposals Delivery System is even easier:</b>
         <br />

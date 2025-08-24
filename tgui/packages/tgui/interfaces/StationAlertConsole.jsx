@@ -30,26 +30,19 @@ export const StationAlertConsoleContent = (props) => {
     Camera: 5,
   };
 
-  const sortedAlarms = flow([sortBy((alarm) => sortingKey[alarm.name])])(
-    data.alarms || [],
-  );
+  const sortedAlarms = flow([sortBy((alarm) => sortingKey[alarm.name])])(data.alarms || []);
 
   return (
     <>
       {sortedAlarms.map((category) => (
         <Section key={category.name} title={category.name + ' Alarms'}>
           <ul>
-            {category.alerts.length === 0 && (
-              <li className="color-good">Systems Nominal</li>
-            )}
+            {category.alerts.length === 0 && <li className="color-good">Systems Nominal</li>}
             {category.alerts.map((alert) => (
               <Stack key={alert.name} height="30px" align="baseline">
                 <Stack.Item grow>
                   <li className="color-average">
-                    {alert.name}{' '}
-                    {!!cameraView && alert.sources > 1
-                      ? ' (' + alert.sources + ' sources)'
-                      : ''}
+                    {alert.name} {!!cameraView && alert.sources > 1 ? ' (' + alert.sources + ' sources)' : ''}
                   </li>
                 </Stack.Item>
                 {!!cameraView && (
@@ -59,13 +52,7 @@ export const StationAlertConsoleContent = (props) => {
                       width="100px"
                       icon={alert.cameras ? 'video' : ''}
                       disabled={!alert.cameras}
-                      content={
-                        alert.cameras === 1
-                          ? alert.cameras + ' Camera'
-                          : alert.cameras > 1
-                            ? alert.cameras + ' Cameras'
-                            : 'No Camera'
-                      }
+                      content={alert.cameras === 1 ? alert.cameras + ' Camera' : alert.cameras > 1 ? alert.cameras + ' Cameras' : 'No Camera'}
                       onClick={() =>
                         act('select_camera', {
                           alert: alert.ref,

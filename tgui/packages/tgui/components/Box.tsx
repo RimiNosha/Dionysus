@@ -5,21 +5,13 @@
  */
 
 import { BooleanLike, classes } from 'common/react';
-import {
-  createElement,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  ReactNode,
-  UIEventHandler,
-} from 'react';
+import { createElement, KeyboardEventHandler, MouseEventHandler, ReactNode, UIEventHandler } from 'react';
 
 import { CSS_COLORS } from '../constants';
 import { logger } from '../logging';
 
 type BooleanProps = Partial<Record<keyof typeof booleanStyleMap, boolean>>;
-type StringProps = Partial<
-  Record<keyof typeof stringStyleMap, string | BooleanLike>
->;
+type StringProps = Partial<Record<keyof typeof stringStyleMap, string | BooleanLike>>;
 
 export type EventHandlers = Partial<{
   onClick: MouseEventHandler<HTMLDivElement>;
@@ -149,12 +141,7 @@ const stringStyleMap = {
     }
   },
   // Margin
-  m: mapDirectionalUnitPropTo('margin', halfUnit, [
-    'Top',
-    'Bottom',
-    'Left',
-    'Right',
-  ]),
+  m: mapDirectionalUnitPropTo('margin', halfUnit, ['Top', 'Bottom', 'Left', 'Right']),
   mb: mapUnitPropTo('marginBottom', halfUnit),
   ml: mapUnitPropTo('marginLeft', halfUnit),
   mr: mapUnitPropTo('marginRight', halfUnit),
@@ -162,12 +149,7 @@ const stringStyleMap = {
   mx: mapDirectionalUnitPropTo('margin', halfUnit, ['Left', 'Right']),
   my: mapDirectionalUnitPropTo('margin', halfUnit, ['Top', 'Bottom']),
   // Padding
-  p: mapDirectionalUnitPropTo('padding', halfUnit, [
-    'Top',
-    'Bottom',
-    'Left',
-    'Right',
-  ]),
+  p: mapDirectionalUnitPropTo('padding', halfUnit, ['Top', 'Bottom', 'Left', 'Right']),
   pb: mapUnitPropTo('paddingBottom', halfUnit),
   pl: mapUnitPropTo('paddingLeft', halfUnit),
   pr: mapUnitPropTo('paddingRight', halfUnit),
@@ -210,8 +192,7 @@ export const computeBoxProps = (props) => {
 
     const propValue = props[propName];
 
-    const mapPropToStyle =
-      stringStyleMap[propName] || booleanStyleMap[propName];
+    const mapPropToStyle = stringStyleMap[propName] || booleanStyleMap[propName];
 
     if (mapPropToStyle) {
       mapPropToStyle(computedStyles, propValue);
@@ -229,25 +210,18 @@ export const computeBoxProps = (props) => {
 export const computeBoxClassName = (props: BoxProps) => {
   const color = props.textColor || props.color;
   const backgroundColor = props.backgroundColor;
-  return classes([
-    isColorClass(color) && 'color-' + color,
-    isColorClass(backgroundColor) && 'color-bg-' + backgroundColor,
-  ]);
+  return classes([isColorClass(color) && 'color-' + color, isColorClass(backgroundColor) && 'color-bg-' + backgroundColor]);
 };
 
 export const Box = (props: BoxProps & DangerDoNotUse) => {
   const { as = 'div', className, children, ...rest } = props;
 
   // Compute class name and styles
-  const computedClassName = className
-    ? `${className} ${computeBoxClassName(rest)}`
-    : computeBoxClassName(rest);
+  const computedClassName = className ? `${className} ${computeBoxClassName(rest)}` : computeBoxClassName(rest);
   const computedProps = computeBoxProps(rest);
 
   if (as === 'img') {
-    logger.error(
-      'Box component cannot be used as an image. Use Image component instead.',
-    );
+    logger.error('Box component cannot be used as an image. Use Image component instead.');
   }
 
   // Render the component

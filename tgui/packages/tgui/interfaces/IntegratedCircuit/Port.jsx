@@ -17,35 +17,17 @@ export class Port extends Component {
   }
 
   handlePortMouseDown(e) {
-    const {
-      port,
-      portIndex,
-      componentId,
-      isOutput,
-      onPortMouseDown = noop,
-    } = this.props;
+    const { port, portIndex, componentId, isOutput, onPortMouseDown = noop } = this.props;
     onPortMouseDown(portIndex, componentId, port, isOutput, e);
   }
 
   handlePortMouseUp(e) {
-    const {
-      port,
-      portIndex,
-      componentId,
-      isOutput,
-      onPortMouseUp = noop,
-    } = this.props;
+    const { port, portIndex, componentId, isOutput, onPortMouseUp = noop } = this.props;
     onPortMouseUp(portIndex, componentId, port, isOutput, e);
   }
 
   handlePortRightClick(e) {
-    const {
-      port,
-      portIndex,
-      componentId,
-      isOutput,
-      onPortRightClick = noop,
-    } = this.props;
+    const { port, portIndex, componentId, isOutput, onPortRightClick = noop } = this.props;
     onPortRightClick(portIndex, componentId, port, isOutput, e);
   }
 
@@ -68,13 +50,7 @@ export class Port extends Component {
 
     return (
       <Stack.Item>
-        <DisplayName
-          act={act}
-          port={port}
-          isOutput={isOutput}
-          componentId={componentId}
-          portIndex={portIndex}
-        />
+        <DisplayName act={act} port={port} isOutput={isOutput} componentId={componentId} portIndex={portIndex} />
       </Stack.Item>
     );
   }
@@ -114,9 +90,7 @@ export class Port extends Component {
                     key={index}
                     stroke={compositeColor}
                     strokeDasharray={`${arcLength}, ${100 * Math.PI}`}
-                    strokeDashoffset={
-                      -index * (100 * (Math.PI / composite_types.length))
-                    }
+                    strokeDashoffset={-index * (100 * (Math.PI / composite_types.length))}
                     className={`color-stroke-${compositeColor}`}
                     strokeWidth="50px"
                     cx="50"
@@ -127,13 +101,7 @@ export class Port extends Component {
                   />
                 );
               })}
-              <circle
-                ref={this.iconRef}
-                cx="50"
-                cy="50"
-                r="50"
-                className={`color-fill-${port.color}`}
-              />
+              <circle ref={this.iconRef} cx="50" cy="50" r="50" className={`color-fill-${port.color}`} />
             </svg>
             <span ref={this.iconRef} className="ObjectComponent__PortPos" />
           </Box>

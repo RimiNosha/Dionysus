@@ -40,22 +40,13 @@ export const Panel = (props) => {
                 <PingIndicator />
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  color="grey"
-                  selected={audio.visible}
-                  icon="music"
-                  tooltip="Music player"
-                  tooltipPosition="bottom-start"
-                  onClick={() => audio.toggle()}
-                />
+                <Button color="grey" selected={audio.visible} icon="music" tooltip="Music player" tooltipPosition="bottom-start" onClick={() => audio.toggle()} />
               </Stack.Item>
               <Stack.Item>
                 <Button
                   icon={settings.visible ? 'times' : 'cog'}
                   selected={settings.visible}
-                  tooltip={
-                    settings.visible ? 'Close settings' : 'Open settings'
-                  }
+                  tooltip={settings.visible ? 'Close settings' : 'Open settings'}
                   tooltipPosition="bottom-start"
                   onClick={() => settings.toggle()}
                 />
@@ -81,17 +72,9 @@ export const Panel = (props) => {
               <ChatPanel lineHeight={settings.lineHeight} />
             </Pane.Content>
             <Notifications>
-              {game.connectionLostAt && (
-                <Notifications.Item rightSlot={<ReconnectButton />}>
-                  You are either AFK, experiencing lag or the connection has
-                  closed.
-                </Notifications.Item>
-              )}
+              {game.connectionLostAt && <Notifications.Item rightSlot={<ReconnectButton />}>You are either AFK, experiencing lag or the connection has closed.</Notifications.Item>}
               {game.roundRestartedAt && (
-                <Notifications.Item>
-                  The connection has been closed because the server is
-                  restarting. Please wait while you automatically reconnect.
-                </Notifications.Item>
+                <Notifications.Item>The connection has been closed because the server is restarting. Please wait while you automatically reconnect.</Notifications.Item>
               )}
             </Notifications>
           </Section>

@@ -15,26 +15,10 @@ export const AutomatedAnnouncement = (props) => {
       <Window.Content>
         <Section
           title="Arrival Announcement"
-          buttons={
-            <Button
-              icon={arrivalToggle ? 'power-off' : 'times'}
-              selected={arrivalToggle}
-              content={arrivalToggle ? 'On' : 'Off'}
-              onClick={() => act('ArrivalToggle')}
-            />
-          }
+          buttons={<Button icon={arrivalToggle ? 'power-off' : 'times'} selected={arrivalToggle} content={arrivalToggle ? 'On' : 'Off'} onClick={() => act('ArrivalToggle')} />}
         >
           <LabeledList>
-            <LabeledList.Item
-              label="Message"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_TEXT}
-                  tooltipPosition="left"
-                />
-              }
-            >
+            <LabeledList.Item label="Message" buttons={<Button icon="info" tooltip={TOOLTIP_TEXT} tooltipPosition="left" />}>
               <Input
                 fluid
                 value={arrival}
@@ -49,26 +33,10 @@ export const AutomatedAnnouncement = (props) => {
         </Section>
         <Section
           title="Departmental Head Announcement"
-          buttons={
-            <Button
-              icon={newheadToggle ? 'power-off' : 'times'}
-              selected={newheadToggle}
-              content={newheadToggle ? 'On' : 'Off'}
-              onClick={() => act('NewheadToggle')}
-            />
-          }
+          buttons={<Button icon={newheadToggle ? 'power-off' : 'times'} selected={newheadToggle} content={newheadToggle ? 'On' : 'Off'} onClick={() => act('NewheadToggle')} />}
         >
           <LabeledList>
-            <LabeledList.Item
-              label="Message"
-              buttons={
-                <Button
-                  icon="info"
-                  tooltip={TOOLTIP_TEXT}
-                  tooltipPosition="left"
-                />
-              }
-            >
+            <LabeledList.Item label="Message" buttons={<Button icon="info" tooltip={TOOLTIP_TEXT} tooltipPosition="left" />}>
               <Input
                 fluid
                 value={newhead}

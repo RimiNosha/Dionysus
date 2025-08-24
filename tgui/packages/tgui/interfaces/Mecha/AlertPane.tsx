@@ -1,10 +1,6 @@
 import { useBackend } from '../../backend';
 import { Box, Button, Stack } from '../../components';
-import {
-  InternalDamageToDamagedDesc,
-  InternalDamageToNormalDesc,
-  OperatorData,
-} from './data';
+import { InternalDamageToDamagedDesc, InternalDamageToNormalDesc, OperatorData } from './data';
 
 export const AlertPane = (props) => {
   const { act, data } = useBackend<OperatorData>();
@@ -15,14 +11,8 @@ export const AlertPane = (props) => {
         <Stack.Item key={t}>
           <Stack justify="space-between">
             <Stack.Item>
-              <Box
-                color={
-                  internal_damage & internal_damage_keys[t] ? 'red' : 'green'
-                }
-              >
-                {internal_damage & internal_damage_keys[t]
-                  ? InternalDamageToDamagedDesc[t]
-                  : InternalDamageToNormalDesc[t]}
+              <Box color={internal_damage & internal_damage_keys[t] ? 'red' : 'green'}>
+                {internal_damage & internal_damage_keys[t] ? InternalDamageToDamagedDesc[t] : InternalDamageToNormalDesc[t]}
               </Box>
             </Stack.Item>
             <Stack.Item>

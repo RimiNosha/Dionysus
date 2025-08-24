@@ -145,9 +145,7 @@ class ChatRenderer {
       }
       const height = node.scrollHeight;
       const bottom = node.scrollTop + node.offsetHeight;
-      const scrollTracking =
-        Math.abs(height - bottom) < SCROLL_TRACKING_TOLERANCE ||
-        this.lastScrollHeight === 0;
+      const scrollTracking = Math.abs(height - bottom) < SCROLL_TRACKING_TOLERANCE || this.lastScrollHeight === 0;
       if (scrollTracking !== this.scrollTracking) {
         this.scrollTracking = scrollTracking;
         this.events.emit('scrollTrackingChanged', scrollTracking);
@@ -313,13 +311,9 @@ class ChatRenderer {
       if (combinable) {
         combinable.times = (combinable.times || 1) + 1;
         updateMessageBadge(combinable);
-        if (
-          combinable.type === MESSAGE_TYPE_COMBAT ||
-          (combinable.type === MESSAGE_TYPE_LOCALCHAT && combinable.times < 10)
-        ) {
+        if (combinable.type === MESSAGE_TYPE_COMBAT || (combinable.type === MESSAGE_TYPE_LOCALCHAT && combinable.times < 10)) {
           let muhstyle = combinable.node.style;
-          let fontsize =
-            document.documentElement.style.getPropertyValue('font-size');
+          let fontsize = document.documentElement.style.getPropertyValue('font-size');
           let basesize = parseInt(fontsize.slice(0, -2), 10);
           muhstyle.setProperty('font-size', basesize + combinable.times + 'px');
         }
@@ -394,9 +388,7 @@ class ChatRenderer {
 
         // Highlight text
         if (!message.avoidHighlighting && this.highlightRegex) {
-          const highlighted = highlightNode(node, this.highlightRegex, (text) =>
-            createHighlightNode(text, this.highlightColor),
-          );
+          const highlighted = highlightNode(node, this.highlightRegex, (text) => createHighlightNode(text, this.highlightColor));
           if (highlighted) {
             node.className += ' ChatMessage--highlighted';
           }
@@ -419,9 +411,7 @@ class ChatRenderer {
       message.node = node;
       // Query all possible selectors to find out the message type
       if (!message.type) {
-        const typeDef = MESSAGE_TYPES.find(
-          (typeDef) => typeDef.selector && node.querySelector(typeDef.selector),
-        );
+        const typeDef = MESSAGE_TYPES.find((typeDef) => typeDef.selector && node.querySelector(typeDef.selector));
         message.type = typeDef?.type || MESSAGE_TYPE_UNKNOWN;
       }
       updateMessageBadge(message);
@@ -476,18 +466,13 @@ class ChatRenderer {
           message.node = 'pruned';
         }
         // Remove pruned messages from the message array
-        this.messages = this.messages.filter(
-          (message) => message.node !== 'pruned',
-        );
+        this.messages = this.messages.filter((message) => message.node !== 'pruned');
         logger.log(`pruned ${fromIndex} visible messages`);
       }
     }
     // All messages
     {
-      const fromIndex = Math.max(
-        0,
-        this.messages.length - MAX_PERSISTED_MESSAGES,
-      );
+      const fromIndex = Math.max(0, this.messages.length - MAX_PERSISTED_MESSAGES);
       if (fromIndex > 0) {
         this.messages = this.messages.slice(fromIndex);
         logger.log(`pruned ${fromIndex} stored messages`);
@@ -500,10 +485,7 @@ class ChatRenderer {
       return;
     }
     // Make a copy of messages
-    const fromIndex = Math.max(
-      0,
-      this.messages.length - MAX_PERSISTED_MESSAGES,
-    );
+    const fromIndex = Math.max(0, this.messages.length - MAX_PERSISTED_MESSAGES);
     const messages = this.messages.slice(fromIndex);
     // Remove existing nodes
     for (let message of messages) {
@@ -556,11 +538,7 @@ class ChatRenderer {
       '</html>\n';
     // Create and send a nice blob
     const blob = new Blob([pageHtml], { type: 'text/plain' });
-    const timestamp = new Date()
-      .toISOString()
-      .substring(0, 19)
-      .replace(/[-:]/g, '')
-      .replace('T', '-');
+    const timestamp = new Date().toISOString().substring(0, 19).replace(/[-:]/g, '').replace('T', '-');
     Byond.saveBlob(blob, `ss13-chatlog-${timestamp}.html`, '.html');
   }
 }

@@ -1,15 +1,7 @@
 import { classes } from 'common/react';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  ColorBox,
-  LabeledList,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, ColorBox, LabeledList, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 const ROOT_CATEGORIES = ['Atmospherics', 'Disposals', 'Transit Tubes'];
@@ -173,10 +165,7 @@ const PreviewSelect = (props) => {
           }
         >
           <Box
-            className={classes([
-              'pipes32x32',
-              preview.dir + '-' + preview.icon_state,
-            ])}
+            className={classes(['pipes32x32', preview.dir + '-' + preview.icon_state])}
             style={{
               transform: 'scale(1.5) translate(9.5%, 9.5%)',
             }}
@@ -203,9 +192,7 @@ const PipeTypeSection = (props) => {
   const { act, data } = useBackend();
   const { categories = [] } = data;
   const [categoryName, setCategoryName] = useLocalState('categoryName');
-  const shownCategory =
-    categories.find((category) => category.cat_name === categoryName) ||
-    categories[0];
+  const shownCategory = categories.find((category) => category.cat_name === categoryName) || categories[0];
   return (
     <Section fill scrollable>
       <Tabs>

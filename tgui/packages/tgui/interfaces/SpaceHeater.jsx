@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NumberInput, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const SpaceHeater = (props) => {
@@ -18,27 +11,9 @@ export const SpaceHeater = (props) => {
           title="Power"
           buttons={
             <>
-              {!!data.chemHacked && (
-                <Button
-                  icon="eject"
-                  content="Eject beaker"
-                  disabled={!data.beaker}
-                  onClick={() => act('ejectBeaker')}
-                />
-              )}
-              <Button
-                icon="eject"
-                content="Eject Cell"
-                disabled={!data.hasPowercell || !data.open}
-                onClick={() => act('eject')}
-              />
-              <Button
-                icon={data.on ? 'power-off' : 'times'}
-                content={data.on ? 'On' : 'Off'}
-                selected={data.on}
-                disabled={!data.hasPowercell}
-                onClick={() => act('power')}
-              />
+              {!!data.chemHacked && <Button icon="eject" content="Eject beaker" disabled={!data.beaker} onClick={() => act('ejectBeaker')} />}
+              <Button icon="eject" content="Eject Cell" disabled={!data.hasPowercell || !data.open} onClick={() => act('eject')} />
+              <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} disabled={!data.hasPowercell} onClick={() => act('power')} />
             </>
           }
         >
@@ -63,16 +38,7 @@ export const SpaceHeater = (props) => {
         <Section title="Thermostat">
           <LabeledList>
             <LabeledList.Item label="Current Temperature">
-              <Box
-                fontSize="18px"
-                color={
-                  Math.abs(data.targetTemp - data.currentTemp) > 50
-                    ? 'bad'
-                    : Math.abs(data.targetTemp - data.currentTemp) > 20
-                      ? 'average'
-                      : 'good'
-                }
-              >
+              <Box fontSize="18px" color={Math.abs(data.targetTemp - data.currentTemp) > 50 ? 'bad' : Math.abs(data.targetTemp - data.currentTemp) > 20 ? 'average' : 'good'}>
                 {data.currentTemp}°C
               </Box>
             </LabeledList.Item>

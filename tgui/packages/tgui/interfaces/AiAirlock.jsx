@@ -30,69 +30,32 @@ export const AiAirlock = (props) => {
             <LabeledList.Item
               label="Main"
               color={statusMain.color}
-              buttons={
-                <Button
-                  icon="lightbulb-o"
-                  disabled={!data.power.main}
-                  content="Disrupt"
-                  onClick={() => act('disrupt-main')}
-                />
-              }
+              buttons={<Button icon="lightbulb-o" disabled={!data.power.main} content="Disrupt" onClick={() => act('disrupt-main')} />}
             >
               {data.power.main ? 'Online' : 'Offline'}{' '}
-              {((!data.wires.main_1 || !data.wires.main_2) &&
-                '[Wires have been cut!]') ||
-                (data.power.main_timeleft > 0 &&
-                  `[${data.power.main_timeleft}s]`)}
+              {((!data.wires.main_1 || !data.wires.main_2) && '[Wires have been cut!]') || (data.power.main_timeleft > 0 && `[${data.power.main_timeleft}s]`)}
             </LabeledList.Item>
             <LabeledList.Item
               label="Backup"
               color={statusBackup.color}
-              buttons={
-                <Button
-                  icon="lightbulb-o"
-                  disabled={!data.power.backup}
-                  content="Disrupt"
-                  onClick={() => act('disrupt-backup')}
-                />
-              }
+              buttons={<Button icon="lightbulb-o" disabled={!data.power.backup} content="Disrupt" onClick={() => act('disrupt-backup')} />}
             >
               {data.power.backup ? 'Online' : 'Offline'}{' '}
-              {((!data.wires.backup_1 || !data.wires.backup_2) &&
-                '[Wires have been cut!]') ||
-                (data.power.backup_timeleft > 0 &&
-                  `[${data.power.backup_timeleft}s]`)}
+              {((!data.wires.backup_1 || !data.wires.backup_2) && '[Wires have been cut!]') || (data.power.backup_timeleft > 0 && `[${data.power.backup_timeleft}s]`)}
             </LabeledList.Item>
             <LabeledList.Item
               label="Electrify"
               color={statusElectrify.color}
               buttons={
                 <>
-                  <Button
-                    icon="wrench"
-                    disabled={!(data.wires.shock && data.shock === 0)}
-                    content="Restore"
-                    onClick={() => act('shock-restore')}
-                  />
-                  <Button
-                    icon="bolt"
-                    disabled={!data.wires.shock}
-                    content="Temporary"
-                    onClick={() => act('shock-temp')}
-                  />
-                  <Button
-                    icon="bolt"
-                    disabled={!data.wires.shock}
-                    content="Permanent"
-                    onClick={() => act('shock-perm')}
-                  />
+                  <Button icon="wrench" disabled={!(data.wires.shock && data.shock === 0)} content="Restore" onClick={() => act('shock-restore')} />
+                  <Button icon="bolt" disabled={!data.wires.shock} content="Temporary" onClick={() => act('shock-temp')} />
+                  <Button icon="bolt" disabled={!data.wires.shock} content="Permanent" onClick={() => act('shock-perm')} />
                 </>
               }
             >
               {data.shock === 2 ? 'Safe' : 'Electrified'}{' '}
-              {(!data.wires.shock && '[Wires have been cut!]') ||
-                (data.shock_timeleft > 0 && `[${data.shock_timeleft}s]`) ||
-                (data.shock_timeleft === -1 && '[Permanent]')}
+              {(!data.wires.shock && '[Wires have been cut!]') || (data.shock_timeleft > 0 && `[${data.shock_timeleft}s]`) || (data.shock_timeleft === -1 && '[Permanent]')}
             </LabeledList.Item>
           </LabeledList>
         </Section>

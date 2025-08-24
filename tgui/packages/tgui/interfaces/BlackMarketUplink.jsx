@@ -1,26 +1,11 @@
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Modal,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { AnimatedNumber, Box, Button, Modal, Section, Stack, Tabs } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 
 export const BlackMarketUplink = (props) => {
   const { act, data } = useBackend();
-  const {
-    categories = [],
-    markets = [],
-    items = [],
-    money,
-    viewing_market,
-    viewing_category,
-  } = data;
+  const { categories = [], markets = [], items = [], money, viewing_market, viewing_category } = data;
   return (
     <Window width={670} height={480} theme="hackerman">
       <ShipmentSelector />
@@ -29,10 +14,7 @@ export const BlackMarketUplink = (props) => {
           title="Black Market Uplink"
           buttons={
             <Box inline bold>
-              <AnimatedNumber
-                value={money}
-                format={(value) => formatMoney(value) + ' cr'}
-              />
+              <AnimatedNumber value={money} format={(value) => formatMoney(value) + ' cr'} />
             </Box>
           }
         />
@@ -77,9 +59,7 @@ export const BlackMarketUplink = (props) => {
                   <Stack.Item grow bold>
                     {item.name}
                   </Stack.Item>
-                  <Stack.Item color="label">
-                    {item.amount ? item.amount + ' in stock' : 'Out of stock'}
-                  </Stack.Item>
+                  <Stack.Item color="label">{item.amount ? item.amount + ' in stock' : 'Out of stock'}</Stack.Item>
                   <Stack.Item>{formatMoney(item.cost) + ' cr'}</Stack.Item>
                   <Stack.Item>
                     <Button

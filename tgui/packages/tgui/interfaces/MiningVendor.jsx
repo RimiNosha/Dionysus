@@ -13,8 +13,7 @@ export const MiningVendor = (props) => {
         <Section title="User">
           {(data.user && (
             <Box>
-              Welcome, <b>{data.user.name || 'Unknown'}</b>,{' '}
-              <b>{data.user.job || 'Unemployed'}</b>!
+              Welcome, <b>{data.user.name || 'Unknown'}</b>, <b>{data.user.job || 'Unemployed'}</b>!
               <br />
               Your balance is <b>{data.user.points} mining points</b>.
             </Box>

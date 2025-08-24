@@ -1,15 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  BlockQuote,
-  Box,
-  Button,
-  Collapsible,
-  Flex,
-  NumberInput,
-  Section,
-  Stack,
-  TextArea,
-} from '../components';
+import { BlockQuote, Box, Button, Collapsible, Flex, NumberInput, Section, Stack, TextArea } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 import { UserDetails } from './Vending';
@@ -26,28 +16,12 @@ export const BountyBoard = (props) => {
 
 export const BountyBoardContent = (props) => {
   const { act, data } = useBackend();
-  const {
-    accountName,
-    requests = [],
-    applicants = [],
-    bountyValue,
-    bountyText,
-    user,
-  } = data;
+  const { accountName, requests = [], applicants = [], bountyValue, bountyText, user } = data;
   const color = 'rgba(13, 13, 213, 0.7)';
   const backColor = 'rgba(50, 50, 170, 0.5)';
   return (
     <>
-      <Section
-        title={'User Details'}
-        buttons={
-          <Button
-            icon="power-off"
-            content="Reset Account"
-            onClick={() => act('clear')}
-          />
-        }
-      >
+      <Section title={'User Details'} buttons={<Button icon="power-off" content="Reset Account" onClick={() => act('clear')} />}>
         <UserDetails />
       </Section>
       <Flex mb={1}>
@@ -59,9 +33,7 @@ export const BountyBoardContent = (props) => {
                   <Stack.Item bold width="310px">
                     {request.owner}
                   </Stack.Item>
-                  <Stack.Item width="100px">
-                    {formatMoney(request.value) + ' cr'}
-                  </Stack.Item>
+                  <Stack.Item width="100px">{formatMoney(request.value) + ' cr'}</Stack.Item>
                   <Stack.Item>
                     <Button
                       fluid
@@ -158,12 +130,7 @@ export const BountyBoardContent = (props) => {
                     })
                   }
                 />
-                <Button
-                  icon="print"
-                  content="Submit bounty"
-                  disabled={user.name === 'Unknown'}
-                  onClick={() => act('createBounty')}
-                />
+                <Button icon="print" content="Submit bounty" disabled={user.name === 'Unknown'} onClick={() => act('createBounty')} />
               </Box>
             </Section>
           </Collapsible>

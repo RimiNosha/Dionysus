@@ -2,21 +2,12 @@ import { createSearch } from 'common/string';
 
 import { resolveAsset } from '../assets';
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Icon,
-  Input,
-  Section,
-} from '../components';
+import { Box, Button, Divider, Flex, Icon, Input, Section } from '../components';
 import { Window } from '../layouts';
 
 const PATTERN_NUMBER = / \(([0-9]+)\)$/;
 
-const searchFor = (searchText) =>
-  createSearch(searchText, (thing) => thing.name);
+const searchFor = (searchText) => createSearch(searchText, (thing) => thing.name);
 
 const compareString = (a, b) => (a < b ? -1 : a > b);
 
@@ -29,11 +20,7 @@ const compareNumberedText = (a, b) => {
   const aNumberMatch = aName.match(PATTERN_NUMBER);
   const bNumberMatch = bName.match(PATTERN_NUMBER);
 
-  if (
-    aNumberMatch &&
-    bNumberMatch &&
-    aName.replace(PATTERN_NUMBER, '') === bName.replace(PATTERN_NUMBER, '')
-  ) {
+  if (aNumberMatch && bNumberMatch && aName.replace(PATTERN_NUMBER, '') === bName.replace(PATTERN_NUMBER, '')) {
     const aNumber = parseInt(aNumberMatch[1], 10);
     const bNumber = parseInt(bNumberMatch[1], 10);
 
@@ -87,8 +74,7 @@ const OrbitedButton = (props) => {
       {thing.orbiters && (
         <Box inline ml={1}>
           {'('}
-          {thing.orbiters}{' '}
-          <Box as="img" src={resolveAsset('ghost.png')} opacity={0.7} />
+          {thing.orbiters} <Box as="img" src={resolveAsset('ghost.png')} opacity={0.7} />
           {')'}
         </Box>
       )}
@@ -117,17 +103,8 @@ export const Orbit = (props) => {
   });
 
   const orbitMostRelevant = (searchText) => {
-    for (const source of [
-      sortedAntagonists.map(([_, antags]) => antags),
-      alive,
-      ghosts,
-      dead,
-      npcs,
-      misc,
-    ]) {
-      const member = source
-        .filter(searchFor(searchText))
-        .sort(compareNumberedText)[0];
+    for (const source of [sortedAntagonists.map(([_, antags]) => antags), alive, ghosts, dead, npcs, misc]) {
+      const member = source.filter(searchFor(searchText)).sort(compareNumberedText)[0];
       if (member !== undefined) {
         act('orbit', {
           ref: member.ref,
@@ -147,14 +124,7 @@ export const Orbit = (props) => {
               <Icon name="search" mr={1} />
             </Flex.Item>
             <Flex.Item grow={1}>
-              <Input
-                placeholder="Search..."
-                autoFocus
-                fluid
-                value={searchText}
-                onInput={(_, value) => setSearchText(value)}
-                onEnter={(_, value) => orbitMostRelevant(value)}
-              />
+              <Input placeholder="Search..." autoFocus fluid value={searchText} onInput={(_, value) => setSearchText(value)} onEnter={(_, value) => orbitMostRelevant(value)} />
             </Flex.Item>
             <Flex.Item>
               <Divider vertical />
@@ -172,14 +142,7 @@ export const Orbit = (props) => {
               />
             </Flex.Item>
             <Flex.Item>
-              <Button
-                inline
-                color="transparent"
-                tooltip="Refresh"
-                tooltipPosition="bottom-start"
-                icon="sync-alt"
-                onClick={() => act('refresh')}
-              />
+              <Button inline color="transparent" tooltip="Refresh" tooltipPosition="bottom-start" icon="sync-alt" onClick={() => act('refresh')} />
             </Flex.Item>
           </Flex>
         </Section>
@@ -191,12 +154,7 @@ export const Orbit = (props) => {
                   .filter(searchFor(searchText))
                   .sort(compareNumberedText)
                   .map((antag) => (
-                    <OrbitedButton
-                      key={antag.name}
-                      color="bad"
-                      thing={antag}
-                      autoObserve={autoObserve}
-                    />
+                    <OrbitedButton key={antag.name} color="bad" thing={antag} autoObserve={autoObserve} />
                   ))}
               </Section>
             ))}
@@ -208,12 +166,7 @@ export const Orbit = (props) => {
             .filter(searchFor(searchText))
             .sort(compareNumberedText)
             .map((thing) => (
-              <OrbitedButton
-                key={thing.name}
-                color="good"
-                thing={thing}
-                autoObserve={autoObserve}
-              />
+              <OrbitedButton key={thing.name} color="good" thing={thing} autoObserve={autoObserve} />
             ))}
         </Section>
 
@@ -222,21 +175,11 @@ export const Orbit = (props) => {
             .filter(searchFor(searchText))
             .sort(compareNumberedText)
             .map((thing) => (
-              <OrbitedButton
-                key={thing.name}
-                color="grey"
-                thing={thing}
-                autoObserve={autoObserve}
-              />
+              <OrbitedButton key={thing.name} color="grey" thing={thing} autoObserve={autoObserve} />
             ))}
         </Section>
 
-        <BasicSection
-          title="Dead"
-          source={dead}
-          searchText={searchText}
-          autoObserve={autoObserve}
-        />
+        <BasicSection title="Dead" source={dead} searchText={searchText} autoObserve={autoObserve} />
 
         <BasicSection title="NPCs" source={npcs} searchText={searchText} />
 

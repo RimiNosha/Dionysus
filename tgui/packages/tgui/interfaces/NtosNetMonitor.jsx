@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  NumberInput,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, NumberInput, Section } from '../components';
 import { NtosWindow } from '../layouts';
 
 export const NtosNetMonitor = (props) => {
@@ -28,10 +21,7 @@ export const NtosNetMonitor = (props) => {
   return (
     <NtosWindow>
       <NtosWindow.Content scrollable>
-        <NoticeBox>
-          WARNING: Disabling wireless transmitters when using a wireless device
-          may prevent you from reenabling them!
-        </NoticeBox>
+        <NoticeBox>WARNING: Disabling wireless transmitters when using a wireless device may prevent you from reenabling them!</NoticeBox>
         <Section
           title="Wireless Connectivity"
           buttons={
@@ -45,9 +35,7 @@ export const NtosNetMonitor = (props) => {
         >
           {ntnetrelays ? (
             <LabeledList>
-              <LabeledList.Item label="Active NTNet Relays">
-                {ntnetrelays}
-              </LabeledList.Item>
+              <LabeledList.Item label="Active NTNet Relays">{ntnetrelays}</LabeledList.Item>
             </LabeledList>
           ) : (
             'No Relays Connected'
@@ -105,10 +93,7 @@ export const NtosNetMonitor = (props) => {
           {!!idsalarm && (
             <>
               <NoticeBox>NETWORK INCURSION DETECTED</NoticeBox>
-              <Box italics>
-                Abnormal activity has been detected in the network. Check system
-                logs for more information
-              </Box>
+              <Box italics>Abnormal activity has been detected in the network. Check system logs for more information</Box>
             </>
           )}
           <LabeledList>
@@ -116,18 +101,8 @@ export const NtosNetMonitor = (props) => {
               label="IDS Status"
               buttons={
                 <>
-                  <Button
-                    icon={idsstatus ? 'power-off' : 'times'}
-                    content={idsstatus ? 'ENABLED' : 'DISABLED'}
-                    selected={idsstatus}
-                    onClick={() => act('toggleIDS')}
-                  />
-                  <Button
-                    icon="sync"
-                    content="Reset"
-                    color="bad"
-                    onClick={() => act('resetIDS')}
-                  />
+                  <Button icon={idsstatus ? 'power-off' : 'times'} content={idsstatus ? 'ENABLED' : 'DISABLED'} selected={idsstatus} onClick={() => act('toggleIDS')} />
+                  <Button icon="sync" content="Reset" color="bad" onClick={() => act('resetIDS')} />
                 </>
               }
             />
@@ -148,17 +123,7 @@ export const NtosNetMonitor = (props) => {
               }
             />
           </LabeledList>
-          <Section
-            title="System Log"
-            level={2}
-            buttons={
-              <Button.Confirm
-                icon="trash"
-                content="Clear Logs"
-                onClick={() => act('purgelogs')}
-              />
-            }
-          >
+          <Section title="System Log" level={2} buttons={<Button.Confirm icon="trash" content="Clear Logs" onClick={() => act('purgelogs')} />}>
             {ntnetlogs.map((log) => (
               <Box key={log.entry} className="candystripe">
                 {log.entry}

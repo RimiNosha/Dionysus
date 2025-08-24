@@ -1,14 +1,5 @@
 import { useBackend, useLocalState } from '../../backend';
-import {
-  Box,
-  Button,
-  ColorBox,
-  Dropdown,
-  Input,
-  LabeledList,
-  NumberInput,
-  Stack,
-} from '../../components';
+import { Box, Button, ColorBox, Dropdown, Input, LabeledList, NumberInput, Stack } from '../../components';
 import {
   EntryCoordProps,
   EntryFloatProps,
@@ -31,11 +22,7 @@ export const EntryFloat = (props: EntryFloatProps) => {
   const { name, var_name, float } = props;
   return (
     <LabeledList.Item label={name}>
-      <Button
-        icon={'question'}
-        onClick={() => setdesc(var_name)}
-        tooltip={'View details'}
-      />
+      <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
       <NumberInput
         animated
         value={float}
@@ -59,11 +46,7 @@ export const EntryCoord = (props: EntryCoordProps) => {
   const { name, var_name, coord } = props;
   return (
     <LabeledList.Item label={name}>
-      <Button
-        icon={'question'}
-        onClick={() => setdesc(var_name)}
-        tooltip={'View details'}
-      />
+      <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
       <NumberInput
         animated
         step={1}
@@ -112,20 +95,12 @@ export const EntryGradient = (props: EntryGradientProps) => {
   const [desc, setdesc] = useLocalState('desc', '');
   const { name, var_name, gradient } = props;
   const isLooping = gradient?.find((x) => x === 'loop');
-  const space_type = gradient?.includes('space')
-    ? Object.keys(SpaceToNum).find(
-        (space) => SpaceToNum[space] === gradient['space'],
-      )
-    : 'COLORSPACE_RGB';
+  const space_type = gradient?.includes('space') ? Object.keys(SpaceToNum).find((space) => SpaceToNum[space] === gradient['space']) : 'COLORSPACE_RGB';
   return (
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         <Stack.Item>
           <Button
@@ -135,9 +110,7 @@ export const EntryGradient = (props: EntryGradientProps) => {
             onClick={() =>
               act('edit', {
                 var: var_name,
-                new_value: isLooping
-                  ? gradient!.filter((x, i) => i !== gradient!.indexOf('loop'))
-                  : [...(gradient || []), 'loop'],
+                new_value: isLooping ? gradient!.filter((x, i) => i !== gradient!.indexOf('loop')) : [...(gradient || []), 'loop'],
               })
             }
           />
@@ -149,9 +122,7 @@ export const EntryGradient = (props: EntryGradientProps) => {
             onSelected={(e) =>
               act('edit', {
                 var: var_name,
-                new_value: gradient
-                  ? setGradientSpace(gradient, SpaceToNum[e])
-                  : { space: SpaceToNum[e] },
+                new_value: gradient ? setGradientSpace(gradient, SpaceToNum[e]) : { space: SpaceToNum[e] },
               })
             }
             width="145px"
@@ -161,9 +132,7 @@ export const EntryGradient = (props: EntryGradientProps) => {
           {gradient?.map((entry, index) =>
             entry === 'loop' || entry === 'space' ? null : (
               <>
-                {typeof entry === 'string' ? (
-                  <ColorBox mr={0.4} color={entry} />
-                ) : null}
+                {typeof entry === 'string' ? <ColorBox mr={0.4} color={entry} /> : null}
                 <Input
                   key={index}
                   maxWidth={'70px'}
@@ -171,9 +140,7 @@ export const EntryGradient = (props: EntryGradientProps) => {
                   onChange={(e, value) =>
                     act('edit', {
                       var: var_name,
-                      new_value: gradient!.map((x, i) =>
-                        i === index ? value : x,
-                      ),
+                      new_value: gradient!.map((x, i) => (i === index ? value : x)),
                     })
                   }
                 />
@@ -212,30 +179,16 @@ export const EntryTransform = (props: EntryTransformProps) => {
   const { act, data } = useBackend<ParticleUIData>();
   const [desc, setdesc] = useLocalState('desc', '');
   const len = props.transform?.length ? props.transform.length : 0;
-  const selected =
-    len < 7
-      ? 'Simple Matrix'
-      : len < 13
-        ? 'Complex Matrix'
-        : 'Projection Matrix';
+  const selected = len < 7 ? 'Simple Matrix' : len < 13 ? 'Complex Matrix' : 'Projection Matrix';
   const { name, var_name, transform } = props;
   return (
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         <Stack.Item>
-          <Dropdown
-            options={MatrixTypes}
-            selected={selected}
-            onSelected={(e) => act('transform_size', { new_value: e })}
-            width="130px"
-          />
+          <Dropdown options={MatrixTypes} selected={selected} onSelected={(e) => act('transform_size', { new_value: e })} width="130px" />
         </Stack.Item>
         <Stack.Item>
           {transform?.map((value, index) => (
@@ -249,9 +202,7 @@ export const EntryTransform = (props: EntryTransformProps) => {
               onDrag={(value) =>
                 act('edit', {
                   var: var_name,
-                  new_value: transform!.map((x, i) =>
-                    i === index ? value : x,
-                  ),
+                  new_value: transform!.map((x, i) => (i === index ? value : x)),
                 })
               }
             />
@@ -270,11 +221,7 @@ export const EntryIcon = (props: EntryIconStateProps) => {
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         {typeof icon_state === 'object' && icon_state !== null ? (
           Object.keys(icon_state).map((icon_name, i) => (
@@ -340,19 +287,12 @@ export const EntryIconState = (props: EntryIconStateProps) => {
   const { act, data } = useBackend<ParticleUIData>();
   const [desc, setdesc] = useLocalState('desc', '');
   const { name, var_name, icon_state } = props;
-  const newValue =
-    typeof icon_state === 'string'
-      ? { [icon_state]: 1, None: 0 }
-      : { ...icon_state, None: 0 };
+  const newValue = typeof icon_state === 'string' ? { [icon_state]: 1, None: 0 } : { ...icon_state, None: 0 };
   return (
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         {typeof icon_state === 'object' && icon_state !== null ? (
           // this can get big enough to go off the edge of the screen and scrollableHorizontal isnt working
@@ -395,11 +335,7 @@ export const EntryIconState = (props: EntryIconStateProps) => {
                   onClick={() =>
                     act('edit', {
                       var: var_name,
-                      new_value: Object.fromEntries(
-                        Object.entries(icon_state).filter(
-                          ([key]) => key !== iconstate,
-                        ),
-                      ),
+                      new_value: Object.fromEntries(Object.entries(icon_state).filter(([key]) => key !== iconstate)),
                     })
                   }
                 />

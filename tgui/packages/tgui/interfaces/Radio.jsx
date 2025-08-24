@@ -8,21 +8,8 @@ import { Window } from '../layouts';
 
 export const Radio = (props) => {
   const { act, data } = useBackend();
-  const {
-    freqlock,
-    frequency,
-    minFrequency,
-    maxFrequency,
-    listening,
-    broadcasting,
-    command,
-    useCommand,
-    subspace,
-    subspaceSwitchable,
-  } = data;
-  const tunedChannel = RADIO_CHANNELS.find(
-    (channel) => channel.freq === frequency,
-  );
+  const { freqlock, frequency, minFrequency, maxFrequency, listening, broadcasting, command, useCommand, subspace, subspaceSwitchable } = data;
+  const tunedChannel = RADIO_CHANNELS.find((channel) => channel.freq === frequency);
   const channels = map((value, key) => ({
     name: key,
     status: !!value,
@@ -70,38 +57,10 @@ export const Radio = (props) => {
               )}
             </LabeledList.Item>
             <LabeledList.Item label="Audio">
-              <Button
-                textAlign="center"
-                width="37px"
-                icon={listening ? 'volume-up' : 'volume-mute'}
-                selected={listening}
-                onClick={() => act('listen')}
-              />
-              <Button
-                textAlign="center"
-                width="37px"
-                icon={broadcasting ? 'microphone' : 'microphone-slash'}
-                selected={broadcasting}
-                onClick={() => act('broadcast')}
-              />
-              {!!command && (
-                <Button
-                  ml={1}
-                  icon="bullhorn"
-                  selected={useCommand}
-                  content={`High volume ${useCommand ? 'ON' : 'OFF'}`}
-                  onClick={() => act('command')}
-                />
-              )}
-              {!!subspaceSwitchable && (
-                <Button
-                  ml={1}
-                  icon="bullhorn"
-                  selected={subspace}
-                  content={`Subspace Tx ${subspace ? 'ON' : 'OFF'}`}
-                  onClick={() => act('subspace')}
-                />
-              )}
+              <Button textAlign="center" width="37px" icon={listening ? 'volume-up' : 'volume-mute'} selected={listening} onClick={() => act('listen')} />
+              <Button textAlign="center" width="37px" icon={broadcasting ? 'microphone' : 'microphone-slash'} selected={broadcasting} onClick={() => act('broadcast')} />
+              {!!command && <Button ml={1} icon="bullhorn" selected={useCommand} content={`High volume ${useCommand ? 'ON' : 'OFF'}`} onClick={() => act('command')} />}
+              {!!subspaceSwitchable && <Button ml={1} icon="bullhorn" selected={subspace} content={`Subspace Tx ${subspace ? 'ON' : 'OFF'}`} onClick={() => act('subspace')} />}
             </LabeledList.Item>
             {!!subspace && (
               <LabeledList.Item label="Channels">

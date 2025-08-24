@@ -1,17 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  ColorBox,
-  Divider,
-  Flex,
-  Icon,
-  Input,
-  LabeledList,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Box, Button, ColorBox, Divider, Flex, Icon, Input, LabeledList, Section, Stack, Table } from '../components';
 import { Image } from '../components/Image';
 import { Window } from '../layouts';
 
@@ -74,12 +62,7 @@ const ConfigDisplay = (props) => {
       <LabeledList>
         <LabeledList.Item label="Design Type">
           <Button icon="cogs" onClick={() => act('select_config')} />
-          <Input
-            value={data.greyscale_config}
-            onChange={(_, value) =>
-              act('load_config_from_string', { config_string: value })
-            }
-          />
+          <Input value={data.greyscale_config} onChange={(_, value) => act('load_config_from_string', { config_string: value })} />
         </LabeledList.Item>
       </LabeledList>
     </Section>
@@ -93,42 +76,15 @@ const ColorDisplay = (props) => {
     <Section title="Colors">
       <LabeledList>
         <LabeledList.Item label="Full Color String">
-          <Button
-            icon="dice"
-            onClick={() => act('random_all_colors')}
-            tooltip="Randomizes all color groups."
-          />
-          <Input
-            value={colors.map((item) => item.value).join('')}
-            onChange={(_, value) =>
-              act('recolor_from_string', { color_string: value })
-            }
-          />
+          <Button icon="dice" onClick={() => act('random_all_colors')} tooltip="Randomizes all color groups." />
+          <Input value={colors.map((item) => item.value).join('')} onChange={(_, value) => act('recolor_from_string', { color_string: value })} />
         </LabeledList.Item>
         {colors.map((item) => (
-          <LabeledList.Item
-            key={`colorgroup${item.index}${item.value}`}
-            label={`Color Group ${item.index}`}
-            color={item.value}
-          >
+          <LabeledList.Item key={`colorgroup${item.index}${item.value}`} label={`Color Group ${item.index}`} color={item.value}>
             <ColorBox color={item.value} />{' '}
-            <Button
-              icon="palette"
-              onClick={() => act('pick_color', { color_index: item.index })}
-              tooltip="Brings up a color pick window to replace this color group."
-            />
-            <Button
-              icon="dice"
-              onClick={() => act('random_color', { color_index: item.index })}
-              tooltip="Randomizes the color for this color group."
-            />
-            <Input
-              value={item.value}
-              width={7}
-              onChange={(_, value) =>
-                act('recolor', { color_index: item.index, new_color: value })
-              }
-            />
+            <Button icon="palette" onClick={() => act('pick_color', { color_index: item.index })} tooltip="Brings up a color pick window to replace this color group." />
+            <Button icon="dice" onClick={() => act('random_color', { color_index: item.index })} tooltip="Randomizes the color for this color group." />
+            <Input value={item.value} width={7} onChange={(_, value) => act('recolor', { color_index: item.index, new_color: value })} />
           </LabeledList.Item>
         ))}
       </LabeledList>
@@ -191,12 +147,7 @@ const IconStatesDisplay = (props) => {
       <Flex>
         {data.sprites.icon_states.map((item) => (
           <Flex.Item key={item}>
-            <Button
-              mx={0.5}
-              content={item ? item : 'Blank State'}
-              disabled={item === data.icon_state}
-              onClick={() => act('select_icon_state', { new_icon_state: item })}
-            />
+            <Button mx={0.5} content={item ? item : 'Blank State'} disabled={item === data.icon_state} onClick={() => act('select_icon_state', { new_icon_state: item })} />
           </Flex.Item>
         ))}
       </Flex>
@@ -226,8 +177,7 @@ const PreviewDisplay = (props) => {
           )}
         </Table.Row>
       </Table>
-      {!!data.generate_full_preview &&
-        `Time Spent: ${data.sprites.time_spent}ms`}
+      {!!data.generate_full_preview && `Time Spent: ${data.sprites.time_spent}ms`}
       <Divider />
       {!data.refreshing && (
         <Table>
@@ -248,9 +198,7 @@ const PreviewDisplay = (props) => {
             data.sprites.steps !== null &&
             data.sprites.steps.map((item) => (
               <Table.Row key={`${item.result}|${item.layer}`}>
-                <Table.Cell verticalAlign="middle">
-                  {item.config_name}
-                </Table.Cell>
+                <Table.Cell verticalAlign="middle">{item.config_name}</Table.Cell>
                 <Table.Cell>
                   <SingleSprite source={item.layer} />
                 </Table.Cell>
@@ -290,9 +238,7 @@ export const GreyscaleModifyMenu = (props) => {
           {!!data.unlocked && (
             <Flex.Item justify="flex-start">
               <Button
-                content={
-                  <Icon name="file-image-o" spin={data.monitoring_files} />
-                }
+                content={<Icon name="file-image-o" spin={data.monitoring_files} />}
                 tooltip="Continuously checks files for changes and reloads when necessary. WARNING: Very expensive"
                 selected={data.monitoring_files}
                 onClick={() => act('toggle_mass_refresh')}
@@ -312,12 +258,7 @@ export const GreyscaleModifyMenu = (props) => {
             </Flex.Item>
           )}
           <Flex.Item>
-            <Button
-              content="Apply"
-              tooltip="Applies changes made to the object this menu was created from."
-              color="red"
-              onClick={() => act('apply')}
-            />
+            <Button content="Apply" tooltip="Applies changes made to the object this menu was created from." color="red" onClick={() => act('apply')} />
             <Button.Checkbox
               content="Full Preview"
               tooltip="Generates and displays the full sprite generation process instead of just the final output."

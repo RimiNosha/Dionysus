@@ -5,18 +5,7 @@ import { createUuid } from 'common/uuid';
 import { Component, Fragment } from 'react';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  ByondUi,
-  Divider,
-  Input,
-  Knob,
-  LabeledControls,
-  NumberInput,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, ByondUi, Divider, Input, Knob, LabeledControls, NumberInput, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 const pod_grey = {
@@ -32,11 +21,7 @@ const useCompact = () => {
 export const CentcomPodLauncher = (props) => {
   const [compact] = useCompact();
   return (
-    <Window
-      title="Supply Pod Menu (Use against Helen Weinstein)"
-      width={compact ? 460 : 730}
-      height={compact ? 360 : 440}
-    >
+    <Window title="Supply Pod Menu (Use against Helen Weinstein)" width={compact ? 460 : 730} height={compact ? 360 : 440}>
       <CentcomPodLauncherContent />
     </Window>
   );
@@ -230,13 +215,7 @@ const STYLES = [
   { title: 'Seethrough' },
 ];
 
-const BAYS = [
-  { title: '1' },
-  { title: '2' },
-  { title: '3' },
-  { title: '4' },
-  { title: 'ERT' },
-];
+const BAYS = [{ title: '1' }, { title: '2' }, { title: '3' }, { title: '4' }, { title: 'ERT' }];
 
 const EFFECTS_LOAD = [
   {
@@ -528,17 +507,8 @@ const TabBay = (props) => {
   const { act, data } = useBackend();
   return (
     <>
-      <Button
-        content="Teleport"
-        icon="street-view"
-        onClick={() => act('teleportCentcom')}
-      />
-      <Button
-        content={data.oldArea ? data.oldArea.substring(0, 17) : 'Go Back'}
-        disabled={!data.oldArea}
-        icon="undo-alt"
-        onClick={() => act('teleportBack')}
-      />
+      <Button content="Teleport" icon="street-view" onClick={() => act('teleportCentcom')} />
+      <Button content={data.oldArea ? data.oldArea.substring(0, 17) : 'Go Back'} disabled={!data.oldArea} icon="undo-alt" onClick={() => act('teleportBack')} />
     </>
   );
 };
@@ -547,17 +517,8 @@ const TabDrop = (props) => {
   const { act, data } = useBackend();
   return (
     <>
-      <Button
-        content="Teleport"
-        icon="street-view"
-        onClick={() => act('teleportDropoff')}
-      />
-      <Button
-        content={data.oldArea ? data.oldArea.substring(0, 17) : 'Go Back'}
-        disabled={!data.oldArea}
-        icon="undo-alt"
-        onClick={() => act('teleportBack')}
-      />
+      <Button content="Teleport" icon="street-view" onClick={() => act('teleportDropoff')} />
+      <Button content={data.oldArea ? data.oldArea.substring(0, 17) : 'Go Back'} disabled={!data.oldArea} icon="undo-alt" onClick={() => act('teleportBack')} />
     </>
   );
 };
@@ -585,34 +546,17 @@ const PodStatusPage = (props) => {
                     {!effect.divider && (
                       <Button
                         tooltip={
-                          effect.details
-                            ? data.effectShrapnel
-                              ? effect.title +
-                                '\n' +
-                                data.shrapnelType +
-                                '\nMagnitude:' +
-                                data.shrapnelMagnitude
-                              : effect.title
-                            : effect.title
+                          effect.details ? (data.effectShrapnel ? effect.title + '\n' + data.shrapnelType + '\nMagnitude:' + data.shrapnelMagnitude : effect.title) : effect.title
                         }
                         tooltipPosition={list.tooltipPosition}
                         icon={effect.icon}
                         content={effect.content}
-                        selected={
-                          effect.soloSelected
-                            ? data[effect.soloSelected]
-                            : data[effect.selected] === effect.choiceNumber
-                        }
-                        onClick={() =>
-                          data.payload !== 0
-                            ? act(effect.act, effect.payload)
-                            : act(effect.act)
-                        }
+                        selected={effect.soloSelected ? data[effect.soloSelected] : data[effect.selected] === effect.choiceNumber}
+                        onClick={() => (data.payload !== 0 ? act(effect.act, effect.payload) : act(effect.act))}
                         style={{
                           verticalAlign: 'middle',
                           marginLeft: j !== 0 ? '1px' : '0px',
-                          marginRight:
-                            j !== list.list.length - 1 ? '1px' : '0px',
+                          marginRight: j !== list.list.length - 1 ? '1px' : '0px',
                           borderRadius: '5px',
                         }}
                       />
@@ -628,24 +572,8 @@ const PodStatusPage = (props) => {
                   <b>Extras:</b>
                 </Box>
                 <Box>
-                  <Button
-                    m={0}
-                    inline
-                    color="transparent"
-                    icon="list-alt"
-                    tooltip="Game Panel"
-                    tooltipPosition="top-start"
-                    onClick={() => act('gamePanel')}
-                  />
-                  <Button
-                    inline
-                    m={0}
-                    color="transparent"
-                    icon="hammer"
-                    tooltip="Build Mode"
-                    tooltipPosition="top-start"
-                    onClick={() => act('buildMode')}
-                  />
+                  <Button m={0} inline color="transparent" icon="list-alt" tooltip="Game Panel" tooltipPosition="top-start" onClick={() => act('gamePanel')} />
+                  <Button inline m={0} color="transparent" icon="hammer" tooltip="Build Mode" tooltipPosition="top-start" onClick={() => act('buildMode')} />
                   {(compact && (
                     <Button
                       inline
@@ -659,17 +587,7 @@ const PodStatusPage = (props) => {
                         act('refreshView');
                       }}
                     />
-                  )) || (
-                    <Button
-                      m={0}
-                      inline
-                      color="transparent"
-                      icon="compress"
-                      tooltip="Compact mode"
-                      tooltipPosition="top-start"
-                      onClick={() => toggleCompact()}
-                    />
-                  )}
+                  )) || <Button m={0} inline color="transparent" icon="compress" tooltip="Compact mode" tooltipPosition="top-start" onClick={() => toggleCompact()} />}
                 </Box>
               </Stack.Item>
             )}
@@ -748,11 +666,7 @@ const ReverseMenu = (props) => {
                 inline
                 icon={option.icon}
                 disabled={!data.effectReverse}
-                selected={
-                  option.key
-                    ? data.reverse_option_list[option.key]
-                    : data.reverse_option_list[option.title]
-                }
+                selected={option.key ? data.reverse_option_list[option.key] : data.reverse_option_list[option.title]}
                 tooltip={option.title}
                 onClick={() =>
                   act('reverseOption', {
@@ -840,14 +754,7 @@ class PresetsPage extends Component {
         title="Presets"
         buttons={
           <>
-            {settingName === 0 && (
-              <Button
-                color="transparent"
-                icon="plus"
-                tooltip="New Preset"
-                onClick={() => setEditingNameStatus(1)}
-              />
-            )}
+            {settingName === 0 && <Button color="transparent" icon="plus" tooltip="New Preset" onClick={() => setEditingNameStatus(1)} />}
             <Button
               inline
               color="transparent"
@@ -867,14 +774,7 @@ class PresetsPage extends Component {
                 this.loadDataFromPreset(presetIndex);
               }}
             />
-            <Button
-              inline
-              color="transparent"
-              icon="trash"
-              tooltip="Deletes the selected preset"
-              tooltipPosition="bottom-start"
-              onClick={() => this.deletePreset(presetIndex)}
-            />
+            <Button inline color="transparent" icon="trash" tooltip="Deletes the selected preset" tooltipPosition="bottom-start" onClick={() => this.deletePreset(presetIndex)} />
           </>
         }
       >
@@ -900,32 +800,12 @@ class PresetsPage extends Component {
               }}
             />
             <span color="label"> Hue: </span>
-            <NumberInput
-              inline
-              animated
-              width="40px"
-              step={5}
-              stepPixelSize={5}
-              value={hue}
-              minValue={0}
-              maxValue={360}
-              onChange={(value) => setHue(value)}
-            />
-            <Input
-              inline
-              autofocus
-              placeholder="Preset Name"
-              onChange={(e, value) => setText(value)}
-            />
+            <NumberInput inline animated width="40px" step={5} stepPixelSize={5} value={hue} minValue={0} maxValue={360} onChange={(value) => setHue(value)} />
+            <Input inline autofocus placeholder="Preset Name" onChange={(e, value) => setText(value)} />
             <Divider horizontal />
           </>
         )}
-        {(!presets || presets.length === 0) && (
-          <span style={pod_grey}>
-            Click [+] to define a new preset. They are persistent across
-            rounds/servers!
-          </span>
-        )}
+        {(!presets || presets.length === 0) && <span style={pod_grey}>Click [+] to define a new preset. They are persistent across rounds/servers!</span>}
         {presets
           ? presets.map((preset, i) => (
               <Button
@@ -1005,15 +885,7 @@ const StylePage = (props) => {
           key={i}
           width="45px"
           height="45px"
-          tooltipPosition={
-            i >= STYLES.length - 2
-              ? i % 2 === 1
-                ? 'top-start'
-                : 'top-end'
-              : i % 2 === 1
-                ? 'bottom-start'
-                : 'bottom-end'
-          }
+          tooltipPosition={i >= STYLES.length - 2 ? (i % 2 === 1 ? 'top-start' : 'top-end') : i % 2 === 1 ? 'bottom-start' : 'bottom-end'}
           tooltip={page.title}
           style={{
             verticalAlign: 'middle',
@@ -1071,13 +943,7 @@ const Bays = (props) => {
       }
     >
       {BAYS.map((bay, i) => (
-        <Button
-          key={i}
-          content={bay.title}
-          tooltipPosition="bottom-end"
-          selected={data.bayNumber === '' + (i + 1)}
-          onClick={() => act('switchBay', { bayNumber: '' + (i + 1) })}
-        />
+        <Button key={i} content={bay.title} tooltipPosition="bottom-end" selected={data.bayNumber === '' + (i + 1)} onClick={() => act('switchBay', { bayNumber: '' + (i + 1) })} />
       ))}
     </Section>
   );
@@ -1134,10 +1000,7 @@ const DelayHelper = (props) => {
   return (
     <LabeledControls wrap>
       {delay_list.map((delay, i) => (
-        <LabeledControls.Item
-          key={i}
-          label={data.custom_rev_delay ? '' : delay.title}
-        >
+        <LabeledControls.Item key={i} label={data.custom_rev_delay ? '' : delay.title}>
           <Knob
             inline
             step={0.02}
@@ -1148,11 +1011,7 @@ const DelayHelper = (props) => {
             unit={'s'}
             format={(value) => toFixed(value, 2)}
             maxValue={10}
-            color={
-              (reverse ? data.rev_delays[i + 1] : data.delays[i + 1]) / 10 > 10
-                ? 'orange'
-                : 'default'
-            }
+            color={(reverse ? data.rev_delays[i + 1] : data.delays[i + 1]) / 10 > 10 ? 'orange' : 'default'}
             onDrag={(e, value) => {
               act('editTiming', {
                 timer: '' + (i + 1),
@@ -1187,14 +1046,7 @@ const Sounds = (props) => {
       }
     >
       {SOUNDS.map((sound, i) => (
-        <Button
-          key={i}
-          content={sound.title}
-          tooltip={sound.tooltip}
-          tooltipPosition="top-end"
-          selected={data[sound.act]}
-          onClick={() => act(sound.act)}
-        />
+        <Button key={i} content={sound.title} tooltip={sound.tooltip} tooltipPosition="top-end" selected={data[sound.act]} onClick={() => act(sound.act)} />
       ))}
     </Section>
   );

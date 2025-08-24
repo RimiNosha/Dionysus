@@ -1,14 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  ColorBox,
-  LabeledList,
-  NumberInput,
-  Section,
-  Table,
-} from '../components';
+import { AnimatedNumber, Box, Button, ColorBox, LabeledList, NumberInput, Section, Table } from '../components';
 import { Window } from '../layouts';
 
 export const ChemMaster = (props) => {
@@ -16,9 +7,7 @@ export const ChemMaster = (props) => {
   const { screen } = data;
   return (
     <Window width={465} height={550}>
-      <Window.Content scrollable>
-        {(screen === 'analyze' && <AnalysisResults />) || <ChemMasterContent />}
-      </Window.Content>
+      <Window.Content scrollable>{(screen === 'analyze' && <AnalysisResults />) || <ChemMasterContent />}</Window.Content>
     </Window>
   );
 };
@@ -50,11 +39,7 @@ const ChemMasterContent = (props) => {
                 <AnimatedNumber value={beakerCurrentVolume} initial={0} />
                 {` / ${beakerMaxVolume} units`}
               </Box>
-              <Button
-                icon="eject"
-                content="Eject"
-                onClick={() => act('eject')}
-              />
+              <Button icon="eject" content="Eject" onClick={() => act('eject')} />
             </>
           )
         }
@@ -71,11 +56,7 @@ const ChemMasterContent = (props) => {
         )}
         <ChemicalBuffer>
           {beakerContents.map((chemical) => (
-            <ChemicalBufferEntry
-              key={chemical.id}
-              chemical={chemical}
-              transferTo="buffer"
-            />
+            <ChemicalBufferEntry key={chemical.id} chemical={chemical} transferTo="buffer" />
           ))}
         </ChemicalBuffer>
       </Section>
@@ -86,12 +67,7 @@ const ChemMasterContent = (props) => {
             <Box inline color="label" mr={1}>
               Mode:
             </Box>
-            <Button
-              color={data.mode ? 'good' : 'bad'}
-              icon={data.mode ? 'exchange-alt' : 'times'}
-              content={data.mode ? 'Transfer' : 'Destroy'}
-              onClick={() => act('toggleMode')}
-            />
+            <Button color={data.mode ? 'good' : 'bad'} icon={data.mode ? 'exchange-alt' : 'times'} content={data.mode ? 'Transfer' : 'Destroy'} onClick={() => act('toggleMode')} />
           </>
         }
       >
@@ -102,11 +78,7 @@ const ChemMasterContent = (props) => {
         )}
         <ChemicalBuffer>
           {bufferContents.map((chemical) => (
-            <ChemicalBufferEntry
-              key={chemical.id}
-              chemical={chemical}
-              transferTo="beaker"
-            />
+            <ChemicalBufferEntry key={chemical.id} chemical={chemical} transferTo="beaker" />
           ))}
         </ChemicalBuffer>
       </Section>
@@ -121,11 +93,7 @@ const ChemMasterContent = (props) => {
               <Box inline color="label" mr={2}>
                 {pillBottleCurrentAmount} / {pillBottleMaxAmount} pills
               </Box>
-              <Button
-                icon="eject"
-                content="Eject"
-                onClick={() => act('ejectPillBottle')}
-              />
+              <Button icon="eject" content="Eject" onClick={() => act('ejectPillBottle')} />
             </>
           }
         />
@@ -212,20 +180,10 @@ const ChemicalBufferEntry = (props) => {
 };
 
 const PackagingControlsItem = (props) => {
-  const { label, amountUnit, amount, onChangeAmount, onCreate, sideNote } =
-    props;
+  const { label, amountUnit, amount, onChangeAmount, onCreate, sideNote } = props;
   return (
     <LabeledList.Item label={label}>
-      <NumberInput
-        width="84px"
-        unit={amountUnit}
-        step={1}
-        stepPixelSize={15}
-        value={amount}
-        minValue={1}
-        maxValue={20}
-        onChange={onChangeAmount}
-      />
+      <NumberInput width="84px" unit={amountUnit} step={1} stepPixelSize={15} value={amount} minValue={1} maxValue={20} onChange={onChangeAmount} />
       <Button ml={1} content="Create" onClick={onCreate} />
       <Box inline ml={1} color="label">
         {sideNote}
@@ -243,30 +201,14 @@ const PackagingControls = (props) => {
   const [vialAmount, setVialAmount] = useSharedState('vialAmount', 1);
   // PARIAH EDIT END
   const [packAmount, setPackAmount] = useSharedState('packAmount', 1);
-  const {
-    condi,
-    chosenPillStyle,
-    chosenCondiStyle,
-    autoCondiStyle,
-    pillStyles = [],
-    condiStyles = [],
-    patch_style,
-    patch_styles = [],
-  } = data;
+  const { condi, chosenPillStyle, chosenCondiStyle, autoCondiStyle, pillStyles = [], condiStyles = [], patch_style, patch_styles = [] } = data;
   const autoCondiStyleChosen = autoCondiStyle === chosenCondiStyle;
   return (
     <LabeledList>
       {!condi && (
         <LabeledList.Item label="Pill type">
           {pillStyles.map((pill) => (
-            <Button
-              key={pill.id}
-              width="30px"
-              selected={pill.id === chosenPillStyle}
-              textAlign="center"
-              color="transparent"
-              onClick={() => act('pillStyle', { id: pill.id })}
-            >
+            <Button key={pill.id} width="30px" selected={pill.id === chosenPillStyle} textAlign="center" color="transparent" onClick={() => act('pillStyle', { id: pill.id })}>
               <Box mx={-1} className={pill.className} />
             </Button>
           ))}
@@ -296,9 +238,7 @@ const PackagingControls = (props) => {
               selected={patch.style === patch_style}
               textAlign="center"
               color="transparent"
-              onClick={() =>
-                act('change_patch_style', { patch_style: patch.style })
-              }
+              onClick={() => act('change_patch_style', { patch_style: patch.style })}
             >
               <Box mb={0} mt={1} className={patch.class_name} />
             </Button>
@@ -447,18 +387,10 @@ const AnalysisResults = (props) => {
           <ColorBox color={analyzeVars.color} mr={1} />
           {analyzeVars.color}
         </LabeledList.Item>
-        <LabeledList.Item label="Description">
-          {analyzeVars.description}
-        </LabeledList.Item>
-        <LabeledList.Item label="Metabolization Rate">
-          {analyzeVars.metaRate} u/minute
-        </LabeledList.Item>
-        <LabeledList.Item label="Overdose Threshold">
-          {analyzeVars.overD}
-        </LabeledList.Item>
-        <LabeledList.Item label="Addiction Threshold">
-          {analyzeVars.addicD}
-        </LabeledList.Item>
+        <LabeledList.Item label="Description">{analyzeVars.description}</LabeledList.Item>
+        <LabeledList.Item label="Metabolization Rate">{analyzeVars.metaRate} u/minute</LabeledList.Item>
+        <LabeledList.Item label="Overdose Threshold">{analyzeVars.overD}</LabeledList.Item>
+        <LabeledList.Item label="Addiction Threshold">{analyzeVars.addicD}</LabeledList.Item>
       </LabeledList>
     </Section>
   );

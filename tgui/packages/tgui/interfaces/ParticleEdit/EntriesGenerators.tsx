@@ -1,20 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { useBackend, useLocalState } from '../../backend';
-import {
-  Button,
-  ColorBox,
-  LabeledList,
-  NumberInput,
-  Stack,
-} from '../../components';
-import {
-  EntryGeneratorNumbersListProps,
-  FloatGeneratorColorProps,
-  FloatGeneratorProps,
-  P_DATA_GENERATOR,
-  ParticleUIData,
-  RandToNumber,
-} from './data';
+import { Button, ColorBox, LabeledList, NumberInput, Stack } from '../../components';
+import { EntryGeneratorNumbersListProps, FloatGeneratorColorProps, FloatGeneratorProps, P_DATA_GENERATOR, ParticleUIData, RandToNumber } from './data';
 import { GeneratorListEntry } from './Generators';
 import { isStringArray } from './helpers';
 
@@ -26,11 +13,7 @@ export const FloatGenerator = (props: FloatGeneratorProps) => {
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         <Stack.Item>
           <Button
@@ -40,9 +23,7 @@ export const FloatGenerator = (props: FloatGeneratorProps) => {
               act('edit', {
                 var: var_name,
                 var_mod: !Array.isArray(float) ? P_DATA_GENERATOR : null,
-                new_value: !Array.isArray(float)
-                  ? ['num', 0, 1, RandToNumber['UNIFORM_RAND']]
-                  : 0,
+                new_value: !Array.isArray(float) ? ['num', 0, 1, RandToNumber['UNIFORM_RAND']] : 0,
               })
             }
           />
@@ -79,11 +60,7 @@ export const FloatGeneratorColor = (props: FloatGeneratorColorProps) => {
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         <Stack.Item>
           <Button
@@ -93,9 +70,7 @@ export const FloatGeneratorColor = (props: FloatGeneratorColorProps) => {
               act('edit', {
                 var: var_name,
                 var_mod: !Array.isArray(float) ? P_DATA_GENERATOR : null,
-                new_value: !Array.isArray(float)
-                  ? ['num', 0, 1, RandToNumber['UNIFORM_RAND']]
-                  : '#FFFFFF',
+                new_value: !Array.isArray(float) ? ['num', 0, 1, RandToNumber['UNIFORM_RAND']] : '#FFFFFF',
               })
             }
           />
@@ -129,9 +104,7 @@ export const FloatGeneratorColor = (props: FloatGeneratorColorProps) => {
   );
 };
 
-export const EntryGeneratorNumbersList = (
-  props: EntryGeneratorNumbersListProps,
-) => {
+export const EntryGeneratorNumbersList = (props: EntryGeneratorNumbersListProps) => {
   const { act, data } = useBackend<ParticleUIData>();
   const [desc, setdesc] = useLocalState('desc', '');
   const { name, var_name, allow_z, input } = props;
@@ -139,11 +112,7 @@ export const EntryGeneratorNumbersList = (
     <LabeledList.Item label={name}>
       <Stack>
         <Stack.Item>
-          <Button
-            icon={'question'}
-            onClick={() => setdesc(var_name)}
-            tooltip={'View details'}
-          />
+          <Button icon={'question'} onClick={() => setdesc(var_name)} tooltip={'View details'} />
         </Stack.Item>
         <Stack.Item>
           <Button
@@ -153,14 +122,7 @@ export const EntryGeneratorNumbersList = (
               act('edit', {
                 var: var_name,
                 var_mod: !isStringArray(input) ? P_DATA_GENERATOR : null,
-                new_value: !isStringArray(input)
-                  ? [
-                      'sphere',
-                      [0, 0, 0],
-                      [1, 1, 1],
-                      RandToNumber['UNIFORM_RAND'],
-                    ]
-                  : [1, 1, 1],
+                new_value: !isStringArray(input) ? ['sphere', [0, 0, 0], [1, 1, 1], RandToNumber['UNIFORM_RAND']] : [1, 1, 1],
               })
             }
           />
@@ -196,11 +158,7 @@ export const EntryGeneratorNumbersList = (
             />
           </Stack.Item>
         ) : isStringArray(input) ? (
-          <GeneratorListEntry
-            var_name={var_name}
-            generator={input}
-            allow_vectors
-          />
+          <GeneratorListEntry var_name={var_name} generator={input} allow_vectors />
         ) : (
           <Stack.Item>
             <NumberInput

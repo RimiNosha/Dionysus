@@ -1,15 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  BlockQuote,
-  Box,
-  Button,
-  Collapsible,
-  Dimmer,
-  Icon,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { BlockQuote, Box, Button, Collapsible, Dimmer, Icon, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 const ALIGNMENT2COLOR = {
@@ -29,11 +19,7 @@ export const ReligiousTool = (props) => {
           <Stack.Item>
             <Tabs textAlign="center" fluid>
               <Tabs.Tab selected={tab === 1} onClick={() => setTab(1)}>
-                Sect{' '}
-                <Icon
-                  name="place-of-worship"
-                  color={ALIGNMENT2COLOR[alignment]}
-                />
+                Sect <Icon name="place-of-worship" color={ALIGNMENT2COLOR[alignment]} />
               </Tabs.Tab>
               {!sects && (
                 <Tabs.Tab selected={tab === 2} onClick={() => setTab(2)}>
@@ -54,17 +40,7 @@ export const ReligiousTool = (props) => {
 
 const SectTab = (props) => {
   const { act, data } = useBackend();
-  const {
-    name,
-    quote,
-    desc,
-    icon,
-    favordesc,
-    favor,
-    wanted,
-    deity,
-    alignment,
-  } = data;
+  const { name, quote, desc, icon, favordesc, favor, wanted, deity, alignment } = data;
   return (
     <Section fill>
       <Stack fill vertical fontSize="15px" textAlign="center">
@@ -76,16 +52,13 @@ const SectTab = (props) => {
         <Stack.Item grow mb={2} color="grey">
           {'"' + quote + '"'}
         </Stack.Item>
-        <Stack.Item color={favor === 0 ? 'white' : 'green'}>
-          {favordesc}
-        </Stack.Item>
+        <Stack.Item color={favor === 0 ? 'white' : 'green'}>{favordesc}</Stack.Item>
         <Stack.Item mb={2} textAlign="left">
           <BlockQuote>{desc}</BlockQuote>
         </Stack.Item>
         <Stack.Item>
           <Section mx={3} mt={-1} title="Wanted Sacrifices">
-            {(!wanted && deity + " doesn't want any sacrifices.") ||
-              deity + ' wishes for ' + wanted + '.'}
+            {(!wanted && deity + " doesn't want any sacrifices.") || deity + ' wishes for ' + wanted + '.'}
           </Section>
         </Stack.Item>
       </Stack>
@@ -105,10 +78,7 @@ const SectSelectTab = (props) => {
               title={
                 <Stack mt={-3.3} ml={3}>
                   <Stack.Item>
-                    <Icon
-                      name={sect.icon}
-                      color={ALIGNMENT2COLOR[sect.alignment]}
-                    />
+                    <Icon name={sect.icon} color={ALIGNMENT2COLOR[sect.alignment]} />
                   </Stack.Item>
                   <Stack.Item grow>{sect.name}</Stack.Item>
                   <Stack.Item italic>{'"' + sect.quote + '"'}</Stack.Item>
@@ -152,11 +122,7 @@ const RiteTab = (props) => {
           <Dimmer>
             <Stack vertical>
               <Stack.Item textAlign="center">
-                <Icon
-                  color={ALIGNMENT2COLOR[alignment]}
-                  name={icon}
-                  size={10}
-                />
+                <Icon color={ALIGNMENT2COLOR[alignment]} name={icon} size={10} />
               </Stack.Item>
               <Stack.Item fontSize="18px" color={ALIGNMENT2COLOR[alignment]}>
                 {deity} does not have any invocations.
@@ -188,8 +154,7 @@ const RiteTab = (props) => {
               }
             >
               <Box color={favor < rite.favor ? 'red' : 'grey'} mb={0.5}>
-                <Icon name="star" color={ALIGNMENT2COLOR[alignment]} /> Costs{' '}
-                {rite.favor} favor.
+                <Icon name="star" color={ALIGNMENT2COLOR[alignment]} /> Costs {rite.favor} favor.
               </Box>
               <BlockQuote>{rite.desc}</BlockQuote>
             </Section>

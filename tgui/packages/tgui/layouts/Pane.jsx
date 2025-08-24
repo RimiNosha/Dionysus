@@ -27,15 +27,8 @@ export const Pane = (props) => {
 const PaneContent = (props) => {
   const { className, fitted, children, ...rest } = props;
   return (
-    <Layout.Content
-      className={classes(['Window__content', className])}
-      {...rest}
-    >
-      {fitted ? (
-        children
-      ) : (
-        <div className="Window__contentPadding">{children}</div>
-      )}
+    <Layout.Content className={classes(['Window__content', className])} {...rest}>
+      {fitted ? children : <div className="Window__contentPadding">{children}</div>}
     </Layout.Content>
   );
 };

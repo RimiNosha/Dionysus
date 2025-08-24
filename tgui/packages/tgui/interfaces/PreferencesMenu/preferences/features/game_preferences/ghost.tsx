@@ -1,13 +1,6 @@
 import { useBackend } from '../../../../../backend';
 import { PreferencesMenuData } from '../../../data';
-import {
-  CheckboxInput,
-  FeatureChoiced,
-  FeatureChoicedServerData,
-  FeatureDropdownInput,
-  FeatureToggle,
-  FeatureValueProps,
-} from '../base';
+import { CheckboxInput, FeatureChoiced, FeatureChoicedServerData, FeatureDropdownInput, FeatureToggle, FeatureValueProps } from '../base';
 
 export const ghost_hud: FeatureToggle = {
   name: 'Ghost HUD',
@@ -23,14 +16,10 @@ export const ghost_orbit: FeatureChoiced = {
     The shape in which your ghost will orbit.
     Requires BYOND membership.
   `,
-  component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
-  ) => {
+  component: (props: FeatureValueProps<string, string, FeatureChoicedServerData>) => {
     const { data } = useBackend<PreferencesMenuData>();
 
-    return (
-      <FeatureDropdownInput {...props} disabled={!data.content_unlocked} />
-    );
+    return <FeatureDropdownInput {...props} disabled={!data.content_unlocked} />;
   },
 };
 

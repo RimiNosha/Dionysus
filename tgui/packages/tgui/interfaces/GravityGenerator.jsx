@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const GravityGenerator = (props) => {
@@ -29,13 +22,7 @@ const GravityGeneratorContent = (props) => {
     <Section>
       <LabeledList>
         <LabeledList.Item label="Power">
-          <Button
-            icon={breaker ? 'power-off' : 'times'}
-            content={breaker ? 'On' : 'Off'}
-            selected={breaker}
-            disabled={!operational}
-            onClick={() => act('gentoggle')}
-          />
+          <Button icon={breaker ? 'power-off' : 'times'} content={breaker ? 'On' : 'Off'} selected={breaker} disabled={!operational} onClick={() => act('gentoggle')} />
         </LabeledList.Item>
         <LabeledList.Item label="Gravity Charge">
           <ProgressBar
@@ -48,10 +35,7 @@ const GravityGeneratorContent = (props) => {
           />
         </LabeledList.Item>
         <LabeledList.Item label="Charge Mode">
-          {charging_state === 0 &&
-            ((on && <Box color="good">Fully Charged</Box>) || (
-              <Box color="bad">Not Charging</Box>
-            ))}
+          {charging_state === 0 && ((on && <Box color="good">Fully Charged</Box>) || <Box color="bad">Not Charging</Box>)}
           {charging_state === 1 && <Box color="average">Charging</Box>}
           {charging_state === 2 && <Box color="average">Discharging</Box>}
         </LabeledList.Item>

@@ -31,11 +31,7 @@ const NukeKeypad = (props) => {
                 fontSize="40px"
                 lineHeight={1.25}
                 width="55px"
-                className={classes([
-                  'NuclearBomb__Button',
-                  'NuclearBomb__Button--keypad',
-                  'NuclearBomb__Button--' + key,
-                ])}
+                className={classes(['NuclearBomb__Button', 'NuclearBomb__Button--keypad', 'NuclearBomb__Button--' + key])}
                 onClick={() => act('keypad', { digit: key })}
               />
             ))}

@@ -1,22 +1,12 @@
 import { useBackend } from '../../backend';
 import { Dropdown, NumberInput, Stack } from '../../components';
-import {
-  GeneratorProps,
-  GeneratorTypes,
-  GeneratorTypesNoVectors,
-  P_DATA_GENERATOR,
-  ParticleUIData,
-  RandToNumber,
-  RandTypes,
-} from './data';
+import { GeneratorProps, GeneratorTypes, GeneratorTypesNoVectors, P_DATA_GENERATOR, ParticleUIData, RandToNumber, RandTypes } from './data';
 
 export const GeneratorListEntry = (props: GeneratorProps) => {
   const { act, data } = useBackend<ParticleUIData>();
   const { var_name, generator, allow_vectors } = props;
   // omits generators that are not allowed with certain vars
-  const allowed_generators = allow_vectors
-    ? GeneratorTypes
-    : GeneratorTypesNoVectors;
+  const allowed_generators = allow_vectors ? GeneratorTypes : GeneratorTypesNoVectors;
   const type = generator ? generator[0] : 'num';
   const calcA = generator ? generator[1] : 'list(0,0,0)';
   const calcB = generator ? generator[2] : 'list(1,1,1)';
@@ -89,12 +79,7 @@ export const GeneratorListEntry = (props: GeneratorProps) => {
                 act('edit', {
                   var: var_name,
                   var_mod: P_DATA_GENERATOR,
-                  new_value: [
-                    type,
-                    [value, A[1], A[2]],
-                    B,
-                    RandToNumber[rand_type],
-                  ],
+                  new_value: [type, [value, A[1], A[2]], B, RandToNumber[rand_type]],
                 })
               }
             />
@@ -158,12 +143,7 @@ export const GeneratorListEntry = (props: GeneratorProps) => {
                 act('edit', {
                   var: var_name,
                   var_mod: P_DATA_GENERATOR,
-                  new_value: [
-                    type,
-                    A,
-                    [value, B[1], B[2]],
-                    RandToNumber[rand_type],
-                  ],
+                  new_value: [type, A, [value, B[1], B[2]], RandToNumber[rand_type]],
                 })
               }
             />
@@ -177,12 +157,7 @@ export const GeneratorListEntry = (props: GeneratorProps) => {
                 act('edit', {
                   var: var_name,
                   var_mod: P_DATA_GENERATOR,
-                  new_value: [
-                    type,
-                    A,
-                    [B[0], value, B[2]],
-                    RandToNumber[rand_type],
-                  ],
+                  new_value: [type, A, [B[0], value, B[2]], RandToNumber[rand_type]],
                 })
               }
             />
@@ -196,12 +171,7 @@ export const GeneratorListEntry = (props: GeneratorProps) => {
                 act('edit', {
                   var: var_name,
                   var_mod: P_DATA_GENERATOR,
-                  new_value: [
-                    type,
-                    A,
-                    [B[0], B[1], value],
-                    RandToNumber[rand_type],
-                  ],
+                  new_value: [type, A, [B[0], B[1], value], RandToNumber[rand_type]],
                 })
               }
             />

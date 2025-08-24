@@ -1,18 +1,7 @@
 import { round, toFixed } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Flex,
-  Icon,
-  NumberInput,
-  ProgressBar,
-  RoundGauge,
-  Section,
-  Table,
-} from '../components';
+import { AnimatedNumber, Box, Button, Flex, Icon, NumberInput, ProgressBar, RoundGauge, Section, Table } from '../components';
 import { Window } from '../layouts';
 import { BeakerContents } from './common/BeakerContents';
 
@@ -38,12 +27,7 @@ export const ChemHeater = (props) => {
           title="Controls"
           buttons={
             <Flex>
-              <Button
-                icon={isActive ? 'power-off' : 'times'}
-                selected={isActive}
-                content={isActive ? 'On' : 'Off'}
-                onClick={() => act('power')}
-              />
+              <Button icon={isActive ? 'power-off' : 'times'} selected={isActive} content={isActive ? 'On' : 'Off'} onClick={() => act('power')} />
             </Flex>
           }
         >
@@ -82,13 +66,7 @@ export const ChemHeater = (props) => {
               </Table.Cell>
               <Table.Cell collapsing color="default">
                 <Box width="60px" textAlign="right">
-                  {(isBeakerLoaded && (
-                    <AnimatedNumber
-                      value={currentTemp}
-                      format={(value) => toFixed(value) + ' K'}
-                    />
-                  )) ||
-                    '—'}
+                  {(isBeakerLoaded && <AnimatedNumber value={currentTemp} format={(value) => toFixed(value) + ' K'} />) || '—'}
                 </Box>
               </Table.Cell>
             </Table.Row>
@@ -96,9 +74,7 @@ export const ChemHeater = (props) => {
         </Section>
         {!!isBeakerLoaded && (
           <Section title="Reactions">
-            {(activeReactions.length === 0 && (
-              <Box color="label">No active reactions.</Box>
-            )) || (
+            {(activeReactions.length === 0 && <Box color="label">No active reactions.</Box>) || (
               <Table>
                 <Table.Row>
                   <Table.Cell bold color="label">
@@ -118,14 +94,7 @@ export const ChemHeater = (props) => {
                     </Table.Cell>
                     <Table.Cell width={'100px'} pr={'10px'}>
                       {(upgradeLevel < 4 && (
-                        <Icon
-                          name={
-                            reaction.danger ? 'exclamation-triangle' : 'spinner'
-                          }
-                          color={reaction.danger && 'red'}
-                          spin={!reaction.danger}
-                          ml={2.5}
-                        />
+                        <Icon name={reaction.danger ? 'exclamation-triangle' : 'spinner'} color={reaction.danger && 'red'} spin={!reaction.danger} ml={2.5} />
                       )) || (
                         <AnimatedNumber value={reaction.quality}>
                           {(_, value) => (
@@ -183,19 +152,12 @@ export const ChemHeater = (props) => {
                 <Box inline color="label" mr={2}>
                   {beakerCurrentVolume} / {beakerMaxVolume} units
                 </Box>
-                <Button
-                  icon="eject"
-                  content="Eject"
-                  onClick={() => act('eject')}
-                />
+                <Button icon="eject" content="Eject" onClick={() => act('eject')} />
               </>
             )
           }
         >
-          <BeakerContents
-            beakerLoaded={isBeakerLoaded}
-            beakerContents={beakerContents}
-          />
+          <BeakerContents beakerLoaded={isBeakerLoaded} beakerContents={beakerContents} />
         </Section>
       </Window.Content>
     </Window>

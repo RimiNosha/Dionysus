@@ -6,10 +6,7 @@ export const LoadoutManager = (props) => {
   const { act, data } = useBackend();
   const { selected_loadout, loadout_tabs } = data;
 
-  const [selectedTabName, setSelectedTab] = useSharedState(
-    'tabs',
-    loadout_tabs[0]?.name,
-  );
+  const [selectedTabName, setSelectedTab] = useSharedState('tabs', loadout_tabs[0]?.name);
   const selectedTab = loadout_tabs.find((curTab) => {
     return curTab.name === selectedTabName;
   });
@@ -22,15 +19,7 @@ export const LoadoutManager = (props) => {
             <Section
               title="Loadout Categories"
               align="center"
-              buttons={
-                <Button
-                  icon="check-double"
-                  color="good"
-                  content="Confirm"
-                  tooltip="Confirm loadout and exit UI."
-                  onClick={() => act('close_ui', { revert: 0 })}
-                />
-              }
+              buttons={<Button icon="check-double" color="good" content="Confirm" tooltip="Confirm loadout and exit UI." onClick={() => act('close_ui', { revert: 0 })} />}
             >
               <Dropdown
                 width="100%"
@@ -111,16 +100,12 @@ export const LoadoutManager = (props) => {
                               <Button.Checkbox
                                 checked={selected_loadout.includes(item.path)}
                                 content="Select"
-                                disabled={
-                                  item.is_donator_only && !user_is_donator
-                                }
+                                disabled={item.is_donator_only && !user_is_donator}
                                 fluid
                                 onClick={() =>
                                   act('select_item', {
                                     path: item.path,
-                                    deselect: selected_loadout.includes(
-                                      item.path,
-                                    ),
+                                    deselect: selected_loadout.includes(item.path),
                                   })
                                 }
                               />

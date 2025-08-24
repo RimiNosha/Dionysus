@@ -5,14 +5,7 @@ import { createSearch } from 'common/string';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Flex,
-  Section,
-  Table,
-} from '../components';
+import { AnimatedNumber, Box, Button, Flex, Section, Table } from '../components';
 import { truncate } from '../format';
 import { Window } from '../layouts';
 
@@ -74,11 +67,8 @@ export const SeedList = (props) => {
   const [sortField, setSortField] = useState('name');
   const search = createSearch(searchText, (item: Seed) => item.name);
 
-  const seeds_filtered =
-    searchText.length > 0 ? data.seeds.filter(search) : data.seeds;
-  const seeds = flow([sortBy((item: Seed) => item[sortField as keyof Seed])])(
-    seeds_filtered || [],
-  );
+  const seeds_filtered = searchText.length > 0 ? data.seeds.filter(search) : data.seeds;
+  const seeds = flow([sortBy((item: Seed) => item[sortField as keyof Seed])])(seeds_filtered || []);
   sortField !== 'name' && seeds.reverse();
 
   return (
@@ -89,66 +79,42 @@ export const SeedList = (props) => {
             <Table cellpadding="3" height="100%">
               <Table.Row header>
                 <Table.Cell width="15%" textAlign="left">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('name')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('name')}>
                     Name
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('damage')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('damage')}>
                     Damage
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('genome')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('genome')}>
                     Genome
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('endurance')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('endurance')}>
                     Endurance
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('maturation')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('maturation')}>
                     Maturation
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('production')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('production')}>
                     Production
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('yield')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('yield')}>
                     Yield
                   </Box>
                 </Table.Cell>
                 <Table.Cell width="10%" textAlign="center">
-                  <Box
-                    style={{ cursor: 'pointer' }}
-                    onClick={(e) => setSortField('potency')}
-                  >
+                  <Box style={{ cursor: 'pointer' }} onClick={(e) => setSortField('potency')}>
                     Potency
                   </Box>
                 </Table.Cell>
@@ -246,11 +212,7 @@ export const SeedList = (props) => {
                   <AnimatedNumber value={beaker.volume} initial={0} />
                   {` / ${beaker.max_volume} units`}
                 </Box>
-                <Button
-                  icon="eject"
-                  content="Eject"
-                  onClick={() => act('eject_beaker')}
-                />
+                <Button icon="eject" content="Eject" onClick={() => act('eject_beaker')} />
               </>
             )
           }
@@ -262,11 +224,7 @@ export const SeedList = (props) => {
           )) || (
             <Box height="100%">
               {beaker.reagents?.map((reagent) => (
-                <ReagentEntry
-                  key={reagent.name}
-                  chemical={reagent}
-                  transferTo="buffer"
-                />
+                <ReagentEntry key={reagent.name} chemical={reagent} transferTo="buffer" />
               ))}
             </Box>
           )}

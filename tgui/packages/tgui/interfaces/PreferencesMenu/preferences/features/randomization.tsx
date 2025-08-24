@@ -13,10 +13,7 @@ export const random_body: Feature<RandomSetting> = {
     return (
       <Stack>
         <Stack.Item>
-          <RandomizationButton
-            setValue={(newValue) => props.handleSetValue(newValue)}
-            value={props.value}
-          />
+          <RandomizationButton setValue={(newValue) => props.handleSetValue(newValue)} value={props.value} />
         </Stack.Item>
 
         {randomToggle ? (
@@ -57,12 +54,7 @@ export const random_hardcore: FeatureToggle = {
 export const random_name: Feature<RandomSetting> = {
   name: 'Random name',
   component: (props) => {
-    return (
-      <RandomizationButton
-        setValue={(value) => props.handleSetValue(value)}
-        value={props.value}
-      />
-    );
+    return <RandomizationButton setValue={(value) => props.handleSetValue(value)} value={props.value} />;
   },
 };
 

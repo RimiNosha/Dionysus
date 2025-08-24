@@ -42,17 +42,7 @@ export const Connections = (props) => {
         // path += `L ${to.x} ${to.y}`;
 
         val.color = val.color || 'blue';
-        return (
-          <path
-            className={classes([
-              isColorClass(val.color) && `color-stroke-${val.color}`,
-            ])}
-            key={index}
-            d={path}
-            fill="transparent"
-            stroke-width="2px"
-          />
-        );
+        return <path className={classes([isColorClass(val.color) && `color-stroke-${val.color}`])} key={index} d={path} fill="transparent" stroke-width="2px" />;
       })}
     </svg>
   );

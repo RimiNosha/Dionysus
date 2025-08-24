@@ -92,14 +92,7 @@ export const SignalerContent = (props) => {
       </Grid>
       <Grid mt={0.8}>
         <Grid.Column>
-          <Button
-            mb={-0.1}
-            fluid
-            icon="arrow-up"
-            content="Send Signal"
-            textAlign="center"
-            onClick={() => act('signal')}
-          />
+          <Button mb={-0.1} fluid icon="arrow-up" content="Send Signal" textAlign="center" onClick={() => act('signal')} />
         </Grid.Column>
       </Grid>
     </Section>

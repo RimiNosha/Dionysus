@@ -54,29 +54,13 @@ export const PatientInfo = (_) => {
   const { data } = useBackend<DiagnosisBookData>();
   const { mob } = data;
   return (
-    <Flex.Item
-      width="30%"
-      height="100%"
-      className="DiagnosisBook__patientBlock"
-    >
+    <Flex.Item width="30%" height="100%" className="DiagnosisBook__patientBlock">
       <Section height="100%">
         <Flex direction="column">
           <PatientAppearance />
-          <PatientEntry
-            fieldName="Patient"
-            actName="name"
-            actValue={mob.name || ''}
-          />
-          <PatientEntry
-            fieldName="Occupation"
-            actName="occupation"
-            actValue={mob.occupation || ''}
-          />
-          <PatientEntry
-            fieldName="Time"
-            actName="time"
-            actValue={mob.time || ''}
-          />
+          <PatientEntry fieldName="Patient" actName="name" actValue={mob.name || ''} />
+          <PatientEntry fieldName="Occupation" actName="occupation" actValue={mob.occupation || ''} />
+          <PatientEntry fieldName="Time" actName="time" actValue={mob.time || ''} />
           <DiagnoseButton />
         </Flex>
       </Section>
@@ -91,11 +75,7 @@ export const PatientAppearance = (_) => {
     <Flex.Item>
       <Flex justify="center" direction="row">
         <Flex.Item>
-          <ByondUi
-            height="256px"
-            width="256px"
-            params={{ id: map_ref, type: 'map' }}
-          />
+          <ByondUi height="256px" width="256px" params={{ id: map_ref, type: 'map' }} />
         </Flex.Item>
       </Flex>
     </Flex.Item>
@@ -163,11 +143,7 @@ export const DiagnoseButton = (_) => {
           />
         </Box>
         <Flex.Item>
-          <Button
-            mt="8px"
-            disabled={!diagnosis}
-            onClick={() => act('diagnose', { diagnosis: diagnosis })}
-          >
+          <Button mt="8px" disabled={!diagnosis} onClick={() => act('diagnose', { diagnosis: diagnosis })}>
             <span style={!diagnosis ? { color: '#FFFFFF' } : {}}>Diagnose</span>
           </Button>
         </Flex.Item>
@@ -193,23 +169,13 @@ export const SymptomInfo = (_) => {
         scrollable
         noTitleBorder
       >
-        <Flex direction="column">
-          {symptom_categories
-            .sort()
-            .map((category_name, i) =>
-              symptomInfoEntry(category_name, i, symptoms),
-            )}
-        </Flex>
+        <Flex direction="column">{symptom_categories.sort().map((category_name, i) => symptomInfoEntry(category_name, i, symptoms))}</Flex>
       </Section>
     </Flex.Item>
   );
 };
 
-function symptomInfoEntry(
-  category_name: string,
-  i: number,
-  symptoms: Array<Symptom>,
-) {
+function symptomInfoEntry(category_name: string, i: number, symptoms: Array<Symptom>) {
   const { act, data } = useBackend<DiagnosisBookData>();
   return (
     <Flex.Item>
@@ -220,11 +186,7 @@ function symptomInfoEntry(
             .map((symptom, i) => (
               <Flex.Item key={i}>
                 <Button
-                  color={
-                    data.selected_symptoms.includes(symptom.path)
-                      ? 'green'
-                      : 'default'
-                  }
+                  color={data.selected_symptoms.includes(symptom.path) ? 'green' : 'default'}
                   tooltip={symptom.desc}
                   tooltipPosition="bottom-start"
                   onClick={() => act('cycle_symptom', { path: symptom.path })}
@@ -262,13 +224,8 @@ export const ConditionInfo = (_) => {
         noTitleBorder
         style={{ backgroundColor: 'black', color: '#B7A486' }}
       >
-        <Flex
-          direction="column"
-          className="DiagnosisBook__conditionBlockContainer"
-        >
-          {conditions
-            .sort(compareConditions)
-            .map((condition) => conditionInfoEntry(condition))}
+        <Flex direction="column" className="DiagnosisBook__conditionBlockContainer">
+          {conditions.sort(compareConditions).map((condition) => conditionInfoEntry(condition))}
         </Flex>
       </Section>
     </Flex.Item>
@@ -280,12 +237,8 @@ export const ConditionInfo = (_) => {
 function compareConditions(a: Condition, b: Condition) {
   const { data } = useBackend<DiagnosisBookData>();
   const { selected_symptoms } = data;
-  const a_matches = a.symptoms.filter((symptom_name) =>
-    selected_symptoms.includes(getSymptomByName(symptom_name).path),
-  ).length;
-  const b_matches = b.symptoms.filter((symptom_name) =>
-    selected_symptoms.includes(getSymptomByName(symptom_name).path),
-  ).length;
+  const a_matches = a.symptoms.filter((symptom_name) => selected_symptoms.includes(getSymptomByName(symptom_name).path)).length;
+  const b_matches = b.symptoms.filter((symptom_name) => selected_symptoms.includes(getSymptomByName(symptom_name).path)).length;
 
   // Equivalent match count, use name instead
   if (a_matches === b_matches) {
@@ -302,33 +255,20 @@ function conditionInfoEntry(condition: Condition) {
   const is_selected = diagnosis === condition.name;
   return (
     <Flex.Item
-      className={classes([
-        'DiagnosisBook__conditionBlock',
-        is_selected && 'DiagnosisBook__conditionBlock--selectedCondition',
-      ])}
-      onClick={() =>
-        act('update_mob', { diagnosis: is_selected ? '' : condition.name })
-      }
+      className={classes(['DiagnosisBook__conditionBlock', is_selected && 'DiagnosisBook__conditionBlock--selectedCondition'])}
+      onClick={() => act('update_mob', { diagnosis: is_selected ? '' : condition.name })}
     >
       <Flex direction="column">
         <Flex.Item>
           <Box className="DiagnosisBook__conditionBlockHeader">
             <span style={{ fontSize: '150%' }}>
               {condition.name}
-              <Button
-                fontSize="60%"
-                icon="question"
-                tooltip={condition.desc}
-                style={{ marginLeft: '8px' }}
-                onClick={(event) => event.stopPropagation()}
-              />
+              <Button fontSize="60%" icon="question" tooltip={condition.desc} style={{ marginLeft: '8px' }} onClick={(event) => event.stopPropagation()} />
             </span>
           </Box>
         </Flex.Item>
         <Flex.Item>
-          <Box className="DiagnosisBook__conditionBlockBody">
-            {printConditionSymptoms(condition)}
-          </Box>
+          <Box className="DiagnosisBook__conditionBlockBody">{printConditionSymptoms(condition)}</Box>
         </Flex.Item>
       </Flex>
     </Flex.Item>
@@ -340,9 +280,7 @@ function printConditionSymptoms(condition: Condition) {
   const { symptoms, selected_symptoms } = data;
   let elements: React.JSX.Element[] = [];
   for (const symptom_name of condition.symptoms.sort()) {
-    const symptom_object = symptoms.find(
-      (symptom) => symptom.name === symptom_name,
-    );
+    const symptom_object = symptoms.find((symptom) => symptom.name === symptom_name);
     if (typeof symptom_object === 'undefined') {
       continue;
     }
@@ -375,10 +313,7 @@ function printConditionSymptoms(condition: Condition) {
     }
   }
 
-  return joinElementArray(
-    elements,
-    <span style={{ margin: '0px 4px' }}>|</span>,
-  );
+  return joinElementArray(elements, <span style={{ margin: '0px 4px' }}>|</span>);
 }
 
 /**
@@ -387,10 +322,7 @@ function printConditionSymptoms(condition: Condition) {
  * @param {React.ReactNode} [separator] - The optional separator <span> element.
  * @returns {React.JSX.Element[]} The joined <span> elements with the separator in between.
  */
-function joinElementArray(
-  elements: React.ReactNode[],
-  separator?: React.ReactNode,
-) {
+function joinElementArray(elements: React.ReactNode[], separator?: React.ReactNode) {
   return elements.map((element, index) => (
     <React.Fragment key={index}>
       {element}
@@ -402,9 +334,7 @@ function joinElementArray(
 function getSymptomByName(symptom_name: string) {
   const { data } = useBackend<DiagnosisBookData>();
   const { symptoms } = data;
-  const symptom_object = symptoms.find(
-    (symptom) => symptom.name === symptom_name,
-  );
+  const symptom_object = symptoms.find((symptom) => symptom.name === symptom_name);
   if (typeof symptom_object === 'undefined') {
     throw new Error('Undefined symptom object');
   }

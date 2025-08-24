@@ -10,39 +10,15 @@ export const ProbingConsole = (props) => {
       <Window.Content>
         <Section>
           <LabeledList>
-            <LabeledList.Item label="Machine Report">
-              {feedback}
-            </LabeledList.Item>
+            <LabeledList.Item label="Machine Report">{feedback}</LabeledList.Item>
           </LabeledList>
         </Section>
-        <Section
-          title="Scanner"
-          buttons={
-            <Button
-              icon={open ? 'sign-out-alt' : 'sign-in-alt'}
-              content={open ? 'Close' : 'Open'}
-              onClick={() => act('door')}
-            />
-          }
-        >
+        <Section title="Scanner" buttons={<Button icon={open ? 'sign-out-alt' : 'sign-in-alt'} content={open ? 'Close' : 'Open'} onClick={() => act('door')} />}>
           {(occupant && (
             <LabeledList>
               <LabeledList.Item label="Name">{occupant_name}</LabeledList.Item>
-              <LabeledList.Item
-                label="Status"
-                color={
-                  occupant_status === 3
-                    ? 'bad'
-                    : occupant_status === 2
-                      ? 'average'
-                      : 'good'
-                }
-              >
-                {occupant_status === 3
-                  ? 'Deceased'
-                  : occupant_status === 2
-                    ? 'Unconscious'
-                    : 'Conscious'}
+              <LabeledList.Item label="Status" color={occupant_status === 3 ? 'bad' : occupant_status === 2 ? 'average' : 'good'}>
+                {occupant_status === 3 ? 'Deceased' : occupant_status === 2 ? 'Unconscious' : 'Conscious'}
               </LabeledList.Item>
               <LabeledList.Item label="Experiments">
                 <Button

@@ -31,10 +31,7 @@ export const NumberInputModal = (props) => {
   };
 
   // Dynamically changes the window height based on the message.
-  const windowHeight =
-    140 +
-    (message.length > 30 ? Math.ceil(message.length / 3) : 0) +
-    (message.length && large_buttons ? 5 : 0);
+  const windowHeight = 140 + (message.length > 30 ? Math.ceil(message.length / 3) : 0) + (message.length && large_buttons ? 5 : 0);
 
   return (
     <Window title={title} width={270} height={windowHeight}>
@@ -55,12 +52,7 @@ export const NumberInputModal = (props) => {
               <Box color="label">{message}</Box>
             </Stack.Item>
             <Stack.Item>
-              <InputArea
-                input={input}
-                onClick={setValue}
-                onChange={setValue}
-                onBlur={setValue}
-              />
+              <InputArea input={input} onClick={setValue} onChange={setValue} onBlur={setValue} />
             </Stack.Item>
             <Stack.Item>
               <InputButtons input={input} />
@@ -81,12 +73,7 @@ const InputArea = (props) => {
   return (
     <Stack fill>
       <Stack.Item>
-        <Button
-          disabled={input === min_value}
-          icon="angle-double-left"
-          onClick={() => onClick(min_value)}
-          tooltip={min_value ? `Min (${min_value})` : 'Min'}
-        />
+        <Button disabled={input === min_value} icon="angle-double-left" onClick={() => onClick(min_value)} tooltip={min_value ? `Min (${min_value})` : 'Min'} />
       </Stack.Item>
       <Stack.Item grow>
         <RestrictedInput
@@ -103,20 +90,10 @@ const InputArea = (props) => {
         />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          disabled={input === max_value}
-          icon="angle-double-right"
-          onClick={() => onClick(max_value)}
-          tooltip={max_value ? `Max (${max_value})` : 'Max'}
-        />
+        <Button disabled={input === max_value} icon="angle-double-right" onClick={() => onClick(max_value)} tooltip={max_value ? `Max (${max_value})` : 'Max'} />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          disabled={input === init_value}
-          icon="redo"
-          onClick={() => onClick(init_value)}
-          tooltip={init_value ? `Reset (${init_value})` : 'Reset'}
-        />
+        <Button disabled={input === init_value} icon="redo" onClick={() => onClick(init_value)} tooltip={init_value ? `Reset (${init_value})` : 'Reset'} />
       </Stack.Item>
     </Stack>
   );

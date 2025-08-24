@@ -55,33 +55,27 @@ const STATUS2COMPONENT = [
 const locationInfo = [
   {
     title: 'Pluto',
-    blurb:
-      'Pluto, long since occupied with long-range sensors and scanners, stands ready to, and indeed continues to probe the far reaches of the galaxy.',
+    blurb: 'Pluto, long since occupied with long-range sensors and scanners, stands ready to, and indeed continues to probe the far reaches of the galaxy.',
   },
   {
     title: 'Asteroid Belt',
-    blurb:
-      'At the edge of the Sol system lies a treacherous asteroid belt. Many have been crushed by stray asteroids and misguided judgement.',
+    blurb: 'At the edge of the Sol system lies a treacherous asteroid belt. Many have been crushed by stray asteroids and misguided judgement.',
   },
   {
     title: 'Proxima Centauri',
-    blurb:
-      'The nearest star system to Sol, in ages past it stood as a reminder of the boundaries of sub-light travel, now a low-population sanctuary for adventurers and traders.',
+    blurb: 'The nearest star system to Sol, in ages past it stood as a reminder of the boundaries of sub-light travel, now a low-population sanctuary for adventurers and traders.',
   },
   {
     title: 'Dead Space',
-    blurb:
-      'This region of space is particularly devoid of matter. Such low-density pockets are known to exist, but the vastness of it is astounding.',
+    blurb: 'This region of space is particularly devoid of matter. Such low-density pockets are known to exist, but the vastness of it is astounding.',
   },
   {
     title: 'Rigel Prime',
-    blurb:
-      'Rigel Prime, the center of the Rigel system, burns hot, basking its planetary bodies in warmth and radiation.',
+    blurb: 'Rigel Prime, the center of the Rigel system, burns hot, basking its planetary bodies in warmth and radiation.',
   },
   {
     title: 'Tau Ceti Beta',
-    blurb:
-      'Tau Ceti Beta has recently become a waypoint for colonists headed towards Orion. There are many ships and makeshift stations in the vicinity.',
+    blurb: 'Tau Ceti Beta has recently become a waypoint for colonists headed towards Orion. There are many ships and makeshift stations in the vicinity.',
   },
   {
     title: 'Space Bugs',
@@ -95,41 +89,18 @@ const locationInfo = [
   },
   {
     title: 'Orion Prime',
-    blurb:
-      'You have made it to Orion! Congratulations! Your crew is one of the few to start a new foothold for mankind!',
+    blurb: 'You have made it to Orion! Congratulations! Your crew is one of the few to start a new foothold for mankind!',
   },
 ];
 
 const AdventureStatus = (props) => {
   const { data, act } = useBackend();
-  const {
-    lings_suspected,
-    eventname,
-    settlers,
-    settlermoods,
-    hull,
-    electronics,
-    engine,
-    food,
-    fuel,
-  } = data;
+  const { lings_suspected, eventname, settlers, settlermoods, hull, electronics, engine, food, fuel } = data;
   return (
     <Section
       title="Adventure Status"
       fill
-      buttons={
-        !!lings_suspected && (
-          <Button
-            fluid
-            color="black"
-            textAlign="center"
-            icon="skull"
-            content="RANDOM KILL"
-            disabled={eventname}
-            onClick={() => act('random_kill')}
-          />
-        )
-      }
+      buttons={!!lings_suspected && <Button fluid color="black" textAlign="center" icon="skull" content="RANDOM KILL" disabled={eventname} onClick={() => act('random_kill')} />}
     >
       <Stack mb={-1} fill>
         <Stack.Item grow mb={-0.5}>
@@ -154,9 +125,7 @@ const AdventureStatus = (props) => {
                 />
               </Stack.Item>
               <Stack.Item mr={0}>
-                <Box
-                  className={'moods32x32 mood' + (settlermoods[settler] + 1)}
-                />
+                <Box className={'moods32x32 mood' + (settlermoods[settler] + 1)} />
               </Stack.Item>
             </Stack>
           ))}
@@ -165,44 +134,19 @@ const AdventureStatus = (props) => {
         <Stack.Item>
           <Stack vertical fill>
             <Stack.Item>
-              <Button
-                fluid
-                icon="hamburger"
-                content={'Food Left: ' + food}
-                color="green"
-              />
+              <Button fluid icon="hamburger" content={'Food Left: ' + food} color="green" />
             </Stack.Item>
             <Stack.Item>
-              <Button
-                fluid
-                icon="gas-pump"
-                content={'Fuel Left: ' + fuel}
-                color="olive"
-              />
+              <Button fluid icon="gas-pump" content={'Fuel Left: ' + fuel} color="olive" />
             </Stack.Item>
             <Stack.Item>
-              <Button
-                fluid
-                icon="wrench"
-                content={'Hull Parts: ' + hull}
-                color="average"
-              />
+              <Button fluid icon="wrench" content={'Hull Parts: ' + hull} color="average" />
             </Stack.Item>
             <Stack.Item>
-              <Button
-                fluid
-                icon="server"
-                content={'Electronics: ' + electronics}
-                color="blue"
-              />
+              <Button fluid icon="server" content={'Electronics: ' + electronics} color="blue" />
             </Stack.Item>
             <Stack.Item mb={1}>
-              <Button
-                fluid
-                icon="rocket"
-                content={'Engine Parts: ' + engine}
-                color="violet"
-              />
+              <Button fluid icon="rocket" content={'Engine Parts: ' + engine} color="violet" />
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -223,22 +167,10 @@ const ORION_STATUS_START = (props) => {
           {'"Experience the journey of your ancestors!"'}
         </Stack.Item>
         <Stack.Item fontSize="15px">
-          <Button
-            lineHeight={2}
-            fluid
-            icon="play"
-            content="Begin Game"
-            onClick={() => act('start_game')}
-          />
+          <Button lineHeight={2} fluid icon="play" content="Begin Game" onClick={() => act('start_game')} />
         </Stack.Item>
         <Stack.Item fontSize="15px">
-          <Button
-            lineHeight={2}
-            fluid
-            icon="info"
-            content="Instructions"
-            onClick={() => act('instructions')}
-          />
+          <Button lineHeight={2} fluid icon="info" content="Instructions" onClick={() => act('instructions')} />
         </Stack.Item>
         <Stack.Item grow={3} />
       </Stack>
@@ -251,21 +183,10 @@ const ORION_STATUS_INSTRUCTIONS = (props) => {
   const fake_settlers = ['John', 'William', 'Alice', 'Tom'];
   return (
     <>
-      <Section
-        color="label"
-        title="Objective"
-        buttons={
-          <Button
-            content="Back to Main Menu"
-            onClick={() => act('back_to_menu')}
-          />
-        }
-      >
+      <Section color="label" title="Objective" buttons={<Button content="Back to Main Menu" onClick={() => act('back_to_menu')} />}>
         <Box fontSize="11px">
-          In the 2200&apos;s, the Orion trail was established as a dangerous yet
-          opportunistic trail through space for those willing to risk it. Many
-          pioneers seeking new lives on the galactic frontier would find exactly
-          what they were seeking... or lose their lives on the way.
+          In the 2200&apos;s, the Orion trail was established as a dangerous yet opportunistic trail through space for those willing to risk it. Many pioneers seeking new lives on
+          the galactic frontier would find exactly what they were seeking... or lose their lives on the way.
         </Box>
       </Section>
       <Section title="Status Example">
@@ -277,13 +198,7 @@ const ORION_STATUS_INSTRUCTIONS = (props) => {
                   {settler}
                 </Stack.Item>
                 <Stack.Item mt={0.9}>
-                  <Button
-                    fluid
-                    color="red"
-                    textAlign="center"
-                    icon="skull"
-                    content="KILL"
-                  />
+                  <Button fluid color="red" textAlign="center" icon="skull" content="KILL" />
                 </Stack.Item>
                 <Stack.Item mr={0}>
                   <Box className={'moods32x32 mood5'} />
@@ -293,74 +208,42 @@ const ORION_STATUS_INSTRUCTIONS = (props) => {
           </Stack.Item>
           <Divider vertical />
           <Stack.Item>
-            This is the status panel for your pioneers. Each one requires 1 food
-            every time you continue towards <span style={goodstyle}>Orion</span>
-            . You can find more crew on your journey, and lose them as fast as
-            you found &apos;em.
+            This is the status panel for your pioneers. Each one requires 1 food every time you continue towards <span style={goodstyle}>Orion</span>
+            . You can find more crew on your journey, and lose them as fast as you found &apos;em.
             <br />
             <br />
-            If you run out of food or crew, it&apos;s{' '}
-            <span style={badstyle}>GAME OVER</span> for you!
+            If you run out of food or crew, it&apos;s <span style={badstyle}>GAME OVER</span> for you!
           </Stack.Item>
         </Stack>
       </Section>
       <Section title="Resources">
         <Stack>
           <Stack.Item grow mt={-1}>
-            If you want to make it to <span style={goodstyle}>Orion</span>,
-            you&apos;ll need to manage your resources:
+            If you want to make it to <span style={goodstyle}>Orion</span>, you&apos;ll need to manage your resources:
             <br />
-            <span style={goodstyle}>Food</span>: Your crewmembers consume it.
-            More crew means this goes down faster!
+            <span style={goodstyle}>Food</span>: Your crewmembers consume it. More crew means this goes down faster!
             <br />
-            <span style={fuelstyle}>Fuel</span>: You use 5u of fuel with every
-            movement. Don&apos;t let it run out.
+            <span style={fuelstyle}>Fuel</span>: You use 5u of fuel with every movement. Don&apos;t let it run out.
             <br />
-            <span style={partstyle}>Parts</span>: Used to repair breakdowns.
-            Nobody likes wasting time on repairs!
+            <span style={partstyle}>Parts</span>: Used to repair breakdowns. Nobody likes wasting time on repairs!
           </Stack.Item>
           <Divider vertical />
           <Stack.Item>
             <Stack vertical fill>
               <Stack.Item>
-                <Button
-                  fluid
-                  icon="hamburger"
-                  content={'Food Left: 80'}
-                  color="green"
-                />
+                <Button fluid icon="hamburger" content={'Food Left: 80'} color="green" />
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  fluid
-                  icon="gas-pump"
-                  content={'Fuel Left: 60'}
-                  color="olive"
-                />
+                <Button fluid icon="gas-pump" content={'Fuel Left: 60'} color="olive" />
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  fluid
-                  icon="wrench"
-                  content={'Hull Parts: 1'}
-                  color="average"
-                />
+                <Button fluid icon="wrench" content={'Hull Parts: 1'} color="average" />
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  fluid
-                  icon="server"
-                  content={'Electronics: 1'}
-                  color="blue"
-                />
+                <Button fluid icon="server" content={'Electronics: 1'} color="blue" />
               </Stack.Item>
               <Stack.Item mb={-0.3}>
-                <Button
-                  fluid
-                  icon="rocket"
-                  content={'Engine Parts: 1'}
-                  color="violet"
-                />
+                <Button fluid icon="rocket" content={'Engine Parts: 1'} color="violet" />
               </Stack.Item>
             </Stack>
           </Stack.Item>
@@ -372,19 +255,7 @@ const ORION_STATUS_INSTRUCTIONS = (props) => {
 
 const ORION_STATUS_NORMAL = (props) => {
   const { data, act } = useBackend();
-  const {
-    settlers,
-    settlermoods,
-    hull,
-    electronics,
-    engine,
-    food,
-    fuel,
-    turns,
-    eventname,
-    eventtext,
-    buttons,
-  } = data;
+  const { settlers, settlermoods, hull, electronics, engine, food, fuel, turns, eventname, eventtext, buttons } = data;
   return (
     <Stack vertical fill>
       <Stack.Item grow>
@@ -395,33 +266,15 @@ const ORION_STATUS_NORMAL = (props) => {
                 {(!!eventname && eventname) || locationInfo[turns - 1].title}
               </Box>
               <br />
-              <Box fontSize="15px">
-                {(!!eventtext && eventtext) || locationInfo[turns - 1].blurb}
-              </Box>
+              <Box fontSize="15px">{(!!eventtext && eventtext) || locationInfo[turns - 1].blurb}</Box>
             </Stack.Item>
             <Stack.Item>
               {(!!buttons &&
                 buttons.map((button) => (
                   <Stack.Item key={button}>
-                    <Button
-                      mb={1}
-                      lineHeight={3}
-                      width={16}
-                      icon={variousButtonIcons[button]}
-                      content={button}
-                      onClick={() => act(button)}
-                    />
+                    <Button mb={1} lineHeight={3} width={16} icon={variousButtonIcons[button]} content={button} onClick={() => act(button)} />
                   </Stack.Item>
-                ))) || (
-                <Button
-                  mb={1}
-                  lineHeight={3}
-                  width={16}
-                  icon="arrow-right"
-                  content="Continue"
-                  onClick={() => act('continue')}
-                />
-              )}
+                ))) || <Button mb={1} lineHeight={3} width={16} icon="arrow-right" content="Continue" onClick={() => act('continue')} />}
             </Stack.Item>
           </Stack>
         </Section>
@@ -447,13 +300,7 @@ const ORION_STATUS_GAMEOVER = (props) => {
           {reason}
         </Stack.Item>
         <Stack.Item fontSize="15px">
-          <Button
-            lineHeight={2}
-            fluid
-            icon="arrow-left"
-            content="Main Menu"
-            onClick={() => act('back_to_menu')}
-          />
+          <Button lineHeight={2} fluid icon="arrow-left" content="Main Menu" onClick={() => act('back_to_menu')} />
         </Stack.Item>
         <Stack.Item grow={3} />
       </Stack>
@@ -474,18 +321,8 @@ const ORION_STATUS_MARKET = (props) => {
           fill
           buttons={
             <>
-              <Button
-                content="Raid"
-                icon="skull"
-                color="black"
-                disabled={spaceport_raided}
-                onClick={() => act('raid_spaceport')}
-              />
-              <Button
-                content="Leave"
-                icon="arrow-right"
-                onClick={() => act('leave_spaceport')}
-              />
+              <Button content="Raid" icon="skull" color="black" disabled={spaceport_raided} onClick={() => act('raid_spaceport')} />
+              <Button content="Leave" icon="arrow-right" onClick={() => act('leave_spaceport')} />
             </>
           }
         >
@@ -496,22 +333,14 @@ const ORION_STATUS_MARKET = (props) => {
               </Box>
               <br />
               <Box fontSize="14px">
-                {(spaceport_raided && (
-                  <Box color="red">
-                    You are lucky to have escaped with your life. Attempting to
-                    dock again would be certain death.
-                  </Box>
-                )) ||
+                {(spaceport_raided && <Box color="red">You are lucky to have escaped with your life. Attempting to dock again would be certain death.</Box>) ||
                   "Hello, Pioneer! We have supplies for you to help \
                   you reach Orion. They aren't free, though!"}
               </Box>
             </Stack.Item>
             {(spaceport_raided && (
               <>
-                <Stack.Item>
-                  The Port is under high security. Any possibility of purchasing
-                  goods has long since sailed.
-                </Stack.Item>
+                <Stack.Item>The Port is under high security. Any possibility of purchasing goods has long since sailed.</Stack.Item>
                 <Stack.Item grow />
               </>
             )) || (
@@ -595,22 +424,10 @@ const ORION_STATUS_MARKET = (props) => {
                         <Divider />
                         <Stack.Item mt={0}>Port Bar:</Stack.Item>
                         <Stack.Item mb={marketButtonSpacing}>
-                          <Button
-                            fluid
-                            icon="user-plus"
-                            content={'10 Food, 10 Fuel for Crew'}
-                            color="white"
-                            onClick={() => act('buycrew')}
-                          />
+                          <Button fluid icon="user-plus" content={'10 Food, 10 Fuel for Crew'} color="white" onClick={() => act('buycrew')} />
                         </Stack.Item>
                         <Stack.Item mb={marketButtonSpacing}>
-                          <Button
-                            fluid
-                            icon="user-minus"
-                            content={'Crew for 7 Food, 7 Fuel'}
-                            color="black"
-                            onClick={() => act('sellcrew')}
-                          />
+                          <Button fluid icon="user-minus" content={'Crew for 7 Food, 7 Fuel'} color="black" onClick={() => act('sellcrew')} />
                         </Stack.Item>
                         <Stack.Item mb={marketButtonSpacing}>
                           <Button
@@ -648,11 +465,7 @@ export const OrionGame = (props) => {
   const MarketRaid = STATUS2COMPONENT[2].component();
   return (
     <Window title={gamename} width={420} height={510}>
-      <Window.Content scrollable>
-        {(eventname === 'Space Port Raid' && <MarketRaid />) || (
-          <GameStatusComponent />
-        )}
-      </Window.Content>
+      <Window.Content scrollable>{(eventname === 'Space Port Raid' && <MarketRaid />) || <GameStatusComponent />}</Window.Content>
     </Window>
   );
 };

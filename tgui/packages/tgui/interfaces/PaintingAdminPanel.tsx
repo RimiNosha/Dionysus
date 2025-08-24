@@ -29,21 +29,14 @@ type PaintingData = {
 
 export const PaintingAdminPanel = (props) => {
   const { act, data } = useBackend<PaintingAdminPanelData>();
-  const [chosenPaintingRef, setChosenPaintingRef] = useLocalState<
-    string | null
-  >('chosenPainting', null);
+  const [chosenPaintingRef, setChosenPaintingRef] = useLocalState<string | null>('chosenPainting', null);
   const { paintings } = data;
   const chosenPainting = paintings.find((p) => p.ref === chosenPaintingRef);
   return (
     <Window title="Painting Admin Panel" width={800} height={600}>
       <Window.Content scrollable>
         {chosenPainting && (
-          <Section
-            title="Painting Information"
-            buttons={
-              <Button onClick={() => setChosenPaintingRef(null)}>Close</Button>
-            }
-          >
+          <Section title="Painting Information" buttons={<Button onClick={() => setChosenPaintingRef(null)}>Close</Button>}>
             <Image
               src={resolveAsset(`paintings_${chosenPainting.md5}`)}
               height="96px"
@@ -58,72 +51,27 @@ export const PaintingAdminPanel = (props) => {
                 <Box inline style={{ wordBreak: 'break-all' }}>
                   {decodeHtmlEntities(chosenPainting.title)}
                 </Box>
-                <Button
-                  onClick={() => act('rename', { ref: chosenPainting.ref })}
-                  icon="edit"
-                />
+                <Button onClick={() => act('rename', { ref: chosenPainting.ref })} icon="edit" />
               </LabeledList.Item>
-              <LabeledList.Item
-                label="creator ckey"
-                content={chosenPainting.creator_ckey}
-              />
+              <LabeledList.Item label="creator ckey" content={chosenPainting.creator_ckey} />
               <LabeledList.Item label="creator name">
                 <Box inline>{chosenPainting.creator_name}</Box>
-                <Button
-                  onClick={() =>
-                    act('rename_author', { ref: chosenPainting.ref })
-                  }
-                  icon="edit"
-                />
+                <Button onClick={() => act('rename_author', { ref: chosenPainting.ref })} icon="edit" />
               </LabeledList.Item>
-              <LabeledList.Item
-                label="creation date"
-                content={chosenPainting.creation_date}
-              />
-              <LabeledList.Item
-                label="creation round id"
-                content={chosenPainting.creation_round_id}
-              />
-              <LabeledList.Item
-                label="medium"
-                content={chosenPainting.medium}
-              />
+              <LabeledList.Item label="creation date" content={chosenPainting.creation_date} />
+              <LabeledList.Item label="creation round id" content={chosenPainting.creation_round_id} />
+              <LabeledList.Item label="medium" content={chosenPainting.medium} />
               <LabeledList.Item label="tags">
                 {chosenPainting.tags?.map((tag) => (
-                  <Button
-                    key={tag}
-                    color="red"
-                    icon="minus-circle"
-                    iconPosition="right"
-                    content={tag}
-                    onClick={() =>
-                      act('remove_tag', { tag, ref: chosenPainting.ref })
-                    }
-                  />
+                  <Button key={tag} color="red" icon="minus-circle" iconPosition="right" content={tag} onClick={() => act('remove_tag', { tag, ref: chosenPainting.ref })} />
                 ))}
-                <Button
-                  color="green"
-                  icon="plus-circle"
-                  onClick={() => act('add_tag', { ref: chosenPainting.ref })}
-                />
+                <Button color="green" icon="plus-circle" onClick={() => act('add_tag', { ref: chosenPainting.ref })} />
               </LabeledList.Item>
-              <LabeledList.Item
-                label="patron ckey"
-                content={chosenPainting.patron_ckey}
-              />
-              <LabeledList.Item
-                label="patron name"
-                content={chosenPainting.patron_name}
-              />
-              <LabeledList.Item
-                label="credit value"
-                content={chosenPainting.credit_value}
-              />
+              <LabeledList.Item label="patron ckey" content={chosenPainting.patron_ckey} />
+              <LabeledList.Item label="patron name" content={chosenPainting.patron_name} />
+              <LabeledList.Item label="credit value" content={chosenPainting.credit_value} />
               <LabeledList.Item label="width" content={chosenPainting.width} />
-              <LabeledList.Item
-                label="height"
-                content={chosenPainting.height}
-              />
+              <LabeledList.Item label="height" content={chosenPainting.height} />
             </LabeledList>
             <Section title="Actions">
               <Button.Confirm
@@ -134,11 +82,7 @@ export const PaintingAdminPanel = (props) => {
               >
                 Delete
               </Button.Confirm>
-              <Button
-                onClick={() => act('dumpit', { ref: chosenPainting.ref })}
-              >
-                Reset Patronage
-              </Button>
+              <Button onClick={() => act('dumpit', { ref: chosenPainting.ref })}>Reset Patronage</Button>
             </Section>
           </Section>
         )}
@@ -152,9 +96,7 @@ export const PaintingAdminPanel = (props) => {
             </Table.Row>
             {paintings.map((painting) => (
               <Table.Row key={painting.ref} className="candystripe">
-                <Table.Cell style={{ wordBreak: 'break-all' }}>
-                  {decodeHtmlEntities(painting.title)}
-                </Table.Cell>
+                <Table.Cell style={{ wordBreak: 'break-all' }}>{decodeHtmlEntities(painting.title)}</Table.Cell>
                 <Table.Cell>{painting.creator_ckey}</Table.Cell>
                 <Table.Cell>
                   <Image
@@ -167,9 +109,7 @@ export const PaintingAdminPanel = (props) => {
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <Button onClick={() => setChosenPaintingRef(painting.ref)}>
-                    Edit
-                  </Button>
+                  <Button onClick={() => setChosenPaintingRef(painting.ref)}>Edit</Button>
                 </Table.Cell>
               </Table.Row>
             ))}

@@ -12,9 +12,7 @@ const sortByPlaytime = sortBy(([_, playtime]) => -playtime);
 const PlaytimeSection = (props) => {
   const { playtimes } = props;
 
-  const sortedPlaytimes = sortByPlaytime(Object.entries(playtimes)).filter(
-    (entry) => entry[1],
-  );
+  const sortedPlaytimes = sortByPlaytime(Object.entries(playtimes)).filter((entry) => entry[1]);
 
   if (!sortedPlaytimes.length) {
     return 'No recorded playtime hours for this section.';
@@ -59,26 +57,13 @@ const PlaytimeSection = (props) => {
 
 export const TrackedPlaytime = (props) => {
   const { act, data } = useBackend();
-  const {
-    failReason,
-    jobPlaytimes,
-    specialPlaytimes,
-    exemptStatus,
-    isAdmin,
-    livingTime,
-    ghostTime,
-    adminTime,
-  } = data;
+  const { failReason, jobPlaytimes, specialPlaytimes, exemptStatus, isAdmin, livingTime, ghostTime, adminTime } = data;
   return (
     <Window title="Tracked Playtime" width={550} height={650}>
       <Window.Content scrollable>
         {(failReason &&
-          ((failReason === JOB_REPORT_MENU_FAIL_REASON_TRACKING_DISABLED && (
-            <Box>This server has disabled tracking.</Box>
-          )) ||
-            (failReason === JOB_REPORT_MENU_FAIL_REASON_NO_RECORDS && (
-              <Box>You have no records.</Box>
-            )))) || (
+          ((failReason === JOB_REPORT_MENU_FAIL_REASON_TRACKING_DISABLED && <Box>This server has disabled tracking.</Box>) ||
+            (failReason === JOB_REPORT_MENU_FAIL_REASON_NO_RECORDS && <Box>You have no records.</Box>))) || (
           <Box>
             <Section title="Total">
               <PlaytimeSection
@@ -93,10 +78,7 @@ export const TrackedPlaytime = (props) => {
               title="Jobs"
               buttons={
                 !!isAdmin && (
-                  <Button.Checkbox
-                    checked={!!exemptStatus}
-                    onClick={() => act('toggle_exempt')}
-                  >
+                  <Button.Checkbox checked={!!exemptStatus} onClick={() => act('toggle_exempt')}>
                     Job Playtime Exempt
                   </Button.Checkbox>
                 )

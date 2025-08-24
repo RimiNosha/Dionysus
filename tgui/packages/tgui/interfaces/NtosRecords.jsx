@@ -14,17 +14,9 @@ export const NtosRecords = (props) => {
   return (
     <NtosWindow width={600} height={800}>
       <NtosWindow.Content scrollable>
-        <Section textAlign="center">
-          NANOTRASEN PERSONNEL RECORDS (CLASSIFIED)
-        </Section>
+        <Section textAlign="center">NANOTRASEN PERSONNEL RECORDS (CLASSIFIED)</Section>
         <Section>
-          <Input
-            placeholder={'Filter results...'}
-            value={searchTerm}
-            fluid
-            textAlign="center"
-            onInput={(e, value) => setSearchTerm(value)}
-          />
+          <Input placeholder={'Filter results...'} value={searchTerm} fluid textAlign="center" onInput={(e, value) => setSearchTerm(value)} />
         </Section>
         {mode === 'security' &&
           records.map((record) => (
@@ -33,19 +25,7 @@ export const NtosRecords = (props) => {
               hidden={
                 !(
                   searchTerm === '' ||
-                  isMatchingSearchTerms(
-                    record.name +
-                      ' ' +
-                      record.rank +
-                      ' ' +
-                      record.species +
-                      ' ' +
-                      record.gender +
-                      ' ' +
-                      record.age +
-                      ' ' +
-                      record.fingerprint,
-                  )
+                  isMatchingSearchTerms(record.name + ' ' + record.rank + ' ' + record.species + ' ' + record.gender + ' ' + record.age + ' ' + record.fingerprint)
                 )
               }
             >
@@ -70,23 +50,7 @@ export const NtosRecords = (props) => {
           ))}
         {mode === 'medical' &&
           records.map((record) => (
-            <Section
-              key={record.id}
-              hidden={
-                !(
-                  searchTerm === '' ||
-                  isMatchingSearchTerms(
-                    record.name +
-                      ' ' +
-                      record.bloodtype +
-                      ' ' +
-                      record.m_stat +
-                      ' ' +
-                      record.p_stat,
-                  )
-                )
-              }
-            >
+            <Section key={record.id} hidden={!(searchTerm === '' || isMatchingSearchTerms(record.name + ' ' + record.bloodtype + ' ' + record.m_stat + ' ' + record.p_stat))}>
               <Box bold>
                 <Icon name="user" mr={1} />
                 {record.name}

@@ -123,49 +123,17 @@ module.exports = function () {
     17: [6, 11, 17, 22, 28, 34, 39, 45, 51, 57, 63, 67, 75, 81, 87],
     18: [7, 12, 18, 24, 30, 36, 42, 48, 55, 61, 67, 74, 80, 86, 93, 99],
     19: [7, 13, 19, 25, 32, 38, 45, 52, 58, 65, 72, 78, 85, 92, 99, 106, 113],
-    20: [
-      8, 14, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90, 98, 105, 112, 119, 127,
-    ],
-    21: [
-      8, 15, 22, 29, 36, 43, 50, 58, 65, 73, 80, 88, 96, 103, 111, 119, 126,
-      134, 142,
-    ],
-    22: [
-      9, 16, 23, 30, 38, 45, 53, 61, 69, 77, 85, 93, 101, 109, 117, 125, 133,
-      141, 150, 158,
-    ],
-    23: [
-      9, 17, 24, 32, 40, 48, 56, 64, 73, 81, 89, 98, 106, 115, 123, 132, 140,
-      149, 157, 166, 175,
-    ],
-    24: [
-      10, 17, 25, 33, 42, 50, 59, 67, 76, 85, 94, 102, 111, 120, 129, 138, 147,
-      156, 165, 174, 183, 192,
-    ],
-    25: [
-      10, 18, 27, 35, 44, 53, 62, 71, 80, 89, 98, 107, 117, 126, 135, 145, 154,
-      163, 173, 182, 192, 201, 211,
-    ],
-    26: [
-      11, 19, 28, 37, 46, 55, 64, 74, 83, 93, 102, 112, 122, 132, 141, 151, 161,
-      171, 181, 191, 200, 210, 220, 230,
-    ],
-    27: [
-      11, 20, 29, 38, 48, 57, 67, 77, 87, 97, 107, 118, 125, 138, 147, 158, 168,
-      178, 188, 199, 209, 219, 230, 240, 250,
-    ],
-    28: [
-      12, 21, 30, 40, 50, 60, 70, 80, 90, 101, 111, 122, 132, 143, 154, 164,
-      175, 186, 196, 207, 218, 228, 239, 250, 261, 272,
-    ],
-    29: [
-      13, 22, 32, 42, 52, 62, 73, 83, 94, 105, 116, 127, 138, 149, 160, 171,
-      182, 193, 204, 215, 226, 238, 249, 260, 271, 282, 294,
-    ],
-    30: [
-      13, 23, 33, 43, 54, 65, 76, 87, 98, 109, 120, 131, 143, 154, 166, 177,
-      189, 200, 212, 223, 235, 247, 258, 270, 282, 293, 305, 317,
-    ],
+    20: [8, 14, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90, 98, 105, 112, 119, 127],
+    21: [8, 15, 22, 29, 36, 43, 50, 58, 65, 73, 80, 88, 96, 103, 111, 119, 126, 134, 142],
+    22: [9, 16, 23, 30, 38, 45, 53, 61, 69, 77, 85, 93, 101, 109, 117, 125, 133, 141, 150, 158],
+    23: [9, 17, 24, 32, 40, 48, 56, 64, 73, 81, 89, 98, 106, 115, 123, 132, 140, 149, 157, 166, 175],
+    24: [10, 17, 25, 33, 42, 50, 59, 67, 76, 85, 94, 102, 111, 120, 129, 138, 147, 156, 165, 174, 183, 192],
+    25: [10, 18, 27, 35, 44, 53, 62, 71, 80, 89, 98, 107, 117, 126, 135, 145, 154, 163, 173, 182, 192, 201, 211],
+    26: [11, 19, 28, 37, 46, 55, 64, 74, 83, 93, 102, 112, 122, 132, 141, 151, 161, 171, 181, 191, 200, 210, 220, 230],
+    27: [11, 20, 29, 38, 48, 57, 67, 77, 87, 97, 107, 118, 125, 138, 147, 158, 168, 178, 188, 199, 209, 219, 230, 240, 250],
+    28: [12, 21, 30, 40, 50, 60, 70, 80, 90, 101, 111, 122, 132, 143, 154, 164, 175, 186, 196, 207, 218, 228, 239, 250, 261, 272],
+    29: [13, 22, 32, 42, 52, 62, 73, 83, 94, 105, 116, 127, 138, 149, 160, 171, 182, 193, 204, 215, 226, 238, 249, 260, 271, 282, 294],
+    30: [13, 23, 33, 43, 54, 65, 76, 87, 98, 109, 120, 131, 143, 154, 166, 177, 189, 200, 212, 223, 235, 247, 258, 270, 282, 293, 305, 317],
   };
 
   /*--------------------------------------------------------------------------*/
@@ -189,9 +157,7 @@ module.exports = function () {
     // after built-in constructors like `Object`, for the creation of literals.
     // ES5 clears this up by stating that literals must use built-in constructors.
     // See http://es5.github.io/#x11.1.5.
-    context = context
-      ? _.defaults(root.Object(), context, _.pick(root, contextProps))
-      : root;
+    context = context ? _.defaults(root.Object(), context, _.pick(root, contextProps)) : root;
 
     /** Native constructor references. */
     var Array = context.Array,
@@ -253,10 +219,7 @@ module.exports = function () {
        * @memberOf Benchmark.support
        * @type boolean
        */
-      support.browser =
-        doc &&
-        isHostType(context, 'navigator') &&
-        !isHostType(context, 'phantom');
+      support.browser = doc && isHostType(context, 'navigator') && !isHostType(context, 'phantom');
 
       /**
        * Detect if the Timers API exists.
@@ -264,9 +227,7 @@ module.exports = function () {
        * @memberOf Benchmark.support
        * @type boolean
        */
-      support.timeout =
-        isHostType(context, 'setTimeout') &&
-        isHostType(context, 'clearTimeout');
+      support.timeout = isHostType(context, 'setTimeout') && isHostType(context, 'clearTimeout');
 
       /**
        * Detect if function decompilation is support.
@@ -476,13 +437,7 @@ module.exports = function () {
       if (type instanceof Event) {
         return type;
       }
-      return event instanceof Event
-        ? _.assign(
-            event,
-            { timeStamp: _.now() },
-            typeof type == 'string' ? { type: type } : type,
-          )
-        : new Event(type);
+      return event instanceof Event ? _.assign(event, { timeStamp: _.now() }, typeof type == 'string' ? { type: type } : type) : new Event(type);
     }
 
     /**
@@ -557,9 +512,7 @@ module.exports = function () {
      */
     var cloneDeep = _.partial(_.cloneDeepWith, _, function (value) {
       // Only clone primitives, arrays, and plain objects.
-      return _.isObject(value) && !_.isArray(value) && !_.isPlainObject(value)
-        ? value
-        : undefined;
+      return _.isObject(value) && !_.isArray(value) && !_.isPlainObject(value) ? value : undefined;
     });
 
     /**
@@ -577,26 +530,14 @@ module.exports = function () {
           anchor = freeDefine ? freeDefine.amd : Benchmark,
           prop = uid + 'createFunction';
 
-        runScript(
-          (freeDefine ? 'define.amd.' : 'Benchmark.') +
-            prop +
-            '=function(' +
-            args +
-            '){' +
-            body +
-            '}',
-        );
+        runScript((freeDefine ? 'define.amd.' : 'Benchmark.') + prop + '=function(' + args + '){' + body + '}');
         result = anchor[prop];
         delete anchor[prop];
         return result;
       };
       // Fix JaegerMonkey bug.
       // For more information see http://bugzil.la/639720.
-      createFunction =
-        support.browser &&
-        (createFunction('', 'return"' + uid + '"') || _.noop)() == uid
-          ? createFunction
-          : Function;
+      createFunction = support.browser && (createFunction('', 'return"' + uid + '"') || _.noop)() == uid ? createFunction : Function;
       return createFunction.apply(null, arguments);
     }
 
@@ -630,11 +571,7 @@ module.exports = function () {
      * @returns {string} The argument name.
      */
     function getFirstArgument(fn) {
-      return (
-        (!_.has(fn, 'toString') &&
-          (/^[\s(]*function[^(]*\(([^\s,)]+)/.exec(fn) || 0)[1]) ||
-        ''
-      );
+      return (!_.has(fn, 'toString') && (/^[\s(]*function[^(]*\(([^\s,)]+)/.exec(fn) || 0)[1]) || '';
     }
 
     /**
@@ -671,11 +608,7 @@ module.exports = function () {
       result = (result || '').replace(/^\s+|\s+$/g, '');
 
       // Detect strings containing only the "use strict" directive.
-      return /^(?:\/\*+[\w\W]*?\*\/|\/\/.*?[\n\r\u2028\u2029]|\s)*(["'])use strict\1;?$/.test(
-        result,
-      )
-        ? ''
-        : result;
+      return /^(?:\/\*+[\w\W]*?\*\/|\/\/.*?[\n\r\u2028\u2029]|\s)*(["'])use strict\1;?$/.test(result) ? '' : result;
     }
 
     /**
@@ -705,9 +638,7 @@ module.exports = function () {
         return false;
       }
       var type = typeof object[property];
-      return (
-        !rePrimitive.test(type) && (type != 'object' || !!object[property])
-      );
+      return !rePrimitive.test(type) && (type != 'object' || !!object[property]);
     }
 
     /**
@@ -718,10 +649,7 @@ module.exports = function () {
      * @returns {boolean} Returns `true` if the value can be coerced, else `false`.
      */
     function isStringable(value) {
-      return (
-        _.isString(value) ||
-        (_.has(value, 'toString') && _.isFunction(value.toString))
-      );
+      return _.isString(value) || (_.has(value, 'toString') && _.isFunction(value.toString));
     }
 
     /**
@@ -736,11 +664,7 @@ module.exports = function () {
         sibling = doc.getElementsByTagName('script')[0],
         parent = sibling.parentNode,
         prop = uid + 'runScript',
-        prefix =
-          '(' +
-          (freeDefine ? 'define.amd.' : 'Benchmark.') +
-          prop +
-          '||function(){})();';
+        prefix = '(' + (freeDefine ? 'define.amd.' : 'Benchmark.') + prop + '||function(){})();';
 
       // Firefox 2.0.0.2 cannot use script injection as intended because it executes
       // asynchronously, but that's OK because script injection is only used to avoid
@@ -769,11 +693,7 @@ module.exports = function () {
      * @param {Object} [options={}] Options object.
      */
     function setOptions(object, options) {
-      options = object.options = _.assign(
-        {},
-        cloneDeep(object.constructor.options),
-        cloneDeep(options),
-      );
+      options = object.options = _.assign({}, cloneDeep(object.constructor.options), cloneDeep(options));
 
       _.forOwn(options, function (value, key) {
         if (value != null) {
@@ -854,10 +774,7 @@ module.exports = function () {
         var result = filter(array, 'successful').sort(function (a, b) {
           a = a.stats;
           b = b.stats;
-          return (
-            (a.mean + a.moe > b.mean + b.moe ? 1 : -1) *
-            (callback === 'fastest' ? 1 : -1)
-          );
+          return (a.mean + a.moe > b.mean + b.moe ? 1 : -1) * (callback === 'fastest' ? 1 : -1);
         });
 
         return _.filter(result, function (bench) {
@@ -877,10 +794,7 @@ module.exports = function () {
      */
     function formatNumber(number) {
       number = String(number).split('.');
-      return (
-        number[0].replace(/(?=(?:\d{3})+$)(?!\b)/g, ',') +
-        (number[1] ? '.' + number[1] : '')
-      );
+      return number[0].replace(/(?=(?:\d{3})+$)(?!\b)/g, ',') + (number[1] ? '.' + number[1] : '');
     }
 
     /**
@@ -945,9 +859,7 @@ module.exports = function () {
           listeners.splice(0, 0, listeners.pop());
         }
         // Execute method.
-        result[index] = _.isFunction(bench && bench[name])
-          ? bench[name].apply(bench, args)
-          : undefined;
+        result[index] = _.isFunction(bench && bench[name]) ? bench[name].apply(bench, args) : undefined;
         // If synchronous return `true` until finished.
         return !async && getNext();
       }
@@ -1003,13 +915,7 @@ module.exports = function () {
       function isAsync(object) {
         // Avoid using `instanceof` here because of IE memory leak issues with host objects.
         var async = args[0] && args[0].async;
-        return (
-          name == 'run' &&
-          object instanceof Benchmark &&
-          (((async == null ? object.options.async : async) &&
-            support.timeout) ||
-            object.defer)
-        );
+        return name == 'run' && object instanceof Benchmark && (((async == null ? object.options.async : async) && support.timeout) || object.defer);
       }
 
       /**
@@ -1023,9 +929,7 @@ module.exports = function () {
           shift.call(benches);
         }
         // If we reached the last index then return `false`.
-        return (queued ? benches.length : index < result.length)
-          ? index
-          : (index = false);
+        return (queued ? benches.length : index < result.length) ? index : (index = false);
       }
       // Juggle arguments.
       if (_.isString(name)) {
@@ -1035,9 +939,7 @@ module.exports = function () {
         // 2 arguments (array, options).
         options = _.assign(options, name);
         name = options.name;
-        args = _.isArray((args = 'args' in options ? options.args : []))
-          ? args
-          : [args];
+        args = _.isArray((args = 'args' in options ? options.args : [])) ? args : [args];
         queued = options.queued;
       }
       // Start iterating over the array.
@@ -1186,10 +1088,7 @@ module.exports = function () {
       // Copy own properties.
       _.forOwn(suite, function (value, key) {
         if (!_.has(result, key)) {
-          result[key] =
-            value && _.isFunction(value.clone)
-              ? value.clone()
-              : cloneDeep(value);
+          result[key] = value && _.isFunction(value.clone) ? value.clone() : cloneDeep(value);
         }
       });
       return result;
@@ -1230,10 +1129,7 @@ module.exports = function () {
         delete calledBy.resetSuite;
       }
       // Reset if the state has changed.
-      else if (
-        (suite.aborted || suite.running) &&
-        (suite.emit((event = Event('reset'))), !event.cancelled)
-      ) {
+      else if ((suite.aborted || suite.running) && (suite.emit((event = Event('reset'))), !event.cancelled)) {
         suite.aborted = suite.running = false;
         if (!aborting) {
           invoke(suite, 'reset');
@@ -1308,10 +1204,7 @@ module.exports = function () {
       event.target || (event.target = object);
       delete event.result;
 
-      if (
-        events &&
-        (listeners = _.has(events, event.type) && events[event.type])
-      ) {
+      if (events && (listeners = _.has(events, event.type) && events[event.type])) {
         _.each(listeners.slice(), function (listener) {
           if ((event.result = listener.apply(object, args)) === false) {
             event.cancelled = true;
@@ -1410,9 +1303,7 @@ module.exports = function () {
         events = object.events || (object.events = {});
 
       _.each(type.split(' '), function (type) {
-        (_.has(events, type) ? events[type] : (events[type] = [])).push(
-          listener,
-        );
+        (_.has(events, type) ? events[type] : (events[type] = [])).push(listener);
       });
       return object;
     }
@@ -1469,11 +1360,7 @@ module.exports = function () {
         result = new bench.constructor(_.assign({}, bench, options));
 
       // Correct the `options` object.
-      result.options = _.assign(
-        {},
-        cloneDeep(bench.options),
-        cloneDeep(options),
-      );
+      result.options = _.assign({}, cloneDeep(bench.options), cloneDeep(options));
 
       // Copy own custom properties.
       _.forOwn(bench, function (value, key) {
@@ -1532,10 +1419,7 @@ module.exports = function () {
       }
 
       function getZ(u) {
-        return (
-          (u - (size1 * size2) / 2) /
-          sqrt((size1 * size2 * (size1 + size2 + 1)) / 12)
-        );
+        return (u - (size1 * size2) / 2) / sqrt((size1 * size2 * (size1 + size2 + 1)) / 12);
       }
       // Reject the null hypothesis the two samples come from the
       // same population (i.e. have the same median) if...
@@ -1574,11 +1458,7 @@ module.exports = function () {
       // For more information see http://www.jslab.dk/articles/non.recursive.preorder.traversal.part4.
       var data = {
         destination: bench,
-        source: _.assign(
-          {},
-          cloneDeep(bench.constructor.prototype),
-          cloneDeep(bench.options),
-        ),
+        source: _.assign({}, cloneDeep(bench.constructor.prototype), cloneDeep(bench.options)),
       };
 
       do {
@@ -1619,20 +1499,14 @@ module.exports = function () {
             queue.push({ destination: currValue, source: value });
           }
           // Register a changed primitive.
-          else if (
-            value !== currValue &&
-            !(value == null || _.isFunction(value))
-          ) {
+          else if (value !== currValue && !(value == null || _.isFunction(value))) {
             changes.push({ destination: destination, key: key, value: value });
           }
         });
       } while ((data = queue[index++]));
 
       // If changed emit the `reset` event and if it isn't cancelled reset the benchmark.
-      if (
-        changes.length &&
-        (bench.emit((event = Event('reset'))), !event.cancelled)
-      ) {
+      if (changes.length && (bench.emit((event = Event('reset'))), !event.cancelled)) {
         _.each(changes, function (data) {
           data.destination[data.key] = data.value;
         });
@@ -1665,23 +1539,11 @@ module.exports = function () {
           errorStr = join(error);
         } else {
           // Error#name and Error#message properties are non-enumerable.
-          errorStr = join(
-            _.assign({ name: error.name, message: error.message }, error),
-          );
+          errorStr = join(_.assign({ name: error.name, message: error.message }, error));
         }
         result += ': ' + errorStr;
       } else {
-        result +=
-          ' x ' +
-          formatNumber(hz.toFixed(hz < 100 ? 2 : 0)) +
-          ' ops/sec ' +
-          pm +
-          stats.rme.toFixed(2) +
-          '% (' +
-          size +
-          ' run' +
-          (size == 1 ? '' : 's') +
-          ' sampled)';
+        result += ' x ' + formatNumber(hz.toFixed(hz < 100 ? 2 : 0)) + ' ops/sec ' + pm + stats.rme.toFixed(2) + '% (' + size + ' run' + (size == 1 ? '' : 's') + ' sampled)';
       }
       return result;
     }
@@ -1711,19 +1573,13 @@ module.exports = function () {
         var bench = clone._original,
           stringable = isStringable(bench.fn),
           count = (bench.count = clone.count),
-          decompilable =
-            stringable ||
-            (support.decompilation &&
-              (clone.setup !== _.noop || clone.teardown !== _.noop)),
+          decompilable = stringable || (support.decompilation && (clone.setup !== _.noop || clone.teardown !== _.noop)),
           id = bench.id,
-          name =
-            bench.name || (typeof id == 'number' ? '<Test #' + id + '>' : id),
+          name = bench.name || (typeof id == 'number' ? '<Test #' + id + '>' : id),
           result = 0;
 
         // Init `minTime` if needed.
-        clone.minTime =
-          bench.minTime ||
-          (bench.minTime = bench.options.minTime = options.minTime);
+        clone.minTime = bench.minTime || (bench.minTime = bench.options.minTime = options.minTime);
 
         // Compile in setup/teardown functions and the test loop.
         // Create a new compiled test, instead of using the cached `bench.compiled`,
@@ -1742,33 +1598,21 @@ module.exports = function () {
             't#.start(d#);' +
             // and then execute `deferred.fn` and return a dummy object.
             '}d#.fn();return{uid:"${uid}"}'
-          : 'var r#,s#,m#=this,f#=m#.fn,i#=m#.count,n#=t#.ns;${setup}\n${begin};' +
-            'while(i#--){${fn}\n}${end};${teardown}\nreturn{elapsed:r#,uid:"${uid}"}';
+          : 'var r#,s#,m#=this,f#=m#.fn,i#=m#.count,n#=t#.ns;${setup}\n${begin};' + 'while(i#--){${fn}\n}${end};${teardown}\nreturn{elapsed:r#,uid:"${uid}"}';
 
-        var compiled =
-            (bench.compiled =
-            clone.compiled =
-              createCompiled(bench, decompilable, deferred, funcBody)),
+        var compiled = (bench.compiled = clone.compiled = createCompiled(bench, decompilable, deferred, funcBody)),
           isEmpty = !(templateData.fn || stringable);
 
         try {
           if (isEmpty) {
             // Firefox may remove dead code from `Function#toString` results.
             // For more information see http://bugzil.la/536085.
-            throw new Error(
-              'The test "' +
-                name +
-                '" is empty. This may be the result of dead code removal.',
-            );
+            throw new Error('The test "' + name + '" is empty. This may be the result of dead code removal.');
           } else if (!deferred) {
             // Pretest to determine if compiled code exits early, usually by a
             // rogue `return` statement, by checking for a return object with the uid.
             bench.count = 1;
-            compiled =
-              decompilable &&
-              (compiled.call(bench, context, timer) || {}).uid ==
-                templateData.uid &&
-              compiled;
+            compiled = decompilable && (compiled.call(bench, context, timer) || {}).uid == templateData.uid && compiled;
             bench.count = count;
           }
         } catch (e) {
@@ -1779,9 +1623,7 @@ module.exports = function () {
         // Fallback when a test exits early or errors during pretest.
         if (!compiled && !deferred && !isEmpty) {
           funcBody =
-            (stringable || (decompilable && !clone.error)
-              ? 'function f#(){${fn}\n}var r#,s#,m#=this,i#=m#.count'
-              : 'var r#,s#,m#=this,f#=m#.fn,i#=m#.count') +
+            (stringable || (decompilable && !clone.error) ? 'function f#(){${fn}\n}var r#,s#,m#=this,i#=m#.count' : 'var r#,s#,m#=this,f#=m#.fn,i#=m#.count') +
             ',n#=t#.ns;${setup}\n${begin};m#.f#=f#;while(i#--){m#.f#()}${end};' +
             'delete m#.f#;${teardown}\nreturn{elapsed:r#}';
 
@@ -1802,10 +1644,7 @@ module.exports = function () {
         }
         // If no errors run the full test loop.
         if (!clone.error) {
-          compiled =
-            bench.compiled =
-            clone.compiled =
-              createCompiled(bench, decompilable, deferred, funcBody);
+          compiled = bench.compiled = clone.compiled = createCompiled(bench, decompilable, deferred, funcBody);
           result = compiled.call(deferred || bench, context, timer).elapsed;
         }
         return result;
@@ -1823,16 +1662,10 @@ module.exports = function () {
         templateData.uid = uid + uidCounter++;
 
         _.assign(templateData, {
-          setup: decompilable
-            ? getSource(bench.setup)
-            : interpolate('m#.setup()'),
-          fn: decompilable
-            ? getSource(fn)
-            : interpolate('m#.fn(' + fnArg + ')'),
+          setup: decompilable ? getSource(bench.setup) : interpolate('m#.setup()'),
+          fn: decompilable ? getSource(fn) : interpolate('m#.fn(' + fnArg + ')'),
           fnArg: fnArg,
-          teardown: decompilable
-            ? getSource(bench.teardown)
-            : interpolate('m#.teardown()'),
+          teardown: decompilable ? getSource(bench.teardown) : interpolate('m#.teardown()'),
         });
 
         // Use API of chosen timer.
@@ -1865,22 +1698,12 @@ module.exports = function () {
           });
         }
         // Define `timer` methods.
-        timer.start = createFunction(
-          interpolate('o#'),
-          interpolate('var n#=this.ns,${begin};o#.elapsed=0;o#.timeStamp=s#'),
-        );
+        timer.start = createFunction(interpolate('o#'), interpolate('var n#=this.ns,${begin};o#.elapsed=0;o#.timeStamp=s#'));
 
-        timer.stop = createFunction(
-          interpolate('o#'),
-          interpolate('var n#=this.ns,s#=o#.timeStamp,${end};o#.elapsed=r#'),
-        );
+        timer.stop = createFunction(interpolate('o#'), interpolate('var n#=this.ns,s#=o#.timeStamp,${end};o#.elapsed=r#'));
 
         // Create compiled test.
-        return createFunction(
-          interpolate('window,t#'),
-          'var global = window, clearTimeout = global.clearTimeout, setTimeout = global.setTimeout;\n' +
-            interpolate(body),
-        );
+        return createFunction(interpolate('window,t#'), 'var global = window, clearTimeout = global.clearTimeout, setTimeout = global.setTimeout;\n' + interpolate(body));
       }
 
       /**
@@ -1908,9 +1731,7 @@ module.exports = function () {
           } else if (unit == 'ns') {
             divisor = 1e9;
             begin = (begin = ns())[0] + begin[1] / divisor;
-            while (
-              !(measured = (measured = ns())[0] + measured[1] / divisor - begin)
-            ) {}
+            while (!(measured = (measured = ns())[0] + measured[1] / divisor - begin)) {}
             divisor = 1;
           } else if (ns.now) {
             begin = ns.now();
@@ -1936,9 +1757,7 @@ module.exports = function () {
        */
       function interpolate(string) {
         // Replaces all occurrences of `#` with a unique number and template tokens with content.
-        return _.template(string.replace(/\#/g, /\d+/.exec(templateData.uid)))(
-          templateData,
-        );
+        return _.template(string.replace(/\#/g, /\d+/.exec(templateData.uid)))(templateData);
       }
 
       /*----------------------------------------------------------------------*/
@@ -1953,10 +1772,7 @@ module.exports = function () {
       } catch (e) {}
 
       // Detect Node.js's nanosecond resolution timer available in Node.js >= 0.8.
-      if (
-        processObject &&
-        typeof (timer.ns = processObject.hrtime) == 'function'
-      ) {
+      if (processObject && typeof (timer.ns = processObject.hrtime) == 'function') {
         timers.push({ ns: timer.ns, res: getRes('ns'), unit: 'ns' });
       }
       // Pick timer with highest resolution.
@@ -2054,9 +1870,7 @@ module.exports = function () {
           done = bench.aborted,
           now = _.now(),
           size = sample.push(clone.times.period),
-          maxedOut =
-            size >= minSamples &&
-            (elapsed += now - clone.times.timeStamp) / 1e3 > bench.maxTime,
+          maxedOut = size >= minSamples && (elapsed += now - clone.times.timeStamp) / 1e3 > bench.maxTime,
           times = bench.times,
           varOf = function (sum, x) {
             return sum + pow(x - mean, 2);
@@ -2267,10 +2081,7 @@ module.exports = function () {
 
       if (!event.cancelled) {
         options = {
-          async:
-            ((options = options && options.async) == null
-              ? bench.async
-              : options) && support.timeout,
+          async: ((options = options && options.async) == null ? bench.async : options) && support.timeout,
         };
 
         // For clones created within `compute()`.
@@ -2440,8 +2251,7 @@ module.exports = function () {
        */
       platform: context.platform ||
         require('platform') || {
-          description:
-            (context.navigator && context.navigator.userAgent) || null,
+          description: (context.navigator && context.navigator.userAgent) || null,
           layout: null,
           product: null,
           name: null,
@@ -2474,12 +2284,9 @@ module.exports = function () {
     });
 
     // Add lodash methods to Benchmark.
-    _.each(
-      ['each', 'forEach', 'forOwn', 'has', 'indexOf', 'map', 'reduce'],
-      function (methodName) {
-        Benchmark[methodName] = _[methodName];
-      },
-    );
+    _.each(['each', 'forEach', 'forOwn', 'has', 'indexOf', 'map', 'reduce'], function (methodName) {
+      Benchmark[methodName] = _[methodName];
+    });
 
     /*------------------------------------------------------------------------*/
 
@@ -2918,17 +2725,14 @@ module.exports = function () {
     /*------------------------------------------------------------------------*/
 
     // Add lodash methods as Suite methods.
-    _.each(
-      ['each', 'forEach', 'indexOf', 'map', 'reduce'],
-      function (methodName) {
-        var func = _[methodName];
-        Suite.prototype[methodName] = function () {
-          var args = [this];
-          push.apply(args, arguments);
-          return func.apply(_, args);
-        };
-      },
-    );
+    _.each(['each', 'forEach', 'indexOf', 'map', 'reduce'], function (methodName) {
+      var func = _[methodName];
+      Suite.prototype[methodName] = function () {
+        var args = [this];
+        push.apply(args, arguments);
+        return func.apply(_, args);
+      };
+    });
 
     // Avoid array-like object bugs with `Array#shift` and `Array#splice`
     // in Firefox < 10 and IE < 9.

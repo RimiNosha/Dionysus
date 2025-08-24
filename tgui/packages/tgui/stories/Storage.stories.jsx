@@ -33,9 +33,7 @@ const Story = (props) => {
       }
     >
       <LabeledList>
-        <LabeledList.Item label="Keys in use">
-          {localStorage.length}
-        </LabeledList.Item>
+        <LabeledList.Item label="Keys in use">{localStorage.length}</LabeledList.Item>
       </LabeledList>
     </Section>
   );

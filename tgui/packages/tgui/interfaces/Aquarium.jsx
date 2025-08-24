@@ -4,15 +4,7 @@ import { Window } from '../layouts';
 
 export const Aquarium = (props) => {
   const { act, data } = useBackend();
-  const {
-    temperature,
-    fluid_type,
-    minTemperature,
-    maxTemperature,
-    fluidTypes,
-    contents,
-    allow_breeding,
-  } = data;
+  const { temperature, fluid_type, minTemperature, maxTemperature, fluidTypes, contents, allow_breeding } = data;
   return (
     <Window width={500} height={400}>
       <Window.Content>
@@ -39,32 +31,19 @@ export const Aquarium = (props) => {
               <Flex direction="column" mb={1}>
                 {fluidTypes.map((f) => (
                   <Flex.Item key={f}>
-                    <Button
-                      fluid
-                      content={f}
-                      selected={fluid_type === f}
-                      onClick={() => act('fluid', { fluid: f })}
-                    />
+                    <Button fluid content={f} selected={fluid_type === f} onClick={() => act('fluid', { fluid: f })} />
                   </Flex.Item>
                 ))}
               </Flex>
             </LabeledControls.Item>
             <LabeledControls.Item label="Reproduction Prevention System">
-              <Button
-                content={allow_breeding ? 'Offline' : 'Online'}
-                selected={!allow_breeding}
-                onClick={() => act('allow_breeding')}
-              />
+              <Button content={allow_breeding ? 'Offline' : 'Online'} selected={!allow_breeding} onClick={() => act('allow_breeding')} />
             </LabeledControls.Item>
           </LabeledControls>
         </Section>
         <Section title="Contents">
           {contents.map((movable) => (
-            <Button
-              key={movable.ref}
-              content={movable.name}
-              onClick={() => act('remove', { ref: movable.ref })}
-            />
+            <Button key={movable.ref} content={movable.name} onClick={() => act('remove', { ref: movable.ref })} />
           ))}
         </Section>
       </Window.Content>

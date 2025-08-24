@@ -12,17 +12,7 @@ import { Window } from './Window';
 export const NtosWindow = (props) => {
   const { title, width = 575, height = 700, theme = 'ntos', children } = props;
   const { act, data } = useBackend();
-  const {
-    PC_device_theme,
-    PC_batteryicon,
-    PC_showbatteryicon,
-    PC_batterypercent,
-    PC_ntneticon,
-    PC_apclinkicon,
-    PC_stationtime,
-    PC_programheaders = [],
-    PC_showexitprogram,
-  } = data;
+  const { PC_device_theme, PC_batteryicon, PC_showbatteryicon, PC_batterypercent, PC_ntneticon, PC_apclinkicon, PC_stationtime, PC_programheaders = [], PC_showexitprogram } = data;
   return (
     <Window title={title} width={width} height={height} theme={theme}>
       <div className="NtosWindow">
@@ -39,35 +29,19 @@ export const NtosWindow = (props) => {
           <div className="NtosHeader__right">
             {PC_programheaders.map((header) => (
               <Box key={header.icon} inline mr={1}>
-                <img
-                  className="NtosHeader__icon"
-                  src={resolveAsset(header.icon)}
-                />
+                <img className="NtosHeader__icon" src={resolveAsset(header.icon)} />
               </Box>
             ))}
-            <Box inline>
-              {PC_ntneticon && (
-                <img
-                  className="NtosHeader__icon"
-                  src={resolveAsset(PC_ntneticon)}
-                />
-              )}
-            </Box>
+            <Box inline>{PC_ntneticon && <img className="NtosHeader__icon" src={resolveAsset(PC_ntneticon)} />}</Box>
             {!!(PC_showbatteryicon && PC_batteryicon) && (
               <Box inline mr={1}>
-                <img
-                  className="NtosHeader__icon"
-                  src={resolveAsset(PC_batteryicon)}
-                />
+                <img className="NtosHeader__icon" src={resolveAsset(PC_batteryicon)} />
                 {PC_batterypercent && PC_batterypercent}
               </Box>
             )}
             {PC_apclinkicon && (
               <Box inline mr={1}>
-                <img
-                  className="NtosHeader__icon"
-                  src={resolveAsset(PC_apclinkicon)}
-                />
+                <img className="NtosHeader__icon" src={resolveAsset(PC_apclinkicon)} />
               </Box>
             )}
             {!!PC_showexitprogram && (

@@ -18,10 +18,7 @@ const getGridSpotKey = (spot: [number, number]): GridSpotKey => {
   return `${spot[0]}/${spot[1]}`;
 };
 
-const CornerText = (props: {
-  align: 'left' | 'right';
-  children: string;
-}): JSX.Element => {
+const CornerText = (props: { align: 'left' | 'right'; children: string }): JSX.Element => {
   const { align, children } = props;
 
   return (
@@ -316,11 +313,7 @@ export const StripMenu = (props) => {
                   } else if ('obscured' in item) {
                     content = (
                       <Icon
-                        name={
-                          item.obscured === ObscuringLevel.Completely
-                            ? 'ban'
-                            : 'eye-slash'
-                        }
+                        name={item.obscured === ObscuringLevel.Completely ? 'ban' : 'eye-slash'}
                         size={3}
                         ml={0}
                         mt={1.3}
@@ -359,22 +352,14 @@ export const StripMenu = (props) => {
                           fluid
                           tooltip={tooltip}
                           style={{
-                            background: item?.interacting
-                              ? 'hsl(39, 73%, 30%)'
-                              : undefined,
+                            background: item?.interacting ? 'hsl(39, 73%, 30%)' : undefined,
                             position: 'relative',
                             width: '100%',
                             height: '100%',
                             padding: 0,
                           }}
                         >
-                          {slot.image && (
-                            <Image
-                              className="centered-image"
-                              src={resolveAsset(slot.image)}
-                              opacity={0.7}
-                            />
-                          )}
+                          {slot.image && <Image className="centered-image" src={resolveAsset(slot.image)} opacity={0.7} />}
 
                           <Box style={{ position: 'relative' }}>{content}</Box>
 
@@ -386,8 +371,7 @@ export const StripMenu = (props) => {
                             onClick={() => {
                               act('alt', {
                                 key: keyAtSpot,
-                                action:
-                                  item && 'name' in item && item.alternate,
+                                action: item && 'name' in item && item.alternate,
                               });
                             }}
                             tooltip={alternateAction.text}

@@ -4,8 +4,7 @@ import { Window } from '../layouts';
 
 export const Vendatray = (props) => {
   const { act, data } = useBackend();
-  const { product_name, product_cost, tray_open, registered, owner_name } =
-    data;
+  const { product_name, product_cost, tray_open, registered, owner_name } = data;
   return (
     <Window width={300} height={270}>
       <Window.Content>
@@ -20,20 +19,8 @@ export const Vendatray = (props) => {
               </Box>
             </Section>
             <>
-              <Button
-                fluid
-                icon="window-restore"
-                content={tray_open ? 'Open' : 'Closed'}
-                selected={tray_open}
-                onClick={() => act('Open')}
-              />
-              <Button.Confirm
-                fluid
-                icon="money-bill-wave"
-                content="Purchase Item"
-                disabled={!product_name}
-                onClick={() => act('Buy')}
-              />
+              <Button fluid icon="window-restore" content={tray_open ? 'Open' : 'Closed'} selected={tray_open} onClick={() => act('Open')} />
+              <Button.Confirm fluid icon="money-bill-wave" content="Purchase Item" disabled={!product_name} onClick={() => act('Buy')} />
             </>
           </Flex.Item>
         </Flex>
@@ -42,13 +29,7 @@ export const Vendatray = (props) => {
         ) : (
           <>
             <Section>Tray is unregistered.</Section>
-            <Button
-              fluid
-              icon="cash-register"
-              content="Register Tray"
-              disabled={registered}
-              onClick={() => act('Register')}
-            />
+            <Button fluid icon="cash-register" content="Register Tray" disabled={registered} onClick={() => act('Register')} />
           </>
         )}
       </Window.Content>

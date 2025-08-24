@@ -12,15 +12,7 @@ export const ComputerFabricator = (props) => {
         <Section italic fontSize="20px">
           Your perfect device, only three steps away...
         </Section>
-        {data.state !== 0 && (
-          <Button
-            fluid
-            mb={1}
-            icon="circle"
-            content="Clear Order"
-            onClick={() => act('clean_order')}
-          />
-        )}
+        {data.state !== 0 && <Button fluid mb={1} icon="circle" content="Clear Order" onClick={() => act('clean_order')} />}
         {data.state === 0 && <CfStep1 />}
         {data.state === 1 && <CfStep2 />}
         {data.state === 2 && <CfStep3 />}
@@ -345,16 +337,7 @@ const CfStep2 = (props) => {
           </Table.Row>
         )}
       </Table>
-      <Button
-        fluid
-        mt={3}
-        content="Confirm Order"
-        color="good"
-        textAlign="center"
-        fontSize="18px"
-        lineHeight={2}
-        onClick={() => act('confirm_order')}
-      />
+      <Button fluid mt={3} content="Confirm Order" color="good" textAlign="center" fontSize="18px" lineHeight={2} onClick={() => act('confirm_order')} />
     </Section>
   );
 };
@@ -375,13 +358,7 @@ const CfStep3 = (props) => {
       <Box bold mt={1} textAlign="center" fontSize="18px">
         Current:
       </Box>
-      <Box
-        bold
-        mt={0.5}
-        textAlign="center"
-        fontSize="18px"
-        color={data.credits >= data.totalprice ? 'good' : 'bad'}
-      >
+      <Box bold mt={0.5} textAlign="center" fontSize="18px" color={data.credits >= data.totalprice ? 'good' : 'bad'}>
         {data.credits} cr
       </Box>
       <Button
@@ -406,8 +383,7 @@ const CfStep4 = (props) => {
         Thank you for your purchase!
       </Box>
       <Box italic mt={1} textAlign="center">
-        If you experience any difficulties with your new device, please contact
-        your local network administrator.
+        If you experience any difficulties with your new device, please contact your local network administrator.
       </Box>
     </Section>
   );

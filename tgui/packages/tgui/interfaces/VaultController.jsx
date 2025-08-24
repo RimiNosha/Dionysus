@@ -30,10 +30,7 @@ export const VaultController = (props) => {
                   bad: [-Infinity, 0.3],
                 }}
               >
-                {toFixed(data.stored / 1000) +
-                  ' / ' +
-                  toFixed(data.max / 1000) +
-                  ' kW'}
+                {toFixed(data.stored / 1000) + ' / ' + toFixed(data.max / 1000) + ' kW'}
               </ProgressBar>
             </LabeledList.Item>
           </LabeledList>

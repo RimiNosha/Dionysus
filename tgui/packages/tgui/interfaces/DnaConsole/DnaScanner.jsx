@@ -1,53 +1,18 @@
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  LabeledList,
-  ProgressBar,
-  Section,
-} from '../../components';
-import {
-  SUBJECT_CONCIOUS,
-  SUBJECT_DEAD,
-  SUBJECT_SOFT_CRIT,
-  SUBJECT_TRANSFORMING,
-  SUBJECT_UNCONSCIOUS,
-} from './constants';
+import { Box, Button, Icon, LabeledList, ProgressBar, Section } from '../../components';
+import { SUBJECT_CONCIOUS, SUBJECT_DEAD, SUBJECT_SOFT_CRIT, SUBJECT_TRANSFORMING, SUBJECT_UNCONSCIOUS } from './constants';
 
 const DnaScannerButtons = (props) => {
   const { data, act } = useBackend();
-  const {
-    hasDelayedAction,
-    isPulsing,
-    isScannerConnected,
-    isScrambleReady,
-    isViableSubject,
-    scannerLocked,
-    scannerOpen,
-    scrambleSeconds,
-  } = data;
+  const { hasDelayedAction, isPulsing, isScannerConnected, isScrambleReady, isViableSubject, scannerLocked, scannerOpen, scrambleSeconds } = data;
   if (!isScannerConnected) {
-    return (
-      <Button
-        content="Connect Scanner"
-        onClick={() => act('connect_scanner')}
-      />
-    );
+    return <Button content="Connect Scanner" onClick={() => act('connect_scanner')} />;
   }
   return (
     <>
-      {!!hasDelayedAction && (
-        <Button
-          content="Cancel Delayed Action"
-          onClick={() => act('cancel_delay')}
-        />
-      )}
+      {!!hasDelayedAction && <Button content="Cancel Delayed Action" onClick={() => act('cancel_delay')} />}
       {!!isViableSubject && (
-        <Button
-          disabled={!isScrambleReady || isPulsing}
-          onClick={() => act('scramble_dna')}
-        >
+        <Button disabled={!isScrambleReady || isPulsing} onClick={() => act('scramble_dna')}>
           Scramble DNA
           {!isScrambleReady && ` (${scrambleSeconds}s)`}
         </Button>
@@ -60,11 +25,7 @@ const DnaScannerButtons = (props) => {
         content={scannerLocked ? 'Locked' : 'Unlocked'}
         onClick={() => act('toggle_lock')}
       />
-      <Button
-        disabled={scannerLocked}
-        content={scannerOpen ? 'Close' : 'Open'}
-        onClick={() => act('toggle_door')}
-      />
+      <Button disabled={scannerLocked} content={scannerOpen ? 'Close' : 'Open'} onClick={() => act('toggle_door')} />
     </>
   );
 };
@@ -114,14 +75,7 @@ const SubjectStatus = (props) => {
 
 const DnaScannerContent = (props) => {
   const { data, act } = useBackend();
-  const {
-    subjectName,
-    isScannerConnected,
-    isViableSubject,
-    subjectHealth,
-    subjectDamage,
-    subjectStatus,
-  } = data;
+  const { subjectName, isScannerConnected, isViableSubject, subjectHealth, subjectDamage, subjectStatus } = data;
   if (!isScannerConnected) {
     return <Box color="bad">DNA Scanner is not connected.</Box>;
   }

@@ -1,14 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, Dropdown, LabeledList, ProgressBar, Section, Stack, Tabs } from '../components';
 import { NtosWindow } from '../layouts';
 
 const getMuleByRef = (mules, ref) => {
@@ -25,27 +16,15 @@ export const NtosRoboControl = (props) => {
         <Section title="Robot Control Console">
           <LabeledList>
             <LabeledList.Item label="ID Card">{id_owner}</LabeledList.Item>
-            <LabeledList.Item label="Bots In Range">
-              {data.botcount}
-            </LabeledList.Item>
+            <LabeledList.Item label="Bots In Range">{data.botcount}</LabeledList.Item>
           </LabeledList>
         </Section>
         <Stack.Item>
           <Tabs>
-            <Tabs.Tab
-              icon="robot"
-              lineHeight="23px"
-              selected={tab_main === 1}
-              onClick={() => setTab_main(1)}
-            >
+            <Tabs.Tab icon="robot" lineHeight="23px" selected={tab_main === 1} onClick={() => setTab_main(1)}>
               Bots
             </Tabs.Tab>
-            <Tabs.Tab
-              icon="hammer"
-              lineHeight="23px"
-              selected={tab_main === 2}
-              onClick={() => setTab_main(2)}
-            >
+            <Tabs.Tab icon="hammer" lineHeight="23px" selected={tab_main === 2} onClick={() => setTab_main(2)}>
               Drones
             </Tabs.Tab>
           </Tabs>
@@ -54,9 +33,7 @@ export const NtosRoboControl = (props) => {
           <Stack.Item>
             <Section>
               <LabeledList>
-                <LabeledList.Item label="Bots in range">
-                  {data.botcount}
-                </LabeledList.Item>
+                <LabeledList.Item label="Bots in range">{data.botcount}</LabeledList.Item>
               </LabeledList>
             </Section>
             {bots?.map((robot) => (
@@ -70,19 +47,11 @@ export const NtosRoboControl = (props) => {
               <Button
                 icon="address-card"
                 tooltip="Grant/Remove Drone access to interact with machines and wires that would otherwise be deemed dangerous."
-                content={
-                  droneaccess ? 'Grant Drone Access' : 'Revoke Drone Access'
-                }
+                content={droneaccess ? 'Grant Drone Access' : 'Revoke Drone Access'}
                 color={droneaccess ? 'good' : 'bad'}
                 onClick={() => act('changedroneaccess')}
               />
-              <Dropdown
-                tooltip="Drone pings"
-                width="100%"
-                displayText={'Drone pings'}
-                options={dronepingtypes}
-                onSelected={(value) => act('ping_drones', { ping_type: value })}
-              />
+              <Dropdown tooltip="Drone pings" width="100%" displayText={'Drone pings'} options={dronepingtypes} onSelected={(value) => act('ping_drones', { ping_type: value })} />
             </Section>
             {drones?.map((drone) => (
               <DroneInfo key={drone.drone_ref} drone={drone} />
@@ -101,8 +70,7 @@ export const RobotInfo = (props) => {
   // Get a mule object
   const mule = !!robot.mule_check && getMuleByRef(mules, robot.bot_ref);
   // Color based on type of a robot
-  const color =
-    robot.mule_check === 1 ? 'rgba(110, 75, 14, 1)' : 'rgba(74, 59, 140, 1)';
+  const color = robot.mule_check === 1 ? 'rgba(110, 75, 14, 1)' : 'rgba(74, 59, 140, 1)';
   return (
     <Section
       title={robot.name}
@@ -152,13 +120,9 @@ export const RobotInfo = (props) => {
             <LabeledList.Item label="Status">{robot.mode}</LabeledList.Item>
             {mule && (
               <>
-                <LabeledList.Item label="Loaded Cargo">
-                  {data.load || 'N/A'}
-                </LabeledList.Item>
+                <LabeledList.Item label="Loaded Cargo">{data.load || 'N/A'}</LabeledList.Item>
                 <LabeledList.Item label="Home">{mule.home}</LabeledList.Item>
-                <LabeledList.Item label="Destination">
-                  {mule.dest || 'N/A'}
-                </LabeledList.Item>
+                <LabeledList.Item label="Destination">{mule.dest || 'N/A'}</LabeledList.Item>
                 <LabeledList.Item label="Power">
                   <ProgressBar
                     value={mule.power}
@@ -308,9 +272,7 @@ export const DroneInfo = (props) => {
         <Stack.Item grow={1} basis={0}>
           <LabeledList>
             <LabeledList.Item label="Status">
-              <Box color={drone.status ? 'bad' : 'good'}>
-                {drone.status ? 'Not Responding' : 'Nominal'}
-              </Box>
+              <Box color={drone.status ? 'bad' : 'good'}>{drone.status ? 'Not Responding' : 'Nominal'}</Box>
             </LabeledList.Item>
           </LabeledList>
         </Stack.Item>

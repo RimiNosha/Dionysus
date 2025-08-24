@@ -1,11 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  LabeledList,
-  Section,
-} from '../components';
+import { AnimatedNumber, Box, Button, LabeledList, Section } from '../components';
 import { Window } from '../layouts';
 
 export const CargoHoldTerminal = (props) => {
@@ -27,12 +21,7 @@ export const CargoHoldTerminal = (props) => {
           title="Cargo Pad"
           buttons={
             <>
-              <Button
-                icon={'sync'}
-                content={'Recalculate Value'}
-                disabled={!pad}
-                onClick={() => act('recalc')}
-              />
+              <Button icon={'sync'} content={'Recalculate Value'} disabled={!pad} onClick={() => act('recalc')} />
               <Button
                 icon={sending ? 'times' : 'arrow-up'}
                 content={sending ? 'Stop Sending' : 'Send Goods'}
@@ -47,9 +36,7 @@ export const CargoHoldTerminal = (props) => {
             <LabeledList.Item label="Status" color={pad ? 'good' : 'bad'}>
               {pad ? 'Online' : 'Not Found'}
             </LabeledList.Item>
-            <LabeledList.Item label="Cargo Report">
-              {status_report}
-            </LabeledList.Item>
+            <LabeledList.Item label="Cargo Report">{status_report}</LabeledList.Item>
           </LabeledList>
         </Section>
       </Window.Content>

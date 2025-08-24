@@ -2,19 +2,7 @@ import { toFixed } from 'common/math';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Chart,
-  ColorBox,
-  Flex,
-  Icon,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { Box, Button, Chart, ColorBox, Flex, Icon, LabeledList, ProgressBar, Section, Stack, Table } from '../components';
 import { Window } from '../layouts';
 import { LoadingScreen } from './common/LoadingScreen';
 
@@ -104,22 +92,12 @@ export function PowerMonitorContent(props) {
             <Section>
               <LabeledList>
                 <LabeledList.Item label="Supply">
-                  <ProgressBar
-                    value={supply}
-                    minValue={0}
-                    maxValue={maxValue}
-                    color="teal"
-                  >
+                  <ProgressBar value={supply} minValue={0} maxValue={maxValue} color="teal">
                     {toFixed(supply / 1000) + ' kW'}
                   </ProgressBar>
                 </LabeledList.Item>
                 <LabeledList.Item label="Draw">
-                  <ProgressBar
-                    value={demand}
-                    minValue={0}
-                    maxValue={maxValue}
-                    color="pink"
-                  >
+                  <ProgressBar value={demand} minValue={0} maxValue={maxValue} color="pink">
                     {toFixed(demand / 1000) + ' kW'}
                   </ProgressBar>
                 </LabeledList.Item>
@@ -186,23 +164,9 @@ function StationAreas(props) {
           <Box inline mr={2} color="label">
             Sort by:
           </Box>
-          <Button.Checkbox
-            checked={sortByField === 'name'}
-            content="Name"
-            onClick={() => setSortByField(sortByField !== 'name' ? 'name' : '')}
-          />
-          <Button.Checkbox
-            checked={sortByField === 'charge'}
-            content="Charge"
-            onClick={() =>
-              setSortByField(sortByField !== 'charge' ? 'charge' : '')
-            }
-          />
-          <Button.Checkbox
-            checked={sortByField === 'draw'}
-            content="Draw"
-            onClick={() => setSortByField(sortByField !== 'draw' ? 'draw' : '')}
-          />
+          <Button.Checkbox checked={sortByField === 'name'} content="Name" onClick={() => setSortByField(sortByField !== 'name' ? 'name' : '')} />
+          <Button.Checkbox checked={sortByField === 'charge'} content="Charge" onClick={() => setSortByField(sortByField !== 'charge' ? 'charge' : '')} />
+          <Button.Checkbox checked={sortByField === 'draw'} content="Draw" onClick={() => setSortByField(sortByField !== 'draw' ? 'draw' : '')} />
         </Box>
       </Section>
 
@@ -229,9 +193,7 @@ function StationAreas(props) {
                 <td className="Table__cell text-right text-nowrap">
                   <AreaCharge charging={area.charging} charge={area.charge} />
                 </td>
-                <td className="Table__cell text-right text-nowrap">
-                  {area.load}
-                </td>
+                <td className="Table__cell text-right text-nowrap">{area.load}</td>
                 <td className="Table__cell text-center text-nowrap">
                   <AreaStatusColorBox status={area.eqp} />
                 </td>
@@ -267,17 +229,8 @@ export function AreaCharge(props: AreaChargeProps) {
       <Icon
         width="18px"
         textAlign="center"
-        name={
-          (charging === NOT_CHARGING &&
-            (charge > 50 ? 'battery-half' : 'battery-quarter')) ||
-          (charging === CHARGING && 'bolt') ||
-          (charging === CHARGED && 'battery-full')
-        }
-        color={
-          (charging === NOT_CHARGING && (charge > 50 ? 'yellow' : 'red')) ||
-          (charging === CHARGING && 'yellow') ||
-          (charging === CHARGED && 'green')
-        }
+        name={(charging === NOT_CHARGING && (charge > 50 ? 'battery-half' : 'battery-quarter')) || (charging === CHARGING && 'bolt') || (charging === CHARGED && 'battery-full')}
+        color={(charging === NOT_CHARGING && (charge > 50 ? 'yellow' : 'red')) || (charging === CHARGING && 'yellow') || (charging === CHARGED && 'green')}
       />
       <Box inline width="36px" textAlign="right">
         {toFixed(charge) + '%'}
@@ -297,11 +250,5 @@ function AreaStatusColorBox(props: AreaStatusColorBoxProps) {
   const mode = Boolean(status & 1);
   const tooltipText = (power ? 'On' : 'Off') + ` [${mode ? 'auto' : 'manual'}]`;
 
-  return (
-    <ColorBox
-      color={power ? 'good' : 'bad'}
-      content={mode ? undefined : 'M'}
-      title={tooltipText}
-    />
-  );
+  return <ColorBox color={power ? 'good' : 'bad'} content={mode ? undefined : 'M'} title={tooltipText} />;
 }

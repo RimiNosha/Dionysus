@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Button,
-  Input,
-  LabeledList,
-  NumberInput,
-  Section,
-  Stack,
-} from '../components';
+import { Button, Input, LabeledList, NumberInput, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 export const SentienceFunBalloon = (props) => {
@@ -46,14 +39,7 @@ export const SentienceFunBalloon = (props) => {
             </LabeledList>
           </Section>
           <Section>
-            <Button.Confirm
-              fluid
-              icon="magic"
-              color="good"
-              textAlign="center"
-              content="Pop Balloon"
-              onClick={() => act('pop')}
-            />
+            <Button.Confirm fluid icon="magic" color="good" textAlign="center" content="Pop Balloon" onClick={() => act('pop')} />
           </Section>
         </Stack>
       </Window.Content>

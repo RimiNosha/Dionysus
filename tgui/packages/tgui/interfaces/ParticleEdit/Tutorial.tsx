@@ -1,22 +1,12 @@
 import { resolveAsset } from '../../assets';
 import { useLocalState } from '../../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  Modal,
-  Section,
-  Stack,
-} from '../../components';
+import { Box, Button, LabeledList, Modal, Section, Stack } from '../../components';
 import { Image } from '../../components/Image';
 
 export const ShowDesc = (props) => {
   const [desc, setdesc] = useLocalState('desc', '');
   return (
-    <Modal
-      width={'60em'}
-      align={VarExplanation[desc].dataunit ? 'center' : 'left'}
-    >
+    <Modal width={'60em'} align={VarExplanation[desc].dataunit ? 'center' : 'left'}>
       <Section
         title={'Var Details'}
         buttons={
@@ -24,39 +14,18 @@ export const ShowDesc = (props) => {
             <Button content="Dismiss" onClick={() => setdesc('')} />
           ) : (
             <>
-              <Button
-                content="Motion basics"
-                selected={desc === 'motion'}
-                onClick={() => setdesc('motion')}
-              />
-              <Button
-                content="Rand types"
-                selected={desc === 'randtypes'}
-                onClick={() => setdesc('randtypes')}
-              />
-              <Button
-                content="Generator types"
-                selected={desc === 'gentypes'}
-                onClick={() => setdesc('gentypes')}
-              />
-              <Button
-                icon="x"
-                tooltip={'Dismiss'}
-                color={'red'}
-                onClick={() => setdesc('')}
-              />
+              <Button content="Motion basics" selected={desc === 'motion'} onClick={() => setdesc('motion')} />
+              <Button content="Rand types" selected={desc === 'randtypes'} onClick={() => setdesc('randtypes')} />
+              <Button content="Generator types" selected={desc === 'gentypes'} onClick={() => setdesc('gentypes')} />
+              <Button icon="x" tooltip={'Dismiss'} color={'red'} onClick={() => setdesc('')} />
             </>
           )
         }
       >
         {VarExplanation[desc].dataunit ? (
           <LabeledList>
-            <LabeledList.Item label={'Data unit'}>
-              {VarExplanation[desc].dataunit}
-            </LabeledList.Item>
-            <LabeledList.Item label={'Description'}>
-              {VarExplanation[desc].desc}
-            </LabeledList.Item>
+            <LabeledList.Item label={'Data unit'}>{VarExplanation[desc].dataunit}</LabeledList.Item>
+            <LabeledList.Item label={'Description'}>{VarExplanation[desc].desc}</LabeledList.Item>
           </LabeledList>
         ) : (
           VarExplanation[desc].desc
@@ -170,15 +139,11 @@ const VarExplanation = {
   motion: {
     desc: (
       <>
-        The first thing to understand before we dive into how generators is
-        motion. These basics assume you fell asleep during physics class so you
-        can skip this if you didnt.
+        The first thing to understand before we dive into how generators is motion. These basics assume you fell asleep during physics class so you can skip this if you didnt.
         <br />
         <br />
-        First things off there are 3 variable you care about: POSITION, VELOCITY
-        and ACCELERATION. Position is where you are in a 3D space, velocity is
-        how fast you are moving in x/y/z directions, and acceleration is how
-        much velocity is being changed by. Shortly summarized this is
+        First things off there are 3 variable you care about: POSITION, VELOCITY and ACCELERATION. Position is where you are in a 3D space, velocity is how fast you are moving in
+        x/y/z directions, and acceleration is how much velocity is being changed by. Shortly summarized this is
         <br />
         <br />
         <b>position = average velocity * time</b> <br />
@@ -188,22 +153,19 @@ const VarExplanation = {
         <br />
         <br />
         <b>
-          location = initial location + (initial velocity * time) + (0.5 *
-          acceleration * time<sup>2</sup>)
+          location = initial location + (initial velocity * time) + (0.5 * acceleration * time<sup>2</sup>)
         </b>
         <br />
         <br />
         So when talking about particles this amounts to: <br />
         <br />
         <b>
-          pixel_location = position + (velocity * ticks_elapsed) +(0.5 *
-          (average_drift_during_ticks + gravity - (velocity * friction
+          pixel_location = position + (velocity * ticks_elapsed) +(0.5 * (average_drift_during_ticks + gravity - (velocity * friction
           <sup>ticks_elapsed</sup>)) * ticks_elapsed<sup>2</sup>)
         </b>
         <br />
         <br />
-        Now while this is all nice and dandy how does it look like in practice?
-        If you look at only one direction then movement will look like this:
+        Now while this is all nice and dandy how does it look like in practice? If you look at only one direction then movement will look like this:
         <br />
         <Image src={resolveAsset('motion')} />
         <Box />
@@ -215,10 +177,8 @@ const VarExplanation = {
     desc: (
       <Stack vertical fill>
         <Stack.Item>
-          If you didnt sleep during statistics class you can skip this part.
-          Basically the type of randomness you choose determines the probability
-          curve (if you take a million samples how will they look on a chart) of
-          the values to pick. The probability graphs for the byond rands are:
+          If you didnt sleep during statistics class you can skip this part. Basically the type of randomness you choose determines the probability curve (if you take a million
+          samples how will they look on a chart) of the values to pick. The probability graphs for the byond rands are:
         </Stack.Item>
         <Stack.Item>
           <Stack>
@@ -303,9 +263,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>vector</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random vector on a line between A and B.
-            </Stack.Item>
+            <Stack.Item width={20}>A random vector on a line between A and B.</Stack.Item>
             <Stack.Item>
               <Image
                 src={resolveAsset('vector')}
@@ -321,9 +279,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>box</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random vector within a box whose corners are at A and B.
-            </Stack.Item>
+            <Stack.Item width={20}>A random vector within a box whose corners are at A and B.</Stack.Item>
             <Stack.Item>
               <Image
                 src={resolveAsset('box')}
@@ -340,9 +296,7 @@ const VarExplanation = {
             <Stack.Item width={10}>color</Stack.Item>
             <Stack.Item width={11}>color (string) or color matrix</Stack.Item>
             <Stack.Item width={20}>
-              Result type depends on whether A or B are matrices or not. The
-              result is interpolated between A and B; components are not
-              randomized separately.
+              Result type depends on whether A or B are matrices or not. The result is interpolated between A and B; components are not randomized separately.
             </Stack.Item>
             <Stack.Item>
               <Box width={15} />
@@ -353,10 +307,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>circle</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random XY-only vector in a ring between radius A and B, centered
-              at 0,0.
-            </Stack.Item>
+            <Stack.Item width={20}>A random XY-only vector in a ring between radius A and B, centered at 0,0.</Stack.Item>
             <Stack.Item>
               <Image
                 src={resolveAsset('circle')}
@@ -372,10 +323,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>sphere</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random vector in a spherical shell between radius A and B,
-              centered at 0,0,0.
-            </Stack.Item>
+            <Stack.Item width={20}>A random vector in a spherical shell between radius A and B, centered at 0,0,0.</Stack.Item>
             <Stack.Item>
               <Image
                 src={resolveAsset('sphere')}
@@ -391,10 +339,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>square</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random XY-only vector between squares of sizes A and B. (The
-              length of the square is between A*2 and B*2, centered at 0,0.)
-            </Stack.Item>
+            <Stack.Item width={20}>A random XY-only vector between squares of sizes A and B. (The length of the square is between A*2 and B*2, centered at 0,0.)</Stack.Item>
             <Stack.Item>
               <Box width={15} />
             </Stack.Item>
@@ -404,10 +349,7 @@ const VarExplanation = {
           <Stack>
             <Stack.Item width={10}>cube</Stack.Item>
             <Stack.Item width={11}>vector</Stack.Item>
-            <Stack.Item width={20}>
-              A random vector between cubes of sizes A and B. (The length of the
-              cube is between A*2 and B*2, centered at 0,0,0.)
-            </Stack.Item>
+            <Stack.Item width={20}>A random vector between cubes of sizes A and B. (The length of the cube is between A*2 and B*2, centered at 0,0,0.)</Stack.Item>
             <Stack.Item>
               <Image
                 src={resolveAsset('cube')}

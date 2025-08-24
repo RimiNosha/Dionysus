@@ -32,11 +32,7 @@ export const NtosStatus = (props) => {
             }
           />
           <br />
-          <Button
-            fluid
-            onClick={() => act('stat_send')}
-            content="Update Status Displays"
-          />
+          <Button fluid onClick={() => act('stat_send')} content="Update Status Displays" />
         </Section>
       </NtosWindow.Content>
     </NtosWindow>

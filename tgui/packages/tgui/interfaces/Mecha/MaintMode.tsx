@@ -49,9 +49,7 @@ const MainPanel = (props) => {
   const { mecha_flags, mechflag_keys } = data;
   return (
     <Stack fill vertical>
-      {mecha_flags & mechflag_keys['ADDING_MAINT_ACCESS_POSSIBLE'] ? (
-        <MaintEnabled />
-      ) : null}
+      {mecha_flags & mechflag_keys['ADDING_MAINT_ACCESS_POSSIBLE'] ? <MaintEnabled /> : null}
       <Stack.Item>
         {mecha_flags & mechflag_keys['ADDING_ACCESS_POSSIBLE'] ? (
           <Button
@@ -76,16 +74,7 @@ const MaintEnabled = (props) => {
   return (
     <>
       <Stack.Item>
-        <Button
-          fluid
-          bold
-          content={'Disable Maintenance'}
-          textAlign="center"
-          fontSize="200%"
-          lineHeight={1.25}
-          className="Mecha__ButtonDanger"
-          onClick={() => act('stopmaint')}
-        />
+        <Button fluid bold content={'Disable Maintenance'} textAlign="center" fontSize="200%" lineHeight={1.25} className="Mecha__ButtonDanger" onClick={() => act('stopmaint')} />
       </Stack.Item>
       <Stack.Item>
         <Button
@@ -100,16 +89,7 @@ const MaintEnabled = (props) => {
         />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          fluid
-          bold
-          content={'Set cabin pressure'}
-          textAlign="center"
-          fontSize="200%"
-          lineHeight={1.25}
-          className="Mecha__Button"
-          onClick={() => act('set_pressure')}
-        />
+        <Button fluid bold content={'Set cabin pressure'} textAlign="center" fontSize="200%" lineHeight={1.25} className="Mecha__Button" onClick={() => act('set_pressure')} />
       </Stack.Item>
     </>
   );
@@ -133,16 +113,7 @@ const StockPartsPanel = (props) => {
         />
       </Stack.Item>
       <Stack.Item>
-        <Button
-          fluid
-          bold
-          content={'Eject cell - ' + cell}
-          textAlign="center"
-          fontSize="200%"
-          lineHeight={1.25}
-          className="Mecha__Button"
-          onClick={() => act('drop_cell')}
-        />
+        <Button fluid bold content={'Eject cell - ' + cell} textAlign="center" fontSize="200%" lineHeight={1.25} className="Mecha__Button" onClick={() => act('drop_cell')} />
       </Stack.Item>
       <Stack.Item>
         <Button
@@ -232,9 +203,7 @@ const AccessPanel = (props) => {
                 fontSize="200%"
                 lineHeight={1.25}
                 className="Mecha__ButtonDanger"
-                onClick={() =>
-                  act('del_req_access', { removed_access: code.number })
-                }
+                onClick={() => act('del_req_access', { removed_access: code.number })}
               />
             </Stack.Item>
           </Stack>
@@ -255,9 +224,7 @@ const AccessPanel = (props) => {
                 fontSize="200%"
                 lineHeight={1.25}
                 className="Mecha__Button"
-                onClick={() =>
-                  act('add_req_access', { added_access: code.number })
-                }
+                onClick={() => act('add_req_access', { added_access: code.number })}
               />
             </Stack.Item>
           </Stack>

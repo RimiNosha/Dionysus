@@ -74,16 +74,7 @@ export class DmIcon extends Component<Props, State> {
   }
 
   render() {
-    const {
-      className,
-      direction = Direction.SOUTH,
-      fallback,
-      frame = 1,
-      icon_state,
-      icon,
-      movement = false,
-      ...rest
-    } = this.props;
+    const { className, direction = Direction.SOUTH, fallback, frame = 1, icon_state, icon, movement = false, ...rest } = this.props;
 
     const { iconRef } = this.state;
     if (!iconRef) return fallback;

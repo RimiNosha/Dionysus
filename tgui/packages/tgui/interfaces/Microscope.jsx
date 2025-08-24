@@ -12,30 +12,15 @@ export const Microscope = (props) => {
         <Section>
           <LabeledList>
             <LabeledList.Item label="Dish Sample">
-              <Button
-                icon="eject"
-                content="Eject"
-                disabled={!has_dish}
-                onClick={() => act('eject_petridish')}
-              />
+              <Button icon="eject" content="Eject" disabled={!has_dish} onClick={() => act('eject_petridish')} />
             </LabeledList.Item>
           </LabeledList>
         </Section>
         <Tabs>
-          <Tabs.Tab
-            icon="microscope"
-            lineHeight="23px"
-            selected={tab === 1}
-            onClick={() => setTab(1)}
-          >
+          <Tabs.Tab icon="microscope" lineHeight="23px" selected={tab === 1} onClick={() => setTab(1)}>
             Micro-Organisms ({cell_lines.length})
           </Tabs.Tab>
-          <Tabs.Tab
-            icon="microscope"
-            lineHeight="23px"
-            selected={tab === 2}
-            onClick={() => setTab(2)}
-          >
+          <Tabs.Tab icon="microscope" lineHeight="23px" selected={tab === 2} onClick={() => setTab(2)}>
             Viruses ({viruses.length})
           </Tabs.Tab>
         </Tabs>
@@ -56,21 +41,11 @@ const Organisms = (props) => {
     return (
       <Section key={cell_line.desc} title={cell_line.desc}>
         <LabeledList>
-          <LabeledList.Item label="Growth Rate">
-            {cell_line.growth_rate}
-          </LabeledList.Item>
-          <LabeledList.Item label="Virus Suspectibility">
-            {cell_line.suspectibility}
-          </LabeledList.Item>
-          <LabeledList.Item label="Required Reagents">
-            {cell_line.requireds}
-          </LabeledList.Item>
-          <LabeledList.Item label="Supplementary Reagents">
-            {cell_line.supplementaries}
-          </LabeledList.Item>
-          <LabeledList.Item label="Suppresive reagents">
-            {cell_line.suppressives}
-          </LabeledList.Item>
+          <LabeledList.Item label="Growth Rate">{cell_line.growth_rate}</LabeledList.Item>
+          <LabeledList.Item label="Virus Suspectibility">{cell_line.suspectibility}</LabeledList.Item>
+          <LabeledList.Item label="Required Reagents">{cell_line.requireds}</LabeledList.Item>
+          <LabeledList.Item label="Supplementary Reagents">{cell_line.supplementaries}</LabeledList.Item>
+          <LabeledList.Item label="Suppresive reagents">{cell_line.suppressives}</LabeledList.Item>
         </LabeledList>
       </Section>
     );

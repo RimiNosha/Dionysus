@@ -1,20 +1,13 @@
 import { useBackend, useLocalState } from '../backend';
 import { Button, LabeledList, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
-import {
-  ColorItem,
-  ICON_BY_CATEGORY_NAME,
-  LayerSelect,
-  SmartPipeBlockSection,
-} from './RapidPipeDispenser';
+import { ColorItem, ICON_BY_CATEGORY_NAME, LayerSelect, SmartPipeBlockSection } from './RapidPipeDispenser';
 
 const PipeTypeSection = (props) => {
   const { act, data } = useBackend();
   const { categories = [] } = data;
   const [categoryName, setCategoryName] = useLocalState('categoryName');
-  const shownCategory =
-    categories.find((category) => category.cat_name === categoryName) ||
-    categories[0];
+  const shownCategory = categories.find((category) => category.cat_name === categoryName) || categories[0];
   return (
     <Section fill scrollable>
       <Tabs>

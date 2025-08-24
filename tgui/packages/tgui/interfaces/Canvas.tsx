@@ -58,11 +58,7 @@ class PaintCanvas extends Component<PaintCanvasProps> {
 
   componentDidUpdate() {
     // eslint-disable-next-line max-len
-    if (
-      this.props.value !== undefined &&
-      JSON.stringify(this.baseImageData) !==
-        JSON.stringify(fromDM(this.props.value))
-    ) {
+    if (this.props.value !== undefined && JSON.stringify(this.baseImageData) !== JSON.stringify(fromDM(this.props.value))) {
       this.syncCanvas();
     }
   }
@@ -113,11 +109,7 @@ class PaintCanvas extends Component<PaintCanvasProps> {
   }
 
   handleStartDrawing(event: MouseEvent) {
-    if (
-      !this.props.editable ||
-      this.props.drawing_color === undefined ||
-      this.props.drawing_color === null
-    ) {
+    if (!this.props.editable || this.props.drawing_color === undefined || this.props.drawing_color === null) {
       return;
     }
     this.modifiedElements = [];
@@ -157,14 +149,7 @@ class PaintCanvas extends Component<PaintCanvasProps> {
   }
 
   render() {
-    const {
-      value,
-      width = 300,
-      height = 300,
-      imageWidth = 36,
-      imageHeight = 36,
-      ...rest
-    } = this.props;
+    const { value, width = 300, height = 300, imageWidth = 36, imageHeight = 36, ...rest } = this.props;
     return (
       <canvas
         ref={this.canvasRef}
@@ -218,12 +203,7 @@ export const Canvas = (props) => {
   return (
     <Window
       width={scaled_width + 72}
-      height={
-        scaled_height +
-        75 +
-        (data.show_plaque ? average_plaque_height : 0) +
-        (data.editable && data.paint_tool_palette ? palette_height : 0)
-      }
+      height={scaled_height + 75 + (data.show_plaque ? average_plaque_height : 0) + (data.editable && data.paint_tool_palette ? palette_height : 0)}
     >
       <Window.Content>
         <Box textAlign="center">
@@ -234,9 +214,7 @@ export const Canvas = (props) => {
             width={scaled_width}
             height={scaled_height}
             drawing_color={data.paint_tool_color}
-            onCanvasModifiedHandler={(changed) =>
-              act('paint', { data: toMassPaintFormat(changed) })
-            }
+            onCanvasModifiedHandler={(changed) => act('paint', { data: toMassPaintFormat(changed) })}
             editable={data.editable}
           />
           <Flex align="center" justify="center" direction="column">
@@ -264,39 +242,22 @@ export const Canvas = (props) => {
             )}
             {!data.finalized && (
               <Flex.Item>
-                <Button.Confirm
-                  onClick={() => act('finalize')}
-                  content="Finalize"
-                />
+                <Button.Confirm onClick={() => act('finalize')} content="Finalize" />
               </Flex.Item>
             )}
             {!!data.finalized && !!data.show_plaque && (
-              <Flex.Item
-                basis="content"
-                p={2}
-                width="60%"
-                textColor="black"
-                textAlign="left"
-                backgroundColor="white"
-                style={{ borderStyle: 'inset' }}
-              >
+              <Flex.Item basis="content" p={2} width="60%" textColor="black" textAlign="left" backgroundColor="white" style={{ borderStyle: 'inset' }}>
                 <Box mb={1} fontSize="18px" bold>
                   {decodeHtmlEntities(data.name)}
                 </Box>
                 <Box bold>
                   {data.author}
-                  {!!data.date &&
-                    `- ${new Date(data.date).getFullYear() + 805}`}
+                  {!!data.date && `- ${new Date(data.date).getFullYear() + 805}`}
                 </Box>
                 <Box italic>{data.medium}</Box>
                 <Box italic>
                   {!!data.patron && `Sponsored by ${data.patron} `}
-                  <Button
-                    icon="hand-holding-usd"
-                    color="transparent"
-                    iconColor="black"
-                    onClick={() => act('patronage')}
-                  />
+                  <Button icon="hand-holding-usd" color="transparent" iconColor="black" onClick={() => act('patronage')} />
                 </Box>
               </Flex.Item>
             )}

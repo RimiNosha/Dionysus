@@ -135,13 +135,7 @@ export const RecipeLookup = (props) => {
       )}
       {recipe.reqContainer && (
         <LabeledList.Item bold label="Container">
-          <Button
-            color="transparent"
-            textColor="white"
-            tooltipPosition="right"
-            content={recipe.reqContainer}
-            tooltip="The required container for this reaction to occur in."
-          />
+          <Button color="transparent" textColor="white" tooltipPosition="right" content={recipe.reqContainer} tooltip="The required container for this reaction to occur in." />
         </LabeledList.Item>
       )}
       <LabeledList.Item bold label="Purity">
@@ -174,12 +168,7 @@ export const RecipeLookup = (props) => {
             backgroundColor: 'black',
           }}
         >
-          <Chart.Line
-            fillPositionedParent
-            data={recipe.thermodynamics}
-            strokeWidth={0}
-            fillColor={'#3cf072'}
-          />
+          <Chart.Line fillPositionedParent data={recipe.thermodynamics} strokeWidth={0} fillColor={'#3cf072'} />
           {recipe.explosive && (
             <Chart.Line
               position="absolute"
@@ -202,13 +191,8 @@ export const RecipeLookup = (props) => {
                 : 'The minimum temperature needed for this reaction to start. Heating it up past this point will increase the reaction rate.'
             }
           >
-            <Flex.Item
-              position="relative"
-              textColor={recipe.isColdRecipe && 'red'}
-            >
-              {recipe.isColdRecipe
-                ? recipe.explodeTemp + 'K'
-                : recipe.tempMin + 'K'}
+            <Flex.Item position="relative" textColor={recipe.isColdRecipe && 'red'}>
+              {recipe.isColdRecipe ? recipe.explodeTemp + 'K' : recipe.tempMin + 'K'}
             </Flex.Item>
           </Tooltip>
 
@@ -220,13 +204,8 @@ export const RecipeLookup = (props) => {
                   : 'The temperature at which it is overheated, causing negative effects on the reaction.'
               }
             >
-              <Flex.Item
-                position="relative"
-                textColor={!recipe.isColdRecipe && 'red'}
-              >
-                {recipe.isColdRecipe
-                  ? recipe.tempMin + 'K'
-                  : recipe.explodeTemp + 'K'}
+              <Flex.Item position="relative" textColor={!recipe.isColdRecipe && 'red'}>
+                {recipe.isColdRecipe ? recipe.tempMin + 'K' : recipe.explodeTemp + 'K'}
               </Flex.Item>
             </Tooltip>
           )}

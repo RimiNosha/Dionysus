@@ -45,9 +45,7 @@ const recursivelyGetObjectives = (value: ObjectiveList) => {
   for (let i = 0; i < value.objectives.length; i++) {
     const possibleValue = value.objectives[i];
     if ((possibleValue as ObjectiveList).objectives) {
-      listToReturn = listToReturn.concat(
-        recursivelyGetObjectives(possibleValue as ObjectiveList),
-      );
+      listToReturn = listToReturn.concat(recursivelyGetObjectives(possibleValue as ObjectiveList));
     } else {
       listToReturn.push(possibleValue as Objective);
     }
@@ -82,10 +80,8 @@ const sortingOptions: SortingOption[] = [
   {
     name: 'Telecrystal Payout',
     sort: (a, b) => {
-      const telecrystalMeanA =
-        (a.telecrystal_reward[0] + a.telecrystal_reward[1]) / 2;
-      const telecrystalMeanB =
-        (b.telecrystal_reward[0] + b.telecrystal_reward[1]) / 2;
+      const telecrystalMeanA = (a.telecrystal_reward[0] + a.telecrystal_reward[1]) / 2;
+      const telecrystalMeanB = (b.telecrystal_reward[0] + b.telecrystal_reward[1]) / 2;
       if (telecrystalMeanA < telecrystalMeanB) {
         return -1;
       } else if (telecrystalMeanA === telecrystalMeanB) {
@@ -97,10 +93,8 @@ const sortingOptions: SortingOption[] = [
   {
     name: 'Progression Payout',
     sort: (a, b) => {
-      const progressionMeanA =
-        (a.progression_reward[0] + a.progression_reward[1]) / 2;
-      const progressionMeanB =
-        (b.progression_reward[0] + b.progression_reward[1]) / 2;
+      const progressionMeanA = (a.progression_reward[0] + a.progression_reward[1]) / 2;
+      const progressionMeanB = (b.progression_reward[0] + b.progression_reward[1]) / 2;
       if (progressionMeanA < progressionMeanB) {
         return -1;
       } else if (progressionMeanA === progressionMeanB) {
@@ -112,12 +106,8 @@ const sortingOptions: SortingOption[] = [
   {
     name: 'Progression Payout + Min. Prog.',
     sort: (a, b) => {
-      const progressionMeanA =
-        (a.progression_reward[0] + a.progression_reward[1]) / 2 +
-        a.progression_minimum;
-      const progressionMeanB =
-        (b.progression_reward[0] + b.progression_reward[1]) / 2 +
-        b.progression_minimum;
+      const progressionMeanA = (a.progression_reward[0] + a.progression_reward[1]) / 2 + a.progression_minimum;
+      const progressionMeanB = (b.progression_reward[0] + b.progression_reward[1]) / 2 + b.progression_minimum;
       if (progressionMeanA < progressionMeanB) {
         return -1;
       } else if (progressionMeanA === progressionMeanB) {
@@ -135,14 +125,7 @@ export const TraitorObjectiveDebug = (props) => {
   lines.sort();
   for (let i = 10; i < 100; i += 10) {
     lines.push(
-      <Box
-        position="absolute"
-        height="100%"
-        top={0}
-        left={`${i}%`}
-        width="2px"
-        backgroundColor="green"
-      >
+      <Box position="absolute" height="100%" top={0} left={`${i}%`} width="2px" backgroundColor="green">
         <Box
           position="absolute"
           top={0}
@@ -170,15 +153,9 @@ export const TraitorObjectiveDebug = (props) => {
   }
   let objectivesToRender: Objective[] = [];
   const [currentTab, setCurrentTab] = useLocalState('currentTab', 'All');
-  const [sortingFunc, setSortingFunc] = useLocalState(
-    'sortingFunc',
-    sortingOptions[0].name,
-  );
+  const [sortingFunc, setSortingFunc] = useLocalState('sortingFunc', sortingOptions[0].name);
   // true = ascending, false = descending
-  const [sortDirection, setSortingDirection] = useLocalState(
-    'sortDirection',
-    true,
-  );
+  const [sortDirection, setSortingDirection] = useLocalState('sortDirection', true);
 
   let actualSortingFunc;
   for (let index = 0; index < sortingOptions.length; index++) {
@@ -193,9 +170,7 @@ export const TraitorObjectiveDebug = (props) => {
     if (value.name !== currentTab && currentTab !== 'All') {
       continue;
     }
-    objectivesToRender = objectivesToRender.concat(
-      recursivelyGetObjectives(value),
-    );
+    objectivesToRender = objectivesToRender.concat(recursivelyGetObjectives(value));
   }
 
   objectivesToRender.sort(actualSortingFunc);
@@ -211,11 +186,7 @@ export const TraitorObjectiveDebug = (props) => {
             <Stack.Item>
               <Tabs width="100%" fluid textAlign="center">
                 {sortingOptions.map((value) => (
-                  <Tabs.Tab
-                    key={value.sort}
-                    selected={value.name === sortingFunc}
-                    onClick={() => setSortingFunc(value.name)}
-                  >
+                  <Tabs.Tab key={value.sort} selected={value.name === sortingFunc} onClick={() => setSortingFunc(value.name)}>
                     {value.name}
                   </Tabs.Tab>
                 ))}
@@ -223,18 +194,11 @@ export const TraitorObjectiveDebug = (props) => {
             </Stack.Item>
             <Stack.Item>
               <Tabs height="100%" width="100%" fluid textAlign="center">
-                <Tabs.Tab
-                  selected={currentTab === 'All'}
-                  onClick={() => setCurrentTab('All')}
-                >
+                <Tabs.Tab selected={currentTab === 'All'} onClick={() => setCurrentTab('All')}>
                   All
                 </Tabs.Tab>
                 {objective_data.map((value) => (
-                  <Tabs.Tab
-                    key={value.name}
-                    selected={value.name === currentTab}
-                    onClick={() => setCurrentTab(value.name)}
-                  >
+                  <Tabs.Tab key={value.name} selected={value.name === currentTab} onClick={() => setCurrentTab(value.name)}>
                     {value.name}
                   </Tabs.Tab>
                 ))}
@@ -242,29 +206,17 @@ export const TraitorObjectiveDebug = (props) => {
             </Stack.Item>
             <Stack.Item>
               <Tabs width="100%" fluid textAlign="center">
-                <Tabs.Tab
-                  selected={sortDirection === true}
-                  onClick={() => setSortingDirection(true)}
-                >
+                <Tabs.Tab selected={sortDirection === true} onClick={() => setSortingDirection(true)}>
                   Ascending
                 </Tabs.Tab>
-                <Tabs.Tab
-                  selected={sortDirection === false}
-                  onClick={() => setSortingDirection(false)}
-                >
+                <Tabs.Tab selected={sortDirection === false} onClick={() => setSortingDirection(false)}>
                   Descending
                 </Tabs.Tab>
               </Tabs>
             </Stack.Item>
           </Stack>
         </Box>
-        <Box
-          position="absolute"
-          width="100%"
-          backgroundColor="black"
-          left={0}
-          top="100px"
-        >
+        <Box position="absolute" width="100%" backgroundColor="black" left={0} top="100px">
           {lines}
           <Stack vertical mt={8}>
             {objectivesToRender.map((value, index) => (
@@ -281,18 +233,9 @@ export const TraitorObjectiveDebug = (props) => {
                 content={
                   <Box>
                     <LabeledList>
-                      <LabeledList.Item label={'Key'}>
-                        {value.player}
-                      </LabeledList.Item>
-                      <LabeledList.Item label={'Total PR'}>
-                        {Math.floor(value.progression_points / 600)} mins
-                      </LabeledList.Item>
-                      <LabeledList.Item label={'Obj PR'}>
-                        {Math.floor(
-                          value.total_progression_from_objectives / 600,
-                        )}{' '}
-                        mins
-                      </LabeledList.Item>
+                      <LabeledList.Item label={'Key'}>{value.player}</LabeledList.Item>
+                      <LabeledList.Item label={'Total PR'}>{Math.floor(value.progression_points / 600)} mins</LabeledList.Item>
+                      <LabeledList.Item label={'Obj PR'}>{Math.floor(value.total_progression_from_objectives / 600)} mins</LabeledList.Item>
                     </LabeledList>
                   </Box>
                 }
@@ -301,49 +244,20 @@ export const TraitorObjectiveDebug = (props) => {
                 <Box
                   backgroundColor="red"
                   position="absolute"
-                  left={`${
-                    (value.progression_points / sizeLimit) * window.innerWidth
-                  }px`}
+                  left={`${(value.progression_points / sizeLimit) * window.innerWidth}px`}
                   width="3px"
                   height="100%"
                   top={0}
                   opacity={0.8}
                 >
-                  <Box
-                    position="absolute"
-                    top={0}
-                    left="-50px"
-                    width="100px"
-                    height="100%"
-                  />
+                  <Box position="absolute" top={0} left="-50px" width="100px" height="100%" />
                 </Box>
               </Tooltip>
             );
           })}
-          <Tooltip
-            content={`Expected Progression: ${Math.floor(
-              current_progression / 600,
-            )} mins`}
-            position="top"
-          >
-            <Box
-              position="absolute"
-              left={`${
-                (current_progression / sizeLimit) * window.innerWidth
-              }px`}
-              width="3px"
-              height="100%"
-              top={0}
-              opacity={1}
-              backgroundColor="pink"
-            >
-              <Box
-                position="absolute"
-                top={0}
-                left="-50px"
-                width="100px"
-                height="100%"
-              />
+          <Tooltip content={`Expected Progression: ${Math.floor(current_progression / 600)} mins`} position="top">
+            <Box position="absolute" left={`${(current_progression / sizeLimit) * window.innerWidth}px`} width="3px" height="100%" top={0} opacity={1} backgroundColor="pink">
+              <Box position="absolute" top={0} left="-50px" width="100px" height="100%" />
             </Box>
           </Tooltip>
         </Box>
@@ -358,22 +272,12 @@ type ObjectiveBoxProps = {
 
 const ObjectiveBox = (props: ObjectiveBoxProps) => {
   const { objective } = props;
-  let width = `${
-    (objective.progression_maximum / sizeLimit) * window.innerWidth
-  }px`;
+  let width = `${(objective.progression_maximum / sizeLimit) * window.innerWidth}px`;
   if (objective.progression_maximum > sizeLimit) {
     width = '100%';
   }
   return (
-    <Box
-      backgroundColor="grey"
-      position="absolute"
-      left={`${
-        (objective.progression_minimum / sizeLimit) * window.innerWidth
-      }px`}
-      width={width}
-      height="95px"
-    >
+    <Box backgroundColor="grey" position="absolute" left={`${(objective.progression_minimum / sizeLimit) * window.innerWidth}px`} width={width} height="95px">
       <Stack vertical width="100%">
         <Stack.Item
           style={{
@@ -386,14 +290,8 @@ const ObjectiveBox = (props: ObjectiveBoxProps) => {
         </Stack.Item>
         <Stack.Item>
           <Stack>
-            <Stack.Item grow>
-              {objective.progression_minimum / 600} mins
-            </Stack.Item>
-            {objective.progression_maximum <= sizeLimit && (
-              <Stack.Item>
-                {objective.progression_maximum / 600} mins
-              </Stack.Item>
-            )}
+            <Stack.Item grow>{objective.progression_minimum / 600} mins</Stack.Item>
+            {objective.progression_maximum <= sizeLimit && <Stack.Item>{objective.progression_maximum / 600} mins</Stack.Item>}
           </Stack>
         </Stack.Item>
         <Stack.Item position="relative" basis="18px">
@@ -402,9 +300,7 @@ const ObjectiveBox = (props: ObjectiveBoxProps) => {
             left={0}
             height="100%"
             backgroundColor="green"
-            width={`${
-              (objective.progression_reward[1] / sizeLimit) * window.innerWidth
-            }px`}
+            width={`${(objective.progression_reward[1] / sizeLimit) * window.innerWidth}px`}
             style={{
               whiteSpace: 'nowrap',
             }}

@@ -33,13 +33,7 @@ export const Reagents = (props) => {
                         tooltip="When enabled the displayed reaction will automatically display ongoing reactions in the associated beaker."
                         onClick={() => act('beaker_sync')}
                       />
-                      <Button
-                        content="Search"
-                        icon="search"
-                        color="purple"
-                        tooltip="Search for a recipe by product name"
-                        onClick={() => act('search_recipe')}
-                      />
+                      <Button content="Search" icon="search" color="purple" tooltip="Search for a recipe by product name" onClick={() => act('search_recipe')} />
                       <Button
                         icon="times"
                         color="red"
@@ -53,10 +47,7 @@ export const Reagents = (props) => {
                     </>
                   }
                 >
-                  <RecipeLookup
-                    recipe={reagent_mode_recipe}
-                    bookmarkedReactions={bookmarkedReactions}
-                  />
+                  <RecipeLookup recipe={reagent_mode_recipe} bookmarkedReactions={bookmarkedReactions} />
                 </Section>
               </Stack.Item>
               <Stack.Item grow basis={0}>
@@ -65,13 +56,7 @@ export const Reagents = (props) => {
                   minWidth="300px"
                   buttons={
                     <>
-                      <Button
-                        content="Search"
-                        icon="search"
-                        tooltip="Search for a reagent by name"
-                        tooltipPosition="left"
-                        onClick={() => act('search_reagents')}
-                      />
+                      <Button content="Search" icon="search" tooltip="Search for a reagent by name" tooltipPosition="left" onClick={() => act('search_reagents')} />
                       <Button
                         icon="times"
                         color="red"
@@ -99,25 +84,16 @@ export const Reagents = (props) => {
 const RecipeLibrary = (props) => {
   const { act, data } = useBackend();
   const [page, setPage] = useLocalState('page', 1);
-  const {
-    currentReagents = [],
-    master_reaction_list = [],
-    linkedBeaker,
-  } = data;
+  const { currentReagents = [], master_reaction_list = [], linkedBeaker } = data;
 
-  const [reagentFilter, setReagentFilter] = useLocalState(
-    'reagentFilter',
-    true,
-  );
+  const [reagentFilter, setReagentFilter] = useLocalState('reagentFilter', true);
   const [bookmarkMode, setBookmarkMode] = useLocalState('bookmarkMode', false);
 
   const matchReagents = (reaction) => {
     if (!reagentFilter || currentReagents === null) {
       return true;
     }
-    let matches = reaction.reactants.filter((reactant) =>
-      currentReagents.includes(reactant.id),
-    ).length;
+    let matches = reaction.reactants.filter((reactant) => currentReagents.includes(reactant.id)).length;
     return matches === currentReagents.length;
   };
 
@@ -127,9 +103,7 @@ const RecipeLibrary = (props) => {
 
   const endIndex = 50 * page;
 
-  const visibleReactions = bookmarkMode
-    ? bookmarkArray
-    : master_reaction_list.filter((reaction) => matchReagents(reaction));
+  const visibleReactions = bookmarkMode ? bookmarkArray : master_reaction_list.filter((reaction) => matchReagents(reaction));
 
   const pageIndexMax = Math.ceil(visibleReactions.length / 50);
 
@@ -168,25 +142,9 @@ const RecipeLibrary = (props) => {
               setPage(1);
             }}
           />
-          <Button
-            icon="minus"
-            disabled={page === 1}
-            onClick={() => setPage(Math.max(page - 1, 1))}
-          />
-          <NumberInput
-            width="25px"
-            step={1}
-            stepPixelSize={3}
-            value={page}
-            minValue={1}
-            maxValue={pageIndexMax}
-            onDrag={(value) => setPage(value)}
-          />
-          <Button
-            icon="plus"
-            disabled={page === pageIndexMax}
-            onClick={() => setPage(Math.min(page + 1, pageIndexMax))}
-          />
+          <Button icon="minus" disabled={page === 1} onClick={() => setPage(Math.max(page - 1, 1))} />
+          <NumberInput width="25px" step={1} stepPixelSize={3} value={page} minValue={1} maxValue={pageIndexMax} onDrag={(value) => setPage(value)} />
+          <Button icon="plus" disabled={page === pageIndexMax} onClick={() => setPage(Math.min(page + 1, pageIndexMax))} />
         </>
       }
     >
@@ -248,13 +206,7 @@ const RecipeLibrary = (props) => {
                     act('update_ui');
                   }}
                 />
-              )) || (
-                <Button
-                  icon="trash"
-                  color="red"
-                  onClick={() => removeBookmark(reaction)}
-                />
-              )}
+              )) || <Button icon="trash" color="red" onClick={() => removeBookmark(reaction)} />}
             </Table.Cell>
           </Table.Row>
         ))}

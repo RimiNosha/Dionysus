@@ -25,9 +25,8 @@ export const AntagInfoGangmember = (props) => {
               {gang_name} for life! You are a {antag_name}!
             </Stack.Item>
             <Stack.Item fontSize="18px">
-              As a gang member, support your family above all! Tag turf with a
-              spraycan, wear your family&apos;s clothes, induct new members with
-              induction packages, and accomplish your family objective.
+              As a gang member, support your family above all! Tag turf with a spraycan, wear your family&apos;s clothes, induct new members with induction packages, and accomplish
+              your family objective.
             </Stack.Item>
             <Stack.Divider />
             <Stack.Item>
@@ -61,17 +60,11 @@ const GangClothesPrintout = (props) => {
           <Stack.Item mt={0.5} mb={1}>
             <Icon size={2} name="tshirt" />
           </Stack.Item>
-          <Stack.Item bold>
-            Wear the following to represent the {gang_name}:
-          </Stack.Item>
+          <Stack.Item bold>Wear the following to represent the {gang_name}:</Stack.Item>
         </Stack>
       </Stack.Item>
       <BlockQuote>
-        {gang_clothes && gang_clothes.length
-          ? gang_clothes.map((clothes_item) => (
-              <Stack.Item key={clothes_item}>- {clothes_item}</Stack.Item>
-            ))
-          : '- Anything!'}
+        {gang_clothes && gang_clothes.length ? gang_clothes.map((clothes_item) => <Stack.Item key={clothes_item}>- {clothes_item}</Stack.Item>) : '- Anything!'}
       </BlockQuote>
     </Stack>
   );
@@ -85,16 +78,11 @@ const GangPhonePrintout = () => {
           <Stack.Item mt={0.5}>
             <Icon size={2} name="phone" />
           </Stack.Item>
-          <Stack.Item bold>
-            You were given a cell phone with your induction package!
-          </Stack.Item>
+          <Stack.Item bold>You were given a cell phone with your induction package!</Stack.Item>
         </Stack>
       </Stack.Item>
       <Stack.Item>
-        <BlockQuote>
-          Use it in hand to activate it, then speak into it to talk with your
-          other family members.
-        </BlockQuote>
+        <BlockQuote>Use it in hand to activate it, then speak into it to talk with your other family members.</BlockQuote>
       </Stack.Item>
     </Stack>
   );
@@ -108,9 +96,7 @@ const GangObjectivePrintout = (props) => {
       <Stack.Item bold fontSize="16px">
         Your family&apos;s goal:
       </Stack.Item>
-      <Stack.Item>
-        {gang_objective || 'No objective set! This is a problem!'}
-      </Stack.Item>
+      <Stack.Item>{gang_objective || 'No objective set! This is a problem!'}</Stack.Item>
     </Stack>
   );
 };

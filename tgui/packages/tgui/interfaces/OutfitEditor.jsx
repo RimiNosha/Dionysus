@@ -32,13 +32,7 @@ export const OutfitEditor = (props) => {
                   textOverflow: 'ellipsis',
                 }}
               >
-                <Button
-                  ml={0.5}
-                  color="transparent"
-                  icon="pencil-alt"
-                  title="Rename this outfit"
-                  onClick={() => act('rename', {})}
-                />
+                <Button ml={0.5} color="transparent" icon="pencil-alt" title="Rename this outfit" onClick={() => act('rename', {})} />
                 {outfit.name}
               </Stack.Item>
               <Stack.Item align="end" shrink={0}>
@@ -48,20 +42,11 @@ export const OutfitEditor = (props) => {
                   tooltip="Ctrl-click a button to select *any* item instead of what will probably fit in that slot."
                   tooltipPosition="bottom-start"
                 />
-                <Button
-                  icon="code"
-                  tooltip="Edit this outfit on a VV window"
-                  tooltipPosition="bottom-start"
-                  onClick={() => act('vv')}
-                />
+                <Button icon="code" tooltip="Edit this outfit on a VV window" tooltipPosition="bottom-start" onClick={() => act('vv')} />
                 <Button
                   color={!saveable && 'bad'}
                   icon={saveable ? 'save' : 'trash-alt'}
-                  tooltip={
-                    saveable
-                      ? 'Save this outfit to the custom outfit list'
-                      : 'Remove this outfit from the custom outfit list'
-                  }
+                  tooltip={saveable ? 'Save this outfit to the custom outfit list' : 'Remove this outfit from the custom outfit list'}
                   tooltipPosition="bottom-start"
                   onClick={() => act(saveable ? 'save' : 'delete')}
                 />
@@ -85,11 +70,7 @@ export const OutfitEditor = (props) => {
               <OutfitSlot name="Gloves" icon="mitten" slot="gloves" />
             </Stack>
             <Stack mb={2}>
-              <OutfitSlot
-                name="Suit Storage"
-                icon="briefcase-medical"
-                slot="suit_store"
-              />
+              <OutfitSlot name="Suit Storage" icon="briefcase-medical" slot="suit_store" />
               <OutfitSlot name="Back" icon="shopping-bag" slot="back" />
               <OutfitSlot name="ID" icon="id-card-o" slot="id" />
             </Stack>
@@ -100,18 +81,8 @@ export const OutfitEditor = (props) => {
             </Stack>
             <Stack mb={2}>
               <OutfitSlot name="Shoes" icon="socks" slot="shoes" />
-              <OutfitSlot
-                name="Left Pocket"
-                icon="envelope-open-o"
-                iconRot={180}
-                slot="l_pocket"
-              />
-              <OutfitSlot
-                name="Right Pocket"
-                icon="envelope-open-o"
-                iconRot={180}
-                slot="r_pocket"
-              />
+              <OutfitSlot name="Left Pocket" icon="envelope-open-o" iconRot={180} slot="l_pocket" />
+              <OutfitSlot name="Right Pocket" icon="envelope-open-o" iconRot={180} slot="r_pocket" />
             </Stack>
           </Box>
         </Section>
@@ -148,13 +119,7 @@ const OutfitSlot = (props) => {
                 '-ms-interpolation-mode': 'nearest-neighbor',
               }}
             />
-            <Icon
-              position="absolute"
-              name="times"
-              color="label"
-              style={{ cursor: 'pointer' }}
-              onClick={() => act('clear', { slot })}
-            />
+            <Icon position="absolute" name="times" color="label" style={{ cursor: 'pointer' }} onClick={() => act('clear', { slot })} />
           </>
         )}
       </Box>

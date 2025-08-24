@@ -23,11 +23,7 @@ export const Terminal = (props) => {
       <Window.Content fontFamily="Consolas">
         <Stack vertical fill>
           <Stack.Item grow>
-            <TerminalOutputSection
-              bgColor={bgColor}
-              displayHTML={displayHTML}
-              fontColor={fontColor}
-            />
+            <TerminalOutputSection bgColor={bgColor} displayHTML={displayHTML} fontColor={fontColor} />
           </Stack.Item>
           <Stack.Item>
             <InputAndButtonsSection />

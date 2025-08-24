@@ -1,21 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Collapsible,
-  ColorBox,
-  Dimmer,
-  Dropdown,
-  Flex,
-  Icon,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-  Stack,
-  Table,
-} from '../components';
+import { AnimatedNumber, Box, Button, Collapsible, ColorBox, Dimmer, Dropdown, Flex, Icon, LabeledList, NumberInput, ProgressBar, Section, Stack, Table } from '../components';
 import { Window } from '../layouts';
 
 const capitalize = (string) => {
@@ -29,10 +13,7 @@ const ModParts = (props) => {
     <>
       {parts.map((part) => {
         return (
-          <LabeledList.Item
-            key={capitalize(part.slot)}
-            label={capitalize(part.slot) + ' Slot'}
-          >
+          <LabeledList.Item key={capitalize(part.slot)} label={capitalize(part.slot) + ' Slot'}>
             {part.name}
           </LabeledList.Item>
         );
@@ -132,15 +113,11 @@ const ConfigureDataEntry = (props) => {
 };
 
 const RadCounter = (props) => {
-  const { active, userradiated, usertoxins, usermaxtoxins, threatlevel } =
-    props;
+  const { active, userradiated, usertoxins, usermaxtoxins, threatlevel } = props;
   return (
     <Stack fill textAlign="center">
       <Stack.Item grow>
-        <Section
-          title="Radiation Level"
-          color={active && userradiated ? 'bad' : 'good'}
-        >
+        <Section title="Radiation Level" color={active && userradiated ? 'bad' : 'good'}>
           {active && userradiated ? 'IRRADIATED' : 'RADIATION-FREE'}
         </Section>
       </Stack.Item>
@@ -159,11 +136,7 @@ const RadCounter = (props) => {
         </Section>
       </Stack.Item>
       <Stack.Item grow>
-        <Section
-          title="Hazard Level"
-          color={active && threatlevel ? 'bad' : 'good'}
-          bold
-        >
+        <Section title="Hazard Level" color={active && threatlevel ? 'bad' : 'good'} bold>
           {active && threatlevel ? threatlevel : 0}
         </Section>
       </Stack.Item>
@@ -172,15 +145,7 @@ const RadCounter = (props) => {
 };
 
 const HealthAnalyzer = (props) => {
-  const {
-    active,
-    userhealth,
-    usermaxhealth,
-    userbrute,
-    userburn,
-    usertoxin,
-    useroxy,
-  } = props;
+  const { active, userhealth, usermaxhealth, userbrute, userburn, usertoxin, useroxy } = props;
   return (
     <>
       <Section title="Health">
@@ -294,25 +259,13 @@ const ConfigureScreen = (props) => {
           const data = configuration_data[key];
           return (
             <Stack.Item key={data.key}>
-              <ConfigureDataEntry
-                name={key}
-                display_name={data.display_name}
-                type={data.type}
-                value={data.value}
-                values={data.values}
-                module_ref={module_ref}
-              />
+              <ConfigureDataEntry name={key} display_name={data.display_name} type={data.type} value={data.value} values={data.values} module_ref={module_ref} />
             </Stack.Item>
           );
         })}
         <Stack.Item>
           <Box>
-            <Button
-              fluid
-              onClick={props.onExit}
-              icon="times"
-              textAlign="center"
-            >
+            <Button fluid onClick={props.onExit} icon="times" textAlign="center">
               Exit
             </Button>
           </Box>
@@ -335,50 +288,15 @@ const displayText = (param) => {
 
 const ParametersSection = (props) => {
   const { act, data } = useBackend();
-  const {
-    active,
-    malfunctioning,
-    locked,
-    link_id,
-    link_call,
-    open,
-    selected_module,
-    complexity,
-    complexity_max,
-    wearer_name,
-    wearer_job,
-    AI,
-  } = data;
-  const status = malfunctioning
-    ? 'Malfunctioning'
-    : active
-      ? 'Active'
-      : 'Inactive';
+  const { active, malfunctioning, locked, link_id, link_call, open, selected_module, complexity, complexity_max, wearer_name, wearer_job, AI } = data;
+  const status = malfunctioning ? 'Malfunctioning' : active ? 'Active' : 'Inactive';
   return (
     <Section title="Parameters">
       <LabeledList>
-        <LabeledList.Item
-          label="Status"
-          buttons={
-            <Button
-              icon="power-off"
-              content={active ? 'Deactivate' : 'Activate'}
-              onClick={() => act('activate')}
-            />
-          }
-        >
+        <LabeledList.Item label="Status" buttons={<Button icon="power-off" content={active ? 'Deactivate' : 'Activate'} onClick={() => act('activate')} />}>
           {status}
         </LabeledList.Item>
-        <LabeledList.Item
-          label="ID Lock"
-          buttons={
-            <Button
-              icon={locked ? 'lock-open' : 'lock'}
-              content={locked ? 'Unlock' : 'Lock'}
-              onClick={() => act('lock')}
-            />
-          }
-        >
+        <LabeledList.Item label="ID Lock" buttons={<Button icon={locked ? 'lock-open' : 'lock'} content={locked ? 'Unlock' : 'Lock'} onClick={() => act('lock')} />}>
           {locked ? 'Locked' : 'Unlocked'}
         </LabeledList.Item>
         <LabeledList.Item
@@ -395,12 +313,8 @@ const ParametersSection = (props) => {
         >
           {link_id}
         </LabeledList.Item>
-        <LabeledList.Item label="Cover">
-          {open ? 'Open' : 'Closed'}
-        </LabeledList.Item>
-        <LabeledList.Item label="Selected Module">
-          {selected_module || 'None'}
-        </LabeledList.Item>
+        <LabeledList.Item label="Cover">{open ? 'Open' : 'Closed'}</LabeledList.Item>
+        <LabeledList.Item label="Selected Module">{selected_module || 'None'}</LabeledList.Item>
         <LabeledList.Item label="Complexity">
           {complexity} ({complexity_max})
         </LabeledList.Item>
@@ -475,10 +389,7 @@ const InfoSection = (props) => {
 const ModuleSection = (props) => {
   const { act, data } = useBackend();
   const { complexity_max, modules } = data;
-  const [configureState, setConfigureState] = useLocalState(
-    'module_configuration',
-    null,
-  );
+  const [configureState, setConfigureState] = useLocalState('module_configuration', null);
   return (
     <Section title="Modules" fill>
       <Flex direction="column">
@@ -489,79 +400,38 @@ const ModuleSection = (props) => {
                 <Collapsible title={module.name}>
                   <Section>
                     {configureState === module.ref && (
-                      <ConfigureScreen
-                        configuration_data={module.configuration_data}
-                        module_ref={module.ref}
-                        onExit={() => setConfigureState(null)}
-                      />
+                      <ConfigureScreen configuration_data={module.configuration_data} module_ref={module.ref} onExit={() => setConfigureState(null)} />
                     )}
                     <Table>
                       <Table.Row header>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="save"
-                            tooltip="Complexity"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="save" tooltip="Complexity" tooltipPosition="top" />
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="plug"
-                            tooltip="Idle Power Cost"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="plug" tooltip="Idle Power Cost" tooltipPosition="top" />
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="lightbulb"
-                            tooltip="Active Power Cost"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="lightbulb" tooltip="Active Power Cost" tooltipPosition="top" />
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="bolt"
-                            tooltip="Use Power Cost"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="bolt" tooltip="Use Power Cost" tooltipPosition="top" />
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="hourglass-half"
-                            tooltip="Cooldown"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="hourglass-half" tooltip="Cooldown" tooltipPosition="top" />
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button
-                            color="transparent"
-                            icon="tasks"
-                            tooltip="Actions"
-                            tooltipPosition="top"
-                          />
+                          <Button color="transparent" icon="tasks" tooltip="Actions" tooltipPosition="top" />
                         </Table.Cell>
                       </Table.Row>
                       <Table.Row>
                         <Table.Cell textAlign="center">
                           {module.complexity}/{complexity_max}
                         </Table.Cell>
+                        <Table.Cell textAlign="center">{module.idle_power}</Table.Cell>
+                        <Table.Cell textAlign="center">{module.active_power}</Table.Cell>
+                        <Table.Cell textAlign="center">{module.use_power}</Table.Cell>
                         <Table.Cell textAlign="center">
-                          {module.idle_power}
-                        </Table.Cell>
-                        <Table.Cell textAlign="center">
-                          {module.active_power}
-                        </Table.Cell>
-                        <Table.Cell textAlign="center">
-                          {module.use_power}
-                        </Table.Cell>
-                        <Table.Cell textAlign="center">
-                          {(module.cooldown > 0 && module.cooldown / 10) || '0'}
-                          /{module.cooldown_time / 10}s
+                          {(module.cooldown > 0 && module.cooldown / 10) || '0'}/{module.cooldown_time / 10}s
                         </Table.Cell>
                         <Table.Cell textAlign="center">
                           <Button
@@ -610,13 +480,7 @@ export const MODsuit = (props) => {
   const { act, data } = useBackend();
   const { ui_theme, interface_break } = data;
   return (
-    <Window
-      width={400}
-      height={525}
-      theme={ui_theme}
-      title="MOD Interface Panel"
-      resizable
-    >
+    <Window width={400} height={525} theme={ui_theme} title="MOD Interface Panel" resizable>
       <Window.Content scrollable={!interface_break}>
         {(!!interface_break && <LockedInterface />) || (
           <Stack vertical fill>

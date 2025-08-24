@@ -7,67 +7,29 @@ export const FUNDAMENTAL_DATA_TYPES = {
     const { name, value, setValue, color } = props;
     return (
       <BasicInput name={name} setValue={setValue} value={value} defaultValue="">
-        <Input
-          placeholder={name}
-          value={value}
-          onChange={(e, val) => setValue(val)}
-          width="96px"
-        />
+        <Input placeholder={name} value={value} onChange={(e, val) => setValue(val)} width="96px" />
       </BasicInput>
     );
   },
   number: (props) => {
     const { name, value, setValue, color } = props;
     return (
-      <BasicInput
-        name={name}
-        setValue={setValue}
-        value={value}
-        defaultValue={0}
-      >
-        <NumberInput
-          value={value}
-          color={color}
-          onChange={(e, val) => setValue(val)}
-          unit={name}
-        />
+      <BasicInput name={name} setValue={setValue} value={value} defaultValue={0}>
+        <NumberInput value={value} color={color} onChange={(e, val) => setValue(val)} unit={name} />
       </BasicInput>
     );
   },
   entity: (props) => {
     const { name, setValue } = props;
-    return (
-      <Button
-        content={name}
-        color="transparent"
-        icon="upload"
-        compact
-        onClick={() => setValue(null, { marked_atom: true })}
-      />
-    );
+    return <Button content={name} color="transparent" icon="upload" compact onClick={() => setValue(null, { marked_atom: true })} />;
   },
   datum: (props) => {
     const { name, setValue } = props;
-    return (
-      <Button
-        content={name}
-        color="transparent"
-        icon="upload"
-        compact
-        onClick={() => setValue(null, { marked_atom: true })}
-      />
-    );
+    return <Button content={name} color="transparent" icon="upload" compact onClick={() => setValue(null, { marked_atom: true })} />;
   },
   signal: (props) => {
     const { name, setValue } = props;
-    return (
-      <Button
-        content={name}
-        color="transparent"
-        compact
-        onClick={() => setValue()}
-      />
-    );
+    return <Button content={name} color="transparent" compact onClick={() => setValue()} />;
   },
   option: (props) => {
     const { value, setValue } = props;
@@ -96,27 +58,13 @@ export const FUNDAMENTAL_DATA_TYPES = {
   any: (props) => {
     const { name, value, setValue, color } = props;
     return (
-      <BasicInput
-        name={name}
-        setValue={setValue}
-        value={value}
-        defaultValue={''}
-      >
+      <BasicInput name={name} setValue={setValue} value={value} defaultValue={''}>
         <Stack>
           <Stack.Item>
-            <Button
-              color={color}
-              icon="upload"
-              onClick={() => setValue(null, { marked_atom: true })}
-            />
+            <Button color={color} icon="upload" onClick={() => setValue(null, { marked_atom: true })} />
           </Stack.Item>
           <Stack.Item>
-            <Input
-              placeholder={name}
-              value={value}
-              onChange={(e, val) => setValue(val)}
-              width="64px"
-            />
+            <Input placeholder={name} value={value} onChange={(e, val) => setValue(val)} width="64px" />
           </Stack.Item>
         </Stack>
       </BasicInput>

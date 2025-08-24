@@ -24,23 +24,14 @@ type AchievementData = {
 export const Achievements = (props) => {
   const { data } = useBackend<AchievementData>();
   const { categories } = data;
-  const [selectedCategory, setSelectedCategory] = useLocalState(
-    'category',
-    categories[0],
-  );
-  const achievements = data.achievements.filter(
-    (x) => x.category === selectedCategory,
-  );
+  const [selectedCategory, setSelectedCategory] = useLocalState('category', categories[0]);
+  const achievements = data.achievements.filter((x) => x.category === selectedCategory);
   return (
     <Window title="Achievements" width={540} height={680}>
       <Window.Content scrollable>
         <Tabs>
           {categories.map((category) => (
-            <Tabs.Tab
-              key={category}
-              selected={selectedCategory === category}
-              onClick={() => setSelectedCategory(category)}
-            >
+            <Tabs.Tab key={category} selected={selectedCategory === category} onClick={() => setSelectedCategory(category)}>
               {category}
             </Tabs.Tab>
           ))}
@@ -64,9 +55,7 @@ const AchievementTable = (props: AchievementTableProps) => {
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((achievement) => {
           if (!achievement.hidden || !!achievement.value) {
-            return (
-              <Achievement key={achievement.name} achievement={achievement} />
-            );
+            return <Achievement key={achievement.name} achievement={achievement} />;
           } else {
             const placeholder_achievement: AchievementDatum = {
               category: achievement.category,
@@ -77,12 +66,7 @@ const AchievementTable = (props: AchievementTableProps) => {
               score: false,
               value: 0,
             };
-            return (
-              <Achievement
-                key={achievement.name}
-                achievement={placeholder_achievement}
-              />
-            );
+            return <Achievement key={achievement.name} achievement={placeholder_achievement} />;
           }
         })}
     </Table>
@@ -100,15 +84,7 @@ const Achievement = (props) => {
       <Table.Cell verticalAlign="top">
         <h1>{name}</h1>
         {desc}
-        {(score && (
-          <Box color={value > 0 ? 'good' : 'bad'}>
-            {`Earned ${value} times`}
-          </Box>
-        )) || (
-          <Box color={value ? 'good' : 'bad'}>
-            {value ? 'Unlocked' : 'Locked'}
-          </Box>
-        )}
+        {(score && <Box color={value > 0 ? 'good' : 'bad'}>{`Earned ${value} times`}</Box>) || <Box color={value ? 'good' : 'bad'}>{value ? 'Unlocked' : 'Locked'}</Box>}
       </Table.Cell>
     </Table.Row>
   );

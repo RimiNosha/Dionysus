@@ -14,24 +14,9 @@ export const OutfitManager = (props) => {
           title="Custom Outfit Manager"
           buttons={
             <>
-              <Button
-                icon="file-upload"
-                tooltip="Load an outfit from a file"
-                tooltipPosition="left"
-                onClick={() => act('load')}
-              />
-              <Button
-                icon="copy"
-                tooltip="Copy an already existing outfit"
-                tooltipPosition="left"
-                onClick={() => act('copy')}
-              />
-              <Button
-                icon="plus"
-                tooltip="Create a new outfit"
-                tooltipPosition="left"
-                onClick={() => act('new')}
-              />
+              <Button icon="file-upload" tooltip="Load an outfit from a file" tooltipPosition="left" onClick={() => act('load')} />
+              <Button icon="copy" tooltip="Copy an already existing outfit" tooltipPosition="left" onClick={() => act('copy')} />
+              <Button icon="plus" tooltip="Create a new outfit" tooltipPosition="left" onClick={() => act('new')} />
             </>
           }
         >
@@ -60,21 +45,10 @@ export const OutfitManager = (props) => {
                     />
                   </Stack.Item>
                   <Stack.Item ml={0.5}>
-                    <Button
-                      icon="save"
-                      tooltip="Save this outfit to a file"
-                      tooltipPosition="left"
-                      onClick={() => act('save', { outfit: outfit.ref })}
-                    />
+                    <Button icon="save" tooltip="Save this outfit to a file" tooltipPosition="left" onClick={() => act('save', { outfit: outfit.ref })} />
                   </Stack.Item>
                   <Stack.Item ml={0.5}>
-                    <Button
-                      color="bad"
-                      icon="trash-alt"
-                      tooltip="Delete this outfit"
-                      tooltipPosition="left"
-                      onClick={() => act('delete', { outfit: outfit.ref })}
-                    />
+                    <Button color="bad" icon="trash-alt" tooltip="Delete this outfit" tooltipPosition="left" onClick={() => act('delete', { outfit: outfit.ref })} />
                   </Stack.Item>
                 </Stack>
               </Stack.Item>

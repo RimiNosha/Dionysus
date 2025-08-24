@@ -2,18 +2,7 @@ import { Tooltip } from 'tgui-core/components';
 
 import { BooleanLike } from '../../common/react';
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Input,
-  LabeledList,
-  NoticeBox,
-  ProgressBar,
-  Section,
-  Stack,
-  Tabs,
-} from '../components';
+import { Box, Button, Collapsible, Input, LabeledList, NoticeBox, ProgressBar, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 
 type PandemicContext = {
@@ -151,25 +140,9 @@ const BeakerDisplay = (_) => {
       title="Beaker"
       buttons={
         <>
-          <Button
-            icon="times"
-            content="Empty and Eject"
-            color="bad"
-            disabled={cant_empty}
-            onClick={() => act('empty_eject_beaker')}
-          />
-          <Button
-            icon="trash"
-            content="Empty"
-            disabled={cant_empty}
-            onClick={() => act('empty_beaker')}
-          />
-          <Button
-            icon="eject"
-            content="Eject"
-            disabled={!has_beaker}
-            onClick={() => act('eject_beaker')}
-          />
+          <Button icon="times" content="Empty and Eject" color="bad" disabled={cant_empty} onClick={() => act('empty_eject_beaker')} />
+          <Button icon="trash" content="Empty" disabled={cant_empty} onClick={() => act('empty_beaker')} />
+          <Button icon="eject" content="Eject" disabled={!has_beaker} onClick={() => act('eject_beaker')} />
         </>
       }
     >
@@ -190,12 +163,8 @@ const BeakerInfoDisplay = (_) => {
     <Stack>
       <Stack.Item grow={2}>
         <LabeledList>
-          <LabeledList.Item label="DNA">
-            {blood.dna.replace(/^\w/, (c) => c.toUpperCase())}
-          </LabeledList.Item>
-          <LabeledList.Item label="Type">
-            {blood.type.replace(/^\w/, (c) => c.toUpperCase())}
-          </LabeledList.Item>
+          <LabeledList.Item label="DNA">{blood.dna.replace(/^\w/, (c) => c.toUpperCase())}</LabeledList.Item>
+          <LabeledList.Item label="Type">{blood.type.replace(/^\w/, (c) => c.toUpperCase())}</LabeledList.Item>
         </LabeledList>
       </Stack.Item>
       <Stack.Item grow={2}>
@@ -298,9 +267,7 @@ const SpecimenDisplay = (_) => {
         <Stack.Item>
           <VirusDisplay virus={virus} />
         </Stack.Item>
-        <Stack.Item>
-          {virus?.symptoms && <SymptomDisplay symptoms={virus.symptoms} />}
-        </Stack.Item>
+        <Stack.Item>{virus?.symptoms && <SymptomDisplay symptoms={virus.symptoms} />}</Stack.Item>
       </Stack>
     </Section>
   );
@@ -318,11 +285,7 @@ const VirusTabs = (props: TabsProps) => {
     <Tabs>
       {viruses.map((virus, index) => {
         return (
-          <Tabs.Tab
-            selected={tab === index}
-            onClick={() => tabHandler(index)}
-            key={virus.name}
-          >
+          <Tabs.Tab selected={tab === index} onClick={() => tabHandler(index)} key={virus.name}>
             {virus.name}
           </Tabs.Tab>
         );
@@ -377,12 +340,8 @@ const VirusTextInfo = (props: VirusInfoProps) => {
           <Box color="bad">{virus.name}</Box>
         )}
       </LabeledList.Item>
-      <LabeledList.Item label="Description">
-        {virus.description}
-      </LabeledList.Item>
-      <LabeledList.Item label="Agent">
-        {virus.agent.replace(/^\w/, (c) => c.toUpperCase())}
-      </LabeledList.Item>
+      <LabeledList.Item label="Description">{virus.description}</LabeledList.Item>
+      <LabeledList.Item label="Agent">{virus.agent.replace(/^\w/, (c) => c.toUpperCase())}</LabeledList.Item>
       <LabeledList.Item label="Spread">{virus.spread}</LabeledList.Item>
       <LabeledList.Item label="Possible Cure">{virus.cure}</LabeledList.Item>
     </LabeledList>
@@ -400,18 +359,12 @@ const VirusTraitInfo = (props: VirusInfoProps) => {
     <Section title="Statistics">
       <LabeledList>
         <Tooltip content="Decides the cure complexity.">
-          <LabeledList.Item
-            color={GetColor(virus.resistance)}
-            label="Resistance"
-          >
+          <LabeledList.Item color={GetColor(virus.resistance)} label="Resistance">
             {virus.resistance}
           </LabeledList.Item>
         </Tooltip>
         <Tooltip content="Symptomic progression.">
-          <LabeledList.Item
-            color={GetColor(virus.stage_speed)}
-            label="Stage speed"
-          >
+          <LabeledList.Item color={GetColor(virus.stage_speed)} label="Stage speed">
             {virus.stage_speed}
           </LabeledList.Item>
         </Tooltip>
@@ -421,10 +374,7 @@ const VirusTraitInfo = (props: VirusInfoProps) => {
           </LabeledList.Item>
         </Tooltip>
         <Tooltip content="Decides the spread type.">
-          <LabeledList.Item
-            color={GetColor(virus.transmission)}
-            label="Transmissibility"
-          >
+          <LabeledList.Item color={GetColor(virus.transmission)} label="Transmissibility">
             {virus.transmission}
           </LabeledList.Item>
         </Tooltip>
@@ -477,18 +427,12 @@ const SymptomTraitInfo = (props: SymptomInfoProps) => {
           </LabeledList.Item>
         </Tooltip>
         <Tooltip content="Decides the cure complexity.">
-          <LabeledList.Item
-            color={GetColor(symptom.resistance)}
-            label="Resistance"
-          >
+          <LabeledList.Item color={GetColor(symptom.resistance)} label="Resistance">
             {symptom.resistance}
           </LabeledList.Item>
         </Tooltip>
         <Tooltip content="Symptomic progression.">
-          <LabeledList.Item
-            color={GetColor(symptom.stage_speed)}
-            label="Stage Speed"
-          >
+          <LabeledList.Item color={GetColor(symptom.stage_speed)} label="Stage Speed">
             {symptom.stage_speed}
           </LabeledList.Item>
         </Tooltip>
@@ -498,10 +442,7 @@ const SymptomTraitInfo = (props: SymptomInfoProps) => {
           </LabeledList.Item>
         </Tooltip>
         <Tooltip content="Decides the spread type.">
-          <LabeledList.Item
-            color={GetColor(symptom.transmission)}
-            label="Transmission"
-          >
+          <LabeledList.Item color={GetColor(symptom.transmission)} label="Transmission">
             {symptom.transmission}
           </LabeledList.Item>
         </Tooltip>

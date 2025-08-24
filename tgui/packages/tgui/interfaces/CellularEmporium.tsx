@@ -1,13 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Icon, LabeledList, NoticeBox, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 type CellularEmporiumContext = {
@@ -39,16 +31,10 @@ export const CellularEmporium = (props) => {
           buttons={
             <Stack>
               <Stack.Item fontSize="16px">
-                {genetic_points_remaining && genetic_points_remaining}{' '}
-                <Icon name="dna" color="#DD66DD" />
+                {genetic_points_remaining && genetic_points_remaining} <Icon name="dna" color="#DD66DD" />
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  icon="undo"
-                  content="Readapt"
-                  disabled={!can_readapt}
-                  onClick={() => act('readapt')}
-                />
+                <Button icon="undo" content="Readapt" disabled={!can_readapt} onClick={() => act('readapt')} />
               </Stack.Item>
             </Stack>
           }
@@ -83,11 +69,7 @@ const AbilityList = (props) => {
                 <Stack.Item>
                   <Button
                     content={'Evolve'}
-                    disabled={
-                      ability.owned ||
-                      ability.dna_cost > genetic_points_remaining ||
-                      !ability.can_purchase
-                    }
+                    disabled={ability.owned || ability.dna_cost > genetic_points_remaining || !ability.can_purchase}
                     onClick={() =>
                       act('evolve', {
                         path: ability.path,

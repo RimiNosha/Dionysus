@@ -2,19 +2,7 @@ import { classes } from 'common/react';
 import { createSearch } from 'common/string';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dimmer,
-  Flex,
-  Icon,
-  Input,
-  NoticeBox,
-  NumberInput,
-  Section,
-  Table,
-  Tabs,
-} from '../components';
+import { Box, Button, Dimmer, Flex, Icon, Input, NoticeBox, NumberInput, Section, Table, Tabs } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 
@@ -43,10 +31,7 @@ export const BiogeneratorContent = (props) => {
   const { act, data } = useBackend();
   const { biomass, can_process, categories = [] } = data;
   const [searchText, setSearchText] = useLocalState('searchText', '');
-  const [selectedCategory, setSelectedCategory] = useLocalState(
-    'category',
-    categories[0]?.name,
-  );
+  const [selectedCategory, setSelectedCategory] = useLocalState('category', categories[0]?.name);
   const testSearch = createSearch(searchText, (item) => {
     return item.name;
   });
@@ -71,19 +56,9 @@ export const BiogeneratorContent = (props) => {
       buttons={
         <>
           Search
-          <Input
-            autoFocus
-            value={searchText}
-            onInput={(e, value) => setSearchText(value)}
-            mx={1}
-          />
+          <Input autoFocus value={searchText} onInput={(e, value) => setSearchText(value)} mx={1} />
           <Button icon="eject" content="Eject" onClick={() => act('eject')} />
-          <Button
-            icon="cog"
-            content="Activate"
-            disabled={!can_process}
-            onClick={() => act('activate')}
-          />
+          <Button icon="cog" content="Activate" disabled={!can_process} onClick={() => act('activate')} />
         </>
       }
     >
@@ -92,11 +67,7 @@ export const BiogeneratorContent = (props) => {
           <Flex.Item>
             <Tabs vertical>
               {categories.map((category) => (
-                <Tabs.Tab
-                  key={category.name}
-                  selected={category.name === selectedCategory}
-                  onClick={() => setSelectedCategory(category.name)}
-                >
+                <Tabs.Tab key={category.name} selected={category.name === selectedCategory} onClick={() => setSelectedCategory(category.name)}>
                   {category.name} ({category.items?.length || 0})
                 </Tabs.Tab>
               ))}
@@ -104,13 +75,7 @@ export const BiogeneratorContent = (props) => {
           </Flex.Item>
         )}
         <Flex.Item grow={1} basis={0}>
-          {items.length === 0 && (
-            <NoticeBox>
-              {searchText.length === 0
-                ? 'No items in this category.'
-                : 'No results found.'}
-            </NoticeBox>
-          )}
+          {items.length === 0 && <NoticeBox>{searchText.length === 0 ? 'No items in this category.' : 'No results found.'}</NoticeBox>}
           <Table>
             <ItemList biomass={biomass} items={items} />
           </Table>
@@ -128,8 +93,7 @@ const ItemList = (props) => {
   const items = props.items.map((item) => {
     const [amount, setAmount] = useLocalState('amount' + item.name, 1);
     const notSameItem = hoveredItem.name !== item.name;
-    const notEnoughHovered =
-      props.biomass - hoveredCost * hoveredItem.amount < item.cost * amount;
+    const notEnoughHovered = props.biomass - hoveredCost * hoveredItem.amount < item.cost * amount;
     const disabledDueToHovered = notSameItem && notEnoughHovered;
     const disabled = props.biomass < item.cost * amount || disabledDueToHovered;
     return {
@@ -151,13 +115,7 @@ const ItemList = (props) => {
         <b>{item.name}</b>
       </Table.Cell>
       <Table.Cell collapsing>
-        <NumberInput
-          value={Math.round(item.amount)}
-          width="35px"
-          minValue={1}
-          maxValue={10}
-          onChange={(value) => item.setAmount(value)}
-        />
+        <NumberInput value={Math.round(item.amount)} width="35px" minValue={1} maxValue={10} onChange={(value) => item.setAmount(value)} />
       </Table.Cell>
       <Table.Cell collapsing>
         <Button

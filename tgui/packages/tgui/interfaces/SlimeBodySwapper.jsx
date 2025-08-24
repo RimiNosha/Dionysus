@@ -24,14 +24,7 @@ export const BodyEntry = (props) => {
         </Box>
       }
       level={2}
-      buttons={
-        <Button
-          content={occupiedMap[body.occupied]}
-          selected={body.occupied === 'owner'}
-          color={body.occupied === 'stranger' && 'bad'}
-          onClick={() => swapFunc()}
-        />
-      }
+      buttons={<Button content={occupiedMap[body.occupied]} selected={body.occupied === 'owner'} color={body.occupied === 'stranger' && 'bad'} onClick={() => swapFunc()} />}
     >
       <LabeledList>
         <LabeledList.Item label="Status" bold color={statusMap[body.status]}>
@@ -52,11 +45,7 @@ export const SlimeBodySwapper = (props) => {
       <Window.Content scrollable>
         <Section>
           {bodies.map((body) => (
-            <BodyEntry
-              key={body.name}
-              body={body}
-              swapFunc={() => act('swap', { ref: body.ref })}
-            />
+            <BodyEntry key={body.name} body={body} swapFunc={() => act('swap', { ref: body.ref })} />
           ))}
         </Section>
       </Window.Content>

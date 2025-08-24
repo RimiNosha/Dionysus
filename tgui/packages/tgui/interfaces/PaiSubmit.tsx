@@ -78,11 +78,7 @@ const InputDisplay = (props) => {
             <Box bold color="label">
               Name
             </Box>
-            <Input
-              fluid
-              value={name}
-              onChange={(e) => onChangeHandler(e, 'name')}
-            />
+            <Input fluid value={name} onChange={(e) => onChangeHandler(e, 'name')} />
           </Tooltip>
         </Stack.Item>
         <Stack.Item>
@@ -90,11 +86,7 @@ const InputDisplay = (props) => {
             <Box bold color="label">
               Description
             </Box>
-            <Input
-              fluid
-              value={description}
-              onChange={(e) => onChangeHandler(e, 'description')}
-            />
+            <Input fluid value={description} onChange={(e) => onChangeHandler(e, 'description')} />
           </Tooltip>
         </Stack.Item>
         <Stack.Item>
@@ -102,11 +94,7 @@ const InputDisplay = (props) => {
             <Box bold color="label">
               OOC Comments
             </Box>
-            <Input
-              fluid
-              value={comments}
-              onChange={(e) => onChangeHandler(e, 'comments')}
-            />
+            <Input fluid value={comments} onChange={(e) => onChangeHandler(e, 'comments')} />
           </Tooltip>
         </Stack.Item>
       </Stack>
@@ -123,18 +111,12 @@ const ButtonsDisplay = (props) => {
     <Section fill>
       <Stack>
         <Stack.Item>
-          <Button
-            onClick={() => act('save', { candidate: input })}
-            tooltip="Saves your candidate data locally."
-          >
+          <Button onClick={() => act('save', { candidate: input })} tooltip="Saves your candidate data locally.">
             SAVE
           </Button>
         </Stack.Item>
         <Stack.Item>
-          <Button
-            onClick={() => act('load')}
-            tooltip="Loads saved candidate data, if any."
-          >
+          <Button onClick={() => act('load')} tooltip="Loads saved candidate data, if any.">
             LOAD
           </Button>
         </Stack.Item>

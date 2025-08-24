@@ -13,11 +13,7 @@ export const CircuitAccessChecker = (props) => {
       <Window.Content>
         <LabeledList>
           <LabeledList.Item label="Access Required">
-            <Button
-              icon={oneAccess ? 'unlock' : 'lock'}
-              content={oneAccess ? 'One' : 'All'}
-              onClick={() => act('one_access')}
-            />
+            <Button icon={oneAccess ? 'unlock' : 'lock'} content={oneAccess ? 'One' : 'All'} onClick={() => act('one_access')} />
           </LabeledList.Item>
         </LabeledList>
         <AccessConfig

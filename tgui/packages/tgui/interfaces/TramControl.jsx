@@ -97,9 +97,7 @@ export const TramControl = (props) => {
           >
             <Icon ml={-2.1} mt={0.55} fontSize="60px" name="circle-o" />
           </Button>
-          {(destinations.length - 1 !== destinations.indexOf(dest) && (
-            <Section title=" " mt={-7.3} ml={10} mr={-6.1} />
-          )) || <Box mt={-2.3} />}
+          {(destinations.length - 1 !== destinations.indexOf(dest) && <Section title=" " mt={-7.3} ml={10} mr={-6.1} />) || <Box mt={-2.3} />}
         </Stack.Item>
         {dest.dest_icons && (
           <Stack.Item>

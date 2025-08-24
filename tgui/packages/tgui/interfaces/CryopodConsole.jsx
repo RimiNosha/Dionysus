@@ -13,10 +13,7 @@ export const CryopodConsole = (props) => {
       <Window.Content>
         <Stack vertical fill>
           <Stack.Item>
-            <Section title={welcomeTitle}>
-              This automated cryogenic freezing unit will safely store your
-              corporeal form until your next assignment.
-            </Section>
+            <Section title={welcomeTitle}>This automated cryogenic freezing unit will safely store your corporeal form until your next assignment.</Section>
           </Stack.Item>
           <Stack.Item grow>
             <CrewList />
@@ -61,12 +58,7 @@ const ItemList = (props) => {
         <LabeledList>
           {item_ref_list.map((item) => (
             <LabeledList.Item key={item} label={item_ref_name[item]}>
-              <Button
-                icon="exclamation-circle"
-                content="Retrieve"
-                color="bad"
-                onClick={() => act('item_get', { item_get: item })}
-              />
+              <Button icon="exclamation-circle" content="Retrieve" color="bad" onClick={() => act('item_get', { item_get: item })} />
             </LabeledList.Item>
           ))}
         </LabeledList>

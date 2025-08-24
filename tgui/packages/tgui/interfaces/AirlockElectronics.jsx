@@ -14,11 +14,7 @@ export const AirlockElectronics = (props) => {
         <Section title="Main">
           <LabeledList>
             <LabeledList.Item label="Access Required">
-              <Button
-                icon={oneAccess ? 'unlock' : 'lock'}
-                content={oneAccess ? 'One' : 'All'}
-                onClick={() => act('one_access')}
-              />
+              <Button icon={oneAccess ? 'unlock' : 'lock'} content={oneAccess ? 'One' : 'All'} onClick={() => act('one_access')} />
             </LabeledList.Item>
             <LabeledList.Item label="Unrestricted Access">
               <Button

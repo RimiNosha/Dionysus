@@ -7,19 +7,7 @@ import { getGasLabel } from '../../constants';
 export const Vent = (props) => {
   const { vent } = props;
   const { act } = useBackend();
-  const {
-    id_tag,
-    long_name,
-    power,
-    checks,
-    excheck,
-    incheck,
-    direction,
-    external,
-    internal,
-    extdefault,
-    intdefault,
-  } = vent;
+  const { id_tag, long_name, power, checks, excheck, incheck, direction, external, internal, extdefault, intdefault } = vent;
   return (
     <Section
       level={2}
@@ -140,8 +128,7 @@ export const Vent = (props) => {
 export const Scrubber = (props) => {
   const { scrubber } = props;
   const { act } = useBackend();
-  const { long_name, power, scrubbing, id_tag, quicksucc, filter_types } =
-    scrubber;
+  const { long_name, power, scrubbing, id_tag, quicksucc, filter_types } = scrubber;
   return (
     <Section
       level={2}

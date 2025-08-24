@@ -1,14 +1,7 @@
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Box, Button, LabeledList, NumberInput, ProgressBar, Section } from '../components';
 import { getGasColor, getGasLabel } from '../constants';
 import { Window } from '../layouts';
 
@@ -18,25 +11,14 @@ export const Crystallizer = (props) => {
   const { act, data } = useBackend();
   const selectedRecipes = data.selected_recipes || [];
   const gasTypes = data.internal_gas_data || [];
-  const {
-    requirements,
-    internal_temperature,
-    progress_bar,
-    gas_input,
-    selected,
-  } = data;
+  const { requirements, internal_temperature, progress_bar, gas_input, selected } = data;
   return (
     <Window width={500} height={600}>
       <Window.Content scrollable>
         <Section title="Controls">
           <LabeledList>
             <LabeledList.Item label="Power">
-              <Button
-                icon={data.on ? 'power-off' : 'times'}
-                content={data.on ? 'On' : 'Off'}
-                selected={data.on}
-                onClick={() => act('power')}
-              />
+              <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} onClick={() => act('power')} />
             </LabeledList.Item>
             <LabeledList.Item label="Recipe">
               {selectedRecipes.map((recipe) => (
@@ -107,12 +89,7 @@ export const Crystallizer = (props) => {
           <LabeledList>
             {gasTypes.map((gas) => (
               <LabeledList.Item key={gas.name} label={getGasLabel(gas.name)}>
-                <ProgressBar
-                  color={getGasColor(gas.name)}
-                  value={gas.amount}
-                  minValue={0}
-                  maxValue={1000}
-                >
+                <ProgressBar color={getGasColor(gas.name)} value={gas.amount} minValue={0} maxValue={1000}>
                   {toFixed(gas.amount, 2) + ' moles'}
                 </ProgressBar>
               </LabeledList.Item>

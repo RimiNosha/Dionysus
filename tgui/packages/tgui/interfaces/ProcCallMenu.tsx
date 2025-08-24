@@ -1,14 +1,7 @@
 import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
-import {
-  Button,
-  Dropdown,
-  Input,
-  NoticeBox,
-  Section,
-  Stack,
-} from '../components';
+import { Button, Dropdown, Input, NoticeBox, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 type Port = {
@@ -27,13 +20,7 @@ type ProcCallMenuData = {
 
 export const ProcCallMenu = (props) => {
   const { act, data } = useBackend<ProcCallMenuData>();
-  const {
-    input_ports,
-    possible_types,
-    expected_output,
-    expected_output_color,
-    resolve_weakref,
-  } = data;
+  const { input_ports, possible_types, expected_output, expected_output_color, resolve_weakref } = data;
   return (
     <Window width={500} height={400}>
       <Window.Content scrollable>
@@ -48,25 +35,16 @@ export const ProcCallMenu = (props) => {
                     displayText={expected_output}
                     options={possible_types}
                     color={expected_output_color}
-                    onSelected={(value) =>
-                      act('set_expected_output', { datatype: value })
-                    }
+                    onSelected={(value) => act('set_expected_output', { datatype: value })}
                   />
                 </Stack.Item>
                 <Stack.Divider />
                 <Stack.Item>
-                  <Button.Checkbox
-                    content="Resolve Weakref"
-                    textAlign="center"
-                    checked={resolve_weakref}
-                    onClick={() => act('resolve_weakref')}
-                    fluid
-                  />
+                  <Button.Checkbox content="Resolve Weakref" textAlign="center" checked={resolve_weakref} onClick={() => act('resolve_weakref')} fluid />
                 </Stack.Item>
                 <Stack.Item>
                   <NoticeBox info width="100%">
-                    This determines whether we automatically resolve any
-                    weakrefs in lists.
+                    This determines whether we automatically resolve any weakrefs in lists.
                   </NoticeBox>
                 </Stack.Item>
               </Stack>
@@ -102,13 +80,7 @@ export const ProcCallMenu = (props) => {
                   />
                 ))}
                 <Stack.Item>
-                  <Button
-                    fluid
-                    content="Add Argument"
-                    color="good"
-                    icon="plus"
-                    onClick={() => act('add_argument')}
-                  />
+                  <Button fluid content="Add Argument" color="good" icon="plus" onClick={() => act('add_argument')} />
                 </Stack.Item>
               </Stack>
             </Section>
@@ -120,16 +92,7 @@ export const ProcCallMenu = (props) => {
 };
 
 const PortEntry = (props) => {
-  const {
-    onRemove,
-    onEnter,
-    onSetType,
-    name,
-    datatype,
-    datatypeOptions = [],
-    color,
-    ...rest
-  } = props;
+  const { onRemove, onEnter, onSetType, name, datatype, datatypeOptions = [], color, ...rest } = props;
 
   return (
     <Stack.Item {...rest}>
@@ -138,12 +101,7 @@ const PortEntry = (props) => {
           <Input placeholder="Name" value={name} onChange={onEnter} fluid />
         </Stack.Item>
         <Stack.Item>
-          <Dropdown
-            displayText={datatype}
-            options={datatypeOptions}
-            onSelected={onSetType}
-            color={color}
-          />
+          <Dropdown displayText={datatype} options={datatypeOptions} onSelected={onSetType} color={color} />
         </Stack.Item>
         <Stack.Item>
           <Button icon="times" color="red" onClick={onRemove} />

@@ -43,24 +43,14 @@ export const DestinationTagger = (props) => {
       <Window.Content>
         <Stack fill vertical>
           <Stack.Item grow>
-            <Section
-              fill
-              scrollable
-              title={
-                !currentTag
-                  ? 'Please Select A Location'
-                  : `Current Destination: ${locations[currentTag - 1]}`
-              }
-            >
+            <Section fill scrollable title={!currentTag ? 'Please Select A Location' : `Current Destination: ${locations[currentTag - 1]}`}>
               {sortDestinations(locations).map((location) => {
                 return (
                   <Button.Checkbox
                     checked={currentTag === location.sorting_id}
                     height={2}
                     key={location.sorting_id}
-                    onClick={() =>
-                      act('change', { index: location.sorting_id })
-                    }
+                    onClick={() => act('change', { index: location.sorting_id })}
                     width={15}
                   >
                     {location.name}

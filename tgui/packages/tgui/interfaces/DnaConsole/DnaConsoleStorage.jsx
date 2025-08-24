@@ -2,15 +2,7 @@ import { uniqBy } from 'common/collections';
 import { capitalize } from 'common/string';
 
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Divider,
-  Flex,
-  LabeledList,
-  Section,
-} from '../../components';
+import { Box, Button, Collapsible, Divider, Flex, LabeledList, Section } from '../../components';
 import {
   STORAGE_CONS_SUBMODE_CHROMOSOMES,
   STORAGE_CONS_SUBMODE_MUTATIONS,
@@ -58,12 +50,7 @@ const DnaConsoleAdvancedInjectors = (props) => {
             </>
           }
         >
-          <StorageMutations
-            mutations={injector.mutations}
-            customMode={`advinj${advInjectors.findIndex(
-              (e) => injector.name === e.name,
-            )}`}
-          />
+          <StorageMutations mutations={injector.mutations} customMode={`advinj${advInjectors.findIndex((e) => injector.name === e.name)}`} />
         </Collapsible>
       ))}
       <Box mt={2}>
@@ -139,8 +126,7 @@ const StorageButtons = (props) => {
         onClick={() =>
           act('set_view', {
             storageMode: STORAGE_MODE_CONSOLE,
-            storageConsSubMode:
-              STORAGE_CONS_SUBMODE_MUTATIONS ?? storageConsSubMode,
+            storageConsSubMode: STORAGE_CONS_SUBMODE_MUTATIONS ?? storageConsSubMode,
           })
         }
       />
@@ -151,8 +137,7 @@ const StorageButtons = (props) => {
         onClick={() =>
           act('set_view', {
             storageMode: STORAGE_MODE_DISK,
-            storageDiskSubMode:
-              STORAGE_DISK_SUBMODE_MUTATIONS ?? storageDiskSubMode,
+            storageDiskSubMode: STORAGE_DISK_SUBMODE_MUTATIONS ?? storageDiskSubMode,
           })
         }
       />
@@ -205,12 +190,8 @@ const StorageChromosomes = (props) => {
             <>
               <LabeledList>
                 <LabeledList.Item label="Name">{chromo.Name}</LabeledList.Item>
-                <LabeledList.Item label="Description">
-                  {chromo.Description}
-                </LabeledList.Item>
-                <LabeledList.Item label="Amount">
-                  {chromos.filter((x) => x.Name === chromo.Name).length}
-                </LabeledList.Item>
+                <LabeledList.Item label="Description">{chromo.Description}</LabeledList.Item>
+                <LabeledList.Item label="Amount">{chromos.filter((x) => x.Name === chromo.Name).length}</LabeledList.Item>
               </LabeledList>
               <Button
                 mt={2}
@@ -237,9 +218,7 @@ const StorageMutations = (props) => {
   const mode = data.view.storageMode + customMode;
 
   let mutationRef = data.view[`storage${mode}MutationRef`];
-  let mutation = mutations.find(
-    (mutation) => mutation.ByondRef === mutationRef,
-  );
+  let mutation = mutations.find((mutation) => mutation.ByondRef === mutationRef);
 
   // If no mutation is selected but there are stored mutations, pick the first
   // mutation and set that as the currently showed one.
@@ -251,10 +230,7 @@ const StorageMutations = (props) => {
   return (
     <Flex>
       <Flex.Item width="140px">
-        <Section
-          title={`${capitalize(data.view.storageMode)} Storage`}
-          level={2}
-        >
+        <Section title={`${capitalize(data.view.storageMode)} Storage`} level={2}>
           {mutations.map((mutation) => (
             <Button
               key={mutation.ByondRef}
@@ -291,31 +267,15 @@ export const DnaConsoleStorage = (props) => {
   const mutations = data.storage[storageMode];
   return (
     <Section title="Storage" buttons={<StorageButtons />}>
-      {storageMode === STORAGE_MODE_CONSOLE &&
-        storageConsSubMode === STORAGE_CONS_SUBMODE_MUTATIONS && (
-          <StorageMutations mutations={mutations} />
-        )}
-      {storageMode === STORAGE_MODE_CONSOLE &&
-        storageConsSubMode === STORAGE_CONS_SUBMODE_CHROMOSOMES && (
-          <StorageChromosomes />
-        )}
-      {storageMode === STORAGE_MODE_DISK &&
-        storageDiskSubMode === STORAGE_DISK_SUBMODE_MUTATIONS && (
-          <StorageMutations mutations={mutations} />
-        )}
-      {storageMode === STORAGE_MODE_DISK &&
-        storageDiskSubMode === STORAGE_DISK_SUBMODE_ENZYMES && (
-          <>
-            <GeneticMakeupInfo makeup={diskMakeupBuffer} />
-            <Button
-              icon="times"
-              color="red"
-              disabled={!diskHasMakeup}
-              content={'Delete'}
-              onClick={() => act('del_makeup_disk')}
-            />
-          </>
-        )}
+      {storageMode === STORAGE_MODE_CONSOLE && storageConsSubMode === STORAGE_CONS_SUBMODE_MUTATIONS && <StorageMutations mutations={mutations} />}
+      {storageMode === STORAGE_MODE_CONSOLE && storageConsSubMode === STORAGE_CONS_SUBMODE_CHROMOSOMES && <StorageChromosomes />}
+      {storageMode === STORAGE_MODE_DISK && storageDiskSubMode === STORAGE_DISK_SUBMODE_MUTATIONS && <StorageMutations mutations={mutations} />}
+      {storageMode === STORAGE_MODE_DISK && storageDiskSubMode === STORAGE_DISK_SUBMODE_ENZYMES && (
+        <>
+          <GeneticMakeupInfo makeup={diskMakeupBuffer} />
+          <Button icon="times" color="red" disabled={!diskHasMakeup} content={'Delete'} onClick={() => act('del_makeup_disk')} />
+        </>
+      )}
       {storageMode === STORAGE_MODE_ADVINJ && <DnaConsoleAdvancedInjectors />}
     </Section>
   );

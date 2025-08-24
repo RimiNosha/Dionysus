@@ -7,13 +7,7 @@ export const StackingConsole = (props) => {
   const { machine } = data;
   return (
     <Window width={320} height={340}>
-      <Window.Content scrollable>
-        {!machine ? (
-          <NoticeBox>No connected stacking machine</NoticeBox>
-        ) : (
-          <StackingConsoleContent />
-        )}
-      </Window.Content>
+      <Window.Content scrollable>{!machine ? <NoticeBox>No connected stacking machine</NoticeBox> : <StackingConsoleContent />}</Window.Content>
     </Window>
   );
 };
@@ -25,9 +19,7 @@ export const StackingConsoleContent = (props) => {
     <>
       <Section>
         <LabeledList>
-          <LabeledList.Item label="Stacking Amount">
-            {stacking_amount || 'Unknown'}
-          </LabeledList.Item>
+          <LabeledList.Item label="Stacking Amount">{stacking_amount || 'Unknown'}</LabeledList.Item>
         </LabeledList>
       </Section>
       <Section title="Stored Materials">

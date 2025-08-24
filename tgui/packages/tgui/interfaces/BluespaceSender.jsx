@@ -3,16 +3,7 @@ import { flow } from 'common/fp';
 import { toFixed } from 'common/math';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Divider,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Divider, LabeledList, NumberInput, ProgressBar, Section, Stack } from '../components';
 import { getGasColor, getGasLabel } from '../constants';
 import { Window } from '../layouts';
 
@@ -21,14 +12,8 @@ const mappedTopMargin = '2%';
 export const BluespaceSender = (props) => {
   const { act, data } = useBackend();
   const { on, gas_transfer_rate, price_multiplier } = data;
-  const bluespace_network_gases = flow([
-    filter((gas) => gas.amount >= 0.01),
-    sortBy((gas) => -gas.amount),
-  ])(data.bluespace_network_gases || []);
-  const gasMax = Math.max(
-    1,
-    ...bluespace_network_gases.map((gas) => gas.amount),
-  );
+  const bluespace_network_gases = flow([filter((gas) => gas.amount >= 0.01), sortBy((gas) => -gas.amount)])(data.bluespace_network_gases || []);
+  const gasMax = Math.max(1, ...bluespace_network_gases.map((gas) => gas.amount));
   return (
     <Window title="Bluespace Sender" width={500} height={600}>
       <Window.Content>
@@ -73,19 +58,11 @@ export const BluespaceSender = (props) => {
                 tooltip="Will only take in gases while on."
                 onClick={() => act('power')}
               />
-              <Button
-                ml={0.5}
-                content="Retrieve gases"
-                tooltipPosition="bottom-start"
-                tooltip="Will transfer any gases inside to the pipe."
-                onClick={() => act('retrieve')}
-              />
+              <Button ml={0.5} content="Retrieve gases" tooltipPosition="bottom-start" tooltip="Will transfer any gases inside to the pipe." onClick={() => act('retrieve')} />
             </>
           }
         >
-          <Box>
-            {'The vendors have made ' + data.credits + ' credits so far.'}
-          </Box>
+          <Box>{'The vendors have made ' + data.credits + ' credits so far.'}</Box>
           <Divider />
           <LabeledList>
             {bluespace_network_gases.map((gas) => (
@@ -112,12 +89,7 @@ export const BluespaceSender = (props) => {
                     </Box>
                   </Stack.Item>
                   <Stack.Item grow mt={mappedTopMargin} mr={1}>
-                    <ProgressBar
-                      color={getGasColor(gas.name)}
-                      value={gas.amount}
-                      minValue={0}
-                      maxValue={gasMax}
-                    >
+                    <ProgressBar color={getGasColor(gas.name)} value={gas.amount} minValue={0} maxValue={gasMax}>
                       {toFixed(gas.amount, 2) + ' moles'}
                     </ProgressBar>
                   </Stack.Item>

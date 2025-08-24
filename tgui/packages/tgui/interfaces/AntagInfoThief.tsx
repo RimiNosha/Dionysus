@@ -42,10 +42,8 @@ export const AntagInfoThief = (props) => {
           {!!hideout && (
             <Stack.Item>
               <Section textAlign="center" textColor="green">
-                This station has an established criminal hideout, which your
-                connections to Val Corrin has granted you access to. It is at
-                the {hideout}. Use it as a space to plan heists with other
-                thieves, and store stolen goods!
+                This station has an established criminal hideout, which your connections to Val Corrin has granted you access to. It is at the {hideout}. Use it as a space to plan
+                heists with other thieves, and store stolen goods!
               </Section>
             </Stack.Item>
           )}

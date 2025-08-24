@@ -1,32 +1,12 @@
 import { useBackend } from '../backend';
-import {
-  Button,
-  Dropdown,
-  Input,
-  Section,
-  Stack,
-  TextArea,
-} from '../components';
+import { Button, Dropdown, Input, Section, Stack, TextArea } from '../components';
 import { Window } from '../layouts';
 
 export const CommandReport = (props) => {
   const { act, data } = useBackend();
-  const {
-    command_name,
-    custom_name,
-    command_name_presets = [],
-    command_report_content,
-    played_sound,
-    announcer_sounds = [],
-    announce_contents,
-  } = data;
+  const { command_name, custom_name, command_name_presets = [], command_report_content, played_sound, announcer_sounds = [], announce_contents } = data;
   return (
-    <Window
-      title="Create Command Report"
-      width={325}
-      height={525}
-      theme="admin"
-    >
+    <Window title="Create Command Report" width={325} height={525} theme="admin">
       <Window.Content>
         <Stack vertical>
           <Stack.Item>
@@ -84,23 +64,12 @@ export const CommandReport = (props) => {
               />
               <Stack vertical>
                 <Stack.Item>
-                  <Button.Checkbox
-                    fluid
-                    checked={announce_contents}
-                    onClick={() => act('toggle_announce')}
-                  >
+                  <Button.Checkbox fluid checked={announce_contents} onClick={() => act('toggle_announce')}>
                     Announce Contents
                   </Button.Checkbox>
                 </Stack.Item>
                 <Stack.Item>
-                  <Button.Confirm
-                    fluid
-                    icon="check"
-                    color="good"
-                    textAlign="center"
-                    content="Submit Report"
-                    onClick={() => act('submit_report')}
-                  />
+                  <Button.Confirm fluid icon="check" color="good" textAlign="center" content="Submit Report" onClick={() => act('submit_report')} />
                 </Stack.Item>
               </Stack>
             </Section>

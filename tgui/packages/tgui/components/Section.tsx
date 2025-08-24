@@ -49,39 +49,16 @@ export class Section extends Component<SectionProps> {
   }
 
   render() {
-    const {
-      className,
-      container_id,
-      title,
-      buttons,
-      fill,
-      fitted,
-      scrollable,
-      children,
-      noTitleBorder,
-      ...rest
-    } = this.props;
+    const { className, container_id, title, buttons, fill, fitted, scrollable, children, noTitleBorder, ...rest } = this.props;
     const hasTitle = canRender(title) || canRender(buttons);
     return (
       <div
         id={container_id}
-        className={classes([
-          'Section',
-          fill && 'Section--fill',
-          fitted && 'Section--fitted',
-          scrollable && 'Section--scrollable',
-          className,
-          computeBoxClassName(rest),
-        ])}
+        className={classes(['Section', fill && 'Section--fill', fitted && 'Section--fitted', scrollable && 'Section--scrollable', className, computeBoxClassName(rest)])}
         {...computeBoxProps(rest)}
       >
         {hasTitle && (
-          <div
-            className={classes([
-              'Section__title',
-              noTitleBorder && 'Section--titleBorderless',
-            ])}
-          >
+          <div className={classes(['Section__title', noTitleBorder && 'Section--titleBorderless'])}>
             <span className="Section__titleText">{title}</span>
             <div className="Section__buttons">{buttons}</div>
           </div>

@@ -1,15 +1,7 @@
 import { BooleanLike } from 'common/react';
 
 import { useLocalState, useSharedState } from '../../backend';
-import {
-  Box,
-  Button,
-  Input,
-  NoticeBox,
-  Section,
-  Stack,
-  Tabs,
-} from '../../components';
+import { Box, Button, Input, NoticeBox, Section, Stack, Tabs } from '../../components';
 
 type GenericUplinkProps = {
   categories: string[];
@@ -27,14 +19,8 @@ export const GenericUplink = (props: GenericUplinkProps) => {
     handleBuy,
   } = props;
   const [searchText, setSearchText] = useLocalState('searchText', '');
-  const [selectedCategory, setSelectedCategory] = useLocalState(
-    'category',
-    categories[0],
-  );
-  const [compactMode, setCompactMode] = useSharedState(
-    'compactModeUplink',
-    false,
-  );
+  const [selectedCategory, setSelectedCategory] = useLocalState('category', categories[0]);
+  const [compactMode, setCompactMode] = useSharedState('compactModeUplink', false);
   let items = props.items.filter((value) => {
     if (searchText.length === 0) {
       return value.category === selectedCategory;
@@ -47,17 +33,8 @@ export const GenericUplink = (props: GenericUplinkProps) => {
       buttons={
         <>
           Search
-          <Input
-            autoFocus
-            value={searchText}
-            onInput={(e, value) => setSearchText(value)}
-            mx={1}
-          />
-          <Button
-            icon={compactMode ? 'list' : 'info'}
-            content={compactMode ? 'Compact' : 'Detailed'}
-            onClick={() => setCompactMode(!compactMode)}
-          />
+          <Input autoFocus value={searchText} onInput={(e, value) => setSearchText(value)} mx={1} />
+          <Button icon={compactMode ? 'list' : 'info'} content={compactMode ? 'Compact' : 'Detailed'} onClick={() => setCompactMode(!compactMode)} />
         </>
       }
     >
@@ -66,11 +43,7 @@ export const GenericUplink = (props: GenericUplinkProps) => {
           <Stack.Item mr={1}>
             <Tabs vertical>
               {categories.map((category) => (
-                <Tabs.Tab
-                  key={category}
-                  selected={category === selectedCategory}
-                  onClick={() => setSelectedCategory(category)}
-                >
+                <Tabs.Tab key={category} selected={category === selectedCategory} onClick={() => setSelectedCategory(category)}>
                   {category}
                 </Tabs.Tab>
               ))}
@@ -78,18 +51,8 @@ export const GenericUplink = (props: GenericUplinkProps) => {
           </Stack.Item>
         )}
         <Stack.Item grow={1}>
-          {items.length === 0 && (
-            <NoticeBox>
-              {searchText.length === 0
-                ? 'No items in this category.'
-                : 'No results found.'}
-            </NoticeBox>
-          )}
-          <ItemList
-            compactMode={searchText.length > 0 || compactMode}
-            items={items}
-            handleBuy={handleBuy}
-          />
+          {items.length === 0 && <NoticeBox>{searchText.length === 0 ? 'No items in this category.' : 'No results found.'}</NoticeBox>}
+          <ItemList compactMode={searchText.length > 0 || compactMode} items={items} handleBuy={handleBuy} />
         </Stack.Item>
       </Stack>
     </Section>
@@ -119,17 +82,7 @@ const ItemList = (props: ItemListProps) => {
     <Stack vertical>
       {items.map((item, index) => (
         <Stack.Item key={index}>
-          <Section
-            key={item.name}
-            title={item.name}
-            buttons={
-              <Button
-                content={item.cost}
-                disabled={item.disabled}
-                onClick={(e) => handleBuy(item)}
-              />
-            }
-          >
+          <Section key={item.name} title={item.name} buttons={<Button content={item.cost} disabled={item.disabled} onClick={(e) => handleBuy(item)} />}>
             {compactMode ? null : item.desc}
           </Section>
         </Stack.Item>

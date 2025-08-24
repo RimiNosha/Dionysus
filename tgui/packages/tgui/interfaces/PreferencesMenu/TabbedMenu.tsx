@@ -33,8 +33,7 @@ export class TabbedMenu extends Component<TabbedMenuProps> {
                     fontSize="1.2em"
                     fluid
                     onClick={() => {
-                      const offsetTop =
-                        this.categoryRefs[category].current?.offsetTop;
+                      const offsetTop = this.categoryRefs[category].current?.offsetTop;
 
                       if (offsetTop === undefined) {
                         return;
@@ -72,10 +71,7 @@ export class TabbedMenu extends Component<TabbedMenuProps> {
           <Stack vertical fill px={2}>
             {this.props.categoryEntries.map(([category, children]) => {
               return (
-                <Stack.Item
-                  key={category}
-                  innerRef={this.getCategoryRef(category)}
-                >
+                <Stack.Item key={category} innerRef={this.getCategoryRef(category)}>
                   <Section fill title={category}>
                     {children}
                   </Section>

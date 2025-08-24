@@ -17,9 +17,7 @@ const NoIDDimmer = (props) => {
                 </Stack.Item>
               </Stack>
             </Stack.Item>
-            <Stack.Item fontSize="18px">
-              Please imprint an ID to continue.
-            </Stack.Item>
+            <Stack.Item fontSize="18px">Please imprint an ID to continue.</Stack.Item>
           </Stack>
         </Dimmer>
       </Stack.Item>
@@ -29,35 +27,15 @@ const NoIDDimmer = (props) => {
 
 export const NtosMessenger = (props) => {
   const { act, data } = useBackend();
-  const {
-    owner,
-    messages = [],
-    ringer_status,
-    sending_and_receiving,
-    messengers = [],
-    viewing_messages,
-    sortByJob,
-    canSpam,
-    isSilicon,
-    virus_attach,
-    sending_virus,
-  } = data;
+  const { owner, messages = [], ringer_status, sending_and_receiving, messengers = [], viewing_messages, sortByJob, canSpam, isSilicon, virus_attach, sending_virus } = data;
   if (viewing_messages) {
     return (
       <NtosWindow width={600} height={800}>
         <NtosWindow.Content>
           <Stack vertical>
             <Section fill>
-              <Button
-                icon="arrow-left"
-                content="Back"
-                onClick={() => act('PDA_viewMessages')}
-              />
-              <Button
-                icon="trash"
-                content="Clear Messages"
-                onClick={() => act('PDA_clearMessages')}
-              />
+              <Button icon="arrow-left" content="Back" onClick={() => act('PDA_viewMessages')} />
+              <Button icon="trash" content="Clear Messages" onClick={() => act('PDA_clearMessages')} />
             </Section>
             {messages.map((message) => (
               <Stack vertical key={message} mt={1}>
@@ -111,48 +89,13 @@ export const NtosMessenger = (props) => {
         <Stack vertical>
           <Section fill textAlign="center">
             <Box>
-              <Button
-                icon="bell"
-                content={ringer_status ? 'Ringer: On' : 'Ringer: Off'}
-                onClick={() => act('PDA_ringer_status')}
-              />
-              <Button
-                icon="address-card"
-                content={
-                  sending_and_receiving
-                    ? 'Send / Receive: On'
-                    : 'Send / Receive: Off'
-                }
-                onClick={() => act('PDA_sAndR')}
-              />
-              <Button
-                icon="bell"
-                content="Set Ringtone"
-                onClick={() => act('PDA_ringSet')}
-              />
-              <Button
-                icon="comment"
-                content="View Messages"
-                onClick={() => act('PDA_viewMessages')}
-              />
-              <Button
-                icon="sort"
-                content={`Sort by: ${sortByJob ? 'Job' : 'Name'}`}
-                onClick={() => act('PDA_changeSortStyle')}
-              />
-              <Button
-                icon="wifi"
-                content={`Scan for PDAs`}
-                onClick={() => act('PDA_scanForPDAs')}
-              />
-              {!!virus_attach && (
-                <Button
-                  icon="bug"
-                  color="bad"
-                  content={`Attach Virus: ${sending_virus ? 'Yes' : 'No'}`}
-                  onClick={() => act('PDA_toggleVirus')}
-                />
-              )}
+              <Button icon="bell" content={ringer_status ? 'Ringer: On' : 'Ringer: Off'} onClick={() => act('PDA_ringer_status')} />
+              <Button icon="address-card" content={sending_and_receiving ? 'Send / Receive: On' : 'Send / Receive: Off'} onClick={() => act('PDA_sAndR')} />
+              <Button icon="bell" content="Set Ringtone" onClick={() => act('PDA_ringSet')} />
+              <Button icon="comment" content="View Messages" onClick={() => act('PDA_viewMessages')} />
+              <Button icon="sort" content={`Sort by: ${sortByJob ? 'Job' : 'Name'}`} onClick={() => act('PDA_changeSortStyle')} />
+              <Button icon="wifi" content={`Scan for PDAs`} onClick={() => act('PDA_scanForPDAs')} />
+              {!!virus_attach && <Button icon="bug" color="bad" content={`Attach Virus: ${sending_virus ? 'Yes' : 'No'}`} onClick={() => act('PDA_toggleVirus')} />}
             </Box>
           </Section>
         </Stack>
@@ -181,14 +124,7 @@ export const NtosMessenger = (props) => {
                 </Button>
               ))}
             </Stack>
-            {!!canSpam && (
-              <Button
-                fluid
-                mt={1}
-                content="Send to all..."
-                onClick={() => act('PDA_sendEveryone')}
-              />
-            )}
+            {!!canSpam && <Button fluid mt={1} content="Send to all..." onClick={() => act('PDA_sendEveryone')} />}
           </Section>
         </Stack>
         {!owner && !isSilicon && <NoIDDimmer />}

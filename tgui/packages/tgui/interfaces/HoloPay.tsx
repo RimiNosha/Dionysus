@@ -1,18 +1,7 @@
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Dropdown,
-  Icon,
-  NoticeBox,
-  RestrictedInput,
-  Section,
-  Stack,
-  Table,
-  TextArea,
-} from '../components';
+import { Box, Button, Dropdown, Icon, NoticeBox, RestrictedInput, Section, Stack, Table, TextArea } from '../components';
 import { Window } from '../layouts';
 
 type HoloPayData = {
@@ -51,13 +40,7 @@ export const HoloPay = (_) => {
             <Stack.Item>
               <AccountDisplay onClick={onClick} />
             </Stack.Item>
-            <Stack.Item grow>
-              {!setupMode ? (
-                <TerminalDisplay onClick={onClick} />
-              ) : (
-                <SetupDisplay onClick={onClick} />
-              )}
-            </Stack.Item>
+            <Stack.Item grow>{!setupMode ? <TerminalDisplay onClick={onClick} /> : <SetupDisplay onClick={onClick} />}</Stack.Item>
           </Stack>
         )}
       </Window.Content>
@@ -105,8 +88,7 @@ const TerminalDisplay = (props) => {
   const { description, force_fee, name, owner, user, shop_logo } = data;
   const { onClick } = props;
   const is_owner = owner === user?.name;
-  const cannot_pay =
-    is_owner || !user || user?.balance < 1 || user?.balance < force_fee;
+  const cannot_pay = is_owner || !user || user?.balance < 1 || user?.balance < force_fee;
   const decodedName = name.replace(/&#(\d+);/g, (_, dec) => {
     return String.fromCharCode(dec);
   });
@@ -212,12 +194,7 @@ const SetupDisplay = (props) => {
           <Box bold color="label">
             Shop Logo
           </Box>
-          <Dropdown
-            onSelected={(value) => act('logo', { logo: value })}
-            options={available_logos}
-            selected={shop_logo}
-            width="100%"
-          />
+          <Dropdown onSelected={(value) => act('logo', { logo: value })} options={available_logos} selected={shop_logo} width="100%" />
         </Stack.Item>
         <Stack.Item>
           <Box bold color="label">
@@ -238,12 +215,7 @@ const SetupDisplay = (props) => {
             <Box bold color="label">
               Forced Fee
             </Box>
-            <RestrictedInput
-              fluid
-              maxValue={max_fee}
-              onChange={(_, value) => act('fee', { amount: value })}
-              value={force_fee}
-            />
+            <RestrictedInput fluid maxValue={max_fee} onChange={(_, value) => act('fee', { amount: value })} value={force_fee} />
           </Tooltip>
         </Stack.Item>
       </Stack>

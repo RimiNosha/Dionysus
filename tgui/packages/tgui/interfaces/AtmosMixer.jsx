@@ -1,11 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Button,
-  LabeledList,
-  NumberInput,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Button, LabeledList, NumberInput, ProgressBar, Section } from '../components';
 import { formatSiUnit } from '../format';
 import { Window } from '../layouts';
 
@@ -17,12 +11,7 @@ export const AtmosMixer = (props) => {
         <Section>
           <LabeledList>
             <LabeledList.Item label="Power">
-              <Button
-                icon={data.on ? 'power-off' : 'times'}
-                content={data.on ? 'On' : 'Off'}
-                selected={data.on}
-                onClick={() => act('power')}
-              />
+              <Button icon={data.on ? 'power-off' : 'times'} content={data.on ? 'On' : 'Off'} selected={data.on} onClick={() => act('power')} />
             </LabeledList.Item>
             <LabeledList.Item label="Output Pressure">
               <NumberInput
@@ -84,11 +73,7 @@ export const AtmosMixer = (props) => {
               />
             </LabeledList.Item>
             <LabeledList.Item label="Power Usage">
-              <ProgressBar
-                value={data.last_draw}
-                maxValue={data.max_power}
-                color="yellow"
-              >
+              <ProgressBar value={data.last_draw} maxValue={data.max_power} color="yellow">
                 {formatSiUnit(data.last_draw, 0, 'W')}
               </ProgressBar>
             </LabeledList.Item>

@@ -13,18 +13,10 @@ export const Crayon = (props) => {
           <Section title="Basic">
             <LabeledList>
               <LabeledList.Item label="Cap">
-                <Button
-                  icon={data.is_capped ? 'power-off' : 'times'}
-                  content={data.is_capped ? 'On' : 'Off'}
-                  selected={data.is_capped}
-                  onClick={() => act('toggle_cap')}
-                />
+                <Button icon={data.is_capped ? 'power-off' : 'times'} content={data.is_capped ? 'On' : 'Off'} selected={data.is_capped} onClick={() => act('toggle_cap')} />
               </LabeledList.Item>
             </LabeledList>
-            <Button
-              content="Select New Color"
-              onClick={() => act('select_colour')}
-            />
+            <Button content="Select New Color" onClick={() => act('select_colour')} />
           </Section>
         )}
         <Section title="Stencil">
@@ -52,9 +44,7 @@ export const Crayon = (props) => {
         </Section>
         <Section title="Text">
           <LabeledList>
-            <LabeledList.Item label="Current Buffer">
-              {data.text_buffer}
-            </LabeledList.Item>
+            <LabeledList.Item label="Current Buffer">{data.text_buffer}</LabeledList.Item>
           </LabeledList>
           <Button content="New Text" onClick={() => act('enter_text')} />
         </Section>

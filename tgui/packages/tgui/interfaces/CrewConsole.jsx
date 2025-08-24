@@ -120,11 +120,7 @@ const CrewTableEntry = (props) => {
         {statusToText(life_status)}
       </Table.Cell>
       <Table.Cell width="15%" collapsing textAlign="center">
-        {area !== undefined ? (
-          area
-        ) : (
-          <Icon name="question" color="#ffffff" size={1} />
-        )}
+        {area !== undefined ? area : <Icon name="question" color="#ffffff" size={1} />}
       </Table.Cell>
       {!!link_allowed && (
         <Table.Cell collapsing textAlign="center">

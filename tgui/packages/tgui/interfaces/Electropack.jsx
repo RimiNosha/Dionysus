@@ -13,12 +13,7 @@ export const Electropack = (props) => {
         <Section>
           <LabeledList>
             <LabeledList.Item label="Power">
-              <Button
-                icon={power ? 'power-off' : 'times'}
-                content={power ? 'On' : 'Off'}
-                selected={power}
-                onClick={() => act('power')}
-              />
+              <Button icon={power ? 'power-off' : 'times'} content={power ? 'On' : 'Off'} selected={power} onClick={() => act('power')} />
             </LabeledList.Item>
             <LabeledList.Item
               label="Frequency"

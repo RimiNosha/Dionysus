@@ -1,14 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Icon,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Stack,
-} from '../components';
+import { Box, Button, Collapsible, Icon, LabeledList, NoticeBox, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 export const Vote = (props) => {
@@ -20,8 +11,7 @@ export const Vote = (props) => {
    */
   let windowTitle = 'Vote';
   if (mode) {
-    windowTitle +=
-      ': ' + (question || mode).replace(/^\w/, (c) => c.toUpperCase());
+    windowTitle += ': ' + (question || mode).replace(/^\w/, (c) => c.toUpperCase());
   }
 
   return (
@@ -56,13 +46,7 @@ const VoteOptions = (props) => {
             <Stack vertical>
               <Stack.Item>
                 {!!lower_admin && (
-                  <Button.Checkbox
-                    mr={!allow_vote_map ? 1 : 1.6}
-                    color="red"
-                    checked={!!allow_vote_map}
-                    disabled={!upper_admin}
-                    onClick={() => act('toggle_map')}
-                  >
+                  <Button.Checkbox mr={!allow_vote_map ? 1 : 1.6} color="red" checked={!!allow_vote_map} disabled={!upper_admin} onClick={() => act('toggle_map')}>
                     {allow_vote_map ? 'Enabled' : 'Disabled'}
                   </Button.Checkbox>
                 )}
@@ -72,20 +56,11 @@ const VoteOptions = (props) => {
               </Stack.Item>
               <Stack.Item>
                 {!!lower_admin && (
-                  <Button.Checkbox
-                    mr={!allow_vote_restart ? 1 : 1.6}
-                    color="red"
-                    checked={!!allow_vote_restart}
-                    disabled={!upper_admin}
-                    onClick={() => act('toggle_restart')}
-                  >
+                  <Button.Checkbox mr={!allow_vote_restart ? 1 : 1.6} color="red" checked={!!allow_vote_restart} disabled={!upper_admin} onClick={() => act('toggle_restart')}>
                     {allow_vote_restart ? 'Enabled' : 'Disabled'}
                   </Button.Checkbox>
                 )}
-                <Button
-                  disabled={!allow_vote_restart}
-                  onClick={() => act('restart')}
-                >
+                <Button disabled={!allow_vote_restart} onClick={() => act('restart')}>
                   Restart
                 </Button>
               </Stack.Item>
@@ -114,9 +89,7 @@ const VotersList = (props) => {
 
   return (
     <Stack.Item>
-      <Collapsible
-        title={`View Voters${voting.length ? `: ${voting.length}` : ''}`}
-      >
+      <Collapsible title={`View Voters${voting.length ? `: ${voting.length}` : ''}`}>
         <Section height={8} fill scrollable>
           {voting.map((voter) => {
             return <Box key={voter}>{voter}</Box>;
@@ -156,14 +129,7 @@ const ChoicesPanel = (props) => {
                     </Button>
                   }
                 >
-                  {i === selected_choice - 1 && (
-                    <Icon
-                      alignSelf="right"
-                      mr={2}
-                      color="green"
-                      name="vote-yea"
-                    />
-                  )}
+                  {i === selected_choice - 1 && <Icon alignSelf="right" mr={2} color="green" name="vote-yea" />}
                   {choice.votes} Votes
                 </LabeledList.Item>
                 <LabeledList.Divider />
@@ -192,11 +158,7 @@ const TimePanel = (props) => {
         <Stack justify="space-between">
           <Box fontSize={1.5}>Time Remaining: {time_remaining || 0}s</Box>
           {!!lower_admin && (
-            <Button
-              color="red"
-              disabled={!lower_admin}
-              onClick={() => act('cancel')}
-            >
+            <Button color="red" disabled={!lower_admin} onClick={() => act('cancel')}>
               Cancel Vote
             </Button>
           )}

@@ -5,13 +5,7 @@ import { Tooltip } from 'tgui-core/components';
 
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  KeyListener,
-  Stack,
-  TrackOutsideClicks,
-} from '../../components';
+import { Box, Button, KeyListener, Stack, TrackOutsideClicks } from '../../components';
 import { KeyEvent } from '../../events';
 import { fetchRetry } from '../../http';
 import { PreferencesMenuData } from './data';
@@ -38,12 +32,7 @@ type KeybindingsPageState = {
 };
 
 function isStandardKey(event: KeyboardEvent): boolean {
-  return (
-    event.key !== KEY.Alt &&
-    event.key !== KEY.Control &&
-    event.key !== KEY.Shift &&
-    !isEscape(event.key)
-  );
+  return event.key !== KEY.Alt && event.key !== KEY.Control && event.key !== KEY.Shift && !isEscape(event.key);
 }
 
 const KEY_CODE_TO_BYOND: Record<string, string> = {
@@ -71,11 +60,9 @@ const sortKeybindings = sortBy(([_, keybinding]: [string, Keybinding]) => {
   return keybinding.name;
 });
 
-const sortKeybindingsByCategory = sortBy(
-  ([category, _]: [string, Record<string, Keybinding>]) => {
-    return category;
-  },
-);
+const sortKeybindingsByCategory = sortBy(([category, _]: [string, Record<string, Keybinding>]) => {
+  return category;
+});
 
 const formatKeyboardEvent = (event: KeyboardEvent): string => {
   let text = '';
@@ -121,10 +108,7 @@ class KeybindingButton extends Component<{
   typingHotkey?: string;
 }> {
   shouldComponentUpdate(nextProps) {
-    return (
-      this.props.typingHotkey !== nextProps.typingHotkey ||
-      this.props.currentHotkey !== nextProps.currentHotkey
-    );
+    return this.props.typingHotkey !== nextProps.typingHotkey || this.props.currentHotkey !== nextProps.currentHotkey;
   }
 
   render() {
@@ -148,9 +132,7 @@ class KeybindingButton extends Component<{
     if (typingHotkey && onClick) {
       return (
         // onClick will cancel it
-        <TrackOutsideClicks onOutsideClick={onClick}>
-          {child}
-        </TrackOutsideClicks>
+        <TrackOutsideClicks onOutsideClick={onClick}>{child}</TrackOutsideClicks>
       );
     } else {
       return child;
@@ -248,9 +230,7 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
 
       if (selectedKeybindings[keybindName]) {
         if (value) {
-          selectedKeybindings[keybindName][
-            Math.min(selectedKeybindings[keybindName].length, slot)
-          ] = value;
+          selectedKeybindings[keybindName][Math.min(selectedKeybindings[keybindName].length, slot)] = value;
         } else {
           selectedKeybindings[keybindName].splice(slot, 1);
         }
@@ -354,9 +334,7 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
   }
 
   async populateKeybindings() {
-    const keybindingsResponse = await fetchRetry(
-      resolveAsset('keybindings.json'),
-    );
+    const keybindingsResponse = await fetchRetry(resolveAsset('keybindings.json'));
     const keybindingsData: Keybindings = await keybindingsResponse.json();
 
     this.setState({
@@ -386,82 +364,61 @@ export class KeybindingsPage extends Component<{}, KeybindingsPageState> {
       return <Box>Loading keybindings...</Box>;
     }
 
-    const keybindingEntries = sortKeybindingsByCategory(
-      Object.entries(keybindings),
-    );
+    const keybindingEntries = sortKeybindingsByCategory(Object.entries(keybindings));
 
     moveToBottom(keybindingEntries, 'EMOTE');
     moveToBottom(keybindingEntries, 'ADMIN');
 
     return (
       <>
-        <KeyListener
-          onKeyDown={this.handleKeyDown}
-          onKeyUp={this.handleKeyUp}
-        />
+        <KeyListener onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp} />
 
         <Stack vertical fill>
           <Stack.Item grow>
             <TabbedMenu
-              categoryEntries={keybindingEntries.map(
-                ([category, keybindings]) => {
-                  return [
-                    category,
-                    <Stack key={category} vertical fill>
-                      {sortKeybindings(Object.entries(keybindings)).map(
-                        ([keybindingId, keybinding]) => {
-                          const keys =
-                            this.state.selectedKeybindings![keybindingId] || [];
+              categoryEntries={keybindingEntries.map(([category, keybindings]) => {
+                return [
+                  category,
+                  <Stack key={category} vertical fill>
+                    {sortKeybindings(Object.entries(keybindings)).map(([keybindingId, keybinding]) => {
+                      const keys = this.state.selectedKeybindings![keybindingId] || [];
 
-                          const name = (
-                            <Stack.Item basis="25%">
-                              <KeybindingName keybinding={keybinding} />
+                      const name = (
+                        <Stack.Item basis="25%">
+                          <KeybindingName keybinding={keybinding} />
+                        </Stack.Item>
+                      );
+
+                      return (
+                        <Stack.Item key={keybindingId}>
+                          <Stack fill>
+                            {name}
+
+                            {range(0, 3).map((key) => (
+                              <Stack.Item key={key} grow basis="10%">
+                                <KeybindingButton
+                                  currentHotkey={keys[key]}
+                                  typingHotkey={this.getTypingHotkey(keybindingId, key)}
+                                  onClick={this.getKeybindingOnClick(keybindingId, key)}
+                                />
+                              </Stack.Item>
+                            ))}
+
+                            <Stack.Item shrink>
+                              <ResetToDefaultButton keybindingId={keybindingId} />
                             </Stack.Item>
-                          );
-
-                          return (
-                            <Stack.Item key={keybindingId}>
-                              <Stack fill>
-                                {name}
-
-                                {range(0, 3).map((key) => (
-                                  <Stack.Item key={key} grow basis="10%">
-                                    <KeybindingButton
-                                      currentHotkey={keys[key]}
-                                      typingHotkey={this.getTypingHotkey(
-                                        keybindingId,
-                                        key,
-                                      )}
-                                      onClick={this.getKeybindingOnClick(
-                                        keybindingId,
-                                        key,
-                                      )}
-                                    />
-                                  </Stack.Item>
-                                ))}
-
-                                <Stack.Item shrink>
-                                  <ResetToDefaultButton
-                                    keybindingId={keybindingId}
-                                  />
-                                </Stack.Item>
-                              </Stack>
-                            </Stack.Item>
-                          );
-                        },
-                      )}
-                    </Stack>,
-                  ];
-                },
-              )}
+                          </Stack>
+                        </Stack.Item>
+                      );
+                    })}
+                  </Stack>,
+                ];
+              })}
             />
           </Stack.Item>
 
           <Stack.Item align="center">
-            <Button.Confirm
-              content="Reset all keybindings"
-              onClick={() => act('reset_all_keybinds')}
-            />
+            <Button.Confirm content="Reset all keybindings" onClick={() => act('reset_all_keybinds')} />
           </Stack.Item>
         </Stack>
       </>

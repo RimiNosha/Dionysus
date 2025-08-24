@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  LabeledList,
-  ProgressBar,
-  Section,
-} from '../components';
+import { AnimatedNumber, Box, Button, LabeledList, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 export const ChemDispenser = (props) => {
@@ -24,11 +17,7 @@ export const ChemDispenser = (props) => {
               icon="book"
               disabled={!data.isBeakerLoaded}
               content={'Reaction search'}
-              tooltip={
-                data.isBeakerLoaded
-                  ? 'Look up recipes and reagents!'
-                  : 'Please insert a beaker!'
-              }
+              tooltip={data.isBeakerLoaded ? 'Look up recipes and reagents!' : 'Please insert a beaker!'}
               tooltipPosition="bottom-start"
               onClick={() => act('reaction_lookup')}
             />
@@ -93,39 +82,21 @@ export const ChemDispenser = (props) => {
         <Section
           title="Beaker"
           buttons={beakerTransferAmounts.map((amount) => (
-            <Button
-              key={amount}
-              icon="minus"
-              content={amount}
-              onClick={() => act('remove', { amount })}
-            />
+            <Button key={amount} icon="minus" content={amount} onClick={() => act('remove', { amount })} />
           ))}
         >
           <LabeledList>
             <LabeledList.Item
               label="Beaker"
-              buttons={
-                !!data.isBeakerLoaded && (
-                  <Button
-                    icon="eject"
-                    content="Eject"
-                    disabled={!data.isBeakerLoaded}
-                    onClick={() => act('eject')}
-                  />
-                )
-              }
+              buttons={!!data.isBeakerLoaded && <Button icon="eject" content="Eject" disabled={!data.isBeakerLoaded} onClick={() => act('eject')} />}
             >
               {data.isBeakerLoaded ? data.beakerName : 'No Beaker'}
             </LabeledList.Item>
             <LabeledList.Item label="Contents">
-              <Box color="label">
-                {(!data.isBeakerLoaded && 'N/A') ||
-                  (beakerContents.length === 0 && 'Nothing')}
-              </Box>
+              <Box color="label">{(!data.isBeakerLoaded && 'N/A') || (beakerContents.length === 0 && 'Nothing')}</Box>
               {beakerContents.map((chemical) => (
                 <Box key={chemical.name} color="label">
-                  <AnimatedNumber initial={0} value={chemical.volume} /> units
-                  of {chemical.name}
+                  <AnimatedNumber initial={0} value={chemical.volume} /> units of {chemical.name}
                 </Box>
               ))}
             </LabeledList.Item>

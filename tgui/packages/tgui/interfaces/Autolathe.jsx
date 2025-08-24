@@ -1,39 +1,15 @@
 import { capitalize } from 'common/string';
 
 import { useBackend, useLocalState } from '../backend';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Dimmer,
-  Flex,
-  Icon,
-  Input,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Table,
-} from '../components';
+import { Box, Button, Collapsible, Dimmer, Flex, Icon, Input, LabeledList, ProgressBar, Section, Table } from '../components';
 import { Window } from '../layouts';
 
 export const Autolathe = (props) => {
   const { act, data } = useBackend();
   // Extract `health` and `color` variables from the `data` object.
-  const {
-    materialtotal,
-    materialsmax,
-    materials = [],
-    categories = [],
-    designs = [],
-    active,
-  } = data;
-  const [current_category, setCategory] = useLocalState(
-    'current_category',
-    'None',
-  );
-  const filteredmaterials = materials.filter(
-    (material) => material.mineral_amount > 0,
-  );
+  const { materialtotal, materialsmax, materials = [], categories = [], designs = [], active } = data;
+  const [current_category, setCategory] = useLocalState('current_category', 'None');
+  const filteredmaterials = materials.filter((material) => material.mineral_amount > 0);
   return (
     <Window title="Autolathe" width={600} height={600}>
       <Window.Content scrollable>
@@ -58,10 +34,7 @@ export const Autolathe = (props) => {
                 <Collapsible title="Materials">
                   <LabeledList>
                     {filteredmaterials.map((filteredmaterial) => (
-                      <LabeledList.Item
-                        key={filteredmaterial.id}
-                        label={capitalize(filteredmaterial.name)}
-                      >
+                      <LabeledList.Item key={filteredmaterial.id} label={capitalize(filteredmaterial.name)}>
                         <ProgressBar
                           style={{
                             transform: 'scaleX(-1) scaleY(1)',
@@ -71,9 +44,7 @@ export const Autolathe = (props) => {
                           color="black"
                           backgroundColor={filteredmaterial.matcolour}
                         >
-                          <div style={{ transform: 'scaleX(-1)' }}>
-                            {filteredmaterial.mineral_amount + ' cm³'}
-                          </div>
+                          <div style={{ transform: 'scaleX(-1)' }}>{filteredmaterial.mineral_amount + ' cm³'}</div>
                         </ProgressBar>
                       </LabeledList.Item>
                     ))}
@@ -212,9 +183,7 @@ export const Autolathe = (props) => {
                           content={'[Max:' + design.maxmult + ']'}
                           maxValue={design.maxmult}
                           disabled={design.buildable}
-                          backgroundColor={
-                            design.buildable ? '#999999' : 'default'
-                          }
+                          backgroundColor={design.buildable ? '#999999' : 'default'}
                           onCommit={(e, value) =>
                             act('make', {
                               id: design.id,

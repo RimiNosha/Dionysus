@@ -1,22 +1,11 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  AnimatedNumber,
-  Box,
-  Button,
-  Flex,
-  Icon,
-  LabeledList,
-  ProgressBar,
-  Section,
-  Stack,
-} from '../components';
+import { AnimatedNumber, Box, Button, Flex, Icon, LabeledList, ProgressBar, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 export const MedicalKiosk = (props) => {
   const { act, data } = useBackend();
   const [scanIndex] = useSharedState('scanIndex');
-  const { active_status_1, active_status_2, active_status_3, active_status_4 } =
-    data;
+  const { active_status_1, active_status_2, active_status_3, active_status_4 } = data;
   return (
     <Window width={575} height={420}>
       <Window.Content scrollable>
@@ -80,10 +69,7 @@ const MedicalKioskScanButton = (props) => {
   return (
     <Stack align="baseline">
       <Stack.Item width="16px" textAlign="center">
-        <Icon
-          name={paid ? 'check' : 'dollar-sign'}
-          color={paid ? 'green' : 'grey'}
-        />
+        <Icon name={paid ? 'check' : 'dollar-sign'} color={paid ? 'green' : 'grey'} />
       </Stack.Item>
       <Stack.Item grow basis="content">
         <Button
@@ -111,8 +97,7 @@ const MedicalKioskInstructions = (props) => {
   return (
     <Section minHeight="100%">
       <Box italic>
-        Greetings Valued Employee! Please select a desired automatic health
-        check procedure. Diagnosis costs <b>{kiosk_cost} credits.</b>
+        Greetings Valued Employee! Please select a desired automatic health check procedure. Diagnosis costs <b>{kiosk_cost} credits.</b>
       </Box>
       <Box mt={1}>
         <Box inline color="label" mr={1}>
@@ -136,13 +121,7 @@ const MedicalKioskInstructions = (props) => {
 
 const MedicalKioskScanResults1 = (props) => {
   const { data } = useBackend();
-  const {
-    patient_health,
-    brute_health,
-    burn_health,
-    suffocation_health,
-    toxin_health,
-  } = data;
+  const { patient_health, brute_health, burn_health, suffocation_health, toxin_health } = data;
   return (
     <Section title="Patient Health">
       <LabeledList>
@@ -179,14 +158,7 @@ const MedicalKioskScanResults1 = (props) => {
 
 const MedicalKioskScanResults2 = (props) => {
   const { data } = useBackend();
-  const {
-    patient_status,
-    patient_illness,
-    illness_info,
-    bleed_status,
-    blood_levels,
-    blood_status,
-  } = data;
+  const { patient_status, patient_illness, illness_info, bleed_status, blood_levels, blood_status } = data;
   return (
     <Section title="Symptom Based Checkup">
       <LabeledList>
@@ -194,12 +166,8 @@ const MedicalKioskScanResults2 = (props) => {
           {patient_status}
         </LabeledList.Item>
         <LabeledList.Divider />
-        <LabeledList.Item label="Disease Status">
-          {patient_illness}
-        </LabeledList.Item>
-        <LabeledList.Item label="Disease information">
-          {illness_info}
-        </LabeledList.Item>
+        <LabeledList.Item label="Disease Status">{patient_illness}</LabeledList.Item>
+        <LabeledList.Item label="Disease information">{illness_info}</LabeledList.Item>
         <LabeledList.Divider />
         <LabeledList.Item label="Blood Levels">
           <ProgressBar value={blood_levels / 100} color="bad">
@@ -209,9 +177,7 @@ const MedicalKioskScanResults2 = (props) => {
             {bleed_status}
           </Box>
         </LabeledList.Item>
-        <LabeledList.Item label="Blood Information">
-          {blood_status}
-        </LabeledList.Item>
+        <LabeledList.Item label="Blood Information">{blood_status}</LabeledList.Item>
       </LabeledList>
     </Section>
   );
@@ -237,9 +203,7 @@ const MedicalKioskScanResults3 = (props) => {
         <LabeledList.Item label="Brain Status" color="health-0">
           {brain_health}
         </LabeledList.Item>
-        <LabeledList.Item label="Brain Trauma Status">
-          {trauma_status}
-        </LabeledList.Item>
+        <LabeledList.Item label="Brain Trauma Status">{trauma_status}</LabeledList.Item>
       </LabeledList>
     </Section>
   );
@@ -247,19 +211,12 @@ const MedicalKioskScanResults3 = (props) => {
 
 const MedicalKioskScanResults4 = (props) => {
   const { data } = useBackend();
-  const {
-    chemical_list = [],
-    overdose_list = [],
-    addict_list = [],
-    hallucinating_status,
-  } = data;
+  const { chemical_list = [], overdose_list = [], addict_list = [], hallucinating_status } = data;
   return (
     <Section title="Chemical and Psychoactive Analysis">
       <LabeledList>
         <LabeledList.Item label="Chemical Contents">
-          {chemical_list.length === 0 && (
-            <Box color="average">No reagents detected.</Box>
-          )}
+          {chemical_list.length === 0 && <Box color="average">No reagents detected.</Box>}
           {chemical_list.map((chem) => (
             <Box key={chem.id} color="good">
               {chem.volume} units of {chem.name}
@@ -267,24 +224,18 @@ const MedicalKioskScanResults4 = (props) => {
           ))}
         </LabeledList.Item>
         <LabeledList.Item label="Overdose Status" color="bad">
-          {overdose_list.length === 0 && (
-            <Box color="good">Patient is not overdosing.</Box>
-          )}
+          {overdose_list.length === 0 && <Box color="good">Patient is not overdosing.</Box>}
           {overdose_list.map((chem) => (
             <Box key={chem.id}>Overdosing on {chem.name}</Box>
           ))}
         </LabeledList.Item>
         <LabeledList.Item label="Addiction Status" color="bad">
-          {addict_list.length === 0 && (
-            <Box color="good">Patient has no addictions.</Box>
-          )}
+          {addict_list.length === 0 && <Box color="good">Patient has no addictions.</Box>}
           {addict_list.map((chem) => (
             <Box key={chem.id}>Addicted to {chem.name}</Box>
           ))}
         </LabeledList.Item>
-        <LabeledList.Item label="Psychoactive Status">
-          {hallucinating_status}
-        </LabeledList.Item>
+        <LabeledList.Item label="Psychoactive Status">{hallucinating_status}</LabeledList.Item>
       </LabeledList>
     </Section>
   );

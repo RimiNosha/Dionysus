@@ -1,27 +1,10 @@
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Input,
-  LabeledList,
-  NumberInput,
-  Section,
-} from '../components';
+import { Box, Button, Input, LabeledList, NumberInput, Section } from '../components';
 import { Window } from '../layouts';
 
 export const ChemPress = (props) => {
   const { act, data } = useBackend();
-  const {
-    current_volume,
-    product_name,
-    pill_style,
-    pill_styles = [],
-    product,
-    min_volume,
-    max_volume,
-    patch_style,
-    patch_styles = [],
-  } = data;
+  const { current_volume, product_name, pill_style, pill_styles = [], product, min_volume, max_volume, patch_style, patch_styles = [] } = data;
   return (
     <Window width={300} height={227}>
       <Window.Content>

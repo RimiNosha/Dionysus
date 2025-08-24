@@ -13,14 +13,7 @@ export const meta = {
 };
 
 const Story = () => {
-  const positions = [
-    'top',
-    'left',
-    'right',
-    'bottom',
-    'bottom-start',
-    'bottom-end',
-  ];
+  const positions = ['top', 'left', 'right', 'bottom', 'bottom-start', 'bottom-end'];
 
   return (
     <Section>
@@ -34,13 +27,7 @@ const Story = () => {
       </Box>
       <Box mt={1}>
         {positions.map((position) => (
-          <Button
-            key={position}
-            color="transparent"
-            tooltip="Tooltip text."
-            tooltipPosition={position}
-            content={position}
-          />
+          <Button key={position} color="transparent" tooltip="Tooltip text." tooltipPosition={position} content={position} />
         ))}
       </Box>
     </Section>

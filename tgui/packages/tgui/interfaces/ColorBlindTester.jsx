@@ -9,29 +9,17 @@ export const ColorBlindTester = (props) => {
     <Window title="Color Blindness Testing" width={600} height={515}>
       <Window.Content>
         <NoticeBox warning>
+          <Box>HEY FUCKOS, these filters are based off VERY OLD and VERY FLAWED matrixes.</Box>
           <Box>
-            HEY FUCKOS, these filters are based off VERY OLD and VERY FLAWED
-            matrixes.
+            There is NO GOOD WAY to do proper color blind simulation in BYOND, because we have no way to extract the gamma of a pixel without iterating all pixels on the screen,
+            which we need to do to properly correct for the human eye.
           </Box>
           <Box>
-            There is NO GOOD WAY to do proper color blind simulation in BYOND,
-            because we have no way to extract the gamma of a pixel without
-            iterating all pixels on the screen, which we need to do to properly
-            correct for the human eye.
+            Because of this, this simulation is very imperfect. You will notice things are much more bright then they should be. This is a direct result of not being able to
+            correct for gamma.
           </Box>
-          <Box>
-            Because of this, this simulation is very imperfect. You will notice
-            things are much more bright then they should be. This is a direct
-            result of not being able to correct for gamma.
-          </Box>
-          <Box>
-            This tool exists so we have at least some form of baseline for
-            accessability, it is nowhere near gospel.
-          </Box>
-          <Box>
-            If I find you being a dick to someone over this I will clobber you
-            with a crowbar
-          </Box>
+          <Box>This tool exists so we have at least some form of baseline for accessability, it is nowhere near gospel.</Box>
+          <Box>If I find you being a dick to someone over this I will clobber you with a crowbar</Box>
         </NoticeBox>
         <Section>
           {Object.keys(details).map((category) => (
@@ -69,18 +57,7 @@ const ColorBlindCategory = (props) => {
     );
   }
   return (
-    <Section
-      key={category}
-      title={category}
-      buttons={
-        <Button
-          icon="times"
-          content="Clear"
-          color="bad"
-          onClick={() => act('clear_matrix')}
-        />
-      }
-    >
+    <Section key={category} title={category} buttons={<Button icon="times" content="Clear" color="bad" onClick={() => act('clear_matrix')} />}>
       {details[category]}
     </Section>
   );

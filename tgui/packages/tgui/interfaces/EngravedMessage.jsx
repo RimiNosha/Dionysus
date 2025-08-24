@@ -6,18 +6,7 @@ import { Window } from '../layouts';
 
 export const EngravedMessage = (props) => {
   const { act, data } = useBackend();
-  const {
-    admin_mode,
-    creator_key,
-    creator_name,
-    has_liked,
-    has_disliked,
-    hidden_message,
-    is_creator,
-    num_likes,
-    num_dislikes,
-    realdate,
-  } = data;
+  const { admin_mode, creator_key, creator_name, has_liked, has_disliked, hidden_message, is_creator, num_likes, num_dislikes, realdate } = data;
   return (
     <Window width={600} height={300}>
       <Window.Content scrollable>
@@ -72,24 +61,10 @@ export const EngravedMessage = (props) => {
           </LabeledList>
         </Section>
         {!!admin_mode && (
-          <Section
-            title="Admin Panel"
-            buttons={
-              <Button
-                icon="times"
-                content="Delete"
-                color="bad"
-                onClick={() => act('delete')}
-              />
-            }
-          >
+          <Section title="Admin Panel" buttons={<Button icon="times" content="Delete" color="bad" onClick={() => act('delete')} />}>
             <LabeledList>
-              <LabeledList.Item label="Creator Ckey">
-                {creator_key}
-              </LabeledList.Item>
-              <LabeledList.Item label="Creator Character Name">
-                {creator_name}
-              </LabeledList.Item>
+              <LabeledList.Item label="Creator Ckey">{creator_key}</LabeledList.Item>
+              <LabeledList.Item label="Creator Character Name">{creator_name}</LabeledList.Item>
             </LabeledList>
           </Section>
         )}

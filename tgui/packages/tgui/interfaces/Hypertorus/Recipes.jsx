@@ -67,8 +67,7 @@ const recipe_effect_structure = [
     icon: 'thermometer-full',
     override_base: 0.85,
     scale: 1.15,
-    tooltip: (v, d) =>
-      'Maximum: ' + (d.baseMaximumTemperature * v).toExponential() + ' K',
+    tooltip: (v, d) => 'Maximum: ' + (d.baseMaximumTemperature * v).toExponential() + ' K',
   },
 ];
 
@@ -89,23 +88,17 @@ const effect_to_icon = (effect_value, effect_scale, base) => {
 };
 
 const recipeChange = {
-  onComponentShouldUpdate: (lastProps, nextProps) =>
-    lastProps.selectedFuelID !== nextProps.selectedFuelID ||
-    lastProps.enableRecipeSelection !== nextProps.enableRecipeSelection,
+  onComponentShouldUpdate: (lastProps, nextProps) => lastProps.selectedFuelID !== nextProps.selectedFuelID || lastProps.enableRecipeSelection !== nextProps.enableRecipeSelection,
 };
 
 const activeChange = {
-  onComponentShouldUpdate: (lastProps, nextProps) =>
-    lastProps.active !== nextProps.active,
+  onComponentShouldUpdate: (lastProps, nextProps) => lastProps.active !== nextProps.active,
 };
 
 const MemoRow = (props) => {
   const { active, children, key, ...rest } = props;
   return (
-    <Table.Row
-      className={`hypertorus-recipes__row${active ? ' hypertorus-recipes__activerow' : ''}`}
-      {...rest}
-    >
+    <Table.Row className={`hypertorus-recipes__row${active ? ' hypertorus-recipes__activerow' : ''}`} {...rest}>
       {children}
     </Table.Row>
   );
@@ -121,13 +114,7 @@ const GasCellItem = (props) => {
 };
 
 export const HypertorusRecipes = (props) => {
-  const {
-    enableRecipeSelection: enable_recipe_selection,
-    onRecipe,
-    selectableFuels: selectable_fuels,
-    selectedFuelID: selected_fuel_id,
-    ...rest
-  } = props;
+  const { enableRecipeSelection: enable_recipe_selection, onRecipe, selectableFuels: selectable_fuels, selectedFuelID: selected_fuel_id, ...rest } = props;
   return (
     <Box overflowX="auto">
       <Table>
@@ -155,10 +142,7 @@ export const HypertorusRecipes = (props) => {
               <Table.Cell key={item.param} color="label">
                 <Tooltip content={item.label}>
                   {typeof item.icon === 'string' ? (
-                    <Icon
-                      className="hypertorus-recipes__icon"
-                      name={item.icon}
-                    />
+                    <Icon className="hypertorus-recipes__icon" name={item.icon} />
                   ) : (
                     <Icon.Stack className="hypertorus-recipes__icon">
                       {item.icon.map((icon) => (
@@ -179,9 +163,7 @@ export const HypertorusRecipes = (props) => {
               <MemoRow key={recipe.id} active={active}>
                 <Table.Cell>
                   <Button
-                    icon={
-                      recipe.id === selected_fuel_id ? 'times' : 'power-off'
-                    }
+                    icon={recipe.id === selected_fuel_id ? 'times' : 'power-off'}
                     disabled={!enable_recipe_selection}
                     key={recipe.id}
                     selected={recipe.id === selected_fuel_id}
@@ -201,20 +183,8 @@ export const HypertorusRecipes = (props) => {
                   // so we set the width to work with both without jumping.
                   return (
                     <Table.Cell key={item.param}>
-                      <Tooltip
-                        content={(item.tooltip || ((v) => 'x' + v))(
-                          value,
-                          rest,
-                        )}
-                      >
-                        <Icon
-                          className="hypertorus-recipes__icon"
-                          name={effect_to_icon(
-                            value,
-                            item.scale,
-                            item.override_base || 1,
-                          )}
-                        />
+                      <Tooltip content={(item.tooltip || ((v) => 'x' + v))(value, rest)}>
+                        <Icon className="hypertorus-recipes__icon" name={effect_to_icon(value, item.scale, item.override_base || 1)} />
                       </Tooltip>
                     </Table.Cell>
                   );

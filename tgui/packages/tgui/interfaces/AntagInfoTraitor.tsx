@@ -122,16 +122,13 @@ const EmployerSection = (props) => {
 
 const UplinkSection = (props) => {
   const { data } = useBackend<Info>();
-  const { has_uplink, uplink_intro, uplink_unlock_info, code, failsafe_code } =
-    data;
+  const { has_uplink, uplink_intro, uplink_unlock_info, code, failsafe_code } = data;
   return (
     <Section title="Uplink" mb={!has_uplink && -1}>
       <Stack fill>
         {(!has_uplink && (
           <Dimmer>
-            <Stack.Item fontSize="18px">
-              You were not supplied with an uplink.
-            </Stack.Item>
+            <Stack.Item fontSize="18px">You were not supplied with an uplink.</Stack.Item>
           </Dimmer>
         )) || (
           <>
@@ -161,22 +158,16 @@ const CodewordsSection = (props) => {
       <Stack fill>
         {(!has_codewords && (
           <BlockQuote>
-            You have not been supplied the Syndicate codewords. You will have to
-            use alternative methods to find potential allies. Proceed with
-            caution, however, as everyone is a potential foe.
+            You have not been supplied the Syndicate codewords. You will have to use alternative methods to find potential allies. Proceed with caution, however, as everyone is a
+            potential foe.
           </BlockQuote>
         )) || (
           <>
             <Stack.Item grow basis={0}>
               <BlockQuote>
-                The Syndicate have provided you with the following codewords to
-                identify fellow agents. Use the codewords during regular
-                conversation to identify other agents. Proceed with caution,
-                however, as everyone is a potential foe.
-                <span style={badstyle}>
-                  &ensp;You have memorized the codewords, allowing you to
-                  recognise them when heard.
-                </span>
+                The Syndicate have provided you with the following codewords to identify fellow agents. Use the codewords during regular conversation to identify other agents.
+                Proceed with caution, however, as everyone is a potential foe.
+                <span style={badstyle}>&ensp;You have memorized the codewords, allowing you to recognise them when heard.</span>
               </BlockQuote>
             </Stack.Item>
             <Stack.Divider mr={1} />

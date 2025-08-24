@@ -1,12 +1,5 @@
 import { useBackend, useSharedState } from '../backend';
-import {
-  Box,
-  Button,
-  LabeledList,
-  NoticeBox,
-  Section,
-  Tabs,
-} from '../components';
+import { Box, Button, LabeledList, NoticeBox, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
 export const RoboticsControlConsole = (props) => {
@@ -17,30 +10,14 @@ export const RoboticsControlConsole = (props) => {
     <Window width={500} height={460}>
       <Window.Content scrollable>
         <Tabs>
-          <Tabs.Tab
-            icon="list"
-            lineHeight="23px"
-            selected={tab === 1}
-            onClick={() => setTab(1)}
-          >
+          <Tabs.Tab icon="list" lineHeight="23px" selected={tab === 1} onClick={() => setTab(1)}>
             Cyborgs ({cyborgs.length})
           </Tabs.Tab>
-          <Tabs.Tab
-            icon="list"
-            lineHeight="23px"
-            selected={tab === 2}
-            onClick={() => setTab(2)}
-          >
+          <Tabs.Tab icon="list" lineHeight="23px" selected={tab === 2} onClick={() => setTab(2)}>
             Drones ({drones.length})
           </Tabs.Tab>
         </Tabs>
-        {tab === 1 && (
-          <Cyborgs
-            cyborgs={cyborgs}
-            can_hack={can_hack}
-            can_detonate={can_detonate}
-          />
-        )}
+        {tab === 1 && <Cyborgs cyborgs={cyborgs} can_hack={can_hack} can_detonate={can_detonate} />}
         {tab === 2 && <Drones drones={drones} />}
       </Window.Content>
     </Window>
@@ -51,9 +28,7 @@ const Cyborgs = (props) => {
   const { cyborgs, can_hack, can_detonate } = props;
   const { act, data } = useBackend();
   if (!cyborgs.length) {
-    return (
-      <NoticeBox>No cyborg units detected within access parameters</NoticeBox>
-    );
+    return <NoticeBox>No cyborg units detected within access parameters</NoticeBox>;
   }
   return cyborgs.map((cyborg) => {
     return (
@@ -101,38 +76,14 @@ const Cyborgs = (props) => {
       >
         <LabeledList>
           <LabeledList.Item label="Status">
-            <Box
-              color={
-                cyborg.status ? 'bad' : cyborg.locked_down ? 'average' : 'good'
-              }
-            >
-              {cyborg.status
-                ? 'Not Responding'
-                : cyborg.locked_down
-                  ? 'Locked Down'
-                  : 'Nominal'}
-            </Box>
+            <Box color={cyborg.status ? 'bad' : cyborg.locked_down ? 'average' : 'good'}>{cyborg.status ? 'Not Responding' : cyborg.locked_down ? 'Locked Down' : 'Nominal'}</Box>
           </LabeledList.Item>
           <LabeledList.Item label="Charge">
-            <Box
-              color={
-                cyborg.charge <= 30
-                  ? 'bad'
-                  : cyborg.charge <= 70
-                    ? 'average'
-                    : 'good'
-              }
-            >
-              {typeof cyborg.charge === 'number'
-                ? cyborg.charge + '%'
-                : 'Not Found'}
-            </Box>
+            <Box color={cyborg.charge <= 30 ? 'bad' : cyborg.charge <= 70 ? 'average' : 'good'}>{typeof cyborg.charge === 'number' ? cyborg.charge + '%' : 'Not Found'}</Box>
           </LabeledList.Item>
           <LabeledList.Item label="Model">{cyborg.module}</LabeledList.Item>
           <LabeledList.Item label="Master AI">
-            <Box color={cyborg.synchronization ? 'default' : 'average'}>
-              {cyborg.synchronization || 'None'}
-            </Box>
+            <Box color={cyborg.synchronization ? 'default' : 'average'}>{cyborg.synchronization || 'None'}</Box>
           </LabeledList.Item>
         </LabeledList>
       </Section>
@@ -145,9 +96,7 @@ const Drones = (props) => {
   const { act } = useBackend();
 
   if (!drones.length) {
-    return (
-      <NoticeBox>No drone units detected within access parameters</NoticeBox>
-    );
+    return <NoticeBox>No drone units detected within access parameters</NoticeBox>;
   }
 
   return drones.map((drone) => {
@@ -170,9 +119,7 @@ const Drones = (props) => {
       >
         <LabeledList>
           <LabeledList.Item label="Status">
-            <Box color={drone.status ? 'bad' : 'good'}>
-              {drone.status ? 'Not Responding' : 'Nominal'}
-            </Box>
+            <Box color={drone.status ? 'bad' : 'good'}>{drone.status ? 'Not Responding' : 'Nominal'}</Box>
           </LabeledList.Item>
         </LabeledList>
       </Section>

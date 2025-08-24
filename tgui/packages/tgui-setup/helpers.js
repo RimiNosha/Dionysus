@@ -43,10 +43,7 @@
   })();
 
   // Basic checks to detect whether this page runs in BYOND
-  var isByond =
-    (Byond.BLINK !== null || window.cef_to_byond) &&
-    location.hostname === '127.0.0.1' &&
-    location.search !== '?external';
+  var isByond = (Byond.BLINK !== null || window.cef_to_byond) && location.hostname === '127.0.0.1' && location.search !== '?external';
   //As of BYOND 515 the path doesn't seem to include tmp dir anymore if you're trying to open tgui in external browser and looking why it doesn't work
   //&& location.pathname.indexOf('/tmp') === 0
 
@@ -180,8 +177,7 @@
   };
 
   Byond.sendMessage = function (type, payload) {
-    var message =
-      typeof type === 'string' ? { type: type, payload: payload } : type;
+    var message = typeof type === 'string' ? { type: type, payload: payload } : type;
     // JSON-encode the payload
     if (message.payload !== null && message.payload !== undefined) {
       message.payload = JSON.stringify(message.payload);
@@ -255,16 +251,9 @@
     // Generic retry function
     var retry = function () {
       if (attempt >= RETRY_ATTEMPTS) {
-        var errorMessage =
-          'Error: Failed to load the asset ' +
-          "'" +
-          url +
-          "' after several attempts.";
+        var errorMessage = 'Error: Failed to load the asset ' + "'" + url + "' after several attempts.";
         if (type === 'css') {
-          errorMessage +=
-            +'\nStylesheet was either not found, ' +
-            "or you're trying to load an empty stylesheet " +
-            'that has no CSS rules in it.';
+          errorMessage += +'\nStylesheet was either not found, ' + "or you're trying to load an empty stylesheet " + 'that has no CSS rules in it.';
         }
         throw new Error(errorMessage);
       }
@@ -512,10 +501,5 @@ window.replaceHtml = function (inline_html) {
     }
   }
 
-  document.body.insertAdjacentHTML(
-    'afterbegin',
-    '<!-- tgui:inline-html-start -->' +
-      inline_html +
-      '<!-- tgui:inline-html-end -->'
-  );
+  document.body.insertAdjacentHTML('afterbegin', '<!-- tgui:inline-html-start -->' + inline_html + '<!-- tgui:inline-html-end -->');
 };

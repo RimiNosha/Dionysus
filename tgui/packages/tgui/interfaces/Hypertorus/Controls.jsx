@@ -1,16 +1,7 @@
 import { Tooltip } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import {
-  Box,
-  Button,
-  Icon,
-  Knob,
-  LabeledControls,
-  LabeledList,
-  NumberInput,
-  Section,
-} from '../../components';
+import { Box, Button, Icon, Knob, LabeledControls, LabeledList, NumberInput, Section } from '../../components';
 import { getGasLabel } from '../../constants';
 import { HelpDummy, HoverHelp } from './helpers';
 
@@ -20,19 +11,7 @@ import { HelpDummy, HoverHelp } from './helpers';
  */
 
 const ComboKnob = (props) => {
-  const {
-    color = false,
-    defaultValue,
-    icon,
-    flipIcon,
-    help,
-    minValue,
-    maxValue,
-    parameter,
-    step = 5,
-    value,
-    ...rest
-  } = props;
+  const { color = false, defaultValue, icon, flipIcon, help, minValue, maxValue, parameter, step = 5, value, ...rest } = props;
 
   const { act, data } = useBackend();
 
@@ -41,17 +20,7 @@ const ComboKnob = (props) => {
     iconProps.rotation = 180;
   }
 
-  const icon_element = icon && (
-    <Icon
-      position="absolute"
-      top="16px"
-      left="-27px"
-      color="label"
-      fontSize="200%"
-      name={icon}
-      {...iconProps}
-    />
-  );
+  const icon_element = icon && <Icon position="absolute" top="16px" left="-27px" color="label" fontSize="200%" name={icon} {...iconProps} />;
 
   return (
     <Box position="relative" left="2px">
@@ -67,33 +36,9 @@ const ComboKnob = (props) => {
         onDrag={(_, v) => act(parameter, { [parameter]: v })}
         {...rest}
       />
-      <Button
-        fluid
-        position="absolute"
-        top="-2px"
-        right="-20px"
-        color="transparent"
-        icon="fast-forward"
-        onClick={() => act(parameter, { [parameter]: maxValue })}
-      />
-      <Button
-        fluid
-        position="absolute"
-        top="16px"
-        right="-20px"
-        color="transparent"
-        icon="undo"
-        onClick={() => act(parameter, { [parameter]: defaultValue })}
-      />
-      <Button
-        fluid
-        position="absolute"
-        top="34px"
-        right="-20px"
-        color="transparent"
-        icon="fast-backward"
-        onClick={() => act(parameter, { [parameter]: minValue })}
-      />
+      <Button fluid position="absolute" top="-2px" right="-20px" color="transparent" icon="fast-forward" onClick={() => act(parameter, { [parameter]: maxValue })} />
+      <Button fluid position="absolute" top="16px" right="-20px" color="transparent" icon="undo" onClick={() => act(parameter, { [parameter]: defaultValue })} />
+      <Button fluid position="absolute" top="34px" right="-20px" color="transparent" icon="fast-backward" onClick={() => act(parameter, { [parameter]: minValue })} />
     </Box>
   );
 };
@@ -105,9 +50,7 @@ export const HypertorusSecondaryControls = (props) => {
       <LabeledControls justify="space-around" wrap>
         <LabeledControls.Item label="Heating Conductor">
           <ComboKnob
-            color={
-              data.heating_conductor > 50 && data.heat_output > 0 && 'yellow'
-            }
+            color={data.heating_conductor > 50 && data.heat_output > 0 && 'yellow'}
             value={parseFloat(data.heating_conductor)}
             unit="J/cm"
             minValue={50}
@@ -171,22 +114,12 @@ export const HypertorusWasteRemove = (props) => {
         <LabeledList.Item
           label={
             <>
-              <HoverHelp
-                content={
-                  'Remove waste gases from Fusion,' +
-                  ' and any selected gases from the Moderator.'
-                }
-              />
+              <HoverHelp content={'Remove waste gases from Fusion,' + ' and any selected gases from the Moderator.'} />
               Waste remove:
             </>
           }
         >
-          <Button
-            icon={data.waste_remove ? 'power-off' : 'times'}
-            content={data.waste_remove ? 'On' : 'Off'}
-            selected={data.waste_remove}
-            onClick={() => act('waste_remove')}
-          />
+          <Button icon={data.waste_remove ? 'power-off' : 'times'} content={data.waste_remove ? 'On' : 'Off'} selected={data.waste_remove} onClick={() => act('waste_remove')} />
         </LabeledList.Item>
         <LabeledList.Item
           label={

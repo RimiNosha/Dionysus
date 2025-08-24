@@ -7,15 +7,9 @@ export const PaintingMachine = (props) => {
 
   const { pdaTypes, cardTrims, hasPDA, pdaName, hasID, idName } = data;
 
-  const [selectedPDA] = useSharedState(
-    'pdaSelection',
-    pdaTypes[Object.keys(pdaTypes)[0]],
-  );
+  const [selectedPDA] = useSharedState('pdaSelection', pdaTypes[Object.keys(pdaTypes)[0]]);
 
-  const [selectedTrim] = useSharedState(
-    'trimSelection',
-    cardTrims[Object.keys(cardTrims)[0]],
-  );
+  const [selectedTrim] = useSharedState('trimSelection', cardTrims[Object.keys(cardTrims)[0]]);
 
   return (
     <Window width={500} height={620}>
@@ -37,10 +31,7 @@ export const PaintingMachine = (props) => {
         >
           <Stack vertical>
             <Stack.Item height="100%">
-              <EjectButton
-                name={pdaName || '-----'}
-                onClickEject={() => act('eject_pda')}
-              />
+              <EjectButton name={pdaName || '-----'} onClickEject={() => act('eject_pda')} />
             </Stack.Item>
             <Stack.Item height="100%">
               <PainterDropdown stateKey="pdaSelection" options={pdaTypes} />
@@ -51,12 +42,7 @@ export const PaintingMachine = (props) => {
           title="ID Trim Imprinter"
           buttons={
             <>
-              <Button.Confirm
-                disabled={!hasID}
-                content="Reset ID Account"
-                confirmContent="Confirm?"
-                onClick={() => act('reset_card')}
-              />
+              <Button.Confirm disabled={!hasID} content="Reset ID Account" confirmContent="Confirm?" onClick={() => act('reset_card')} />
               <Button.Confirm
                 disabled={!hasID}
                 content="Imprint ID Trim"
@@ -67,23 +53,13 @@ export const PaintingMachine = (props) => {
                   })
                 }
               />
-              <Button
-                icon="question-circle"
-                tooltip={
-                  'WARNING: This is destructive' +
-                  ' and will wipe ALL access on the card.'
-                }
-                tooltipPosition="left"
-              />
+              <Button icon="question-circle" tooltip={'WARNING: This is destructive' + ' and will wipe ALL access on the card.'} tooltipPosition="left" />
             </>
           }
         >
           <Stack vertical>
             <Stack.Item height="100%">
-              <EjectButton
-                name={idName || '-----'}
-                onClickEject={() => act('eject_card')}
-              />
+              <EjectButton name={idName || '-----'} onClickEject={() => act('eject_card')} />
             </Stack.Item>
             <Stack.Item height="100%">
               <PainterDropdown stateKey="trimSelection" options={cardTrims} />
@@ -98,24 +74,13 @@ export const PaintingMachine = (props) => {
 export const EjectButton = (props) => {
   const { name, onClickEject } = props;
 
-  return (
-    <Button
-      fluid
-      ellipsis
-      icon="eject"
-      content={name}
-      onClick={() => onClickEject()}
-    />
-  );
+  return <Button fluid ellipsis icon="eject" content={name} onClick={() => onClickEject()} />;
 };
 
 export const PainterDropdown = (props) => {
   const { stateKey, options } = props;
 
-  const [selectedOption, setSelectedOption] = useSharedState(
-    stateKey,
-    options[Object.keys(options)[0]],
-  );
+  const [selectedOption, setSelectedOption] = useSharedState(stateKey, options[Object.keys(options)[0]]);
 
   return (
     <Dropdown

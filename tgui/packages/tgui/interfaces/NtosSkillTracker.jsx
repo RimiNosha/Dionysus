@@ -1,12 +1,5 @@
 import { useBackend } from '../backend';
-import {
-  AnimatedNumber,
-  BlockQuote,
-  Button,
-  ProgressBar,
-  Section,
-  Table,
-} from '../components';
+import { AnimatedNumber, BlockQuote, Button, ProgressBar, Section, Table } from '../components';
 import { NtosWindow } from '../layouts';
 
 export const NtosSkillTracker = (props) => {
@@ -40,10 +33,7 @@ export const NtosSkillTracker = (props) => {
                             good: [0.75, 1.0],
                           }}
                         >
-                          <AnimatedNumber
-                            value={Math.round(skill.progress_percent * 100)}
-                          />
-                          %
+                          <AnimatedNumber value={Math.round(skill.progress_percent * 100)} />%
                         </ProgressBar>
                       ) : (
                         '—'
@@ -57,10 +47,7 @@ export const NtosSkillTracker = (props) => {
                             good: [0.75, 1.0],
                           }}
                         >
-                          <AnimatedNumber
-                            value={Math.round(skill.overall_percent * 100)}
-                          />
-                          %
+                          <AnimatedNumber value={Math.round(skill.overall_percent * 100)} />%
                         </ProgressBar>
                       ) : (
                         '—'
@@ -70,13 +57,7 @@ export const NtosSkillTracker = (props) => {
                   {!!skill.reward && (
                     <Table.Row className="candystripe">
                       <Table.Cell textAlign="center" colspan="3">
-                        <Button
-                          icon="trophy"
-                          style={{ margin: '8px' }}
-                          onClick={() =>
-                            act('PRG_reward', { skill: skill.name })
-                          }
-                        >
+                        <Button icon="trophy" style={{ margin: '8px' }} onClick={() => act('PRG_reward', { skill: skill.name })}>
                           Contact the Professional {skill.title} Association
                         </Button>
                       </Table.Cell>
