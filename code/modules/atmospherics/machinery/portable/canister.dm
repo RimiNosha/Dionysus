@@ -574,7 +574,7 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "canister", "Canister", 480, 400)
-		ui.set_initial_data(nanoui_data(user, ui_monkey_back))
+		ui.set_initial_data(nanoui_data(user, ui_key))
 		ui.open()
 		ui.set_auto_update(TRUE)
 
