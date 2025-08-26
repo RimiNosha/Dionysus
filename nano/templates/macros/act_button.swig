@@ -3,7 +3,7 @@
 	class="link hasIcon link {% if !enabled %}disabled{% endif %}"
 	href="?"
 	{% if enabled %}
-	onclick="Byond.sendMessage('{{ act }}', {{ act_data }})"
+	onclick="Byond.sendMessage('act/{{ act }}', {{ act_data }})"
 	{% endif %}
 	>
 	{% if icon %}
@@ -15,13 +15,13 @@
 {% endmacro %}
 
 {% macro pwr_button(act, act_data, state, enabled) %}
-<label class="switch"><input type="checkbox" {% if enabled %}checked{% endif %}/>
-    <div class="button">
-        <div class="light"></div>
-        <div class="dots"></div>
-        <div class="characters"></div>
-        <div class="shine"></div>
-        <div class="shadow"></div>
+<label class="switch" onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"><input type="checkbox" {% if state %}checked{% endif %}/>
+    <div class="switch-button">
+        <div class="switch-light"></div>
+        <div class="switch-dots"></div>
+        <div class="switch-characters"></div>
+        <div class="switch-shine"></div>
+        <div class="switch-shadow"></div>
     </div>
 </label>
 {% endmacro %}

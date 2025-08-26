@@ -67,6 +67,7 @@ Main changes are:
 	--switch-boxDistHeight: calc(var(--switch-height) / 1.875);
 	--switch-animTime: 0.1s;
 	--switch-border-size: 4px;
+	display: flex;
 	background-color: black;
 	width: calc(var(--switch-width) - var(--switch-border-size));
 	height: var(--switch-height);
@@ -87,25 +88,25 @@ Main changes are:
 	display: none;
 }
 
-.switch input:checked + .button {
+.switch input:checked + .switch-button {
 	transform: translateZ(var(--switch-pivot-distance))
 		rotateX(var(--switch-rotation));
 	box-shadow: 0 -10px 20px var(--switch-color);
 }
 
-.switch input:checked + .button .light {
+.switch input:checked + .switch-button .light {
 	animation: flicker 0.2s infinite var(--switch-animTime);
 }
 
-.switch input:checked + .button .shine {
+.switch input:checked + .switch-button .shine {
 	opacity: 1;
 }
 
-.switch input:checked + .button .shadow {
+.switch input:checked + .switch-button .shadow {
 	opacity: 0;
 }
 
-.switch .button {
+.switch .switch-button {
 	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
 	transform-origin: center center calc(var(--switch-pivot-distance) * -1);
 	transform: translateZ(var(--switch-pivot-distance))
@@ -125,7 +126,7 @@ Main changes are:
 	background-repeat: no-repeat;
 }
 
-.switch .button::before {
+.switch .switch-button::before {
 	content: "";
 	background: var(--switch-color-25);
 	background-repeat: no-repeat;
@@ -137,7 +138,7 @@ Main changes are:
 	top: 0;
 }
 
-.switch .button::after {
+.switch .switch-button::after {
 	content: "";
 	background-image: linear-gradient(
 		var(--switch-color-35),
@@ -154,7 +155,7 @@ Main changes are:
 		0 var(--switch-boxDistHeight) 20px 0px rgba(0, 0, 0, 0.5);
 }
 
-.switch .light {
+.switch .switch-light {
 	opacity: 0;
 	animation: light-off 1s;
 	position: absolute;
@@ -167,7 +168,7 @@ Main changes are:
 	);
 }
 
-.switch .dots {
+.switch .switch-dots {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -178,7 +179,7 @@ Main changes are:
 	background-size: 10px 10px;
 }
 
-.switch .characters {
+.switch .switch-characters {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -200,7 +201,7 @@ Main changes are:
 	background-repeat: no-repeat;
 }
 
-.switch .shine {
+.switch .switch-shine {
 	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
 	opacity: 0.3;
 	position: absolute;
@@ -216,7 +217,7 @@ Main changes are:
 	background-repeat: no-repeat;
 }
 
-.switch .shadow {
+.switch .switch-shadow {
 	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
 	opacity: 1;
 	position: absolute;
