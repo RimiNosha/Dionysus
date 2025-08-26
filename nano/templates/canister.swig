@@ -89,4 +89,14 @@
 	</div>
 </div>
 
+<div class="item">
+	<div class="itemLabel">
+		Engineering Only:
+	</div>
+	<div class="itemContent">
+		{{ ab.act_button('Unlock', 'unlocked', 'restrict', "{}", !data.restricted) }}
+		{{ ab.act_button('Lock', 'locked', 'restrict', "{}", data.restricted) }}
+	</div>
+</div>
+
 {% endblock %}

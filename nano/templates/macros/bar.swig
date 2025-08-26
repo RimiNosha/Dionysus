@@ -8,5 +8,4 @@
   {% endif %}</div>
   <div class="displayBarText">{{ text }}</div>
 </div>
-{{ value }}<br>{{min}}<br>{{max}}
 {% endmacro %}

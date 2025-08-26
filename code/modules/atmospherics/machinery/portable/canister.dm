@@ -581,7 +581,6 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 /obj/machinery/portable_atmospherics/canister/nanoui_data(mob/user, ui_key)
 	var/list/data = ..(user, ui_key)
 	data["name"] = name
-	data["canLabel"] = TRUE
 	data["portConnected"] = !!connected_port
 	data["tankPressure"] = round(air_contents.returnPressure() ? air_contents.returnPressure() : 0)
 	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
@@ -662,7 +661,7 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 		if("relabel")
 			name = params["name"]
 			. = TRUE
-		if("restricted")
+		if("restrict")
 			restricted = !restricted
 			if(restricted)
 				req_access = list(ACCESS_ENGINEERING)
@@ -670,7 +669,7 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 				req_access = list()
 				. = TRUE
 		if("pressure")
-			var/pressure = params["pressure"]
+			var/pressure = params["pressure_adj"]
 			if(pressure == "reset")
 				pressure = CAN_DEFAULT_RELEASE_PRESSURE
 				. = TRUE
@@ -680,15 +679,14 @@ GLOBAL_LIST_INIT(gas_id_to_canister, init_gas_id_to_canister())
 			else if(pressure == "max")
 				pressure = can_max_release_pressure
 				. = TRUE
-			else if(pressure == "input")
-				pressure = tgui_input_number(usr, "New release pressure", "Canister Pressure", release_pressure, can_max_release_pressure, can_min_release_pressure)
-				if(!isnull(pressure) && !..())
-					. = TRUE
-			else if(text2num(pressure) != null)
-				pressure = text2num(pressure)
+			else if(pressure == "set")
+				pressure = clamp(params["pressure"], can_min_release_pressure, can_max_release_pressure)
+			else if(isnum(pressure))
+				pressure = clamp(release_pressure + pressure, can_min_release_pressure, can_max_release_pressure)
 				. = TRUE
-			if(.)
-				release_pressure = clamp(round(pressure), can_min_release_pressure, can_max_release_pressure)
+
+			if(. == TRUE)
+				release_pressure = pressure
 				investigate_log("was set to [release_pressure] kPa by [key_name(usr)].", INVESTIGATE_ATMOS)
 		if("valve")		//logging for openning canisters
 			var/logmsg

@@ -1,0 +1,262 @@
+/*
+Copyright (c) 2025 by Yoav Kadosh (https://codepen.io/ykadosh/pen/ExNOmZx)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*
+This is heavily modified from the original, though.
+
+Main changes are:
+- Made in *actually* pure CSS.
+- Many attributes are vars to enable overriding them using other classes.
+*/
+
+.switch {
+	--switch-color-h: 290deg;
+	--switch-color-s: 100%;
+	--switch-color-l: 50%;
+	--switch-color: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		var(--switch-color-l)
+	); /* Needs to be HSL */
+	--switch-color-25: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) - 25%)
+	);
+	--switch-color-33: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) - 33%)
+	);
+	--switch-color-35: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) - 35%)
+	);
+	--switch-color-45: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) - 45%)
+	);
+	--switch-color-l20: hsl(
+		var(--switch-color-h),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) + 20%)
+	);
+	--switch-color-35-a70: hsl(
+		var(--switch-color-h) var(--switch-color-s)
+			calc(var(--switch-color-l) - 35%) / 70%
+	);
+	--switch-color-light: hsl(
+		calc(var(--switch-color-h) - 35deg),
+		var(--switch-color-s),
+		calc(var(--switch-color-l) + 20%)
+	);
+	--switch-rotation: 15deg;
+	--switch-pivot-distance: 10px;
+	--switch-width: 25px;
+	--switch-height: calc(1.3 * var(--switch-width));
+	--switch-boxHeight: calc(var(--switch-height) / 3);
+	--switch-boxDistHeight: calc(var(--switch-height) / 1.875);
+	--switch-animTime: 0.1s;
+	--switch-border-size: 4px;
+	background-color: black;
+	width: calc(var(--switch-width) - var(--switch-border-size));
+	height: var(--switch-height);
+	box-shadow:
+    /* The surrounding shadow (second layer) */
+		0 0 1px 2px black,
+		/* The top white "shine" */ inset 0 2px 2px -2px #ffffff,
+		/* The light gray frame */ inset 0 0 2px var(--switch-border-size)
+			#47434c,
+		/* The internal black shadow */ inset 0 0 2px
+			calc(var(--switch-border-size) + 4px) black;
+	border-radius: 1px;
+	padding: calc(var(--switch-border-size) + 2px);
+	perspective: 700px;
+}
+
+.switch input {
+	display: none;
+}
+
+.switch input:checked + .button {
+	transform: translateZ(var(--switch-pivot-distance))
+		rotateX(var(--switch-rotation));
+	box-shadow: 0 -10px 20px var(--switch-color);
+}
+
+.switch input:checked + .button .light {
+	animation: flicker 0.2s infinite var(--switch-animTime);
+}
+
+.switch input:checked + .button .shine {
+	opacity: 1;
+}
+
+.switch input:checked + .button .shadow {
+	opacity: 0;
+}
+
+.switch .button {
+	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
+	transform-origin: center center calc(var(--switch-pivot-distance) * -1);
+	transform: translateZ(var(--switch-pivot-distance))
+		rotateX(calc(var(--switch-rotation) * -1));
+	transform-style: preserve-3d;
+	width: calc(100% + 2px);
+	height: 100%;
+	position: relative;
+	margin-left: -1px;
+	cursor: pointer;
+	background: linear-gradient(
+		var(--switch-color-25) 0%,
+		var(--switch-color-33) 30%,
+		var(--switch-color-33) 70%,
+		var(--switch-color-25) 100%
+	);
+	background-repeat: no-repeat;
+}
+
+.switch .button::before {
+	content: "";
+	background: var(--switch-color-25);
+	background-repeat: no-repeat;
+	width: 100%;
+	height: var(--switch-boxHeight);
+	transform-origin: top;
+	transform: rotateX(-90deg);
+	position: absolute;
+	top: 0;
+}
+
+.switch .button::after {
+	content: "";
+	background-image: linear-gradient(
+		var(--switch-color-35),
+		var(--switch-color-45)
+	);
+	width: 100%;
+	height: var(--switch-boxHeight);
+	transform-origin: top;
+	transform: translateY(var(--switch-boxHeight)) rotateX(-90deg);
+	position: absolute;
+	bottom: 0;
+	box-shadow:
+		0 var(--switch-boxHeight) 8px 0px black,
+		0 var(--switch-boxDistHeight) 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.switch .light {
+	opacity: 0;
+	animation: light-off 1s;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(
+		var(--switch-color-light),
+		var(--switch-color) 40%,
+		transparent 70%
+	);
+}
+
+.switch .dots {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(
+		transparent 30%,
+		var(--switch-color-35-a70) 70%
+	);
+	background-size: 10px 10px;
+}
+
+.switch .characters {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	/* Drawing with gradients!
+  Read more about it here: https://css-tricks.com/drawing-images-with-css-gradients/
+  And check this collection out: https://a.singlediv.com/*/
+	background:
+		linear-gradient(white, white) 50% 20% / 5% 20%,
+		/* White vertical line */
+			radial-gradient(
+				circle,
+				transparent 50%,
+				white 52%,
+				white 70%,
+				transparent 72%
+			)
+			50% 80% / 33% 25%; /* White circle*/
+	background-repeat: no-repeat;
+}
+
+.switch .shine {
+	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
+	opacity: 0.3;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+			transparent,
+			transparent 50%,
+			transparent 80%,
+			rgba(255, 255, 255, 0.5)
+		)
+		50% 50% / 97% 97%;
+	background-repeat: no-repeat;
+}
+
+.switch .shadow {
+	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
+	opacity: 1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background:
+		linear-gradient(rgba(255, 255, 255, 0.05), transparent 70%) 50% 50% /
+			97% 97%,
+		linear-gradient(
+				rgba(0, 0, 0, 0.2),
+				transparent 80%,
+				transparent 50%,
+				transparent
+			)
+			50% 50% / 97% 97%,
+		linear-gradient(
+			transparent 3%,
+			rgba(255, 255, 255, 0.7),
+			transparent 5%
+		);
+	background-repeat: no-repeat;
+}
+
+@keyframes flicker {
+	0% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes light-off {
+	0% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 0;
+	}
+}

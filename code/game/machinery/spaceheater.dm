@@ -190,13 +190,15 @@
 	toggle_power()
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/machinery/space_heater/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/space_heater/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui)
 	if(!ui)
-		ui = new(user, src, "SpaceHeater", name)
+		ui = new(user, src, ui_key, "space_heater", name, 480, 400)
+		ui.set_initial_data(nanoui_data(user, ui_key))
 		ui.open()
+		ui.set_auto_update(TRUE)
 
-/obj/machinery/space_heater/ui_data()
+/obj/machinery/space_heater/nanoui_data(mob/user, ui_key)
 	var/list/data = list()
 	data["open"] = panel_open
 	data["on"] = on
@@ -222,7 +224,7 @@
 		data["currentTemp"] = round(current_temperature - T0C, 1)
 	return data
 
-/obj/machinery/space_heater/ui_act(action, params)
+/obj/machinery/space_heater/nanoui_act(action, list/params, list/href_list, datum/nanoui/ui)
 	. = ..()
 	if(.)
 		return

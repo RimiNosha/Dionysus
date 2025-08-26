@@ -13,3 +13,15 @@
 	{{ label }}
 </div>
 {% endmacro %}
+
+{% macro pwr_button(act, act_data, state, enabled) %}
+<label class="switch"><input type="checkbox" {% if enabled %}checked{% endif %}/>
+    <div class="button">
+        <div class="light"></div>
+        <div class="dots"></div>
+        <div class="characters"></div>
+        <div class="shine"></div>
+        <div class="shadow"></div>
+    </div>
+</label>
+{% endmacro %}
