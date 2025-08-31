@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% macro pwr_button(act, act_data, state, enabled) %}
-<label class="switch" {% if enabled %}onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"{% endif %}><input type="checkbox" {% if state %}checked{% endif %}/>
+<label class="switch" {% if enabled %}onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"{% endif %} onclick="event.preventDefault()"><input type="checkbox" {% if state %}checked{% endif %}/>
     <div class="switch-button">
         <div class="switch-light"></div>
         <div class="switch-dots"></div>

@@ -4,11 +4,11 @@
 
 {% block content %}
 {% if data.chemHacked %}
-{{ ab.act_button("Eject Beaker", "eject", "ejectBeaker", "{}", !data.beaker) }}
+{{ ab.act_button("Eject Beaker", "eject", "ejectBeaker", "{}", data.beaker) }}
 {% endif %}
-{{ ab.act_button("Eject Cell", "eject", "eject", "{}", !data.hasPowercell) }}
+{{ ab.act_button("Eject Cell", "eject", "eject", "{}", data.hasPowercell && data.open) }}
 <div style="position: absolute; top: 40px; right: 10px">
-{{ ab.pwr_button("power", "{}", data.on, !data.hasPowercell) }}
+{{ ab.pwr_button("power", "{}", data.on, data.hasPowercell) }}
 </div>
 <br>
 <p>Cell:</p>
