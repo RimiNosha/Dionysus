@@ -1,2 +1,5 @@
 #!/bin/sh
+# Ensure mapmerge has been run
 exec tools/bootstrap/python -m mapmerge2.precommit
+# And make sure sass has been run so the bundle doesn't fall out of date.
+exec tools/bootstrap/python -m sass.build

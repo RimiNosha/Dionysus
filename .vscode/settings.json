@@ -24,5 +24,6 @@
 
 	// Quality of life for making UIs, cause VSC doesn't have autoclose outside of certain files cause ????
 	// Requires the related extension, which is in the recommendations.
-	"auto-close-tag.activationOnLanguage": ["swig", "nunjucks"]
+	"auto-close-tag.activationOnLanguage": ["swig", "nunjucks"],
+	"python-envs.pythonProjects": []
 }
