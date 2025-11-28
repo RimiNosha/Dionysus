@@ -405,17 +405,6 @@
 		/obj/item/implantpad = 1)
 	generate_items_inside(items_inside,src)
 
-/obj/item/storage/box/exileimp
-	name = "boxed exile implant kit"
-	desc = "Box of exile implants. It has a picture of a clown being booted through the Gateway."
-	illustration = "implant"
-
-/obj/item/storage/box/exileimp/PopulateContents()
-	var/static/items_inside = list(
-		/obj/item/implantcase/exile = 5,
-		/obj/item/implanter = 1)
-	generate_items_inside(items_inside,src)
-
 /obj/item/storage/box/bodybags
 	name = "body bags"
 	desc = "The label indicates that it contains body bags."
@@ -1148,13 +1137,15 @@
 		)
 	generate_items_inside(items_inside,src)
 
+TYPEINFO_DEF(/obj/item/storage/box/plastic)
+	default_materials = list(/datum/material/plastic = 1000)
+
 /obj/item/storage/box/plastic
 	name = "plastic box"
 	desc = "It's a solid, plastic shell box."
 	icon_state = "plasticbox"
 	foldable = null
 	illustration = "writing"
-	custom_materials = list(/datum/material/plastic = 1000) //You lose most if recycled.
 
 
 /obj/item/storage/box/fireworks
