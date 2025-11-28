@@ -1,3 +1,6 @@
+TYPEINFO_DEF(/obj/item/peripheral)
+	default_materials = list(/datum/material/glass = 1000)
+
 /obj/item/peripheral
 	name = "peripheral card"
 	desc = "A computer circuit board."

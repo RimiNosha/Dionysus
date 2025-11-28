@@ -5,6 +5,9 @@
 
 DEFINE_INTERACTABLE(/obj/machinery/computer4)
 
+TYPEINFO_DEF(/obj/machinery/computer4)
+	default_armor = list(BLUNT = 0, PUNCTURE = 0, SLASH = 90, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 40, ACID = 20)
+
 /obj/machinery/computer4
 	name = "voidcomputer"
 	desc = "An older voidcomputer model produced by ThinkTronic LTD."
@@ -71,7 +74,6 @@ DEFINE_INTERACTABLE(/obj/machinery/computer4)
 	/// Set to TRUE during restart, prevents inputting commands.
 	var/rebooting = FALSE
 
-	armor = list(BLUNT = 0, PUNCTURE = 0, SLASH = 90, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 40, ACID = 20)
 	is_mouseover_interactable = TRUE
 
 /obj/machinery/computer4/Initialize(mapload)
