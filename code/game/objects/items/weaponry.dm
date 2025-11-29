@@ -280,7 +280,7 @@ TYPEINFO_DEF(/obj/item/katana)
 	slot_flags = null
 
 TYPEINFO_DEF(/obj/item/throwing_star)
-	default_materials = list(/datum/material/iron=500, /datum/material/glass=500)
+	default_materials = list(/datum/material/steel=500, /datum/material/glass=500)
 
 /obj/item/throwing_star
 	name = "throwing star"
@@ -314,7 +314,7 @@ TYPEINFO_DEF(/obj/item/throwing_star)
 	embedding = list("pain_mult" = 0, "jostle_pain_mult" = 0, "embed_chance" = 100, "fall_chance" = 0)
 
 TYPEINFO_DEF(/obj/item/switchblade)
-	default_materials = list(/datum/material/iron=12000)
+	default_materials = list(/datum/material/steel=12000)
 
 /obj/item/switchblade
 	name = "switchblade"
@@ -381,7 +381,7 @@ TYPEINFO_DEF(/obj/item/switchblade)
 	return(OXYLOSS)
 
 TYPEINFO_DEF(/obj/item/cane)
-	default_materials = list(/datum/material/iron=50)
+	default_materials = list(/datum/material/steel=50)
 
 /obj/item/cane
 	name = "cane"

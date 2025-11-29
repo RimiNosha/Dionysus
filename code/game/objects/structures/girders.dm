@@ -281,7 +281,7 @@
 /obj/structure/girder/reinforced
 	name = "reinforced girder"
 	state = GIRDER_REINF
-	reinforced_material = /datum/material/iron
+	reinforced_material = /datum/material/steel
 	girderpasschance = GIRDER_PASSCHANCE_REINFORCED
 
 /obj/structure/girder/tram

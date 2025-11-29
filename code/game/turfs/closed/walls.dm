@@ -35,13 +35,13 @@ GLOBAL_REAL_VAR(wall_overlays_cache) = list()
 
 	rcd_memory = RCD_MEMORY_WALL
 
-	color = /datum/material/iron::wall_color //To display in mapping softwares
+	color = /datum/material/steel::wall_color //To display in mapping softwares
 
 	///lower numbers are harder. Used to determine the probability of a hulk smashing through.
 	var/hardness = 40
 	var/slicing_duration = 100  //default time taken to slice the wall
 	/// Material type of the plating
-	var/plating_material = /datum/material/iron
+	var/plating_material = /datum/material/steel
 	/// Material type of the reinforcement
 	var/reinf_material
 

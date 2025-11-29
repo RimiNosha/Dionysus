@@ -150,7 +150,7 @@ TYPEINFO_DEF(/obj/item/stack/sheet/rglass)
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 	inhand_icon_state = "sheet-rglass"
-	mats_per_unit = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/steel=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/rglass
 	grind_results = list(/datum/reagent/silicon = 20, /datum/reagent/iron = 10)
@@ -205,7 +205,7 @@ TYPEINFO_DEF(/obj/item/stack/sheet/plasmarglass)
 	singular_name = "reinforced plasma glass sheet"
 	icon_state = "sheet-prglass"
 	inhand_icon_state = "sheet-prglass"
-	mats_per_unit = list(/datum/material/alloy/plasmaglass=MINERAL_MATERIAL_AMOUNT, /datum/material/iron = MINERAL_MATERIAL_AMOUNT * 0.5)
+	mats_per_unit = list(/datum/material/alloy/plasmaglass=MINERAL_MATERIAL_AMOUNT, /datum/material/steel = MINERAL_MATERIAL_AMOUNT * 0.5)
 	resistance_flags = ACID_PROOF
 	material_flags = NONE
 	merge_type = /obj/item/stack/sheet/plasmarglass

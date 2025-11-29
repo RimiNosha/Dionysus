@@ -1,5 +1,5 @@
 TYPEINFO_DEF(/obj/item/wallframe)
-	default_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT*2)
+	default_materials = list(/datum/material/steel=MINERAL_MATERIAL_AMOUNT*2)
 
 /obj/item/wallframe
 	icon = 'icons/obj/wallframe.dmi'
@@ -68,7 +68,7 @@ TYPEINFO_DEF(/obj/item/wallframe)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/wallframe/wrench_act(mob/living/user, obj/item/tool)
-	var/metal_amt = round(custom_materials[GET_MATERIAL_REF(/datum/material/iron)]/MINERAL_MATERIAL_AMOUNT) //Replace this shit later
+	var/metal_amt = round(custom_materials[GET_MATERIAL_REF(/datum/material/steel)]/MINERAL_MATERIAL_AMOUNT) //Replace this shit later
 	var/glass_amt = round(custom_materials[GET_MATERIAL_REF(/datum/material/glass)]/MINERAL_MATERIAL_AMOUNT) //Replace this shit later
 
 	if(!metal_amt && !glass_amt)
@@ -82,7 +82,7 @@ TYPEINFO_DEF(/obj/item/wallframe)
 	return ITEM_INTERACT_SUCCESS
 
 TYPEINFO_DEF(/obj/item/electronics)
-	default_materials = list(/datum/material/iron=50, /datum/material/glass=50)
+	default_materials = list(/datum/material/steel=50, /datum/material/glass=50)
 
 /obj/item/electronics
 	desc = "Looks like a circuit. Probably is."

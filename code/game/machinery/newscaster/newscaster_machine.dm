@@ -775,7 +775,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 	qdel(active_request)
 
 TYPEINFO_DEF(/obj/item/wallframe/newscaster)
-	default_materials = list(/datum/material/iron=14000, /datum/material/glass=8000)
+	default_materials = list(/datum/material/steel=14000, /datum/material/glass=8000)
 
 /obj/item/wallframe/newscaster
 	name = "newscaster frame"

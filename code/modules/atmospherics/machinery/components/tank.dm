@@ -1,7 +1,7 @@
 #define TANK_PLATING_SHEETS 12
 
 TYPEINFO_DEF(/obj/machinery/atmospherics/components/tank)
-	default_materials = list(/datum/material/iron = TANK_PLATING_SHEETS * MINERAL_MATERIAL_AMOUNT)
+	default_materials = list(/datum/material/steel = TANK_PLATING_SHEETS * MINERAL_MATERIAL_AMOUNT)
 
 /obj/machinery/atmospherics/components/tank
 	icon = 'icons/obj/atmospherics/stationary_canisters.dmi'

@@ -12,7 +12,7 @@ TYPEINFO_DEF(/obj/item/shield)
 	return TRUE
 
 TYPEINFO_DEF(/obj/item/shield/riot)
-	default_materials = list(/datum/material/glass=7500, /datum/material/iron=1000)
+	default_materials = list(/datum/material/glass=7500, /datum/material/steel=1000)
 
 /obj/item/shield/riot
 	name = "riot shield"
@@ -94,7 +94,7 @@ TYPEINFO_DEF(/obj/item/shield/riot)
 	return ..()
 
 TYPEINFO_DEF(/obj/item/shield/riot/roman)
-	default_materials = list(/datum/material/iron=8500)
+	default_materials = list(/datum/material/steel=8500)
 
 /obj/item/shield/riot/roman
 	name = "\improper Roman shield"
@@ -255,7 +255,7 @@ TYPEINFO_DEF(/obj/item/shield/riot/buckler)
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
 TYPEINFO_DEF(/obj/item/shield/riot/tele)
-	default_materials = list(/datum/material/iron = 3600, /datum/material/glass = 3600, /datum/material/silver = 270, /datum/material/titanium = 180)
+	default_materials = list(/datum/material/steel = 3600, /datum/material/glass = 3600, /datum/material/silver = 270, /datum/material/titanium = 180)
 
 /obj/item/shield/riot/tele
 	name = "telescopic shield"

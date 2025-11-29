@@ -1034,7 +1034,7 @@ TYPEINFO_DEF(/obj/machinery/porta_turret/syndicate/shuttle)
 	return ..()
 
 TYPEINFO_DEF(/obj/item/wallframe/turret_control)
-	default_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
+	default_materials = list(/datum/material/steel=MINERAL_MATERIAL_AMOUNT)
 
 /obj/item/wallframe/turret_control
 	name = "turret control frame"

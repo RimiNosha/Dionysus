@@ -52,7 +52,7 @@
 
 /obj/structure/girdern/proc/use_sheet(mob/user, obj/item/stack/sheet/material_sheet)
 	if(girder_state == GIRDER_NOTHING)
-		if(material_sheet.material_type != /datum/material/iron)
+		if(material_sheet.material_type != /datum/material/steel)
 			balloon_alert(user, "wrong material!")
 			return
 		create_structure(user, material_sheet)
@@ -71,7 +71,7 @@
 		return FALSE
 
 	// verify that the material is iron
-	if(structure_material.material_type != /datum/material/iron)
+	if(structure_material.material_type != /datum/material/steel)
 		balloon_alert(user, "wrong material!")
 		return FALSE
 	// do we have enough material?

@@ -21,7 +21,7 @@ TYPEINFO_DEF(/obj/structure/low_wall)
 	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WALLS
 
 	/// Material used in construction
-	var/plating_material = /datum/material/iron
+	var/plating_material = /datum/material/steel
 	/// Paint color of our wall
 	var/wall_paint
 	/// Paint colour of our stripe

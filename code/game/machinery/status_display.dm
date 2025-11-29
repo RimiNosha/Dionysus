@@ -36,7 +36,7 @@
 	var/message2 = ""
 
 TYPEINFO_DEF(/obj/item/wallframe/status_display)
-	default_materials = list(/datum/material/iron=14000, /datum/material/glass=8000)
+	default_materials = list(/datum/material/steel=14000, /datum/material/glass=8000)
 
 /obj/item/wallframe/status_display
 	name = "status display frame"

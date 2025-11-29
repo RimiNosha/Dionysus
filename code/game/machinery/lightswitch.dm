@@ -17,7 +17,7 @@
 	id = "lightswitch_frame"
 	build_type = AUTOLATHE | FABRICATOR
 	materials = list(
-		/datum/material/iron = 200,
+		/datum/material/steel = 200,
 		/datum/material/glass = 200,
 	)
 	build_path = /obj/item/wallframe/light_switch

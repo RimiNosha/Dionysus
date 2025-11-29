@@ -1,5 +1,5 @@
 TYPEINFO_DEF(/obj/structure/chair)
-	default_materials = list(/datum/material/iron = 2000)
+	default_materials = list(/datum/material/steel = 2000)
 
 /obj/structure/chair
 	name = "chair"
@@ -302,7 +302,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 	item_chair = /obj/item/chair/stool/bamboo
 
 TYPEINFO_DEF(/obj/item/chair)
-	default_materials = list(/datum/material/iron = 2000)
+	default_materials = list(/datum/material/steel = 2000)
 
 /obj/item/chair
 	name = "chair"
@@ -365,7 +365,7 @@ TYPEINFO_DEF(/obj/item/chair)
 	if(remaining_mats)
 		for(var/M=1 to remaining_mats)
 			new stack_type(get_turf(loc))
-	else if(custom_materials[GET_MATERIAL_REF(/datum/material/iron)])
+	else if(custom_materials[GET_MATERIAL_REF(/datum/material/steel)])
 		new /obj/item/stack/rods(get_turf(loc), 2)
 	qdel(src)
 

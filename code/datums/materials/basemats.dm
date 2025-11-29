@@ -1,6 +1,6 @@
 ///Has no special properties.
-/datum/material/iron
-	name = "iron"
+/datum/material/steel
+	name = "steel"
 	desc = "Common iron ore often found in sedimentary and igneous layers of the crust."
 	color = "#878687"
 	greyscale_colors = "#878687"
@@ -9,7 +9,7 @@
 	value_per_unit = IRON_VALUE_PER_UNIT
 	wall_color = "#57575c"
 
-/datum/material/iron/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
+/datum/material/steel/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)
 	return TRUE
 

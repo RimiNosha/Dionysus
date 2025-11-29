@@ -23,7 +23,7 @@
 	rad_insulation = RAD_MEDIUM_INSULATION
 	material_flags = MATERIAL_EFFECTS
 	/// Material type of the plating
-	var/plating_material = /datum/material/iron
+	var/plating_material = /datum/material/steel
 	/// Material type of the reinforcement
 	var/reinf_material
 	/// Paint of the wall

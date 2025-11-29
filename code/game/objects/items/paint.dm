@@ -3,7 +3,7 @@
 //IT SUCKED SO MUCH WE CHANGED IT ENTIRELY
 
 TYPEINFO_DEF(/obj/item/paint_sprayer)
-	default_materials = list(/datum/material/iron=50, /datum/material/glass=50)
+	default_materials = list(/datum/material/steel=50, /datum/material/glass=50)
 
 /obj/item/paint_sprayer
 	name = "paint sprayer"

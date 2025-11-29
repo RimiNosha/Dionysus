@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	singular_name = "iron sheet"
 	icon_state = "sheet-metal"
 	inhand_icon_state = "sheet-metal"
-	mats_per_unit = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/steel=MINERAL_MATERIAL_AMOUNT)
 	throwforce = 10
 	flags_1 = CONDUCT_1
 	resistance_flags = FIRE_PROOF
@@ -141,7 +141,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	grind_results = list(/datum/reagent/iron = 20)
 	point_value = 2
 	tableVariant = /obj/structure/table
-	material_type = /datum/material/iron
+	material_type = /datum/material/steel
 	matter_amount = 4
 	cost = 500
 	source = /datum/robot_energy_storage/iron

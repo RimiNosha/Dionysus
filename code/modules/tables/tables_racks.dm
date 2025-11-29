@@ -13,7 +13,7 @@
  */
 
 TYPEINFO_DEF(/obj/structure/table)
-	default_materials = list(/datum/material/iron = 2000)
+	default_materials = list(/datum/material/steel = 2000)
 
 /obj/structure/table
 	name = "table"
@@ -859,7 +859,7 @@ TYPEINFO_DEF(/obj/structure/table/reinforced)
 	playsound(src, 'sound/magic/clockwork/fellowship_armory.ogg', 50, TRUE)
 
 TYPEINFO_DEF(/obj/structure/table/reinforced/rglass)
-	default_materials = list(/datum/material/glass = 2000, /datum/material/iron = 2000)
+	default_materials = list(/datum/material/glass = 2000, /datum/material/steel = 2000)
 
 /obj/structure/table/reinforced/rglass
 	name = "reinforced glass table"
@@ -871,7 +871,7 @@ TYPEINFO_DEF(/obj/structure/table/reinforced/rglass)
 	max_integrity = 150
 
 TYPEINFO_DEF(/obj/structure/table/reinforced/plasmarglass)
-	default_materials = list(/datum/material/alloy/plasmaglass = 2000, /datum/material/iron = 2000)
+	default_materials = list(/datum/material/alloy/plasmaglass = 2000, /datum/material/steel = 2000)
 
 /obj/structure/table/reinforced/plasmarglass
 	name = "reinforced plasma glass table"
@@ -1082,7 +1082,7 @@ TYPEINFO_DEF(/obj/structure/table/optable)
  */
 
 TYPEINFO_DEF(/obj/item/rack_parts)
-	default_materials = list(/datum/material/iron=2000)
+	default_materials = list(/datum/material/steel=2000)
 
 /obj/item/rack_parts
 	name = "rack parts"

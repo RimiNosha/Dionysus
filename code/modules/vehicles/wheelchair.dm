@@ -77,7 +77,7 @@ TYPEINFO_DEF(/obj/vehicle/ridden/wheelchair/gold)
 	foldabletype = /obj/item/wheelchair/gold
 
 TYPEINFO_DEF(/obj/item/wheelchair)
-	default_materials = list(/datum/material/iron = 10000)
+	default_materials = list(/datum/material/steel = 10000)
 
 /obj/item/wheelchair
 	name = "wheelchair"

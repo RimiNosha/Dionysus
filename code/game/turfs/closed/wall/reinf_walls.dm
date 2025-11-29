@@ -5,7 +5,7 @@
 	opacity = TRUE
 	density = TRUE
 	hardness = 10
-	reinf_material = /datum/material/iron
+	reinf_material = /datum/material/steel
 	plating_material = /datum/material/alloy/plasteel
 	explosion_block = 6
 	rad_insulation = RAD_HEAVY_INSULATION
@@ -22,7 +22,7 @@
 	desc = "The armored hull of an ominous looking ship."
 	icon = 'icons/turf/walls/metal_wall.dmi'
 	explosion_block = 20
-	reinf_material = /datum/material/iron
+	reinf_material = /datum/material/steel
 	plating_material = /datum/material/alloy/plastitanium
 	color = "#3a313a" //To display in mapping softwares
 

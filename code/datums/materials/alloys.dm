@@ -33,13 +33,13 @@
 	desc = "The heavy duty result of infusing iron with plasma."
 	color = "#706374"
 	greyscale_colors = "#706374"
-	value_per_unit = ((/datum/material/iron::value_per_unit * 0.5) + (/datum/material/plasma::value_per_unit * 0.5)) * 1.1
+	value_per_unit = ((/datum/material/steel::value_per_unit * 0.5) + (/datum/material/plasma::value_per_unit * 0.5)) * 1.1
 	strength_modifier = 1.25
 	integrity_modifier = 1.5 // Heavy duty.
 	armor_modifiers = list(BLUNT = 1.4, PUNCTURE = 1.4, SLASH = 0, LASER = 1.1, ENERGY = 1.1, BOMB = 1.5, BIO = 1, FIRE = 1.1, ACID = 1)
 	sheet_type = /obj/item/stack/sheet/plasteel
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	composition = list(/datum/material/iron=1, /datum/material/plasma=1)
+	composition = list(/datum/material/steel=1, /datum/material/plasma=1)
 	reinforced_wall_icon = 'icons/turf/walls/solid_wall_reinforced.dmi'
 	//This creates legacy r_walls so that I don't have to recode a shitload of stuff
 	wall_type = /turf/closed/wall/r_wall
@@ -158,7 +158,7 @@
 	sheet_type = /obj/item/stack/sheet/mineral/abductor
 	value_per_unit = 1
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	composition = list(/datum/material/iron=2, /datum/material/plasma=2)
+	composition = list(/datum/material/steel=2, /datum/material/plasma=2)
 	reinforced_wall_icon = 'icons/turf/walls/solid_wall_reinforced.dmi'
 	wall_name = "hull"
 	hard_wall_decon = TRUE
