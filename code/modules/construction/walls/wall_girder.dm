@@ -5,210 +5,255 @@
 #define GIRDER_WALL_FULL "full"
 #define GIRDER_WALL_HALF "half"
 
-/obj/structure/girder
-    name = "girder"
-    desc = "An interconnected network of metal rods."
-    icon = 'icons/obj/structures.dmi'
-    icon_state = "girder"
-    density = TRUE
-    /// The material that the girder walls are made of.
-    var/datum/material/material_plate = null
-    /// the material that the reinforcement rods are made of.
-    var/datum/material/material_reinforce = null
-    /// The current state the girder is in; used for construction of walls.
-    var/girder_state = GIRDER_NOTHING
-    /// The current shape of the girder. Currently only used for walls.
-    var/girder_shape = GIRDER_WALL_FULL
+#define STRUCTURE_COST 3
+#define PLATING_COST 2
+#define REINFORCEMENT_COST 2
 
-/obj/structure/girder/proc/attempt_finish(mob/user)
-    var/turf/turf_loc = get_turf(src)
-    if(loc != turf_loc)
-        balloon_alert(user, "can't build here!")
-        return TRUE
-    if(!isopenturf(turf_loc))
-        balloon_alert(user, "can't build here!")
-        return TRUE
-    balloon_alert_to_viewers("finishing wall...")
-    if(!do_after(user, src, 2 SECONDS, DO_PUBLIC|DO_RESTRICT_CLICKING, TRUE))
-        balloon_alert(user, "interrupted!")
-        return TRUE
-    switch(girder_shape)
-        if(GIRDER_WALL_FULL)
-            var/turf/closed/wall/new_wall = turf_loc.ChangeTurf(/turf/closed/wall)
-            new_wall.set_materials(material_plate, material_reinforce, TRUE)
-            qdel(src)
-            return TRUE
-        if(GIRDER_WALL_HALF)
-            var/obj/structure/low_wall/new_wall = new /obj/structure/low_wall(turf_loc)
-            qdel(src)
-            return TRUE
+/obj/structure/girdern
+	name = "girder"
+	desc = "An interconnected network of metal rods."
+	icon = 'icons/obj/girders.dmi'
+	icon_state = "girder_base"
+	density = TRUE
+	/// The material that the girder walls are made of.
+	var/datum/material/material_plate = null
+	/// the material that the reinforcement rods are made of.
+	var/datum/material/material_reinforce = null
+	/// The current state the girder is in; used for construction of walls.
+	var/girder_state = GIRDER_NOTHING
+	/// The current shape of the girder. Currently only used for walls.
+	var/girder_shape = GIRDER_WALL_FULL
 
-/obj/structure/girder/proc/attempt_reinforce(mob/user, obj/item/stack/sheet/material)
-    switch(girder_state)
-        if(GIRDER_NOTHING)
-            balloon_alert(user, "nothing to reinforce!")
-            return TRUE
-        if(GIRDER_PLATED)
-            balloon_alert(user, "can't reach!")
-            return TRUE
-        if(GIRDER_STRUCTURAL)
-            var/amount_needed = 10
-            if(girder_shape == GIRDER_WALL_HALF)
-                amount_needed = 5
-            if(!isnull(material_reinforce))
-                balloon_alert(user, "already reinforced!")
-                return TRUE
-            if(material.get_amount() < amount_needed)
-                balloon_alert(user, "not enough!")
-                return TRUE
-            balloon_alert_to_viewers("reinforcing...")
-            if(!do_after(user, src, 2 SECONDS, DO_PUBLIC|DO_RESTRICT_CLICKING, TRUE))
-                balloon_alert(user, "interrupted!")
-                return TRUE
-            if(!material.use(amount_needed))
-                balloon_alert(user, "not enough!")
-                return TRUE
-            material_reinforce = material
-            return TRUE
-        else
-            var/err_message = "BUG: reinforcement attempted on a girder in an invalid state ([girder_state])!"
-            to_chat(user, span_warning(err_message))
-            stack_trace(err_message)
-            return TRUE
+/obj/structure/girdern/update_overlays()
+	. = ..()
+	if(girder_state == GIRDER_NOTHING)
+		return
+	if(girder_shape == GIRDER_WALL_FULL)
+		. += "girder"
+		if(!isnull(material_reinforce))
+			. += "girder_reinforced"
+	else
+		. += "girder_half"
+	if(girder_state == GIRDER_PLATED)
+		. += "girder_plate"
 
-/obj/structure/girder/proc/attempt_plate(mob/user, obj/item/stack/sheet/material)
-    switch(girder_state)
-        if(GIRDER_NOTHING)
-            if(material.material_type != /datum/material/iron)
-                balloon_alert(user, "nothing to plate!")
-                return TRUE
+/obj/structure/girdern/proc/do_finish(mob/user)
+	var/turf/my_turf = get_turf(src)
+	if(my_turf != loc)
+		balloon_alert(user, "can't reach!")
+		return
+	if(girder_shape == GIRDER_WALL_FULL)
+		var/turf/closed/wall/new_wall = my_turf.ChangeTurf(/turf/closed/wall)
+		new_wall.set_materials(material_plate, material_reinforce, TRUE)
+	else
+		var/obj/structure/low_wall/new_low_wall = new /obj/structure/low_wall(my_turf)
+		new_low_wall.set_material(material_plate, TRUE)
+	qdel(src)
 
-            if(material.get_amount() < 10)
-                balloon_alert(user, "not enough!")
-                return TRUE
+/obj/structure/girdern/proc/use_sheet(mob/user, obj/item/stack/sheet/material_sheet)
+	if(girder_state == GIRDER_NOTHING)
+		if(material_sheet.material_type != /datum/material/iron)
+			balloon_alert(user, "wrong material!")
+			return
+		create_structure(user, material_sheet)
+		return
 
-            var/obj/item/weldingtool/welder = locate() in user.held_items
-            if(isnull(welder) || !welder.isOn())
-                balloon_alert(user, "can't weld!")
+	apply_plating(user, material_sheet)
 
-            balloon_alert_to_viewers("welding structure...")
-            if(!welder.use_tool(src, user, 2 SECONDS))
-                return
+/**
+ * Creates the structure of the girder.
+ * Expects the provided material to be iron(steel).
+ */
+/obj/structure/girdern/proc/create_structure(mob/user, obj/item/stack/sheet/structure_material)
+	// are we at the correct state?
+	if(girder_state != GIRDER_NOTHING)
+		balloon_alert(user, "no") // shouldn't be able to get here anyway
+		return FALSE
 
-            if(!material.use(10))
-                balloon_alert(user, "not enough!")
-                return TRUE
+	// verify that the material is iron
+	if(structure_material.material_type != /datum/material/iron)
+		balloon_alert(user, "wrong material!")
+		return FALSE
+	// do we have enough material?
+	if(structure_material.get_amount() < STRUCTURE_COST)
+		balloon_alert(user, "not enough!")
+		return FALSE
+	// do we have a welder?
+	var/obj/item/weldingtool/welder = locate() in user.held_items
+	if(!istype(welder))
+		balloon_alert(user, "need welder!")
+		return FALSE
+	user.balloon_alert_to_viewers("welding...")
+	if(!welder.use_tool(src, user, 2 SECONDS))
+		balloon_alert(user, "interrupted!")
+		return FALSE
+	if(!structure_material.use(STRUCTURE_COST))
+		balloon_alert(user, "not enough!")
+		return FALSE
+	girder_state = GIRDER_STRUCTURAL
+	update_appearance()
+	return TRUE
 
-            girder_state = GIRDER_STRUCTURAL
-            return TRUE
+/**
+ * Attempts to apply the given material as a plating to the girder.
+ */
+/obj/structure/girdern/proc/apply_plating(mob/user, obj/item/stack/sheet/material)
+	if(girder_state != GIRDER_STRUCTURAL)
+		balloon_alert(user, "no") // shouldn't be able to get here anyway
+		return FALSE
+	// do we have enough material?
+	if(material.get_amount() < PLATING_COST)
+		balloon_alert(user, "not enough!")
+		return FALSE
+	// do we have a screwdriver?
+	var/obj/item/screwdriver/screwdriver = locate() in user.held_items
+	if(!istype(screwdriver))
+		balloon_alert(user, "need screwdriver!")
+		return FALSE
+	user.balloon_alert_to_viewers("plating...")
+	if(!screwdriver.use_tool(src, user, 2 SECONDS))
+		balloon_alert(user, "interrupted!")
+		return FALSE
+	if(!material.use(PLATING_COST))
+		balloon_alert(user, "not enough!")
+		return FALSE
+	material_plate = material.material_type
+	girder_state = GIRDER_PLATED
+	update_appearance()
+	return TRUE
 
-        if(GIRDER_PLATED)
-            balloon_alert(user, "already plated!")
-            return TRUE
+/**
+ * Attempts to apply the given material as reinforcement to the girder.
+ */
+/obj/structure/girdern/proc/create_reinforcement(mob/user, obj/item/stack/sheet/reinforcement_material)
+	if(girder_state != GIRDER_STRUCTURAL || girder_shape != GIRDER_WALL_FULL)
+		balloon_alert(user, "can't attach!")
+		return FALSE
+	// are we already reinforced?
+	if(!isnull(material_reinforce))
+		balloon_alert(user, "already reinforced!")
+		return FALSE
+	// do we have enough material?
+	if(reinforcement_material.get_amount() < REINFORCEMENT_COST)
+		balloon_alert(user, "not enough!")
+		return FALSE
+	// do we have a screwdriver?
+	var/obj/item/screwdriver/screwdriver = locate() in user.held_items
+	if(!istype(screwdriver))
+		balloon_alert(user, "need screwdriver!")
+		return FALSE
+	user.balloon_alert_to_viewers("reinforcing...")
+	if(!screwdriver.use_tool(src, user, 2 SECONDS))
+		balloon_alert(user, "interrupted!")
+		return FALSE
+	if(!reinforcement_material.use(REINFORCEMENT_COST))
+		balloon_alert(user, "not enough!")
+		return FALSE
+	material_reinforce = reinforcement_material.material_type
+	update_appearance()
+	return TRUE
 
-        if(GIRDER_STRUCTURAL)
-            if(!isnull(material_plate))
-                balloon_alert(user, "already plated!")
-                return TRUE
-            if(material.get_amount() < 10)
-                balloon_alert(user, "not enough!")
-                return TRUE
-            balloon_alert_to_viewers("plating...")
-            if(!do_after(user, src, 2 SECONDS, DO_PUBLIC|DO_RESTRICT_CLICKING, TRUE))
-                balloon_alert(user, "interrupted!")
-                return TRUE
-            if(!material.use(10))
-                balloon_alert(user, "not enough!")
-                return TRUE
-            material_plate = material
-            return TRUE
-        else
-            var/err_message = "BUG: plate attempted on a girder in an invalid state ([girder_state])!"
-            to_chat(user, span_warning(err_message))
-            stack_trace(err_message)
-            return TRUE
+/obj/structure/girdern/attackby(obj/item/object, mob/user, params)
+	if(!Adjacent(object))
+		return ..()
+	if(istype(object, /obj/item/stack/sheet))
+		use_sheet(user, object)
+		return TRUE
+	return ..()
 
-/obj/structure/girder/crowbar_act(mob/living/user, obj/item/tool)
-    if(!Adjacent(tool))
-        return ..()
-    switch(girder_state)
-        if(GIRDER_NOTHING, GIRDER_STRUCTURAL)
-            balloon_alert(user, "nothing to remove!")
-            return TRUE
-        if(GIRDER_PLATED)
-            ASSERT(!isnull(material_plate))
-            balloon_alert_to_viewers("removing plating...")
-            if(!do_after(user, src, 2 SECONDS, DO_PUBLIC|DO_RESTRICT_CLICKING, TRUE))
-                balloon_alert(user, "interrupted!")
-                return TRUE
-            material_plate = null
-            return TRUE
-        else
-            var/err_message = "BUG: crowbar attempted on a girder in an invalid state ([girder_state])!"
-            to_chat(user, span_warning(err_message))
-            stack_trace(err_message)
-            return TRUE
+/obj/structure/girdern/attackby_secondary(obj/item/object, mob/user, params)
+	if(!Adjacent(object))
+		return ..()
+	if(istype(object, /obj/item/stack/sheet))
+		create_reinforcement(user, object)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ..()
 
-/obj/structure/girder/wrench_act(mob/user, obj/item/tool)
-    if(!Adjacent(tool))
-        return ..()
-    switch(girder_state)
-        if(GIRDER_PLATED)
-            balloon_alert(user, "can't reach!")
-            return TRUE
-        if(GIRDER_STRUCTURAL, GIRDER_NOTHING)
-            if(!istype(loc, /turf/open/floor))
-                balloon_alert(user, "what floor?")
-                return TRUE
-            balloon_alert(user, "adjusting floor bolts!")
-            if(!tool.use_tool(src, user, 2 SECONDS))
-                return TRUE
-            anchored = !anchored
-            return TRUE
-        else
-            var/err_message = "BUG: wrench attempted on a girder in an invalid state ([girder_state])!"
-            to_chat(user, span_warning(err_message))
-            stack_trace(err_message)
+/obj/structure/girdern/welder_act(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_STRUCTURAL)
+		return ..()
+	if(girder_shape != GIRDER_WALL_FULL)
+		balloon_alert(user, "already sliced!")
+		return TRUE
+	if(!isnull(material_reinforce))
+		balloon_alert(user, "already reinforced!")
+		return TRUE
+	balloon_alert_to_viewers("slicing...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), 1))
+	girder_shape = GIRDER_WALL_HALF
+	update_appearance()
+	return TRUE
 
-/obj/structure/girder/welder_act(mob/living/user, obj/item/tool)
-    if(!Adjacent(tool))
-        return ..()
-    switch(girder_state)
-        if(GIRDER_STRUCTURAL)
-            if(girder_shape != GIRDER_WALL_FULL)
-                balloon_alert(user, "already sliced!")
-                return TRUE
-            balloon_alert(user, "slicing...")
-            if(!tool.use_tool(src, user, 2 SECONDS))
-                return TRUE
-            new /obj/item/stack/sheet/iron(user.drop_location(), 5)
-            return TRUE
+/obj/structure/girdern/welder_act_secondary(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_STRUCTURAL)
+		return ..()
+	balloon_alert_to_viewers("dismantling...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	var/refund = STRUCTURE_COST
+	if(girder_shape == GIRDER_WALL_HALF)
+		refund -= 1
+	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), refund))
+	qdel(src)
+	return TRUE
 
-/obj/structure/girder/screwdriver_act(mob/user, obj/item/tool)
-    if(!Adjacent(tool))
-        return ..()
-    switch(girder_state)
-        if(GIRDER_PLATED)
-            return attempt_finish(user)
-        if(GIRDER_STRUCTURAL, GIRDER_NOTHING)
-            balloon_alert(user, "not ready!")
-            return TRUE
-        else
-            var/err_message = "BUG: screwdriver attempted on a girder in an invalid state ([girder_state])!"
-            to_chat(user, span_warning(err_message))
-            stack_trace(err_message)
-            return TRUE
+/obj/structure/girdern/crowbar_act(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_PLATED)
+		return ..()
+	balloon_alert_to_viewers("removing plating...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	user.put_in_hands(new material_plate.sheet_type(drop_location(), PLATING_COST))
+	material_plate = null
+	girder_state = GIRDER_STRUCTURAL
+	update_appearance()
+	return TRUE
 
-/obj/structure/girder/attackby(obj/item/object, mob/user, params)
-    if(!Adjacent(object))
-        return ..()
-    if(istype(object, /obj/item/stack/sheet))
-        return attempt_plate(user, object)
-    return ..()
+/obj/structure/girdern/screwdriver_act(mob/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_PLATED)
+		return ..()
+	balloon_alert_to_viewers("finishing...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	do_finish(user)
+	return TRUE
 
-/obj/structure/girder/attackby_secondary(obj/item/object, mob/user, params)
-    if(!Adjacent(object))
-        return ..()
-    if(istype(object, /obj/item/stack/sheet))
-        return attempt_reinforce(user, object)
-    return ..()
+/obj/structure/girdern/screwdriver_act_secondary(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_STRUCTURAL)
+		return ..()
+	if(isnull(material_reinforce))
+		return ..()
+	balloon_alert_to_viewers("removing reinforcement...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	user.put_in_hands(new material_reinforce.sheet_type(drop_location(), REINFORCEMENT_COST))
+	material_reinforce = null
+	return TRUE
+
+/obj/structure/girdern/wrench_act(mob/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_NOTHING)
+		balloon_alert(user, "can't reach!")
+		return TRUE
+	var/turf/my_loc = get_turf(src)
+	if(!isopenturf(my_loc) || isopenspaceturf(my_loc))
+		balloon_alert(user, "what floor?")
+		return TRUE
+	balloon_alert(user, "adjusting floor bolts!")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	anchored = !anchored
+	return TRUE
