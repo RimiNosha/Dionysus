@@ -1,14 +1,3 @@
-#define GIRDER_NOTHING "nothing"
-#define GIRDER_STRUCTURAL "structural"
-#define GIRDER_PLATED "plated"
-
-#define GIRDER_WALL_FULL "full"
-#define GIRDER_WALL_HALF "half"
-
-#define STRUCTURE_COST 3
-#define PLATING_COST 2
-#define REINFORCEMENT_COST 2
-
 /obj/structure/girdern
 	name = "girder"
 	desc = "An interconnected network of metal rods."
@@ -21,19 +10,14 @@
 	var/datum/material/material_reinforce = null
 	/// The current state the girder is in; used for construction of walls.
 	var/girder_state = GIRDER_NOTHING
-	/// The current shape of the girder. Currently only used for walls.
-	var/girder_shape = GIRDER_WALL_FULL
 
 /obj/structure/girdern/update_overlays()
 	. = ..()
 	if(girder_state == GIRDER_NOTHING)
 		return
-	if(girder_shape == GIRDER_WALL_FULL)
-		. += "girder"
-		if(!isnull(material_reinforce))
-			. += "girder_reinforced"
-	else
-		. += "girder_half"
+	. += "girder"
+	if(!isnull(material_reinforce))
+		. += "girder_reinforced"
 	if(girder_state == GIRDER_PLATED)
 		. += "girder_plate"
 
@@ -42,12 +26,8 @@
 	if(my_turf != loc)
 		balloon_alert(user, "can't reach!")
 		return
-	if(girder_shape == GIRDER_WALL_FULL)
-		var/turf/closed/wall/new_wall = my_turf.ChangeTurf(/turf/closed/wall)
-		new_wall.set_materials(material_plate, material_reinforce, TRUE)
-	else
-		var/obj/structure/low_wall/new_low_wall = new /obj/structure/low_wall(my_turf)
-		new_low_wall.set_material(material_plate, TRUE)
+	var/turf/closed/wall/new_wall = my_turf.ChangeTurf(/turf/closed/wall)
+	new_wall.set_materials(material_plate, material_reinforce, TRUE)
 	qdel(src)
 
 /obj/structure/girdern/proc/use_sheet(mob/user, obj/item/stack/sheet/material_sheet)
@@ -126,7 +106,7 @@
  * Attempts to apply the given material as reinforcement to the girder.
  */
 /obj/structure/girdern/proc/create_reinforcement(mob/user, obj/item/stack/sheet/reinforcement_material)
-	if(girder_state != GIRDER_STRUCTURAL || girder_shape != GIRDER_WALL_FULL)
+	if(girder_state != GIRDER_STRUCTURAL)
 		balloon_alert(user, "can't attach!")
 		return FALSE
 	// are we already reinforced?
@@ -169,25 +149,6 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 
-/obj/structure/girdern/welder_act(mob/living/user, obj/item/tool)
-	if(!Adjacent(tool))
-		return ..()
-	if(girder_state != GIRDER_STRUCTURAL)
-		return ..()
-	if(girder_shape != GIRDER_WALL_FULL)
-		balloon_alert(user, "already sliced!")
-		return TRUE
-	if(!isnull(material_reinforce))
-		balloon_alert(user, "already reinforced!")
-		return TRUE
-	balloon_alert_to_viewers("slicing...")
-	if(!tool.use_tool(src, user, 2 SECONDS))
-		return TRUE
-	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), 1))
-	girder_shape = GIRDER_WALL_HALF
-	update_appearance()
-	return TRUE
-
 /obj/structure/girdern/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
@@ -196,10 +157,7 @@
 	balloon_alert_to_viewers("dismantling...")
 	if(!tool.use_tool(src, user, 2 SECONDS))
 		return TRUE
-	var/refund = STRUCTURE_COST
-	if(girder_shape == GIRDER_WALL_HALF)
-		refund -= 1
-	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), refund))
+	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), STRUCTURE_COST))
 	qdel(src)
 	return TRUE
 

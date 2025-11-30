@@ -161,8 +161,8 @@ TYPEINFO_DEF(/obj/structure/grille)
 	add_fingerprint(user)
 	if(shock(user, 100))
 		return
-	tool.play_tool_sound(src, 100)
-	deconstruct()
+	if(tool.use_tool(src, user, 1 SECONDS, volume=50))
+		deconstruct()
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/grille/screwdriver_act(mob/living/user, obj/item/tool)
