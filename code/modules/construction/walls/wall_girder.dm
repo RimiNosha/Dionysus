@@ -10,6 +10,7 @@
 	var/datum/material/material_reinforce = null
 	/// The current state the girder is in; used for construction of walls.
 	var/girder_state = GIRDER_NOTHING
+	var/reinforcement_secure = FALSE
 
 /obj/structure/girdern/update_overlays()
 	. = ..()
@@ -130,6 +131,7 @@
 		balloon_alert(user, "not enough!")
 		return FALSE
 	material_reinforce = reinforcement_material.material_type
+	reinforcement_secure = FALSE
 	update_appearance()
 	return TRUE
 
@@ -180,6 +182,12 @@
 		return ..()
 	if(girder_state != GIRDER_PLATED)
 		return ..()
+	if(!anchored)
+		balloon_alert("anchor first!")
+		return TRUE
+	if(material_reinforce && !reinforcement_secure)
+		balloon_alert("secure first!")
+		return TRUE
 	balloon_alert_to_viewers("finishing...")
 	if(!tool.use_tool(src, user, 2 SECONDS))
 		return TRUE
@@ -193,12 +201,34 @@
 		return ..()
 	if(isnull(material_reinforce))
 		return ..()
-	balloon_alert_to_viewers("removing reinforcement...")
+	if(reinforcement_secure)
+		balloon_alert_to_viewers("unsecuring reinforcements...")
+		if(!tool.use_tool(src, user, 2 SECONDS))
+			return TRUE
+		reinforcement_secure = FALSE
+		return TRUE
+	balloon_alert_to_viewers("securing reinforcements...")
+	if(!tool.use_tool(src, user, 2 SECONDS))
+		return TRUE
+	reinforcement_secure = TRUE
+	return TRUE
+
+/obj/structure/girdern/wirecutter_act(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(girder_state != GIRDER_STRUCTURAL)
+		return ..()
+	if(isnull(material_reinforce))
+		return ..()
+	if(reinforcement_secure)
+		balloon_alert("unsecure first!")
+		return TRUE
+	balloon_alert_to_viewers("removing reinforcements...")
 	if(!tool.use_tool(src, user, 2 SECONDS))
 		return TRUE
 	user.put_in_hands(new material_reinforce.sheet_type(drop_location(), REINFORCEMENT_COST))
 	material_reinforce = null
-	return TRUE
+	update_appearance()
 
 /obj/structure/girdern/wrench_act(mob/user, obj/item/tool)
 	if(!Adjacent(tool))
