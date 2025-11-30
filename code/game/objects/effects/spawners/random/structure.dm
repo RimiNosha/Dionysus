@@ -27,8 +27,8 @@
 	icon_state = "girder"
 	spawn_loot_chance = 90
 	loot = list( // 80% chance normal girder, 10% chance of displaced, 10% chance of nothing
-		/obj/structure/girder = 8,
-		/obj/structure/girder/displaced = 1,
+		/obj/structure/girderold = 8,
+		/obj/structure/girderold/displaced = 1,
 	)
 
 /obj/effect/spawner/random/structure/grille

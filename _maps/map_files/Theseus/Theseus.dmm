@@ -1866,7 +1866,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/gravity_generator)
 "aFO" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/greater)
 "aFP" = (
@@ -7068,7 +7068,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/spawner/random/structure/grille,
 /obj/structure/cable/yellow{
@@ -7768,7 +7768,7 @@
 /turf/open/space/basic,
 /area/space/nearstation)
 "cMJ" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
@@ -8105,7 +8105,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
 "cQT" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/effect/spawner/random/trash/mess,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/upper)
@@ -14385,7 +14385,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
 "fhu" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/commons/fitness)
 "fhz" = (
@@ -22396,7 +22396,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "ipo" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/spawner/random/structure/grille,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating,
@@ -26197,7 +26197,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/main)
 "jLj" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/space/nearstation)
 "jLv" = (
@@ -27348,7 +27348,7 @@
 /turf/open/floor/iron,
 /area/station/science/robotics/lab)
 "kgk" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/machinery/status_display/ai/directional/east,
 /obj/machinery/status_display/evac/directional/north,
 /turf/open/floor/plating,
@@ -37577,7 +37577,7 @@
 /turf/open/floor/iron,
 /area/station/security/lockers)
 "nRw" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/machinery/status_display/evac/directional/north,
 /obj/machinery/status_display/ai/directional/west,
 /turf/open/floor/plating,
@@ -40974,7 +40974,7 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "pgq" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/lesser)
 "pgx" = (
@@ -41264,7 +41264,7 @@
 /area/station/hallway/primary/central/fore)
 "plT" = (
 /obj/effect/spawner/random/structure/grille,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "plZ" = (
@@ -50407,7 +50407,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/central)
 "sGb" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/commons/fitness/recreation)
 "sGj" = (
@@ -56292,7 +56292,7 @@
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/ce)
 "uRk" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/upper)
 "uRp" = (
@@ -60961,7 +60961,7 @@
 /turf/open/floor/plating,
 /area/station/command/bridge)
 "wBf" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/space/basic,
 /area/space/nearstation)
 "wBv" = (
@@ -65495,7 +65495,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/aft)
 "ylX" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},

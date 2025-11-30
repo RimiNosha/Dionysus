@@ -72,10 +72,10 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("floor tile", /obj/item/stack/tile/iron/base, 1, 4, 20), \
 	new/datum/stack_recipe("iron rod", /obj/item/stack/rods, 1, 2, 60), \
 	null, \
-	new/datum/stack_recipe("wall girders (anchored)", /obj/structure/girder, 2, time = 40, one_per_turf = TRUE, on_floor = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
-	new/datum/stack_recipe("low wall", /obj/structure/low_wall, 2, time = 40, one_per_turf = TRUE, on_floor = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
+	new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 2 SECONDS, one_per_turf = TRUE, on_floor = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
+	new/datum/stack_recipe("wall trim kit", /obj/item/wall_trim_kit, 2, time = 2 SECONDS), \
 	null, \
-	new/datum/stack_recipe("tram wall girders (anchored)", /obj/structure/girder/tram, 2, time = 40, one_per_turf = TRUE, on_floor = FALSE, on_tram = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
+	new/datum/stack_recipe("tram wall girders (anchored)", /obj/structure/girderold/tram, 2, time = 40, one_per_turf = TRUE, on_floor = FALSE, on_tram = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
 	null, \
 	new/datum/stack_recipe("computer frame", /obj/structure/frame/computer, 5, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer/console/buildable/, 10, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
@@ -193,7 +193,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 		if(!use(2))
 			user.balloon_alert(user, "not enough material!")
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		new/obj/structure/girder/displaced(build_on)
+		new/obj/structure/girderold/displaced(build_on)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
@@ -592,7 +592,7 @@ GLOBAL_LIST_INIT(cardboard_recipes, list ( \
 
 GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
 	new /datum/stack_recipe("runed door (a weak door that stuns non-cultists who touch it)", /obj/machinery/door/airlock/cult, 1, time = 5 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("runed girder (not a recommended usage of runed metal)", /obj/structure/girder/cult, 1, time = 5 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
+	new /datum/stack_recipe("runed girder (not a recommended usage of runed metal)", /obj/structure/girderold/cult, 1, time = 5 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("pylon (heals (and regenerates the blood of) nearby blood cultists and constructs, but also turns nearby floor tiles into engraved flooring)", /obj/structure/destructible/cult/pylon, 4, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("daemon forge (can make Nar'Sien hardened armor, flagellant's robes, and eldritch longswords)", /obj/structure/destructible/cult/item_dispenser/forge, 3, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("archives (can make zealot's blindfolds, shuttle curse orbs, and veil walker equipment)", /obj/structure/destructible/cult/item_dispenser/archives, 3, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
@@ -643,7 +643,7 @@ GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
  */
 
 GLOBAL_LIST_INIT(bronze_recipes, list ( \
-	new/datum/stack_recipe("wall gear", /obj/structure/girder/bronze, 2, time = 20, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("wall gear", /obj/structure/girderold/bronze, 2, time = 20, one_per_turf = TRUE, on_floor = TRUE), \
 	null,
 	new/datum/stack_recipe("directional bronze window", /obj/structure/window/bronze/unanchored, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("fulltile bronze window", /obj/structure/window/bronze/fulltile/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \

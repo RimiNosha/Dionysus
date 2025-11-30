@@ -75,16 +75,6 @@
 	color = null
 	AddElement(/datum/element/rust)
 
-/turf/closed/wall/r_wall/rust
-	//SDMM supports colors, this is simply for easier mapping
-	//and should be removed on initialize
-	color = COLOR_ORANGE_BROWN
-
-/turf/closed/wall/r_wall/rust/Initialize(mapload)
-	. = ..()
-	color = null
-	AddElement(/datum/element/rust)
-
 /turf/closed/wall/mineral/bronze
 	name = "clockwork wall"
 	desc = "A huge chunk of bronze, decorated like gears and cogs."

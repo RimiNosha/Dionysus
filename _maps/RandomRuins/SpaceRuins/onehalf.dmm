@@ -522,7 +522,7 @@
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/onehalf/drone_bay)
 "bK" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "bL" = (
@@ -548,12 +548,12 @@
 /turf/open/floor/iron/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "bP" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girderold/reinforced,
 /obj/item/stack/sheet/plasteel,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "bQ" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girderold/reinforced,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "bR" = (
@@ -725,7 +725,7 @@
 /turf/open/floor/iron/airless,
 /area/ruin/space/has_grav/onehalf/hallway)
 "cv" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girderold/reinforced,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/onehalf/bridge)
 "cw" = (

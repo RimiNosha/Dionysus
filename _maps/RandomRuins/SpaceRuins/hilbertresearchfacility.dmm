@@ -375,7 +375,7 @@
 /turf/open/floor/iron/grimy,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "iO" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/engine,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "iP" = (
@@ -1722,7 +1722,7 @@
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "Mf" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girderold/reinforced,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/engine,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
@@ -1795,7 +1795,7 @@
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "NF" = (
 /obj/structure/grille/broken,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "NJ" = (
@@ -2233,7 +2233,7 @@
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "Xt" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "Xw" = (

@@ -4779,7 +4779,7 @@
 /turf/open/floor/plating,
 /area/maintenance/department/security/brig)
 "apB" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/security/brig)
 "apE" = (
@@ -10858,7 +10858,7 @@
 /turf/open/floor/plating,
 /area/maintenance/department/cargo)
 "aKq" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/cargo)
 "aKr" = (
@@ -12099,7 +12099,7 @@
 /turf/open/floor/plating,
 /area/maintenance/department/crew_quarters/bar)
 "aPB" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/crew_quarters/bar)
 "aPC" = (
@@ -19582,7 +19582,7 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "bsn" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/engine)
 "bso" = (
@@ -24565,7 +24565,7 @@
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "bLG" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/smart_cable/color/yellow,
 /turf/open/floor/plating,
@@ -26068,7 +26068,7 @@
 /turf/open/floor/plating,
 /area/maintenance/department/engine)
 "bRF" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/closed/wall,
 /area/maintenance/department/engine)
 "bRG" = (
@@ -34614,7 +34614,7 @@
 /turf/open/floor/engine/o2,
 /area/engineering/atmos)
 "egK" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
@@ -38846,7 +38846,7 @@
 /turf/open/floor/iron,
 /area/security/prison)
 "hXt" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/science)
 "hXC" = (
@@ -49835,7 +49835,7 @@
 /turf/open/floor/iron,
 /area/cargo/storage)
 "sbk" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/department/crew_quarters/dorms)
 "sbI" = (
@@ -54005,7 +54005,7 @@
 /turf/open/floor/iron,
 /area/service/chapel/monastery)
 "vpz" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating{
 	luminosity = 2
 	},

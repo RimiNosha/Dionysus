@@ -282,7 +282,7 @@ GLOBAL_REAL_VAR(wall_overlays_cache) = list()
 /turf/closed/wall/proc/break_wall(drop_mats = TRUE)
 	if(drop_mats)
 		drop_materials_used()
-	return new /obj/structure/girder(src, reinf_material, wall_paint, stripe_paint)
+	return new /obj/structure/girderold(src, reinf_material, wall_paint, stripe_paint)
 
 /turf/closed/wall/proc/devastate_wall()
 	drop_materials_used(TRUE)

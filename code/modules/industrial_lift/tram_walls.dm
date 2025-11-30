@@ -22,7 +22,7 @@
 	var/mineral = /obj/item/stack/sheet/iron
 	var/mineral_amount = 2
 	var/tram_wall_type = /obj/structure/tramwall
-	var/girder_type = /obj/structure/girder/tram
+	var/girder_type = /obj/structure/girderold/tram
 
 /obj/structure/tramwall/Initialize(mapload)
 	. = ..()

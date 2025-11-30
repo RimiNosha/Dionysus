@@ -9367,7 +9367,7 @@
 /turf/open/floor/iron,
 /area/maintenance/starboard)
 "clw" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/starboard)
@@ -10387,7 +10387,7 @@
 /turf/open/floor/iron,
 /area/security/checkpoint/escape)
 "cwc" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -10649,7 +10649,7 @@
 /area/maintenance/starboard)
 "czb" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "czd" = (
@@ -11207,7 +11207,7 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "cIX" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "cJa" = (
@@ -13394,7 +13394,7 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "cYm" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
@@ -15715,7 +15715,7 @@
 /turf/open/floor/iron/dark,
 /area/service/theater/abandoned)
 "dmf" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -16386,7 +16386,7 @@
 /turf/open/floor/iron,
 /area/maintenance/department/crew_quarters/bar)
 "drq" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -18865,7 +18865,7 @@
 	},
 /area/maintenance/port/aft)
 "dLU" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -19007,7 +19007,7 @@
 /area/ai_monitored/aisat/exterior)
 "dMP" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
@@ -19682,7 +19682,7 @@
 /turf/open/floor/iron/white,
 /area/medical/virology)
 "dSD" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
@@ -20554,7 +20554,7 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/command)
 "dZg" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -31931,7 +31931,7 @@
 /turf/open/floor/iron/dark,
 /area/service/chapel/funeral)
 "hei" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/fore)
@@ -38781,7 +38781,7 @@
 /area/commons/locker)
 "jcq" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/structure/grille,
 /turf/open/floor/plating,
 /area/maintenance/department/crew_quarters/bar)
@@ -39793,7 +39793,7 @@
 /turf/open/floor/plating,
 /area/commons/toilet/locker)
 "jrZ" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/port/greater)
 "jsa" = (
@@ -52351,7 +52351,7 @@
 /area/science/server)
 "ndp" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/maintenance/port/greater)
 "ndr" = (
@@ -67076,7 +67076,7 @@
 /turf/open/floor/iron,
 /area/command/teleporter)
 "ruM" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{
@@ -77520,7 +77520,7 @@
 /turf/open/floor/iron,
 /area/security/checkpoint)
 "uwd" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{
@@ -77909,7 +77909,7 @@
 /turf/open/floor/iron,
 /area/security/range)
 "uCh" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
@@ -78869,7 +78869,7 @@
 /turf/open/floor/iron,
 /area/commons/dorms)
 "uTK" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
@@ -79304,7 +79304,7 @@
 /turf/open/floor/iron/dark,
 /area/service/hydroponics)
 "van" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
@@ -81672,7 +81672,7 @@
 /turf/open/floor/iron,
 /area/cargo/office)
 "vLZ" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -87045,7 +87045,7 @@
 /turf/open/floor/wood,
 /area/service/library/abandoned)
 "xvE" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,

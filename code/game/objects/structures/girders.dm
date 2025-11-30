@@ -2,7 +2,7 @@
 #define GIRDER_PASSCHANCE_UNANCHORED 25
 #define GIRDER_PASSCHANCE_REINFORCED 0
 
-/obj/structure/girder
+/obj/structure/girderold
 	name = "girder"
 	icon_state = "girder"
 	desc = "A large structural assembly made out of metal; It requires a layer of iron before it can be considered a wall."
@@ -22,7 +22,7 @@
 	/// Stripe paint to apply to the wall built. Matters for deconstructed and reconstructed walls
 	var/stripe_paint
 
-/obj/structure/girder/Initialize(mapload, reinforced_mat, new_paint, new_stripe_paint, unanchored)
+/obj/structure/girderold/Initialize(mapload, reinforced_mat, new_paint, new_stripe_paint, unanchored)
 	. = ..()
 	wall_paint = new_paint
 	stripe_paint = new_stripe_paint
@@ -34,7 +34,7 @@
 		state = GIRDER_REINF
 		update_appearance()
 
-/obj/structure/girder/update_name()
+/obj/structure/girderold/update_name()
 	. = ..()
 	if(!anchored)
 		name = "displaced girder"
@@ -43,7 +43,7 @@
 	else
 		name = "reinforced girder"
 
-/obj/structure/girder/update_icon_state()
+/obj/structure/girderold/update_icon_state()
 	. = ..()
 	if(!anchored)
 		icon_state = "displaced"
@@ -52,7 +52,7 @@
 	else
 		icon_state = "reinforced"
 
-/obj/structure/girder/examine(mob/user)
+/obj/structure/girderold/examine(mob/user)
 	. = ..()
 	switch(state)
 		if(GIRDER_REINF)
@@ -67,7 +67,7 @@
 	else
 		. += span_notice("The bolts are <i>loosened</i>, but the <b>screws</b> are holding [src] together.")
 
-/obj/structure/girder/attackby(obj/item/W, mob/user, params)
+/obj/structure/girderold/attackby(obj/item/W, mob/user, params)
 	var/platingmodifier = 1
 	if(HAS_TRAIT(user, TRAIT_QUICK_BUILD))
 		platingmodifier = 0.7
@@ -184,7 +184,7 @@
 		return ..()
 
 // Screwdriver behavior for girders
-/obj/structure/girder/screwdriver_act(mob/user, obj/item/tool)
+/obj/structure/girderold/screwdriver_act(mob/user, obj/item/tool)
 	if(..())
 		return TRUE
 
@@ -216,7 +216,7 @@
 		return TRUE
 
 // Wirecutter behavior for girders
-/obj/structure/girder/wirecutter_act(mob/user, obj/item/tool)
+/obj/structure/girderold/wirecutter_act(mob/user, obj/item/tool)
 	. = ..()
 	if(state == GIRDER_REINF_STRUTS)
 		to_chat(user, span_notice("You start removing the reinforcement struts..."))
@@ -227,7 +227,7 @@
 			update_appearance()
 		return TRUE
 
-/obj/structure/girder/wrench_act(mob/user, obj/item/tool)
+/obj/structure/girderold/wrench_act(mob/user, obj/item/tool)
 	. = ..()
 	if(!anchored)
 		if(!isfloorturf(loc))
@@ -249,12 +249,12 @@
 			update_appearance()
 		return TRUE
 
-/obj/structure/girder/CanAllowThrough(atom/movable/mover, turf/target)
+/obj/structure/girderold/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
 	if((mover.pass_flags & PASSGRILLE) || istype(mover, /obj/projectile))
 		return prob(girderpasschance)
 
-/obj/structure/girder/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+/obj/structure/girderold/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(!density)
 		return TRUE
 
@@ -263,41 +263,41 @@
 
 	return FALSE
 
-/obj/structure/girder/deconstruct(disassembled = TRUE)
+/obj/structure/girderold/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
 		var/remains = pick(/obj/item/stack/rods, /obj/item/stack/sheet/iron)
 		new remains(loc)
 	qdel(src)
 
-/obj/structure/girder/narsie_act()
-	new /obj/structure/girder/cult(loc)
+/obj/structure/girderold/narsie_act()
+	new /obj/structure/girderold/cult(loc)
 	qdel(src)
 
-/obj/structure/girder/displaced
+/obj/structure/girderold/displaced
 	name = "displaced girder"
 	anchored = FALSE
 	girderpasschance = GIRDER_PASSCHANCE_UNANCHORED
 
-/obj/structure/girder/reinforced
+/obj/structure/girderold/reinforced
 	name = "reinforced girder"
 	state = GIRDER_REINF
 	reinforced_material = /datum/material/steel
 	girderpasschance = GIRDER_PASSCHANCE_REINFORCED
 
-/obj/structure/girder/tram
+/obj/structure/girderold/tram
 	name = "tram girder"
 	state = GIRDER_TRAM
 
 //////////////////////////////////////////// cult girder //////////////////////////////////////////////
 
-/obj/structure/girder/cult
+/obj/structure/girderold/cult
 	name = "runed girder"
 	desc = "Framework made of a strange and shockingly cold metal. It doesn't seem to have any bolts."
 	icon = 'icons/obj/cult/structures.dmi'
 	icon_state= "cultgirder"
 	can_displace = FALSE
 
-/obj/structure/girder/cult/attackby(obj/item/W, mob/user, params)
+/obj/structure/girderold/cult/attackby(obj/item/W, mob/user, params)
 	W.leave_evidence(user, src)
 	if(istype(W, /obj/item/melee/cultblade/dagger) && IS_CULTIST(user)) //Cultists can demolish cult girders instantly with their tomes
 		user.visible_message(span_warning("[user] strikes [src] with [W]!"), span_notice("You demolish [src]."))
@@ -333,15 +333,15 @@
 	else
 		return ..()
 
-/obj/structure/girder/cult/narsie_act()
+/obj/structure/girderold/cult/narsie_act()
 	return
 
-/obj/structure/girder/cult/deconstruct(disassembled = TRUE)
+/obj/structure/girderold/cult/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
 		new /obj/item/stack/sheet/runed_metal(drop_location(), 1)
 	qdel(src)
 
-/obj/structure/girder/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+/obj/structure/girderold/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
 		if(RCD_FLOORWALL)
 			return rcd_result_with_memory(
@@ -352,7 +352,7 @@
 			return list("mode" = RCD_DECONSTRUCT, "delay" = 20, "cost" = 13)
 	return FALSE
 
-/obj/structure/girder/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
+/obj/structure/girderold/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	var/turf/T = get_turf(src)
 	switch(passed_mode)
 		if(RCD_FLOORWALL)
@@ -365,40 +365,3 @@
 			qdel(src)
 			return TRUE
 	return FALSE
-
-/obj/structure/girder/bronze
-	name = "wall gear"
-	desc = "A girder made out of sturdy bronze, made to resemble a gear."
-	icon = 'icons/obj/clockwork_objects.dmi'
-	icon_state = "wall_gear"
-	can_displace = FALSE
-
-/obj/structure/girder/bronze/attackby(obj/item/W, mob/living/user, params)
-	W.leave_evidence(user, src)
-	if(W.tool_behaviour == TOOL_WELDER)
-		if(!W.tool_start_check(user, amount = 0))
-			return
-		to_chat(user, span_notice("You start slicing apart [src]..."))
-		if(W.use_tool(src, user, 40, volume=50))
-			to_chat(user, span_notice("You slice apart [src]."))
-			var/obj/item/stack/sheet/bronze/B = new(drop_location(), 2)
-			transfer_fingerprints_to(B)
-			qdel(src)
-
-	else if(istype(W, /obj/item/stack/sheet/bronze))
-		var/obj/item/stack/sheet/bronze/B = W
-		if(B.get_amount() < 2)
-			to_chat(user, span_warning("You need at least two bronze sheets to build a bronze wall!"))
-			return
-		user.visible_message(span_notice("[user] begins plating [src] with bronze..."), span_notice("You begin constructing a bronze wall..."))
-		if(do_after(user, src, 50, DO_PUBLIC, display = W))
-			if(B.get_amount() < 2)
-				return
-			user.visible_message(span_notice("[user] plates [src] with bronze!"), span_notice("You construct a bronze wall."))
-			B.use(2)
-			var/turf/T = get_turf(src)
-			T.PlaceOnTop(/turf/closed/wall/mineral/bronze)
-			qdel(src)
-
-	else
-		return ..()

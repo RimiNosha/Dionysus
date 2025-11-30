@@ -27,7 +27,7 @@
 /turf/closed/wall/r_wall,
 /area/ruin/tcommsat_oldaisat)
 "ah" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/tcommsat_oldaisat)
 "ai" = (

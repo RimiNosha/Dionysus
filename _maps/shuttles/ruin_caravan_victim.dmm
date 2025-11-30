@@ -513,7 +513,7 @@
 /turf/open/floor/plating/airless,
 /area/shuttle/caravan/freighter1)
 "zy" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/shuttle/caravan/freighter1)

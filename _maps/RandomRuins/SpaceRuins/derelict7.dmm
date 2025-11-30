@@ -81,7 +81,7 @@
 /turf/open/floor/wood/airless,
 /area/ruin/space/has_grav)
 "gX" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/template_noop,
 /area/template_noop)
 "hf" = (
@@ -151,7 +151,7 @@
 /area/ruin/space/has_grav)
 "pd" = (
 /obj/structure/lattice,
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/template_noop,
 /area/template_noop)
 "pr" = (
@@ -174,7 +174,7 @@
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "rN" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "tj" = (
@@ -424,7 +424,7 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space/has_grav)
 "Qf" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/structure/lattice,
 /turf/template_noop,
 /area/template_noop)

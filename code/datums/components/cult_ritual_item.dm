@@ -124,7 +124,7 @@
 	if(!isliving(cultist) || !IS_CULTIST(cultist))
 		return
 
-	if(istype(target, /obj/structure/girder/cult))
+	if(istype(target, /obj/structure/girderold/cult))
 		INVOKE_ASYNC(src, PROC_REF(do_destroy_girder), target, cultist)
 		return COMPONENT_NO_AFTERATTACK
 

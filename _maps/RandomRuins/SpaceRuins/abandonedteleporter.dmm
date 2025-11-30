@@ -123,7 +123,7 @@
 /turf/open/floor/plating/airless,
 /area/ruin/space/abandoned_tele)
 "B" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/abandoned_tele)
 "O" = (

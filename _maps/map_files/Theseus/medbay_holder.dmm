@@ -1720,7 +1720,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "fL" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
@@ -2313,7 +2313,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port)
 "hL" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
@@ -2335,7 +2335,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "hP" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/spawner/random/structure/grille,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating,
@@ -2707,7 +2707,7 @@
 /area/station/maintenance/port/aft)
 "js" = (
 /obj/effect/spawner/random/structure/grille,
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "jt" = (
@@ -13610,7 +13610,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/structure/cable/smart_cable/color/yellow,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/spawner/random/structure/grille,

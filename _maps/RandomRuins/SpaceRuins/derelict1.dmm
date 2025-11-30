@@ -15,7 +15,7 @@
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
 "e" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/structure/alien/weeds,
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
@@ -67,7 +67,7 @@
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
 "p" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
 "q" = (

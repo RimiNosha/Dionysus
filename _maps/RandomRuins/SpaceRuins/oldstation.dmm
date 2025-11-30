@@ -1847,7 +1847,7 @@
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/ancientstation/charlie/hall)
 "fi" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/ancientstation/beta/hall)
 "fj" = (
@@ -4659,14 +4659,14 @@
 /turf/closed/mineral/plasma,
 /area/ruin/space/has_grav/ancientstation/charlie/dorms)
 "md" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/closed/mineral/random,
 /area/ruin/unpowered)
 "me" = (
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/ancientstation/beta/hall)
 "mf" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/ancientstation/beta/storage)
 "mg" = (
@@ -6964,7 +6964,7 @@
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/ancientstation/charlie/hall)
 "OQ" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/ancientstation/beta/medbay)
 "OU" = (

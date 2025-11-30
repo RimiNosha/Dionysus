@@ -11,12 +11,12 @@
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "cB" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "dm" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "dI" = (
@@ -53,7 +53,7 @@
 /turf/open/floor/iron/dark/textured,
 /area/ruin/space/has_grav)
 "ii" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "jA" = (
@@ -126,7 +126,7 @@
 /area/ruin/space/has_grav)
 "wM" = (
 /obj/structure/lattice,
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/template_noop,
 /area/ruin/space/has_grav)
 "wO" = (
@@ -196,7 +196,7 @@
 /area/template_noop)
 "Dz" = (
 /obj/structure/lattice,
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/template_noop,
 /area/template_noop)
 "DQ" = (
@@ -293,7 +293,7 @@
 /area/ruin/space/has_grav)
 "Px" = (
 /obj/structure/cable/smart_cable/color/yellow,
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "PG" = (

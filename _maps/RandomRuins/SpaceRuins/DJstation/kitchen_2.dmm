@@ -8,7 +8,7 @@
 /turf/template_noop,
 /area/space/nearstation)
 "h" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/space/djstation)
@@ -70,7 +70,7 @@
 /turf/template_noop,
 /area/space/nearstation)
 "X" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/space/djstation)

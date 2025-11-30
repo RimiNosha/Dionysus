@@ -264,7 +264,7 @@
 /obj/structure/falsewall/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
 		if(disassembled)
-			new /obj/structure/girder(src.loc, reinf_material, wall_paint, stripe_paint, TRUE)
+			new /obj/structure/girderold(src.loc, reinf_material, wall_paint, stripe_paint, TRUE)
 		var/datum/material/plating_mat_ref = GET_MATERIAL_REF(plating_material)
 		new plating_mat_ref.sheet_type(src.loc, 2)
 	qdel(src)

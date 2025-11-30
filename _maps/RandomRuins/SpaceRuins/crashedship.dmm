@@ -38,7 +38,7 @@
 /turf/open/floor/iron/airless,
 /area/awaymission/bmpship/midship)
 "cB" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/awaymission/bmpship/midship)
@@ -125,7 +125,7 @@
 /obj/machinery/porta_turret{
 	dir = 8;
 	installation = /obj/item/gun/energy/lasercannon;
-	
+
 	},
 /obj/effect/mapping_helpers/atom_injector/obj_flag{
 	inject_flags = 1;
@@ -226,7 +226,7 @@
 /turf/template_noop,
 /area/template_noop)
 "kz" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating/airless,
 /area/awaymission/bmpship/aft)
@@ -547,7 +547,7 @@
 /turf/open/floor/plating/airless,
 /area/awaymission/bmpship/aft)
 "vu" = (
-/obj/structure/girder,
+/obj/structure/girderold,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/awaymission/bmpship/midship)
@@ -936,7 +936,7 @@
 	},
 /area/awaymission/bmpship/midship)
 "Gn" = (
-/obj/structure/girder/displaced,
+/obj/structure/girderold/displaced,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating/airless,
 /area/awaymission/bmpship/midship)
@@ -1368,7 +1368,7 @@
 /obj/machinery/porta_turret{
 	dir = 8;
 	installation = /obj/item/gun/energy/lasercannon;
-	
+
 	},
 /obj/effect/mapping_helpers/atom_injector/obj_flag{
 	inject_flags = 1;

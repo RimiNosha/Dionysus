@@ -19,6 +19,33 @@
 	src.material_trim_high = material_trim_high
 	update_connections()
 
+/turf/closed/constructed_wall/examine(mob/user)
+	. = ..()
+	if(!isnull(material_trim_low) || !isnull(material_trim_high))
+		if(!isnull(material_trim_low))
+			. += span_notice("You could remove the bottom trim with a <i>crowbar</i>.")
+		if(!isnull(material_trim_high))
+			. += span_notice("You could remove the top trim with a <i>crowbar</i>.")
+		return .
+	switch(deconstruction_stage)
+		if(DECON_NONE)
+			. += span_notice("You could loosen the [isnull(material_reinforcement) ? "plating" : "bulkhead"] with a <i>welder</i>.")
+		if(DECON_WALL_WEAKENED)
+			if(!isnull(material_reinforcement))
+				switch(deconstruction_r_step)
+					if(DECON_REINF_NONE)
+						. += span_notice("You could remove the bulkhead with a <i>crowbar</i>.")
+					if(DECON_REINF_BULKHEAD_REMOVED)
+						. += span_notice("You could remove the grille with a <i>wirecutters</i>.")
+					if(DECON_REINF_GRILLE_REMOVED)
+						. += span_notice("You could remove the bracing with a <i>welder</i>.")
+					if(DECON_REINF_BRACING_REMOVED)
+						. += span_notice("You could remove the bolts with a <i>wrench</i>.")
+					if(DECON_REINF_BOLTS_UNDONE)
+						. += span_notice("You could remove the plating with a <i>crowbar</i>.")
+			else
+				. += span_notice("You could remove the plating with a <i>crowbar</i>.")
+
 /turf/closed/constructed_wall/proc/trim_overlays()
 	var/static/list/trim_map_low = alist(
 		/datum/material/bronze = 'icons/walls/trim_low/bronze.dmi',
@@ -41,7 +68,6 @@
 		if(!(material_trim_low in trim_map_low))
 			stack_trace("unhandled material_trim_low: [material_trim_low]")
 		else overlays += icon(trim_map_low[material_trim_low], "trim-[wall_connections]")
-
 	if(material_trim_high)
 		if(!(material_trim_high in trim_map_high))
 			stack_trace("unhandled material_trim_high: [material_trim_high]")

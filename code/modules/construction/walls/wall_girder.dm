@@ -1,4 +1,4 @@
-/obj/structure/girdern
+/obj/structure/girder
 	name = "girder"
 	desc = "An interconnected network of metal rods."
 	icon = 'icons/obj/girders.dmi'
@@ -12,7 +12,7 @@
 	var/girder_state = GIRDER_NOTHING
 	var/reinforcement_secure = FALSE
 
-/obj/structure/girdern/update_overlays()
+/obj/structure/girder/update_overlays()
 	. = ..()
 	if(girder_state == GIRDER_NOTHING)
 		return
@@ -22,16 +22,36 @@
 	if(girder_state == GIRDER_PLATED)
 		. += "girder_plate"
 
-/obj/structure/girdern/proc/do_finish(mob/user)
+/obj/structure/girder/examine(mob/user)
+	. = ..()
+	switch(girder_state)
+		if(GIRDER_NOTHING)
+			. += span_notice("You could <i>weld</i> some [/datum/material/steel::name] into a girder.")
+		if(GIRDER_STRUCTURAL)
+			. += span_notice("You could <i>wrench</i> the floor bolts [anchored ? "loose" : "secured"].")
+			if(material_reinforce)
+				. += span_notice("You could <i>screw</i> the reinforcement bolts [reinforcement_secure ? "loose" : "secured"].")
+				if(!reinforcement_secure)
+					. += span_notice("You could <i>cut</i> the reinforcements off.")
+			else
+				. += span_notice("You could attach some reinforcements to the girder.")
+				. += span_notice("You could dismantle the girder with a <i>welder</i>.")
+		if(GIRDER_PLATED)
+			. += span_notice("You could <i>crowbar</i> the plating off.")
+			if(anchored)
+				. += span_notice("You could <i>screw</i> the plating into place.")
+
+/obj/structure/girder/proc/do_finish(mob/user)
 	var/turf/my_turf = get_turf(src)
 	if(my_turf != loc)
 		balloon_alert(user, "can't reach!")
 		return
-	var/turf/closed/wall/new_wall = my_turf.ChangeTurf(/turf/closed/wall)
-	new_wall.set_materials(material_plate, material_reinforce, TRUE)
+	var/turf/closed/constructed_wall/new_wall = my_turf.ChangeTurf(/turf/closed/constructed_wall)
+	new_wall.material_plating = material_plate
+	new_wall.material_reinforcement = material_reinforce
 	qdel(src)
 
-/obj/structure/girdern/proc/use_sheet(mob/user, obj/item/stack/sheet/material_sheet)
+/obj/structure/girder/proc/use_sheet(mob/user, obj/item/stack/sheet/material_sheet)
 	if(girder_state == GIRDER_NOTHING)
 		if(material_sheet.material_type != /datum/material/steel)
 			balloon_alert(user, "wrong material!")
@@ -45,7 +65,7 @@
  * Creates the structure of the girder.
  * Expects the provided material to be iron(steel).
  */
-/obj/structure/girdern/proc/create_structure(mob/user, obj/item/stack/sheet/structure_material)
+/obj/structure/girder/proc/create_structure(mob/user, obj/item/stack/sheet/structure_material)
 	// are we at the correct state?
 	if(girder_state != GIRDER_NOTHING)
 		balloon_alert(user, "no") // shouldn't be able to get here anyway
@@ -78,9 +98,12 @@
 /**
  * Attempts to apply the given material as a plating to the girder.
  */
-/obj/structure/girdern/proc/apply_plating(mob/user, obj/item/stack/sheet/material)
+/obj/structure/girder/proc/apply_plating(mob/user, obj/item/stack/sheet/material)
 	if(girder_state != GIRDER_STRUCTURAL)
 		balloon_alert(user, "no") // shouldn't be able to get here anyway
+		return FALSE
+	if(!anchored)
+		balloon_alert(user, "anchor first!")
 		return FALSE
 	// do we have enough material?
 	if(material.get_amount() < PLATING_COST)
@@ -106,7 +129,7 @@
 /**
  * Attempts to apply the given material as reinforcement to the girder.
  */
-/obj/structure/girdern/proc/create_reinforcement(mob/user, obj/item/stack/sheet/reinforcement_material)
+/obj/structure/girder/proc/create_reinforcement(mob/user, obj/item/stack/sheet/reinforcement_material)
 	if(girder_state != GIRDER_STRUCTURAL)
 		balloon_alert(user, "can't attach!")
 		return FALSE
@@ -135,15 +158,15 @@
 	update_appearance()
 	return TRUE
 
-/obj/structure/girdern/attackby(obj/item/object, mob/user, params)
+/obj/structure/girder/attackby(obj/item/object, mob/user, params)
 	if(!Adjacent(object))
 		return ..()
-	if(istype(object, /obj/item/stack/sheet))
+	if(istype(object, /obj/item/stack/sheet) && girder_state != GIRDER_PLATED)
 		use_sheet(user, object)
 		return TRUE
 	return ..()
 
-/obj/structure/girdern/attackby_secondary(obj/item/object, mob/user, params)
+/obj/structure/girder/attackby_secondary(obj/item/object, mob/user, params)
 	if(!Adjacent(object))
 		return ..()
 	if(istype(object, /obj/item/stack/sheet))
@@ -151,19 +174,19 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 
-/obj/structure/girdern/welder_act_secondary(mob/living/user, obj/item/tool)
+/obj/structure/girder/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
-	if(girder_state != GIRDER_STRUCTURAL)
+	if(girder_state != GIRDER_STRUCTURAL || !isnull(material_reinforce))
 		return ..()
 	balloon_alert_to_viewers("dismantling...")
 	if(!tool.use_tool(src, user, 2 SECONDS))
 		return TRUE
-	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), STRUCTURE_COST))
+	user.put_in_hands(new /obj/item/stack/sheet/iron(drop_location(), STRUCTURE_COST + 2)) // the girder base costs 2; change this if you change the girder cost
 	qdel(src)
 	return TRUE
 
-/obj/structure/girdern/crowbar_act(mob/living/user, obj/item/tool)
+/obj/structure/girder/crowbar_act(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
 	if(girder_state != GIRDER_PLATED)
@@ -177,16 +200,16 @@
 	update_appearance()
 	return TRUE
 
-/obj/structure/girdern/screwdriver_act(mob/user, obj/item/tool)
+/obj/structure/girder/screwdriver_act(mob/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
 	if(girder_state != GIRDER_PLATED)
 		return ..()
 	if(!anchored)
-		balloon_alert("anchor first!")
+		balloon_alert(user, "anchor first!")
 		return TRUE
 	if(material_reinforce && !reinforcement_secure)
-		balloon_alert("secure first!")
+		balloon_alert(user, "secure first!")
 		return TRUE
 	balloon_alert_to_viewers("finishing...")
 	if(!tool.use_tool(src, user, 2 SECONDS))
@@ -194,7 +217,7 @@
 	do_finish(user)
 	return TRUE
 
-/obj/structure/girdern/screwdriver_act_secondary(mob/living/user, obj/item/tool)
+/obj/structure/girder/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
 	if(girder_state != GIRDER_STRUCTURAL)
@@ -213,7 +236,7 @@
 	reinforcement_secure = TRUE
 	return TRUE
 
-/obj/structure/girdern/wirecutter_act(mob/living/user, obj/item/tool)
+/obj/structure/girder/wirecutter_act(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
 	if(girder_state != GIRDER_STRUCTURAL)
@@ -229,11 +252,12 @@
 	user.put_in_hands(new material_reinforce.sheet_type(drop_location(), REINFORCEMENT_COST))
 	material_reinforce = null
 	update_appearance()
+	return TRUE
 
-/obj/structure/girdern/wrench_act(mob/user, obj/item/tool)
+/obj/structure/girder/wrench_act(mob/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
-	if(girder_state != GIRDER_NOTHING)
+	if(girder_state != GIRDER_STRUCTURAL)
 		balloon_alert(user, "can't reach!")
 		return TRUE
 	var/turf/my_loc = get_turf(src)

@@ -57,6 +57,18 @@
 			return TRUE
 	return ..()
 
+/turf/closed/constructed_wall/wrench_act(mob/living/user, obj/item/tool)
+	if(!Adjacent(tool))
+		return ..()
+	if(deconstruction_r_step != DECON_REINF_BRACING_REMOVED)
+		return ..()
+	balloon_alert_to_viewers("undoing bolts...")
+	if(!tool.use_tool(src, user, WALL_DECON_STEP_REINF_TIME))
+		return TRUE
+	deconstruction_r_step = DECON_REINF_BOLTS_UNDONE
+	update_appearance(UPDATE_OVERLAYS)
+	return TRUE
+
 /turf/closed/constructed_wall/wirecutter_act(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
@@ -72,9 +84,12 @@
 	return ..()
 
 /turf/closed/constructed_wall/proc/deconstruct_to_girder()
-	var/obj/structure/girdern/girder = new(src)
+	var/obj/structure/girder/girder = new(src)
+	girder.material_plate = material_plating
 	girder.material_reinforce = material_reinforcement
-	girder.girder_state = GIRDER_STRUCTURAL
+	if(material_reinforcement)
+		girder.reinforcement_secure = TRUE
+	girder.girder_state = GIRDER_PLATED
 	girder.anchored = TRUE
 	girder.update_appearance()
 	ScrapeAway()
@@ -84,3 +99,16 @@
 	if(isnull(cable))
 		return TRUE
 	return !cable.shock(user, 75)
+
+/turf/closed/constructed_wall/drill_act(obj/item/mecha_parts/mecha_equipment/drill/drill, mob/user)
+	if(isnull(material_reinforcement))
+		if(drill.do_after_mecha(src, user, 60 / drill.drill_level))
+			drill.log_message("Drilled through [src]", LOG_MECHA)
+			wall_destroyed()
+		return
+	if(drill.drill_level > DRILL_HARDENED)
+		to_chat(user, "[icon2html(src, user)][span_danger("[src] is too durable to drill through.")]")
+		return
+	if(drill.do_after_mecha(src, user, 120 / drill.drill_level))
+		drill.log_message("Drilled through [src]", LOG_MECHA)
+		wall_destroyed()
