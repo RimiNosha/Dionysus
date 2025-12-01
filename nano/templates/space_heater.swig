@@ -8,7 +8,7 @@
 {% endif %}
 {{ ab.fancy_button("Eject Cell", "eject", "{}", true, data.hasPowercell && data.open, data.open, "purple") }}
 <div style="position: absolute; top: 40px; right: 10px">
-{{ ab.pwr_button("power", "{}", data.on, data.hasPowercell) }}
+{{ ab.pwr_button("power", "{}", data.on, data.hasPowercell, "red") }}
 </div>
 <br>
 <p>Cell:</p>

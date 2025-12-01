@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% macro pwr_button(act, act_data, state, enabled, color) %}
-<label class="switch {% if color %}switch-{{ color }}{% endif %} componentFrame" {% if enabled %}onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"{% endif %} onclick="event.preventDefault()"><input type="checkbox" {% if state %}checked{% endif %}/>
+<label class="switch {% if color %}elem-color-{{ color }}{% endif %} componentFrame" {% if enabled %}onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"{% endif %} onclick="event.preventDefault()"><input type="checkbox" {% if state %}checked{% endif %}/>
     <div class="switch-button">
         <div class="switch-light"></div>
         <div class="switch-dots"></div>
@@ -27,7 +27,7 @@
 {% endmacro %}
 
 {% macro fancy_button(label, act, act_data, can_be_lit, lit, enabled, color) %}
-<div class="componentFrame fancy-button {% if color %}fancy-button-{{ color }}{% endif %} {% if can_be_lit && lit %}fancy-button-lit{% endif %}">
+<div class="componentFrame fancy-button {% if color %}elem-color-{{ color }}{% endif %} {% if can_be_lit && lit %}fancy-button-lit{% endif %}">
   <button class="fancy-button-pushable {% if can_be_lit && lit %}fancy-button-lit{% endif %}" {% if enabled %}onmouseup="Byond.sendMessage('act/{{act}}', {{act_data}})"{% else %}disabled{% endif %}>
     <div class="fancy-button-edge"></div>
     <div class="fancy-button-light"></div>

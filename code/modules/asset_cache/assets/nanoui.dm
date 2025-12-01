@@ -10,6 +10,7 @@
 	var/list/common_dirs = list(
 		"nano/css/",
 		"nano/images/",
+		"nano/images/fonts/",
 		"nano/images/status_icons/",
 		"nano/images/modular_computers/",
 		"nano/js/"
