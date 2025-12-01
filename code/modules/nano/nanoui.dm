@@ -125,6 +125,7 @@
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
 	add_stylesheet("fonts.css") //Common Fonts
 	add_stylesheet("switch.css") //Common Fonts
+	add_stylesheet("button.css") //Common Fonts
 
  /**
   * Set the current status (also known as visibility) of this ui.

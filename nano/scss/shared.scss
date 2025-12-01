@@ -1,0 +1,557 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+	color: #00ff00;
+	line-height: 170%;
+	background: #272727;
+	height: 100%;
+}
+
+html {
+	font-family: typewriter;
+	height: 100%;
+}
+
+#uiNoScript {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -60px 0 0 -150px;
+	width: 280px;
+	height: 120px;
+	background: #ffffff;
+	border: 2px solid #ff0000;
+	color: #000000;
+	font-size: 10px;
+	font-weight: bold;
+	z-index: 9999;
+	padding: 0px 10px;
+	text-align: center;
+}
+
+hr {
+	background-color: #40628a;
+	height: 1px;
+}
+
+.hidden {
+	display: none;
+}
+
+ul {
+	padding: 4px 0 0 10px;
+	margin: 0;
+	list-style-type: none;
+}
+
+li {
+	padding: 0 0 2px 0;
+}
+
+img,
+a img {
+	border-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 12px 0 6px 0;
+	color: #ffffff;
+	clear: both;
+}
+
+h1 {
+	font-size: 18px;
+}
+
+h2 {
+	font-size: 16px;
+}
+
+h3 {
+	font-size: 14px;
+}
+
+h4 {
+	font-size: 12px;
+}
+
+abbr {
+	border-bottom: 0.1em dotted;
+}
+
+.caption {
+	font-size: 10px;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.footer {
+	font-size: 10px;
+}
+
+.notice-placeholder {
+	position: relative;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 3px 4px 3px 4px;
+	margin: 4px 0 4px 0;
+}
+
+.notice {
+	position: relative;
+	background: url(uiNoticeBackground.jpg) 50% 50%;
+	color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 3px 10px;
+	margin: 4px 0 4px 0;
+}
+
+.notice-container {
+	padding: 10px 10px 0 10px;
+	filter: drop-shadow(#000000 0 0 1px);
+}
+
+.tape {
+	--deg: 0;
+	background: linear-gradient(calc(var(--deg) * -1), #111111 70%, #4d4d4d);
+	transform: rotate(var(--deg));
+	position: absolute;
+	width: 30px;
+	height: 15px;
+	z-index: 1;
+}
+
+.tape-l {
+	--deg: -45deg;
+	top: 10px;
+	left: 0;
+}
+
+.tape-r {
+	--deg: 45deg;
+	top: 10px;
+	right: 0;
+}
+
+.paper-length {
+	clip-path: polygon(0% 0%,
+			97.3% 0.3%,
+			98.9% 6%,
+			98.1% 11.4%,
+			98.6% 15.5%,
+			97.3% 17.8%,
+			97.7% 27.4%,
+			98.3% 28.5%,
+			99.7% 34.1%,
+			98.8% 41.9%,
+			98.3% 45.7%,
+			98.4% 50.9%,
+			98.7% 57.4%,
+			99.6% 60.4%,
+			99.4% 66.6%,
+			99.2% 69.5%,
+			97.4% 77.1%,
+			98.1% 82.3%,
+			99.9% 83.5%,
+			98.2% 91.5%,
+			99.3% 100%,
+			2% 100%,
+			2.1% 94.3%,
+			0.7% 90.5%,
+			0.9% 86.3%,
+			2.2% 78.2%,
+			0.4% 76.7%,
+			1.2% 72.1%,
+			2% 64%,
+			1.4% 59.8%,
+			0.4% 57.3%,
+			0.3% 49.1%,
+			2.9% 44.7%,
+			1.9% 41.3%,
+			0.8% 35.7%,
+			2.9% 31.3%,
+			0.8% 24.9%,
+			2.7% 20.5%,
+			0.8% 17.4%,
+			2.5% 8.6%,
+			1.1% 5.5%);
+}
+
+.paper {
+	clip-path: polygon(1% 2%,
+			3.5% 0.1%,
+			8.9% 2.7%,
+			16.2% 1.2%,
+			19.7% 0.8%,
+			24.7% 2%,
+			31.2% 0%,
+			35.9% 2.3%,
+			40.6% 0.5%,
+			47.1% 1.8%,
+			49.9% 1%,
+			53.8% 2.5%,
+			62.2% 0.4%,
+			67.3% 1.2%,
+			70.3% 0.3%,
+			75.8% 1.4%,
+			78.5% 1.7%,
+			84% 2.6%,
+			91.1% 0.5%,
+			93.6% 2.4%,
+			97.3% 0.3%,
+			98.9% 6%,
+			98.1% 11.4%,
+			98.6% 15.5%,
+			97.3% 17.8%,
+			97.7% 27.4%,
+			98.3% 28.5%,
+			99.7% 34.1%,
+			98.8% 41.9%,
+			98.3% 45.7%,
+			98.4% 50.9%,
+			98.7% 57.4%,
+			99.6% 60.4%,
+			99.4% 66.6%,
+			99.2% 69.5%,
+			97.4% 77.1%,
+			98.1% 82.3%,
+			99.9% 83.5%,
+			98.2% 91.5%,
+			99.3% 95.3%,
+			98% 98.6%,
+			93.6% 97.4%,
+			90.3% 98.3%,
+			86.8% 98.3%,
+			78.6% 98.5%,
+			76.4% 99.2%,
+			69.7% 99.8%,
+			64.2% 99.3%,
+			61.8% 99.2%,
+			57.2% 98.1%,
+			48.7% 98.3%,
+			46.8% 99%,
+			39.6% 98.9%,
+			33.8% 97.3%,
+			28.2% 99.4%,
+			27% 98.3%,
+			22.1% 98.6%,
+			13.1% 97.1%,
+			8.7% 99.3%,
+			2.7% 97.4%,
+			2% 98.2%,
+			2.1% 94.3%,
+			0.7% 90.5%,
+			0.9% 86.3%,
+			2.2% 78.2%,
+			0.4% 76.7%,
+			1.2% 72.1%,
+			2% 64%,
+			1.4% 59.8%,
+			0.4% 57.3%,
+			0.3% 49.1%,
+			2.9% 44.7%,
+			1.9% 41.3%,
+			0.8% 35.7%,
+			2.9% 31.3%,
+			0.8% 24.9%,
+			2.7% 20.5%,
+			0.8% 17.4%,
+			2.5% 8.6%,
+			1.1% 5.5%);
+}
+
+.notice.icon {
+	padding: 2px 4px 0 20px;
+}
+
+.notice img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 16px;
+	height: 16px;
+}
+
+div.notice {
+	clear: both;
+}
+
+.notice.info {
+	background: url(uiInfoBackground.jpg) 50% 50%;
+}
+
+/***********************************
+	Fancy OS-like Button
+************************************/
+
+/* A button that looks like an operating system button */
+.linkBtnOS,
+.linkBtnOS:hover,
+.linkBtnOSDark,
+.linkBtnOSDark:hover,
+.linkBtnOSRed,
+.linkBtnOSRed:hover {
+	float: none;
+	min-width: 1em;
+	height: 1em;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	color: hsl(0, 0%, 20%);
+	background: hsl(0, 0%, 55%);
+	outline: 1px dotted hsl(0, 0%, 15%);
+	outline-offset: -4px;
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 16%),
+		inset 1px 1px hsl(0, 0%, 80%),
+		inset -2px -2px hsl(0, 0%, 62%),
+		inset 2px 2px hsl(0, 0%, 80%);
+	padding: 0.5em 1em;
+	margin: 0 2px 2px 0;
+}
+
+/**Button pressed */
+.linkBtnOS:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 80%),
+		inset 1px 1px hsl(0, 0%, 16%),
+		inset -2px -2px hsl(0, 0%, 80%),
+		inset 2px 2px hsl(0, 0%, 62%);
+}
+
+/**Button disabled */
+.linkBtnOS.disabled,
+.linkBtnOS.inactive,
+.linkBtnOS:disabled {
+	color: hsl(0, 0%, 45%);
+	background: hsl(0, 0%, 55%);
+	outline: 1px dotted hsl(0, 0%, 40%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 36%),
+		inset 1px 1px hsl(0, 0%, 70%),
+		inset -2px -2px hsl(0, 0%, 52%),
+		inset 2px 2px hsl(0, 0%, 70%);
+}
+
+/**Button pressed + disabled */
+.linkBtnOS.disabled:active,
+.linkBtnOS.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 70%),
+		inset 1px 1px hsl(0, 0%, 16%),
+		inset -2px -2px hsl(0, 0%, 70%),
+		inset 2px 2px hsl(0, 0%, 30%);
+}
+
+/*****************
+ * Darker variant
+ *****************/
+.linkBtnOSDark,
+.linkBtnOSDark:hover {
+	color: hsl(0, 0%, 65%);
+	background: hsl(0, 0%, 35%);
+	outline: 1px dotted hsl(0, 0%, 45%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 8%),
+		inset 1px 1px hsl(0, 0%, 60%),
+		inset -2px -2px hsl(0, 0%, 32%),
+		inset 2px 2px hsl(0, 0%, 60%);
+}
+
+.linkBtnOSDark:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 60%),
+		inset 1px 1px hsl(0, 0%, 8%),
+		inset -2px -2px hsl(0, 0%, 60%),
+		inset 2px 2px hsl(0, 0%, 32%);
+}
+
+.linkBtnOSDark.disabled,
+.linkBtnOSDark.inactive,
+.linkBtnOSDark:disabled {
+	color: hsl(0, 0%, 38%);
+	background: hsl(0, 0%, 45%);
+	outline: 1px dotted hsl(0, 0%, 60%);
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 8%),
+		inset 1px 1px hsl(0, 0%, 50%),
+		inset -2px -2px hsl(0, 0%, 32%),
+		inset 2px 2px hsl(0, 0%, 50%);
+}
+
+.linkBtnOSDark.disabled:active,
+.linkBtnOSDark.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(0, 0%, 50%),
+		inset 1px 1px hsl(0, 0%, 8%),
+		inset -2px -2px hsl(0, 0%, 50%),
+		inset 2px 2px hsl(0, 0%, 25%);
+}
+
+/*******************
+ * Dark Red Variant
+ *******************/
+.linkBtnOSRed,
+.linkBtnOSRed:hover {
+	color: hsl(20, 50%, 65%);
+	background: hsl(20, 70%, 35%);
+	outline: 1px dotted hsl(20, 40%, 45%);
+	box-shadow:
+		inset -1px -1px hsl(20, 50%, 8%),
+		inset 1px 1px hsl(20, 50%, 60%),
+		inset -2px -2px hsl(20, 50%, 32%),
+		inset 2px 2px hsl(20, 50%, 60%);
+}
+
+.linkBtnOSRed:active {
+	box-shadow:
+		inset -1px -1px hsl(20, 50%, 60%),
+		inset 1px 1px hsl(20, 50%, 8%),
+		inset -2px -2px hsl(20, 50%, 60%),
+		inset 2px 2px hsl(20, 50%, 32%);
+}
+
+.linkBtnOSRed.disabled,
+.linkBtnOSRed.inactive,
+.linkBtnOSRed:disabled {
+	color: hsl(20, 20%, 28%);
+	background: hsl(20, 40%, 35%);
+	outline: 1px dotted hsl(20, 20%, 40%);
+	box-shadow:
+		inset -1px -1px hsl(20, 20%, 8%),
+		inset 1px 1px hsl(20, 20%, 50%),
+		inset -2px -2px hsl(20, 20%, 32%),
+		inset 2px 2px hsl(20, 20%, 50%);
+}
+
+.linkBtnOSRed.disabled:active,
+.linkBtnOSRed.inactive:active {
+	box-shadow:
+		inset -1px -1px hsl(20, 20%, 50%),
+		inset 1px 1px hsl(20, 20%, 8%),
+		inset -2px -2px hsl(20, 20%, 50%),
+		inset 2px 2px hsl(20, 20%, 25%);
+}
+
+.componentFrame {
+	display: inline-block;
+	--button-border-size: 4px;
+	background-color: black;
+	box-shadow:
+		/* The surrounding shadow (second layer) */
+		0 0 1px 2px black,
+		/* The top white "shine" */
+		inset 0 2px 2px -2px #ffffff,
+		/* The light gray frame */
+		inset 0 0 2px var(--button-border-size) #47434c,
+		/* The internal black shadow */
+		inset 0 0 2px calc(var(--button-border-size) + 4px) black;
+	border-radius: 1px;
+	padding: calc(var(--button-border-size) + 2px);
+	margin: 4px;
+}
+
+.panelcontainer {
+	width: 100%;
+	height: 100%;
+}
+
+.panelouter {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(66, 157, 214);
+	box-shadow: inset 25px 25px 3px -20px rgba(255, 255, 255, 0.5), inset -25px -25px 3px -20px black;
+
+	.panel {
+		padding: 20px;
+		width: calc(100% - 40px);
+		height: calc(100% - 40px);
+		image-rendering: pixelated;
+		background: url(metal_background.png);
+		background-size: 3000px;
+	}
+}
+
+// Can be used just about anywhere, so don't hide these inside panel.
+.panelbolt {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: black;
+
+	&.panelbolt-tl {
+		left: 0;
+		top: 0;
+		border-radius: 0 0 50% 0;
+	}
+
+	&.panelbolt-tr {
+		right: 0;
+		top: 0;
+
+		border-radius: 0 0 0 50%;
+	}
+
+	&.panelbolt-bl {
+		left: 0;
+		bottom: 0;
+		border-radius: 0 50% 0 0;
+	}
+
+	&.panelbolt-br {
+		right: 0;
+		bottom: 0;
+		border-radius: 50% 0 0 0;
+	}
+
+	.panelbolt-bolthead {
+		margin-left: 2px;
+		margin-top: 2px;
+		width: 16px;
+		height: 16px;
+		background-color: silver;
+		border-radius: 100%;
+
+		.panelbolt-bolthead-inner {
+			background-color: rgb(71, 71, 71);
+			--s: 16px;
+			/* adjust to control the size */
+
+			width: var(--s);
+			aspect-ratio: 1;
+			--g: /calc(var(--s)*0.27) calc(var(--s)*0.27) radial-gradient(50% 50%, #000 99%, #0000 101%) no-repeat;
+			mask: calc(50% + var(--s)*0.33) calc(50% + var(--s)*0) var(--g), calc(50% + var(--s)*0.165) calc(50% + var(--s)*0.286) var(--g), calc(50% + var(--s)*-0.165) calc(50% + var(--s)*0.286) var(--g), calc(50% + var(--s)*-0.33) calc(50% + var(--s)*0) var(--g), calc(50% + var(--s)*-0.165) calc(50% + var(--s)*-0.286) var(--g), calc(50% + var(--s)*0.165) calc(50% + var(--s)*-0.286) var(--g), radial-gradient(calc(var(--s)*0.401), #000 99%, #0000 101%) subtract, calc(50% + var(--s)*0.432) calc(50% + var(--s)*0.25) var(--g), calc(50% + var(--s)*0) calc(50% + var(--s)*0.499) var(--g), calc(50% + var(--s)*-0.432) calc(50% + var(--s)*0.25) var(--g), calc(50% + var(--s)*-0.432) calc(50% + var(--s)*-0.25) var(--g), calc(50% + var(--s)*0) calc(50% + var(--s)*-0.499) var(--g), calc(50% + var(--s)*0.432) calc(50% + var(--s)*-0.25) var(--g);
+			box-shadow: 0 0 2px 0px white inset, 0 0 2px 0px white;
+		}
+	}
+}
+
+button,
+input,
+textarea {
+	font-family: typewriter;
+}
+
+.label {
+	display: inline-block;
+	position: relative;
+	height: 62px;
+
+	.label-inner {
+		// display: inline-block; // ?????
+		margin: 20px;
+	}
+}

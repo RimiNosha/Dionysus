@@ -6,7 +6,7 @@
 {% if data.chemHacked %}
 {{ ab.act_button("Eject Beaker", "eject", "ejectBeaker", "{}", data.beaker) }}
 {% endif %}
-{{ ab.act_button("Eject Cell", "eject", "eject", "{}", data.hasPowercell && data.open) }}
+{{ ab.fancy_button("Eject Cell", "eject", "{}", true, data.hasPowercell && data.open, data.open, "purple") }}
 <div style="position: absolute; top: 40px; right: 10px">
 {{ ab.pwr_button("power", "{}", data.on, data.hasPowercell) }}
 </div>

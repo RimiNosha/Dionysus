@@ -1,0 +1,81 @@
+// This shit is so fucking stupid
+@function extract($var) {
+	@return $var;
+}
+
+// All the vars shared between elements
+@mixin elem-color($h, $s, $l) {
+	// Why keep vars? In case elements want to mix a colour for whatever reason.
+	--element-color-h: #{extract($h)};
+	--element-color-s: #{extract($s)};
+	--element-color-l: #{extract($l)};
+	--element-color: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		var(--element-color-l)
+	); /* Needs to be HSL */
+	--element-color-25: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		calc(var(--element-color-l) - 25%)
+	);
+	--element-color-33: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		calc(var(--element-color-l) - 33%)
+	);
+	--element-color-35: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		calc(var(--element-color-l) - 35%)
+	);
+	--element-color-45: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		calc(var(--element-color-l) - 45%)
+	);
+	--element-color-l20: hsl(
+		var(--element-color-h),
+		var(--element-color-s),
+		calc(var(--element-color-l) + 20%)
+	);
+	--element-color-35-a70: hsl(
+		var(--element-color-h) var(--element-color-s)
+			calc(var(--element-color-l) - 35%) / 70%
+	);
+	--element-color-light: hsl(
+		calc(var(--element-color-h) - 35deg),
+		var(--element-color-s),
+		calc(var(--element-color-l) + 20%)
+	);
+}
+
+.elem-color- {
+	&red {
+		@include elem-color(0deg, 60%, 70%);
+	}
+	
+	&purple {
+		@include elem-color(290deg, 100%, 70%);
+	}
+	
+	&green {
+		@include elem-color(115deg, 75%, 60%);
+	}
+	
+	&black {
+		@include elem-color(0deg, 0%, 0%);
+	}
+
+}
+
+@mixin font-color($c) {
+	--font-color: extract($c);
+	color: $c;
+}
+
+.font-color- {
+	&white {
+		@include font-color(white)
+	}
+}

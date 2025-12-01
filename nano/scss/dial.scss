@@ -1,0 +1,39 @@
+.dial-frame {
+	display: inline-block;
+	image-rendering: pixelated;
+	background: url(metal_background.png) rgb(183, 192, 192);
+	background-size: 3000px;
+    padding: 20px;
+}
+
+.dial {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 100%;
+    user-select: none;
+}
+
+.dial-label {
+    position: absolute;
+    display: block;
+    width: auto;
+}
+
+.notch {
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 5px;
+    background-color: red;
+}
+
+.dial-pointer {
+    left: calc(100% / 2 - 1px);
+    bottom: 0;
+    position: absolute;
+    background-color: red;
+    width: 3px;
+    height: calc(100% / 2);
+}

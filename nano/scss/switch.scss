@@ -17,70 +17,17 @@ Main changes are:
 */
 
 .switch {
-	--switch-color-h: 290deg;
-	--switch-color-s: 100%;
-	--switch-color-l: 50%;
-	--switch-color: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		var(--switch-color-l)
-	); /* Needs to be HSL */
-	--switch-color-25: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) - 25%)
-	);
-	--switch-color-33: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) - 33%)
-	);
-	--switch-color-35: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) - 35%)
-	);
-	--switch-color-45: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) - 45%)
-	);
-	--switch-color-l20: hsl(
-		var(--switch-color-h),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) + 20%)
-	);
-	--switch-color-35-a70: hsl(
-		var(--switch-color-h) var(--switch-color-s)
-			calc(var(--switch-color-l) - 35%) / 70%
-	);
-	--switch-color-light: hsl(
-		calc(var(--switch-color-h) - 35deg),
-		var(--switch-color-s),
-		calc(var(--switch-color-l) + 20%)
-	);
-	--switch-rotation: 15deg;
-	--switch-pivot-distance: 10px;
-	--switch-width: 25px;
-	--switch-height: calc(1.3 * var(--switch-width));
-	--switch-boxHeight: calc(var(--switch-height) / 3);
-	--switch-boxDistHeight: calc(var(--switch-height) / 1.875);
-	--switch-animTime: 0.1s;
-	--switch-border-size: 4px;
+	--element-rotation: 15deg;
+	--element-pivot-distance: 10px;
+	--element-height: 50px;
+	--element-width: calc(0.7 * var(--element-height));
+	--element-boxHeight: calc(var(--element-height) / 3);
+	--element-boxDistHeight: calc(var(--element-height) / 1.875);
+	--element-animTime: 0.1s;
+	--element-border-size: 4px;
 	display: flex;
-	background-color: black;
-	width: calc(var(--switch-width) - var(--switch-border-size));
-	height: var(--switch-height);
-	box-shadow:
-    /* The surrounding shadow (second layer) */
-		0 0 1px 2px black,
-		/* The top white "shine" */ inset 0 2px 2px -2px #ffffff,
-		/* The light gray frame */ inset 0 0 2px var(--switch-border-size)
-			#47434c,
-		/* The internal black shadow */ inset 0 0 2px
-			calc(var(--switch-border-size) + 4px) black;
-	border-radius: 1px;
-	padding: calc(var(--switch-border-size) + 2px);
+	width: calc(var(--element-width) - var(--element-border-size));
+	height: var(--element-height);
 	perspective: 700px;
 }
 
@@ -89,49 +36,48 @@ Main changes are:
 }
 
 .switch input:checked + .switch-button {
-	transform: translateZ(var(--switch-pivot-distance))
-		rotateX(var(--switch-rotation));
-	box-shadow: 0 -10px 20px var(--switch-color);
+	transform: translateZ(var(--element-pivot-distance))
+		rotateX(var(--element-rotation));
+	box-shadow: 0 -10px 20px var(--element-color);
 }
 
-.switch input:checked + .switch-button .light {
-	animation: flicker 0.2s infinite var(--switch-animTime);
+.switch input:checked + .switch-button .switch-light {
+	animation: flicker 0.2s infinite var(--element-animTime);
 }
 
-.switch input:checked + .switch-button .shine {
+.switch input:checked + .switch-button .switch-shine {
 	opacity: 1;
 }
 
-.switch input:checked + .switch-button .shadow {
+.switch input:checked + .switch-button .switch-shadow {
 	opacity: 0;
 }
 
 .switch .switch-button {
-	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
-	transform-origin: center center calc(var(--switch-pivot-distance) * -1);
-	transform: translateZ(var(--switch-pivot-distance))
-		rotateX(calc(var(--switch-rotation) * -1));
+	transition: all var(--element-animTime) cubic-bezier(1, 0, 1, 1);
+	transform-origin: center center calc(var(--element-pivot-distance) * -1);
+	transform: translateZ(var(--element-pivot-distance))
+		rotateX(calc(var(--element-rotation) * -1));
 	transform-style: preserve-3d;
-	width: calc(100% + 2px);
-	height: 100%;
+	width: 100%;
+	height: 98%;
 	position: relative;
-	margin-left: -1px;
 	cursor: pointer;
 	background: linear-gradient(
-		var(--switch-color-25) 0%,
-		var(--switch-color-33) 30%,
-		var(--switch-color-33) 70%,
-		var(--switch-color-25) 100%
+		var(--element-color-25) 0%,
+		var(--element-color-33) 30%,
+		var(--element-color-33) 70%,
+		var(--element-color-25) 100%
 	);
 	background-repeat: no-repeat;
 }
 
 .switch .switch-button::before {
 	content: "";
-	background: var(--switch-color-25);
+	background: var(--element-color-25);
 	background-repeat: no-repeat;
 	width: 100%;
-	height: var(--switch-boxHeight);
+	height: var(--element-boxHeight);
 	transform-origin: top;
 	transform: rotateX(-90deg);
 	position: absolute;
@@ -141,18 +87,25 @@ Main changes are:
 .switch .switch-button::after {
 	content: "";
 	background-image: linear-gradient(
-		var(--switch-color-35),
-		var(--switch-color-45)
+		var(--element-color-35),
+		var(--element-color-45)
 	);
 	width: 100%;
-	height: var(--switch-boxHeight);
+	height: var(--element-boxHeight);
 	transform-origin: top;
-	transform: translateY(var(--switch-boxHeight)) rotateX(-90deg);
+	transform: translateY(var(--element-boxHeight)) rotateX(-90deg);
 	position: absolute;
 	bottom: 0;
 	box-shadow:
-		0 var(--switch-boxHeight) 8px 0px black,
-		0 var(--switch-boxDistHeight) 20px 0px rgba(0, 0, 0, 0.5);
+		0 var(--element-boxHeight) 8px 0px black,
+		0 var(--element-boxDistHeight) 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.switch :not(input:checked) + .switch-button::after {
+	transition: box-shadow var(--element-animTime) cubic-bezier(1, 0, 1, 1);
+	box-shadow:
+		0 calc(var(--element-boxHeight) + 15px) 8px 0px transparent,
+		0 calc(var(--element-boxDistHeight) + 15px) 20px 0px transparent;
 }
 
 .switch .switch-light {
@@ -162,21 +115,19 @@ Main changes are:
 	width: 100%;
 	height: 100%;
 	background-image: radial-gradient(
-		var(--switch-color-light),
-		var(--switch-color) 40%,
+		var(--element-color-light),
+		var(--element-color) 40%,
 		transparent 70%
 	);
 }
 
+
 .switch .switch-dots {
 	position: absolute;
+	top: 0;
 	width: 100%;
 	height: 100%;
-	background-image: radial-gradient(
-		transparent 30%,
-		var(--switch-color-35-a70) 70%
-	);
-	background-size: 10px 10px;
+	background: url("/images/uiButtonPrism.png");
 }
 
 .switch .switch-characters {
@@ -192,8 +143,8 @@ Main changes are:
 		/* White vertical line */
 			radial-gradient(
 				circle,
-				transparent 50%,
-				white 52%,
+				transparent 40%,
+				white 55%,
 				white 70%,
 				transparent 72%
 			)
@@ -202,7 +153,7 @@ Main changes are:
 }
 
 .switch .switch-shine {
-	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
+	transition: all var(--element-animTime) cubic-bezier(1, 0, 1, 1);
 	opacity: 0.3;
 	position: absolute;
 	width: 100%;
@@ -218,7 +169,7 @@ Main changes are:
 }
 
 .switch .switch-shadow {
-	transition: all var(--switch-animTime) cubic-bezier(1, 0, 1, 1);
+	transition: all var(--element-animTime) cubic-bezier(1, 0, 1, 1);
 	opacity: 1;
 	position: absolute;
 	width: 100%;
@@ -227,9 +178,9 @@ Main changes are:
 		linear-gradient(rgba(255, 255, 255, 0.05), transparent 70%) 50% 50% /
 			97% 97%,
 		linear-gradient(
-				rgba(0, 0, 0, 0.2),
-				transparent 80%,
-				transparent 50%,
+				rgba(0, 0, 0, 0.5),
+				transparent 60%,
+				transparent 30%,
 				transparent
 			)
 			50% 50% / 97% 97%,

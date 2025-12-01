@@ -58,6 +58,7 @@
 			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[item]")
 			continue
 		item.keep_local_name = TRUE
+		item.namespace = "nanoui"
 
 /datum/asset/nanoui/send(client, uncommon)
 	. = SSassets.transport.send_assets(client, TEMPLATE_FILE_NAME)
@@ -92,6 +93,11 @@
 
 // Note: this is intended for dev work, and is unsafe. Do not use outside of that.
 /datum/asset/nanoui/proc/recompute_and_resend_templates()
+	if(is_client_remote(usr.client))
+		var/input = tgui_input_list(usr, "This server is live! You could potentially break all UIs!", "Are you REALLY sure?", list("Yes", "No"), "No", 10 SECONDS)
+		if (!input || input == "No")
+			return
+
 	merge_and_register_templates()
 	for(var/client/C in GLOB.clients)
 		if(C) // there are sleeps here, potentially

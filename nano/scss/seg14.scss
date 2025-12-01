@@ -1,0 +1,31 @@
+.seg14 {
+    position: relative;
+    font-family: dseg;
+    line-height: 44px;
+    font-size: 44px;
+    height: 50px;
+    color: var(--font-color, var(--element-color));
+    .contents {
+        position: relative;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+        padding: 3px;
+        z-index: 1;
+
+        &.lit {
+            text-shadow: hsl(var(--element-color-h), calc(var(--element-color-s) - 50%), calc(var(--element-color-l) + 20%)) 0 0 5px;
+        }
+    }
+
+    .backlight {
+        position: absolute;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+        overflow: hidden;
+        padding: 3px;
+        top: 0;
+        color: rgba(0, 0, 0, 10%);
+        background-color: var(--element-color-45);
+        user-select: none;
+    }
+}

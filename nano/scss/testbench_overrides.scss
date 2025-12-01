@@ -1,0 +1,100 @@
+// I hate this. I need to construct a proper devserver for this or something.
+
+.notice {
+    background: url(/images/uiNoticeBackground.jpg) 50% 50%;
+}
+
+.notice.info {
+    background: url(/images/uiInfoBackground.jpg) 50% 50%;
+}
+
+body {
+    background: #121212 url(/images/uiBackground.png) 50% 0 repeat;
+}
+
+#uiTitleWrapper {
+    background: gray url(/images/uiTitleBackground.png) repeat;
+}
+
+#uiTitleFluff {
+    background: url(/images/uiTitleFluff.png) 50% 50% no-repeat;
+}
+
+#uiMapContainer {
+    background: url(/images/nanomapBackground.png);
+}
+
+#uiLoadingNotice {
+    background: url(/images/uiNoticeBackground.jpg) 50% 50%;
+}
+
+.icon24.uiStatusGood {
+    background: url(/images/uiIcons24.png) 0 0 no-repeat;
+}
+
+.icon24.uiStatusAverage {
+    background: url(/images/uiIcons24.png) 0 -24px no-repeat;
+}
+
+.icon24.uiStatusBad {
+    background: url(/images/uiIcons24.png) 0 -48px no-repeat;
+}
+
+.uiIcon16 {
+    background-image: url(/images/uiIcons16.png);
+}
+
+.uiLinkPendingIcon {
+    background-image: url(/images/uiLinkPendingIcon.gif);
+}
+
+.mapIcon16 {
+    background-image: url(/images/uiIcons16Green.png);
+}
+
+.mapIcon16.dead {
+    background-image: url(/images/iIcons16Red.png);
+}
+
+.uiIcon16.icon-batt_full {
+    background-image: url(/images/c_max.gif);
+    background-position: 0px 0px
+}
+
+.uiIcon16.icon-batt_disc {
+    background-image: url(/images/c_discharging.gif);
+    background-position: 0px 0px
+}
+
+.uiIcon16.icon-batt_chrg {
+    background-image: url(/images/c_charging.gif);
+    background-position: 0px 0px
+}
+
+.uiIcon16.icon-close64 {
+    background-image: url(/images/uiIcons64.png);
+    background-position: -128px -64px;
+    width: 64px;
+    height: 64px;
+}
+
+/** Font for numeric 7 segments lcd screens. */
+@font-face {
+    font-family: dseg;
+    src: url('/images/fonts/DSEG14Classic-Regular.woff2') format("woff2");
+}
+
+// General font
+@font-face {
+    font-family: typewriter;
+    src: url('/images/fonts/MonospaceTypewriter.ttf');
+    font-weight: 100;
+}
+
+.dial-frame {
+    background: url(/images/metal_background.png) rgb(183, 192, 192);
+}
+
+.panelouter .panel {
+    background: url(/images/metal_background.png);
+}

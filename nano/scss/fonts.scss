@@ -10,16 +10,13 @@
 
 /** Font for numeric 7 segments lcd screens. */
 @font-face {
-    font-family: 'segment7';
-    src: url('./segment7.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-family: dseg;
+    src: url('DSEG14Classic-Regular.woff2') format("woff2");
 }
 
-/** Font for monolith runes */
+// General font
 @font-face {
-    font-family: 'shage';
-    src: url('./Shage.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    font-family: typewriter;
+    src: url('MonospaceTypewriter.ttf');
+    font-weight: 100;
 }
