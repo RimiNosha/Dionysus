@@ -10,3 +10,6 @@
 		if (ch < 48 || ch > 57) //0-9
 			return FALSE
 	return TRUE
+
+/proc/is_client_remote(client/client)
+	return !(isnull(client.address) || (client.address in GLOB.localhost_addresses))
