@@ -174,7 +174,7 @@
  * cult_girder - the girder being destoyed
  * cultist - the mob doing the destroying
  */
-/datum/component/cult_ritual_item/proc/do_destroy_girder(obj/structure/girder/cult/cult_girder, mob/living/cultist)
+/datum/component/cult_ritual_item/proc/do_destroy_girder(obj/structure/girderold/cult/cult_girder, mob/living/cultist)
 	playsound(cult_girder, 'sound/weapons/resonator_blast.ogg', 40, TRUE, ignore_walls = FALSE)
 	cultist.visible_message(
 		span_warning("[cultist] strikes [cult_girder] with [parent]!"),

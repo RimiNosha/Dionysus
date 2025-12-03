@@ -99,16 +99,3 @@
 	if(isnull(cable))
 		return TRUE
 	return !cable.shock(user, 75)
-
-/turf/closed/constructed_wall/drill_act(obj/item/mecha_parts/mecha_equipment/drill/drill, mob/user)
-	if(isnull(material_reinforcement))
-		if(drill.do_after_mecha(src, user, 60 / drill.drill_level))
-			drill.log_message("Drilled through [src]", LOG_MECHA)
-			wall_destroyed()
-		return
-	if(drill.drill_level > DRILL_HARDENED)
-		to_chat(user, "[icon2html(src, user)][span_danger("[src] is too durable to drill through.")]")
-		return
-	if(drill.do_after_mecha(src, user, 120 / drill.drill_level))
-		drill.log_message("Drilled through [src]", LOG_MECHA)
-		wall_destroyed()

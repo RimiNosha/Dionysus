@@ -1,7 +1,7 @@
 /turf/closed/constructed_wall
 	name = "wall"
 	desc = "A huge chunk of iron used to separate rooms."
-	icon = 'icons/turf/walls/bimmer_walls.dmi'
+	icon = 'icons/walls/plating/steel.dmi'
 	icon_state = "wall-0"
 	var/wall_connections = -1
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
@@ -48,20 +48,20 @@
 
 /turf/closed/constructed_wall/proc/trim_overlays()
 	var/static/list/trim_map_low = alist(
-		/datum/material/bronze = 'icons/walls/trim_low/bronze.dmi',
-		/datum/material/steel = 'icons/walls/trim_low/iron.dmi',
-		/datum/material/alloy/plasteel = 'icons/walls/trim_low/reinforced.dmi',
+		// /datum/material/bronze = 'icons/walls/trim_low/bronze.dmi',
+		// /datum/material/steel = 'icons/walls/trim_low/iron.dmi',
+		// /datum/material/alloy/plasteel = 'icons/walls/trim_low/reinforced.dmi',
 		/datum/material/silver = 'icons/walls/trim_low/silver.dmi',
-		/datum/material/titanium = 'icons/walls/trim_low/titanium.dmi',
-		/datum/material/wood = 'icons/walls/trim_low/wood.dmi',
+		// /datum/material/titanium = 'icons/walls/trim_low/titanium.dmi',
+		// /datum/material/wood = 'icons/walls/trim_low/wood.dmi',
 	)
 	var/static/list/trim_map_high = alist(
-		/datum/material/bronze = 'icons/walls/trim_high/bronze.dmi',
-		/datum/material/steel = 'icons/walls/trim_high/iron.dmi',
-		/datum/material/alloy/plasteel = 'icons/walls/trim_high/reinforced.dmi',
+		// /datum/material/bronze = 'icons/walls/trim_high/bronze.dmi',
+		// /datum/material/steel = 'icons/walls/trim_high/iron.dmi',
+		// /datum/material/alloy/plasteel = 'icons/walls/trim_high/reinforced.dmi',
 		/datum/material/silver = 'icons/walls/trim_high/silver.dmi',
-		/datum/material/titanium = 'icons/walls/trim_high/titanium.dmi',
-		/datum/material/wood = 'icons/walls/trim_high/wood.dmi',
+		// /datum/material/titanium = 'icons/walls/trim_high/titanium.dmi',
+		// /datum/material/wood = 'icons/walls/trim_high/wood.dmi',
 	)
 	var/list/overlays = list()
 	if(material_trim_low)
@@ -76,13 +76,13 @@
 
 /turf/closed/constructed_wall/update_icon()
 	var/static/list/plating_map = alist(
-		/*/datum/material/marbleblack*/ /datum/material/bananium = 'icons/walls/plating/blackmarble.dmi',
-		/datum/material/bronze = 'icons/walls/plating/bronze.dmi',
-		/datum/material/steel = 'icons/walls/plating/iron.dmi',
-		/datum/material/alloy/plasteel = 'icons/walls/plating/reinforced.dmi',
-		/*/datum/material/lead*/ /datum/material/cardboard = 'icons/walls/plating/lead.dmi',
-		/datum/material/silver = 'icons/walls/plating/silver.dmi',
-		/datum/material/wood = 'icons/walls/plating/wood.dmi',
+		// /datum/material/marbleblack = 'icons/walls/plating/blackmarble.dmi',
+		// /datum/material/bronze = 'icons/walls/plating/bronze.dmi',
+		/datum/material/steel = 'icons/walls/plating/steel.dmi',
+		// /datum/material/alloy/plasteel = 'icons/walls/plating/reinforced.dmi',
+		// /datum/material/lead = 'icons/walls/plating/lead.dmi',
+		// /datum/material/silver = 'icons/walls/plating/silver.dmi',
+		// /datum/material/wood = 'icons/walls/plating/wood.dmi',
 	)
 	if(!(material_plating in plating_map))
 		stack_trace("plating_overlay(): invalid material_plating: [material_plating]")
