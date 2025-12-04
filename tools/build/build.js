@@ -8,7 +8,6 @@
 
 import fs from "fs";
 import https from "https";
-import { env } from "process";
 import Juke from "./juke/index.js";
 import { DreamDaemon, DreamMaker } from "./lib/byond.js";
 import { yarn } from "./lib/yarn.js";
@@ -20,6 +19,11 @@ Juke.setup({ file: import.meta.url }).then((code) => {
   if (code !== 0 && process.argv.includes("--wait-on-error")) {
     Juke.logger.error("Please inspect the error and close the window.");
     return;
+  }
+  if (process.platform === "linux") {
+    Juke.logger.info(
+      "While building is supported on Linux, running the server is not.",
+    );
   }
   process.exit(code);
 });
