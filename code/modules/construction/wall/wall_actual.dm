@@ -4,6 +4,9 @@
 	icon = 'icons/walls/plating/steel.dmi'
 	base_icon_state = "wall"
 	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
 	var/datum/material/material_reinforcement //! (if applicable) the material that the reinforcement rods are made of.
 	var/datum/material/material_trim_low //! (if applicable) the material that the bottom trim is made of.
@@ -12,10 +15,15 @@
 	var/deconstruction_r_step = DECON_REINF_NONE //! the current stage of reinforcement deconstruction
 
 /turf/closed/constructed_wall/New(loc, material_plating, material_reinforcement, material_trim_low, material_trim_high)
+	return ..()
+
+/turf/closed/constructed_wall/Initialize(mapload, material_plating, material_reinforcement, material_trim_low, material_trim_high)
 	src.material_plating = material_plating || /datum/material/steel
 	src.material_reinforcement = material_reinforcement
 	src.material_trim_low = material_trim_low
 	src.material_trim_high = material_trim_high
+	QUEUE_SMOOTH(src)
+	QUEUE_SMOOTH_NEIGHBORS(src)
 	return ..()
 
 /turf/closed/constructed_wall/examine(mob/user)

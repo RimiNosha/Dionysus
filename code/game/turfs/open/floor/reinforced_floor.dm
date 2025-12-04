@@ -147,7 +147,7 @@
 	be_removed()
 	return ..()
 
-/turf/open/floor/engine/cult/ChangeTurf(path, new_baseturf, flags)
+/turf/open/floor/engine/cult/ChangeTurf(turf/path, list/new_baseturfs, flags, list/args_turf_new = null)
 	if(path != type)
 		be_removed()
 	return ..()
