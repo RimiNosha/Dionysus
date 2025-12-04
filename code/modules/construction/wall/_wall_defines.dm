@@ -7,13 +7,5 @@
 #define DECON_NONE 0
 #define DECON_WALL_WEAKENED 1
 
-#define GIRDER_NOTHING "nothing"
-#define GIRDER_STRUCTURAL "structural"
-#define GIRDER_PLATED "plated"
-
-#define STRUCTURE_COST 2
-#define PLATING_COST 2
-#define REINFORCEMENT_COST 2
-
 #define WALL_DECON_STEP_TIME 2 SECONDS
 #define WALL_DECON_STEP_REINF_TIME 5 SECONDS

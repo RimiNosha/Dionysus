@@ -201,6 +201,8 @@
 	if(new_overlays)
 		add_overlay(new_overlays)
 
+/atom/proc/can_smooth(atom/other)
+	return TRUE
 
 ///Scans direction to find targets to smooth with.
 /atom/proc/find_type_in_direction(direction)
@@ -215,13 +217,21 @@
 
 	if(isnull(canSmoothWith)) //special case in which it will only smooth with itself
 		if(isturf(src))
-			return (type == target_turf.type) ? ADJ_FOUND : NO_ADJ_FOUND
+			if(type != target_turf.type)
+				return NO_ADJ_FOUND
+			if(!can_smooth(target_turf))
+				return NO_ADJ_FOUND
+			return ADJ_FOUND
 		var/atom/matching_obj = locate(type) in target_turf
-		return (matching_obj && matching_obj.type == type) ? ADJ_FOUND : NO_ADJ_FOUND
+		if(!matching_obj || matching_obj.type != type || !can_smooth(matching_obj))
+			return NO_ADJ_FOUND
+		return ADJ_FOUND
 
 	if(!isnull(target_turf.smoothing_groups))
 		for(var/target in canSmoothWith)
 			if(!(canSmoothWith[target] & target_turf.smoothing_groups[target]))
+				continue
+			if(!can_smooth(target_turf))
 				continue
 			return ADJ_FOUND
 
@@ -231,6 +241,8 @@
 				continue
 			for(var/target in canSmoothWith)
 				if(!(canSmoothWith[target] & thing.smoothing_groups[target]))
+					continue
+				if(!can_smooth(thing))
 					continue
 				return ADJ_FOUND
 
@@ -261,6 +273,9 @@
 						if(neighbor_smoothing_groups) { \
 							for(var/target in canSmoothWith) { \
 								if(canSmoothWith[target] & neighbor_smoothing_groups[target]) { \
+									if(!can_smooth(neighbor)) { \
+										continue; \
+									}; \
 									new_junction |= direction_flag; \
 									break set_adj_in_dir; \
 								}; \
@@ -274,6 +289,9 @@
 								}; \
 								for(var/target in canSmoothWith) { \
 									if(canSmoothWith[target] & thing_smoothing_groups[target]) { \
+										if(!can_smooth(thing)) { \
+											continue; \
+										}; \
 										new_junction |= direction_flag; \
 										break set_adj_in_dir; \
 									}; \

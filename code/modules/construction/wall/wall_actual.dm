@@ -2,8 +2,8 @@
 	name = "wall"
 	desc = "A huge chunk of iron used to separate rooms."
 	icon = 'icons/walls/plating/steel.dmi'
-	icon_state = "wall-0"
-	var/wall_connections = -1
+	base_icon_state = "wall"
+	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
 	var/datum/material/material_reinforcement //! (if applicable) the material that the reinforcement rods are made of.
 	var/datum/material/material_trim_low //! (if applicable) the material that the bottom trim is made of.
@@ -12,12 +12,11 @@
 	var/deconstruction_r_step = DECON_REINF_NONE //! the current stage of reinforcement deconstruction
 
 /turf/closed/constructed_wall/New(loc, material_plating, material_reinforcement, material_trim_low, material_trim_high)
-	. = ..()
 	src.material_plating = material_plating || /datum/material/steel
 	src.material_reinforcement = material_reinforcement
 	src.material_trim_low = material_trim_low
 	src.material_trim_high = material_trim_high
-	update_connections()
+	return ..()
 
 /turf/closed/constructed_wall/examine(mob/user)
 	. = ..()
@@ -67,11 +66,11 @@
 	if(material_trim_low)
 		if(!(material_trim_low in trim_map_low))
 			stack_trace("unhandled material_trim_low: [material_trim_low]")
-		else overlays += icon(trim_map_low[material_trim_low], "trim-[wall_connections]")
+		else overlays += icon(trim_map_low[material_trim_low], icon_state)
 	if(material_trim_high)
 		if(!(material_trim_high in trim_map_high))
 			stack_trace("unhandled material_trim_high: [material_trim_high]")
-		else overlays += icon(trim_map_high[material_trim_high], "trim-[wall_connections]")
+		else overlays += icon(trim_map_high[material_trim_high], icon_state)
 	return overlays
 
 /turf/closed/constructed_wall/update_icon()
@@ -96,10 +95,6 @@
 	. += trim_overlays()
 	. += deconstruction_overlay()
 
-/turf/closed/constructed_wall/update_icon_state()
-	. = ..()
-	icon_state = "wall-[wall_connections]"
-
 /turf/closed/constructed_wall/proc/deconstruction_overlay()
 	if(deconstruction_stage == 0)
 		return
@@ -107,8 +102,3 @@
 	if(deconstruction_r_step > 0)
 		overlays += list(mutable_appearance('icons/walls/decon.dmi', "r[deconstruction_r_step]", alpha = 125))
 	return overlays
-
-/turf/closed/constructed_wall/ChangeTurf(turf/path, list/new_baseturfs, flags)
-	material_plating = null
-	update_connections(from_changeturf = TRUE)
-	return ..()

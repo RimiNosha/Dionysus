@@ -1,3 +1,11 @@
+#define GIRDER_NOTHING "nothing"
+#define GIRDER_STRUCTURAL "structural"
+#define GIRDER_PLATED "plated"
+
+#define STRUCTURE_COST 2
+#define PLATING_COST 2
+#define REINFORCEMENT_COST 2
+
 /obj/structure/girder
 	name = "girder"
 	desc = "An interconnected network of metal rods."
