@@ -10,7 +10,6 @@
  */
 GLOBAL_LIST_INIT(glass_recipes, list ( \
 	new/datum/stack_recipe("directional window", /obj/structure/window/unanchored, time = 0, on_floor = TRUE, window_checks = TRUE), \
-	new/datum/stack_recipe("fulltile window", /obj/structure/window/fulltile/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("glass shard", /obj/item/shard, time = 0, on_floor = TRUE), \
 	new/datum/stack_recipe("glass tile", /obj/item/stack/tile/glass, 1, 4, 20) \
 ))
@@ -79,7 +78,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/glass)
 
 GLOBAL_LIST_INIT(pglass_recipes, list ( \
 	new/datum/stack_recipe("directional window", /obj/structure/window/plasma/unanchored, time = 0, on_floor = TRUE, window_checks = TRUE), \
-	new/datum/stack_recipe("fulltile window", /obj/structure/window/plasma/fulltile/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("plasma glass shard", /obj/item/shard/plasma, time = 20, on_floor = TRUE) \
 ))
 
@@ -135,7 +133,6 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 	new/datum/stack_recipe("windoor frame", /obj/structure/windoor_assembly, 5, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	null, \
 	new/datum/stack_recipe("directional reinforced window", /obj/structure/window/reinforced/unanchored, time = 0, on_floor = TRUE, window_checks = TRUE), \
-	new/datum/stack_recipe("fulltile reinforced window", /obj/structure/window/reinforced/fulltile/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("glass shard", /obj/item/shard, time = 10, on_floor = TRUE), \
 	new/datum/stack_recipe("reinforced glass tile", /obj/item/stack/tile/rglass, 1, 4, 20) \
 ))
@@ -192,7 +189,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/rglass)
 
 GLOBAL_LIST_INIT(prglass_recipes, list ( \
 	new/datum/stack_recipe("directional reinforced window", /obj/structure/window/reinforced/plasma/unanchored, time = 0, on_floor = TRUE, window_checks = TRUE), \
-	new/datum/stack_recipe("fulltile reinforced window", /obj/structure/window/reinforced/plasma/fulltile/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("plasma glass shard", /obj/item/shard/plasma, time = 40, on_floor = TRUE) \
 ))
 
@@ -220,7 +216,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/plasmarglass)
 	. += GLOB.prglass_recipes
 
 GLOBAL_LIST_INIT(titaniumglass_recipes, list(
-	new/datum/stack_recipe("shuttle window", /obj/structure/window/reinforced/shuttle/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE), \
 	new/datum/stack_recipe("titanium glass shard", /obj/item/shard/titanium, time = 40, on_floor = TRUE) \
 	))
 
@@ -243,14 +238,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/titaniumglass)
 /obj/item/stack/sheet/titaniumglass/fifty
 	amount = 50
 
-/obj/item/stack/sheet/titaniumglass/get_main_recipes()
-	. = ..()
-	. += GLOB.titaniumglass_recipes
-
-GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
-	new/datum/stack_recipe("plastitanium window", /obj/structure/window/reinforced/plasma/plastitanium/unanchored, 2, time = 0, on_floor = TRUE, window_checks = TRUE) \
-	))
-
 TYPEINFO_DEF(/obj/item/stack/sheet/plastitaniumglass)
 	default_armor = list(BLUNT = 0, PUNCTURE = 0, SLASH = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 80, ACID = 100)
 
@@ -267,10 +254,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/plastitaniumglass)
 	merge_type = /obj/item/stack/sheet/plastitaniumglass
 	tableVariant = /obj/structure/table/reinforced/plastitaniumglass
 	window_type = /obj/structure/window/reinforced/plasma/plastitanium
-
-/obj/item/stack/sheet/plastitaniumglass/get_main_recipes()
-	. = ..()
-	. += GLOB.plastitaniumglass_recipes
 
 /obj/item/stack/sheet/gnesis_glass
 	name = "transculent wafers"

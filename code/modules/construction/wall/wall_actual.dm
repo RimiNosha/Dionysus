@@ -6,7 +6,7 @@
 	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
 	var/datum/material/material_reinforcement //! (if applicable) the material that the reinforcement rods are made of.
 	var/datum/material/material_trim_low //! (if applicable) the material that the bottom trim is made of.

@@ -185,9 +185,11 @@
 	if(overfloor_placed && istype(object, /obj/item/stack/tile))
 		try_replace_tile(object, user, params)
 		return TRUE
-	if(user.combat_mode && istype(object, /obj/item/stack/sheet))
+	if(istype(object, /obj/item/stack/sheet))
 		var/obj/item/stack/sheet/sheets = object
-		return sheets.on_attack_floor(user, params)
+		if(user.combat_mode)
+			return sheets.on_attack_floor(user, src)
+		return sheets.on_use_floor(user, src)
 	return FALSE
 
 /turf/open/floor/crowbar_act(mob/living/user, obj/item/I)

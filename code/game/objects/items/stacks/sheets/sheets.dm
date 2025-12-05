@@ -35,6 +35,11 @@
 	pixel_x = rand(-4, 4)
 	pixel_y = rand(-4, 4)
 
+/obj/item/stack/sheet/examine(mob/user)
+	. = ..()
+	if(window_type)
+		. += span_notice("It can be used to build windows on [/turf/open/floor/plating::name].")
+
 /**
  * Facilitates sheets being smacked on the floor
  *
@@ -44,11 +49,11 @@
  * * user: The user that did the action
  * * params: paramas passed in from attackby
  */
-/obj/item/stack/sheet/proc/on_attack_floor(mob/user, params)
+/obj/item/stack/sheet/proc/on_attack_floor(mob/user, turf/open/floor/floor)
 	var/list/shards = list()
 	for(var/datum/material/mat in custom_materials)
 		if(mat.shard_type)
-			var/obj/item/new_shard = new mat.shard_type(user.loc)
+			var/obj/item/new_shard = new mat.shard_type(floor)
 			new_shard.add_fingerprint(user)
 			shards += "\a [new_shard.name]"
 	if(!shards.len)
@@ -59,6 +64,14 @@
 	user.visible_message(span_notice("[user] shatters the sheet of [name] on the floor, leaving [english_list(shards)]."), \
 		span_notice("You shatter the sheet of [name] on the floor, leaving [english_list(shards)]."))
 	return TRUE
+
+/**
+ * Currently handles building windows on plating.
+ */
+/obj/item/stack/sheet/proc/on_use_floor(mob/user, turf/open/floor/floor)
+	if(!isnull(window_type) && istype(floor, /turf/open/floor/plating))
+		return try_install_window(user, floor, null)
+	return FALSE
 
 /// Mob action to try and install a window if the sheet can do that
 /obj/item/stack/sheet/proc/try_install_window(mob/living/user, turf/location, obj/mounted_on)
