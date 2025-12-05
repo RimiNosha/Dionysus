@@ -16,6 +16,7 @@
 		C.parallax_layers_cached = list()
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_1(null, src)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/stars(null, src)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/gate(null, src)
 
 	C.parallax_layers = C.parallax_layers_cached.Copy()
 
@@ -316,40 +317,28 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_root)
 	icon_state = "stars"
 	speed = 0.5
 
-/*
-/atom/movable/screen/parallax_layer/planet
-	icon_state = "planet"
-	blend_mode = BLEND_OVERLAY
-	absolute = TRUE //Status of seperation
-	speed = 3
-	layer = 30
+/atom/movable/screen/parallax_layer/gate
+	icon = 'icons/effects/parallax/gate.dmi'
+	icon_state = "0,0"
+	var/mutable_appearance/lights
 
-/atom/movable/screen/parallax_layer/planet/Initialize(mapload, mob/owner)
+/atom/movable/screen/parallax_layer/gate/New(loc, mob/owner)
+	lights = mutable_appearance('icons/effects/parallax/gate.dmi', "light_mask")
 	. = ..()
-	if(!owner?.client)
-		return
-	var/static/list/connections = list(
-		COMSIG_MOVABLE_Z_CHANGED = PROC_REF(on_z_change),
-		COMSIG_MOB_LOGOUT = PROC_REF(on_mob_logout),
-	)
-	AddComponent(/datum/component/connect_mob_behalf, owner.client, connections)
-	on_z_change(owner)
+	RegisterSignal(SSgate, COMSIG_GATE_UPDATED, PROC_REF(update_state))
 
-/atom/movable/screen/parallax_layer/planet/proc/on_mob_logout(mob/source)
+/atom/movable/screen/parallax_layer/gate/on_view_change(datum/source, new_size)
+	. = ..()
+	update_state(null, SSgate.gate_icon_state, SSgate.light_color) // Look man, I just work here
+
+/atom/movable/screen/parallax_layer/gate/update_overlays()
+	. = ..()
+	. += lights
+
+/atom/movable/screen/parallax_layer/gate/proc/update_state(source, icon_state, color)
 	SIGNAL_HANDLER
-	var/client/boss = source.canon_client
-	on_z_change(boss.mob)
-
-/atom/movable/screen/parallax_layer/planet/proc/on_z_change(mob/source)
-	SIGNAL_HANDLER
-	var/client/boss = source.client
-	var/turf/posobj = get_turf(boss?.eye)
-	if(!posobj)
-		return
-	invisibility = is_station_level(posobj.z) ? 0 : INVISIBILITY_ABSTRACT
-
-/atom/movable/screen/parallax_layer/planet/update_o()
-	return //Shit won't move
-*/
+	src.icon_state = icon_state
+	lights.color = color
+	update_appearance()
 
 #undef PARALLAX_ICON_SIZE
