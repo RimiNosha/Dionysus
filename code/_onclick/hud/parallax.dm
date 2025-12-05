@@ -37,7 +37,6 @@
 		0, 0, 0, 0
 		)
 
-
 /datum/hud/proc/remove_parallax(mob/viewmob)
 	var/mob/screenmob = viewmob || mymob
 	var/client/C = screenmob.client
@@ -246,21 +245,20 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_root)
 	screen_loc = "CENTER-7,CENTER-7"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-// We need parallax to always pass its args down into initialize, so we immediate init it
-INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 /atom/movable/screen/parallax_layer
 	icon = 'icons/effects/parallax/skybox.dmi'
+	layer = AREA_LAYER
 	var/speed = 1
 	var/offset_x = 0
 	var/offset_y = 0
 	var/view_sized
 	var/absolute = FALSE
 	appearance_flags = APPEARANCE_UI | TILE_BOUND | KEEP_TOGETHER
-	blend_mode = BLEND_ADD
+	blend_mode = BLEND_OVERLAY
 	plane = PLANE_SPACE_PARALLAX
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/atom/movable/screen/parallax_layer/Initialize(mapload, datum/hud/hud_owner)
+/atom/movable/screen/parallax_layer/New(loc, datum/hud/hud_owner)
 	. = ..()
 	// Parallax layers are independant of hud, they care about client
 	// Not doing this will just create a bunch of hard deletes
@@ -308,18 +306,14 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 
 /atom/movable/screen/parallax_layer/layer_1
 	icon_state = "dyable"
-	blend_mode = BLEND_OVERLAY
 	speed = 0.5
-	layer = 1
 
-/atom/movable/screen/parallax_layer/layer_1/Initialize(mapload, mob/owner)
+/atom/movable/screen/parallax_layer/layer_1/New(loc, mob/owner)
 	. = ..()
 	src.add_atom_colour(global.starlight_color, ADMIN_COLOUR_PRIORITY)
 
 /atom/movable/screen/parallax_layer/stars
 	icon_state = "stars"
-	blend_mode = BLEND_OVERLAY
-	layer = 1
 	speed = 0.5
 
 /*
