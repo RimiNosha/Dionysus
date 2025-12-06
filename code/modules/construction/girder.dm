@@ -14,17 +14,25 @@
 	density = FALSE
 	can_atmos_pass = CANPASS_ALWAYS
 	smoothing_groups = SMOOTH_GROUP_WALLS
-	canSmoothWith = SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_GRILLE + SMOOTH_GROUP_WINDOW_FULLTILE
+	uses_integrity = TRUE
+	max_integrity = /datum/material/steel::wall_integrity * 0.5
 	/// The material that the girder walls are made of.
 	var/datum/material/material_plating = null
 	/// The material that the reinforcement rods are made of.
-	var/datum/material/material_reinforce = null
+	var/datum/material/material_reinforcement = null
 	/// Are the reinforcement rods secured?
 	var/reinforcement_secure = FALSE
+	/// The heat resistance of the girder.
+	var/heat_resistance = /datum/material/steel::heat_resistance
+
+/obj/structure/girder/Initialize(mapload)
+	. = ..()
+	become_atmos_sensitive()
 
 /obj/structure/girder/update_overlays()
 	. = ..()
-	if(!isnull(material_reinforce))
+	if(!isnull(material_reinforcement))
 		. += "reinf-temp"
 	if(!isnull(material_plating))
 		return
@@ -38,7 +46,7 @@
 		. += "The structure can be cut apart using a <b>welder</b>."
 		. += "Plating can be <b>welded</b> onto the structure."
 		return .
-	if(isnull(material_reinforce))
+	if(isnull(material_reinforcement))
 		. += "The plating can be cut apart using a <b>welder</b>."
 		. += "Reinforcement can be <b>welded</b> onto the structure."
 		return .
@@ -51,7 +59,7 @@
 /obj/structure/girder/proc/start_smoothing()
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
 	// todo: actually have different bitmask states, plz bimmer
-	// if(material_reinforce)
+	// if(material_reinforcement)
 	// 	base_icon_state = "girder-reinf"
 	// else
 	// 	base_icon_state = "girder"
@@ -71,10 +79,35 @@
 		if(isnull(material_plating))
 			add_plating(user, object)
 			return TRUE
-		if(isnull(material_reinforce))
+		if(isnull(material_reinforcement))
 			add_reinforcement(user, object)
 			return TRUE
 	return ..()
+
+/obj/structure/girder/proc/update_material_resistances()
+	var/new_heat_resistance = /obj/structure/girder::heat_resistance
+	var/new_max_integrity = /obj/structure/girder::max_integrity
+	if(!isnull(material_plating)) // take the highest heat resistance and max integrity when compared the the actual girder frame
+		heat_resistance = max(heat_resistance, material_plating.heat_resistance)
+		max_integrity = max(max_integrity, material_plating.wall_integrity)
+	if(!isnull(material_reinforcement))
+		new_heat_resistance += material_reinforcement.heat_resistance * 0.25
+		new_max_integrity += material_reinforcement.wall_integrity * 0.5
+	heat_resistance = new_heat_resistance
+	var/integrity_pct = atom_integrity / max_integrity
+	max_integrity = new_max_integrity
+	update_integrity(max_integrity * integrity_pct)
+
+/obj/structure/girder/atmos_expose(datum/gas_mixture/air, exposed_temperature)
+	if(exposed_temperature <= heat_resistance)
+		return
+	var/ratio_over = exposed_temperature / heat_resistance
+	var/damage_ratio = (ratio_over - 1) ** 2
+	take_damage(2 ** damage_ratio, BURN)
+	if(prob(ratio_over * 25))
+		playsound(src, SFX_ROCK_TAP, 25)
+	if(prob(ratio_over * 10))
+		visible_message(span_warning("\The [src] seems to warp slightly!"))
 
 /obj/structure/girder/proc/add_plating(mob/user, obj/item/stack/sheet/material_sheet)
 	if(!anchored)
@@ -97,6 +130,7 @@
 	material_plating = material_sheet.material_type
 	density = TRUE
 	start_smoothing()
+	update_material_resistances()
 
 /obj/structure/girder/proc/add_reinforcement(mob/user, obj/item/stack/sheet/reinforcement_material)
 	if(reinforcement_material.amount < PLATING_COST)
@@ -113,8 +147,9 @@
 	if(!reinforcement_material.use(PLATING_COST))
 		balloon_alert(user, "not enough!")
 		return
-	material_reinforce = reinforcement_material.material_type
+	material_reinforcement = reinforcement_material.material_type
 	start_smoothing()
+	update_material_resistances()
 
 /obj/structure/girder/wrench_act(mob/user, obj/item/tool)
 	if(!Adjacent(user))
@@ -132,13 +167,13 @@
 /obj/structure/girder/screwdriver_act(mob/user, obj/item/tool)
 	if(!Adjacent(user))
 		return ..()
-	if(isnull(material_reinforce))
+	if(isnull(material_reinforcement))
 		return ..()
 	balloon_alert_to_viewers("[reinforcement_secure ? "unsecuring" : "securing"] reinforcements...")
 	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
 		return TRUE
 	reinforcement_secure = !reinforcement_secure
-	// todo: change base_icon_state and re-smooth
+	// todo: change base_icon_state and re-smooth, plz bimmer
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
@@ -147,7 +182,7 @@
 		return ..()
 	if(isnull(material_plating))
 		return ..()
-	if(!isnull(material_reinforce) && !reinforcement_secure)
+	if(!isnull(material_reinforcement) && !reinforcement_secure)
 		balloon_alert(user, "secure the reinforcements first!")
 		return TRUE
 	var/turf/my_loc = get_turf(src)
@@ -163,22 +198,22 @@
 	balloon_alert_to_viewers("finishing...")
 	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
 		return TRUE
-	my_loc.ChangeTurf(/turf/closed/constructed_wall, args_turf_new = list(material_plating = material_plating, material_reinforcement = material_reinforce))
+	my_loc.ChangeTurf(/turf/closed/constructed_wall, args_turf_new = list(material_plating = material_plating, material_reinforcement = material_reinforcement))
 	qdel(src)
 	return TRUE
 
 /obj/structure/girder/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(!Adjacent(user))
 		return ..()
-	if(!isnull(material_reinforce))
+	if(!isnull(material_reinforcement))
 		if(reinforcement_secure)
 			balloon_alert(user, "secured!")
 			return TRUE
 		balloon_alert_to_viewers("cutting...")
 		if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
 			return TRUE
-		user.put_in_hands(new material_reinforce.sheet_type(loc, REINFORCEMENT_COST))
-		material_reinforce = null
+		user.put_in_hands(new material_reinforcement.sheet_type(loc, REINFORCEMENT_COST))
+		material_reinforcement = null
 		reinforcement_secure = FALSE
 		// todo: change base_icon_state and re-smooth
 		update_appearance(UPDATE_OVERLAYS)
@@ -196,6 +231,6 @@
 	balloon_alert_to_viewers("dismantling...")
 	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
 		return TRUE
-	user.put_in_hands(new material_reinforce.sheet_type(loc, 2)) // keep in sync with code/game/objects/items/stacks/sheets/sheet_types.dm:75
+	user.put_in_hands(new /obj/item/stack/sheet/steel(loc, 2)) // keep in sync with code/game/objects/items/stacks/sheets/sheet_types.dm:75
 	qdel(src)
 	return TRUE

@@ -687,7 +687,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table,
-/obj/item/stack/sheet/iron/twenty,
+/obj/item/stack/sheet/steel/twenty,
 /obj/item/stack/sheet/glass{
 	amount = 10
 	},
@@ -1404,7 +1404,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/closet/crate,
-/obj/item/stack/sheet/iron/twenty,
+/obj/item/stack/sheet/steel/twenty,
 /obj/item/stack/sheet/glass{
 	amount = 10
 	},

@@ -1778,7 +1778,7 @@
 /obj/item/stack/sheet/glass/fifty{
 	layer = 4
 	},
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	amount = 20;
 	layer = 3.1
 	},

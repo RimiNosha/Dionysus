@@ -1620,7 +1620,7 @@
 /area/shuttle/sbc_starfury)
 "fl" = (
 /obj/structure/table,
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	pixel_x = 1
 	},
 /obj/item/stack/sheet/glass{
@@ -3714,12 +3714,12 @@
 /area/shuttle/sbc_starfury)
 "lz" = (
 /obj/structure/table,
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	amount = 50;
 	pixel_x = -2;
 	pixel_y = -2
 	},
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	pixel_x = 1
 	},
 /obj/item/stack/sheet/glass{

@@ -153,7 +153,7 @@
 "ao" = (
 /obj/effect/turf_decal/bot_white,
 /obj/structure/table,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = -3;
 	pixel_y = 8
@@ -808,7 +808,7 @@
 "bx" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate,
-/obj/item/stack/sheet/iron/twenty,
+/obj/item/stack/sheet/steel/twenty,
 /obj/item/stack/sheet/glass{
 	amount = 10
 	},
@@ -1145,7 +1145,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/structure/table_frame,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/bridge)
 "ck" = (

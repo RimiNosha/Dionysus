@@ -90,7 +90,7 @@
 	singular_name = "iron ore chunk"
 	points = 1
 	mats_per_unit = list(/datum/material/steel=MINERAL_MATERIAL_AMOUNT)
-	refined_type = /obj/item/stack/sheet/iron
+	refined_type = /obj/item/stack/sheet/steel
 	merge_type = /obj/item/stack/ore/iron
 
 /obj/item/stack/ore/glass

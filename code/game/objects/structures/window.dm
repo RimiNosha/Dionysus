@@ -647,7 +647,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	glass_amount = 2
 
 /obj/structure/window/fulltile/unanchored
@@ -664,7 +664,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	glass_amount = 2
 	melting_point = 25000
 
@@ -683,7 +683,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	glass_amount = 2
 	melting_point = 28000
 
@@ -703,7 +703,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma)
 	state = WINDOW_SCREWED_TO_FRAME
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	glass_amount = 2
 
 /obj/structure/window/reinforced/fulltile/unanchored
@@ -720,7 +720,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	glass_amount = 2
 
 /obj/structure/window/reinforced/fulltile/ice
@@ -749,7 +749,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/shuttle)
 	heat_resistance = 1600
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE
-	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE + SMOOTH_GROUP_WALLS
 	explosion_block = 3
 	glass_type = /obj/item/stack/sheet/titaniumglass
 	glass_amount = 2
@@ -794,7 +794,7 @@ TYPEINFO_DEF(/obj/structure/window/reinforced/plasma/plastitanium)
 	heat_resistance = 1600
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	explosion_block = 3
 	damage_deflection = 21 //The same as reinforced plasma windows.3
 	glass_type = /obj/item/stack/sheet/plastitaniumglass
@@ -830,7 +830,7 @@ TYPEINFO_DEF(/obj/structure/window/paperframe)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_PAPERFRAME
-	canSmoothWith = SMOOTH_GROUP_PAPERFRAME
+	smoothing_groups_with = SMOOTH_GROUP_PAPERFRAME
 	glass_amount = 2
 	glass_type = /obj/item/stack/sheet/paperframes
 	heat_resistance = 233
@@ -918,7 +918,7 @@ TYPEINFO_DEF(/obj/structure/window/paperframe)
 	alpha = 180
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WINDOW_FULLTILE
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	fulltile = TRUE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	max_integrity = 50

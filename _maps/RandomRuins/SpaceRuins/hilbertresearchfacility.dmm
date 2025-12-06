@@ -458,7 +458,7 @@
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "kp" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/floor/mineral/titanium/tiled/purple,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "ks" = (
@@ -1046,7 +1046,7 @@
 /turf/open/floor/mineral/titanium/tiled/purple,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "yw" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "yD" = (

@@ -1890,7 +1890,7 @@
 	pixel_x = -2;
 	pixel_y = 2
 	},
-/obj/item/stack/sheet/iron/fifty{
+/obj/item/stack/sheet/steel/fifty{
 	pixel_x = 4;
 	pixel_y = -4
 	},

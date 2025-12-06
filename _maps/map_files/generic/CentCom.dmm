@@ -97,8 +97,8 @@
 /area/centcom/tdome/observation)
 "au" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/stack/sheet/plasteel{
 	amount = 15
 	},
@@ -1891,8 +1891,8 @@
 "ft" = (
 /obj/structure/closet/crate,
 /obj/item/storage/toolbox/mechanical,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/multitool,
@@ -6472,7 +6472,7 @@
 /area/centcom/central_command_areas/control)
 "sA" = (
 /obj/structure/rack,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/wrench{
 	desc = "A little smidgeon of Freon...";
 	name = "Freon"
@@ -10041,8 +10041,8 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/reinforced,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/stack/sheet/plasteel{
 	amount = 15
 	},

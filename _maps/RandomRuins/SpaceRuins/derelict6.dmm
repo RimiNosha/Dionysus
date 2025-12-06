@@ -15,7 +15,7 @@
 /turf/template_noop,
 /area/template_noop)
 "ae" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/structure/lattice,
 /turf/template_noop,
 /area/template_noop)
@@ -78,7 +78,7 @@
 /turf/open/floor/iron/airless,
 /area/ruin/unpowered)
 "aw" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/floor/iron/airless,
 /area/ruin/unpowered)
 "ax" = (
@@ -106,7 +106,7 @@
 /turf/open/floor/iron/airless,
 /area/ruin/unpowered)
 "aD" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -233,7 +233,7 @@
 /area/ruin/unpowered)
 "aY" = (
 /obj/structure/lattice,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/template_noop)
 "aZ" = (
@@ -268,7 +268,7 @@
 /turf/open/floor/iron/cafeteria/airless,
 /area/ruin/unpowered)
 "bi" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/item/clothing/head/chefhat,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
@@ -298,14 +298,14 @@
 /turf/template_noop,
 /area/template_noop)
 "bp" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/structure/girderold,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
 "br" = (
 /obj/structure/girderold,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
@@ -421,7 +421,7 @@
 /turf/template_noop,
 /area/ruin/unpowered)
 "OB" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)

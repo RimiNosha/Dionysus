@@ -14,12 +14,12 @@
 	max_integrity = 100
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
-	canSmoothWith = SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_WALLS
 	can_be_unanchored = FALSE
 	can_atmos_pass = CANPASS_DENSITY
 	rad_insulation = RAD_MEDIUM_INSULATION
 	material_flags = MATERIAL_EFFECTS
-	var/mineral = /obj/item/stack/sheet/iron
+	var/mineral = /obj/item/stack/sheet/steel
 	var/mineral_amount = 2
 	var/tram_wall_type = /obj/structure/tramwall
 	var/girder_type = /obj/structure/girderold/tram

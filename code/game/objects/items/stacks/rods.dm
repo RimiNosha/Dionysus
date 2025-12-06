@@ -1,5 +1,5 @@
 GLOBAL_LIST_INIT(rod_recipes, list ( \
-	new/datum/stack_recipe("grille", /obj/structure/grille, 2, time = 10, one_per_turf = TRUE, on_floor = FALSE), \
+	new/datum/stack_recipe("grille", /obj/structure/grillen, 2, time = 10, one_per_turf = TRUE, on_floor = FALSE), \
 	new/datum/stack_recipe("table frame", /obj/structure/table_frame, 2, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("scooter frame", /obj/item/scooter_frame, 10, time = 25, one_per_turf = FALSE), \
 	new/datum/stack_recipe("linen bin", /obj/structure/bedsheetbin/empty, 2, time = 5, one_per_turf = FALSE), \
@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 			return
 
 		if(W.use_tool(src, user, 0, volume=40))
-			var/obj/item/stack/sheet/iron/new_item = new(usr.loc)
+			var/obj/item/stack/sheet/steel/new_item = new(usr.loc)
 			user.visible_message(span_notice("[user.name] shaped [src] into iron sheets with [W]."), \
 				span_notice("You shape [src] into iron sheets with [W]."), \
 				span_hear("You hear welding."))

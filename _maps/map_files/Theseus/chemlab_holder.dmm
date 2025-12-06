@@ -360,8 +360,8 @@
 /area/space)
 "aR" = (
 /obj/structure/table,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/item/construction/plumbing,
 /obj/item/construction/plumbing,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{

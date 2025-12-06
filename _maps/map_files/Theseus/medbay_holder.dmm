@@ -440,8 +440,8 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "bD" = (
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/structure/table,
 /obj/item/stack/sheet/plasteel{
 	amount = 10
@@ -2350,7 +2350,7 @@
 /area/station/maintenance/port/aft)
 "hU" = (
 /obj/structure/closet,
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	amount = 34
 	},
 /obj/item/extinguisher/mini,
@@ -4091,7 +4091,7 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/stack/sheet/iron/twenty,
+/obj/item/stack/sheet/steel/twenty,
 /turf/open/floor/iron,
 /area/station/maintenance/port/aft)
 "nz" = (

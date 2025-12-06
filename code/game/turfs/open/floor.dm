@@ -12,7 +12,7 @@
 	flags_1 = NO_SCREENTIPS_1
 	turf_flags = CAN_BE_DIRTY_1 | IS_SOLID
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
-	canSmoothWith = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
+	smoothing_groups_with = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_OPEN_FLOOR
 
 	heat_capacity = 10000
 	tiled_dirt = TRUE
@@ -101,7 +101,7 @@
 					else
 						ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
 					if(prob(33))
-						new /obj/item/stack/sheet/iron(src)
+						new /obj/item/stack/sheet/steel(src)
 				if(2)
 					ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
 				if(3)
@@ -111,7 +111,7 @@
 						break_tile()
 					hotspot_expose(1000,CELL_VOLUME)
 					if(prob(33))
-						new /obj/item/stack/sheet/iron(src)
+						new /obj/item/stack/sheet/steel(src)
 		if(EXPLODE_LIGHT)
 			if (prob(50))
 				src.break_tile()

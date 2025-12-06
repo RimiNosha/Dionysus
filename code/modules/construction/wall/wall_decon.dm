@@ -1,4 +1,4 @@
-/turf/closed/constructed_wall/welder_act(mob/living/user, obj/item/tool)
+/turf/closed/constructed_wall/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(!Adjacent(tool))
 		return ..()
 	switch(deconstruction_stage)
@@ -86,7 +86,7 @@
 /turf/closed/constructed_wall/proc/deconstruct_to_girder()
 	var/obj/structure/girder/girder = new(src)
 	girder.material_plating = material_plating
-	girder.material_reinforce = material_reinforcement
+	girder.material_reinforcement = material_reinforcement
 	if(material_reinforcement)
 		girder.reinforcement_secure = TRUE
 	girder.anchored = TRUE

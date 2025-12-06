@@ -15,7 +15,7 @@ TYPEINFO_DEF(/obj/structure/chair)
 	layer = OBJ_LAYER
 	mouse_drop_pointer = TRUE
 
-	var/buildstacktype = /obj/item/stack/sheet/iron
+	var/buildstacktype = /obj/item/stack/sheet/steel
 	var/buildstackamount = 1
 	var/item_chair = /obj/item/chair // if null it can't be picked up
 

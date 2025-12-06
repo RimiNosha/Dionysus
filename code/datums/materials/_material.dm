@@ -67,6 +67,10 @@ Simple datum which is instanced once per type and is used for every object of sa
 	var/false_wall_type
 	/// If true, walls plated with this material that have a reinforcement, will be hard to deconstruct
 	var/hard_wall_decon = FALSE
+	/// Material heat resistance.
+	var/heat_resistance
+	/// The integrity of walls made with this material.
+	var/wall_integrity
 
 /** Handles initializing the material.
  *

@@ -29,7 +29,7 @@ DEFINE_BITFIELD(smoothing_flags, list(
 /**SMOOTHING GROUPS
  * Groups of things to smooth with.
  * * Contained in the `list/smoothing_groups` variable.
- * * Matched with the `list/canSmoothWith` variable to check whether smoothing is possible or not.
+ * * Matched with the `list/smoothing_groups_with` variable to check whether smoothing is possible or not.
  */
 
 #define S_TURF(num) (#num + ",")
@@ -148,19 +148,19 @@ DEFINE_BITFIELD(smoothing_flags, list(
 
 #define SMOOTH_GROUP_GAS_TANK S_OBJ(71)
 
-/// Performs the work to set smoothing_groups and canSmoothWith.
+/// Performs the work to set smoothing_groups and smoothing_groups_with.
 /// An inlined function used in both turf/Initialize and atom/Initialize.
 #define SETUP_SMOOTHING(...) \
 	if (istext(smoothing_groups)) { \
 		SET_SMOOTHING_GROUPS(smoothing_groups); \
 	} \
 \
-	if (istext(canSmoothWith)) { \
+	if (istext(smoothing_groups_with)) { \
 		/* S_OBJ is always negative, and we are guaranteed to be sorted. */ \
-		if (canSmoothWith[1] == "-") { \
+		if (smoothing_groups_with[1] == "-") { \
 			smoothing_flags |= SMOOTH_OBJ; \
 		} \
-		SET_SMOOTHING_GROUPS(canSmoothWith); \
+		SET_SMOOTHING_GROUPS(smoothing_groups_with); \
 	}
 
 /// Given a smoothing groups variable, will set out to the actual numbers inside it

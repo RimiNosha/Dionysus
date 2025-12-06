@@ -21,7 +21,7 @@ TYPEINFO_DEF(/obj/structure/door_assembly)
 	var/heat_proof_finished = 0 //whether to heat-proof the finished airlock
 	var/previous_assembly = /obj/structure/door_assembly
 	var/noglass = FALSE //airlocks with no glass version, also cannot be modified with sheets
-	var/material_type = /obj/item/stack/sheet/iron
+	var/material_type = /obj/item/stack/sheet/steel
 	var/material_amt = 4
 
 	var/overlays_file
@@ -413,4 +413,3 @@ TYPEINFO_DEF(/obj/structure/door_assembly)
 
 	if(.)
 		user.visible_message(span_notice("[user] shimmies their way through [src]."))
-

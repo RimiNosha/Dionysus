@@ -260,7 +260,7 @@
 	id = "iron"
 	build_type = AUTOLATHE
 	materials = list(/datum/material/steel = MINERAL_MATERIAL_AMOUNT)
-	build_path = /obj/item/stack/sheet/iron
+	build_path = /obj/item/stack/sheet/steel
 	category = list(DCAT_MATERIAL)
 	maxstack = 50
 
@@ -1041,4 +1041,3 @@
 	build_path = /obj/item/bikehorn/rubberducky/plasticducky
 	category = list(DCAT_MISC)
 	mapload_design_flags = DESIGN_FAB_CIV
-

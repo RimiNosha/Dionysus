@@ -954,7 +954,7 @@
 /area/shuttle/escape)
 "dd" = (
 /obj/structure/table,
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},

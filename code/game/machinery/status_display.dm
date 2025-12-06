@@ -74,7 +74,7 @@ TYPEINFO_DEF(/obj/item/wallframe/status_display)
 	if(flags_1 & NODECONSTRUCT_1)
 		return
 	if(!disassembled)
-		new /obj/item/stack/sheet/iron(drop_location(), 2)
+		new /obj/item/stack/sheet/steel(drop_location(), 2)
 		new /obj/item/shard(drop_location())
 		new /obj/item/shard(drop_location())
 	else

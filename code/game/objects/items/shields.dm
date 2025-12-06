@@ -116,7 +116,7 @@ TYPEINFO_DEF(/obj/item/shield/riot/roman/fake)
 
 /obj/item/shield/riot/roman/shatter(mob/living/carbon/human/owner)
 	playsound(owner, 'sound/effects/grillehit.ogg', 100)
-	new /obj/item/stack/sheet/iron(get_turf(src))
+	new /obj/item/stack/sheet/steel(get_turf(src))
 
 TYPEINFO_DEF(/obj/item/shield/riot/buckler)
 	default_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 10)

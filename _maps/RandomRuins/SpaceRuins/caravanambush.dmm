@@ -275,7 +275,7 @@
 /turf/template_noop,
 /area/template_noop)
 "br" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/template_noop)
 "bs" = (
@@ -327,7 +327,7 @@
 /turf/open/misc/asteroid/airless,
 /area/ruin/unpowered)
 "ex" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/misc/asteroid/airless,
 /area/ruin/unpowered)
 "eG" = (

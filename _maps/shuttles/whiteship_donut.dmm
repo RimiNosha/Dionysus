@@ -26,7 +26,7 @@
 "ae" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/directional/west,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/structure/tank_dispenser,
 /turf/open/floor/iron/airless,
 /area/shuttle/abandoned)
@@ -123,7 +123,7 @@
 /area/shuttle/abandoned)
 "ax" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/open/floor/iron/airless,
 /area/shuttle/abandoned)
 "ay" = (
@@ -298,7 +298,7 @@
 /area/shuttle/abandoned)
 "aY" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
@@ -504,7 +504,7 @@
 /area/shuttle/abandoned)
 "tT" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/stack/sheet/iron{
+/obj/item/stack/sheet/steel{
 	amount = 50
 	},
 /turf/open/floor/iron/airless,

@@ -147,6 +147,13 @@ export const DreamDaemon = async (dmbFile, ...args) => {
   const baseDir = path.dirname(dmPath);
   const ddExeName =
     process.platform === "win32" ? "dreamdaemon.exe" : "DreamDaemon";
+  if (process.platform === "linux") {
+    Juke.logger.info("Inserting LD_LIBRARY_PATH and BYOND_SYSTEM.");
+    const ldLibrary = byondPathLinux() + "/bin";
+    const byondSystem = byondPathLinux();
+    process.env.LD_LIBRARY_PATH = ldLibrary;
+    process.env.BYOND_SYSTEM = byondSystem;
+  }
   const ddExePath = baseDir === "." ? ddExeName : path.join(baseDir, ddExeName);
   return Juke.exec(ddExePath, [dmbFile, ...args]);
 };

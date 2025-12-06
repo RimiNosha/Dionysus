@@ -282,7 +282,7 @@ TYPEINFO_DEF(/obj/item/wallframe/camera)
 
 /obj/structure/camera_assembly/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
-		new /obj/item/stack/sheet/iron(loc)
+		new /obj/item/stack/sheet/steel(loc)
 	qdel(src)
 
 

@@ -137,7 +137,7 @@
 /area/ruin/space/has_grav)
 "oP" = (
 /obj/structure/lattice,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/template_noop)
 "oX" = (
@@ -213,7 +213,7 @@
 "wz" = (
 /obj/structure/lattice,
 /obj/item/stack/tile/iron,
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/template_noop)
 "wJ" = (
@@ -309,7 +309,7 @@
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "Fv" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/template_noop)
 "Gb" = (

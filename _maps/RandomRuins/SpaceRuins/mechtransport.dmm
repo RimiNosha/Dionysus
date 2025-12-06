@@ -158,7 +158,7 @@
 /turf/open/floor/mineral/titanium/yellow/airless,
 /area/ruin/space/has_grav/powered/mechtransport)
 "P" = (
-/obj/item/stack/sheet/iron,
+/obj/item/stack/sheet/steel,
 /turf/template_noop,
 /area/ruin/space/has_grav/powered/mechtransport)
 "Q" = (

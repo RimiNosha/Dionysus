@@ -1020,7 +1020,7 @@
 	name = "50 Iron Sheets"
 	desc = "Any construction project begins with a good stack of fifty iron sheets!"
 	cost = CARGO_CRATE_VALUE + (/datum/material/steel::value_per_unit * MINERAL_MATERIAL_AMOUNT * 50)
-	contains = list(/obj/item/stack/sheet/iron/fifty)
+	contains = list(/obj/item/stack/sheet/steel/fifty)
 	crate_name = "iron sheets crate"
 
 /datum/supply_pack/materials/plasteel20

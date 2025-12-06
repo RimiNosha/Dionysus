@@ -57,7 +57,7 @@
 	name = "Material spawner"
 	icon_state = "metal"
 	loot = list(
-		/obj/item/stack/sheet/iron/fifty = 5,
+		/obj/item/stack/sheet/steel/fifty = 5,
 		/obj/item/stack/sheet/glass/fifty = 5,
 		/obj/item/stack/rods/fifty = 3,
 		/obj/item/stack/sheet/rglass{amount = 30} = 2,

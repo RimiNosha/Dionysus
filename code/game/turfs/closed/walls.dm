@@ -28,7 +28,7 @@ GLOBAL_REAL_VAR(wall_overlays_cache) = list()
 
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	lighting_uses_jen = TRUE
 
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
@@ -286,7 +286,7 @@ GLOBAL_REAL_VAR(wall_overlays_cache) = list()
 
 /turf/closed/wall/proc/devastate_wall()
 	drop_materials_used(TRUE)
-	new /obj/item/stack/sheet/iron(src)
+	new /obj/item/stack/sheet/steel(src)
 
 /turf/closed/wall/proc/drop_materials_used(drop_reinf = FALSE)
 	var/datum/material/plating_mat_ref = GET_MATERIAL_REF(plating_material)

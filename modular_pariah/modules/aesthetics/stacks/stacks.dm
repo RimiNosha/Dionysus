@@ -1,4 +1,4 @@
-/obj/item/stack/sheet/iron
+/obj/item/stack/sheet/steel
 	icon = 'modular_pariah/modules/aesthetics/stacks/stack_objects.dmi'
 
 /obj/item/stack/sheet/plasteel

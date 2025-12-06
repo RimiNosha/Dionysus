@@ -328,7 +328,7 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/stack/sheet/iron/five,
+/obj/item/stack/sheet/steel/five,
 /obj/item/stack/cable_coil/five,
 /turf/open/floor/iron,
 /area/space)

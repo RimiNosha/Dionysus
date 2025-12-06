@@ -108,7 +108,7 @@
 	bar_material = SAND
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_SANDBAGS
-	canSmoothWith = SMOOTH_GROUP_SANDBAGS + SMOOTH_GROUP_SECURITY_BARRICADE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SANDBAGS + SMOOTH_GROUP_SECURITY_BARRICADE + SMOOTH_GROUP_WALLS
 
 /obj/structure/barricade/sandbags/Initialize(mapload)
 	. = ..()

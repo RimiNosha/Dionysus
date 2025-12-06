@@ -18,7 +18,7 @@ TYPEINFO_DEF(/obj/structure/low_wall)
 	max_integrity = 150
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_LOW_WALL
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WALLS
 
 	/// Material used in construction
 	var/plating_material = /datum/material/steel
@@ -211,7 +211,7 @@ TYPEINFO_DEF(/obj/structure/low_wall)
 
 /obj/structure/low_wall/titanium
 	plating_material = /datum/material/titanium
-	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_LOW_WALL + SMOOTH_GROUP_WALLS
 
 /obj/structure/low_wall/plastitanium
 	plating_material = /datum/material/alloy/plastitanium

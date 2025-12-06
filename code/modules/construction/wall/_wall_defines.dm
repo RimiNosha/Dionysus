@@ -9,3 +9,5 @@
 
 #define WALL_DECON_STEP_TIME 2 SECONDS
 #define WALL_DECON_STEP_REINF_TIME 5 SECONDS
+
+#define COMSIG_WALL_MATERIALS_UPDATED "wall_materials_updated"

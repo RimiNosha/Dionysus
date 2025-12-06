@@ -5,9 +5,11 @@
 	color = "#878687"
 	greyscale_colors = "#878687"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	sheet_type = /obj/item/stack/sheet/iron
+	sheet_type = /obj/item/stack/sheet/steel
 	value_per_unit = IRON_VALUE_PER_UNIT
 	wall_color = "#57575c"
+	wall_integrity = 250
+	heat_resistance = 800
 
 /datum/material/steel/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)

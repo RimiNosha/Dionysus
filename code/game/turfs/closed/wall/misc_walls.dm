@@ -4,7 +4,7 @@
 	icon = 'icons/turf/walls/cult_wall.dmi'
 	turf_flags = IS_SOLID
 	smoothing_flags = SMOOTH_BITMASK
-	canSmoothWith = null
+	smoothing_groups_with = null
 	plating_material = /datum/material/runedmetal
 	color = "#3C3434" //To display in mapping softwares
 
@@ -37,7 +37,7 @@
 	name = "strange wall"
 	turf_flags = IS_SOLID
 	smoothing_flags = NONE
-	canSmoothWith = null
+	smoothing_groups_with = null
 	smoothing_groups = null
 	rcd_memory = null
 
@@ -59,7 +59,7 @@
 	desc = "A wall covered in a thick sheet of ice."
 	turf_flags = IS_SOLID
 	smoothing_flags = SMOOTH_BITMASK
-	canSmoothWith = null
+	smoothing_groups_with = null
 	rcd_memory = null
 	hardness = 35
 	slicing_duration = 150 //welding through the ice+metal

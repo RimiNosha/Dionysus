@@ -16,7 +16,7 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 	plane = FLOOR_PLANE
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_INDUSTRIAL_LIFT
-	canSmoothWith = SMOOTH_GROUP_INDUSTRIAL_LIFT
+	smoothing_groups_with = SMOOTH_GROUP_INDUSTRIAL_LIFT
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER //no TILE_BOUND since we're potentially multitile
 	// If we don't do this, we'll build our overlays early, and fuck up how we're rendered
@@ -668,7 +668,7 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 	base_icon_state = null
 	smoothing_flags = NONE
 	smoothing_groups = null
-	canSmoothWith = null
+	smoothing_groups_with = null
 	//kind of a centerpiece of the station, so pretty tough to destroy
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 

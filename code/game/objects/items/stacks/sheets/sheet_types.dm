@@ -127,7 +127,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("shower frame", /obj/structure/showerframe, 2, time= 2 SECONDS)
 ))
 
-/obj/item/stack/sheet/iron
+/obj/item/stack/sheet/steel
 	name = "iron sheets"
 	desc = "Sheets made out of iron."
 	singular_name = "iron sheet"
@@ -137,7 +137,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	throwforce = 10
 	flags_1 = CONDUCT_1
 	resistance_flags = FIRE_PROOF
-	merge_type = /obj/item/stack/sheet/iron
+	merge_type = /obj/item/stack/sheet/steel
 	grind_results = list(/datum/reagent/iron = 20)
 	point_value = 2
 	tableVariant = /obj/structure/table
@@ -147,31 +147,31 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	source = /datum/robot_energy_storage/iron
 	tram_wall_type = /obj/structure/tramwall
 
-/obj/item/stack/sheet/iron/narsie_act()
+/obj/item/stack/sheet/steel/narsie_act()
 	new /obj/item/stack/sheet/runed_metal(loc, amount)
 	qdel(src)
 
-/obj/item/stack/sheet/iron/fifty
+/obj/item/stack/sheet/steel/fifty
 	amount = 50
 
-/obj/item/stack/sheet/iron/twenty
+/obj/item/stack/sheet/steel/twenty
 	amount = 20
 
-/obj/item/stack/sheet/iron/ten
+/obj/item/stack/sheet/steel/ten
 	amount = 10
 
-/obj/item/stack/sheet/iron/five
+/obj/item/stack/sheet/steel/five
 	amount = 5
 
-/obj/item/stack/sheet/iron/get_main_recipes()
+/obj/item/stack/sheet/steel/get_main_recipes()
 	. = ..()
 	. += GLOB.metal_recipes
 
-/obj/item/stack/sheet/iron/suicide_act(mob/living/carbon/user)
+/obj/item/stack/sheet/steel/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins whacking [user.p_them()]self over the head with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return BRUTELOSS
 
-/obj/item/stack/sheet/iron/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/stack/sheet/steel/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
 	if(istype(target, /turf/open))
 		var/turf/open/build_on = target
 		if(!user.Adjacent(build_on))

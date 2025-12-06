@@ -21,7 +21,7 @@ TYPEINFO_DEF(/obj/structure/grille)
 	integrity_failure = 0.4
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_GRILLE
-	canSmoothWith = SMOOTH_GROUP_GRILLE
+	smoothing_groups_with = SMOOTH_GROUP_GRILLE
 	var/icon/broken_icon = 'icons/obj/smooth_structures/grille_broken.dmi'
 	var/rods_type = /obj/item/stack/rods
 	var/rods_amount = 2

@@ -80,7 +80,7 @@
 		to_chat(user, span_notice("You start slicing apart the girder..."))
 		if(W.use_tool(src, user, 40, volume=100))
 			to_chat(user, span_notice("You slice apart the girder."))
-			var/obj/item/stack/sheet/iron/M = new (loc, 2)
+			var/obj/item/stack/sheet/steel/M = new (loc, 2)
 			M.add_fingerprint(user)
 			qdel(src)
 
@@ -210,7 +210,7 @@
 			if(anchored)
 				return
 			to_chat(user, span_notice("You disassemble the girder."))
-			var/obj/item/stack/sheet/iron/M = new (loc, 2)
+			var/obj/item/stack/sheet/steel/M = new (loc, 2)
 			M.add_fingerprint(user)
 			qdel(src)
 		return TRUE
@@ -265,7 +265,7 @@
 
 /obj/structure/girderold/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
-		var/remains = pick(/obj/item/stack/rods, /obj/item/stack/sheet/iron)
+		var/remains = pick(/obj/item/stack/rods, /obj/item/stack/sheet/steel)
 		new remains(loc)
 	qdel(src)
 

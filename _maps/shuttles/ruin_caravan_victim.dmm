@@ -216,7 +216,7 @@
 /area/shuttle/caravan/freighter1)
 "lt" = (
 /obj/structure/closet/crate,
-/obj/item/stack/sheet/iron/twenty,
+/obj/item/stack/sheet/steel/twenty,
 /obj/item/stack/sheet/glass{
 	amount = 10
 	},
@@ -518,7 +518,7 @@
 /turf/open/floor/plating/airless,
 /area/shuttle/caravan/freighter1)
 "Ax" = (
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/iron/airless,
 /area/shuttle/caravan/freighter1)
@@ -906,7 +906,7 @@
 /obj/structure/closet/crate{
 	icon_state = "crateopen"
 	},
-/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/steel/fifty,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/caravan/freighter1)
 "Ut" = (

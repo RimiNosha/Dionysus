@@ -6,7 +6,11 @@
 	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
-	canSmoothWith = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_GRILLE
+	uses_integrity = TRUE
+	max_integrity = /datum/material/steel::wall_integrity
+	var/last_damage = 0
+	var/heat_resistance = /datum/material/steel::heat_resistance
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
 	var/datum/material/material_reinforcement //! (if applicable) the material that the reinforcement rods are made of.
 	var/datum/material/material_trim_low //! (if applicable) the material that the bottom trim is made of.
@@ -22,12 +26,75 @@
 	src.material_reinforcement = material_reinforcement
 	src.material_trim_low = material_trim_low
 	src.material_trim_high = material_trim_high
+	update_material_resistances()
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
 	return ..()
 
+/turf/closed/constructed_wall/proc/update_material_resistances()
+	var/new_heat_resistance = material_plating.heat_resistance
+	var/new_max_integrity = material_plating.wall_integrity
+	if(!isnull(material_reinforcement))
+		new_heat_resistance += material_reinforcement.heat_resistance * 0.25
+		new_max_integrity += material_reinforcement.wall_integrity * 0.5
+	heat_resistance = new_heat_resistance
+	var/integrity_pct = atom_integrity / max_integrity
+	max_integrity = new_max_integrity
+	update_integrity(max_integrity * integrity_pct)
+
+/turf/closed/constructed_wall/atmos_expose(datum/gas_mixture/air, exposed_temperature)
+	if(exposed_temperature <= heat_resistance)
+		return
+	var/ratio_over = exposed_temperature / heat_resistance
+	var/damage_ratio = (ratio_over - 1) ** 2
+	take_damage(2 ** damage_ratio, BURN)
+	if(prob(ratio_over * 25))
+		playsound(src, SFX_ROCK_TAP, 25)
+	if(prob(ratio_over * 10))
+		visible_message(span_warning("\The [src] seems to warp slightly!"))
+
+/turf/closed/constructed_wall/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
+	last_damage = damage_amount
+	return ..()
+
+/turf/closed/constructed_wall/welder_act(mob/living/user, obj/item/tool)
+	if(!Adjacent(user))
+		return ..()
+	if(atom_integrity >= max_integrity)
+		return TRUE
+	var/repair_amount = max(10, max_integrity * 0.1) // always repair at least 10 damage, otherwise 10% of the wall's max health
+	balloon_alert_to_viewers("repairing...")
+	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
+		return TRUE
+	repair_damage(repair_amount)
+
+/turf/closed/constructed_wall/atom_destruction(damage_flag)
+	. = ..()
+	if(last_damage < /obj/structure/girder::max_integrity)
+		deconstruct_to_girder()
+	else ScrapeAway()
+
+/turf/closed/constructed_wall/can_smooth(atom/other)
+	if(!istype(other, /obj/structure/girder))
+		return ..()
+	var/obj/structure/girder/girder = other
+	return !isnull(girder.material_plating)
+
 /turf/closed/constructed_wall/examine(mob/user)
 	. = ..()
+	if(atom_integrity < max_integrity)
+		. += span_notice("The wall can be repaired with a <i>welder</i>.")
+		switch((atom_integrity / max_integrity) * 100)
+			if(00 to 01)
+				. += span_warning("You're not even sure if this qualifies as a wall right now.")
+			if(02 to 25)
+				. += span_warning("The wall is almost destroyed.")
+			if(25 to 50)
+				. += span_warning("The wall has seen better days.")
+			if(50 to 75)
+				. += span_warning("Looks fine to me.")
+			if(75 to 100)
+				. += span_warning("One could argue that the damage is soul.")
 	if(!isnull(material_trim_low) || !isnull(material_trim_high))
 		if(!isnull(material_trim_low))
 			. += span_notice("You could remove the bottom trim with a <i>crowbar</i>.")
