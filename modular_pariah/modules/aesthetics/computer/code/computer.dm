@@ -9,7 +9,7 @@
 	. = ..()
 	if(clicksound && world.time > next_clicksound && isliving(user))
 		next_clicksound = world.time + CLICKSOUND_TIME
-		playsound(src, get_sfx_pariah(clicksound), clickvol)
+		playsound(src, get_sfx(clicksound), clickvol)
 
 #undef CLICKSOUND_TIME
 

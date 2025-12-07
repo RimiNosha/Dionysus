@@ -117,8 +117,7 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 /obj/machinery/light/update_icon_state()
 	switch(status) // set icon_states
 		if(LIGHT_OK)
-			//var/area/local_area = get_area(src) //PARIAH EDIT REMOVAL
-			if(emergency_mode || firealarm) //PARIAH EDIT CHANGE
+			if(emergency_mode || firealarm)
 				icon_state = "[base_state]_emergency"
 			else
 				icon_state = "[base_state]"
@@ -138,7 +137,7 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 	if(!overlay_icon)
 		return
 
-	if(emergency_mode || firealarm) //PARIAH EDIT END
+	if(emergency_mode || firealarm)
 		. += mutable_appearance(overlay_icon, "[base_state]_emergency")
 		return
 	. += mutable_appearance(overlay_icon, base_state)
@@ -162,13 +161,11 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 			pixel_x = -10
 			pixel_y = 0
 
-//PARIAH EDIT ADDITION
 #define LIGHT_ON_DELAY_UPPER 3 SECONDS
 #define LIGHT_ON_DELAY_LOWER 1 SECONDS
-//PARIAH EDIT END
 
 // update the icon_state and luminosity of the light depending on its state
-/obj/machinery/light/proc/update(trigger = TRUE, instant = FALSE, play_sound = TRUE) //PARIAH EDIT CHANGE
+/obj/machinery/light/proc/update(trigger = TRUE, instant = FALSE, play_sound = TRUE)
 	switch(status)
 		if(LIGHT_BROKEN,LIGHT_BURNED,LIGHT_EMPTY)
 			on = FALSE
@@ -208,10 +205,8 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 
 	broken_sparks(start_only=TRUE)
 
-//PARIAH EDIT
 #undef LIGHT_ON_DELAY_UPPER
 #undef LIGHT_ON_DELAY_LOWER
-//PARIAH EDIT END
 
 /obj/machinery/light/update_atom_colour()
 	..()
@@ -298,14 +293,12 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 		replacer.ReplaceLight(src, user)
 		return TRUE
 
-	//PARIAH EDIT ADDITION
 	if(istype(tool, /obj/item/multitool) && constant_flickering)
 		to_chat(user, span_notice("You start repairing the ballast of [src] with [tool]."))
 		if(do_after(user, src, 2 SECONDS, DO_PUBLIC, display = tool))
 			stop_flickering()
 			to_chat(user, span_notice("You repair the ballast of [src]!"))
 		return TRUE
-	//PARIAH EDIT END
 
 	// attempt to insert light
 	if(istype(tool, /obj/item/light))
@@ -439,16 +432,14 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 // if a light is turned off, it won't activate emergency power
 /obj/machinery/light/proc/turned_off()
 	var/area/local_area = get_area(src)
-	return !local_area.lightswitch && local_area.power_light || flickering || constant_flickering //PARIAH EDIT CHANGE
+	return !local_area.lightswitch && local_area.power_light || flickering || constant_flickering
 
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/proc/has_power()
 	var/area/local_area = get_area(src)
-	//PARIAH EDIT ADDITION
 	if(isnull(local_area))
 		return FALSE
-	//PARIAH EDIT END
 	return local_area.lightswitch && local_area.power_light
 
 // returns whether this light has emergency power

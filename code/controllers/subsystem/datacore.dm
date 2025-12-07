@@ -223,10 +223,8 @@ SUBSYSTEM_DEF(datacore)
 	var/datum/job/job = H.mind.assigned_role
 	var/assignment = H.mind.assigned_role.title
 
-	//PARIAH EDIT ADDITION
 	// The alt job title, if user picked one, or the default
 	var/chosen_assignment = C?.prefs.alt_job_titles[assignment] || assignment
-	//PARIAH EDIT END
 
 	var/id = next_record_id()
 	if(!C)
@@ -240,7 +238,7 @@ SUBSYSTEM_DEF(datacore)
 	G.fields[DATACORE_ID] = id
 
 	G.fields[DATACORE_NAME] = H.real_name
-	G.fields[DATACORE_RANK] = chosen_assignment //PARIAH EDIT
+	G.fields[DATACORE_RANK] = chosen_assignment
 	G.fields[DATACORE_TEMPLATE_RANK] = assignment
 	G.fields[DATACORE_INITIAL_RANK] = assignment
 	G.fields[DATACORE_AGE] = H.age
@@ -299,7 +297,7 @@ SUBSYSTEM_DEF(datacore)
 	L.fields[DATACORE_ID] = id
 	L.fields[DATACORE_NAME] = H.real_name
 	// L.fields[DATACORE_RANK] = assignment //ORIGINAL
-	L.fields[DATACORE_RANK] = chosen_assignment  //PARIAH EDIT
+	L.fields[DATACORE_RANK] = chosen_assignment
 	L.fields[DATACORE_TEMPLATE_RANK] = assignment
 	G.fields[DATACORE_INITIAL_RANK] = assignment
 	L.fields[DATACORE_AGE] = H.age

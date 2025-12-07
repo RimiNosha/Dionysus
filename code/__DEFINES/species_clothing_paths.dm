@@ -8,13 +8,12 @@
 
 //DIGITIGRADE PATHS
 ///The dmi containing digitigrade uniforms
-#define DIGITIGRADE_UNIFORM_FILE 'modular_pariah/master_files/icons/mob/clothing/uniform_digi.dmi' //PARIAH EDIT
+#define DIGITIGRADE_UNIFORM_FILE 'modular_pariah/master_files/icons/mob/clothing/uniform_digi.dmi'
 ///The dmi containing digitigrade shoes
-#define DIGITIGRADE_SHOES_FILE 'modular_pariah/master_files/icons/mob/clothing/feet_digi.dmi' //PARIAH EDIT
+#define DIGITIGRADE_SHOES_FILE 'modular_pariah/master_files/icons/mob/clothing/feet_digi.dmi'
 ///The dmi containing digitigrade oversuits
-#define DIGITIGRADE_SUIT_FILE 'modular_pariah/master_files/icons/mob/clothing/suit_digi.dmi' //PARIAH EDIT
+#define DIGITIGRADE_SUIT_FILE 'modular_pariah/master_files/icons/mob/clothing/suit_digi.dmi'
 
-//PARIAH EDIT ADDITION
 ///The dmi containing snouted variation masks
 #define SNOUTED_MASK_FILE 'modular_pariah/master_files/icons/mob/clothing/mask_muzzled.dmi'
 
@@ -44,7 +43,6 @@
 #define VOX_UNIFORM_FILE 'icons/mob/clothing/species/vox/uniform.dmi'
 
 #define VOX_GAGS_FILE 'icons/mob/clothing/species/vox/color_gags_vox.dmi'
-//PARIAH EDIT END
 
 //TESHARI PATHS
 ///The dmi containing Teshari backpack sprites

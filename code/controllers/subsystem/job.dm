@@ -298,14 +298,6 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ skipping leadership role, Player: [player], Job: [job]")
 			continue
 
-		/*
-		//PARIAH EDIT ADDITION
-		if(job.departments_bitflags & DEPARTMENT_BITFLAG_CENTRAL_COMMAND) //If you want a CC position, select it!
-			JobDebug("GRJ skipping Central Command role, Player: [player], Job: [job]")
-			continue
-		//PARIAH EDIT END
-		*/
-
 		// This check handles its own output to JobDebug.
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
 			continue
@@ -629,7 +621,7 @@ SUBSYSTEM_DEF(job)
 		wageslave.mind.set_note(NOTES_BANK_ACCOUNT, list("Account ID: [wageslave.account_id]<br>Account PIN: [bank.account_pin]"))
 		to_chat(player_client, span_obviousnotice("Your bank account pin is: <b>[bank.account_pin]</b>"))
 
-		setup_alt_job_items(wageslave, job, player_client) //PARIAH EDIT ADDITION
+		setup_alt_job_items(wageslave, job, player_client)
 
 	job.after_spawn(equipping, player_client)
 
