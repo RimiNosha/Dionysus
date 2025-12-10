@@ -16,6 +16,8 @@ TYPEINFO_DEF(/obj/machinery/button)
 	var/silicon_access_disabled = FALSE
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.02
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
+	icon = 'modular_pariah/modules/aesthetics/buttons/icons/buttons.dmi'
+	var/light_mask = "button-light-mask"
 
 /obj/machinery/button/indestructible
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -55,6 +57,8 @@ TYPEINFO_DEF(/obj/machinery/button)
 /obj/machinery/button/update_overlays()
 	. = ..()
 	if(!panel_open)
+		if(light_mask && !(machine_stat & (NOPOWER|BROKEN)))
+			. += emissive_appearance(icon, light_mask)
 		return
 	if(device)
 		. += "button-device"
