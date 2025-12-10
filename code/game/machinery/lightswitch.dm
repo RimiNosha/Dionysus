@@ -1,6 +1,6 @@
 /obj/item/wallframe/light_switch
 	name = "light switch frame"
-	icon = 'modular_pariah/modules/aesthetics/lightswitch/icons/lightswitch.dmi'
+	icon = 'icons/obj/lightswitch.dmi'
 	icon_state = "lightswitch_frame"
 	result_path = /obj/machinery/light_switch
 	pixel_shift = 26
@@ -27,7 +27,7 @@
 DEFINE_INTERACTABLE(/obj/machinery/light_switch)
 /obj/machinery/light_switch
 	name = "light switch"
-	icon = 'modular_pariah/modules/aesthetics/lightswitch/icons/lightswitch.dmi'
+	icon = 'icons/obj/lightswitch.dmi'
 	icon_state = "lightswitch-base"
 	base_icon_state = "lightswitch"
 	desc = "Make dark."

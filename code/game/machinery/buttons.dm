@@ -16,7 +16,7 @@ TYPEINFO_DEF(/obj/machinery/button)
 	var/silicon_access_disabled = FALSE
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.02
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
-	icon = 'modular_pariah/modules/aesthetics/buttons/icons/buttons.dmi'
+	icon = 'icons/obj/buttons.dmi'
 	var/light_mask = "button-light-mask"
 
 /obj/machinery/button/indestructible
