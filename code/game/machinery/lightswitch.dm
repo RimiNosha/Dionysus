@@ -163,7 +163,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/light_switch, 26)
 			did_anything = set_lights(!area.lightswitch)
 
 	if(did_anything)
-		playsound(src, 'modular_pariah/modules/aesthetics/lightswitch/sound/lightswitch.ogg', 100, 1)
+		playsound(src, 'sound/effects/lightswitch.ogg', 100, 1)
 
 	return TRUE
 

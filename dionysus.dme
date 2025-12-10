@@ -4931,9 +4931,6 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
-#include "modular_pariah\modules\aesthetics\firedoor\code\firedoor.dm"
-#include "modular_pariah\modules\aesthetics\janitor\janitor.dm"
-#include "modular_pariah\modules\aesthetics\lights\code\lighting.dm"
 #include "modular_pariah\modules\aesthetics\newscaster\code\newscaster.dm"
 #include "modular_pariah\modules\aesthetics\rack\code\rack.dm"
 #include "modular_pariah\modules\aesthetics\stacks\stacks.dm"
@@ -4987,5 +4984,4 @@
 #include "modular_pariah\modules\hyposprays\code\vending_hypospray.dm"
 #include "modular_pariah\modules\indicators\code\typing_indicator.dm"
 #include "modular_pariah\modules\pixel_shift\code\pixel_shift.dm"
-#include "modular_pariah\modules\radiosound\code\headset.dm"
 // END_INCLUDE

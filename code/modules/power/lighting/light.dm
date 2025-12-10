@@ -70,6 +70,13 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 	///The area this thing is in.
 	var/area/my_area = null
 
+	var/turning_on = FALSE // Prevents lag from spamming lights.
+	var/constant_flickering = FALSE
+	var/flicker_timer = null
+	var/roundstart_flicker = FALSE
+	/// Should this turn red when a firealarm is on in the area?
+	var/firealarm = FALSE
+
 /obj/machinery/light/Move()
 	if(status != LIGHT_BROKEN)
 		break_light_tube(TRUE)
@@ -85,14 +92,6 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 
 	RegisterSignal(src, COMSIG_LIGHT_EATER_ACT, PROC_REF(on_light_eater))
 	become_atmos_sensitive()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/light/LateInitialize()
-	. = ..()
-	my_area = get_area(src)
-	if(my_area)
-		LAZYADD(my_area.lights, src)
-
 	#ifdef LIGHTS_RANDOMLY_BROKEN
 	switch(fitting)
 		if("tube")
@@ -102,7 +101,16 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 			if(prob(1))
 				break_light_tube(TRUE)
 	#endif
-	update(FALSE, TRUE, FALSE)
+	update(FALSE, TRUE, FALSE, mapload)
+	if(roundstart_flicker)
+		start_flickering()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/light/LateInitialize()
+	. = ..()
+	my_area = get_area(src)
+	if(my_area)
+		LAZYADD(my_area.lights, src)
 
 /obj/machinery/light/Destroy()
 	UNSET_TRACKING(__TYPE__)
@@ -165,7 +173,7 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 #define LIGHT_ON_DELAY_LOWER 1 SECONDS
 
 // update the icon_state and luminosity of the light depending on its state
-/obj/machinery/light/proc/update(trigger = TRUE, instant = FALSE, play_sound = TRUE)
+/obj/machinery/light/proc/update(trigger = TRUE, instant = FALSE, play_sound = TRUE, maploaded = FALSE)
 	switch(status)
 		if(LIGHT_BROKEN,LIGHT_BURNED,LIGHT_EMPTY)
 			on = FALSE
@@ -486,6 +494,88 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 		update(FALSE, TRUE)
 
 	flickering = FALSE
+
+/obj/machinery/light/proc/turn_on(trigger, play_sound = TRUE)
+	if(QDELETED(src))
+		return
+	turning_on = FALSE
+	if(!on)
+		return
+	var/OR = bulb_outer_range
+	var/IR = bulb_inner_range
+	var/PO = bulb_power
+	var/CO = bulb_colour
+	var/FC = bulb_falloff
+	if(color)
+		CO = color
+	if (firealarm)
+		CO = bulb_emergency_colour
+
+	var/matching = light && OR == light.light_outer_range && IR == light.light_inner_range && PO == light.light_power && CO == light.light_color && FC == light.light_falloff_curve
+	if(!matching)
+		switchcount++
+		if(rigged)
+			if(status == LIGHT_OK && trigger)
+				explode()
+		else if( prob( min(60, (switchcount**2)*0.01) ) )
+			if(trigger)
+				burn_out()
+		else
+			if(use_power != NO_POWER_USE)
+				use_power = ACTIVE_POWER_USE
+			set_light(l_outer_range = OR, l_inner_range = IR, l_power = PO, l_falloff_curve = FC, l_color = CO)
+			if(play_sound)
+				playsound(src.loc, 'sound/effects/light_on.ogg', 65, 1)
+
+/obj/machinery/light/proc/start_flickering()
+	if(constant_flickering)
+		return
+
+	on = FALSE
+	update(FALSE, TRUE, FALSE)
+
+	constant_flickering = TRUE
+
+	flicker_timer = addtimer(CALLBACK(src, PROC_REF(flicker_on)), rand(5, 10))
+
+/obj/machinery/light/proc/stop_flickering()
+	if(!constant_flickering)
+		return
+
+	constant_flickering = FALSE
+
+	if(flicker_timer)
+		deltimer(flicker_timer)
+		flicker_timer = null
+
+	set_on(has_power())
+
+/obj/machinery/light/proc/alter_flicker(enable = TRUE)
+	if(!constant_flickering)
+		return
+	if(has_power())
+		on = enable
+		update(FALSE, TRUE, FALSE)
+
+/obj/machinery/light/proc/flicker_on()
+	alter_flicker(TRUE)
+	flicker_timer = addtimer(CALLBACK(src, PROC_REF(flicker_off)), rand(5, 10), TIMER_STOPPABLE|TIMER_DELETE_ME)
+
+/obj/machinery/light/proc/flicker_off()
+	alter_flicker(FALSE)
+	flicker_timer = addtimer(CALLBACK(src, PROC_REF(flicker_on)), rand(5, 50), TIMER_STOPPABLE|TIMER_DELETE_ME)
+
+/obj/machinery/light/proc/firealarm_on()
+	SIGNAL_HANDLER
+
+	firealarm = TRUE
+	update()
+
+/obj/machinery/light/proc/firealarm_off()
+	SIGNAL_HANDLER
+
+	firealarm = FALSE
+	update()
 
 // ai attack - make lights flicker, because why not
 
