@@ -92,6 +92,11 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 
 	RegisterSignal(src, COMSIG_LIGHT_EATER_ACT, PROC_REF(on_light_eater))
 	become_atmos_sensitive()
+
+	my_area = get_area(src)
+	if(my_area)
+		LAZYADD(my_area.lights, src)
+
 	#ifdef LIGHTS_RANDOMLY_BROKEN
 	switch(fitting)
 		if("tube")
@@ -101,16 +106,10 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 			if(prob(1))
 				break_light_tube(TRUE)
 	#endif
+
 	update(FALSE, TRUE, FALSE, mapload)
 	if(roundstart_flicker)
 		start_flickering()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/light/LateInitialize()
-	. = ..()
-	my_area = get_area(src)
-	if(my_area)
-		LAZYADD(my_area.lights, src)
 
 /obj/machinery/light/Destroy()
 	UNSET_TRACKING(__TYPE__)
