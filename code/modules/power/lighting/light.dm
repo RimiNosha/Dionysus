@@ -76,6 +76,7 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 	var/roundstart_flicker = FALSE
 	/// Should this turn red when a firealarm is on in the area?
 	var/firealarm = FALSE
+	var/maploaded = FALSE
 
 /obj/machinery/light/Move()
 	if(status != LIGHT_BROKEN)
@@ -86,13 +87,17 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 /obj/machinery/light/Initialize(mapload)
 	. = ..()
 	SET_TRACKING(__TYPE__)
+	maploaded = mapload
 
 	if(start_with_cell && !no_emergency)
 		cell = new/obj/item/stock_parts/cell/emergency_light(src)
 
 	RegisterSignal(src, COMSIG_LIGHT_EATER_ACT, PROC_REF(on_light_eater))
 	become_atmos_sensitive()
+	return INITIALIZE_HINT_LATELOAD
 
+/obj/machinery/light/LateInitialize()
+	. = ..()
 	my_area = get_area(src)
 	if(my_area)
 		LAZYADD(my_area.lights, src)
@@ -107,7 +112,7 @@ DEFINE_INTERACTABLE(/obj/machinery/light)
 				break_light_tube(TRUE)
 	#endif
 
-	update(FALSE, TRUE, FALSE, mapload)
+	update(FALSE, TRUE, FALSE, maploaded)
 	if(roundstart_flicker)
 		start_flickering()
 
