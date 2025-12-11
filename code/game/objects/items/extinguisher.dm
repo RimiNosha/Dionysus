@@ -4,7 +4,7 @@ TYPEINFO_DEF(/obj/item/extinguisher)
 /obj/item/extinguisher
 	name = "fire extinguisher"
 	desc = "A traditional red fire extinguisher."
-	icon = 'icons/obj/items_and_weapons.dmi'
+	icon = 'icons/obj/extinguisher.dmi'
 	icon_state = "fire_extinguisher0"
 	worn_icon_state = "fire_extinguisher"
 	inhand_icon_state = "fire_extinguisher"
