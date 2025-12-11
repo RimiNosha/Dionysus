@@ -25,9 +25,9 @@
 		for(var/access in access_lists)
 			for(var/item in (access_lists[access]))
 				if(!ispath(item))
-					continue
+					CRASH("Invalid entry [item]!")
 				if(item in products)
-					continue
+					CRASH("Duplicate entry [item]!")
 				products[item] = auto_build_products
 	return ..()
 
