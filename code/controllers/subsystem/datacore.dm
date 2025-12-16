@@ -173,7 +173,8 @@ SUBSYSTEM_DEF(datacore)
 				department_list.Insert(1, null)
 				department_list[1] = entry
 			else
-				department_list[++department_list.len] = entry
+				department_list.len++
+				department_list[department_list.len] = entry
 
 	// Trim the empty categories.
 	for (var/department in manifest_out)
@@ -383,7 +384,8 @@ SUBSYSTEM_DEF(datacore)
 	c.time = time
 	c.fine = fine
 	c.paid = 0
-	c.dataId = ++securityCrimeCounter
+	securityCrimeCounter++
+	c.dataId = securityCrimeCounter
 	return c
 
 /// Checks if using the given access, something can access the given datacore key.

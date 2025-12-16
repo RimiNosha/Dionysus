@@ -99,6 +99,9 @@
 	/// A lazylist of dream types we have fully experienced
 	var/list/finished_dream_types
 
+	/// A list of the mind's objectives.
+	var/list/datum/objective/objectives = list()
+
 /datum/mind/New(_key)
 	key = _key
 	martial_art = default_martial_art
