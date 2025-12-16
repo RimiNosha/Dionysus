@@ -144,8 +144,8 @@
 	if (length(status_examines))
 		. += status_examines
 
-	var/appears_dead = isobserver(user)
-	if(stat != CONSCIOUS || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+	var/appears_dead = FALSE
+	if(stat != CONSCIOUS || HAS_TRAIT(src, TRAIT_FAKEDEATH))
 		if(!adjacent)
 			. += span_alert("[t_He] is not moving.")
 		else
