@@ -30,8 +30,6 @@ GLOBAL_LIST_EMPTY(valid_cryopods)
 	var/open_icon_state = "cryopod-open"
 	/// Whether the cryopod respects the minimum time someone has to be disconnected before they can be put into cryo by another player
 	var/allow_timer_override = FALSE
-	/// Minimum time for someone to be SSD before another player can cryo them.
-	var/ssd_time = 30 MINUTES //Replace with "cryo_min_ssd_time" CONFIG
 
 	/// Time until despawn when a mob enters a cryopod. You cannot other people in pods unless they're catatonic.
 	var/time_till_despawn = 30 SECONDS
@@ -329,24 +327,23 @@ GLOBAL_LIST_EMPTY(valid_cryopods)
 
 	// Allows players to cryo others. Checks if they have been AFK for 30 minutes.
 	if(target.key && user != target)
-		if (target.getorgan(/obj/item/organ/brain) ) //Target the Brain
-			if(!target.mind || !target.client ) // Is the character empty / AI Controlled
-				if(target.last_client_time + ssd_time >= world.time)
-					to_chat(user, span_notice("You can't put [target] into [src] for another [round(((ssd_time - (world.time - target.last_client_time)) / (1 MINUTES)), 1)] minutes."))
-					log_admin("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod, but they were only disconnected for [round(((world.time - target.last_client_time) / (1 MINUTES)), 1)] minutes.")
-					message_admins("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod. [ADMIN_JMP(src)]")
-					return
-				else if(tgui_alert(user, "Would you like to place [target] into [src]?", "Place into Cryopod?", list("Yes", "No")) == "Yes")
-					if(target.mind.assigned_role.req_admin_notify)
-						tgui_alert(user, "They are an important role! [AHELP_FIRST_MESSAGE]")
-					to_chat(user, span_danger("You put [target] into [src]."))
-					log_admin("[key_name(user)] has put [key_name(target)] into a stasis pod.")
-					message_admins("[key_name(user)] has put [key_name(target)] into a stasis pod. [ADMIN_JMP(src)]")
+		if(!target.mind || !target.client) // Is the character empty / AI Controlled
+			if(target.last_client_time + (CONFIG_GET(number/cryostasis_min_ssd_time) MINUTES) >= world.time)
+				to_chat(user, span_notice("You can't put [target] into [src] for another [round(((ssd_time - (world.time - target.last_client_time)) / (1 MINUTES)), 1)] minutes."))
+				log_admin("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod, but they were only disconnected for [round(((world.time - target.last_client_time) / (1 MINUTES)), 1)] minutes.")
+				message_admins("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod. [ADMIN_JMP(src)]")
+				return
+			else if(tgui_alert(user, "Would you like to place [target] into [src]?", "Place into Cryopod?", list("Yes", "No")) == "Yes")
+				if(target.mind.assigned_role.req_admin_notify)
+					tgui_alert(user, "They are an important role! [AHELP_FIRST_MESSAGE]")
+				to_chat(user, span_danger("You put [target] into [src]."))
+				log_admin("[key_name(user)] has put [key_name(target)] into a stasis pod.")
+				message_admins("[key_name(user)] has put [key_name(target)] into a stasis pod. [ADMIN_JMP(src)]")
 
-					add_fingerprint(target)
+				add_fingerprint(target)
 
-					close_machine(target)
-					name = "[name] ([target.name])"
+				close_machine(target)
+				name = "[name] ([target.name])"
 
 		else if(iscyborg(target))
 			to_chat(user, span_danger("You can't put [target] into [src], [target.p_theyre()] online."))
