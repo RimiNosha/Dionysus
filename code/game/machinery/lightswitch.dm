@@ -1,7 +1,7 @@
 /obj/item/wallframe/light_switch
 	name = "light switch frame"
 	icon = 'icons/obj/lightswitch.dmi'
-	icon_state = "lightswitch_frame"
+	icon_state = "lightswitch-base"
 	result_path = /obj/machinery/light_switch
 	pixel_shift = 26
 
@@ -14,7 +14,7 @@
 
 /datum/design/lightswitch_frame
 	name = "Light Switch (Wallframe)"
-	id = "lightswitch_frame"
+	id = "lightswitch-base"
 	build_type = AUTOLATHE | FABRICATOR
 	materials = list(
 		/datum/material/iron = 200,
