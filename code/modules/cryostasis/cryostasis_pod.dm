@@ -328,7 +328,8 @@ GLOBAL_LIST_EMPTY(valid_cryopods)
 	// Allows players to cryo others. Checks if they have been AFK for 30 minutes.
 	if(target.key && user != target)
 		if(!target.mind || !target.client) // Is the character empty / AI Controlled
-			if(target.last_client_time + (CONFIG_GET(number/cryostasis_min_ssd_time) MINUTES) >= world.time)
+			var/ssd_time = CONFIG_GET(number/cryostasis_min_ssd_time) MINUTES
+			if(target.last_client_time + ssd_time >= world.time)
 				to_chat(user, span_notice("You can't put [target] into [src] for another [round(((ssd_time - (world.time - target.last_client_time)) / (1 MINUTES)), 1)] minutes."))
 				log_admin("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod, but they were only disconnected for [round(((world.time - target.last_client_time) / (1 MINUTES)), 1)] minutes.")
 				message_admins("[key_name(user)] has attempted to put [key_name(target)] into a stasis pod. [ADMIN_JMP(src)]")
