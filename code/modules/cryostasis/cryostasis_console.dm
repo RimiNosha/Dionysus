@@ -111,7 +111,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/cryostasis, 32)
 	if(message_type != "CRYO_LEAVE")
 		return
 
-	var/is_command = user?.mind?.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_MANAGEMENT
+	var/is_command = user?.mind?.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_COMPANY_LEADER
 	var/last_of_command = length(SSjob.get_all_heads())
 	if(is_command && last_of_command <= 1)
 		minor_announce(message = "Your station's last member of management has entered cryogenic storage. \
