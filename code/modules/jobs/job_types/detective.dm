@@ -1,5 +1,6 @@
 /datum/job/detective
-	title = JOB_COMPLIANCE_AUDITOR
+	id = JOB_COMPLIANCE_AUDITOR
+	titles = /datum/job_title/detective
 	description = "Investigate crimes. Solve crimes. Cover up crimes."
 	faction = FACTION_STATION
 	pinpad_key = "columbo"
@@ -13,14 +14,6 @@
 
 	employers = list(
 		/datum/employer/none
-	)
-
-	outfits = list(
-		"Default" = list(
-			SPECIES_HUMAN = /datum/outfit/job/detective,
-			SPECIES_TESHARI = /datum/outfit/job/detective,
-			SPECIES_VOX = /datum/outfit/job/detective,
-		),
 	)
 
 	departments_list = list(
@@ -94,3 +87,11 @@
 	gloves = /obj/item/clothing/gloves/color/latex
 	head = /obj/item/clothing/head/flatcap
 	shoes = /obj/item/clothing/shoes/laceup
+
+/datum/job_title/detective
+	name = JOB_COMPLIANCE_AUDITOR
+	outfits = list(
+		SPECIES_HUMAN = /datum/outfit/job/detective,
+		SPECIES_TESHARI = /datum/outfit/job/detective,
+		SPECIES_VOX = /datum/outfit/job/detective,
+	)

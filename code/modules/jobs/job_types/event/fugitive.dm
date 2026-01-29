@@ -1,2 +1,6 @@
 /datum/job/fugitive
-	title = ROLE_FUGITIVE
+	id = ROLE_FUGITIVE
+	titles = /datum/job_title/fugitive
+
+/datum/job_title/fugitive
+	name = ROLE_FUGITIVE

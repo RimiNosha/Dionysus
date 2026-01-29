@@ -1,2 +1,6 @@
 /datum/job/positronic_brain
-	title = ROLE_POSITRONIC_BRAIN
+	id = ROLE_POSITRONIC_BRAIN
+	titles = /datum/job_title/positronic_brain
+
+/datum/job_title/positronic_brain
+	name = ROLE_POSITRONIC_BRAIN

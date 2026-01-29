@@ -1,3 +1,7 @@
 /datum/job/fugitive_hunter
-	title = ROLE_FUGITIVE_HUNTER
+	id = ROLE_FUGITIVE_HUNTER
+	titles = /datum/job_title/fugitive_hunter
 	policy_index = ROLE_FUGITIVE_HUNTER
+
+/datum/job_title/fugitive_hunter
+	name = ROLE_FUGITIVE_HUNTER

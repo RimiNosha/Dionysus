@@ -1,5 +1,6 @@
 // /datum/job/security_consultant
-// 	title = JOB_SECURITY_CONSULTANT
+// 	id = JOB_SECURITY_CONSULTANT
+// 	titles = /datum/job_title/security_consultant
 // 	description = "Handles relationships with Mars Executive Outcomes. Acts as a guard for Management."
 // 	department_head = list(JOB_PORT_AUTHORITY)
 // 	faction = FACTION_STATION
@@ -59,3 +60,6 @@
 // 	ears = /obj/item/radio/headset/heads/captain
 // 	glasses = /obj/item/clothing/glasses/sunglasses
 // 	shoes = /obj/item/clothing/shoes/laceup
+
+// /datum/job_title/security_consultant
+// 	name = JOB_SECURITY_CONSULTANT

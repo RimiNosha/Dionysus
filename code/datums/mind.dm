@@ -825,7 +825,7 @@
 	if(has_antag_datum(/datum/antagonist/wizard))
 		return
 	set_assigned_role(SSjob.GetJobType(/datum/job/space_wizard))
-	special_role = ROLE_WIZARD
+	special_role = ROLE_SPACE_WIZARD
 	add_antag_datum(/datum/antagonist/wizard)
 
 /datum/mind/proc/transfer_martial_arts(mob/living/new_character)

@@ -32,6 +32,7 @@
 #define JOB_PRISONER "Prisoner" //Pending Removal
 //Command
 #define JOB_PORT_AUTHORITY "Port Authority"
+#define JOB_BUREAUCRAT "Bureaucrat"
 #define JOB_DIRECTOR_OF_PORT_SERVICES "Director of Port Services"
 #define JOB_SECURITY_CONSULTANT "Security Consultant"
 //Silicon
@@ -72,6 +73,7 @@
 #define JOB_CHAPLAIN "Chaplain" //Considering removal.
 #define JOB_PSYCHOLOGIST "Psychologist" //Removed
 //ERTs
+#define JOB_ERT_GENERIC "ERT Generic"
 #define JOB_ERT_DEATHSQUAD "Death Commando"
 #define JOB_ERT_COMMANDER "Emergency Response Team Commander"
 #define JOB_ERT_OFFICER "Security Response Officer"

@@ -1,3 +1,7 @@
 /datum/job/space_doctor
-	title = ROLE_SPACE_DOCTOR
+	id = ROLE_SPACE_DOCTOR
+	titles = /datum/job_title/space_doctor
 	policy_index = ROLE_SPACE_DOCTOR
+
+/datum/job_title/space_doctor
+	name = ROLE_SPACE_DOCTOR

@@ -1,2 +1,6 @@
 /datum/job/morph
-	title = ROLE_MORPH
+	id = ROLE_MORPH
+	titles = /datum/job_title/morph
+
+/datum/job_title/morph
+	name = ROLE_MORPH

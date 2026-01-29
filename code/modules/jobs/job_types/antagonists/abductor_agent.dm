@@ -1,2 +1,6 @@
 /datum/job/abductor_agent
-	title = "Abductor Agent"
+	id = ROLE_ABDUCTOR_AGENT
+	titles = /datum/job_title/abductor_agent
+
+/datum/job_title/abductor_agent
+	name = "Abductor Agent"

@@ -12,7 +12,3 @@
 	for (var/species in outfits)
 		outfit = outfits[species]
 		outfits[species] = new outfit()
-
-// Used for bank blank bank accounts.
-/datum/job_title/unassigned
-	name = "Unassigned"

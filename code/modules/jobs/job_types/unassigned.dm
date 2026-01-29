@@ -5,6 +5,10 @@
  **/
 
 /datum/job/unassigned
-	title = "Unassigned Crewmember"
+	id = "Unassigned Crewmember"
+	titles = /datum/job_title/unassigned
 	rpg_title = "Peasant"
 	paycheck = PAYCHECK_ZERO
+
+/datum/job_title/unassigned
+	name = "Unassigned Crewmember"

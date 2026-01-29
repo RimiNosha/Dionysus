@@ -393,8 +393,8 @@
 /datum/dynamic_ruleset/midround/from_ghosts/wizard
 	name = "Wizard"
 	antag_datum = /datum/antagonist/wizard
-	antag_flag = ROLE_WIZARD_MIDROUND
-	antag_flag_override = ROLE_WIZARD
+	antag_flag = ROLE_SPACE_WIZARD_MIDROUND
+	antag_flag_override = ROLE_SPACE_WIZARD
 	enemy_roles = list(
 		JOB_PORT_AUTHORITY,
 		JOB_COMPLIANCE_AUDITOR,
@@ -559,7 +559,7 @@
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	antag_datum = /datum/antagonist/xeno
-	antag_flag = ROLE_ALIEN
+	antag_flag = ROLE_XENOMORPH
 	enemy_roles = list(
 		JOB_PORT_AUTHORITY,
 		JOB_COMPLIANCE_AUDITOR,
@@ -611,7 +611,7 @@
 	name = "Nightmare"
 	antag_datum = /datum/antagonist/nightmare
 	antag_flag = ROLE_NIGHTMARE
-	antag_flag_override = ROLE_ALIEN
+	antag_flag_override = ROLE_XENOMORPH
 	enemy_roles = list(
 		JOB_PORT_AUTHORITY,
 		JOB_COMPLIANCE_AUDITOR,

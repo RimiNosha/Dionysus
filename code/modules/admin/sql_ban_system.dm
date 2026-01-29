@@ -345,7 +345,7 @@
 			),
 			"Antagonist Positions" = list(
 				ROLE_ABDUCTOR,
-				ROLE_ALIEN,
+				ROLE_XENOMORPH,
 				ROLE_BLOB,
 				ROLE_BROTHER,
 				ROLE_CHANGELING,
@@ -354,7 +354,7 @@
 				ROLE_HERETIC,
 				ROLE_HIVE,
 				ROLE_MALF,
-				ROLE_NINJA,
+				ROLE_SPACE_NINJA,
 				ROLE_OPERATIVE,
 				ROLE_OVERTHROW,
 				ROLE_REV,
@@ -364,7 +364,7 @@
 				ROLE_SPIDER,
 				ROLE_SYNDICATE,
 				ROLE_TRAITOR,
-				ROLE_WIZARD,
+				ROLE_SPACE_WIZARD,
 			),
 		)
 		for(var/department in long_job_lists)

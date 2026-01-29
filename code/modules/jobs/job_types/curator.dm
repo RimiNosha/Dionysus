@@ -1,5 +1,6 @@
 /datum/job/curator
-	title = JOB_ARCHIVIST
+	id = JOB_ARCHIVIST
+	titles = /datum/job_title/curator
 	description = "Read and write books and hand them to people, stock \
 		bookshelves, report on station news."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)
@@ -12,12 +13,6 @@
 
 	employers = list(
 		/datum/employer/none,
-	)
-
-	outfits = list(
-		"Default" = list(
-			SPECIES_HUMAN = /datum/outfit/job/curator,
-		),
 	)
 
 	departments_list = list(
@@ -57,3 +52,9 @@
 		return
 
 	H.grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_ARCHIVIST)
+
+/datum/job_title/curator
+	name = JOB_ARCHIVIST
+	outfits = list(
+		SPECIES_HUMAN = /datum/outfit/job/curator,
+	)
