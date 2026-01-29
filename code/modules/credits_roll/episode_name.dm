@@ -166,9 +166,9 @@
 			chefcount++
 		if(H.is_wearing_item_of_type(/obj/item/clothing/under/rank/civilian/lawyer))
 			lawyercount++
-		if(H.mind && H.mind.assigned_role.title == JOB_CIVILLIAN)
+		if(H.mind && H.mind.assigned_role.id == JOB_CIVILLIAN)
 			minercount++
-		if(H.mind && H.mind.assigned_role.title == JOB_CHAPLAIN)
+		if(H.mind && H.mind.assigned_role.id == JOB_CHAPLAIN)
 			chaplaincount++
 			if(IS_CHANGELING(H))
 				episode_names += new /datum/episode_name/rare("[uppertext(H.real_name)]: A BLESSING IN DISGUISE", "The Chaplain, [H.real_name], was a changeling and escaped alive.", 750)

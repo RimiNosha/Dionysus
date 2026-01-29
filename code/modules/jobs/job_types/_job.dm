@@ -40,7 +40,8 @@ GLOBAL_LIST_INIT(job_display_order, list(
 
 /datum/job
 	/// The titles this job has. These are turned into instances during init. You can use JOB_TITLE(my_title) as a shortcut.
-	var/list/datum/job_title/titles = list(/datum/job_title)
+	/// This can also just be a path if you only have one title.
+	var/list/datum/job_title/titles = /datum/job_title
 	/// Title types to their instance. Populated automatically.
 	var/list/datum/job_title/type_to_title = list()
 
@@ -185,10 +186,13 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		id = copytext(type_str, findlasttext(type_str, "/") + 1, length(type_str) + 1) // Just use the last part of the type to fill this out if it's empty.
 
 	var/list/title_instances = list()
-	for (var/title in titles)
-		var/title_inst = new title()
-		type_to_title[title] = title_inst
-		title_instances.Add(title_inst)
+	if (islist(titles))
+		for (var/title in titles)
+			var/title_inst = new title
+			type_to_title[title] = title_inst
+			title_instances.Add(title_inst)
+	else
+		title_instances.Add(new titles)
 	titles = title_instances
 
 	if(pinpad_key)
@@ -409,7 +413,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		PDA.saved_identification = H.real_name
 		PDA.UpdateDisplay()
 		if(H.mind)
-			PDA.saved_job = H.mind.get_title()
+			PDA.saved_job = H.mind.get_title().name
 			spawn(-1) //Ssshhh linter don't worry about the lack of a user it's all gonna be okay.
 				PDA.turn_on()
 		else

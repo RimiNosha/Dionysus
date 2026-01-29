@@ -263,7 +263,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 
 	if(mob_occupant.mind)
 		// Handle job slot/tater cleanup.
-		crew_member["job"] = mob_occupant.mind.get_title()
+		crew_member["job"] = mob_occupant.mind.get_title().name
 		SSjob.FreeRole(mob_occupant.mind.assigned_role.id)
 		if(LAZYLEN(mob_occupant.mind.objectives))
 			mob_occupant.mind.objectives.Cut()
