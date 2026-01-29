@@ -263,9 +263,8 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 
 	if(mob_occupant.mind)
 		// Handle job slot/tater cleanup.
-		var/job = mob_occupant.mind.assigned_role.title
-		crew_member["job"] = job
-		SSjob.FreeRole(job)
+		crew_member["job"] = mob_occupant.mind.get_title()
+		SSjob.FreeRole(mob_occupant.mind.assigned_role.id)
 		if(LAZYLEN(mob_occupant.mind.objectives))
 			mob_occupant.mind.objectives.Cut()
 			mob_occupant.mind.special_role = null
@@ -273,7 +272,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		crew_member["job"] = "N/A"
 
 	// Delete them from datacore.
-	var/announce_rank = SSdatacore.get_record_by_name(mob_occupant.real_name, DATACORE_RECORDS_STATION)?.fields[DATACORE_RANK]
+	var/announce_rank = SSdatacore.get_record_by_name(mob_occupant.real_name, DATACORE_RECORDS_STATION)?.fields[DATACORE_TITLE]
 	SSdatacore.demanifest(mob_occupant.real_name)
 
 	var/obj/machinery/computer/cryopod/control_computer = control_computer_weakref?.resolve()

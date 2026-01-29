@@ -456,7 +456,7 @@
 	if(isturf(new_uplink.uplink_handler))
 		stack_trace("what")
 
-	new_uplink.uplink_handler.assigned_role = traitor_mob.mind.assigned_role.title
+	new_uplink.uplink_handler.assigned_role = traitor_mob.mind.assigned_role.id
 	new_uplink.uplink_handler.assigned_species = traitor_mob.dna.species.id
 	if(uplink_loc == R)
 		unlock_text = "Your Uplink is cunningly disguised as your [R.name]. Simply dial the frequency [format_frequency(new_uplink.unlock_code)] to unlock its hidden features."
@@ -522,7 +522,8 @@
 		usr.client?.debug_variables(to_vv)
 
 	if (href_list["role_edit"])
-		var/new_role = input("Select new role", "Assigned role", assigned_role.title) as null|anything in sort_list(SSjob.name_occupations)
+		// TODO: Convert to assoc
+		var/new_role = input("Select new role", "Assigned role", assigned_role.id) as null|anything in sort_list(SSjob.name_occupations)
 		if(isnull(new_role))
 			return
 		var/datum/job/new_job = SSjob.GetJob(new_role)
@@ -893,6 +894,10 @@
 		CRASH("set_assigned_role called with invalid role: [isnull(new_role) ? "null" : new_role]")
 	. = assigned_role
 	assigned_role = new_role
+
+/// Try to get the title for the assigned role, if there is none, returns null.
+/datum/mind/proc/get_title(random = FALSE)
+	return assigned_title
 
 /// Getter for the memories list
 /datum/mind/proc/get_notes()
