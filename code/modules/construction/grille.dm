@@ -150,7 +150,6 @@
 /obj/structure/grillen/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(!density)
 		return TRUE
-
 	if(pass_info.pass_flags & PASSGRILLE)
 		return TRUE
 	return FALSE

@@ -279,7 +279,7 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 		for(var/turf/dest_turf as anything in entering_locs)
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
-			if(istype(dest_turf, /turf/closed/wall))
+			if(iswall(dest_turf))
 				var/turf/closed/constructed_wall/wall = dest_turf
 				do_sparks(2, FALSE, wall)
 				wall.destroy_wall()
@@ -296,7 +296,7 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 			///handles any special interactions objects could have with the lift/tram, handled on the item itself
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
-			if(istype(dest_turf, /turf/closed/wall))
+			if(iswall(dest_turf))
 				var/turf/closed/constructed_wall/wall = dest_turf
 				do_sparks(2, FALSE, wall)
 				wall.destroy_wall()
@@ -314,7 +314,7 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 			///handles any special interactions objects could have with the lift/tram, handled on the item itself
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
-			if(istype(dest_turf, /turf/closed/wall))
+			if(iswall(dest_turf))
 				var/turf/closed/constructed_wall/wall = dest_turf
 				do_sparks(2, FALSE, wall)
 				wall.destroy_wall()

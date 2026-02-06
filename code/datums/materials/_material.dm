@@ -56,6 +56,8 @@ Simple datum which is instanced once per type and is used for every object of sa
 	var/can_make_walls
 	/// Can this material be used for wall trims?
 	var/can_make_walls_trim
+	/// The name of the walls made with this material.
+	var/wall_name
 
 /** Handles initializing the material.
  *

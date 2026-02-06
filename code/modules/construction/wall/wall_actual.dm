@@ -1,5 +1,5 @@
 /turf/closed/constructed_wall
-	name = "wall"
+	name = "steel wall"
 	desc = "A huge chunk of iron used to separate rooms."
 	icon = 'icons/walls/plating/steel.dmi'
 	base_icon_state = "wall"
@@ -22,10 +22,11 @@
 	return ..()
 
 /turf/closed/constructed_wall/Initialize(mapload, material_plating, material_reinforcement, material_trim_low, material_trim_high)
-	src.material_plating = material_plating || /datum/material/steel
-	src.material_reinforcement = material_reinforcement
-	src.material_trim_low = material_trim_low
-	src.material_trim_high = material_trim_high
+	src.material_plating = material_plating || src.material_plating || /datum/material/steel
+	src.material_reinforcement = material_reinforcement || src.material_reinforcement
+	src.material_trim_low = material_trim_low || src.material_trim_low
+	src.material_trim_high = material_trim_high || src.material_trim_high
+	name = src.material_plating::wall_name || "[src.material_plating::name] wall"
 	update_material_resistances()
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
