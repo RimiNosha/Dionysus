@@ -420,19 +420,6 @@
 						Bring those who still cling to this world of illusion back to the Geometer so they may know Truth. Your form and any you are pulling can pass through runed walls effortlessly.</B>"
 	can_repair = TRUE
 
-
-/mob/living/simple_animal/hostile/construct/harvester/Bump(atom/AM)
-	. = ..()
-	if(istype(AM, /turf/closed/wall/mineral/cult) && AM != loc) //we can go through cult walls
-		var/atom/movable/stored_pulling = get_active_grab()?.affecting
-		var/datum/grab/stored_tier = get_active_grab()?.current_grab.type
-		if(stored_pulling)
-			stored_pulling.setDir(get_dir(stored_pulling.loc, loc))
-			stored_pulling.forceMove(loc)
-		forceMove(AM)
-		if(stored_pulling)
-			try_make_grab(stored_pulling, stored_tier)
-
 /mob/living/simple_animal/hostile/construct/harvester/AttackingTarget()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target

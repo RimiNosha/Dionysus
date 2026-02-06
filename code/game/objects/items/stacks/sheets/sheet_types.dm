@@ -64,9 +64,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 		new /datum/stack_recipe("Black King", /obj/structure/chess/blackking, 2, time = 1 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	)),
 	null, \
-	new/datum/stack_recipe("rack parts", /obj/item/rack_parts), \
-	new/datum/stack_recipe("shelf parts", /obj/item/rack_parts/shelf), \
-	new/datum/stack_recipe("gun rack parts", /obj/item/rack_parts/gunrack), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
 	null, \
 	new/datum/stack_recipe("unfinished canister frame", /obj/structure/canister_frame/machine/unfinished_canister_frame, 5, time = 8, one_per_turf = TRUE, on_floor = TRUE), \
@@ -76,8 +73,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	null, \
 	new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 2 SECONDS, one_per_turf = TRUE, on_floor = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
 	new/datum/stack_recipe("wall trim kit", /obj/item/wall_trim_kit, 2, time = 2 SECONDS), \
-	null, \
-	new/datum/stack_recipe("tram wall girders (anchored)", /obj/structure/girderold/tram, 2, time = 40, one_per_turf = TRUE, on_floor = FALSE, on_tram = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
 	null, \
 	new/datum/stack_recipe("computer frame", /obj/structure/frame/computer, 5, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer/console/buildable/, 10, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
@@ -172,32 +167,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 /obj/item/stack/sheet/steel/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins whacking [user.p_them()]self over the head with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return BRUTELOSS
-
-/obj/item/stack/sheet/steel/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
-	if(istype(target, /turf/open))
-		var/turf/open/build_on = target
-		if(!user.Adjacent(build_on))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(isgroundlessturf(build_on))
-			user.balloon_alert(user, "can't place it here!")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(build_on.is_blocked_turf())
-			user.balloon_alert(user, "something is blocking the tile!")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(get_amount() < 2)
-			user.balloon_alert(user, "not enough material!")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(!do_after(user, build_on, 4 SECONDS))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(build_on.is_blocked_turf())
-			user.balloon_alert(user, "something is blocking the tile!")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(!use(2))
-			user.balloon_alert(user, "not enough material!")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		new/obj/structure/girderold/displaced(build_on)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 /*
  * Plasteel
@@ -594,7 +563,6 @@ GLOBAL_LIST_INIT(cardboard_recipes, list ( \
 
 GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
 	new /datum/stack_recipe("runed door (a weak door that stuns non-cultists who touch it)", /obj/machinery/door/airlock/cult, 1, time = 5 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("runed girder (not a recommended usage of runed metal)", /obj/structure/girderold/cult, 1, time = 5 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("pylon (heals (and regenerates the blood of) nearby blood cultists and constructs, but also turns nearby floor tiles into engraved flooring)", /obj/structure/destructible/cult/pylon, 4, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("daemon forge (can make Nar'Sien hardened armor, flagellant's robes, and eldritch longswords)", /obj/structure/destructible/cult/item_dispenser/forge, 3, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new /datum/stack_recipe("archives (can make zealot's blindfolds, shuttle curse orbs, and veil walker equipment)", /obj/structure/destructible/cult/item_dispenser/archives, 3, time = 4 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \

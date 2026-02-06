@@ -120,14 +120,8 @@
  */
 /datum/component/cult_ritual_item/proc/try_hit_object(datum/source, obj/structure/target, mob/cultist)
 	SIGNAL_HANDLER
-
 	if(!isliving(cultist) || !IS_CULTIST(cultist))
 		return
-
-	if(istype(target, /obj/structure/girderold/cult))
-		INVOKE_ASYNC(src, PROC_REF(do_destroy_girder), target, cultist)
-		return COMPONENT_NO_AFTERATTACK
-
 	if(istype(target, /obj/structure/destructible/cult))
 		INVOKE_ASYNC(src, PROC_REF(do_unanchor_structure), target, cultist)
 		return COMPONENT_NO_AFTERATTACK
@@ -167,21 +161,6 @@
 			belly.reagents.del_reagent(/datum/reagent/water/holywater)
 	target.reagents.add_reagent(/datum/reagent/fuel/unholywater, holy_to_unholy)
 	log_combat(cultist, target, "smacked", parent, " removing the holy water from them")
-
-/*
- * Destoys the target cult girder [cult_girder], acted upon by [cultist].
- *
- * cult_girder - the girder being destoyed
- * cultist - the mob doing the destroying
- */
-/datum/component/cult_ritual_item/proc/do_destroy_girder(obj/structure/girderold/cult/cult_girder, mob/living/cultist)
-	playsound(cult_girder, 'sound/weapons/resonator_blast.ogg', 40, TRUE, ignore_walls = FALSE)
-	cultist.visible_message(
-		span_warning("[cultist] strikes [cult_girder] with [parent]!"),
-		span_notice("You demolish [cult_girder].")
-		)
-	new /obj/item/stack/sheet/runed_metal(cult_girder.drop_location(), 1)
-	qdel(cult_girder)
 
 /*
  * Unanchors the target cult building.

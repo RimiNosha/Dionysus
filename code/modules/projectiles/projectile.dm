@@ -291,7 +291,8 @@
 		if(impact_effect_type && !hitscan)
 			new impact_effect_type(target_loca, hitx, hity)
 
-		W.add_dent(WALL_DENT_SHOT, hitx, hity)
+		// ZEPHYR TODO: reimpl this
+		// W.add_dent(WALL_DENT_SHOT, hitx, hity)
 
 		return BULLET_ACT_HIT
 

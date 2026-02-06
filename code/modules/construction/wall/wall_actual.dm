@@ -74,6 +74,12 @@
 		deconstruct_to_girder()
 	else ScrapeAway()
 
+/turf/closed/constructed_wall/proc/destroy_wall(and_girder = TRUE)
+	if(and_girder)
+		ScrapeAway()
+		return
+	deconstruct_to_girder()
+
 /turf/closed/constructed_wall/can_smooth(atom/other)
 	if(!istype(other, /obj/structure/girder))
 		return ..()

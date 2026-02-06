@@ -40,13 +40,6 @@
 	sheet_type = /obj/item/stack/sheet/plasteel
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	composition = list(/datum/material/steel=1, /datum/material/plasma=1)
-	reinforced_wall_icon = 'icons/turf/walls/solid_wall_reinforced.dmi'
-	//This creates legacy r_walls so that I don't have to recode a shitload of stuff
-	wall_type = /turf/closed/wall/r_wall
-	false_wall_type = /obj/structure/falsewall/reinforced
-	wall_name = "bulkhead"
-	wall_color = "#57575c"
-	hard_wall_decon = TRUE
 
 /datum/material/alloy/plasteel/on_applied_obj(obj/item/target_item, amount, material_flags)
 	. = ..()
@@ -79,12 +72,6 @@
 	sheet_type = /obj/item/stack/sheet/mineral/plastitanium
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	composition = list(/datum/material/titanium=1, /datum/material/plasma=1)
-	wall_icon = 'icons/turf/walls/metal_wall.dmi'
-	reinforced_wall_icon = 'icons/turf/walls/solid_wall_reinforced.dmi'
-	wall_type = /turf/closed/wall/mineral/plastitanium
-	false_wall_type = /obj/structure/falsewall/plastitanium
-	hard_wall_decon = TRUE
-	wall_color = "#423b3b"
 
 /** Plasmaglass
  *
@@ -103,7 +90,6 @@
 	value_per_unit = ((/datum/material/glass::value_per_unit * 1) + (/datum/material/plasma::value_per_unit * 0.5)) * 1.1
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	composition = list(/datum/material/glass=1, /datum/material/plasma=0.5)
-	wall_type = null
 
 /** Titaniumglass
  *
@@ -121,7 +107,6 @@
 	value_per_unit = ((/datum/material/glass::value_per_unit * 1) + (/datum/material/titanium::value_per_unit * 0.5)) * 1.04
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	composition = list(/datum/material/glass=1, /datum/material/titanium=0.5)
-	wall_type = null
 
 /** Plastitanium Glass
  *
@@ -159,9 +144,6 @@
 	value_per_unit = 1
 	categories = list(MAT_CATEGORY_RIGID=TRUE, MAT_CATEGORY_BASE_RECIPES=TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	composition = list(/datum/material/steel=2, /datum/material/plasma=2)
-	reinforced_wall_icon = 'icons/turf/walls/solid_wall_reinforced.dmi'
-	wall_name = "hull"
-	hard_wall_decon = TRUE
 
 /datum/material/alloy/alien/on_applied_obj(obj/item/target_item, amount, material_flags)
 	. = ..()

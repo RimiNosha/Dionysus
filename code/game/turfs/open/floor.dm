@@ -289,11 +289,6 @@
 
 /turf/open/floor/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
-		if(RCD_FLOORWALL)
-			to_chat(user, span_notice("You build a wall."))
-			var/turf/closed/wall/placed_wall = PlaceOnTop(/turf/closed/wall)
-			placed_wall.set_wall_information(/datum/material/steel)
-			return TRUE
 		if(RCD_AIRLOCK)
 			for(var/obj/machinery/door/door in src)
 				if(door.sub_door)

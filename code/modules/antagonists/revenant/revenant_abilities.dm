@@ -283,10 +283,7 @@
 		floor.burnt = 0
 		floor.make_plating(TRUE)
 
-	if(victim.type == /turf/closed/wall && prob(15) && !HAS_TRAIT(victim, TRAIT_RUSTY))
-		new /obj/effect/temp_visual/revenant(victim)
-		victim.AddElement(/datum/element/rust)
-	if(victim.type == /turf/closed/wall/r_wall && prob(10) && !HAS_TRAIT(victim, TRAIT_RUSTY))
+	if(victim.type == /turf/closed/constructed_wall && prob(15) && !HAS_TRAIT(victim, TRAIT_RUSTY))
 		new /obj/effect/temp_visual/revenant(victim)
 		victim.AddElement(/datum/element/rust)
 	for(var/obj/effect/decal/cleanable/food/salt/salt in victim)

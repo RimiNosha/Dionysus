@@ -7,7 +7,6 @@
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
 	sheet_type = /obj/item/stack/sheet/steel
 	value_per_unit = IRON_VALUE_PER_UNIT
-	wall_color = "#57575c"
 	wall_integrity = 250
 	heat_resistance = 800
 
@@ -29,7 +28,6 @@
 	value_per_unit = IRON_VALUE_PER_UNIT * 0.5
 	beauty_modifier = 0.05
 	armor_modifiers = list(BLUNT = 0.2, PUNCTURE = 0.2, SLASH = 0, LASER = 0, ENERGY = 1, BOMB = 0, BIO = 0.2, FIRE = 1, ACID = 0.2)
-	wall_type = null
 
 /datum/material/glass/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, sharpness = TRUE) //cronch
@@ -50,8 +48,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	sheet_type = /obj/item/stack/sheet/mineral/silver
 	value_per_unit = IRON_VALUE_PER_UNIT * 10
 	beauty_modifier = 0.075
-	wall_type = /turf/closed/wall/mineral/silver
-	false_wall_type = /obj/structure/falsewall/silver
 
 /datum/material/silver/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)
@@ -69,8 +65,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 25
 	beauty_modifier = 0.15
 	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 1.15, ENERGY = 1.15, BOMB = 1, BIO = 1, FIRE = 0.7, ACID = 1.1)
-	wall_type = /turf/closed/wall/mineral/gold
-	false_wall_type = /obj/structure/falsewall/gold
 
 /datum/material/gold/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)
@@ -88,8 +82,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 100
 	beauty_modifier = 0.3
 	armor_modifiers = list(BLUNT = 1.3, PUNCTURE = 1.3, SLASH = 0, LASER = 0.6, ENERGY = 1, BOMB = 1.2, BIO = 1, FIRE = 1, ACID = 1)
-	wall_type = /turf/closed/wall/mineral/diamond
-	false_wall_type = /obj/structure/falsewall/diamond
 
 /datum/material/diamond/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD)
@@ -106,9 +98,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 20
 	beauty_modifier = 0.3 //It shines so beautiful
 	armor_modifiers = list(BLUNT = 1.5, PUNCTURE = 1.4, SLASH = 0, LASER = 0.5, ENERGY = 0.5, BOMB = 0, BIO = 0, FIRE = 1, ACID = 1)
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
-	wall_type = /turf/closed/wall/mineral/uranium
-	false_wall_type = /obj/structure/falsewall/uranium
 
 /datum/material/uranium/on_applied(atom/source, amount, material_flags)
 	. = ..()
@@ -145,9 +134,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 40
 	beauty_modifier = 0.15
 	armor_modifiers = list(BLUNT = 1.4, PUNCTURE = 0.7, SLASH = 0, LASER = 0, ENERGY = 1.2, BOMB = 0, BIO = 1.2, FIRE = 0, ACID = 0.5)
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
-	wall_type = /turf/closed/wall/mineral/plasma
-	false_wall_type = /obj/structure/falsewall/plasma
 
 /datum/material/plasma/on_applied(atom/source, amount, material_flags)
 	. = ..()
@@ -179,7 +165,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	beauty_modifier = 0.5
 	sheet_type = /obj/item/stack/sheet/bluespace_crystal
 	value_per_unit = 0.15
-	wall_type = null
 
 ///Honks and slips
 /datum/material/bananium
@@ -192,9 +177,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 2
 	beauty_modifier = 0.5
 	armor_modifiers = list(BLUNT = 0, PUNCTURE = 0, SLASH = 0, LASER = 0, ENERGY = 0, BOMB = 100, BIO = 0, FIRE = 10, ACID = 0) //Clowns cant be blown away.
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
-	wall_type = /turf/closed/wall/mineral/bananium
-	false_wall_type = /obj/structure/falsewall/bananium
 
 /datum/material/bananium/on_applied(atom/source, amount, material_flags)
 	. = ..()
@@ -222,9 +204,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	sheet_type = /obj/item/stack/sheet/mineral/titanium
 	value_per_unit = IRON_VALUE_PER_UNIT * 25
 	armor_modifiers = list(BLUNT = 1.35, PUNCTURE = 1.3, SLASH = 0, LASER = 1.3, ENERGY = 1.25, BOMB = 1.25, BIO = 1, FIRE = 0.7, ACID = 1)
-	wall_icon = 'icons/turf/walls/metal_wall.dmi'
-	wall_type = /turf/closed/wall/mineral/titanium
-	false_wall_type = /obj/structure/falsewall/titanium
 
 /datum/material/titanium/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD)
@@ -279,12 +258,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 4
 	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 0.4, ENERGY = 0.4, BOMB = 1, BIO = 0.2, FIRE = 0, ACID = 0.3)
 	texture_layer_icon_state = "woodgrain"
-	wall_icon = 'icons/turf/walls/wood_wall.dmi'
-	wall_stripe_icon = 'icons/turf/walls/wood_wall_stripe.dmi'
-	low_wall_stripe_icon = 'icons/turf/walls/wood_wall_stripe.dmi'
-	wall_color = "#38260f"
-	wall_type = /turf/closed/wall/mineral/wood
-	false_wall_type = /obj/structure/falsewall/wood
 
 /datum/material/wood/on_applied_obj(obj/source, amount, material_flags)
 	. = ..()
@@ -317,7 +290,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	strength_modifier = 1.2
 	armor_modifiers = list(BLUNT = 1.5, PUNCTURE = 1.5, SLASH = 0, LASER = 1.5, ENERGY = 1.5, BOMB = 1.5, BIO = 1.5, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = 0.5
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
 
 /datum/material/mythril/on_applied_obj(atom/source, amount, material_flags)
 	. = ..()
@@ -390,7 +362,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	beauty_modifier = 0.25
 	turf_sound_override = FOOTSTEP_SAND
 	texture_layer_icon_state = "sand"
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
 
 /datum/material/sand/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.adjust_disgust(17)
@@ -408,7 +379,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	armor_modifiers = list(BLUNT = 0.5, PUNCTURE = 0.5, SLASH = 0, LASER = 1.25, ENERGY = 0.5, BOMB = 0.5, BIO = 0.25, FIRE = 1.5, ACID = 1.5)
 	turf_sound_override = FOOTSTEP_WOOD
 	texture_layer_icon_state = "brick"
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
 
 /datum/material/snow
 	name = "snow"
@@ -421,7 +391,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	armor_modifiers = list(BLUNT = 0.25, PUNCTURE = 0.25, SLASH = 0, LASER = 0.25, ENERGY = 0.25, BOMB = 0.25, BIO = 0.25, FIRE = 0.25, ACID = 1.5)
 	turf_sound_override = FOOTSTEP_SAND
 	texture_layer_icon_state = "sand"
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
 
 /datum/material/snow/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.reagents.add_reagent(/datum/reagent/water, rand(5, 10))
@@ -437,7 +406,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = 0
 	armor_modifiers = list(BLUNT = 1.2, PUNCTURE = 1.2, SLASH = 0, LASER = 1, ENERGY = 1, BOMB = 1.2, BIO = 1.2, FIRE = 1.5, ACID = 1.5)
 	texture_layer_icon_state = "runed"
-	wall_icon = 'icons/turf/walls/cult_wall.dmi'
 
 /datum/material/runedmetal/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.reagents.add_reagent(/datum/reagent/fuel/unholywater, rand(8, 12))
@@ -491,7 +459,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 0.25
 	armor_modifiers = list(BLUNT = 0.25, PUNCTURE = 0.25, SLASH = 0, LASER = 0.25, ENERGY = 0.25, BOMB = 0.25, BIO = 0.25, FIRE = 0, ACID = 1.5)
 	beauty_modifier = -0.1
-	wall_icon = 'icons/turf/walls/stone_wall.dmi'
 
 /datum/material/cardboard/on_applied_obj(obj/source, amount, material_flags)
 	. = ..()

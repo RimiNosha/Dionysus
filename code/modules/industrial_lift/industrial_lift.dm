@@ -280,12 +280,12 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
 			if(istype(dest_turf, /turf/closed/wall))
-				var/turf/closed/wall/C = dest_turf
-				do_sparks(2, FALSE, C)
-				C.dismantle_wall(devastated = TRUE)
+				var/turf/closed/constructed_wall/wall = dest_turf
+				do_sparks(2, FALSE, wall)
+				wall.destroy_wall()
 				for(var/mob/M in urange(8, src))
 					shake_camera(M, 2, 3)
-				playsound(C, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+				playsound(wall, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 			for(var/mob/living/crushed in dest_turf.contents)
 				to_chat(crushed, span_userdanger("You are crushed by [src]!"))
@@ -297,12 +297,12 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
 			if(istype(dest_turf, /turf/closed/wall))
-				var/turf/closed/wall/C = dest_turf
-				do_sparks(2, FALSE, C)
-				C.dismantle_wall(devastated = TRUE)
+				var/turf/closed/constructed_wall/wall = dest_turf
+				do_sparks(2, FALSE, wall)
+				wall.destroy_wall()
 				for(var/mob/client_mob in SSspatial_grid.orthogonal_range_search(src, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS, 8))
 					shake_camera(client_mob, 2, 3)
-				playsound(C, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+				playsound(wall, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 	else
 		///potentially finds a spot to throw the victim at for daring to be hit by a tram. is null if we havent found anything to throw
@@ -315,14 +315,13 @@ TYPEINFO_DEF(/obj/structure/industrial_lift)
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
 			if(istype(dest_turf, /turf/closed/wall))
-				var/turf/closed/wall/collided_wall = dest_turf
-				do_sparks(2, FALSE, collided_wall)
-				collided_wall.dismantle_wall(devastated = TRUE)
-				for(var/mob/client_mob in SSspatial_grid.orthogonal_range_search(collided_wall, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS, 8))
+				var/turf/closed/constructed_wall/wall = dest_turf
+				do_sparks(2, FALSE, wall)
+				wall.destroy_wall()
+				for(var/mob/client_mob in SSspatial_grid.orthogonal_range_search(wall, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS, 8))
 					if(get_dist(dest_turf, client_mob) <= 8)
 						shake_camera(client_mob, 2, 3)
-
-				playsound(collided_wall, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+				playsound(wall, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 			for(var/obj/structure/victim_structure in dest_turf.contents)
 				if(QDELING(victim_structure))

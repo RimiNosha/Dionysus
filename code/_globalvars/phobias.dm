@@ -149,7 +149,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/toy/mecha/honk,
 		/obj/item/trash/cheesie,
 		/obj/machinery/door/airlock/bananium,
-		/obj/structure/falsewall/bananium,
 		/obj/structure/mecha_wreckage/honker,
 		/obj/structure/statue/bananium,
 		/obj/vehicle/sealed/car/clowncar,
@@ -458,11 +457,9 @@ GLOBAL_LIST_INIT(phobia_turfs, list(
 		/turf/open/space,
 	)),
 	"the supernatural" = typecacheof(list(
-		/turf/closed/wall/mineral/cult,
 		/turf/open/floor/cult,
 	)),
 	"aliens" = typecacheof(list(
-		/turf/closed/wall/mineral/abductor,
 		/turf/open/floor/mineral/abductor,
 		/turf/open/floor/plating/abductor,
 		/turf/open/floor/plating/abductor2,

@@ -192,10 +192,6 @@ TYPEINFO_DEF(/obj/structure/low_wall)
 /obj/structure/low_wall/proc/set_material(new_material_type, update_appearance = TRUE)
 	plating_material = new_material_type
 	var/datum/material/mat_ref = GET_MATERIAL_REF(plating_material)
-
-	material_color = mat_ref.wall_color
-	stripe_icon = mat_ref.low_wall_stripe_icon
-
 	if(update_appearance)
 		update_appearance()
 

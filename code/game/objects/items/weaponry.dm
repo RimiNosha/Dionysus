@@ -872,8 +872,8 @@ TYPEINFO_DEF(/obj/item/melee/baseball_bat)
 	else if(target.uses_integrity)
 		target.take_damage(force*damage_mod*3, BRUTE, BLUNT, FALSE, null, 50)
 	else if(iswallturf(target) && prob(force*damage_mod*0.5))
-		var/turf/closed/wall/wall_target = target
-		wall_target.dismantle_wall()
+		var/turf/closed/constructed_wall/wall_target = target
+		wall_target.destroy_wall()
 	else if(ismineralturf(target) && prob(force*damage_mod))
 		var/turf/closed/mineral/mineral_target = target
 		mineral_target.MinedAway()
