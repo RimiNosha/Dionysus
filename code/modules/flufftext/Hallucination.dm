@@ -343,8 +343,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 /datum/hallucination/oh_yeah/New(mob/living/carbon/C, forced = TRUE)
 	set waitfor = FALSE
 	. = ..()
-	var/turf/closed/wall/wall
-	for(var/turf/closed/wall/W in range(7,target))
+	var/turf/closed/constructed_wall/wall
+	for(var/turf/closed/constructed_wall/W in range(7,target))
 		wall = W
 		break
 	if(!wall)

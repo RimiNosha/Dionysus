@@ -11,8 +11,6 @@
 
 	For turfs, what appears under the diagonal corners depends on the turf that was in the same position previously: if you make a wall on
 	a plating floor, you will see plating under the diagonal wall corner, if it was space, you will see space.
-
-	To see an example of a diagonal wall, see '/turf/closed/wall/mineral/titanium' and its subtypes.
 */
 
 #define NO_ADJ_FOUND 0
@@ -427,16 +425,6 @@
 			return SOUTHEAST
 		else
 			return NONE
-
-
-//Example smooth wall
-/turf/closed/wall/smooth
-	name = "smooth wall"
-	icon = 'icons/turf/smooth_wall.dmi'
-	icon_state = "smooth"
-	smoothing_flags = SMOOTH_CORNERS|SMOOTH_BORDER
-	smoothing_groups = null
-	smoothing_groups_with = null
 
 #undef NO_ADJ_FOUND
 #undef ADJ_FOUND

@@ -256,7 +256,6 @@
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/responsory/chaplain
 	l_hand = /obj/item/gun/energy/e_gun
-	belt = /obj/item/storage/belt/soulstone
 	glasses = /obj/item/clothing/glasses/hud/health
 	backpack_contents = list(
 		/obj/item/nullrod = 1,
@@ -280,7 +279,6 @@
 		/obj/item/nullrod = 1,
 		/obj/item/storage/box/survival/engineer = 1,
 	)
-	belt = /obj/item/storage/belt/soulstone/full/chappy
 
 /datum/outfit/centcom/ert/janitor
 	name = "ERT Janitor"

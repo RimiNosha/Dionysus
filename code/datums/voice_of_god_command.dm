@@ -32,10 +32,6 @@ GLOBAL_LIST_INIT(voice_of_god_commands, init_voice_of_god_commands())
  */
 /proc/voice_of_god(message, mob/living/user, list/span_list, base_multiplier = 1, include_speaker = FALSE, forced = null)
 	var/log_message = uppertext(message)
-	var/is_cultie = IS_CULTIST(user)
-	if(LAZYLEN(span_list) && is_cultie)
-		span_list = list("narsiesmall")
-
 	if(!user.say(message, spans = span_list, sanitize = FALSE))
 		return
 

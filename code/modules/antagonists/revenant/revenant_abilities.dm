@@ -275,7 +275,7 @@
 		qdel(blessing)
 		new /obj/effect/temp_visual/revenant(victim)
 
-	if(!isplatingturf(victim) && !istype(victim, /turf/open/floor/engine/cult) && isfloorturf(victim) && prob(15))
+	if(!isplatingturf(victim) && isfloorturf(victim) && prob(15))
 		var/turf/open/floor/floor = victim
 		if(floor.overfloor_placed && floor.floor_tile)
 			new floor.floor_tile(floor)

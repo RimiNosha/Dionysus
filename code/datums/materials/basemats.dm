@@ -396,17 +396,6 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	victim.reagents.add_reagent(/datum/reagent/water, rand(5, 10))
 	return TRUE
 
-/datum/material/runedmetal
-	name = "runed metal"
-	desc = "Mir'ntrath barhah Nar'sie."
-	color = "#3C3434"
-	greyscale_colors = "#3C3434"
-	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
-	sheet_type = /obj/item/stack/sheet/runed_metal
-	value_per_unit = 0
-	armor_modifiers = list(BLUNT = 1.2, PUNCTURE = 1.2, SLASH = 0, LASER = 1, ENERGY = 1, BOMB = 1.2, BIO = 1.2, FIRE = 1.5, ACID = 1.5)
-	texture_layer_icon_state = "runed"
-
 /datum/material/runedmetal/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.reagents.add_reagent(/datum/reagent/fuel/unholywater, rand(8, 12))
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)

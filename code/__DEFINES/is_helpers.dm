@@ -134,8 +134,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isbot(A) (istype(A, /mob/living/simple_animal/bot))
 
-#define isshade(A) (istype(A, /mob/living/simple_animal/shade))
-
 #define ismouse(A) (istype(A, /mob/living/simple_animal/mouse))
 
 #define iscow(A) (istype(A, /mob/living/basic/cow))
@@ -157,8 +155,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isregalrat(A) (istype(A, /mob/living/simple_animal/hostile/regalrat))
 
 #define isguardian(A) (istype(A, /mob/living/simple_animal/hostile/guardian))
-
-#define isconstruct(A) (istype(A, /mob/living/simple_animal/hostile/construct))
 
 #define ismegafauna(A) (istype(A, /mob/living/simple_animal/hostile/megafauna))
 

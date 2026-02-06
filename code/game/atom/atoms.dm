@@ -1112,14 +1112,6 @@ TYPEINFO_DEF(/atom)
 /atom/proc/emag_act(mob/user, obj/item/card/emag/emag_card)
 	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user, emag_card)
 
-/**
- * Respond to narsie eating our atom
- *
- * Default behaviour is to send [COMSIG_ATOM_NARSIE_ACT] and return
- */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
-
 
 ///Return the values you get when an RCD eats you?
 /atom/proc/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)

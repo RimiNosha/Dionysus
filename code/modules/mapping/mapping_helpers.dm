@@ -150,7 +150,7 @@
 					here.PlaceOnTop(T.type)
 					qdel(src)
 					return
-				here.PlaceOnTop(/turf/closed/wall)
+				here.PlaceOnTop(/turf/closed/constructed_wall)
 				qdel(src)
 				return
 			if(9 to 11)

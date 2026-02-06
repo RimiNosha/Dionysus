@@ -69,18 +69,6 @@ TYPEINFO_DEF(/obj/item/paint_sprayer)
 		return
 	if(!proximity)
 		return
-	var/list/modifiers = params2list(params)
-	if(istype(target, /obj/structure/low_wall))
-		var/obj/structure/low_wall/target_low_wall = target
-		if(LAZYACCESS(modifiers, RIGHT_CLICK))
-			target_low_wall.paint_stripe(stripe_color)
-		else
-			target_low_wall.paint_wall(wall_color)
-		user.changeNext_move(CLICK_CD_MELEE)
-		user.visible_message(span_notice("[user] paints \the [target_low_wall]."), \
-			span_notice("You paint \the [target_low_wall]."))
-		playsound(src, SFX_PAINT, 50, TRUE)
-		return TRUE
 	if(!isturf(target) || isspaceturf(target))
 		return TRUE
 	target.add_atom_colour(wall_color, WASHABLE_COLOUR_PRIORITY)
@@ -106,23 +94,6 @@ TYPEINFO_DEF(/obj/item/paint_sprayer)
 		return
 	if(!proximity)
 		return
-	var/list/modifiers = params2list(params)
-	if(istype(target, /obj/structure/low_wall))
-		var/obj/structure/low_wall/target_low_wall = target
-		if(LAZYACCESS(modifiers, RIGHT_CLICK))
-			if(!target_low_wall.stripe_paint)
-				to_chat(user, span_warning("There is no paint to strip!"))
-				return TRUE
-			target_low_wall.paint_stripe(null)
-		else
-			if(!target_low_wall.wall_paint)
-				to_chat(user, span_warning("There is no paint to strip!"))
-				return TRUE
-			target_low_wall.paint_wall(null)
-		user.changeNext_move(CLICK_CD_MELEE)
-		user.visible_message(span_notice("[user] strips the paint from \the [target_low_wall]."), \
-			span_notice("You strip the paint from \the [target_low_wall]."))
-		return TRUE
 	if(!isturf(target) && !isobj(target))
 		return
 	if(target.color != initial(target.color))

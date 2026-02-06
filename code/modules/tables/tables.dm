@@ -91,12 +91,6 @@ TYPEINFO_DEF(/obj/structure/table)
 		QUEUE_SMOOTH(src)
 		QUEUE_SMOOTH_NEIGHBORS(src)
 
-
-/obj/structure/table/narsie_act()
-	var/atom/A = loc
-	qdel(src)
-	new /obj/structure/table/wood(A)
-
 /obj/structure/table/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
 
@@ -190,10 +184,6 @@ TYPEINFO_DEF(/obj/structure/table)
 
 	var/obj/structure/table/T = locate() in get_turf(mover)
 	if(T && !T.is_flipped())
-		return TRUE
-
-	var/obj/structure/low_wall/L = locate() in get_turf(mover)
-	if(L)
 		return TRUE
 
 	if(is_flipped() && !(border_dir & dir))
@@ -680,9 +670,6 @@ TYPEINFO_DEF(/obj/structure/table/glass)
 			shard.color = color
 	qdel(src)
 
-/obj/structure/table/glass/narsie_act()
-	color = NARSIE_WINDOW_COLOUR
-
 TYPEINFO_DEF(/obj/structure/table/glass/plasmaglass)
 	default_materials = list(/datum/material/alloy/plasmaglass = 2000)
 
@@ -714,10 +701,6 @@ TYPEINFO_DEF(/obj/structure/table/glass/plasmaglass)
 	smoothing_groups = SMOOTH_GROUP_WOOD_TABLES //Don't smooth with SMOOTH_GROUP_TABLES
 	smoothing_groups_with = SMOOTH_GROUP_WOOD_TABLES
 
-/obj/structure/table/wood/narsie_act(total_override = TRUE)
-	if(!total_override)
-		..()
-
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
 	name = "gambling table"
 	desc = "A seedy table for seedy dealings in seedy places."
@@ -725,9 +708,6 @@ TYPEINFO_DEF(/obj/structure/table/glass/plasmaglass)
 	icon_state = "poker_table-0"
 	base_icon_state = "poker_table"
 	buildstack = /obj/item/stack/tile/carpet
-
-/obj/structure/table/wood/poker/narsie_act()
-	..(FALSE)
 
 /obj/structure/table/wood/fancy
 	name = "fancy table"
