@@ -67,7 +67,7 @@ Simple datum which is instanced once per type and is used for every object of sa
 		id = type
 	if(texture_layer_icon_state)
 		cached_texture_filter_icon = icon('icons/materials/composite.dmi', texture_layer_icon_state)
-	return INITIALIZE_HINT_NORMAL
+	return TRUE
 
 ///This proc is called when the material is added to an object.
 /datum/material/proc/on_applied(atom/source, amount, material_flags)

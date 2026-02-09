@@ -2,6 +2,7 @@
 	name = "steel wall"
 	desc = "A huge chunk of iron used to separate rooms."
 	icon = 'icons/construction/wall/iron/wall/wall_0.dmi'
+	icon_state = "wall-0"
 	base_icon_state = "wall"
 	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
 	smoothing_flags = SMOOTH_BITMASK
@@ -22,6 +23,9 @@
 	return ..()
 
 /turf/closed/constructed_wall/Initialize(mapload, material_plating, material_reinforcement, material_trim_low, material_trim_high)
+	. = ..()
+	if(uses_integrity && atom_integrity == null)
+		atom_integrity = max_integrity
 	src.material_plating = material_plating || src.material_plating || /datum/material/steel
 	src.material_reinforcement = material_reinforcement || src.material_reinforcement
 	src.material_trim_low = material_trim_low || src.material_trim_low
@@ -30,7 +34,6 @@
 	update_material_resistances()
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
-	return ..()
 
 /turf/closed/constructed_wall/proc/update_material_resistances()
 	var/new_heat_resistance = material_plating.heat_resistance
@@ -58,16 +61,20 @@
 	last_damage = damage_amount
 	return ..()
 
+/turf/closed/constructed_wall/update_integrity(new_value)
+	. = ..()
+	update_appearance()
+
 /turf/closed/constructed_wall/welder_act(mob/living/user, obj/item/tool)
 	if(!Adjacent(user))
 		return ..()
-	if(atom_integrity >= max_integrity)
-		return TRUE
-	var/repair_amount = max(10, max_integrity * 0.1) // always repair at least 10 damage, otherwise 10% of the wall's max health
-	balloon_alert_to_viewers("repairing...")
-	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
-		return TRUE
-	repair_damage(repair_amount)
+	while(atom_integrity < max_integrity)
+		var/repair_amount = max(10, max_integrity * 0.1) // always repair at least 10 damage, otherwise 10% of the wall's max health
+		repair_amount = min(repair_amount, max_integrity - atom_integrity)
+		if(!tool.use_tool(src, user, 2 SECONDS, volume = 50))
+			return TRUE
+		repair_damage(repair_amount)
+	return TRUE
 
 /turf/closed/constructed_wall/atom_destruction(damage_flag)
 	. = ..()
@@ -129,8 +136,13 @@
 
 /turf/closed/constructed_wall/update_icon(updates)
 	. = ..()
+	if(!SSmaterials.initialized)
+		return
 	var/integrity_pct = atom_integrity / max_integrity
 	var/datum/material/plating_material_instance = GET_MATERIAL_REF(material_plating)
+	if(!plating_material_instance)
+		stack_trace("null material_plating: [material_plating]")
+		return
 	var/list/icon/plating_icons = plating_material_instance.wall_icons
 	var/total_states = length(plating_icons)
 	if(!total_states)
@@ -141,6 +153,8 @@
 
 /turf/closed/constructed_wall/update_overlays()
 	. = ..()
+	if(!SSmaterials.initialized)
+		return
 	if(deconstruction_stage)
 		. += deconstruction_overlay()
 	if(material_trim_high)
