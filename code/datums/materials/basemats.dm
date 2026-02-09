@@ -9,6 +9,14 @@
 	value_per_unit = IRON_VALUE_PER_UNIT
 	wall_integrity = 250
 	heat_resistance = 800
+	wall_icons = list(
+		'icons/construction/wall/iron/wall/wall_0.dmi',
+		'icons/construction/wall/iron/wall/wall_1.dmi',
+		'icons/construction/wall/iron/wall/wall_2.dmi',
+		'icons/construction/wall/iron/wall/wall_3.dmi',
+		'icons/construction/wall/iron/wall/wall_4.dmi',
+		'icons/construction/wall/iron/wall/wall_5.dmi',
+	)
 
 /datum/material/steel/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)

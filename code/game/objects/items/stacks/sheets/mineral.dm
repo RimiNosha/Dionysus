@@ -39,7 +39,6 @@ GLOBAL_LIST_INIT(sandstone_recipes, list ( \
 	inhand_icon_state = "sheet-sandstone"
 	throw_range = 5
 	mats_per_unit = list(/datum/material/sandstone=MINERAL_MATERIAL_AMOUNT)
-	sheettype = "sandstone"
 	merge_type = /obj/item/stack/sheet/mineral/sandstone
 	material_type = /datum/material/sandstone
 
@@ -97,7 +96,6 @@ GLOBAL_LIST_INIT(sandbag_recipes, list ( \
 	icon_state = "sheet-diamond"
 	inhand_icon_state = "sheet-diamond"
 	singular_name = "diamond"
-	sheettype = "diamond"
 	mats_per_unit = list(/datum/material/diamond=MINERAL_MATERIAL_AMOUNT)
 	novariants = TRUE
 	grind_results = list(/datum/reagent/carbon = 20)
@@ -122,7 +120,6 @@ GLOBAL_LIST_INIT(diamond_recipes, list ( \
 	icon_state = "sheet-uranium"
 	inhand_icon_state = "sheet-uranium"
 	singular_name = "uranium sheet"
-	sheettype = "uranium"
 	mats_per_unit = list(/datum/material/uranium=MINERAL_MATERIAL_AMOUNT)
 	novariants = TRUE
 	grind_results = list(/datum/reagent/uranium = 20)
@@ -150,7 +147,6 @@ GLOBAL_LIST_INIT(uranium_recipes, list ( \
 	icon_state = "sheet-plasma"
 	inhand_icon_state = "sheet-plasma"
 	singular_name = "plasma sheet"
-	sheettype = "plasma"
 	resistance_flags = FLAMMABLE
 	max_integrity = 100
 	mats_per_unit = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT)
@@ -186,7 +182,6 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 	icon_state = "sheet-gold"
 	inhand_icon_state = "sheet-gold"
 	singular_name = "gold bar"
-	sheettype = "gold"
 	mats_per_unit = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
 	grind_results = list(/datum/reagent/gold = 20)
 	point_value = 20
@@ -212,7 +207,6 @@ GLOBAL_LIST_INIT(gold_recipes, list ( \
 	icon_state = "sheet-silver"
 	inhand_icon_state = "sheet-silver"
 	singular_name = "silver bar"
-	sheettype = "silver"
 	mats_per_unit = list(/datum/material/silver=MINERAL_MATERIAL_AMOUNT)
 	grind_results = list(/datum/reagent/silver = 20)
 	point_value = 20
@@ -237,7 +231,6 @@ GLOBAL_LIST_INIT(silver_recipes, list ( \
 	icon_state = "sheet-bananium"
 	inhand_icon_state = "sheet-bananium"
 	singular_name = "bananium sheet"
-	sheettype = "bananium"
 	mats_per_unit = list(/datum/material/bananium=MINERAL_MATERIAL_AMOUNT)
 	novariants = TRUE
 	grind_results = list(/datum/reagent/consumable/banana = 20)
@@ -269,7 +262,6 @@ GLOBAL_LIST_INIT(bananium_recipes, list ( \
 	w_class = WEIGHT_CLASS_NORMAL
 	throw_speed = 1
 	throw_range = 3
-	sheettype = "titanium"
 	mats_per_unit = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT)
 	point_value = 20
 	merge_type = /obj/item/stack/sheet/mineral/titanium
@@ -300,7 +292,6 @@ GLOBAL_LIST_INIT(titanium_recipes, list ( \
 	w_class = WEIGHT_CLASS_NORMAL
 	throw_speed = 1
 	throw_range = 3
-	sheettype = "plastitanium"
 	mats_per_unit = list(/datum/material/alloy/plastitanium=MINERAL_MATERIAL_AMOUNT)
 	point_value = 45
 	material_type = /datum/material/alloy/plastitanium
@@ -380,7 +371,6 @@ GLOBAL_LIST_INIT(snow_recipes, list ( \
 	icon_state = "sheet-abductor"
 	inhand_icon_state = "sheet-abductor"
 	singular_name = "alien alloy sheet"
-	sheettype = "abductor"
 	mats_per_unit = list(/datum/material/alloy/alien=MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/mineral/abductor
 	material_type = /datum/material/alloy/alien

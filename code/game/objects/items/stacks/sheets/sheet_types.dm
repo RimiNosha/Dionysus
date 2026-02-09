@@ -142,7 +142,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	matter_amount = 4
 	cost = 500
 	source = /datum/robot_energy_storage/iron
-	tram_wall_type = /obj/structure/tramwall
 
 /obj/item/stack/sheet/steel/fifty
 	amount = 50
@@ -269,7 +268,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/mineral/wood)
 	stamina_critical_chance = 10
 
 	mats_per_unit = list(/datum/material/wood=MINERAL_MATERIAL_AMOUNT)
-	sheettype = "wood"
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/sheet/mineral/wood
 	novariants = TRUE
@@ -313,7 +311,6 @@ TYPEINFO_DEF(/obj/item/stack/sheet/mineral/bamboo)
 	icon_state = "sheet-bamboo"
 	inhand_icon_state = "sheet-bamboo"
 	icon = 'icons/obj/stack_objects.dmi'
-	sheettype = "bamboo"
 	mats_per_unit = list(/datum/material/bamboo = MINERAL_MATERIAL_AMOUNT)
 	throwforce = 15
 	resistance_flags = FLAMMABLE
@@ -576,7 +573,6 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	lefthand_file = 'icons/mob/inhands/misc/sheets_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/sheets_righthand.dmi'
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	sheettype = "bronze"
 	force = 5
 	throwforce = 10
 	max_amount = 50
@@ -588,7 +584,6 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	tableVariant = /obj/structure/table/bronze
 	material_type = /datum/material/bronze
 	has_unique_girder = TRUE
-	window_type = /obj/structure/window/bronze/fulltile
 
 /obj/item/stack/sheet/bronze/get_main_recipes()
 	. = ..()

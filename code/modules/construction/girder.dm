@@ -8,7 +8,7 @@
 /obj/structure/girder
 	name = "girder frame"
 	desc = "A frame for a wall girder."
-	icon = 'icons/walls/girder.dmi'
+	icon = 'icons/construction/girder.dmi'
 	icon_state = "girder-base"
 	base_icon_state = "girder"
 	density = FALSE

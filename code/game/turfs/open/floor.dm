@@ -189,7 +189,6 @@
 		var/obj/item/stack/sheet/sheets = object
 		if(user.combat_mode)
 			return sheets.on_attack_floor(user, src)
-		return sheets.on_use_floor(user, src)
 	return FALSE
 
 /turf/open/floor/crowbar_act(mob/living/user, obj/item/I)

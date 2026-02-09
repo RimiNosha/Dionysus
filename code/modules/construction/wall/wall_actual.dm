@@ -1,7 +1,7 @@
 /turf/closed/constructed_wall
 	name = "steel wall"
 	desc = "A huge chunk of iron used to separate rooms."
-	icon = 'icons/walls/plating/steel.dmi'
+	icon = 'icons/construction/wall/iron/wall/wall_0.dmi'
 	base_icon_state = "wall"
 	smoothing_flags = SMOOTH_BITMASK|SMOOTH_OBJ
 	smoothing_flags = SMOOTH_BITMASK
@@ -127,60 +127,53 @@
 			else
 				. += span_notice("You could remove the plating with a <i>crowbar</i>.")
 
-/turf/closed/constructed_wall/proc/trim_overlays()
-	var/static/list/trim_map_low = alist(
-		// /datum/material/bronze = 'icons/walls/trim_low/bronze.dmi',
-		// /datum/material/steel = 'icons/walls/trim_low/iron.dmi',
-		// /datum/material/alloy/plasteel = 'icons/walls/trim_low/reinforced.dmi',
-		/datum/material/silver = 'icons/walls/trim_low/silver.dmi',
-		// /datum/material/titanium = 'icons/walls/trim_low/titanium.dmi',
-		// /datum/material/wood = 'icons/walls/trim_low/wood.dmi',
-	)
-	var/static/list/trim_map_high = alist(
-		// /datum/material/bronze = 'icons/walls/trim_high/bronze.dmi',
-		// /datum/material/steel = 'icons/walls/trim_high/iron.dmi',
-		// /datum/material/alloy/plasteel = 'icons/walls/trim_high/reinforced.dmi',
-		/datum/material/silver = 'icons/walls/trim_high/silver.dmi',
-		// /datum/material/titanium = 'icons/walls/trim_high/titanium.dmi',
-		// /datum/material/wood = 'icons/walls/trim_high/wood.dmi',
-	)
-	var/list/overlays = list()
-	if(material_trim_low)
-		if(!(material_trim_low in trim_map_low))
-			stack_trace("unhandled material_trim_low: [material_trim_low]")
-		else overlays += icon(trim_map_low[material_trim_low], icon_state)
-	if(material_trim_high)
-		if(!(material_trim_high in trim_map_high))
-			stack_trace("unhandled material_trim_high: [material_trim_high]")
-		else overlays += icon(trim_map_high[material_trim_high], icon_state)
-	return overlays
-
-/turf/closed/constructed_wall/update_icon()
-	var/static/list/plating_map = alist(
-		// /datum/material/marbleblack = 'icons/walls/plating/blackmarble.dmi',
-		// /datum/material/bronze = 'icons/walls/plating/bronze.dmi',
-		/datum/material/steel = 'icons/walls/plating/steel.dmi',
-		// /datum/material/alloy/plasteel = 'icons/walls/plating/reinforced.dmi',
-		// /datum/material/lead = 'icons/walls/plating/lead.dmi',
-		// /datum/material/silver = 'icons/walls/plating/silver.dmi',
-		// /datum/material/wood = 'icons/walls/plating/wood.dmi',
-	)
-	if(!(material_plating in plating_map))
-		stack_trace("plating_overlay(): invalid material_plating: [material_plating]")
-		icon = /turf/closed/constructed_wall::icon
+/turf/closed/constructed_wall/update_icon(updates)
+	. = ..()
+	var/integrity_pct = atom_integrity / max_integrity
+	var/datum/material/plating_material_instance = GET_MATERIAL_REF(material_plating)
+	var/list/icon/plating_icons = plating_material_instance.wall_icons
+	var/total_states = length(plating_icons)
+	if(!total_states)
+		stack_trace("unimplemented material_plating: [material_plating]")
 		return
-	icon = plating_map[material_plating]
-	return ..()
+	var/wanted_state = MAP(integrity_pct, 0, 1, 1, total_states)
+	icon = plating_icons[wanted_state]
 
 /turf/closed/constructed_wall/update_overlays()
 	. = ..()
-	. += trim_overlays()
-	. += deconstruction_overlay()
+	if(deconstruction_stage)
+		. += deconstruction_overlay()
+	if(material_trim_high)
+		. += trim_overlay_high()
+	if(material_trim_low)
+		. += trim_overlay_low()
+
+/turf/closed/constructed_wall/proc/trim_overlay_low()
+	var/integrity_pct = atom_integrity / max_integrity
+	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_low)
+	var/list/icon/trim_icons = material_instance.wall_icons_trim
+	var/total_states = length(trim_icons)
+	if(!total_states)
+		stack_trace("unimplemented material_trim_low: [material_trim_low]")
+		return
+	var/wanted_state = MAP(integrity_pct, 0, 1, 1, total_states)
+	return mutable_appearance(trim_icons[wanted_state], replacetext(icon_state, "wall", "trim"))
+
+/turf/closed/constructed_wall/proc/trim_overlay_high()
+	var/integrity_pct = atom_integrity / max_integrity
+	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_high)
+	var/list/icon/trim_icons = material_instance.wall_icons_trim
+	var/total_states = length(trim_icons)
+	if(!total_states)
+		stack_trace("unimplemented material_trim_low: [material_trim_low]")
+		return
+	var/wanted_state = MAP(integrity_pct, 0, 1, 1, total_states)
+	return mutable_appearance(trim_icons[wanted_state], replacetext(icon_state, "wall", "trim"))
 
 /turf/closed/constructed_wall/proc/deconstruction_overlay()
 	if(deconstruction_stage == 0)
 		return
-	var/list/overlays = list(mutable_appearance('icons/walls/decon.dmi', "d[deconstruction_stage]", alpha = 125))
+	var/list/overlays = list(mutable_appearance('icons/construction/wall/decon.dmi', "d[deconstruction_stage]", alpha = 125))
 	if(deconstruction_r_step > 0)
-		overlays += list(mutable_appearance('icons/walls/decon.dmi', "r[deconstruction_r_step]", alpha = 125))
+		overlays += list(mutable_appearance('icons/construction/wall/decon.dmi', "r[deconstruction_r_step]", alpha = 125))
 	return overlays

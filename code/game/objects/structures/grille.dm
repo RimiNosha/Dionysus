@@ -190,12 +190,6 @@ TYPEINFO_DEF(/obj/structure/grille)
 		R.use(1)
 		return TRUE
 
-	//Try place window on the grille if the sheet supports it
-	else if(istype(W, /obj/item/stack/sheet))
-		var/obj/item/stack/sheet/my_sheet = W
-		if(my_sheet.try_install_window(user, src.loc, src))
-			return TRUE
-
 	else if(istype(W, /obj/item/shard) || !shock(user, 70))
 		return ..()
 

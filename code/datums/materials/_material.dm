@@ -50,14 +50,10 @@ Simple datum which is instanced once per type and is used for every object of sa
 	var/heat_resistance
 	/// The integrity of walls made with this material.
 	var/wall_integrity
-	/// The base icon name for walls made with this material.
-	var/wall_icon_id
-	/// Can this material make walls?
-	var/can_make_walls
-	/// Can this material be used for wall trims?
-	var/can_make_walls_trim
-	/// The name of the walls made with this material.
-	var/wall_name
+
+	var/list/icon/wall_icons //! The icons used for walls made with this material. In order of the wall's damage level from max durability to destroyed.
+	var/list/icon/wall_icons_trim //! The icons used for wall trims made with this material. In order of the wall's damage level from max durability to destroyed.
+	var/wall_name //! The name of the walls made with this material.
 
 /** Handles initializing the material.
  *
@@ -69,18 +65,9 @@ Simple datum which is instanced once per type and is used for every object of sa
 		id = _id
 	else if(isnull(id))
 		id = type
-
 	if(texture_layer_icon_state)
 		cached_texture_filter_icon = icon('icons/materials/composite.dmi', texture_layer_icon_state)
-
-	if(wall_icon_id)
-		var/icon_base = "icons/construction/[wall_icon_id]"
-		if(length(flist("[icon_base]/wall")))
-			can_make_walls = TRUE
-		if(length(flist("[icon_base]/trim_top")))
-			can_make_walls_trim = TRUE
-
-	return TRUE
+	return INITIALIZE_HINT_NORMAL
 
 ///This proc is called when the material is added to an object.
 /datum/material/proc/on_applied(atom/source, amount, material_flags)

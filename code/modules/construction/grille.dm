@@ -2,7 +2,7 @@
 	base_icon_state = "grille"
 	name = "grille"
 	desc = "A metal grille."
-	icon = 'icons/walls/grille.dmi'
+	icon = 'icons/construction/grille.dmi'
 	icon_state = "grille-0"
 	density = TRUE
 	anchored = FALSE
@@ -86,19 +86,6 @@
 
 /obj/structure/grillen/proc/repair()
 	repair_damage(max_integrity)
-
-/obj/structure/grillen/attackby(obj/item/weapon, mob/user, params)
-	if(!Adjacent(user))
-		return ..()
-	if(!istype(weapon, /obj/item/stack/sheet))
-		return ..()
-	var/obj/item/stack/sheet/sheet = weapon
-	if(isnull(sheet.window_type))
-		return ..()
-	if(shock(user, 100))
-		return TRUE
-	sheet.try_install_window(user, get_turf(src), src)
-	return TRUE
 
 /obj/structure/grillen/BumpedBy(atom/movable/AM)
 	if(!ismob(AM))

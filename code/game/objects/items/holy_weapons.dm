@@ -410,10 +410,6 @@ TYPEINFO_DEF(/obj/item/clothing/head/helmet/chaplain)
 	hitsound = 'sound/weapons/rapierhit.ogg'
 	menu_description = "A sharp blade which partially penetrates armor. Able to awaken a friendly spirit to provide guidance. Very effective at butchering bodies. Can be worn on the back."
 
-/obj/item/nullrod/scythe/talking/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/spirit_holding)
-
 /obj/item/nullrod/scythe/talking/chainsword
 	name = "possessed chainsaw sword"
 	desc = "Suffer not a heretic to live."
