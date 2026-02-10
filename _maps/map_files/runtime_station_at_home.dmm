@@ -3,7 +3,7 @@
 "c" = (/turf/open/floor/light,/area/centcom)
 "d" = (/turf/open/floor/plastic,/area/centcom)
 "e" = (/obj/effect/landmark/error,/obj/effect/landmark/latejoin,/obj/effect/landmark/start,/obj/effect/landmark/observer_start,/turf/open/floor/light,/area/centcom)
-"f" = (/obj/effect/landmark/wall_reinforcement/steel,/turf/closed/constructed_wall/steel,/area/centcom)
+"f" = (/turf/closed/constructed_wall/steel/steel,/area/centcom)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

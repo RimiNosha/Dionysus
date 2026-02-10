@@ -7,8 +7,7 @@
 /datum/map_generator_module/border/syndie_walls
 	spawnableAtoms = list()
 	spawnableTurfs = list(
-		/turf/closed/constructed_wall/steel = 100,
-		/obj/effect/landmark/wall_reinforcement/steel = 100,
+		/turf/closed/constructed_wall/steel/steel = 100,
 	)
 
 /datum/map_generator_module/syndie_furniture
