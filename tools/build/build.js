@@ -6,8 +6,7 @@
  * https://github.com/stylemistake/juke-build
  */
 
-import fs from "fs";
-import https from "https";
+import fs, { existsSync } from "fs";
 import Juke from "./juke/index.js";
 import { DreamDaemon, DreamMaker } from "./lib/byond.js";
 import { yarn } from "./lib/yarn.js";
@@ -90,12 +89,11 @@ export const IconCutterTarget = new Juke.Target({
     return folders.map((file) => file.replace(`${CUTTER_SUFFIX}`, ".dmi"));
   },
   executes: async () => {
-    await Juke.exec(pythonPath, [
-      "-m",
-      "icon_cutter.cutter",
-      "cutter_templates",
-      "icons",
-    ], { shell: true });
+    await Juke.exec(
+      pythonPath,
+      ["-m", "icon_cutter.cutter", "cutter_templates", "icons"],
+      { shell: true },
+    );
   },
 });
 
@@ -113,12 +111,20 @@ export const DionysusIconCutterTarget = new Juke.Target({
     return folders.map((file) => file.replace(`${CUTTER_SUFFIX}`, ".dmi"));
   },
   executes: async () => {
-    await Juke.exec(pythonPath, [
-      "-m",
-      "icon_cutter.cutter",
-      "cutter_templates", // WHY ARE YOU RELATIVE??? HUH???
-      "dionysus_icons",
-    ], { shell: true });
+    if (!existsSync("dionysus_icons")) {
+      Juke.logger.info("Dionysus icons not found, skipping");
+      return;
+    }
+    await Juke.exec(
+      pythonPath,
+      [
+        "-m",
+        "icon_cutter.cutter",
+        "cutter_templates", // WHY ARE YOU RELATIVE??? HUH???
+        "dionysus_icons",
+      ],
+      { shell: true },
+    );
   },
 });
 
