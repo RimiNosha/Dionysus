@@ -47,9 +47,9 @@ Simple datum which is instanced once per type and is used for every object of sa
 	///What type of shard the material will shatter to
 	var/obj/item/shard_type
 	// The heat resistance of the material
-	var/heat_resistance
+	var/heat_resistance = 400
 	/// The integrity of walls made with this material.
-	var/wall_integrity
+	var/wall_integrity = 50
 
 	var/list/icon/wall_icons //! The icons used for walls made with this material. In order of the wall's damage level from destroyed to max durability.
 	var/list/icon/wall_icons_trim_top //! The icons used for wall trims made with this material. In order of the wall's damage level from destroyed to max durability.
