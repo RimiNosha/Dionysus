@@ -51,8 +51,9 @@ Simple datum which is instanced once per type and is used for every object of sa
 	/// The integrity of walls made with this material.
 	var/wall_integrity
 
-	var/list/icon/wall_icons //! The icons used for walls made with this material. In order of the wall's damage level from max durability to destroyed.
-	var/list/icon/wall_icons_trim //! The icons used for wall trims made with this material. In order of the wall's damage level from max durability to destroyed.
+	var/list/icon/wall_icons //! The icons used for walls made with this material. In order of the wall's damage level from destroyed to max durability.
+	var/list/icon/wall_icons_trim_top //! The icons used for wall trims made with this material. In order of the wall's damage level from destroyed to max durability.
+	var/list/icon/wall_icons_trim_bottom //! The icons used for wall trims made with this material. In order of the wall's damage level from destroyed to max durability.
 	var/wall_name //! The name of the walls made with this material.
 
 /** Handles initializing the material.

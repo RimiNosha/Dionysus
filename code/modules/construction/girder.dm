@@ -8,9 +8,9 @@
 /obj/structure/girder
 	name = "girder frame"
 	desc = "A frame for a wall girder."
-	icon = 'icons/construction/girder.dmi'
-	icon_state = "girder-base"
-	base_icon_state = "girder"
+	icon = 'icons/construction/wall/girder/girder_0.dmi'
+	icon_state = "wall-0"
+	base_icon_state = "wall"
 	density = FALSE
 	can_atmos_pass = CANPASS_ALWAYS
 	smoothing_groups = SMOOTH_GROUP_WALLS
@@ -29,15 +29,37 @@
 /obj/structure/girder/Initialize(mapload)
 	. = ..()
 	become_atmos_sensitive()
+	update_appearance()
 
 /obj/structure/girder/update_overlays()
 	. = ..()
-	if(!isnull(material_reinforcement))
-		. += "reinf-temp"
-	if(!isnull(material_plating))
-		return
+	if(material_plating)
+		return .
 	if(anchored)
-		. += "girder-anchor"
+		. += "anchoring"
+
+/obj/structure/girder/update_icon(updates)
+	. = ..()
+	var/static/list/icon/girder_icons = list(
+		'icons/construction/wall/girder/girder_0.dmi',
+		'icons/construction/wall/girder/girder_1.dmi',
+		'icons/construction/wall/girder/girder_2.dmi',
+	)
+	var/static/list/icon/reinforced_icons = list(
+		'icons/construction/wall/girder/reinforced_0.dmi',
+		'icons/construction/wall/girder/reinforced_1.dmi',
+		'icons/construction/wall/girder/reinforced_2.dmi',
+	)
+	var/integrity_pct = atom_integrity / max_integrity
+	var/wanted_state = MAP(integrity_pct, 0, 1, 0, 2)
+	if(material_reinforcement)
+		icon = reinforced_icons[wanted_state]
+	else if(material_plating)
+		icon = girder_icons[wanted_state]
+	else
+		icon = 'icons/construction/wall/girder/base.dmi'
+		icon_state = "base"
+
 
 /obj/structure/girder/examine(mob/user)
 	. = ..()
@@ -58,19 +80,14 @@
 
 /obj/structure/girder/proc/start_smoothing()
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
-	// todo: actually have different bitmask states, plz bimmer
-	// if(material_reinforcement)
-	// 	base_icon_state = "girder-reinf"
-	// else
-	// 	base_icon_state = "girder"
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
-	update_appearance(UPDATE_OVERLAYS)
+	update_appearance()
 
 /obj/structure/girder/proc/stop_smoothing()
 	smoothing_flags = initial(smoothing_flags)
 	icon_state = initial(icon_state)
-	update_appearance(UPDATE_OVERLAYS)
+	update_appearance()
 
 /obj/structure/girder/attackby(obj/item/object, mob/user, params)
 	if(!Adjacent(object))
@@ -182,6 +199,9 @@
 		return ..()
 	if(isnull(material_plating))
 		return ..()
+	if(!anchored)
+		balloon_alert(user, "not anchored!")
+		return TRUE
 	if(!isnull(material_reinforcement) && !reinforcement_secure)
 		balloon_alert(user, "secure the reinforcements first!")
 		return TRUE

@@ -112,6 +112,12 @@ GLOBAL_LIST_INIT(diamond_recipes, list ( \
 	. = ..()
 	. += GLOB.diamond_recipes
 
+/** TODO!! */
+/obj/item/stack/sheet/mineral/lead
+/obj/item/stack/sheet/mineral/marble_black
+/obj/item/stack/sheet/mineral/marble_white
+/obj/item/stack/sheet/mineral/centcomnium
+
 /*
  * Uranium
  */

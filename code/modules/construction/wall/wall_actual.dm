@@ -14,24 +14,24 @@
 	var/heat_resistance = /datum/material/steel::heat_resistance
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.
 	var/datum/material/material_reinforcement //! (if applicable) the material that the reinforcement rods are made of.
-	var/datum/material/material_trim_low //! (if applicable) the material that the bottom trim is made of.
-	var/datum/material/material_trim_high //! (if applicable) the material that the top trim is made of.
+	var/datum/material/material_trim_bottom //! (if applicable) the material that the bottom trim is made of.
+	var/datum/material/material_trim_top //! (if applicable) the material that the top trim is made of.
 	var/deconstruction_stage = DECON_NONE //! the current stage of wall deconstruction
 	var/deconstruction_r_step = DECON_REINF_NONE //! the current stage of reinforcement deconstruction
 
-/turf/closed/constructed_wall/New(loc, material_plating, material_reinforcement, material_trim_low, material_trim_high)
+/turf/closed/constructed_wall/New(loc, material_plating, material_reinforcement, material_trim_bottom, material_trim_top)
 	return ..()
 
-/turf/closed/constructed_wall/Initialize(mapload, material_plating, material_reinforcement, material_trim_low, material_trim_high)
+/turf/closed/constructed_wall/Initialize(mapload, material_plating, material_reinforcement, material_trim_bottom, material_trim_top)
 	. = ..()
 	if(uses_integrity && atom_integrity == null)
 		atom_integrity = max_integrity
 	src.material_plating = material_plating || src.material_plating || /datum/material/steel
 	src.material_reinforcement = material_reinforcement || src.material_reinforcement
-	src.material_trim_low = material_trim_low || src.material_trim_low
-	src.material_trim_high = material_trim_high || src.material_trim_high
-	name = src.material_plating::wall_name || "[src.material_plating::name] wall"
+	src.material_trim_bottom = material_trim_bottom || src.material_trim_bottom
+	src.material_trim_top = material_trim_top || src.material_trim_top
 	update_material_resistances()
+	update_appearance()
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
 
@@ -109,10 +109,10 @@
 				. += span_warning("Looks fine to me.")
 			if(75 to 100)
 				. += span_warning("One could argue that the damage is soul.")
-	if(!isnull(material_trim_low) || !isnull(material_trim_high))
-		if(!isnull(material_trim_low))
+	if(!isnull(material_trim_bottom) || !isnull(material_trim_top))
+		if(!isnull(material_trim_bottom))
 			. += span_notice("You could remove the bottom trim with a <i>crowbar</i>.")
-		if(!isnull(material_trim_high))
+		if(!isnull(material_trim_top))
 			. += span_notice("You could remove the top trim with a <i>crowbar</i>.")
 		return .
 	switch(deconstruction_stage)
@@ -157,29 +157,34 @@
 		return
 	if(deconstruction_stage)
 		. += deconstruction_overlay()
-	if(material_trim_high)
-		. += trim_overlay_high()
-	if(material_trim_low)
-		. += trim_overlay_low()
+	if(material_trim_top)
+		. += trim_overlay_top()
+	if(material_trim_bottom)
+		. += trim_overlay_bottom()
 
-/turf/closed/constructed_wall/proc/trim_overlay_low()
+/turf/closed/constructed_wall/update_name(updates)
+	. = ..()
+	var/wall_name = material_plating::wall_name || material_plating::name
+	name = "[wall_name] [material_reinforcement ? "bulkhead" : "wall"]"
+
+/turf/closed/constructed_wall/proc/trim_overlay_bottom()
 	var/integrity_pct = atom_integrity / max_integrity
-	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_low)
-	var/list/icon/trim_icons = material_instance.wall_icons_trim
+	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_bottom)
+	var/list/icon/trim_icons = material_instance.wall_icons_trim_bottom
 	var/total_states = length(trim_icons)
 	if(!total_states)
-		stack_trace("unimplemented material_trim_low: [material_trim_low]")
+		stack_trace("unimplemented material_trim_bottom: [material_trim_bottom]")
 		return
 	var/wanted_state = MAP(integrity_pct, 0, 1, 1, total_states)
 	return mutable_appearance(trim_icons[wanted_state], replacetext(icon_state, "wall", "trim"))
 
-/turf/closed/constructed_wall/proc/trim_overlay_high()
+/turf/closed/constructed_wall/proc/trim_overlay_top()
 	var/integrity_pct = atom_integrity / max_integrity
-	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_high)
-	var/list/icon/trim_icons = material_instance.wall_icons_trim
+	var/datum/material/material_instance = GET_MATERIAL_REF(material_trim_top)
+	var/list/icon/trim_icons = material_instance.wall_icons_trim_top
 	var/total_states = length(trim_icons)
 	if(!total_states)
-		stack_trace("unimplemented material_trim_low: [material_trim_low]")
+		stack_trace("unimplemented material_trim_bottom: [material_trim_bottom]")
 		return
 	var/wanted_state = MAP(integrity_pct, 0, 1, 1, total_states)
 	return mutable_appearance(trim_icons[wanted_state], replacetext(icon_state, "wall", "trim"))

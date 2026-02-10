@@ -12,10 +12,10 @@
 		return ..()
 	if(!istype(wall))
 		return ..()
-	if(!isnull(wall.material_trim_high))
+	if(!isnull(wall.material_trim_top))
 		balloon_alert(user, "already trimmed!")
 		return ..()
-	wall.material_trim_high = trim_material
+	wall.material_trim_top = trim_material
 	wall.update_appearance()
 	uses_left -= 1
 	return TRUE
@@ -25,10 +25,10 @@
 		return ..()
 	if(!istype(wall))
 		return ..()
-	if(!isnull(wall.material_trim_low))
+	if(!isnull(wall.material_trim_bottom))
 		balloon_alert(user, "already trimmed!")
 		return ..()
-	wall.material_trim_low = trim_material
+	wall.material_trim_bottom = trim_material
 	wall.update_appearance()
 	uses_left -= 1
 	return TRUE

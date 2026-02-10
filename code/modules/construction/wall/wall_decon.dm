@@ -3,7 +3,7 @@
 		return ..()
 	switch(deconstruction_stage)
 		if(DECON_NONE)
-			if(material_trim_high || material_trim_low)
+			if(material_trim_top || material_trim_bottom)
 				balloon_alert("remove the trim!")
 				return TRUE
 			balloon_alert_to_viewers("cutting frame...")
@@ -23,20 +23,20 @@
 	return ..()
 
 /turf/closed/constructed_wall/crowbar_act(mob/living/user, obj/item/tool)
-	if(material_trim_high)
+	if(material_trim_top)
 		balloon_alert_to_viewers("removing trim...")
 		if(!tool.use_tool(src, user, WALL_DECON_STEP_TIME, volume = 50))
 			return TRUE
-		user.put_in_hands(new material_trim_high.sheet_type(drop_location(), 1))
-		material_trim_high = null
+		user.put_in_hands(new material_trim_top.sheet_type(drop_location(), 1))
+		material_trim_top = null
 		update_appearance(UPDATE_OVERLAYS)
 		return TRUE
-	if(material_trim_low)
+	if(material_trim_bottom)
 		balloon_alert_to_viewers("removing trim...")
 		if(!tool.use_tool(src, user, WALL_DECON_STEP_TIME, volume = 50))
 			return TRUE
-		user.put_in_hands(new material_trim_low.sheet_type(drop_location(), 1))
-		material_trim_low = null
+		user.put_in_hands(new material_trim_bottom.sheet_type(drop_location(), 1))
+		material_trim_bottom = null
 		update_appearance(UPDATE_OVERLAYS)
 		return TRUE
 	switch(deconstruction_stage)

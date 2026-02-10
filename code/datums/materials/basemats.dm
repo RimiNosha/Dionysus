@@ -9,13 +9,30 @@
 	value_per_unit = IRON_VALUE_PER_UNIT
 	wall_integrity = 250
 	heat_resistance = 800
+	wall_name = "steel"
 	wall_icons = list(
-		'icons/construction/wall/iron/wall/wall_0.dmi',
-		'icons/construction/wall/iron/wall/wall_1.dmi',
-		'icons/construction/wall/iron/wall/wall_2.dmi',
-		'icons/construction/wall/iron/wall/wall_3.dmi',
-		'icons/construction/wall/iron/wall/wall_4.dmi',
 		'icons/construction/wall/iron/wall/wall_5.dmi',
+		'icons/construction/wall/iron/wall/wall_4.dmi',
+		'icons/construction/wall/iron/wall/wall_3.dmi',
+		'icons/construction/wall/iron/wall/wall_2.dmi',
+		'icons/construction/wall/iron/wall/wall_1.dmi',
+		'icons/construction/wall/iron/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/iron/trim/trim_top_5.dmi',
+		'icons/construction/wall/iron/trim/trim_top_4.dmi',
+		'icons/construction/wall/iron/trim/trim_top_3.dmi',
+		'icons/construction/wall/iron/trim/trim_top_2.dmi',
+		'icons/construction/wall/iron/trim/trim_top_1.dmi',
+		'icons/construction/wall/iron/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/iron/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/iron/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/iron/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/iron/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/iron/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/iron/trim/trim_bottom_0.dmi',
 	)
 
 /datum/material/steel/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
@@ -56,6 +73,31 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	sheet_type = /obj/item/stack/sheet/mineral/silver
 	value_per_unit = IRON_VALUE_PER_UNIT * 10
 	beauty_modifier = 0.075
+	wall_name = "silver"
+	wall_icons = list(
+		'icons/construction/wall/silver/wall/wall_5.dmi',
+		'icons/construction/wall/silver/wall/wall_4.dmi',
+		'icons/construction/wall/silver/wall/wall_3.dmi',
+		'icons/construction/wall/silver/wall/wall_2.dmi',
+		'icons/construction/wall/silver/wall/wall_1.dmi',
+		'icons/construction/wall/silver/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/silver/trim/trim_top_5.dmi',
+		'icons/construction/wall/silver/trim/trim_top_4.dmi',
+		'icons/construction/wall/silver/trim/trim_top_3.dmi',
+		'icons/construction/wall/silver/trim/trim_top_2.dmi',
+		'icons/construction/wall/silver/trim/trim_top_1.dmi',
+		'icons/construction/wall/silver/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/silver/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/silver/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/silver/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/silver/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/silver/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/silver/trim/trim_bottom_0.dmi',
+	)
 
 /datum/material/silver/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)
@@ -212,6 +254,31 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	sheet_type = /obj/item/stack/sheet/mineral/titanium
 	value_per_unit = IRON_VALUE_PER_UNIT * 25
 	armor_modifiers = list(BLUNT = 1.35, PUNCTURE = 1.3, SLASH = 0, LASER = 1.3, ENERGY = 1.25, BOMB = 1.25, BIO = 1, FIRE = 0.7, ACID = 1)
+	wall_name = "titanium"
+	wall_icons = list(
+		'icons/construction/wall/titanium/wall/wall_5.dmi',
+		'icons/construction/wall/titanium/wall/wall_4.dmi',
+		'icons/construction/wall/titanium/wall/wall_3.dmi',
+		'icons/construction/wall/titanium/wall/wall_2.dmi',
+		'icons/construction/wall/titanium/wall/wall_1.dmi',
+		'icons/construction/wall/titanium/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/titanium/trim/trim_top_5.dmi',
+		'icons/construction/wall/titanium/trim/trim_top_4.dmi',
+		'icons/construction/wall/titanium/trim/trim_top_3.dmi',
+		'icons/construction/wall/titanium/trim/trim_top_2.dmi',
+		'icons/construction/wall/titanium/trim/trim_top_1.dmi',
+		'icons/construction/wall/titanium/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/titanium/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/titanium/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/titanium/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/titanium/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/titanium/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/titanium/trim/trim_bottom_0.dmi',
+	)
 
 /datum/material/titanium/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD)
@@ -266,6 +333,146 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 4
 	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 0.4, ENERGY = 0.4, BOMB = 1, BIO = 0.2, FIRE = 0, ACID = 0.3)
 	texture_layer_icon_state = "woodgrain"
+
+/datum/material/wood/oak
+	name = "oak"
+	wall_name = "oak wood"
+	wall_icons = list(
+		'icons/construction/wall/wood_oak/wall/wall_5.dmi',
+		'icons/construction/wall/wood_oak/wall/wall_4.dmi',
+		'icons/construction/wall/wood_oak/wall/wall_3.dmi',
+		'icons/construction/wall/wood_oak/wall/wall_2.dmi',
+		'icons/construction/wall/wood_oak/wall/wall_1.dmi',
+		'icons/construction/wall/wood_oak/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/wood_oak/trim/trim_top_5.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_top_4.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_top_3.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_top_2.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_top_1.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/wood_oak/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/wood_oak/trim/trim_bottom_0.dmi',
+	)
+
+/datum/material/wood/dark_oak
+	name = "dark oak"
+	wall_name = "dark oak wood"
+	wall_icons = list(
+		'icons/construction/wall/wood_dark_oak/wall/wall_5.dmi',
+		'icons/construction/wall/wood_dark_oak/wall/wall_4.dmi',
+		'icons/construction/wall/wood_dark_oak/wall/wall_3.dmi',
+		'icons/construction/wall/wood_dark_oak/wall/wall_2.dmi',
+		'icons/construction/wall/wood_dark_oak/wall/wall_1.dmi',
+		'icons/construction/wall/wood_dark_oak/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_5.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_4.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_3.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_2.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_1.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/wood_dark_oak/trim/trim_bottom_0.dmi',
+	)
+
+/datum/material/wood/mahogany
+	name = "mahogany"
+	wall_name = "mahogany wood"
+	wall_icons = list(
+		'icons/construction/wall/wood_mahogany/wall/wall_5.dmi',
+		'icons/construction/wall/wood_mahogany/wall/wall_4.dmi',
+		'icons/construction/wall/wood_mahogany/wall/wall_3.dmi',
+		'icons/construction/wall/wood_mahogany/wall/wall_2.dmi',
+		'icons/construction/wall/wood_mahogany/wall/wall_1.dmi',
+		'icons/construction/wall/wood_mahogany/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/wood_mahogany/trim/trim_top_5.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_top_4.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_top_3.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_top_2.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_top_1.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/wood_mahogany/trim/trim_bottom_0.dmi',
+	)
+
+/datum/material/wood/cherry
+	name = "cherry"
+	wall_name = "cherry wood"
+	wall_icons = list(
+		'icons/construction/wall/wood_cherry/wall/wall_5.dmi',
+		'icons/construction/wall/wood_cherry/wall/wall_4.dmi',
+		'icons/construction/wall/wood_cherry/wall/wall_3.dmi',
+		'icons/construction/wall/wood_cherry/wall/wall_2.dmi',
+		'icons/construction/wall/wood_cherry/wall/wall_1.dmi',
+		'icons/construction/wall/wood_cherry/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/wood_cherry/trim/trim_top_5.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_top_4.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_top_3.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_top_2.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_top_1.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/wood_cherry/trim/trim_bottom_0.dmi',
+	)
+
+/datum/material/wood/teak
+	name = "teak"
+	wall_name = "teak wood"
+	wall_icons = list(
+		'icons/construction/wall/wood_teak/wall/wall_5.dmi',
+		'icons/construction/wall/wood_teak/wall/wall_4.dmi',
+		'icons/construction/wall/wood_teak/wall/wall_3.dmi',
+		'icons/construction/wall/wood_teak/wall/wall_2.dmi',
+		'icons/construction/wall/wood_teak/wall/wall_1.dmi',
+		'icons/construction/wall/wood_teak/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/wood_teak/trim/trim_top_5.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_top_4.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_top_3.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_top_2.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_top_1.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/wood_teak/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/wood_teak/trim/trim_bottom_0.dmi',
+	)
 
 /datum/material/wood/on_applied_obj(obj/source, amount, material_flags)
 	. = ..()
@@ -409,6 +616,81 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD)
 	return TRUE
 
+/datum/material/centcomnium
+	name = "centcomnium"
+	desc = "A super-dense crystalline alloy used in the construction of stellar equipment."
+	color = "#1e0065"
+	greyscale_colors = "#1e0065"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/mineral/centcomnium
+	value_per_unit = IRON_VALUE_PER_UNIT * 100
+	armor_modifiers = list(BLUNT = 2, PUNCTURE = 2, SLASH = 2, LASER = 10, ENERGY = 5, BOMB = 50, BIO = 50, FIRE = 50, ACID = 100)
+	beauty_modifier = 0.5
+	wall_name = "stellar"
+	wall_icons = list(
+		'icons/construction/wall/stellar/wall/wall_0.dmi',
+	)
+
+/datum/material/lead
+	name = "lead"
+	desc = "A soft, dense, yet malleable metal that is used in the construction of armor and shielding."
+	color = "#c7c7de"
+	greyscale_colors = "#c7c7de"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/mineral/lead
+	value_per_unit = IRON_VALUE_PER_UNIT * 5
+	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 0.4, ENERGY = 0.4, BOMB = 0.3, BIO = 0.2, FIRE = 0.2, ACID = 1)
+	beauty_modifier = 0.1
+	wall_name = "shielded"
+	wall_icons = list(
+		'icons/construction/wall/shielded/wall/wall_5.dmi',
+		'icons/construction/wall/shielded/wall/wall_4.dmi',
+		'icons/construction/wall/shielded/wall/wall_3.dmi',
+		'icons/construction/wall/shielded/wall/wall_2.dmi',
+		'icons/construction/wall/shielded/wall/wall_1.dmi',
+		'icons/construction/wall/shielded/wall/wall_0.dmi',
+	)
+
+/datum/material/marble_black
+	name = "black marble"
+	desc = "Surprisingly delicate thick stone."
+	color = "#2b2b30"
+	greyscale_colors = "#2b2b30"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/mineral/marble_black
+	value_per_unit = IRON_VALUE_PER_UNIT * 25
+	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 0.4, ENERGY = 0.4, BOMB = 0.3, BIO = 0.2, FIRE = 0.2, ACID = 1)
+	beauty_modifier = 1.0
+	wall_name = "black marble"
+	wall_icons = list(
+		'icons/construction/wall/marble_black/wall/wall_5.dmi',
+		'icons/construction/wall/marble_black/wall/wall_4.dmi',
+		'icons/construction/wall/marble_black/wall/wall_3.dmi',
+		'icons/construction/wall/marble_black/wall/wall_2.dmi',
+		'icons/construction/wall/marble_black/wall/wall_1.dmi',
+		'icons/construction/wall/marble_black/wall/wall_0.dmi',
+	)
+
+/datum/material/marble_white
+	name = "black marble"
+	desc = "Surprisingly delicate thick stone."
+	color = "#c7c7de"
+	greyscale_colors = "#c7c7de"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/mineral/marble_black
+	value_per_unit = IRON_VALUE_PER_UNIT * 25
+	armor_modifiers = list(BLUNT = 1.1, PUNCTURE = 1.1, SLASH = 0, LASER = 0.4, ENERGY = 0.4, BOMB = 0.3, BIO = 0.2, FIRE = 0.2, ACID = 1)
+	beauty_modifier = 1.0
+	wall_name = "white marble"
+	wall_icons = list(
+		'icons/construction/wall/marble_white/wall/wall_5.dmi',
+		'icons/construction/wall/marble_white/wall/wall_4.dmi',
+		'icons/construction/wall/marble_white/wall/wall_3.dmi',
+		'icons/construction/wall/marble_white/wall/wall_2.dmi',
+		'icons/construction/wall/marble_white/wall/wall_1.dmi',
+		'icons/construction/wall/marble_white/wall/wall_0.dmi',
+	)
+
 /datum/material/bronze
 	name = "bronze"
 	desc = "Clock Cult? Never heard of it."
@@ -419,6 +701,31 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = IRON_VALUE_PER_UNIT * 10
 	armor_modifiers = list(BLUNT = 1, PUNCTURE = 1, SLASH = 0, LASER = 1, ENERGY = 1, BOMB = 1, BIO = 1, FIRE = 1.5, ACID = 1.5)
 	beauty_modifier = 0.2
+	wall_name = "bronze"
+	wall_icons = list(
+		'icons/construction/wall/bronze/wall/wall_5.dmi',
+		'icons/construction/wall/bronze/wall/wall_4.dmi',
+		'icons/construction/wall/bronze/wall/wall_3.dmi',
+		'icons/construction/wall/bronze/wall/wall_2.dmi',
+		'icons/construction/wall/bronze/wall/wall_1.dmi',
+		'icons/construction/wall/bronze/wall/wall_0.dmi',
+	)
+	wall_icons_trim_top = list(
+		'icons/construction/wall/bronze/trim/trim_top_5.dmi',
+		'icons/construction/wall/bronze/trim/trim_top_4.dmi',
+		'icons/construction/wall/bronze/trim/trim_top_3.dmi',
+		'icons/construction/wall/bronze/trim/trim_top_2.dmi',
+		'icons/construction/wall/bronze/trim/trim_top_1.dmi',
+		'icons/construction/wall/bronze/trim/trim_top_0.dmi',
+	)
+	wall_icons_trim_bottom = list(
+		'icons/construction/wall/bronze/trim/trim_bottom_5.dmi',
+		'icons/construction/wall/bronze/trim/trim_bottom_4.dmi',
+		'icons/construction/wall/bronze/trim/trim_bottom_3.dmi',
+		'icons/construction/wall/bronze/trim/trim_bottom_2.dmi',
+		'icons/construction/wall/bronze/trim/trim_bottom_1.dmi',
+		'icons/construction/wall/bronze/trim/trim_bottom_0.dmi',
+	)
 
 /datum/material/paper
 	name = "paper"
