@@ -154,6 +154,8 @@ export const DmTarget = new Juke.Target({
   ],
   inputs: [
     "_maps/map_files/generic/**",
+    "_maps/**.dmm",
+    "_maps/**/**.json",
     "maps/**/*.dm",
     "code/**",
     "goon/**",

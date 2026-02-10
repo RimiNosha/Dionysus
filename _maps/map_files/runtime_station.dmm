@@ -31,12 +31,13 @@
 	width = 3;
 	dwidth = 1;
 	dheight = 3;
-	height = 0
+	height = 0;
+	dir = 8
 	},
 /obj/machinery/door/airlock/shuttle{
 	dir = 4
 	},
-/turf/open/space/basic,
+/turf/open/floor/iron,
 /area/shuttle)
 "B" = (
 /turf/closed/constructed_wall/wood_dark_oak,
