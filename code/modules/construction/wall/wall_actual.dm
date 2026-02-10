@@ -10,6 +10,7 @@
 	smoothing_groups_with = SMOOTH_GROUP_SHUTTERS_BLASTDOORS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_GRILLE + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 	uses_integrity = TRUE
 	max_integrity = /datum/material/steel::wall_integrity
+	baseturfs = /turf/open/floor/plating
 	var/last_damage = 0
 	var/heat_resistance = /datum/material/steel::heat_resistance
 	var/datum/material/material_plating //! the material that the exterior of the wall is made of.

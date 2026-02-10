@@ -114,9 +114,20 @@ GLOBAL_LIST_INIT(diamond_recipes, list ( \
 
 /** TODO!! */
 /obj/item/stack/sheet/mineral/lead
+	singular_name = "lead sheet"
+	merge_type = /obj/item/stack/sheet/mineral/lead
+
 /obj/item/stack/sheet/mineral/marble_black
+	singular_name = "black marble sheet"
+	merge_type = /obj/item/stack/sheet/mineral/marble_black
+
 /obj/item/stack/sheet/mineral/marble_white
+	singular_name = "white marble sheet"
+	merge_type = /obj/item/stack/sheet/mineral/marble_white
+
 /obj/item/stack/sheet/mineral/centcomnium
+	singular_name = "stellar alloy crystal"
+	merge_type = /obj/item/stack/sheet/mineral/centcomnium
 
 /*
  * Uranium
