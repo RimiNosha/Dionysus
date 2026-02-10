@@ -1,9 +1,21 @@
 "a" = (/turf/open/space/basic,/area/space)
-"b" = (/turf/closed/constructed_wall/steel,/area/centcom)
+"b" = (/turf/closed/constructed_wall/marble_white,/area/centcom)
 "c" = (/turf/open/floor/light,/area/centcom)
-"d" = (/turf/open/floor/plastic,/area/centcom)
+"d" = (/turf/closed/constructed_wall/stellar,/area/centcom)
 "e" = (/obj/effect/landmark/error,/obj/effect/landmark/latejoin,/obj/effect/landmark/start,/obj/effect/landmark/observer_start,/turf/open/floor/light,/area/centcom)
-"f" = (/turf/closed/constructed_wall/steel/steel,/area/centcom)
+"f" = (/turf/closed/constructed_wall/marble_black,/area/centcom)
+"g" = (/turf/open/floor/iron,/area/centcom)
+"h" = (/turf/closed/constructed_wall/bronze,/area/centcom)
+"i" = (/turf/closed/constructed_wall/shielded,/area/centcom)
+"j" = (/turf/closed/constructed_wall/plasteel,/area/centcom)
+"k" = (/turf/open/space/basic,/area/space/nearstation)
+"l" = (/turf/closed/constructed_wall/titanium,/area/centcom)
+"m" = (/turf/closed/constructed_wall/silver,/area/centcom)
+"n" = (/turf/closed/constructed_wall/wood_cherry,/area/centcom)
+"o" = (/turf/closed/constructed_wall/wood_oak,/area/centcom)
+"p" = (/turf/closed/constructed_wall/wood_teak,/area/centcom)
+"q" = (/turf/closed/constructed_wall/wood_dark_oak,/area/centcom)
+"r" = (/turf/closed/constructed_wall/wood_mahogany,/area/centcom)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -20,24 +32,24 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaafffffaaaaaaaaaaaaaaaa
-aaaaaaaaaaafcccfaaaaaaaaaaaaaaaa
-aaaaaaaaaaafcccfaaaaaaaaaaaaaaaa
-aaaaaaaaaaafcccfaaaaaaaaaaaaaaaa
-aaaaaaaaabbffdffbbaaaaaaaaaaaaaa
-aaaaaaaaabddcccddbaaaaaaaaaaaaaa
-aaaaaaaaabdccdccdbaaaaaaaaaaaaaa
-aaaaaaaaabccdcdccbaaaaaaaaaaaaaa
-aaaaaaaaabcdcecdcbaaaaaaaaaaaaaa
-aaaaaaaaabccdcdccbaaaaaaaaaaaaaa
-aaaaaaaaabdccdccdbaaaaaaaaaaaaaa
-aaaaaaaaabddcccddbaaaaaaaaaaaaaa
-aaaaaaaaabbbbbbbbbaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bbddffaaaaaaaaaaaaaaaaaaaaaaaaaa
+bggggfaaaaaaaaaaaaaaaaaaaaaaaaaa
+hgccghaaaaaaaaaaaaaaaaaaaaaaaaaa
+hgccghaaaaaaaaaaaaaaaaaaaaaaaaaa
+iggggjaaaaaaaaaaaaaaaaaaaaaaaaaa
+iiggjjaaaaaaaaaaaaaaaaaaaaaaaaaa
+klggmkaaaaaaaaaaaaaaaaaaaaaaaaaa
+klggmkaaaaaaaaaaaaaaaaaaaaaaaaaa
+klggmkaaaaaaaaaaaaaaaaaaaaaaaaaa
+klggmkaaaaaaaaaaaaaaaaaaaaaaaaaa
+nnggooaaaaaaaaaaaaaaaaaaaaaaaaaa
+nggggoaaaaaaaaaaaaaaaaaaaaaaaaaa
+pgcegpaaaaaaaaaaaaaaaaaaaaaaaaaa
+pgccgpaaaaaaaaaaaaaaaaaaaaaaaaaa
+qggggraaaaaaaaaaaaaaaaaaaaaaaaaa
+qqpprraaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
 (1,1,2) = {"
