@@ -302,7 +302,7 @@
 	var/hijack_status = NOT_BEGUN
 
 /obj/docking_port/mobile/emergency/Initialize(mapload)
-	..()
+	. = ..()
 	register()
 
 /obj/docking_port/mobile/emergency/canDock(obj/docking_port/stationary/S)
