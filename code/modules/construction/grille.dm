@@ -7,7 +7,7 @@
 	density = TRUE
 	anchored = FALSE
 	smoothing_groups = SMOOTH_GROUP_GRILLE
-	smoothing_groups_with = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_GRILLE
+	smoothing_groups_with = SMOOTH_GROUP_GRILLE + SMOOTH_GROUP_WALLS
 	pass_flags_self = PASSGRILLE
 	can_atmos_pass = CANPASS_ALWAYS
 	flags_1 = CONDUCT_1
