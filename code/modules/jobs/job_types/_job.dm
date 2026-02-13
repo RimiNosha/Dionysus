@@ -288,7 +288,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 
 /mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE, datum/preferences/used_pref, use_loadout = FALSE)
 	//Find job title in the first list, then pick the outfit based on species.
-	var/datum/job_title/title = equipping.get_title(used_pref.parent)
+	var/datum/job_title/title = equipping.get_title(used_pref?.parent)
 	if(!length(title.outfits))
 		dna.species.pre_equip_species_outfit(null, src, visual_only)
 		return//for jobs that don't come with any equipment or load outfits differently
