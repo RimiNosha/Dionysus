@@ -289,7 +289,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 /mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE, datum/preferences/used_pref, use_loadout = FALSE)
 	//Find job title in the first list, then pick the outfit based on species.
 	var/datum/job_title/title = equipping.get_title(used_pref.parent)
-	if(!title.outfits)
+	if(!length(title.outfits))
 		dna.species.pre_equip_species_outfit(null, src, visual_only)
 		return//for jobs that don't come with any equipment or load outfits differently
 
@@ -302,7 +302,6 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		outfit2wear = /datum/outfit/job //Emergency fallback that equips the generic "job outfit". This shouldn't happen unless something is wrong.
 		stack_trace("[equipping] has no valid outfits in its list.")
 
-	outfit2wear = new outfit2wear()
 	dna.species.pre_equip_species_outfit(outfit2wear, src, visual_only)
 	if(use_loadout)
 		equip_outfit_and_loadout(outfit2wear, used_pref, visual_only, equipping)
@@ -653,7 +652,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 /// Tries to get the job name from the client, otherwise, returns index 1, or a random one.
 /datum/job/proc/get_title(client/player, random = FALSE)
 	RETURN_TYPE(/datum/job_title)
-	var/title = player?.prefs.get_chosen_job_title_name(id)
+	var/title = player?.prefs.get_chosen_job_title(id)
 
 	if (!title)
 		return random ? pick(titles) : titles[1]
