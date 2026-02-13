@@ -901,7 +901,7 @@
 /// Try to get the title for the assigned role, if there is none, returns null.
 /datum/mind/proc/get_title(random = FALSE)
 	RETURN_TYPE(/datum/job_title)
-	return assigned_role?.get_title(current.client)
+	return assigned_role?.get_title(current?.client)
 
 /// Getter for the memories list
 /datum/mind/proc/get_notes()
