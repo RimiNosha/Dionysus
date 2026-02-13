@@ -3,6 +3,7 @@
 	var/name = "NOPE"
 	/// Assoc list of species to outfit datums. Turned into an outfit instance during runtime.
 	/// If a species doesn't have an outfit, it will fall back to using the human outfit.
+	/// The human outfit is **required** if it's for a stationside job.
 	var/list/datum/outfit/outfits
 
 /datum/job_title/New()
