@@ -24,7 +24,7 @@
 #define DATACORE_TITLE "rank"
 // The job_id of the role they joined as. This should never change.
 #define DATACORE_INITIAL_RANK "initial_rank"
-// The job_id that's currently meant to be applied to their ID. Currently only used on joining the round, though.
+// The job_id that's currently meant to be applied to their ID. Currently only used on joining the round and cryoing, though.
 #define DATACORE_TEMPLATE_RANK "trim"
 // The networking ID of the pda that they're "supposed" to have. Used by the messenger and AAS.
 #define DATACORE_PDA_ID "pda_id"

@@ -1121,7 +1121,7 @@ SUBSYSTEM_DEF(job)
 	if(!job)
 		stack_trace("FreeRole could not map rank [rank] to a job slot")
 		return FALSE
-	log_econ("Modifying job slots of [job.title]. Existing slots: [job.current_positions]/[job.total_positions] New slots: [max(0, job.current_positions - 1)]/[job.total_positions]")
+	log_econ("Modifying job slots of [job.id] ([job.get_title_name()]). Existing slots: [job.current_positions]/[job.total_positions] New slots: [max(0, job.current_positions - 1)]/[job.total_positions]")
 	job.current_positions = max(0, job.current_positions - 1)
 
 /// Used for clocking back in, re-claiming the previously freed role. Returns false if no slot is available.
@@ -1134,8 +1134,8 @@ SUBSYSTEM_DEF(job)
 		stack_trace("FreeRole could not map rank [rank] to a job slot")
 		return FALSE
 	if(job.current_positions >= job.total_positions)
-		log_econ("Modifying job slots of [job.title] failed due to no job slot being available. Current slots: [job.current_positions]/[job.total_positions]")
+		log_econ("Modifying job slots of [job.id] ([job.get_title_name()]) failed due to no job slot being available. Current slots: [job.current_positions]/[job.total_positions]")
 		return FALSE
-	log_econ("Modifying job slots of [job.title]. Existing slots: [job.current_positions]/[job.total_positions] New slots: [job.current_positions + 1]/[job.total_positions]")
+	log_econ("Modifying job slots of [job.id] ([job.get_title_name()]). Existing slots: [job.current_positions]/[job.total_positions] New slots: [job.current_positions + 1]/[job.total_positions]")
 	job.current_positions = job.current_positions + 1
 	return TRUE
