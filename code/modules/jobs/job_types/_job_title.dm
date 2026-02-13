@@ -1,7 +1,6 @@
 /// Contains title names and any custom equipment or features they might have.
 /datum/job_title
 	var/name = "NOPE"
-	var/description // TODO: Do we actually need this?
 	/// Assoc list of species to outfit datums. Turned into an outfit instance during runtime.
 	/// If a species doesn't have an outfit, it will fall back to using the human outfit.
 	var/list/datum/outfit/outfits
