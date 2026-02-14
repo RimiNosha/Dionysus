@@ -11,7 +11,7 @@
 
 	var/datum/preferences/prefs = locate(href_list["prefs"])
 	if(!prefs)
-		return
+		CRASH("Prefs reference for occupation of [usr?.client] is invalid?")
 
 	if(prefs.parent != usr.client && !check_rights())
 		CRASH("Unable to edit prefs that don't belong to you, [usr.key]! (pref owner: [prefs.parent?.key || "NULL"])")
