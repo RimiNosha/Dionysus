@@ -148,6 +148,3 @@
 #define JOBSPAWN_ALLOW_RANDOM 1
 /// Spawn point is always a random spawnpoint.
 #define JOBSPAWN_FORCE_RANDOM 2
-
-#define JOB_TITLE(title) /datum/job_title/##title
-#define JOB(job_name) /datum/job/##job_name
