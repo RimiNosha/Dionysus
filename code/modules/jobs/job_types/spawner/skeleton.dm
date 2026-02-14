@@ -1,6 +1,8 @@
 /datum/job/skeleton
 	id = ROLE_SKELETON
-	titles = /datum/job_title/skeleton
+	titles = list(
+		/datum/job_title/skeleton,
+	)
 	policy_index = ROLE_SKELETON
 
 /datum/job_title/skeleton

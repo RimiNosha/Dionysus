@@ -1,6 +1,8 @@
 /datum/job/detective
 	id = JOB_COMPLIANCE_AUDITOR
-	titles = /datum/job_title/detective
+	titles = list(
+		/datum/job_title/detective,
+	)
 	description = "Investigate crimes. Solve crimes. Cover up crimes."
 	faction = FACTION_STATION
 	pinpad_key = "columbo"

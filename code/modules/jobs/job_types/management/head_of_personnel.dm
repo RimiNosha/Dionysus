@@ -1,6 +1,8 @@
 /datum/job/head_of_personnel
 	id = JOB_DIRECTOR_OF_PORT_SERVICES
-	titles = /datum/job_title/head_of_personnel
+	titles = list(
+		/datum/job_title/head_of_personnel,
+	)
 	description = "The Superintendent's right hand, and Management's workhorse. Completes tasks on behalf of the Superintendent."
 	department_head = list(JOB_PORT_AUTHORITY)
 	faction = FACTION_STATION

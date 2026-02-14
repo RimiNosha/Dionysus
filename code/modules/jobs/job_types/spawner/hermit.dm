@@ -1,6 +1,8 @@
 /datum/job/hermit
 	id = ROLE_HERMIT
-	titles = /datum/job_title/hermit
+	titles = list(
+		/datum/job_title/hermit,
+	)
 	policy_index = ROLE_HERMIT
 
 /datum/job_title/hermit

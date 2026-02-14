@@ -1,6 +1,8 @@
 /datum/job/atmospheric_technician
 	id = JOB_ATMOSPHERIC_TECHNICIAN
-	titles = /datum/job_title/atmospheric_technician
+	titles = list(
+		/datum/job_title/atmospheric_technician,
+	)
 	description = "Ensure the air is breathable on the station, fill oxygen tanks, fight fires, purify the air."
 	department_head = list(JOB_CHIEF_ENGINEER)
 	faction = FACTION_STATION

@@ -1,6 +1,8 @@
 /datum/job/syndicate_cybersun_captain
 	id = ROLE_SYNDICATE_CYBERSUN_CAPTAIN
-	titles = /datum/job_title/syndicate_cybersun_captain
+	titles = list(
+		/datum/job_title/syndicate_cybersun_captain,
+	)
 	policy_index = ROLE_SYNDICATE_CYBERSUN_CAPTAIN
 
 /datum/job_title/syndicate_cybersun_captain

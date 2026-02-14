@@ -1,6 +1,8 @@
 /datum/job/security_officer
 	id = JOB_SECURITY_LIASON
-	titles = /datum/job_title/security_officer
+	titles = list(
+		/datum/job_title/security_officer,
+	)
 	description = "Protect company assets, follow the Standard Operating \
 		Procedure, eat donuts."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY

@@ -1,6 +1,8 @@
 /datum/job/bartender
 	id = JOB_LOUNGE_STEWARD
-	titles = /datum/job_title/bartender
+	titles = list(
+		/datum/job_title/bartender,
+	)
 	description = "Serve booze, mix drinks, keep the crew drunk."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)
 	faction = FACTION_STATION

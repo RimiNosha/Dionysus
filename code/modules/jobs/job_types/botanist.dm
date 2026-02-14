@@ -1,6 +1,8 @@
 /datum/job/botanist
 	id = JOB_BOTANIST
-	titles = /datum/job_title/botanist
+	titles = list(
+		/datum/job_title/botanist,
+	)
 	description = "Grow plants for the cook, for medicine, and for recreation."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)
 	faction = FACTION_STATION

@@ -1,6 +1,8 @@
 /datum/job/virologist
 	id = JOB_VIROLOGIST
-	titles = /datum/job_title/virologist
+	titles = list(
+		/datum/job_title/virologist,
+	)
 	description = "Study the effects of various diseases and synthesize a \
 		vaccine for them. Engineer beneficial viruses."
 	department_head = list(JOB_DIRECTOR_OF_MEDICAE_SERVICES)

@@ -1,6 +1,8 @@
 /datum/job/shaft_miner
 	id = JOB_PROSPECTOR
-	titles = /datum/job_title/shaft_miner
+	titles = list(
+		/datum/job_title/shaft_miner,
+	)
 	description = "Gather valuable resources for the station. Hit rocks with tools. Do trigonometry."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)
 	faction = FACTION_STATION

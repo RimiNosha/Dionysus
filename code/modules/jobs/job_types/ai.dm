@@ -1,6 +1,8 @@
 /datum/job/ai
 	id = JOB_AI
-	titles = /datum/job_title/ai
+	titles = list(
+		/datum/job_title/ai,
+	)
 	description = "Assist the crew, follow your laws, coordinate your cyborgs."
 	radio_help_message = "<b>Prefix your message with :b to speak with cyborgs and other AIs.</b>"
 	auto_deadmin_role_flags = DEADMIN_POSITION_SILICON

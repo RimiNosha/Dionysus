@@ -1,6 +1,8 @@
 /datum/job/curator
 	id = JOB_ARCHIVIST
-	titles = /datum/job_title/curator
+	titles = list(
+		/datum/job_title/curator,
+	)
 	description = "Read and write books and hand them to people, stock \
 		bookshelves, report on station news."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)

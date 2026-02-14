@@ -1,6 +1,8 @@
 /datum/job/chaplain
 	id = JOB_CHAPLAIN
-	titles = /datum/job_title/chaplain
+	titles = list(
+		/datum/job_title/chaplain,
+	)
 	description = "Hold services and funerals, cremate people, preach your \
 		religion, protect the crew against cults."
 	department_head = list(JOB_DIRECTOR_OF_PORT_SERVICES)

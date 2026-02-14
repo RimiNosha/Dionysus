@@ -1,6 +1,8 @@
 /datum/job/paramedic
 	id = JOB_PARAMEDIC
-	titles = /datum/job_title/paramedic
+	titles = list(
+		/datum/job_title/paramedic,
+	)
 	description = "Run around the station looking for patients, respond to \
 		emergencies, give patients a roller bed ride to medbay."
 	department_head = list(JOB_DIRECTOR_OF_MEDICAE_SERVICES)

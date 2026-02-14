@@ -1,6 +1,8 @@
 /datum/job/ancient_crew
 	id = ROLE_ANCIENT_CREW
-	titles = /datum/job_title/ancient_crew
+	titles = list(
+		/datum/job_title/ancient_crew,
+	)
 	policy_index = ROLE_ANCIENT_CREW
 
 /datum/job_title/ancient_crew

@@ -6,7 +6,9 @@
 
 /datum/job/unassigned
 	id = "Unassigned Crewmember"
-	titles = /datum/job_title/unassigned
+	titles = list(
+		/datum/job_title/unassigned,
+	)
 	rpg_title = "Peasant"
 	paycheck = PAYCHECK_ZERO
 

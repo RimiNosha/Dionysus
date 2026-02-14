@@ -1,6 +1,8 @@
 /datum/job/morph
 	id = ROLE_MORPH
-	titles = /datum/job_title/morph
+	titles = list(
+		/datum/job_title/morph,
+	)
 
 /datum/job_title/morph
 	name = ROLE_MORPH

@@ -5,7 +5,9 @@ Assistant
 */
 /datum/job/assistant
 	id = JOB_CIVILLIAN
-	titles = /datum/job_title/assistant
+	titles = list(
+		/datum/job_title/assistant,
+	)
 	description = "The everyman, an essential component to station life."
 	faction = FACTION_STATION
 	total_positions = 5

@@ -1,6 +1,8 @@
 /datum/job/quartermaster
 	id = JOB_QUARTERMASTER
-	titles = /datum/job_title/quartermaster
+	titles = list(
+		/datum/job_title/quartermaster,
+	)
 	description = "Manage your Deckhands and Prospectors, assist with \
 		economical purchasing."
 	faction = FACTION_STATION

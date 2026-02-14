@@ -1,6 +1,8 @@
 /datum/job/cargo_technician
 	id = JOB_DECKHAND
-	titles = /datum/job_title/cargo_technician
+	titles = list(
+		/datum/job_title/cargo_technician,
+	)
 	description = "Distribute supplies to the departments that ordered them, \
 		collect empty crates, load and unload the supply shuttle, \
 		ship bounty cubes."

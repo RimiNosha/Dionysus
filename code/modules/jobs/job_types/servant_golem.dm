@@ -1,6 +1,8 @@
 /datum/job/servant_golem
 	id = ROLE_SERVANT_GOLEM
-	titles = /datum/job_title/servant_golem
+	titles = list(
+		/datum/job_title/servant_golem,
+	)
 
 /datum/job_title/servant_golem
 	name = ROLE_SERVANT_GOLEM

@@ -1,6 +1,8 @@
 /datum/job/warden
 	id = JOB_BRIG_LIEUTENANT
-	titles = /datum/job_title/warden
+	titles = list(
+		/datum/job_title/warden,
+	)
 	description = "Watch over the Brig and Prison Wing, manage prisoners, \
 		issue equipment to security, work with the Security Marshal \
 		to organize security."

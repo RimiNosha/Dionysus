@@ -1,6 +1,8 @@
 /datum/job/captain
 	id = JOB_PORT_AUTHORITY
-	titles = /datum/job_title/captain
+	titles = list(
+		/datum/job_title/captain,
+	)
 	description = "The middle-man between the big man at home and the station's inhabitants. Ensure that quotas are met and the population is \
 	compliant."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY

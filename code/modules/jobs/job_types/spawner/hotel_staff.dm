@@ -1,6 +1,8 @@
 /datum/job/hotel_staff
 	id = ROLE_HOTEL_STAFF
-	titles = /datum/job_title/hotel_staff
+	titles = list(
+		/datum/job_title/hotel_staff,
+	)
 	policy_index = ROLE_HOTEL_STAFF
 
 /datum/job_title/hotel_staff

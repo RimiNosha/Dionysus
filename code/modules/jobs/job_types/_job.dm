@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 
 /datum/job
 	/// The titles this job has. These are turned into instances during init.
-	var/list/datum/job_title/titles = /datum/job_title
+	var/list/datum/job_title/titles = list(/datum/job_title)
 	/// Title types to their instance. Populated automatically.
 	var/list/datum/job_title/type_to_title = list()
 

@@ -1,6 +1,8 @@
 /datum/job/nuclear_operative
 	id = ROLE_NUCLEAR_OPERATIVE
-	titles = /datum/job_title/nuclear_operative
+	titles = list(
+		/datum/job_title/nuclear_operative,
+	)
 	spawn_logic = JOBSPAWN_FORCE_FIXED
 
 /datum/job_title/nuclear_operative

@@ -1,6 +1,8 @@
 /datum/job/space_bartender
 	id = ROLE_SPACE_BARTENDER
-	titles = /datum/job_title/space_bartender
+	titles = list(
+		/datum/job_title/space_bartender,
+	)
 	policy_index = ROLE_SPACE_BARTENDER
 
 /datum/job_title/space_bartender

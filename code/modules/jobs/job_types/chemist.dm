@@ -1,6 +1,8 @@
 /datum/job/chemist
 	id = JOB_PHARMACOLOGIST
-	titles = /datum/job_title/chemist
+	titles = list(
+		/datum/job_title/chemist,
+	)
 	description = "Supply the doctors with chemicals, make medicine, as well as \
 		less likable substances in the comfort of a fully reinforced room."
 	department_head = list("Medical Director")

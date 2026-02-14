@@ -1,6 +1,8 @@
 /datum/job/acolyte
 	id = JOB_MEDICAE_TECHNICIAN
-	titles = /datum/job_title/acolyte
+	titles = list(
+		/datum/job_title/acolyte,
+	)
 	department_head = list(JOB_DIRECTOR_OF_MEDICAE_SERVICES)
 	faction = FACTION_STATION
 	total_positions = 5

@@ -1,6 +1,8 @@
 /datum/job/head_of_security
 	id = JOB_PORT_MARSHAL
-	titles = /datum/job_title/head_of_security
+	titles = list(
+		/datum/job_title/head_of_security,
+	)
 	description = "Coordinate security personnel, ensure Management's needs are met."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
 	department_head = list(JOB_PORT_AUTHORITY)

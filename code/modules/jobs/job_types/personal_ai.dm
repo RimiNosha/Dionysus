@@ -1,6 +1,8 @@
 /datum/job/personal_ai
 	id = ROLE_PAI
-	titles = /datum/job_title/personal_ai
+	titles = list(
+		/datum/job_title/personal_ai,
+	)
 
 /datum/job_title/personal_ai
 	name = ROLE_PAI

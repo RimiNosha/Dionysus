@@ -1,6 +1,8 @@
 /datum/job/chief_engineer
 	id = JOB_CHIEF_ENGINEER
-	titles = /datum/job_title/chief_engineer
+	titles = list(
+		/datum/job_title/chief_engineer,
+	)
 	description = "Coordinate engineering, ensure equipment doesn't get stolen, \
 		make sure the Supermatter doesn't blow up, maintain telecommunications."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD

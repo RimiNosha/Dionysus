@@ -1,6 +1,8 @@
 /datum/job/augur
 	id = JOB_DIRECTOR_OF_MEDICAE_SERVICES
-	titles = /datum/job_title/augur
+	titles = list(
+		/datum/job_title/augur,
+	)
 
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	head_announce = list(RADIO_CHANNEL_MEDICAL)
