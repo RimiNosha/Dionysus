@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(job_display_order, list(
 
 /**
  * DB STUFF
- * DO NOT FUCKING EDIT UNLESS YOU REALLY KNOW WHAT YOU'RE DOING
+ * DO NOT EDIT UNLESS YOU REALLY KNOW WHAT YOU'RE DOING
  */
 	/// Dictates what the job is named in the DB, the preferences file, and a few other places. DO NOT CHANGE THIS WITHOUT A VERY GOOD REASON!!!
 	var/id
