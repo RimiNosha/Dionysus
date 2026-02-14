@@ -34,7 +34,6 @@
 #define JOB_PORT_AUTHORITY "Port Authority"
 #define JOB_BUREAUCRAT "Bureaucrat"
 #define JOB_DIRECTOR_OF_PORT_SERVICES "Director of Port Services"
-#define JOB_SECURITY_CONSULTANT "Security Consultant"
 //Silicon
 #define JOB_AI "AI" //Pending rework
 #define JOB_CYBORG "Cyborg" //Pending rework
