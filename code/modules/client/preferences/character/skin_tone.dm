@@ -1,6 +1,6 @@
 /datum/preference/color/skin_color
 	explanation = "Skin Color"
-	category = PREFERENCE_CATEGORY_APPEARANCE_TORSO
+	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "skin_color"
 
