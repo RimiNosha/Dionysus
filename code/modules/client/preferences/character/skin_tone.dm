@@ -13,3 +13,6 @@
 		return FALSE
 
 	return TRUE
+
+/datum/preference/color/skin_color/create_default_value()
+	return skintone2hex(random_skin_tone())

@@ -88,7 +88,7 @@
 		return FALSE // Don't try to serialize this if it can't even be seen.
 
 /datum/preference/color/mutant/create_default_value()
-	return list(random_color(), random_color(), random_color())
+	return random_color_list(3)
 
 // Fuck you, this is sanitized already, so this is pointless.
 /datum/preference/color/mutant/is_valid(value)

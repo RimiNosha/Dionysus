@@ -25,8 +25,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(hairstyle, GLOB.hairstyles_list)
 	relevant_mutant_bodypart = "hair"
 
 /datum/preference/color/mutant/hair_color/create_default_value()
-	return list("#422f03", "#422f03", "#422f03")
-
+	return random_color_list(3)
 
 /datum/preference/choiced/mutant/facial_hairstyle
 	explanation = "Facial Hair"
@@ -55,4 +54,4 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(facial_hairstyle, GLOB.facial_hairstyles_list
 	relevant_mutant_bodypart = "facial_hair"
 
 /datum/preference/color/mutant/facial_hair_color/create_default_value()
-	return list("#422f03", "#422f03", "#422f03")
+	return random_color_list(3)
