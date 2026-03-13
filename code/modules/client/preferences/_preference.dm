@@ -379,17 +379,6 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 	return TRUE
 
-/datum/preference/proc/button_act(mob/user, datum/preferences/prefs, list/params)
-	if(user_edit(user, prefs, params))
-		return TRUE
-	return FALSE
-
-/datum/preference/proc/user_edit(mob/user, datum/preferences/prefs, list/params)
-	CRASH("Unimplimented preference edit!")
-
-/datum/preference/proc/get_button(datum/preferences/prefs)
-	CRASH("Unimplimented button!")
-
 /// A preference that is a choice of one option among a fixed set.
 /// Used for preferences such as clothing.
 /datum/preference/choiced
@@ -560,34 +549,6 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 	return data
 
-/datum/preference/choiced/button_act(mob/user, datum/preferences/prefs, list/params)
-	if(params["cycle"])
-		var/list/choices = get_choices()
-		var/new_index = choices.Find(prefs.read_preference(type)) + (params["cycle"] == "down" ? (-1) : 1)
-		if(new_index == 0)
-			new_index = length(choices)
-		else if(new_index > length(choices))
-			new_index = 1
-
-		return prefs.update_preference(src, serialize(choices[new_index]))
-	return ..()
-
-/datum/preference/choiced/user_edit(mob/user, datum/preferences/prefs)
-	var/input = tgui_input_list(user, "Change [explanation]",, get_choices_serialized(), serialize(prefs.read_preference(type)))
-	if(!input)
-		return
-	return prefs.update_preference(src, input)
-
-/datum/preference/choiced/get_button(datum/preferences/prefs)
-	if(!cyclable)
-		return button_element(prefs, capitalize(serialize(prefs.read_preference(type))), "pref_act=[type]")
-	else
-		return {"
-			[button_element(prefs, "<", "pref_act=[type];cycle=down")]
-			[button_element(prefs, capitalize(serialize(prefs.read_preference(type))), "pref_act=[type]")]
-			[button_element(prefs, ">", "pref_act=[type];cycle=up")]
-		"}
-
 /// A preference that represents an RGB color of something.
 /// Will give the value as 6 hex digits, without a hash.
 /datum/preference/color
@@ -605,15 +566,6 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 /datum/preference/color/is_valid(value)
 	return findtext(value, GLOB.is_color)
-
-/datum/preference/color/user_edit(mob/user, datum/preferences/prefs, list/params)
-	var/input = input(user, "Change [explanation]",, prefs.read_preference(type)) as null|color
-	if(!input)
-		return
-	return prefs.update_preference(src, input)
-
-/datum/preference/color/get_button(datum/preferences/prefs)
-	return color_button_element(prefs, prefs.read_preference(type), "pref_act=[type]")
 
 /// A numeric preference with a minimum and maximum value
 /datum/preference/numeric
@@ -651,15 +603,6 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 		"maximum" = maximum,
 		"step" = step,
 	)
-
-/datum/preference/numeric/user_edit(mob/user, datum/preferences/prefs)
-	var/input = tgui_input_number(user, "Change [explanation] ([minimum] - [maximum][step != 1 ? "increment [step]" : ""])",, prefs.read_preference(type), maximum, minimum, round_value = step)
-	if(!input)
-		return
-	return prefs.update_preference(src, input)
-
-/datum/preference/numeric/get_button(datum/preferences/prefs)
-	return button_element(prefs, prefs.read_preference(type), "pref_act=[type]")
 
 /// A prefernece whose value is always TRUE or FALSE
 /datum/preference/toggle

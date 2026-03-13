@@ -32,19 +32,6 @@
 /datum/preference/choiced/employer/create_default_value()
 	return /datum/employer/none
 
-/datum/preference/choiced/employer/button_act(mob/user, datum/preferences/prefs, list/params)
-	if(params["info"])
-		var/datum/employer/employer = prefs.read_preference(type)
-		if(!employer)
-			return
-
-		var/datum/browser/popup = new(user, "factioninfo", "[initial(employer.name)] ([initial(employer.short_name)])", 660, 270)
-		popup.set_content(initial(employer.creator_info))
-		popup.open()
-		return FALSE
-
-	return ..()
-
 /// Associative list of job:integer, where integer is a priority between 1 and 4
 /datum/preference/blob/job_priority
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
@@ -86,38 +73,3 @@
 		return FALSE
 
 	return TRUE
-
-/datum/preference/blob/job_priority/user_edit(mob/user, datum/preferences/prefs, list/params)
-	var/datum/job/job = SSjob.GetJob(params["job"])
-	if(!job)
-		return
-
-	if (job.faction != FACTION_STATION)
-		return FALSE
-
-	if(!can_play_job(prefs, job.id))
-		return FALSE
-
-	var/list/job_prefs = prefs.read_preference(type)
-	var/list/choices = list("Never", "Low", "Medium", "High")
-	var/level = tgui_input_list(usr, "Change Priority",, choices, choices[job_prefs[job] + 1])
-	if(!level)
-		return
-
-	level = choices.Find(level) - 1
-
-	if (level == JP_HIGH)
-		var/datum/job/overflow_role = SSjob.overflow_role
-		var/overflow_role_title = overflow_role.id
-
-		for(var/other_job in job_prefs)
-			if(job_prefs[other_job] == JP_HIGH)
-				// Overflow role needs to go to NEVER, not medium!
-				if(other_job == overflow_role_title)
-					job_prefs[other_job] = null
-				else
-					job_prefs[other_job] = JP_MEDIUM
-
-	job_prefs[job.id] = level
-
-	return prefs.update_preference(src, job_prefs)

@@ -79,87 +79,88 @@
 
 	return input
 
-/datum/preference/blob/augments/user_edit(mob/user, datum/preferences/prefs, list/params)
-	var/list/user_augs = prefs.read_preference(type)
-	var/datum/species/S = prefs.read_preference(/datum/preference/choiced/species)
-	var/list/species_augment_tree = get_species_augments(S)
+// RIMI TODO: I need to reference this code later.
+// /datum/preference/blob/augments/user_edit(mob/user, datum/preferences/prefs, list/params)
+// 	var/list/user_augs = prefs.read_preference(type)
+// 	var/datum/species/S = prefs.read_preference(/datum/preference/choiced/species)
+// 	var/list/species_augment_tree = get_species_augments(S)
 
-	if(params["switch_augment"])
-		var/datum/augment_item/old = GLOB.augment_items[user_augs[params["switch_augment"]]]
-		if(!old)
-			return
+// 	if(params["switch_augment"])
+// 		var/datum/augment_item/old = GLOB.augment_items[user_augs[params["switch_augment"]]]
+// 		if(!old)
+// 			return
 
-		var/list/datum/options = list()
-		for(var/datum/augment_item/A as anything in GLOB.augment_slot_to_items[old.slot])
-			A = GLOB.augment_items[A]
-			options[A.name] = A.type
+// 		var/list/datum/options = list()
+// 		for(var/datum/augment_item/A as anything in GLOB.augment_slot_to_items[old.slot])
+// 			A = GLOB.augment_items[A]
+// 			options[A.name] = A.type
 
-		var/input = tgui_input_list(user, "Switch Augment", "Augments", options)
-		if(!input)
-			return
+// 		var/input = tgui_input_list(user, "Switch Augment", "Augments", options)
+// 		if(!input)
+// 			return
 
-		user_augs[old.slot] = options[input]
-		return prefs.update_preference(src, user_augs)
+// 		user_augs[old.slot] = options[input]
+// 		return prefs.update_preference(src, user_augs)
 
-	if(params["remove_augment"])
-		var/datum/augment_item/removing = GLOB.augment_items[user_augs[params["remove_augment"]]]
-		user_augs -= removing.slot
-		return prefs.update_preference(src, user_augs)
+// 	if(params["remove_augment"])
+// 		var/datum/augment_item/removing = GLOB.augment_items[user_augs[params["remove_augment"]]]
+// 		user_augs -= removing.slot
+// 		return prefs.update_preference(src, user_augs)
 
-	if(params["add_augment"])
-		var/category = params["add_augment"]
-		var/slot = tgui_input_list(user, "Add Augment", "Augments", species_augment_tree?[category])
-		if(!slot)
-			return
+// 	if(params["add_augment"])
+// 		var/category = params["add_augment"]
+// 		var/slot = tgui_input_list(user, "Add Augment", "Augments", species_augment_tree?[category])
+// 		if(!slot)
+// 			return
 
-		var/list/choices = list()
+// 		var/list/choices = list()
 
-		for(var/datum/augment_item/path as anything in species_augment_tree?[category][slot])
-			choices[initial(path.name)] = path
+// 		for(var/datum/augment_item/path as anything in species_augment_tree?[category][slot])
+// 			choices[initial(path.name)] = path
 
-		var/augment = tgui_input_list(user, "Add [slot] Augment", "Augments", choices)
-		if(!augment)
-			return
+// 		var/augment = tgui_input_list(user, "Add [slot] Augment", "Augments", choices)
+// 		if(!augment)
+// 			return
 
-		user_augs[slot] = choices[augment]
-		return prefs.update_preference(src, user_augs)
+// 		user_augs[slot] = choices[augment]
+// 		return prefs.update_preference(src, user_augs)
 
 
-	if(params["add_implant"])
-		var/list/choices = list()
-		for(var/datum/augment_item/implant/path as anything in species_augment_tree?[AUGMENT_CATEGORY_IMPLANTS][AUGMENT_SLOT_IMPLANTS])
-			choices[initial(path.name)] = path
+// 	if(params["add_implant"])
+// 		var/list/choices = list()
+// 		for(var/datum/augment_item/implant/path as anything in species_augment_tree?[AUGMENT_CATEGORY_IMPLANTS][AUGMENT_SLOT_IMPLANTS])
+// 			choices[initial(path.name)] = path
 
-		var/datum/augment_item/implant/implant = tgui_input_list(user, "Add Implant", "Implants", choices)
-		if(!implant)
-			return
+// 		var/datum/augment_item/implant/implant = tgui_input_list(user, "Add Implant", "Implants", choices)
+// 		if(!implant)
+// 			return
 
-		implant = GLOB.augment_items[choices[implant]]
-		LAZYADDASSOC(user_augs[AUGMENT_SLOT_IMPLANTS], implant.type, implant.get_choices()[1])
-		return prefs.update_preference(src, user_augs)
+// 		implant = GLOB.augment_items[choices[implant]]
+// 		LAZYADDASSOC(user_augs[AUGMENT_SLOT_IMPLANTS], implant.type, implant.get_choices()[1])
+// 		return prefs.update_preference(src, user_augs)
 
-	if(params["modify_implant"])
-		var/datum/augment_item/implant/I = text2path(params["modify_implant"])
-		if(!ispath(I))
-			return
-		if(!(I in user_augs[AUGMENT_SLOT_IMPLANTS]))
-			return
+// 	if(params["modify_implant"])
+// 		var/datum/augment_item/implant/I = text2path(params["modify_implant"])
+// 		if(!ispath(I))
+// 			return
+// 		if(!(I in user_augs[AUGMENT_SLOT_IMPLANTS]))
+// 			return
 
-		I = GLOB.augment_items[I]
-		var/new_look = tgui_input_list(user, "Modify Implant", "Implants", I.get_choices() - SPRITE_ACCESSORY_NONE, user_augs[AUGMENT_SLOT_IMPLANTS][I.type])
-		if(!new_look)
-			return
+// 		I = GLOB.augment_items[I]
+// 		var/new_look = tgui_input_list(user, "Modify Implant", "Implants", I.get_choices() - SPRITE_ACCESSORY_NONE, user_augs[AUGMENT_SLOT_IMPLANTS][I.type])
+// 		if(!new_look)
+// 			return
 
-		user_augs[AUGMENT_SLOT_IMPLANTS][I.type] = new_look
+// 		user_augs[AUGMENT_SLOT_IMPLANTS][I.type] = new_look
 
-		return prefs.update_preference(src, user_augs)
+// 		return prefs.update_preference(src, user_augs)
 
-	if(params["remove_implant"])
-		var/path = params["remove_implant"]
-		path = text2path(path)
-		if(!ispath(path))
-			return
+// 	if(params["remove_implant"])
+// 		var/path = params["remove_implant"]
+// 		path = text2path(path)
+// 		if(!ispath(path))
+// 			return
 
-		var/datum/augment_item/removing = GLOB.augment_items[path]
-		user_augs -= removing.slot
-		return prefs.update_preference(src, user_augs)
+// 		var/datum/augment_item/removing = GLOB.augment_items[path]
+// 		user_augs -= removing.slot
+// 		return prefs.update_preference(src, user_augs)

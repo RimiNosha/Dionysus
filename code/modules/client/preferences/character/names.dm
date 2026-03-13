@@ -30,21 +30,6 @@
 /datum/preference/name/is_valid(value)
 	return istext(value) && !isnull(reject_bad_name(value, allow_numbers))
 
-/datum/preference/name/user_edit(mob/user, datum/preferences/prefs)
-	var/input = tgui_input_text(user, "Change [explanation]",, serialize(prefs.read_preference(type)))
-	if(!input)
-		return
-	. = prefs.update_preference(src, input)
-
-	if(istype(user, /mob/dead/new_player))
-		var/mob/dead/new_player/player = user
-		if(player.npp.active_tab == "game")
-			player.npp.change_tab("game") // Reload name
-	return .
-
-/datum/preference/name/get_button(datum/preferences/prefs)
-	return button_element(prefs, capitalize(serialize(prefs.read_preference(type))), "pref_act=[type]")
-
 /// A character's real name
 /datum/preference/name/real_name
 	explanation = "Name"
