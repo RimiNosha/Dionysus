@@ -2,19 +2,24 @@ import { Button } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../../backend';
 import { Box, ByondUi, Stack } from '../../components';
-import { PreferencesMenuData } from '../PreferencesMenu/data';
+import { PreferencesMenuData } from './data';
 
 export enum DioPrefsPage {
   APPEARANCE = 'Appearance',
   JOBS = 'Jobs',
   LORE = 'Lore',
-  MARKINGS = 'Markings',
   OOC = 'OOC',
   RECORDS = 'Records',
   SELECT = 'Select',
   SKILLS = 'Skills',
   SPECIES = 'Species',
 }
+
+export const HIDDEN_PAGES = [
+  DioPrefsPage.SELECT,
+  DioPrefsPage.SKILLS,
+  // DioPrefsPage.SPECIES,
+];
 
 export const CharacterPreview = (props) => {
   const { data, act } = useBackend<PreferencesMenuData>();
@@ -23,8 +28,23 @@ export const CharacterPreview = (props) => {
   return (
     <Stack vertical height="100%" pt="5px" pb="5px">
       <Stack.Item>
-        [1] [2] [3] [4]
-        {current_page === DioPrefsPage.SPECIES && <> [M] [F]</>}
+        {current_page !== DioPrefsPage.SPECIES ? (
+          <>
+            <Button>Job</Button>
+            <Button>Loadout</Button>
+            <Button>Underwear</Button>
+            <Button>Naked</Button>
+          </>
+        ) : (
+          <>
+            <Button>1</Button>
+            <Button>2</Button>
+            <Button>3</Button>
+            <Button>4</Button>
+            <Button>Male</Button>
+            <Button>Female</Button>
+          </>
+        )}
       </Stack.Item>
       <Stack.Item height="100%">
         <ByondUi

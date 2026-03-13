@@ -5,7 +5,6 @@
 /datum/preference/choiced/mutant
 	priority = PREFERENCE_PRIORITY_NAME_MODIFICATIONS // Otherwise organs will get qdel'd on body replacement.
 	abstract_type = /datum/preference/choiced/mutant
-	// category = PREFERENCE_CATEGORY_APPEARANCE
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_ICON_BOX
 	should_generate_icons = TRUE
@@ -56,6 +55,7 @@
 		var/datum/preference/sub_preference_instance = GLOB.preference_entries[color_feature]
 		LAZYADD(.[PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES], list(list("key" = sub_preference_instance.savefile_key, "feature" = sub_preference_instance.feature_identifier)))
 
+/// Mutant color. Used to automagically apply a color to a mutant part. Very nice.
 /datum/preference/color/mutant
 	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
 	abstract_type = /datum/preference/color/mutant
@@ -94,7 +94,6 @@
 /datum/preference/color/mutant/is_valid(value)
 	return TRUE
 
-// Mutant color. Used to automagically apply a color to a mutant part. Very nice.
 /datum/preference/color/mutant/apply_to_human(mob/living/carbon/human/target, value, datum/preferences/preferences)
 	target.dna.features["[relevant_mutant_bodypart]_color"] = value
 

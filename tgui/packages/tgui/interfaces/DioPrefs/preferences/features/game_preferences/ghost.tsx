@@ -1,5 +1,5 @@
 import { useBackend } from '../../../../../backend';
-import { PreferencesMenuData } from '../../../data';
+import { PreferencesMenuData } from '../../../../DioPrefs/data';
 import {
   CheckboxInput,
   FeatureChoiced,

@@ -14,15 +14,15 @@ import {
   Stack,
   TrackOutsideClicks,
 } from '../../components';
-import { PreferencesMenuData, RandomSetting } from '../PreferencesMenu/data';
+import { PreferencesMenuData, RandomSetting } from './data';
 import {
   FeatureChoicedServerData,
   FeatureValueInput,
   SupplementalFeature,
-} from '../PreferencesMenu/preferences/features/base';
-import { RandomizationButton } from '../PreferencesMenu/RandomizationButton';
-import { ServerPreferencesFetcher } from '../PreferencesMenu/ServerPreferencesFetcher';
+} from './preferences/features/base';
 import { PREFERENCE_ID_TO_COMPONENT } from './PreferenceTypes';
+import { RandomizationButton } from './RandomizationButton';
+import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 const CLOTHING_CELL_INNER_SIZE = 64;
 const CLOTHING_CELL_PADDING = 0;
@@ -30,8 +30,8 @@ const CLOTHING_CELL_SIZE = CLOTHING_CELL_INNER_SIZE + CLOTHING_CELL_PADDING;
 
 const CLOTHING_SELECTION_CELL_SIZE =
   CLOTHING_CELL_INNER_SIZE + CLOTHING_CELL_PADDING;
-const CLOTHING_SELECTION_WIDTH = 4.8;
-const CLOTHING_SELECTION_MULTIPLIER = 5.2;
+const CLOTHING_SELECTION_WIDTH = 4; // in slots
+const CLOTHING_SELECTION_HEIGHT = 5.2; // uuhhh, pretty much arbitrary, have fun :)
 
 export const MainFeature = (props: {
   catalog: FeatureChoicedServerData;
@@ -39,6 +39,7 @@ export const MainFeature = (props: {
   handleClose: () => void;
   handleOpen: () => void;
   handleSelect: (newClothing: string) => void;
+  isEven?: boolean;
   isOpen: boolean;
   randomization?: RandomSetting;
   setRandomization: (newSetting: RandomSetting) => void;
@@ -54,84 +55,108 @@ export const MainFeature = (props: {
     handleSelect,
     randomization,
     setRandomization,
+    isEven,
   } = props;
 
   return (
-    <Popper
-      isOpen={isOpen}
-      placement="bottom-start"
-      content={
-        isOpen && (
-          <TrackOutsideClicks onOutsideClick={props.handleClose}>
-            <ChoicedSelection
-              name={catalog.name}
-              catalog={catalog}
-              selected={currentValue}
-              supplementalFeatures={catalog.supplemental_features}
-              onClose={handleClose}
-              onSelect={handleSelect}
-            />
-          </TrackOutsideClicks>
-        )
-      }
+    <Flex
+      inline
+      width="50%"
+      height={`${CLOTHING_CELL_SIZE}px`}
+      position="relative"
+      className="DioPrefs__PopperContainer"
     >
-      <Button
-        onClick={(e) => {
-          e.stopPropagation();
-          if (isOpen) {
-            handleClose();
-          } else {
-            handleOpen();
-          }
-        }}
-        style={{
-          height: `${CLOTHING_CELL_SIZE}px`,
-          width: `${CLOTHING_CELL_SIZE}px`,
-        }}
-        position="relative"
-        tooltip={
-          <>
-            {catalog.name}
-            <br /> <Box textColor="grey">{props.currentValue}</Box>
-          </>
+      <Popper
+        isOpen={isOpen}
+        placement={
+          // I HATE byondui
+          isEven ? 'bottom-start' : 'bottom-end'
         }
-        tooltipPosition="right"
-        selected={props.isOpen}
+        content={
+          isOpen && (
+            <TrackOutsideClicks onOutsideClick={props.handleClose}>
+              <ChoicedSelection
+                name={catalog.name}
+                catalog={catalog}
+                selected={currentValue}
+                supplementalFeatures={catalog.supplemental_features}
+                onClose={handleClose}
+                onSelect={handleSelect}
+              />
+            </TrackOutsideClicks>
+          )
+        }
       >
-        <Box
-          className={classes([
-            'preferences32x32',
-            catalog.icons![currentValue],
-            'centered-image',
-          ])}
-          style={{
-            colorInterpolation: 'nearest-neighbor',
-            transform: `translateX(-50%) translateY(-50%) scale(${CLOTHING_CELL_INNER_SIZE / 32})`,
-          }}
-        />
-
-        {randomization && (
-          <RandomizationButton
-            dropdownProps={{
-              dropdownStyle: {
-                bottom: 0,
-                position: 'absolute',
-                right: '1px',
-              },
-
-              onOpen: (event) => {
-                // We're a button inside a button.
-                // Did you know that's against the W3C standard? :)
-                event.cancelBubble = true;
-                event.stopPropagation();
-              },
+        <Box inline>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isOpen) {
+                handleClose();
+              } else {
+                handleOpen();
+              }
             }}
-            value={randomization}
-            setValue={setRandomization}
-          />
-        )}
-      </Button>
-    </Popper>
+            style={{
+              height: `${CLOTHING_CELL_SIZE}px`,
+              width: `${CLOTHING_CELL_SIZE}px`,
+            }}
+            position="relative"
+            tooltipPosition="right"
+            selected={props.isOpen}
+          >
+            <Box
+              className={classes([
+                'preferences32x32',
+                catalog.icons![currentValue],
+                'centered-image',
+              ])}
+              style={{
+                colorInterpolation: 'nearest-neighbor',
+                transform: `translateX(-50%) translateY(-50%) scale(${CLOTHING_CELL_INNER_SIZE / 32})`,
+              }}
+            />
+
+            {randomization && (
+              <RandomizationButton
+                dropdownProps={{
+                  dropdownStyle: {
+                    bottom: 0,
+                    position: 'absolute',
+                    right: '1px',
+                  },
+
+                  onOpen: (event) => {
+                    // We're a button inside a button.
+                    // Did you know that's against the W3C standard? :)
+                    event.cancelBubble = true;
+                    event.stopPropagation();
+                  },
+                }}
+                value={randomization}
+                setValue={setRandomization}
+              />
+            )}
+          </Button>
+        </Box>
+        <Box
+          position="absolute"
+          height="100%"
+          verticalAlign="top"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+          }}
+          width={`calc(100% - ${CLOTHING_CELL_SIZE}px)`} // Agony
+        >
+          <Box inline>
+            <span>{catalog.name}</span>
+            <br />
+            <span style={{ color: 'grey' }}>{currentValue}</span>
+          </Box>
+        </Box>
+      </Popper>
+    </Flex>
   );
 };
 
@@ -161,18 +186,18 @@ const ChoicedSelection = (props: {
           className="DioPrefs__PartSelector"
           style={{
             height: `${
-              CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER + 4
+              CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_HEIGHT + 4
             }px`,
-            width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH + 4}px`,
+            width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH + 72}px`,
           }}
         >
           <Box
             className="DioPrefs__PartSelector__inner"
             style={{
               height: `${
-                CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER
+                CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_HEIGHT
               }px`,
-              width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH}px`,
+              width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH + 68}px`,
             }}
           >
             <Stack vertical fill>

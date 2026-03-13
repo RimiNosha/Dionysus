@@ -41,8 +41,7 @@
 	else
 		var/static/icon/dummy
 		if (!dummy)
-			dummy = icon('icons/mob/tails.dmi', "blank_template")
-			dummy.Scale(32, 128)
+			dummy = icon('icons/blanks/32x128.dmi', "nothing")
 
 		canvas = image(dummy)
 		canvas.plane = GAME_PLANE

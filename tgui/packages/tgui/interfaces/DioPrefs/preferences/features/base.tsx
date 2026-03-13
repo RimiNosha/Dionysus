@@ -12,7 +12,10 @@ import {
   Stack,
   TextArea,
 } from '../../../../components';
-import { createSetPreference, PreferencesMenuData } from '../../data';
+import {
+  createSetPreference,
+  PreferencesMenuData,
+} from '../../../DioPrefs/data';
 import { ServerPreferencesFetcher } from '../../ServerPreferencesFetcher';
 
 export const sortChoices = sortBy<[string, ReactNode]>(([name]) => name);

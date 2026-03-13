@@ -3,22 +3,19 @@ import { useState } from 'react';
 import { useBackend } from '../../backend';
 import { Box, LabeledList, Section, Stack } from '../../components';
 import { CharacterDoll, Part } from '../../components/CharacterDoll';
-import {
-  createSetPreference,
-  PreferencesMenuData,
-} from '../PreferencesMenu/data';
+import { MainFeature } from './Components';
+import { createSetPreference, PreferencesMenuData } from './data';
+import { CharacterPreview } from './Preferences';
 import {
   FeatureChoicedServerData,
   FeatureValueInput,
-} from '../PreferencesMenu/preferences/features/base';
-import { ServerPreferencesFetcher } from '../PreferencesMenu/ServerPreferencesFetcher';
-import { MainFeature } from './Components';
-import { CharacterPreview } from './Preferences';
+} from './preferences/features/base';
 import { PREFERENCE_ID_TO_COMPONENT } from './PreferenceTypes';
+import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 // These consts make thinking about this 1000% easier.
-const DOLL_SIZE = 32 * 14;
-const CENTER = 32 * 0.484375;
+const DOLL_SIZE = 32 * 14; // Each sprite pixel is 14x14 screen pixels
+const CENTER = 32 * 0.484375; // The weird decimal is cause human sprites are an odd number wide on an even canvas
 
 export const AppearancePage = (props) => {
   const { data, act } = useBackend<PreferencesMenuData>();
@@ -32,7 +29,12 @@ export const AppearancePage = (props) => {
       render={(serverData) => {
         return (
           <Box position="relative" width="100%" height="100%">
-            <Box position="absolute" left="0" top="50%">
+            <Box
+              position="absolute"
+              left="0"
+              top="50%"
+              style={{ transform: 'translate(0, -50%)' }}
+            >
               <CharacterDoll
                 selectedPart={selectedPart}
                 setSelectedPart={setSelectedPart}
@@ -50,40 +52,43 @@ export const AppearancePage = (props) => {
                       title={
                         selectedPart
                           ? `Organs of ${selectedPart?.name}`
-                          : 'No part selected'
+                          : 'General Organs (Would There Even Be Any??)'
                       }
                     >
-                      {!!selectedPart &&
-                        !!serverData &&
-                        !!data.character_preferences[selectedPart.id] &&
+                      {!!serverData &&
+                        !!data.character_preferences[
+                          selectedPart ? selectedPart.id : 'general'
+                        ] &&
                         Object.entries(
-                          data.character_preferences[selectedPart.id],
+                          data.character_preferences[
+                            selectedPart ? selectedPart.id : 'general'
+                          ],
                         )
                           .filter(
                             (e) =>
                               (serverData[e[0]] as FeatureChoicedServerData)
                                 .feature === 'icon_box',
                           )
-                          .map((feature) => {
+                          .map((feature, index) => {
                             const [id, value] = feature;
                             return (
-                              <Box inline key={id}>
-                                <MainFeature
-                                  catalog={
-                                    serverData[id] as FeatureChoicedServerData
-                                  }
-                                  currentValue={value as string /* yolo */}
-                                  handleClose={() => {
-                                    setCurrentFeatureMenu(null);
-                                  }}
-                                  handleOpen={() => {
-                                    setCurrentFeatureMenu(id);
-                                  }}
-                                  handleSelect={createSetPreference(act, id)}
-                                  isOpen={currentFeatureMenu === id}
-                                  setRandomization={() => {}}
-                                />
-                              </Box>
+                              <MainFeature
+                                key={id}
+                                catalog={
+                                  serverData[id] as FeatureChoicedServerData
+                                }
+                                currentValue={value as string /* yolo */}
+                                handleClose={() => {
+                                  setCurrentFeatureMenu(null);
+                                }}
+                                handleOpen={() => {
+                                  setCurrentFeatureMenu(id);
+                                }}
+                                handleSelect={createSetPreference(act, id)}
+                                isOpen={currentFeatureMenu === id}
+                                setRandomization={() => {}}
+                                isEven={index % 2 === 0}
+                              />
                             );
                           })}
                     </Section>
@@ -93,15 +98,18 @@ export const AppearancePage = (props) => {
                       title={
                         selectedPart
                           ? `Limb Options for ${selectedPart?.name}`
-                          : 'No part selected'
+                          : 'General Options'
                       }
                     >
                       <LabeledList>
-                        {!!selectedPart &&
-                          !!serverData &&
-                          !!data.character_preferences[selectedPart.id] &&
+                        {!!serverData &&
+                          !!data.character_preferences[
+                            selectedPart ? selectedPart.id : 'general'
+                          ] &&
                           Object.entries(
-                            data.character_preferences[selectedPart.id],
+                            data.character_preferences[
+                              selectedPart ? selectedPart.id : 'general'
+                            ],
                           )
                             .filter(
                               (e) =>

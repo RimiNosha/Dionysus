@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { useBackend } from '../backend';
-import { PreferencesMenuData } from '../interfaces/PreferencesMenu/data';
+import { PreferencesMenuData } from '../interfaces/DioPrefs/data';
 import { Box } from './Box';
 import { Button } from './Button';
 import { Image } from './Image';

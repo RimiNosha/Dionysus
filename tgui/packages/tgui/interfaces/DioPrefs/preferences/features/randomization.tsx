@@ -1,6 +1,6 @@
 import { useBackend } from '../../../../backend';
 import { Button, Stack } from '../../../../components';
-import { PreferencesMenuData, RandomSetting } from '../../data';
+import { PreferencesMenuData, RandomSetting } from '../../../DioPrefs/data';
 import { RandomizationButton } from '../../RandomizationButton';
 import { useRandomToggleState } from '../../useRandomToggleState';
 import { CheckboxInput, Feature, FeatureToggle } from './base';

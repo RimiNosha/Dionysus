@@ -6,7 +6,7 @@
 	// I'm not a fan of this, but I'm here for results, not speed at all costs.
 	var/list/color_layers
 	if(sprite_datum.color_src == TRI_COLOR_LAYERS)
-		color_layers = list("primary", "secondary", "tertiary")
+		color_layers = global.layer_text_color
 	else
 		color_layers = list(null) // lazy but keeps it simple, stupid
 

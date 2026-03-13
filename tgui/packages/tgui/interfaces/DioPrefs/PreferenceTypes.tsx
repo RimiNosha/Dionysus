@@ -15,7 +15,7 @@ import {
   FeatureTextInput,
   FeatureTriColorInput,
   FeatureValue,
-} from '../PreferencesMenu/preferences/features/base';
+} from './preferences/features/base';
 
 export const PREFERENCE_ID_TO_COMPONENT: Record<
   string,

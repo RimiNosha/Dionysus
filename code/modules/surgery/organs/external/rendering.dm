@@ -17,6 +17,12 @@ GLOBAL_REAL_VAR(layer_values) = list(
 	BODY_FRONT_LAYER,
 )
 
+GLOBAL_REAL_VAR(layer_text_color) = list(
+	"primary",
+	"secondary",
+	"tertiary",
+)
+
 GLOBAL_LIST_EMPTY(organ_overlays_cache)
 
 /obj/item/organ

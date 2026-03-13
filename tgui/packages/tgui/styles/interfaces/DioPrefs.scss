@@ -2,14 +2,24 @@
 @use 'sass:map';
 @use '../components/Button.scss';
 @use '../colors.scss';
+@use '../base.scss';
+@use '../functions.scss' as *;
 
 $char_size: 32px * 5; // Might need to fudge this a little for oversized characters. We'll see.
+
+$background-color: base.$color-bg !default;
 
 .DioPrefs {
   &__CharacterPreview {
     aspect-ratio: 25%;
     height: 100%;
     image-rendering: pixelated;
+  }
+
+  &__PopperContainer {
+    >:first-child {
+      width: 100%;
+    }
   }
 
   &__CharacterSelect {
@@ -52,6 +62,16 @@ $char_size: 32px * 5; // Might need to fudge this a little for oversized charact
         animation: marqueeIfOverflowing 6s linear infinite forwards;
         left: 0;
       }
+    }
+  }
+
+  &__PartSelector {
+    background-color: $background-color;
+    border: 2px solid lighten(base.$color-bg, 20%);
+    box-shadow: 5px 5px 20px black;
+
+    &__inner {
+      border: 2px solid rgb(129, 129, 129);
     }
   }
 
