@@ -1524,7 +1524,10 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 /// Given a human, will adjust it before taking a picture for the preferences UI.
 /// This should create a CONSISTENT result, so the icons don't randomly change.
-/datum/species/proc/prepare_human_for_preview(mob/living/carbon/human/human)
+/// Gender can be MALE or FEMALE. What, your species only has one gender? Not my problem yet! - Rimi
+/// Index goes from 1 to 4 (inclusive)
+/// This is called multiple times. Don't forget.
+/datum/species/proc/prepare_human_for_preview(mob/living/carbon/human/human, gender, index)
 	return
 
 /// Returns the species's scream sound.

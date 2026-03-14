@@ -2651,6 +2651,7 @@
 #include "code\modules\client\preferences\middleware\_middleware.dm"
 #include "code\modules\client\preferences\middleware\keybindings.dm"
 #include "code\modules\client\preferences\middleware\legacy_toggles.dm"
+#include "code\modules\client\preferences\middleware\species_previews.dm"
 #include "code\modules\client\preferences\player\accessibility.dm"
 #include "code\modules\client\preferences\player\admin.dm"
 #include "code\modules\client\preferences\player\auto_fit_viewport.dm"
