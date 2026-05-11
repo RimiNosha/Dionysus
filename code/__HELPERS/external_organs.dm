@@ -8,7 +8,8 @@
 	if(sprite_datum.color_src == TRI_COLOR_LAYERS)
 		color_layers = global.layer_text_color
 	else
-		color_layers = list(null) // lazy but keeps it simple, stupid
+		var/static/list/null_list = list(null)
+		color_layers = null_list // lazy but keeps it simple, stupid
 
 	for(var/image_layer in layers)
 		var/layer_text = global.layer2text["[image_layer]"]
