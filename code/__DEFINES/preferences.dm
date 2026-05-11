@@ -160,3 +160,7 @@
 }
 
 #define PREF_CROP_AREA_HEAD list(10, 19, 22, 31)
+
+#define TRAIT_NEGATIVE "negative"
+#define TRAIT_POSITIVE "positive"
+#define TRAIT_NEUTRAL "neutral"

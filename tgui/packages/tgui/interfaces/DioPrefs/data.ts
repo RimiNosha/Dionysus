@@ -36,7 +36,7 @@ export type Name = {
 };
 
 export type Species = {
-  desc: string;
+  desc: string[];
   diet?: {
     disliked_food: Food[];
     liked_food: Food[];
@@ -48,21 +48,21 @@ export type Species = {
   lore: string[];
   name: string;
 
-  perks: {
-    negative: Perk[];
-    neutral: Perk[];
-    positive: Perk[];
-  };
-
   sexes: BooleanLike;
+
+  traits: {
+    negative: Trait[];
+    neutral: Trait[];
+    positive: Trait[];
+  };
 
   use_skintones: BooleanLike;
 };
 
-export type Perk = {
+export type Trait = {
   description: string;
+  icon: string;
   name: string;
-  ui_icon: string;
 };
 
 export type Department = {
@@ -194,4 +194,11 @@ export type ServerData = {
     randomizable: string[];
   };
   species: Record<string, Species>;
+  species_previews: Record<
+    string,
+    {
+      female: [string, string, string, string];
+      male: [string, string, string, string];
+    }
+  >;
 };

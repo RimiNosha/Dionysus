@@ -1,24 +1,24 @@
 import { Button } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../../backend';
-import { Stack } from '../../components';
+import { Box, Stack } from '../../components';
 import { Window } from '../../layouts';
 import { AppearancePage } from './AppearancePage';
 import { CharacterSelect } from './CharacterSelectPage';
 import { PreferencesMenuData } from './data';
-import { DioPrefsPage, HIDDEN_PAGES } from './Preferences';
+import { CharacterPreview, DioPrefsPage, HIDDEN_PAGES } from './Preferences';
 import { SpeciesPage } from './SpeciesPage';
 
 export const DioPrefs = (props) => {
   const { data } = useBackend<PreferencesMenuData>();
-  const [current_page, setCurrentPage] = useLocalState(
+  const [currentPage, setCurrentPage] = useLocalState(
     'DioPrefs_page',
     DioPrefsPage.SELECT,
   );
 
   let page;
 
-  switch (current_page) {
+  switch (currentPage) {
     case DioPrefsPage.SELECT:
       page = <CharacterSelect />;
       break;
@@ -34,7 +34,7 @@ export const DioPrefs = (props) => {
   }
 
   return (
-    <Window title={current_page} theme="dionysus" width={920} height={770}>
+    <Window title={currentPage} theme="dionysus" width={920} height={770}>
       <Stack vertical fill>
         <Stack.Item>
           <Stack vertical width="100%">
@@ -54,7 +54,7 @@ export const DioPrefs = (props) => {
                 return (
                   <Button
                     key={key}
-                    selected={value === current_page}
+                    selected={value === currentPage}
                     onClick={() => setCurrentPage(value)}
                   >
                     {value}
@@ -65,7 +65,16 @@ export const DioPrefs = (props) => {
             <Stack.Divider />
           </Stack>
         </Stack.Item>
-        <Stack.Item height="100%">{page}</Stack.Item>
+        <Stack.Item height="100%">
+          <Box position="relative" width="100%" height="100%">
+            <Stack fill>
+              <Stack.Item width="100%">{page}</Stack.Item>
+              <Stack.Item style={{ width: '158px' }}>
+                <CharacterPreview id={data.character_preview_view} />
+              </Stack.Item>
+            </Stack>
+          </Box>
+        </Stack.Item>
       </Stack>
     </Window>
   );

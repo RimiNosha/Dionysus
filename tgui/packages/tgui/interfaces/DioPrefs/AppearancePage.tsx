@@ -5,7 +5,6 @@ import { Box, LabeledList, Section, Stack } from '../../components';
 import { CharacterDoll, Part } from '../../components/CharacterDoll';
 import { MainFeature } from './Components';
 import { createSetPreference, PreferencesMenuData } from './data';
-import { CharacterPreview } from './Preferences';
 import {
   FeatureChoicedServerData,
   FeatureValueInput,
@@ -28,7 +27,7 @@ export const AppearancePage = (props) => {
     <ServerPreferencesFetcher
       render={(serverData) => {
         return (
-          <Box position="relative" width="100%" height="100%">
+          <>
             <Box
               position="absolute"
               left="0"
@@ -151,11 +150,8 @@ export const AppearancePage = (props) => {
                   </Stack.Item>
                 </Stack>
               </Stack.Item>
-              <Stack.Item style={{ width: '158px' }}>
-                <CharacterPreview id={data.character_preview_view} />
-              </Stack.Item>
             </Stack>
-          </Box>
+          </>
         );
       }}
     />

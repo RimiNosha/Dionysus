@@ -70,3 +70,18 @@
 		'sound/voice/human/wounded/female_moan_wounded4.ogg',
 		'sound/voice/human/wounded/female_moan_wounded5.ogg',
 	)
+
+/datum/species/human/get_notable_traits()
+	var/list/neutral = list()
+	var/list/positive = list()
+	var/list/negative = list()
+	. = list(TRAIT_NEUTRAL = neutral, TRAIT_POSITIVE = positive, TRAIT_NEGATIVE = negative)
+
+	neutral += trait_entry("Basic as Hell", FA_ICON_QUESTION, "You're pretty basic. Nothing exceptional to see here.")
+	neutral += trait_entry("Medium Lifespan", FA_ICON_PERSON_CANE, "You live to about 100 years, provided unforseen circumstances don't cut that short.")
+
+	negative += trait_entry("Has Blood", FA_ICON_DROPLET, "You can bleed. Don't lose all your blood.")
+	negative += trait_entry("Warm Blooded", FA_ICON_THERMOMETER, "You get hot easily.")
+
+	positive += trait_entry("Blends In", FA_ICON_MASK, "You're so basic that you just blend in with everyone else when chaos gets going.")
+	positive += trait_entry("Blunt Resistance", FA_ICON_BASEBALL, "One of the few things humans have a reputation for. No guarantees on standing up for a while after getting smacked down, though.")

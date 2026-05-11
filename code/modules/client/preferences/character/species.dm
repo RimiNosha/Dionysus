@@ -40,3 +40,25 @@
 /datum/preference/choiced/species/value_changed(datum/preferences/prefs, new_value, old_value)
 	var/datum/preference/P = GLOB.preference_entries[/datum/preference/appearance_mods]
 	prefs.update_preference(P, P.create_default_value())
+
+/datum/preference/choiced/species/compile_constant_data()
+	var/list/data = list()
+
+	for (var/species_id in get_selectable_species())
+		var/species_type = GLOB.species_list[species_id]
+		var/datum/species/species = new species_type()
+
+		data[species_id] = list()
+		data[species_id]["name"] = species.name
+		data[species_id]["desc"] = species.get_species_description()
+		data[species_id]["lore"] = species.get_species_lore()
+		data[species_id]["icon"] = sanitize_css_class_name(species.name)
+		data[species_id]["use_skintones"] = species.use_skintones
+		data[species_id]["sexes"] = species.sexes
+		data[species_id]["enabled_features"] = species.get_features()
+		data[species_id]["traits"] = species.get_notable_traits()
+		data[species_id]["diet"] =  species.get_species_diet()
+
+		qdel(species)
+
+	return data

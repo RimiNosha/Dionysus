@@ -9,6 +9,13 @@ $char_size: 32px * 5; // Might need to fudge this a little for oversized charact
 
 $background-color: base.$color-bg !default;
 
+// I hate TGUI's tooltip element.
+.InlineTooltip div {
+  display: inline-block;
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
 .DioPrefs {
   &__CharacterPreview {
     aspect-ratio: 25%;
@@ -108,23 +115,80 @@ $background-color: base.$color-bg !default;
       }
     }
   }
-}
 
-.preferences32x32 {
-  image-rendering: pixelated;
-}
+  &__Trait {
+    padding: 5px;
+    display: inline-flex;
+    font-size: 24px;
+    -webkit-text-stroke: 1px;
 
-@keyframes marqueeIfOverflowing {
+    &_negative {
+      .Icon {
+        -webkit-text-fill-color: red;
+      }
+    }
 
-  0%,
-  10%,
-  90%,
-  100% {
-    transform: translateX(0px);
+    &_positive {
+      .Icon {
+        -webkit-text-fill-color: green
+      }
+    }
+
+    &_neutral {
+      .Icon {
+        -webkit-text-fill-color: gray;
+      }
+    }
+
+    &_error {
+      .Icon {
+        animation: errorFlash 1s ease infinite;
+      }
+    }
   }
 
-  40%,
-  60% {
-    transform: translateX(calc(-1 * max(0px, 100% - $char_size)));
+  @keyframes errorFlash {
+    0% {
+      color: red;
+    }
+
+    25% {
+      color: rgb(247, 0, 255);
+    }
+
+    50% {
+      color: blue;
+    }
+
+    75% {
+      color: black;
+    }
+
+    100% {
+      color: red;
+    }
   }
+
+  .preferences32x32 {
+    image-rendering: pixelated;
+  }
+
+  @keyframes marqueeIfOverflowing {
+
+    0%,
+    10%,
+    90%,
+    100% {
+      transform: translateX(0px);
+    }
+
+    40%,
+    60% {
+      transform: translateX(calc(-1 * max(0px, 100% - $char_size)));
+    }
+  }
+}
+
+.bigButton {
+  padding: 10px 15px;
 }

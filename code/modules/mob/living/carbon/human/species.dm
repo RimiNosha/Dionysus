@@ -1619,6 +1619,28 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	return list("WIP")
 
 /**
+ * Gets the general physical description of the species. Can be long.
+ * Used in the preference menu.
+ *
+ * Returns a list of strings.
+ * Between each entry in the list, a newline will be inserted, for formatting.
+ */
+/datum/species/proc/get_species_description()
+	SHOULD_CALL_PARENT(FALSE)
+	RETURN_TYPE(/list)
+
+	return list("WIP")
+
+/datum/species/proc/get_notable_traits()
+	SHOULD_CALL_PARENT(FALSE)
+	RETURN_TYPE(/list)
+
+	return list(TRAIT_NEGATIVE = trait_entry("No traits set!", FA_ICON_X, "This is a coder problem!"))
+
+/datum/species/proc/trait_entry(name, icon, description)
+	return list(list("name" = name, "icon" = icon, "description" = description))
+
+/**
  * Translate the species liked foods from bitfields into strings
  * and returns it in the form of an associated list.
  *
