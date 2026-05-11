@@ -108,6 +108,7 @@
 #include "code\__DEFINES\flags.dm"
 #include "code\__DEFINES\flavor.dm"
 #include "code\__DEFINES\flock_defines.dm"
+#include "code\__DEFINES\font_awesome_icons.dm"
 #include "code\__DEFINES\fonts.dm"
 #include "code\__DEFINES\food.dm"
 #include "code\__DEFINES\footsteps.dm"
