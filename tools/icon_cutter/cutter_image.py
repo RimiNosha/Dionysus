@@ -3,6 +3,7 @@ from copy import deepcopy
 from PIL import Image, PngImagePlugin
 import tomllib
 import math
+import oxipng
 
 from . import cutter_shapes, door_stitch, basic_cutter
 

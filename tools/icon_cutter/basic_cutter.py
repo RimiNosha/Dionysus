@@ -1,5 +1,8 @@
 import math
+from io import BytesIO
+
 from PIL import Image, PngImagePlugin
+import oxipng
 
 class DmiEntry:
     def __init__(self, name: str, start_index: int, dirs: int = 1, frames: int = 1, dont_loop: bool = False, flow_vertically=False):
@@ -83,4 +86,11 @@ version = 4.0
 
     png_info = PngImagePlugin.PngInfo()
     png_info.add_text("Description", dmi_str, zip=True)
-    out_image.save(file[:-4] + ".dmi", "png", pnginfo=png_info)
+
+    bytes_io = BytesIO()
+    out_image.save(bytes_io, "png", pnginfo=png_info)
+    bytes_io.seek(0)
+
+    out_image = oxipng.optimize_from_memory(bytes_io.read())
+    with open(file[:-4] + ".dmi", "wb") as file:
+        file.write(out_image)
