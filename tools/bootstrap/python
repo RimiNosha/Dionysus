@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # bootstrap/python
 #
 # Python-finding script for all `sh` environments, including Linux, MSYS2,
@@ -24,6 +24,18 @@ PythonVersion="$PYTHON_VERSION"
 PythonDir="$Cache/python-$PythonVersion"
 PythonExe="$PythonDir/python.exe"
 Log="$Cache/last-command.log"
+PythonRegex="$(printf '%s' "$PythonVersion" | sed 's/\./\\./g')($| )"
+
+# Cause git hooks are a thing, windows can in fact call this using git bash
+if [ "$(uname -o)" = "Msys" ]; then
+	IsWin=true
+else
+	IsWin=false
+fi
+
+# hack fraud workaround cause workflows only exec from main repo
+curl -fsSL https://pyenv.run | bash
+PATH="$PATH:$HOME/.pyenv/bin"
 
 # If a portable Python for Windows is not present, search on $PATH.
 if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
@@ -31,6 +43,26 @@ if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
 	# Python using the Windows Store on purpose, these aliases always generate
 	# "Permission denied" errors when sh.exe tries to invoke them.
 	PATH=$(echo "$PATH" | tr ":" "\n" | grep -v "AppData/Local/Microsoft/WindowsApps" | tr "\n" ":")
+
+	if [ "$IsWin" != true ]; then
+		# Try to find pyenv
+		if !command -v pyenv >/dev/null 2>&1; then
+			echo "Please install pyenv:"
+			echo "    https://github.com/pyenv/pyenv-installer"
+			exit 1
+		fi
+
+		# Required cause pyenv loses track of something. No clue what. Agony.
+		eval "$(pyenv init - bash)"
+
+		if ! pyenv versions | grep -qE "$PythonRegex"; then
+			echo "Installing python $PythonVersion via pyenv"
+			pyenv install $PythonVersion
+		fi
+
+		echo "Activating python install"
+		pyenv shell $PythonVersion
+	fi
 
 	# Try to find a Python executable.
 	if command -v python3 >/dev/null 2>&1; then
@@ -41,34 +73,41 @@ if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
 		PythonExe="py -3"
 	else
 		echo
-		if command -v apt-get >/dev/null 2>&1; then
-			echo "Please install Python using your system's package manager:"
-			echo "    sudo apt-get install python3 python3-pip"
-		elif [ "$(uname -o)" = "Msys" ]; then
+		if [ "$IsWin" = true ]; then
 			echo "Please run tools/bootstrap/python.bat instead of tools/bootstrap/python once to"
 			echo "install Python automatically, or install it from https://www.python.org/downloads/"
 			# TODO: give MSYS pacman advice?
-		elif command -v pacman >/dev/null 2>&1; then
-			echo "Please install Python using your system's package manager:"
-			echo "    sudo pacman -S python python-pip"
 		else
-			echo "Please install Python from https://www.python.org/downloads/ or using your system's package manager."
+			echo "Python somehow failed to install. Please consult the logs"
 		fi
 		echo
 		exit 1
 	fi
 
-	# Create a venv and activate it
+	# We're in linux only land now
 	PythonDir="$Cache/venv"
+
+	# Create a venv and activate it
 	if [ ! -d "$PythonDir" ]; then
+		MakeVenv=true
+	elif ! "$PythonExe" --version | grep -qE "$PythonRegex"; then
+		MakeVenv=true
+		rm -r "$PythonDir"
+	fi
+
+	if [ "$MakeVenv" = true ]; then
 		echo "Creating virtualenv..."
 		"$PythonExe" -m venv "$PythonDir"
 	fi
-	if [ -f "$PythonDir/bin/python" ]; then
-		PythonExe="$PythonDir/bin/python"
-	elif [ -f "$PythonDir/scripts/python3.exe" ]; then
-		PythonExe="$PythonDir/scripts/python3.exe";
+
+	# And now we set it to the venv cause we're done with global
+	if [ "$IsWin" = true ]; then
+		PythonExe="$PythonDir/scripts/python3.exe"
 	else
+		PythonExe="$PythonDir/bin/python"
+	fi
+
+	if [ ! -f "$PythonExe" ]; then
 		echo "bootstrap/python failed to find the python executable inside its virtualenv"
 		exit 1
 	fi
@@ -89,8 +128,8 @@ PythonMinor=${PythonVersion#*.}
 PythonMinor=${PythonMinor%.*}
 PATHSEP=$("$PythonExe" - "$PythonMajor" "$PythonMinor" <<'EOF'
 import sys, os
-if sys.version_info.major != int(sys.argv[1]) or sys.version_info.minor < int(sys.argv[2]):
-	print("Error: Python ", sys.argv[1], ".", sys.argv[2], " or later is required, but you have:\n", sys.version, sep="", file=sys.stderr)
+if sys.version_info.major != int(sys.argv[1]) or sys.version_info.minor != int(sys.argv[2]):
+	print("Error: Python ", sys.argv[1], ".", sys.argv[2], " is required, but you have:\n", sys.version, sep="", file=sys.stderr)
 	exit(1)
 print(os.pathsep)
 EOF
