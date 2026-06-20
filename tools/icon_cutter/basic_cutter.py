@@ -1,9 +1,8 @@
 import math
 from PIL import Image, PngImagePlugin
 
-
 class DmiEntry:
-    def __init__(self, name: str, start_index: int, dirs: int = 1, frames: int = 1, dont_loop: bool = False):
+    def __init__(self, name: str, start_index: int, dirs: int = 1, frames: int = 1, dont_loop: bool = False, flow_vertically=False):
         super().__init__()
         self.name = name
         self.start_index = start_index
@@ -11,29 +10,37 @@ class DmiEntry:
         self.frames = frames
         self.sprite_locations = []
         self.dont_loop = dont_loop
+        self.flow_vertically = flow_vertically
 
-    def resolve_sprites(self, image_size: (int, int), icon_size: (int, int)):
+    def resolve_sprites(self, image_size: tuple[int, int], icon_size: tuple[int, int], silent = False):
+        self.sprite_locations = []
         img_w, img_h = image_size
         icon_w, icon_h = icon_size
         sprites_per_row = img_w // icon_w
+        if not silent:
+            print("Resolving state " + self.name + "...")
+
+        def add_entry(): # My OOB brain is screaming at this but I'm just gonna treat it like a macro :)
+            if not self.flow_vertically:
+                sprite_idx = self.start_index + direction * self.frames + frame
+            else:
+                sprite_idx = self.start_index + frame
+            col = sprite_idx % sprites_per_row
+            row = sprite_idx // sprites_per_row
+            if self.flow_vertically:
+                row += direction
+            self.sprite_locations.append((col * icon_w, row * icon_h))
 
         for frame in range(self.frames):
             for direction in range(self.dirs):
-                sprite_idx = self.start_index + direction * self.frames + frame
-                col = sprite_idx % sprites_per_row
-                row = sprite_idx // sprites_per_row
-                self.sprite_locations.append((col * icon_w, row * icon_h))
-            # Now duplicate the sprites for this frame cause we want to make mr. spriter man's life less repetitive
-            for direction in range(self.dirs):
-                sprite_idx = self.start_index + direction * self.frames + frame
-                col = sprite_idx % sprites_per_row
-                row = sprite_idx // sprites_per_row
-                self.sprite_locations.append((col * icon_w, row * icon_h))
+                add_entry()
+                if self.dirs == 2: # Dupe the sprite if we're not spriting all four directions for this entry
+                    add_entry()
 
         if self.dirs == 2:
             self.dirs = 4
 
-def make_dmi(file, dmi_icons: list[DmiEntry], icon_size):
+def make_dmi(file, dmi_icons: list[DmiEntry], icon_size, silent = False):
 
     # Never fucking trust the parser to handle multiline strings sensibly. Yes, indenting this "properly" breaks it. Don't do it.
     dmi_str = f"""# BEGIN DMI
@@ -45,7 +52,7 @@ version = 4.0
 
     all_locations = []
     for entry in dmi_icons:
-        entry.resolve_sprites(image.size, icon_size)
+        entry.resolve_sprites(image.size, icon_size, silent)
         all_locations.extend(entry.sprite_locations)
 
     total_images = len(all_locations)
