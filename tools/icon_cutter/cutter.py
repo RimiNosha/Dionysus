@@ -6,6 +6,8 @@ from datetime import datetime
 
 from . import cutter_image
 
+print("Using python " + sys.version)
+
 time = datetime.now()
 
 if len(sys.argv) < 3:
