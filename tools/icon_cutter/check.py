@@ -136,7 +136,7 @@ for output_name in output_hash:
         events += f"{current_op*10}\n{working}\n"
         print(events, end="")
     if old_icon_hash != new_icon_hash:
-        print("Icon hashes differ! " + old_icon_hash + " vs " + new_icon_hash)
+        print("Icon hashes differ!")
     fail_count += 1
     print(f"::error output={output_name} and its templates all exist but were not comitted fully compiled")
 
