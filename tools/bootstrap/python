@@ -34,7 +34,8 @@ else
 fi
 
 # hack fraud workaround cause workflows only exec from main repo
-curl -fsSL https://pyenv.run | bash
+if [ ! -d "~/.pyenv" ]; then
+	curl -fsSL https://pyenv.run | bash
 PATH="$PATH:$HOME/.pyenv/bin"
 
 # If a portable Python for Windows is not present, search on $PATH.
