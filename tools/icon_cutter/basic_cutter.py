@@ -98,4 +98,4 @@ version = 4.0
     # with open(file[:-4] + ".dmi", "wb") as file:
     #     file.write(out_image)
 
-    out_image.save(file[:-4] + ".dmi", "PNG", pnginfo=png_info)
+    out_image.save(file[:-4] + ".dmi", "PNG", pnginfo=png_info, compress_level=0, optimize=False)
