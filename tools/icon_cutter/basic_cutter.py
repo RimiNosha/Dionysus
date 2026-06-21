@@ -88,7 +88,7 @@ version = 4.0
     png_info.add_text("Description", dmi_str, zip=True)
 
     bytes_io = BytesIO()
-    out_image.save(bytes_io, "png", pnginfo=png_info)
+    out_image.save(bytes_io, "png", pnginfo=png_info, compress_level=0, optimize=True)
     bytes_io.seek(0)
 
     out_image = oxipng.optimize_from_memory(bytes_io.read())
