@@ -3,7 +3,6 @@ from io import BytesIO
 
 from PIL import Image, PngImagePlugin
 import oxipng
-import gzip
 
 class DmiEntry:
     def __init__(self, name: str, start_index: int, dirs: int = 1, frames: int = 1, dont_loop: bool = False, flow_vertically=False):
@@ -85,14 +84,14 @@ version = 4.0
 
     dmi_str += "\n# END DMI"
 
-    # png_info = PngImagePlugin.PngInfo()
-    # png_info.gamma = 0
-    # png_info.icc_profile = None
-    # png_info.chunks = []
-    # png_info.add_text("Description", dmi_str, zip=True)
+    png_info = PngImagePlugin.PngInfo()
+    png_info.gamma = 0
+    png_info.icc_profile = None
+    png_info.chunks = []
+    png_info.add_text("Description", dmi_str, zip=True)
 
     bytes_io = BytesIO()
-    out_image.save(bytes_io, "png", pnginfo=None)
+    out_image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=True)
     bytes_io.seek(0)
 
     out_image = oxipng.optimize_from_memory(bytes_io.read())

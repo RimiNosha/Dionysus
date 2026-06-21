@@ -45,12 +45,8 @@ def hash_dmi(path):
     dmi = Image.open(path)
     dmi = dmi.convert('RGBA')
     dmi.load()  # Needed only for .png EXIF data (see citation above)
-    if not ("Description" in dmi.info.keys()):
-        return hash_file(path)
-
     dmi_metadata = dmi.info['Description']
     md5.update(dmi_metadata.encode('utf-8'))
-
 
     readable_metadata = dict(
         map(lambda entry: (entry[0], entry[1]),
