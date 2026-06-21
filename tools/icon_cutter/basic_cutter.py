@@ -95,6 +95,6 @@ version = 4.0
     out_image.save(bytes_io, "png", pnginfo=None)
     bytes_io.seek(0)
 
-    out_image = oxipng.optimize_from_memory(bytes_io.read()) 
+    out_image = oxipng.optimize_from_memory(bytes_io.read())
     with open(file[:-4] + ".dmi", "wb") as file:
         file.write(out_image)
