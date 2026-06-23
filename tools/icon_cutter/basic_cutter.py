@@ -1,5 +1,6 @@
 import math
 from io import BytesIO
+import zlib
 
 from PIL import Image, PngImagePlugin
 import oxipng
@@ -84,17 +85,27 @@ version = 4.0
 
     dmi_str += "\n# END DMI"
 
-    png_info = PngImagePlugin.PngInfo()
-    png_info.gamma = 0
-    png_info.icc_profile = None
-    png_info.chunks = []
-    png_info.add_text("Description", dmi_str, zip=True)
+    # png_info = PngImagePlugin.PngInfo()
+    # png_info.gamma = 0
+    # png_info.icc_profile = None
+    # png_info.chunks = []
+    # png_info.add_text("Description", dmi_str, zip=True)
+    #
+    # bytes_io = BytesIO()
+    # out_image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=False) # e
+    # bytes_io.seek(0)
 
-    bytes_io = BytesIO()
-    out_image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=False) # e
-    bytes_io.seek(0)
+    raw_png = oxipng.RawImage(
+        out_image.tobytes(),
+        out_image.width,
+        out_image.height,
+        bit_depth=8,
+        color_type=oxipng.ColorType.rgba(),
+    )
 
-    out_image = oxipng.optimize_from_memory(bytes_io.read())
+    # raw_png.add_png_chunk("Description".encode(), zlib.compress(dmi_str.encode()))
+    raw_png.add_png_chunk(b"iTXt", "Description".encode("latin-1") + b"\0\x01\0\0\0" + zlib.compress(dmi_str.encode()))
+    out_image = raw_png.create_optimized_png()
     with open(file[:-4] + ".dmi", "wb") as file:
         file.write(out_image)
 
