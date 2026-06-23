@@ -1,10 +1,8 @@
 from copy import deepcopy
-from io import BytesIO
 
 from PIL import Image, PngImagePlugin
 import tomllib
 import math
-import oxipng
 
 from . import cutter_shapes, door_stitch, basic_cutter
 
@@ -145,19 +143,5 @@ version = 4.0
     dmi_str += "\n# END DMI"
 
     png_info = PngImagePlugin.PngInfo()
-    png_info.gamma = 0
-    png_info.icc_profile = None
-    png_info.chunks = []
     png_info.add_text("Description", dmi_str, zip=True)
-
-    bytes_io = BytesIO()
-    image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=False)
-    bytes_io.seek(0)
-
-    out_image = oxipng.optimize_from_memory(bytes_io.read())
-    with open(file, "wb") as file:
-        file.write(out_image)
-
-    # png_info = PngImagePlugin.PngInfo()
-    # png_info.add_text("Description", dmi_str, zip=True)
-    # image.save(file, "png", pnginfo=png_info)
+    image.save(file, "png", pnginfo=png_info)
