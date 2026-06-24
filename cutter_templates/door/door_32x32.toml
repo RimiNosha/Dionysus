@@ -1,0 +1,8 @@
+# This technically doesn't cut anything, per se. It copy-pastes from the provided door template file and fill in duplicate sprites.
+# This makes spriter's lives when making doors approximately 40% less miserable. (Citation needed.)
+mode = "Door"
+
+# And at the same width/height too
+[output_icon_size]
+x = 32
+y = 32
