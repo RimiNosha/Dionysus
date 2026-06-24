@@ -41,9 +41,6 @@ class DmiEntry:
                 if self.dirs == 2: # Dupe the sprite if we're not spriting all four directions for this entry
                     add_entry()
 
-        if self.dirs == 2:
-            self.dirs = 4
-
 def make_dmi(file, dmi_icons: list[DmiEntry], icon_size, silent = False):
 
     # Never fucking trust the parser to handle multiline strings sensibly. Yes, indenting this "properly" breaks it. Don't do it.
@@ -85,28 +82,10 @@ version = 4.0
 
     dmi_str += "\n# END DMI"
 
-    # png_info = PngImagePlugin.PngInfo()
-    # png_info.gamma = 0
-    # png_info.icc_profile = None
-    # png_info.chunks = []
-    # png_info.add_text("Description", dmi_str, zip=True)
-    #
-    # bytes_io = BytesIO()
-    # out_image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=False) # e
-    # bytes_io.seek(0)
+    png_info = PngImagePlugin.PngInfo()
+    png_info.gamma = 0
+    png_info.icc_profile = None
+    png_info.chunks = []
+    png_info.add_text("Description", dmi_str, zip=True)
 
-    raw_png = oxipng.RawImage(
-        out_image.tobytes(),
-        out_image.width,
-        out_image.height,
-        bit_depth=8,
-        color_type=oxipng.ColorType.rgba(),
-    )
-
-    # raw_png.add_png_chunk("Description".encode(), zlib.compress(dmi_str.encode()))
-    raw_png.add_png_chunk(b"iTXt", "Description".encode("latin-1") + b"\0\x01\0\0\0" + zlib.compress(dmi_str.encode()))
-    out_image = raw_png.create_optimized_png()
-    with open(file[:-4] + ".dmi", "wb") as file:
-        file.write(out_image)
-
-    # out_image.save(file[:-4] + ".dmi", "PNG", pnginfo=png_info, compress_level=0, optimize=False)
+    out_image.save(file[:-4] + ".dmi", "PNG", pnginfo=png_info, compress_level=0, optimize=False)
