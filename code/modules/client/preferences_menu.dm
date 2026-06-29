@@ -1,6 +1,6 @@
 /datum/preferences_menu
 	var/datum/preferences/preferences
-	var/atom/movable/screen/map_view/char_preview/character_preview_view
+	var/datum/quad_char_preview/character_preview_view
 
 	/// The current window, PREFERENCE_TAB_* in [`code/__DEFINES/preferences.dm`]
 	var/current_window = PREFERENCE_TAB_CHARACTER
@@ -35,10 +35,9 @@
 			character_preview_view.update_body()
 
 			return TRUE
-		if ("rotate")
-			character_preview_view.dir = turn(character_preview_view.dir, -90)
-
-			return TRUE
+		// if ("rotate")
+		// 	character_preview_view.dir = turn(character_preview_view.dir, -90)
+		// 	return TRUE
 		if ("set_preference")
 			var/requested_preference_key = params["preference"]
 			var/value = params["value"]
@@ -181,7 +180,7 @@
 
 	// Fuck maps and especially this dogshit """engine""", I have better shit to do.
 	// If someone wants to make this a map, then good fucking luck, I wasted five hours on this fucking garbage.
-	data["character_preview_view"] = character_preview_view.assigned_map
+	data["character_preview_view"] = character_preview_view.assigned_maps()
 
 	data["overflow_role"] = SSjob.GetJobType(SSjob.overflow_role).id
 	data["window"] = current_window
@@ -239,8 +238,8 @@
 		addtimer(CALLBACK(character_preview_view, TYPE_PROC_REF(/atom/movable/screen/map_view/char_preview, update_body)), 1 SECONDS)
 
 /datum/preferences_menu/proc/create_character_preview_view(mob/user)
-	character_preview_view = new(null, preferences, user.client)
-	character_preview_view.generate_view("character_preview_[REF(character_preview_view)]")
+	character_preview_view = new(preferences)
+	character_preview_view.generate_view()
 	character_preview_view.update_body()
 
 	return character_preview_view

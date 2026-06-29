@@ -9,15 +9,11 @@
 	var/atom/movable/screen/background/background
 	var/image/canvas
 
-	bound_height = 128
-
 /atom/movable/screen/map_view/char_preview/Initialize(mapload, datum/preferences/preferences)
 	. = ..()
 	src.preferences = preferences
-	generate_view("character_preview")
 	background = new
 	background.del_on_map_removal = FALSE
-	background.assigned_map = "character_preview"
 	background.fill_rect(1, 1, 1, 4)
 
 /atom/movable/screen/map_view/char_preview/Destroy()
@@ -36,33 +32,23 @@
 	else
 		body.wipe_state()
 
+	preferences.preferences_menu.render_new_preview_appearance(body)
+
+/atom/movable/screen/map_view/char_preview/proc/update_canvas()
 	if (canvas)
 		canvas.cut_overlays()
 	else
 		var/static/icon/dummy
 		if (!dummy)
-			dummy = icon('icons/blanks/32x128.dmi', "nothing")
+			dummy = icon('icons/turf/floors.dmi', "black")
 
 		canvas = image(dummy)
 		canvas.plane = GAME_PLANE
 		background.vis_contents += canvas
 
-	preferences.preferences_menu.render_new_preview_appearance(body)
+	canvas.add_overlay(body.appearance)
 
-	var/offset = 0
-	for(var/dir in GLOB.cardinals)
-		var/static/dummy = icon('icons/turf/floors.dmi', "floor")
-		var/image/bg = image(dummy, dir=dir, pixel_y=offset, layer=SPACE_LAYER)
-		bg.plane = GAME_PLANE
-
-		// Look man, I have no idea why this works. The body appearance doesn't add properly otherwise.
-		var/image/body_apearance = image(dummy, dir=dir, pixel_y=offset)
-		body_apearance.appearance = body.appearance
-		body_apearance.plane = GAME_PLANE
-
-		bg.add_overlay(body_apearance)
-		canvas.add_overlay(bg)
-		offset+=32
+	appearance = canvas.appearance
 
 /atom/movable/screen/map_view/char_preview/proc/create_body()
 	QDEL_NULL(body)
@@ -72,3 +58,64 @@
 /atom/movable/screen/map_view/char_preview/display_to_client(client/show_to)
 	. = ..()
 	show_to.register_map_obj(background)
+
+/datum/quad_char_preview // fuuuuuuck
+	var/atom/movable/screen/map_view/char_preview/preview1
+	var/atom/movable/screen/map_view/char_preview/preview2
+	var/atom/movable/screen/map_view/char_preview/preview3
+	var/atom/movable/screen/map_view/char_preview/preview4
+
+/datum/quad_char_preview/New(datum/preferences/preferences)
+	. = ..()
+	preview1 = new(null, preferences)
+	preview2 = new(null, preferences)
+	preview3 = new(null, preferences)
+	preview4 = new(null, preferences)
+
+	preview2.dir = NORTH
+	preview3.dir = EAST
+	preview4.dir = WEST
+
+/datum/quad_char_preview/Destroy(force, ...)
+	. = ..()
+	QDEL_NULL(preview1)
+	QDEL_NULL(preview2)
+	QDEL_NULL(preview3)
+	QDEL_NULL(preview4)
+
+/datum/quad_char_preview/proc/update_body()
+	preview1.update_body()
+	preview2.body = preview1.body
+	preview3.body = preview1.body
+	preview4.body = preview1.body
+	preview1.update_canvas()
+	preview2.update_canvas()
+	preview3.update_canvas()
+	preview4.update_canvas()
+
+/datum/quad_char_preview/proc/create_body()
+	preview1.create_body()
+	preview2.body = preview1.body
+	preview3.body = preview1.body
+	preview4.body = preview1.body
+
+/datum/quad_char_preview/proc/display_to_client(client/show_to)
+	preview1.display_to_client(show_to)
+	preview2.display_to_client(show_to)
+	preview3.display_to_client(show_to)
+	preview4.display_to_client(show_to)
+
+/datum/quad_char_preview/proc/display_to(mob/show_to, datum/tgui_window/window)
+	preview1.display_to(show_to, window)
+	preview2.display_to(show_to, window)
+	preview3.display_to(show_to, window)
+	preview4.display_to(show_to, window)
+
+/datum/quad_char_preview/proc/assigned_maps()
+	return list(preview1.assigned_map, preview2.assigned_map, preview3.assigned_map, preview4.assigned_map)
+
+/datum/quad_char_preview/proc/generate_view()
+	preview1.generate_view("character_preview_[REF(preview1)]")
+	preview2.generate_view("character_preview_[REF(preview2)]")
+	preview3.generate_view("character_preview_[REF(preview3)]")
+	preview4.generate_view("character_preview_[REF(preview4)]")

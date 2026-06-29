@@ -34,7 +34,7 @@ export const DioPrefs = (props) => {
   }
 
   return (
-    <Window title={currentPage} theme="dionysus" width={920} height={770}>
+    <Window title={currentPage} theme="dionysus" width={920} height={870}>
       <Stack vertical fill>
         <Stack.Item>
           <Stack vertical width="100%">

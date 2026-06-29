@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Button } from 'tgui-core/components';
 
 import { useBackend, useLocalState } from '../../backend';
-import { Box, Stack } from '../../components';
-import { Image } from '../../components/Image';
+import { Box, ByondUi, Stack } from '../../components';
 import { PreferencesMenuData } from './data';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
@@ -35,6 +34,7 @@ export const CharacterPreview = (props) => {
   );
 
   const [previewSex, setPreviewSex] = useState('male');
+
   const [previewIndex, setPreviewIndex] = useState(0);
 
   return (
@@ -82,12 +82,39 @@ export const CharacterPreview = (props) => {
           }}
         /> */}
         <ServerPreferencesFetcher
-          render={(serverData) => (
-            <Image
-              className="DioPrefs__CharacterPreview"
-              src={`data:image/png;base64,${current_page === DioPrefsPage.SPECIES ? serverData?.species_previews[previewSpecies][previewSex][previewIndex] : 'do a different thing dipshit'}`}
-            />
-          )}
+          render={(serverData) =>
+            current_page === DioPrefsPage.SPECIES ? (
+              <Box>
+                <Box className={`preferences32x32 ${previewSpecies}_north`} />
+                <Box className={`preferences32x32 ${previewSpecies}_south`} />
+                <Box className={`preferences32x32 ${previewSpecies}_east`} />
+                <Box className={`preferences32x32 ${previewSpecies}_west`} />
+              </Box>
+            ) : (
+              <Box>
+                <ByondUi
+                  width="160px"
+                  height="160px"
+                  params={{ id: data.character_preview_view[0], type: 'map' }}
+                />
+                <ByondUi
+                  width="160px"
+                  height="160px"
+                  params={{ id: data.character_preview_view[1], type: 'map' }}
+                />
+                <ByondUi
+                  width="160px"
+                  height="160px"
+                  params={{ id: data.character_preview_view[2], type: 'map' }}
+                />
+                <ByondUi
+                  width="160px"
+                  height="160px"
+                  params={{ id: data.character_preview_view[3], type: 'map' }}
+                />
+              </Box>
+            )
+          }
         />
       </Stack.Item>
       <Stack.Item align="center" width="100%" basis="0" height="100px">

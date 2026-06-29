@@ -179,7 +179,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		var/name = is_default ? read_preference(/datum/preference/name/real_name) : save_data?["real_name"]
 		var/icon = is_default ? read_preference(/datum/preference/stored_appearance) : save_data?["stored_appearance"]
 		if (!icon && is_default)
-			icon = icon2base64(get_flat_existing_human_icon(preferences_menu.character_preview_view.body, list(SOUTH)))
+			icon = icon2base64(get_flat_existing_human_icon(preferences_menu.character_preview_view.preview1.body, list(SOUTH)))
 			write_preference(
 				GLOB.preference_entries[/datum/preference/stored_appearance],
 				icon
