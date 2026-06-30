@@ -10,7 +10,7 @@ import { CharacterPreview, DioPrefsPage, HIDDEN_PAGES } from './Preferences';
 import { SpeciesPage } from './SpeciesPage';
 
 export const DioPrefs = (props) => {
-  const { data } = useBackend<PreferencesMenuData>();
+  const { act, data } = useBackend<PreferencesMenuData>();
   const [currentPage, setCurrentPage] = useLocalState(
     'DioPrefs_page',
     DioPrefsPage.SELECT,
@@ -34,7 +34,13 @@ export const DioPrefs = (props) => {
   }
 
   return (
-    <Window title={currentPage} theme="dionysus" width={920} height={870}>
+    <Window
+      title={currentPage}
+      theme="dionysus"
+      width={920}
+      height={870}
+      onMount={() => act('do_da_jiggle')}
+    >
       <Stack vertical fill>
         <Stack.Item>
           <Stack vertical width="100%">

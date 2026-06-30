@@ -1,3 +1,12 @@
+GLOBAL_LIST_INIT(preferences_preview_backgrounds, list(
+	"black",
+	"grey",
+	"floor",
+	"plating",
+	"darkfull",
+	"smooth",
+))
+
 /// A preview of a character for use in the preferences menu
 /atom/movable/screen/map_view/char_preview
 
@@ -8,6 +17,7 @@
 
 	var/atom/movable/screen/background/background
 	var/image/canvas
+	var/last_background
 
 /atom/movable/screen/map_view/char_preview/Initialize(mapload, datum/preferences/preferences)
 	. = ..()
@@ -37,14 +47,14 @@
 /atom/movable/screen/map_view/char_preview/proc/update_canvas()
 	if (canvas)
 		canvas.cut_overlays()
-	else
-		var/static/icon/dummy
-		if (!dummy)
-			dummy = icon('icons/turf/floors.dmi', "black")
+
+	if (canvas || preferences.preferences_menu.background != last_background)
+		var/icon/dummy = icon('icons/turf/floors.dmi', GLOB.preferences_preview_backgrounds[preferences.preferences_menu.background])
 
 		canvas = image(dummy)
 		canvas.plane = GAME_PLANE
 		background.vis_contents += canvas
+		last_background = preferences.preferences_menu.background
 
 	canvas.add_overlay(body.appearance)
 
@@ -58,6 +68,12 @@
 /atom/movable/screen/map_view/char_preview/display_to_client(client/show_to)
 	. = ..()
 	show_to.register_map_obj(background)
+
+/atom/movable/screen/map_view/char_preview/proc/jiggle()
+	fill_rect(0, 0, 0, 0)
+
+	spawn(1) // Fugly byond workaround cause we need to jiggle the view. Entirely map_view impl agnostic, so feel free to reuse where needed.
+		fill_rect(1, 1, 1, 1)
 
 /datum/quad_char_preview // fuuuuuuck
 	var/atom/movable/screen/map_view/char_preview/preview1
@@ -88,6 +104,9 @@
 	preview2.body = preview1.body
 	preview3.body = preview1.body
 	preview4.body = preview1.body
+	update_canvas()
+
+/datum/quad_char_preview/proc/update_canvas()
 	preview1.update_canvas()
 	preview2.update_canvas()
 	preview3.update_canvas()
@@ -98,6 +117,7 @@
 	preview2.body = preview1.body
 	preview3.body = preview1.body
 	preview4.body = preview1.body
+	update_canvas()
 
 /datum/quad_char_preview/proc/display_to_client(client/show_to)
 	preview1.display_to_client(show_to)
@@ -119,3 +139,9 @@
 	preview2.generate_view("character_preview_[REF(preview2)]")
 	preview3.generate_view("character_preview_[REF(preview3)]")
 	preview4.generate_view("character_preview_[REF(preview4)]")
+
+/datum/quad_char_preview/proc/jiggle()
+	preview1.jiggle()
+	preview2.jiggle()
+	preview3.jiggle()
+	preview4.jiggle()

@@ -2,6 +2,8 @@
 	var/datum/preferences/preferences
 	var/datum/quad_char_preview/character_preview_view
 
+	var/background = 1
+
 	/// The current window, PREFERENCE_TAB_* in [`code/__DEFINES/preferences.dm`]
 	var/current_window = PREFERENCE_TAB_CHARACTER
 
@@ -35,9 +37,19 @@
 			character_preview_view.update_body()
 
 			return TRUE
-		// if ("rotate")
-		// 	character_preview_view.dir = turn(character_preview_view.dir, -90)
-		// 	return TRUE
+
+		if ("cycle_background")
+			var/forwards = params["forwards"]
+			background += forwards ? 1 : -1
+			if (background > length(GLOB.preferences_preview_backgrounds))
+				background = 0
+			else if (background < 0)
+				background = length(GLOB.preferences_preview_backgrounds)
+
+			character_preview_view.update_canvas()
+
+			return TRUE
+
 		if ("set_preference")
 			var/requested_preference_key = params["preference"]
 			var/value = params["value"]
@@ -61,6 +73,7 @@
 				preferences.write_preference(GLOB.preference_entries[/datum/preference/stored_appearance], null)
 
 			return TRUE
+
 		if ("set_color_preference")
 			var/requested_preference_key = params["preference"]
 
@@ -134,6 +147,10 @@
 				preferences.write_preference(GLOB.preference_entries[/datum/preference/stored_appearance], null)
 
 			return TRUE
+
+		// Automated callback that fixes maps not being sized properly. Thanks BYOND.
+		if ("do_da_jiggle")
+			character_preview_view.jiggle()
 
 	for (var/datum/preference_middleware/preference_middleware as anything in preferences.middleware)
 		var/delegation = preference_middleware.action_delegations[action]
@@ -232,10 +249,6 @@
 		ui.set_autoupdate(FALSE)
 		ui.open()
 		character_preview_view.display_to(user, ui.window)
-
-		// HACK: Without this the character starts out really tiny because of some BYOND bug.
-		// You can fix it by changing a preference, so let's just forcably update the body to emulate this.
-		addtimer(CALLBACK(character_preview_view, TYPE_PROC_REF(/atom/movable/screen/map_view/char_preview, update_body)), 1 SECONDS)
 
 /datum/preferences_menu/proc/create_character_preview_view(mob/user)
 	character_preview_view = new(preferences)

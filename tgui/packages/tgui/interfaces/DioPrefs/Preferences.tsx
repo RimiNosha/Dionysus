@@ -6,6 +6,8 @@ import { Box, ByondUi, Stack } from '../../components';
 import { PreferencesMenuData } from './data';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
+const CHARACTER_PORTRAIT_SIZE = 160;
+
 export enum DioPrefsPage {
   APPEARANCE = 'Appearance',
   JOBS = 'Jobs',
@@ -73,43 +75,51 @@ export const CharacterPreview = (props) => {
         )}
       </Stack.Item>
       <Stack.Item height="100%" width="220px">
-        {/* <ByondUi
-          width="220px"
-          height="100%"
-          params={{
-            id: props.id,
-            type: 'map',
-          }}
-        /> */}
         <ServerPreferencesFetcher
           render={(serverData) =>
             current_page === DioPrefsPage.SPECIES ? (
-              <Box>
-                <Box className={`preferences32x32 ${previewSpecies}_north`} />
-                <Box className={`preferences32x32 ${previewSpecies}_south`} />
-                <Box className={`preferences32x32 ${previewSpecies}_east`} />
-                <Box className={`preferences32x32 ${previewSpecies}_west`} />
-              </Box>
+              <Stack vertical>
+                <SpeciesPreview
+                  previewSpecies={previewSpecies}
+                  previewIndex={previewIndex}
+                  dir="south"
+                />
+                <SpeciesPreview
+                  previewSpecies={previewSpecies}
+                  previewIndex={previewIndex}
+                  dir="north"
+                />
+                <SpeciesPreview
+                  previewSpecies={previewSpecies}
+                  previewIndex={previewIndex}
+                  dir="east"
+                />
+                <SpeciesPreview
+                  previewSpecies={previewSpecies}
+                  previewIndex={previewIndex}
+                  dir="west"
+                />
+              </Stack>
             ) : (
               <Box>
                 <ByondUi
-                  width="160px"
-                  height="160px"
+                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
                   params={{ id: data.character_preview_view[0], type: 'map' }}
                 />
                 <ByondUi
-                  width="160px"
-                  height="160px"
+                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
                   params={{ id: data.character_preview_view[1], type: 'map' }}
                 />
                 <ByondUi
-                  width="160px"
-                  height="160px"
+                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
                   params={{ id: data.character_preview_view[2], type: 'map' }}
                 />
                 <ByondUi
-                  width="160px"
-                  height="160px"
+                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
                   params={{ id: data.character_preview_view[3], type: 'map' }}
                 />
               </Box>
@@ -118,12 +128,41 @@ export const CharacterPreview = (props) => {
         />
       </Stack.Item>
       <Stack.Item align="center" width="100%" basis="0" height="100px">
-        <Button icon="arrow-left" ml="2px" />
+        <Button
+          icon="arrow-left"
+          ml="2px"
+          onClick={() => act('cycle_background')}
+        />
         <Box inline align="center" width="107px">
           Background
         </Box>
-        <Button icon="arrow-right" />
+        <Button
+          icon="arrow-right"
+          onClick={() => act('cycle_background', { forwards: true })}
+        />
       </Stack.Item>
     </Stack>
+  );
+};
+
+const SpeciesPreview = (props) => {
+  return (
+    <Stack.Item
+      position="relative"
+      width={`${CHARACTER_PORTRAIT_SIZE}px`}
+      height={`${CHARACTER_PORTRAIT_SIZE}px`}
+      mt="0"
+    >
+      <Box
+        className={`preferences32x32 species__${props.previewSpecies}_${props.previewIndex + 1}_${props.dir}`}
+        style={{
+          scale: `${CHARACTER_PORTRAIT_SIZE / 32}`,
+          imageRendering: 'pixelated',
+        }}
+        position="absolute"
+        left={`${(CHARACTER_PORTRAIT_SIZE / 32 - (CHARACTER_PORTRAIT_SIZE / 32 - 2)) * 32}px`}
+        top={`${(CHARACTER_PORTRAIT_SIZE / 32 - (CHARACTER_PORTRAIT_SIZE / 32 - 2)) * 32}px`}
+      />
+    </Stack.Item>
   );
 };

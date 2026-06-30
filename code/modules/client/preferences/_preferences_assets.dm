@@ -34,6 +34,17 @@
 
 			to_insert[preference.get_spritesheet_key(preference_value)] = list(icon, icon_state)
 
+	for (var/datum/species/species as anything in get_selectable_species_by_type())
+		// We're not particularly performance sensitive here. While I don't trust species to change owners nicely, I do expect the same species to be able to modify itself without breaking.
+		var/mob/living/carbon/human/dummy/consistent/dummy = new
+		species = new species()
+		for (var/gender in list(MALE, FEMALE))
+			for (var/i = 1, i < 5, i++)
+				species.prepare_human_for_preview(dummy, gender, i)
+				var/icon/icon = get_flat_existing_human_icon(dummy)
+				for (var/dir in GLOB.cardinals)
+					Insert("species__[species.id]_[i]_[dir2text(dir)]", icon, "", dir)
+
 	for (var/spritesheet_key in to_insert)
 		var/list/inserting = to_insert[spritesheet_key]
 		Insert(spritesheet_key, inserting[1], inserting[2])
