@@ -174,7 +174,6 @@ export const SpeciesPage = (props) => {
                     >
                       Confirm
                     </Button>
-                    {/* RIMI TODO: Replace this with the real link */}
                     <a
                       href={
                         'https://wiki.dionysus13.net/wiki/Species/' +
