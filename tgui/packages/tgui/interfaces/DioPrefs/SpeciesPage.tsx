@@ -167,13 +167,17 @@ export const SpeciesPage = (props) => {
                   </Stack.Item>
 
                   <Stack.Item mt="auto" position="relative" height="40px">
-                    <Button position="absolute" left="0" className="bigButton">
+                    <Button
+                      position="absolute"
+                      left="0"
+                      className="Button--big"
+                    >
                       Confirm
                     </Button>
                     {/* RIMI TODO: Replace this with the real link */}
                     <a
                       href={
-                        'https://wiki.dionysuss13.com/species/' +
+                        'https://wiki.dionysus13.net/wiki/Species/' +
                         data.character_preferences.misc.species
                       }
                       style={{

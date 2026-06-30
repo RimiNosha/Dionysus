@@ -169,10 +169,6 @@ $background-color: base.$color-bg !default;
     }
   }
 
-  .preferences32x32 {
-    image-rendering: pixelated;
-  }
-
   @keyframes marqueeIfOverflowing {
 
     0%,
@@ -189,6 +185,6 @@ $background-color: base.$color-bg !default;
   }
 }
 
-.bigButton {
-  padding: 10px 15px;
+.preferences32x32 {
+  image-rendering: pixelated;
 }

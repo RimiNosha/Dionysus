@@ -112,6 +112,10 @@ $bg-map: colors.$bg-map !default;
   line-height: 1.333em;
 }
 
+.Button--big {
+  padding: 10px 15px;
+}
+
 @each $color-name, $color-value in $bg-map {
   .Button--color--#{$color-name} {
     @include button-color($color-value);
