@@ -343,6 +343,18 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		return FALSE
 	return TRUE
 
+/// This is a long description in the form of a list of lines. Avoid in-jokes, this is for new players.
+/datum/job/proc/get_description()
+	return list("None")
+
+/// This is a long flavor text in the form of a list of lines. For lore.
+/datum/job/proc/get_flavor()
+	return list("None")
+
+/// This is a bullet point list. Keep entries short and sweet.
+/datum/job/proc/get_tips()
+	return list("None")
+
 /datum/outfit/job
 	name = "Standard Gear"
 

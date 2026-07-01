@@ -2650,6 +2650,7 @@
 #include "code\modules\client\preferences\character\species_features\lizard.dm"
 #include "code\modules\client\preferences\character\species_features\spritemods.dm"
 #include "code\modules\client\preferences\middleware\_middleware.dm"
+#include "code\modules\client\preferences\middleware\jobs.dm"
 #include "code\modules\client\preferences\middleware\keybindings.dm"
 #include "code\modules\client\preferences\middleware\legacy_toggles.dm"
 #include "code\modules\client\preferences\middleware\species_previews.dm"

@@ -6,6 +6,7 @@ import { Window } from '../../layouts';
 import { AppearancePage } from './AppearancePage';
 import { CharacterSelect } from './CharacterSelectPage';
 import { PreferencesMenuData } from './data';
+import { JobsPage } from './JobsPage';
 import { CharacterPreview, DioPrefsPage, HIDDEN_PAGES } from './Preferences';
 import { SpeciesPage } from './SpeciesPage';
 
@@ -27,6 +28,9 @@ export const DioPrefs = (props) => {
       break;
     case DioPrefsPage.SPECIES:
       page = <SpeciesPage />;
+      break;
+    case DioPrefsPage.JOBS:
+      page = <JobsPage />;
       break;
     default:
       page = <CharacterSelect />;

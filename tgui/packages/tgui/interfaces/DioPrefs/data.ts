@@ -66,13 +66,19 @@ export type Trait = {
 };
 
 export type Department = {
+  color: string;
+  css_class: string;
   head?: string;
+  name: string;
 };
 
 export type Job = {
-  alt_titles?: string[];
+  alt_titles: string[];
   department: string;
-  description: string;
+  description: string[];
+  flavor: string[];
+  sub_department?: string;
+  tips: string[];
 };
 
 export type Quirk = {
