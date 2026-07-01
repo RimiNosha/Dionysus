@@ -82,21 +82,25 @@ export const CharacterPreview = (props) => {
                 <SpeciesPreview
                   previewSpecies={previewSpecies}
                   previewIndex={previewIndex}
+                  previewSex={previewSex}
                   dir="south"
                 />
                 <SpeciesPreview
                   previewSpecies={previewSpecies}
                   previewIndex={previewIndex}
+                  previewSex={previewSex}
                   dir="north"
                 />
                 <SpeciesPreview
                   previewSpecies={previewSpecies}
                   previewIndex={previewIndex}
+                  previewSex={previewSex}
                   dir="east"
                 />
                 <SpeciesPreview
                   previewSpecies={previewSpecies}
                   previewIndex={previewIndex}
+                  previewSex={previewSex}
                   dir="west"
                 />
               </Stack>
@@ -154,7 +158,7 @@ const SpeciesPreview = (props) => {
       mt="0"
     >
       <Box
-        className={`preferences32x32 species__${props.previewSpecies}_${props.previewIndex + 1}_${props.dir}`}
+        className={`preferences32x32 species__${props.previewSpecies}_${props.previewSex}_${props.previewIndex + 1}_${props.dir}`}
         style={{
           scale: `${CHARACTER_PORTRAIT_SIZE / 32}`,
           imageRendering: 'pixelated',

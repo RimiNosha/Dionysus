@@ -43,7 +43,7 @@
 				species.prepare_human_for_preview(dummy, gender, i)
 				var/icon/icon = get_flat_existing_human_icon(dummy)
 				for (var/dir in GLOB.cardinals)
-					Insert("species__[species.id]_[i]_[dir2text(dir)]", icon, "", dir)
+					Insert("species__[species.id]_[gender == MALE ? "male" : "female"]_[i]_[dir2text(dir)]", icon, "", dir)
 
 	for (var/spritesheet_key in to_insert)
 		var/list/inserting = to_insert[spritesheet_key]
