@@ -15,21 +15,16 @@ GLOBAL_LIST_INIT(preferences_preview_backgrounds, list(
 	/// The preferences this refers to
 	var/datum/preferences/preferences
 
-	var/atom/movable/screen/background/background
 	var/image/canvas
 	var/last_background
 
 /atom/movable/screen/map_view/char_preview/Initialize(mapload, datum/preferences/preferences)
 	. = ..()
 	src.preferences = preferences
-	background = new
-	background.del_on_map_removal = FALSE
-	background.fill_rect(1, 1, 1, 4)
 
 /atom/movable/screen/map_view/char_preview/Destroy()
 	canvas?.cut_overlays()
 	canvas = null
-	QDEL_NULL(background)
 	QDEL_NULL(body)
 	preferences?.preferences_menu?.character_preview_view = null
 	preferences = null
@@ -53,7 +48,6 @@ GLOBAL_LIST_INIT(preferences_preview_backgrounds, list(
 
 		canvas = image(dummy)
 		canvas.plane = GAME_PLANE
-		background.vis_contents += canvas
 		last_background = preferences.preferences_menu.background
 
 	canvas.add_overlay(body.appearance)
@@ -64,10 +58,6 @@ GLOBAL_LIST_INIT(preferences_preview_backgrounds, list(
 	QDEL_NULL(body)
 
 	body = new
-
-/atom/movable/screen/map_view/char_preview/display_to_client(client/show_to)
-	. = ..()
-	show_to.register_map_obj(background)
 
 /atom/movable/screen/map_view/char_preview/proc/jiggle()
 	fill_rect(0, 0, 0, 0)

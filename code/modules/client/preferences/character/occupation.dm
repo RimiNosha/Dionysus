@@ -49,27 +49,11 @@
 		return create_default_value()
 
 	for(var/thing in input)
-		if(!ispath(thing))
+		if(!istext(thing) || !SSjob.GetJob(thing))
 			input -= thing
 			continue
 
-		if(!isnum(input[thing]) || !(input[thing] in list(1, 2, 3)))
+		if(!isnum(input[thing]) || !(input[thing] in list(JP_LOW, JP_MEDIUM, JP_HIGH)))
 			input -= thing
 
 	return input
-
-/datum/preference/blob/job_priority/proc/can_play_job(datum/preferences/prefs, job_id)
-	var/datum/job/J = SSjob.GetJob(job_id)
-	if(!J)
-		return FALSE
-
-	if(is_banned_from(prefs.parent.ckey, job_id))
-		return FALSE
-
-	if(J.required_playtime_remaining(prefs.parent))
-		return FALSE
-
-	if(!J.player_old_enough(prefs.parent))
-		return FALSE
-
-	return TRUE

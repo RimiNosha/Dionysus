@@ -147,6 +147,25 @@ $background-color: base.$color-bg !default;
     }
   }
 
+  &__Job {
+    &__priority {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+
+      &--off::after {
+        content: '';
+
+        background: rgba(0, 0, 0, 0.2);
+        display: block;
+        height: 80%;
+        left: 50%;
+        position: relative;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%) rotate(40deg);
+        width: 2px;
+      }
+    }
+  }
+
   @keyframes errorFlash {
     0% {
       color: red;

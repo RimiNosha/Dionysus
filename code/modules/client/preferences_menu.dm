@@ -42,8 +42,8 @@
 			var/forwards = params["forwards"]
 			background += forwards ? 1 : -1
 			if (background > length(GLOB.preferences_preview_backgrounds))
-				background = 0
-			else if (background < 0)
+				background = 1
+			else if (background < 1)
 				background = length(GLOB.preferences_preview_backgrounds)
 
 			character_preview_view.update_canvas()
@@ -62,8 +62,8 @@
 			if (isnull(requested_preference))
 				return FALSE
 
-			// SAFETY: `update_preference` performs validation checks
-			if (!preferences.update_preference(requested_preference, value))
+			// SAFETY: `write_preference` performs validation checks
+			if (!preferences.write_preference(requested_preference, value))
 				return FALSE
 
 			if (istype(requested_preference, /datum/preference/name))
@@ -235,7 +235,7 @@
 
 /datum/preferences_menu/ui_interact(mob/user, datum/tgui/ui, tab)
 	// If you leave and come back, re-register the character preview
-	if (!isnull(character_preview_view) && !(character_preview_view in user.client?.screen))
+	if (!isnull(character_preview_view) && !(character_preview_view.preview1 in user.client?.screen))
 		user.client?.register_map_obj(character_preview_view)
 
 	if (tab)

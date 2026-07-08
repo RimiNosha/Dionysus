@@ -19,6 +19,7 @@
 			"description" = job.get_description(),
 			"flavor" = job.get_flavor(),
 			"tips" = job.get_tips(),
+			"css_class" = sanitize_css_class_name(job.id),
 		)
 
 	for (var/datum/job_department/department)
@@ -30,3 +31,15 @@
 		)
 
 	return data
+
+/datum/preference_middleware/jobs/get_ui_data(mob/user)
+	var/list/data = list()
+
+	for (var/datum/job/job as anything in SSjob.joinable_occupations)
+		data[job.id] = list(
+			"banned" = is_banned_from(user.ckey, job),
+			"account_days_left" = job.available_in_days(user.client),
+			"playtime_required" = list("department" = job.exp_required_type_department, "time_left" = job.required_playtime_remaining(user.client)),
+		)
+
+	return list("jobs" = data)

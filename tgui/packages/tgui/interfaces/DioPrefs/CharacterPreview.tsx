@@ -4,27 +4,10 @@ import { Button } from 'tgui-core/components';
 import { useBackend, useLocalState } from '../../backend';
 import { Box, ByondUi, Stack } from '../../components';
 import { PreferencesMenuData } from './data';
+import { DioPrefsPage } from './Pages';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 const CHARACTER_PORTRAIT_SIZE = 160;
-
-export enum DioPrefsPage {
-  APPEARANCE = 'Appearance',
-  JOBS = 'Jobs',
-  LOADOUT = 'Loadout',
-  LORE = 'Lore',
-  OOC = 'OOC',
-  RECORDS = 'Records',
-  SELECT = 'Select',
-  SKILLS = 'Skills',
-  SPECIES = 'Species',
-}
-
-export const HIDDEN_PAGES = [
-  DioPrefsPage.SELECT,
-  DioPrefsPage.SKILLS,
-  // DioPrefsPage.SPECIES,
-];
 
 export const CharacterPreview = (props) => {
   const { data, act } = useBackend<PreferencesMenuData>();
@@ -158,7 +141,7 @@ const SpeciesPreview = (props) => {
       mt="0"
     >
       <Box
-        className={`preferences32x32 species__${props.previewSpecies}_${props.previewSex}_${props.previewIndex + 1}_${props.dir}`}
+        className={`preferences32x32 species___${props.previewSpecies}_${props.previewSex}_${props.previewIndex + 1}_${props.dir}`}
         style={{
           scale: `${CHARACTER_PORTRAIT_SIZE / 32}`,
           imageRendering: 'pixelated',

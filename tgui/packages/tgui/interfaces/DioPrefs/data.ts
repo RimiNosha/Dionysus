@@ -74,6 +74,7 @@ export type Department = {
 
 export type Job = {
   alt_titles: string[];
+  css_class: string;
   department: string;
   description: string[];
   flavor: string[];
@@ -142,6 +143,7 @@ export type PreferencesMenuData = {
     game_preferences: Record<string, unknown>;
     misc: {
       gender: Gender;
+      job_priority: Record<string, JobPriority>;
       joblessrole: JoblessRole;
       species: string;
     };
@@ -160,19 +162,19 @@ export type PreferencesMenuData = {
   character_profiles: CharacterProfile[];
 
   content_unlocked: BooleanLike;
-  job_alt_titles: Record<string, string>;
-  job_bans?: string[];
-  job_days_left?: Record<string, number>;
 
-  job_preferences: Record<string, JobPriority>;
-
-  job_required_experience?: Record<
+  jobs: Record<
     string,
     {
-      experience_type: string;
-      required_playtime: number;
+      account_days_left: number;
+      banned?: string;
+      playtime_required: {
+        department: string;
+        time_left: number; // in minutes
+      };
     }
   >;
+
   keybindings: Record<string, string[]>;
   name_to_use: string;
 

@@ -678,3 +678,6 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		return title.name
 
 	return title.name
+
+/datum/job/proc/prepare_human_for_preview(mob/living/carbon/human/human)
+	human.dress_up_as_job(src, TRUE)

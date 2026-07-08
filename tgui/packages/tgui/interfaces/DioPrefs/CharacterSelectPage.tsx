@@ -1,7 +1,7 @@
 import { useBackend, useLocalState } from '../../backend';
 import { Box, Icon } from '../../components';
 import { CharacterProfile, PreferencesMenuData } from './data';
-import { DioPrefsPage } from './Preferences';
+import { DioPrefsPage } from './Pages';
 
 export const CharacterSelect = (props) => {
   const { data } = useBackend<PreferencesMenuData>();

@@ -142,10 +142,6 @@ const CharacterPart = (props: {
         maskSize: `${dollSize}px`,
         maskPosition: `calc(${scale(part.pos.x)}px - ${scale(part.pos.width / 2)}px) calc(${scale(part.pos.y)}px - ${scale(part.pos.height / 2)}px)`,
       }}
-    >
-      {
-        //part.name
-      }
-    </Button>
+    />
   );
 };

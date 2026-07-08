@@ -43,7 +43,13 @@
 				species.prepare_human_for_preview(dummy, gender, i)
 				var/icon/icon = get_flat_existing_human_icon(dummy)
 				for (var/dir in GLOB.cardinals)
-					Insert("species__[species.id]_[gender == MALE ? "male" : "female"]_[i]_[dir2text(dir)]", icon, "", dir)
+					Insert("species___[species.id]_[gender == MALE ? "male" : "female"]_[i]_[dir2text(dir)]", icon, "", dir)
+
+	for (var/datum/job/job as anything in SSjob.joinable_occupations)
+		var/mob/living/carbon/human/dummy/consistent/dummy = new
+		job.prepare_human_for_preview(dummy)
+		var/icon = get_flat_existing_human_icon(dummy, list(SOUTH))
+		Insert("job___[sanitize_css_class_name(job.id)]", icon)
 
 	for (var/spritesheet_key in to_insert)
 		var/list/inserting = to_insert[spritesheet_key]

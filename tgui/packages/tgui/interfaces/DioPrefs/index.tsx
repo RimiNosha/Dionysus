@@ -4,10 +4,11 @@ import { useBackend, useLocalState } from '../../backend';
 import { Box, Stack } from '../../components';
 import { Window } from '../../layouts';
 import { AppearancePage } from './AppearancePage';
+import { CharacterPreview } from './CharacterPreview';
 import { CharacterSelect } from './CharacterSelectPage';
 import { PreferencesMenuData } from './data';
 import { JobsPage } from './JobsPage';
-import { CharacterPreview, DioPrefsPage, HIDDEN_PAGES } from './Preferences';
+import { DioPrefsPage, HIDDEN_PAGES } from './Pages';
 import { SpeciesPage } from './SpeciesPage';
 
 export const DioPrefs = (props) => {
@@ -41,49 +42,60 @@ export const DioPrefs = (props) => {
     <Window
       title={currentPage}
       theme="dionysus"
-      width={920}
-      height={870}
+      width={1100}
+      height={770}
       onMount={() => act('do_da_jiggle')}
     >
-      <Stack vertical fill>
-        <Stack.Item>
-          <Stack vertical width="100%">
-            <Stack.Item style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button selected>Character</Button>
-              <Button>Game</Button>
+      <Stack fill>
+        <Stack.Item width="100%">
+          <Stack vertical fill>
+            <Stack.Item>
+              <Stack vertical width="100%">
+                <Stack.Item
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <Button selected>Character</Button>
+                  <Button>Game</Button>
+                </Stack.Item>
+                <Stack.Divider />
+                <Stack.Item
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <h3>{data.character_profiles[data.active_slot].name}</h3>
+                </Stack.Item>
+                <Stack.Item
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  {Object.entries(DioPrefsPage).map(([key, value]) => {
+                    if (HIDDEN_PAGES.includes(value)) {
+                      return;
+                    }
+                    return (
+                      <Button
+                        key={key}
+                        selected={value === currentPage}
+                        onClick={() => setCurrentPage(value)}
+                      >
+                        {value}
+                      </Button>
+                    );
+                  })}
+                </Stack.Item>
+                <Stack.Divider />
+              </Stack>
             </Stack.Item>
-            <Stack.Divider />
-            <Stack.Item style={{ display: 'flex', justifyContent: 'center' }}>
-              <h3>{data.character_profiles[data.active_slot].name}</h3>
+            <Stack.Item height="100%">
+              <Box position="relative" width="100%" height="100%">
+                <Stack fill>
+                  <Stack.Item width="100%">{page}</Stack.Item>
+                </Stack>
+              </Box>
             </Stack.Item>
-            <Stack.Item style={{ display: 'flex', justifyContent: 'center' }}>
-              {Object.entries(DioPrefsPage).map(([key, value]) => {
-                if (HIDDEN_PAGES.includes(value)) {
-                  return;
-                }
-                return (
-                  <Button
-                    key={key}
-                    selected={value === currentPage}
-                    onClick={() => setCurrentPage(value)}
-                  >
-                    {value}
-                  </Button>
-                );
-              })}
-            </Stack.Item>
-            <Stack.Divider />
           </Stack>
         </Stack.Item>
-        <Stack.Item height="100%">
-          <Box position="relative" width="100%" height="100%">
-            <Stack fill>
-              <Stack.Item width="100%">{page}</Stack.Item>
-              <Stack.Item style={{ width: '158px' }}>
-                <CharacterPreview id={data.character_preview_view} />
-              </Stack.Item>
-            </Stack>
-          </Box>
+        <Stack.Divider />
+        <Stack.Item style={{ width: '158px' }}>
+          <CharacterPreview id={data.character_preview_view} />
         </Stack.Item>
       </Stack>
     </Window>
