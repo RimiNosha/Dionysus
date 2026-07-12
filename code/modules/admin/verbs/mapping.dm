@@ -54,7 +54,6 @@ GLOBAL_LIST_INIT(admin_verbs_debug_mapping, list(
 	/client/proc/station_food_debug,
 	/client/proc/station_stack_debug,
 	/client/proc/check_atmos_controls,
-	/client/proc/find_bad_access,
 ))
 GLOBAL_PROTECT(admin_verbs_debug_mapping)
 
@@ -122,14 +121,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 					output += "<li>Overlapping cameras at [ADMIN_VERBOSEJMP(C1)] Networks: [json_encode(C1.network)] and [json_encode(C2.network)]</li>"
 		var/turf/T = get_step(C1,C1.dir)
 		if(!T || !isturf(T) || !T.density )
-			if(!(locate(/obj/structure/grille) in T))
-				var/window_check = 0
-				for(var/obj/structure/window/W in T)
-					if (W.dir == turn(C1.dir,180) || (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST)) )
-						window_check = 1
-						break
-				if(!window_check)
-					output += "<li><font color='red'>Camera not connected to wall at [ADMIN_VERBOSEJMP(C1)] Network: [json_encode(C1.network)]</font></li>"
+			output += "<li><font color='red'>Camera not connected to wall at [ADMIN_VERBOSEJMP(C1)] Network: [json_encode(C1.network)]</font></li>"
 
 	output += "</ul>"
 	usr << browse(output,"window=airreport;size=1000x500")
@@ -550,41 +542,3 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 		to_chat(usr, "Atmos control frequency check passed without encountering problems.", confidential=TRUE)
 	else
 		to_chat(usr, "Total errors: [invalid_machine + invalid_tag + tagless + duplicate_tag + not_heard + not_told]", confidential=TRUE)
-
-/client/proc/find_bad_access()
-	set name = "Find Bad Access"
-	set category = "Mapping"
-
-	var/list/zlevel_cache = new /list(world.maxz)
-	for(var/zlevel in SSmapping.get_zstack(get_random_station_turf(), FALSE))
-		zlevel_cache[zlevel] = TRUE
-
-	var/doors = 0
-	for(var/obj/machinery/door/D as anything in INSTANCES_OF(/obj/machinery/door))
-		if(!zlevel_cache[D.z])
-			continue
-
-		doors++
-
-		var/list/bad_access = list()
-		var/list/bad_one_access = list()
-
-		D.gen_access()
-
-		for(var/access_num in D.req_access)
-			if(!SSid_access.desc_by_access["[access_num]"])
-				bad_access += num2text(access_num)
-
-		for(var/access_num in D.req_one_access)
-			if(!SSid_access.desc_by_access["[access_num]"])
-				bad_one_access += num2text(access_num)
-
-
-		if(length(bad_access) && length(bad_one_access))
-			to_chat(src, "[ADMIN_COORDJMP(D)] <a href='?_src_=vars;[HrefToken()];Vars=\"+ref+\"'>VV</a> Bad Access: [jointext(bad_access, ",")] | Bad One Access: [jointext(bad_one_access, ",")]")
-		else if(length(bad_access))
-			to_chat(src, "[ADMIN_COORDJMP(D)] <a href='?_src_=vars;[HrefToken()];Vars=\"+ref+\"'>VV</a> Bad Access: [jointext(bad_access, ",")]")
-		else if(length(bad_one_access))
-			to_chat(src, "[ADMIN_COORDJMP(D)] <a href='?_src_=vars;[HrefToken()];Vars=\"+ref+\"'>VV</a> Bad One Access: [jointext(bad_one_access, ",")]")
-
-	to_chat(src, span_debug("Searched [doors] doors."))

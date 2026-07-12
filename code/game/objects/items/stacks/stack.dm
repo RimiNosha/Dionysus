@@ -71,8 +71,6 @@
 	/// How much this stack reduces blood flow, multiplier
 	var/absorption_rate_modifier = 1
 
-	/// Amount of matter for RCD
-	var/matter_amount = 0
 	/// Does this stack require a unique girder in order to make a wall?
 	var/has_unique_girder = FALSE
 
@@ -438,13 +436,6 @@
 		return FALSE
 	var/turf/dest_turf = get_turf(usr)
 
-	// If we're making a window, we have some special snowflake window checks to do.
-	if(ispath(recipe.result_type, /obj/structure/window))
-		var/obj/structure/window/result_path = recipe.result_type
-		if(!valid_window_location(dest_turf, usr.dir, is_fulltile = initial(result_path.fulltile)))
-			to_chat(usr, span_warning("The [recipe.title] won't fit here!"))
-			return FALSE
-
 	if(recipe.one_per_turf && (locate(recipe.result_type) in dest_turf))
 		to_chat(usr, span_warning("There is another [recipe.title] here!"))
 		return FALSE
@@ -460,14 +451,8 @@
 			return FALSE
 
 		for(var/obj/object in dest_turf)
-			if(istype(object, /obj/structure/grille))
-				continue
 			if(istype(object, /obj/structure/table))
 				continue
-			if(istype(object, /obj/structure/window))
-				var/obj/structure/window/window_structure = object
-				if(!window_structure.fulltile)
-					continue
 			if(object.density || NO_BUILD & object.obj_flags)
 				to_chat(usr, span_warning("There is \a [object.name] here. You can\'t make \a [recipe.title] here!"))
 				return FALSE

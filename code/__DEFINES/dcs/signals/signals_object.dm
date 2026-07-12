@@ -73,10 +73,6 @@
 /// from /obj/machinery/light_switch/set_lights(), sent to every switch in the area: (status)
 #define COMSIG_LIGHT_SWITCH_SET "light_switch_set"
 
-/// from /obj/machinery/fire_alarm/reset(), /obj/machinery/fire_alarm/alarm(): (status)
-#define COMSIG_FIREALARM_ON_TRIGGER "firealarm_trigger"
-#define COMSIG_FIREALARM_ON_RESET "firealarm_reset"
-
 // /obj access signals
 
 #define COMSIG_OBJ_ALLOWED "door_try_to_activate"
@@ -85,14 +81,6 @@
 #define COMSIG_AIRLOCK_SHELL_ALLOWED "airlock_shell_try_allowed"
 	#define COMPONENT_AIRLOCK_SHELL_ALLOW (1<<0)
 
-// /obj/machinery/door/airlock signals
-
-//from /obj/machinery/door/airlock/open(): (forced)
-#define COMSIG_AIRLOCK_OPEN "airlock_open"
-//from /obj/machinery/door/airlock/close(): (forced)
-#define COMSIG_AIRLOCK_CLOSE "airlock_close"
-///from /obj/machinery/door/airlock/set_bolt():
-#define COMSIG_AIRLOCK_SET_BOLT "airlock_set_bolt"
 // /obj/item signals
 
 ///from base of obj/item/equipped(): (/mob/equipper, slot)
@@ -417,4 +405,3 @@
 /// from base of /obj/item/slimepotion/speed/afterattack(): (obj/target, /obj/src, mob/user)
 #define COMSIG_SPEED_POTION_APPLIED "speed_potion"
 	#define SPEED_POTION_STOP (1<<0)
-

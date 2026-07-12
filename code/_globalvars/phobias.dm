@@ -115,7 +115,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/stamp/hos,
 		/obj/item/toy/figure/hos,
 		/obj/item/toy/figure/secofficer,
-		/obj/machinery/door/airlock/security,
 		/obj/structure/statue/gold/hos,
 		/obj/structure/statue/silver/sec,
 		/obj/structure/statue/silver/secborg,
@@ -146,11 +145,8 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/toy/mecha/darkhonk,
 		/obj/item/toy/mecha/honk,
 		/obj/item/trash/cheesie,
-		/obj/machinery/door/airlock/bananium,
-		/obj/structure/mecha_wreckage/honker,
 		/obj/structure/statue/bananium,
 		/obj/vehicle/sealed/car/clowncar,
-		/obj/vehicle/sealed/mecha/combat/honker,
 	)),
 
 	"greytide" = (typecacheof(list(
@@ -215,7 +211,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/toy/figure/hos,
 		/obj/item/toy/figure/rd,
 		/obj/machinery/atmospherics/miner,
-		/obj/machinery/door/airlock/centcom,
 	)),
 
 	"robots" = typecacheof(list(
@@ -250,7 +245,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/surgicaldrill,
 		/obj/machinery/atmospherics/components/unary/cryo_cell,
 		/obj/machinery/dna_scannernew,
-		/obj/machinery/door/airlock/medical,
 		/obj/machinery/sleeper,
 		/obj/machinery/stasis,
 		/obj/structure/sign/departments/medbay,
@@ -284,7 +278,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/toy/figure/hop,
 		/obj/item/toy/figure/hos,
 		/obj/item/toy/figure/rd,
-		/obj/machinery/door/airlock/command,
 		/obj/structure/statue/diamond/captain,
 		/obj/structure/statue/gold/ce,
 		/obj/structure/statue/gold/cmo,
@@ -365,7 +358,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/throwing_star,
 		/obj/item/toy/katana,
 		/obj/structure/mineral_door/paperframe,
-		/obj/structure/window/paperframe,
 	)),
 
 	"birds" = typecacheof(list(
@@ -392,9 +384,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/gun/energy,
 		/obj/item/gun/grenadelauncher,
 		/obj/item/gun/syringe,
-		/obj/item/mecha_ammo,
-		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic,
-		/obj/item/mecha_parts/mecha_equipment/weapon/energy,
 		/obj/item/storage/belt/bandolier,
 		/obj/item/storage/belt/holster,
 		/obj/machinery/porta_turret,
@@ -427,7 +416,6 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/throwing_star,
 		/obj/item/toy/katana,
 		/obj/structure/mineral_door/paperframe,
-		/obj/structure/window/paperframe,
 	)),
 
 	"blood" = typecacheof(list(

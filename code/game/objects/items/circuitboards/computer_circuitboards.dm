@@ -167,16 +167,6 @@
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/computer/auxiliary_base
 
-/obj/item/circuitboard/computer/base_construction
-	name = "circuit board (Generic Base Construction Console)"
-	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/computer/camera_advanced/base_construction
-
-/obj/item/circuitboard/computer/base_construction/centcom
-	name = "circuit board (Centcom Base Construction Console)"
-	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
-	build_path = /obj/machinery/computer/camera_advanced/base_construction/centcom
-
 /obj/item/circuitboard/computer/comm_monitor
 	name = "Telecommunications Monitor (Computer Board)"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
@@ -364,16 +354,6 @@
 	name = "Launchpad Control Console (Computer Board)"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
 	build_path = /obj/machinery/computer/launchpad
-
-/obj/item/circuitboard/computer/mech_bay_power_console
-	name = "Mech Bay Power Control Console (Computer Board)"
-	greyscale_colors = CIRCUIT_COLOR_SCIENCE
-	build_path = /obj/machinery/computer/mech_bay_power_console
-
-/obj/item/circuitboard/computer/mecha_control
-	name = "Exosuit Control Console (Computer Board)"
-	greyscale_colors = CIRCUIT_COLOR_SCIENCE
-	build_path = /obj/machinery/computer/mecha
 
 /obj/item/circuitboard/computer/research
 	name = "Research Monitor (Computer Board)"

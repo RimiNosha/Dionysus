@@ -678,8 +678,6 @@
 	return ripple_turfs
 
 /obj/docking_port/mobile/proc/check_poddoors()
-	for(var/obj/machinery/door/poddoor/shuttledock/pod in INSTANCES_OF(/obj/machinery/door))
-		pod.check()
 
 /obj/docking_port/mobile/proc/dock_id(id)
 	var/port = SSshuttle.getDock(id)
@@ -934,11 +932,6 @@
 
 	if(engines.len > 0)
 		distant_source = engines[1]
-	else
-		for(var/A in areas)
-			distant_source = locate(/obj/machinery/door) in A
-			if(distant_source)
-				break
 
 	if(distant_source)
 		for(var/mob/M in SSmobs.clients_by_zlevel[z])

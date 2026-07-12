@@ -12,18 +12,14 @@
 		/obj/item/grenade/chem_grenade/metalfoam = 10,
 		/obj/item/geiger_counter = 5,
 		/obj/item/stock_parts/cell/high = 10,
-		/obj/item/electronics/airlock = 10,
 		/obj/item/electronics/apc = 10,
 		/obj/item/electronics/airalarm = 10,
-		/obj/item/electronics/firealarm = 10,
-		/obj/item/electronics/firelock = 10
 	)
 	contraband = list(
 		/obj/item/stock_parts/cell/potato = 3
 	)
 	premium = list(
 		/obj/item/storage/belt/utility = 3,
-		/obj/item/construction/rcd/loaded = 2,
 	)
 	refill_canister = /obj/item/vending_refill/engivend
 	default_price = PAYCHECK_EASY

@@ -353,12 +353,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 	uses = 1
 
 /datum/action/innate/ai/lockdown/Activate()
-	for(var/obj/machinery/door/D in INSTANCES_OF(/obj/machinery/door))
-		if(!is_station_level(D.z))
-			continue
-		INVOKE_ASYNC(D, TYPE_PROC_REF(/obj/machinery/door, hostile_lockdown), owner)
-		addtimer(CALLBACK(D, TYPE_PROC_REF(/obj/machinery/door, disable_lockdown)), 900)
-
 	var/obj/machinery/computer/communications/C = locate() in INSTANCES_OF(/obj/machinery/computer/communications)
 	if(C)
 		C.post_status("alert", "lockdown")
@@ -420,31 +414,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 		return
 
 	new /mob/living/simple_animal/hostile/mimic/copy/machine(get_turf(to_animate), to_animate, invoker, TRUE)
-
-/// Destroy RCDs: Detonates all non-cyborg RCDs on the station.
-/datum/ai_module/destructive/destroy_rcd
-	name = "Destroy RCDs"
-	description = "Send a specialised pulse to detonate all hand-held and exosuit Rapid Construction Devices on the station."
-	cost = 25
-	one_purchase = TRUE
-	power_type = /datum/action/innate/ai/destroy_rcds
-	unlock_text = "<span class='notice'>After some improvisation, you rig your onboard radio to be able to send a signal to detonate all RCDs.</span>"
-	unlock_sound = 'sound/items/timer.ogg'
-
-/datum/action/innate/ai/destroy_rcds
-	name = "Destroy RCDs"
-	desc = "Detonate all non-cyborg RCDs on the station."
-	button_icon_state = "detonate_rcds"
-	uses = 1
-	cooldown_period = 100
-
-/datum/action/innate/ai/destroy_rcds/Activate()
-	for(var/I in INSTANCES_OF(TRACKING_KEY_RCD))
-		if(!istype(I, /obj/item/construction/rcd/borg)) //Ensures that cyborg RCDs are spared.
-			var/obj/item/construction/rcd/RCD = I
-			RCD.detonate_pulse()
-	to_chat(owner, span_danger("RCD detonation pulse emitted."))
-	owner.playsound_local(owner, 'sound/machines/twobeep.ogg', 50, 0)
 
 /// Overload Machine: Allows the AI to overload a machine, detonating it after a delay. Two uses per purchase.
 /datum/ai_module/destructive/overload_machine
@@ -663,37 +632,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 			continue
 		AA.obj_flags |= EMAGGED
 	to_chat(owner, span_notice("All air alarm safeties on the station have been overridden. Air alarms may now use the Flood environmental mode."))
-	owner.playsound_local(owner, 'sound/machines/terminal_off.ogg', 50, 0)
-
-/// Thermal Sensor Override: Unlocks the ability to disable all fire alarms from doing their job.
-/datum/ai_module/utility/break_fire_alarms
-	name = "Thermal Sensor Override"
-	description = "Gives you the ability to override the thermal sensors on all fire alarms. This will remove their ability to scan for fire and thus their ability to alert."
-	one_purchase = TRUE
-	cost = 25
-	power_type = /datum/action/innate/ai/break_fire_alarms
-	unlock_text = "<span class='notice'>You replace the thermal sensing capabilities of all fire alarms with a manual override, allowing you to turn them off at will.</span>"
-	unlock_sound = 'sound/machines/FireAlarm1.ogg'
-
-/datum/action/innate/ai/break_fire_alarms
-	name = "Override Thermal Sensors"
-	desc = "Disables the automatic temperature sensing on all fire alarms, making them effectively useless."
-	button_icon_state = "break_fire_alarms"
-	uses = 1
-
-/datum/action/innate/ai/break_fire_alarms/Activate()
-	for(var/obj/machinery/firealarm/bellman as anything in INSTANCES_OF(/obj/machinery/firealarm))
-		if(!is_station_level(bellman.z))
-			continue
-		bellman.obj_flags |= EMAGGED
-		bellman.update_appearance()
-
-	for(var/obj/machinery/door/firedoor/firelock in INSTANCES_OF(/obj/machinery/door))
-		if(!is_station_level(firelock.z))
-			continue
-
-		firelock.emag_act(owner_AI, src)
-	to_chat(owner, span_notice("All thermal sensors on the station have been disabled. Fire alerts will no longer be recognized."))
 	owner.playsound_local(owner, 'sound/machines/terminal_off.ogg', 50, 0)
 
 /// Disable Emergency Lights

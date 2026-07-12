@@ -398,17 +398,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 	if(!dest_turf)
 		return FALSE
 	for(var/obj/turf_content in dest_turf)
-		if(istype(turf_content, /obj/machinery/door/window))
-			if((turf_content.dir == test_dir) || is_fulltile)
-				return FALSE
-		if(istype(turf_content, /obj/structure/windoor_assembly))
-			var/obj/structure/windoor_assembly/windoor_assembly = turf_content
-			if(windoor_assembly.dir == test_dir || is_fulltile)
-				return FALSE
-		if(istype(turf_content, /obj/structure/window))
-			var/obj/structure/window/window_structure = turf_content
-			if(window_structure.dir == test_dir || window_structure.fulltile || is_fulltile)
-				return FALSE
 		if(istype(turf_content, /obj/structure/railing))
 			var/obj/structure/railing/rail = turf_content
 			if(rail.dir == test_dir || is_fulltile)
