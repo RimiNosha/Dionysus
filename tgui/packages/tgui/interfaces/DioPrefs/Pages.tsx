@@ -4,7 +4,6 @@ export enum DioPrefsPage {
   LOADOUT = 'Loadout',
   LORE = 'Lore',
   OOC = 'OOC',
-  RECORDS = 'Records',
   SELECT = 'Select',
   SKILLS = 'Skills',
   SPECIES = 'Species',

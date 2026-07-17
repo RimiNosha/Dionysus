@@ -4,6 +4,7 @@
 	savefile_key = "uplink_loc"
 	can_randomize = FALSE
 	feature_identifier = PREFERENCE_FEATURE_DROPDOWN
+	category = PREFERENCE_CATEGORY_EMPLOYEE_META
 
 /datum/preference/choiced/uplink_location/init_possible_values()
 	return list(UPLINK_PDA, UPLINK_RADIO, UPLINK_PEN, UPLINK_IMPLANT)

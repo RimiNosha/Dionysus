@@ -59,7 +59,7 @@
 					return TRUE
 
 			var/datum/preference/requested_preference = GLOB.preference_entries_by_key[requested_preference_key]
-			if (isnull(requested_preference))
+			if (isnull(requested_preference) || requested_preference.locked)
 				return FALSE
 
 			// SAFETY: `write_preference` performs validation checks

@@ -147,10 +147,13 @@ export type PreferencesMenuData = {
       joblessrole: JoblessRole;
       species: string;
     };
-    names: Record<string, string>;
     non_contextual: {
       [otherKey: string]: unknown;
       random_body: RandomSetting;
+    };
+    pii: {
+      [otherKey: string]: unknown;
+      real_name: string;
     };
     randomization: Record<string, RandomSetting>;
     secondary_features: Record<string, unknown>;
@@ -188,25 +191,33 @@ export type PreferencesMenuData = {
   window: Window;
 };
 
+export type PreferenceData = {
+  [otherKey: string]: unknown;
+  feature: string;
+  locked?: BooleanLike;
+  name?: string;
+};
+
 export type ServerData = {
-  [otheyKey: string]: unknown;
-  jobs: {
+  [otherKey: string]: PreferenceData;
+  jobs: PreferenceData & {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;
   };
-  names: {
+  names: PreferenceData & {
     types: Record<string, Name>;
   };
-  quirks: QuirkInfo;
-  random: {
+  quirks: PreferenceData & QuirkInfo;
+  random: PreferenceData & {
     randomizable: string[];
   };
-  species: Record<string, Species>;
-  species_previews: Record<
-    string,
-    {
-      female: [string, string, string, string];
-      male: [string, string, string, string];
-    }
-  >;
+  species: PreferenceData & Record<string, Species>;
+  species_previews: PreferenceData &
+    Record<
+      string,
+      {
+        female: [string, string, string, string];
+        male: [string, string, string, string];
+      }
+    >;
 };

@@ -4,16 +4,11 @@
 	priority = PREFERENCE_PRIORITY_NAMES
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	abstract_type = /datum/preference/name
-	feature_identifier = PREFERENCE_FEATURE_NONE
-
-	/// These will be grouped together on the preferences menu
-	var/group
+	feature_identifier = PREFERENCE_FEATURE_SHORT_TEXT
+	category = PREFERENCE_CATEGORY_EMPLOYEE_ALIASES_AFFILIATIONS
 
 	/// Whether or not to allow numbers in the person's name
 	var/allow_numbers = TRUE
-
-	/// If the highest priority job matches this, will prioritize this name in the UI
-	var/relevant_job
 
 /datum/preference/name/apply_to_human(mob/living/carbon/human/target, value)
 	// Only real_name applies directly, everything else is applied by something else
@@ -33,10 +28,8 @@
 /// A character's real name
 /datum/preference/name/real_name
 	explanation = "Name"
-	// The `_` makes it first in ABC order.
-	group = "_real_name"
 	savefile_key = "real_name"
-	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_EMPLOYEE_PII
 
 /datum/preference/name/real_name/apply_to_human(mob/living/carbon/human/target, value)
 	target.set_real_name(value)
@@ -63,88 +56,57 @@
 
 	return reject_bad_name(input, allow_numbers)
 
-/// The name for a backup human, when nonhumans are made into head of staff
-/datum/preference/name/backup_human
-	explanation = "Backup Human Name"
-	group = "backup_human"
-	savefile_key = "human_name"
-	feature_identifier = PREFERENCE_FEATURE_NONE
-
-/datum/preference/name/backup_human/create_informed_default_value(datum/preferences/preferences)
-	var/gender = preferences.read_preference(/datum/preference/choiced/gender)
-
-	return random_unique_name(gender)
-
 /datum/preference/name/clown
-	savefile_key = "clown_name"
-
 	explanation = "Entertainer Name"
-	group = "fun"
-	relevant_job = /datum/job/clown
-	feature_identifier = PREFERENCE_FEATURE_NONE
+	savefile_key = "clown_name"
 
 /datum/preference/name/clown/create_default_value()
 	return pick(GLOB.clown_names)
 
 /datum/preference/name/cyborg
 	savefile_key = "cyborg_name"
+	explanation = "Cyborg Name"
 
 	allow_numbers = TRUE
 	can_randomize = FALSE
-
-	explanation = "Cyborg Name"
-	group = "silicons"
-	relevant_job = /datum/job/cyborg
 
 /datum/preference/name/cyborg/create_default_value()
 	return DEFAULT_CYBORG_NAME
 
 /datum/preference/name/ai
 	savefile_key = "ai_name"
+	explanation = "AI Name"
 
 	allow_numbers = TRUE
-	explanation = "AI Name"
-	group = "silicons"
-	relevant_job = /datum/job/ai
-	feature_identifier = PREFERENCE_FEATURE_NONE
 
 /datum/preference/name/ai/create_default_value()
 	return pick(GLOB.ai_names)
 
 /datum/preference/name/religion
 	savefile_key = "religion_name"
+	explanation = "Religion Name"
 
 	allow_numbers = TRUE
-
-	explanation = "Religion Name"
-	group = "religion"
-	feature_identifier = PREFERENCE_FEATURE_NONE
 
 /datum/preference/name/religion/create_default_value()
 	return pick(GLOB.religion_names)
 
 /datum/preference/name/deity
 	savefile_key = "deity_name"
+	explanation = "(Chaplain) Deity Name"
 
 	allow_numbers = TRUE
 	can_randomize = FALSE
-
-	explanation = "(Chaplain) Deity Name"
-	group = "religion"
-	feature_identifier = PREFERENCE_FEATURE_NONE
 
 /datum/preference/name/deity/create_default_value()
 	return DEFAULT_DEITY
 
 /datum/preference/name/bible
 	savefile_key = "bible_name"
+	explanation = "(Chaplain) Book Name"
 
 	allow_numbers = TRUE
 	can_randomize = FALSE
-
-	explanation = "(Chaplain) Book Name"
-	group = "religion"
-	feature_identifier = PREFERENCE_FEATURE_NONE
 
 /datum/preference/name/bible/create_default_value()
 	return DEFAULT_BIBLE

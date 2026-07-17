@@ -139,6 +139,9 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	/// Is this type a sub preference?
 	var/is_sub_preference = FALSE
 
+	/// Can this preference be edited by the user ever?
+	var/locked = FALSE
+
 /datum/preference/New()
 	. = ..()
 	if (abstract_type != type && savefile_identifier == PREFERENCE_SAVEFILE_CHARACTER && !feature_identifier)
@@ -357,12 +360,18 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /datum/preference/proc/compile_constant_data()
 	SHOULD_NOT_SLEEP(TRUE)
 
-	var/list/data = list("name" = explanation, "feature" = feature_identifier)
+	var/list/data = list("name" = explanation, "feature" = feature_identifier, "locked" = locked)
 	if (length(sub_preferences))
 		for (var/sub_preference in sub_preferences)
 			var/datum/preference/sub_preference_instance = GLOB.preference_entries[sub_preference]
-			LAZYADD(data[PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES], list(list("key" = sub_preference_instance.savefile_key, "feature" = sub_preference_instance.feature_identifier)))
+			LAZYADD(data[PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES], list(list("key" = sub_preference_instance.savefile_key, "feature" = sub_preference_instance.feature_identifier, "locked" = sub_preference_instance.locked)))
 	return data
+
+/// Can this preference currently be edited by the user?
+/datum/preference/proc/is_editable(datum/preferences/preferences)
+	SHOULD_NOT_SLEEP(TRUE)
+
+	return !locked
 
 /// Returns whether or not this preference is accessible.
 /// If FALSE, will not show in the UI and will not be editable (by update_preference).
@@ -624,15 +633,20 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /datum/preference/text
 	abstract_type = /datum/preference/text
 	feature_identifier = PREFERENCE_FEATURE_SHORT_TEXT
+	var/max_length = 50
 
 /datum/preference/text/deserialize(input, datum/preferences/preferences)
-	return STRIP_HTML_SIMPLE(input, MAX_FLAVOR_LEN)
+	return STRIP_HTML_SIMPLE(input, max_length)
 
 /datum/preference/text/create_default_value()
 	return ""
 
 /datum/preference/text/is_valid(value)
 	return istext(value)
+
+/datum/preference/text/compile_constant_data()
+	. = ..()
+	.["max_length"] = max_length
 
 ///Holds any kind of abstract list data you'd like it to. MUST impliment `is_valid`!
 /datum/preference/blob
@@ -652,5 +666,66 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 /datum/preference/blob/apply_to_human(mob/living/carbon/human/target, value)
 	return
+
+/// Generates choices from a base type datum.
+/datum/preference/choiced/datum_backed
+	abstract_type = /datum/preference/choiced/datum_backed
+
+	/// The base datum that will be subtyped and used to populate choices.
+	var/choices_datum
+
+	/// Set this to a reference of the proc inside your datum that will provide the value to use. If not set, this will try to use "name".
+	var/data_proc
+
+	/// If this datum has a description. If data_proc is set, you should return an assoc list of "name" and "description".
+	var/has_description
+
+	var/list/cached_instances = list()
+
+/datum/preference/choiced/datum_backed/New()
+	. = ..()
+
+	if (!ispath(choices_datum, /datum))
+		CRASH("[type] has no choices datum!")
+
+	var/list/subtypes = subtypesof(choices_datum)
+	if (length(subtypes) < 1)
+		CRASH("[type] choices datum ([choices_datum]) has no choices!")
+
+	for (var/datum/type as anything in subtypes)
+		if (initial(type.abstract_type) == type)
+			continue
+
+		cached_instances[type] = new type
+
+/datum/preference/choiced/datum_backed/init_possible_values()
+
+	var/list/data = list()
+
+	for (var/datum/type as anything in cached_instances)
+		var/datum/instance = cached_instances[type]
+
+		if (data_proc)
+			var/list/result = call(instance, data_proc)()
+			data += result
+		else
+			data += instance:name
+
+	return data
+
+/datum/preference/choiced/datum_backed/compile_constant_data()
+	. = ..()
+
+	var/list/descriptions = list()
+	.["descriptions"] = descriptions
+
+	for (var/datum/type as anything in cached_instances)
+		var/datum/instance = cached_instances[type]
+
+		if (data_proc)
+			var/list/result = call(instance, data_proc)()
+			descriptions[result["name"]] = result["description"]
+		else
+			descriptions[instance:name] = instance:description
 
 #undef REQUIRED_CROP_LIST_SIZE

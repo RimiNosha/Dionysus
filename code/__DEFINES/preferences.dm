@@ -117,7 +117,7 @@
 
 /// Will be put under the game preferences window.
 #define PREFERENCE_CATEGORY_GAME_PREFERENCES "game_preferences"
-/// This preference has to be manually rendered by another.
+/// This preference has to be rendered with another.
 #define PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES "supplemental_features"
 // These will be in the appearance menu.
 #define PREFERENCE_CATEGORY_APPEARANCE_HEAD "head"
@@ -128,6 +128,13 @@
 #define PREFERENCE_CATEGORY_APPEARANCE_LEFT_LEG "left_leg"
 #define PREFERENCE_CATEGORY_APPEARANCE_RIGHT_LEG "right_leg"
 #define PREFERENCE_CATEGORY_APPEARANCE_GENERAL "general"
+// These will be in the employee menu.
+#define PREFERENCE_CATEGORY_EMPLOYEE_PII "pii"
+#define PREFERENCE_CATEGORY_EMPLOYEE_LOYALTIES "loyalties"
+#define PREFERENCE_CATEGORY_EMPLOYEE_ALIASES_AFFILIATIONS "aliases_affiliations"
+#define PREFERENCE_CATEGORY_EMPLOYEE_META "meta"
+/// These will be in the ooc info menu.
+#define PREFERENCE_CATEGORY_OOC "ooc"
 
 // Playtime is tracked in minutes
 /// The time needed to unlock hardcore random mode in preferences

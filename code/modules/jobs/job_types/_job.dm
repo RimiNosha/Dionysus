@@ -556,7 +556,6 @@ GLOBAL_LIST_INIT(job_display_order, list(
 		if(require_human && !ishumanbasic(src))
 			set_species(/datum/species/human)
 			dna.species.roundstart_changed = TRUE
-			apply_pref_name(/datum/preference/name/backup_human, player_client)
 
 		if(CONFIG_GET(flag/force_random_names))
 			var/species_type = player_client.prefs.read_preference(/datum/preference/choiced/species)

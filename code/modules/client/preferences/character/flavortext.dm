@@ -4,3 +4,4 @@
 
 	explanation = "Flavor Text"
 	feature_identifier = PREFERENCE_FEATURE_LONG_TEXT
+	max_length = MAX_FLAVOR_LEN

@@ -113,7 +113,7 @@ $bg-map: colors.$bg-map !default;
 }
 
 .Button--big {
-  padding: 10px 15px;
+  padding: 1rem 2rem;
 }
 
 @each $color-name, $color-value in $bg-map {

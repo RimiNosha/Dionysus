@@ -8,6 +8,7 @@ import { CharacterPreview } from './CharacterPreview';
 import { CharacterSelect } from './CharacterSelectPage';
 import { PreferencesMenuData } from './data';
 import { JobsPage } from './JobsPage';
+import { LorePage } from './LorePage';
 import { DioPrefsPage, HIDDEN_PAGES } from './Pages';
 import { SpeciesPage } from './SpeciesPage';
 
@@ -32,6 +33,9 @@ export const DioPrefs = (props) => {
       break;
     case DioPrefsPage.JOBS:
       page = <JobsPage />;
+      break;
+    case DioPrefsPage.LORE:
+      page = <LorePage />;
       break;
     default:
       page = <CharacterSelect />;
@@ -61,7 +65,7 @@ export const DioPrefs = (props) => {
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}
                 >
-                  <h3>{data.character_profiles[data.active_slot].name}</h3>
+                  <h3>{data.character_preferences.pii.real_name}</h3>
                 </Stack.Item>
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}

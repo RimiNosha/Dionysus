@@ -3,6 +3,7 @@
 	savefile_key = "age"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_NUMBER
+	category = PREFERENCE_CATEGORY_EMPLOYEE_PII
 
 	minimum = AGE_MIN
 	maximum = AGE_MAX
