@@ -14,11 +14,18 @@ import {
 } from '../../../../components';
 import {
   createSetPreference,
+  PreferenceData,
   PreferencesMenuData,
 } from '../../../DioPrefs/data';
 import { ServerPreferencesFetcher } from '../../ServerPreferencesFetcher';
 
 export const sortChoices = sortBy<[string, ReactNode]>(([name]) => name);
+
+export const isFeatureLocked = (
+  serverData: PreferenceData | undefined,
+): boolean => {
+  return !serverData || !!serverData.locked;
+};
 
 export type Feature<
   TReceiving,
@@ -40,13 +47,13 @@ export type Feature<
 export type FeatureValue<
   TReceiving,
   TSending = TReceiving,
-  TServerData = undefined,
+  TServerData = PreferenceData,
 > = ComponentType<FeatureValueProps<TReceiving, TSending, TServerData>>;
 
 export type FeatureValueProps<
   TReceiving,
   TSending = TReceiving,
-  TServerData = undefined,
+  TServerData = PreferenceData,
 > = Readonly<{
   act: typeof sendAct;
   featureId: string;
@@ -62,12 +69,16 @@ export type SupplementalFeature = {
 };
 
 export const FeatureColorInput = (props: FeatureValueProps<string>) => {
+  const locked = isFeatureLocked(props.serverData);
   return (
     <Button
+      disabled={locked}
       onClick={() => {
-        props.act('set_color_preference', {
-          preference: props.featureId,
-        });
+        if (!locked) {
+          props.act('set_color_preference', {
+            preference: props.featureId,
+          });
+        }
       }}
     >
       <Stack align="center" fill>
@@ -104,8 +115,11 @@ export const CheckboxInput = (
   return (
     <Button.Checkbox
       checked={!!props.value}
+      disabled={isFeatureLocked(props.serverData)}
       onClick={() => {
-        props.handleSetValue(!props.value);
+        if (!isFeatureLocked(props.serverData)) {
+          props.handleSetValue(!props.value);
+        }
       }}
     />
   );
@@ -117,8 +131,11 @@ export const CheckboxInputInverse = (
   return (
     <Button.Checkbox
       checked={!props.value}
+      disabled={isFeatureLocked(props.serverData)}
       onClick={() => {
-        props.handleSetValue(!props.value);
+        if (!isFeatureLocked(props.serverData)) {
+          props.handleSetValue(!props.value);
+        }
       }}
     />
   );
@@ -150,12 +167,10 @@ export const createDropdownInput = <T extends string | number = string>(
   };
 };
 
-export type FeatureChoicedServerData = {
+export type FeatureChoicedServerData = PreferenceData & {
   choices: string[];
   display_names?: Record<string, string>;
-  feature: string;
   icons?: Record<string, string>;
-  name: string;
   supplemental_features?: SupplementalFeature[];
 };
 
@@ -212,7 +227,7 @@ export const FeatureDropdownInput = (
   return (
     <StandardizedDropdown
       choices={sortStrings(serverData.choices)}
-      disabled={props.disabled}
+      disabled={props.disabled || isFeatureLocked(serverData)}
       displayNames={displayNames}
       onSetValue={props.handleSetValue}
       value={props.value}
@@ -280,6 +295,7 @@ export const FeatureIconnedDropdownInput = (
   return (
     <StandardizedDropdown
       choices={sortStrings(serverData.choices)}
+      disabled={isFeatureLocked(serverData)}
       displayNames={displayNames}
       onSetValue={props.handleSetValue}
       value={props.value.value}
@@ -287,7 +303,7 @@ export const FeatureIconnedDropdownInput = (
   );
 };
 
-export type FeatureNumericData = {
+export type FeatureNumericData = PreferenceData & {
   maximum: number;
   minimum: number;
   step: number;
@@ -304,8 +320,11 @@ export const FeatureNumberInput = (
 
   return (
     <NumberInput
+      disabled={isFeatureLocked(props.serverData)}
       onChange={(value) => {
-        props.handleSetValue(value);
+        if (!isFeatureLocked(props.serverData)) {
+          props.handleSetValue(value);
+        }
       }}
       minValue={props.serverData.minimum}
       maxValue={props.serverData.maximum}
@@ -357,9 +376,14 @@ export const FeatureValueInput = (props: {
 export const FeatureTextInput = (props: FeatureValueProps<string>) => {
   return (
     <TextArea
+      disabled={isFeatureLocked(props.serverData)}
       height="100px"
       value={props.value}
-      onChange={(_, value) => props.handleSetValue(value)}
+      onChange={(_, value) => {
+        if (!isFeatureLocked(props.serverData)) {
+          props.handleSetValue(value);
+        }
+      }}
     />
   );
 };
@@ -367,9 +391,14 @@ export const FeatureTextInput = (props: FeatureValueProps<string>) => {
 export const FeatureShortTextInput = (props: FeatureValueProps<string>) => {
   return (
     <Input
+      disabled={isFeatureLocked(props.serverData)}
       width="100%"
       value={props.value}
-      onChange={(_, value) => props.handleSetValue(value)}
+      onChange={(_, value) => {
+        if (!isFeatureLocked(props.serverData)) {
+          props.handleSetValue(value);
+        }
+      }}
     />
   );
 };
@@ -380,11 +409,14 @@ export const FeatureTriColorInput = (props: FeatureValueProps<string>) => {
     return (
       <Stack.Item>
         <Button
+          disabled={isFeatureLocked(props.serverData)}
           onClick={() => {
-            props.act('set_tricolor_preference', {
-              preference: props.featureId,
-              value: index + 1,
-            });
+            if (!isFeatureLocked(props.serverData)) {
+              props.act('set_tricolor_preference', {
+                preference: props.featureId,
+                value: index + 1,
+              });
+            }
           }}
         >
           <Stack align="center" fill>

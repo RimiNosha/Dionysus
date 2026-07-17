@@ -77,3 +77,9 @@ $border-radius: Input.$border-radius !default;
   overflow-wrap: normal;
   overflow-x: scroll;
 }
+
+.TextArea__textarea--disabled {
+  cursor: not-allowed;
+  border-color: #777;
+  color: #777;
+}

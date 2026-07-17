@@ -23,6 +23,7 @@ import { toInputValue } from './Input';
 type Props = Partial<{
   autoFocus: boolean;
   autoSelect: boolean;
+  disabled: boolean;
   displayedValue: string;
   dontUseTabForIndent: boolean;
   fluid: boolean;
@@ -50,6 +51,7 @@ export const TextArea = forwardRef(
     const {
       autoFocus,
       autoSelect,
+      disabled,
       displayedValue,
       dontUseTabForIndent,
       maxLength,
@@ -179,10 +181,16 @@ export const TextArea = forwardRef(
             'TextArea__textarea',
             scrollbar && 'TextArea__textarea--scrollable',
             nowrap && 'TextArea__nowrap',
+            disabled && 'TextArea__textarea--disabled',
             innerClassName,
           ])}
+          disabled={disabled}
           maxLength={maxLength}
-          onBlur={(event) => onChange?.(event, event.target.value)}
+          onBlur={(event) => {
+            if (!disabled) {
+              onChange?.(event, event.target.value);
+            }
+          }}
           onChange={(event) => onInput?.(event, event.target.value)}
           onKeyDown={handleKeyDown}
           onScroll={() => {
