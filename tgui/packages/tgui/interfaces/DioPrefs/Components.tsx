@@ -20,7 +20,7 @@ import {
   FeatureValueInput,
   SupplementalFeature,
 } from './preferences/features/base';
-import { PREFERENCE_ID_TO_COMPONENT } from './PreferenceTypes';
+import { FEATURE_ID_TO_COMPONENT } from './PreferenceTypes';
 import { RandomizationButton } from './RandomizationButton';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
@@ -266,7 +266,7 @@ const ChoicedSelection = (props: {
                           act={(action, data) => {
                             act(action, data);
                           }}
-                          feature={PREFERENCE_ID_TO_COMPONENT[feature.feature]}
+                          feature={FEATURE_ID_TO_COMPONENT[feature.feature]}
                           featureId={feature.key}
                           shrink
                           value={

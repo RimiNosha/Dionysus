@@ -22,7 +22,7 @@ import {
 } from './preferences/features/base';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
-export const PREFERENCE_ID_TO_COMPONENT: Record<
+export const FEATURE_ID_TO_COMPONENT: Record<
   string,
   FeatureValue<unknown, unknown, unknown>
 > = {
@@ -50,12 +50,12 @@ export const PreferenceDataComponent = (props: {
         const { act, data } = useBackend<PreferencesMenuData>();
         const prefData = serverData[props.prefId];
         console.log(prefData);
-        return PREFERENCE_ID_TO_COMPONENT[prefData.feature] ? (
+        return FEATURE_ID_TO_COMPONENT[prefData.feature] ? (
           <FeatureValueInput
             act={(action, data) => {
               act(action, data);
             }}
-            feature={PREFERENCE_ID_TO_COMPONENT[prefData.feature]}
+            feature={FEATURE_ID_TO_COMPONENT[prefData.feature]}
             featureId={props.prefId}
             shrink
             value={data.character_preferences[props.prefCategory][props.prefId]}

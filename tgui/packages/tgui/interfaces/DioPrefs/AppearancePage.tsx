@@ -9,7 +9,7 @@ import {
   FeatureChoicedServerData,
   FeatureValueInput,
 } from './preferences/features/base';
-import { PREFERENCE_ID_TO_COMPONENT } from './PreferenceTypes';
+import { FEATURE_ID_TO_COMPONENT } from './PreferenceTypes';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 // These consts make thinking about this 1000% easier.
@@ -129,7 +129,7 @@ export const AppearancePage = (props) => {
                                     act(action, data);
                                   }}
                                   feature={
-                                    PREFERENCE_ID_TO_COMPONENT[
+                                    FEATURE_ID_TO_COMPONENT[
                                       featureProps.feature
                                     ]
                                   }
