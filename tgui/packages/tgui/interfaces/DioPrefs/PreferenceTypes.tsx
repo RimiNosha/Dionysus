@@ -49,7 +49,6 @@ export const PreferenceDataComponent = (props: {
         }
         const { act, data } = useBackend<PreferencesMenuData>();
         const prefData = serverData[props.prefId];
-        console.log(prefData);
         return FEATURE_ID_TO_COMPONENT[prefData.feature] ? (
           <FeatureValueInput
             act={(action, data) => {
