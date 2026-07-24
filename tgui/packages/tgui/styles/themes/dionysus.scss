@@ -68,6 +68,11 @@ $color-secondary: #c4c4c4;
       'border-color': $color-primary,
       'text-color': $color-fg ));
 
+  @include meta.load-css('../components/TextArea.scss',
+    $with: ('background-color': $color-component-background,
+      'border-color': $color-primary,
+      'text-color': $color-fg ));
+
   @include meta.load-css('../components/NumberInput.scss',
     $with: ('background-color': $color-component-background,
       'border-color': $color-primary,
