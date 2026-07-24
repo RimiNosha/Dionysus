@@ -78,6 +78,10 @@ $border-radius: Input.$border-radius !default;
   overflow-x: scroll;
 }
 
+.TextArea--monospace.TextArea__textarea {
+  font-family: 'Consolas', monospace;
+}
+
 .TextArea__textarea--disabled {
   cursor: not-allowed;
   border-color: #777;

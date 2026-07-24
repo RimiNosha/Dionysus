@@ -30,6 +30,7 @@ type Props = Partial<{
   /** Classname applied to the internal textarea element */
   innerClassName: string;
   maxLength: number;
+  monospace: boolean;
   noborder: boolean;
   /** Fires when user is 'done typing': Clicked out, blur, enter key (but not shift+enter) */
   onChange: (event: SyntheticEvent<HTMLTextAreaElement>, value: string) => void;
@@ -55,6 +56,7 @@ export const TextArea = forwardRef(
       displayedValue,
       dontUseTabForIndent,
       maxLength,
+      monospace,
       noborder,
       onChange,
       onEnter,
@@ -167,6 +169,7 @@ export const TextArea = forwardRef(
               className={classes([
                 'TextArea__textarea',
                 'TextArea__textarea_custom',
+                monospace && 'TextArea--monospace',
               ])}
               style={{
                 transform: `translateY(-${scrolledAmount}px)`,
@@ -182,6 +185,7 @@ export const TextArea = forwardRef(
             scrollbar && 'TextArea__textarea--scrollable',
             nowrap && 'TextArea__nowrap',
             disabled && 'TextArea__textarea--disabled',
+            monospace && 'TextArea--monospace',
             innerClassName,
           ])}
           disabled={disabled}
