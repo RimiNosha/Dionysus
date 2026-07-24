@@ -1,5 +1,13 @@
 import { useBackend, useLocalState } from '../../backend';
-import { Box, Button, Modal, Section, Stack, TextArea } from '../../components';
+import {
+  Box,
+  Button,
+  Dimmer,
+  Section,
+  Stack,
+  TextArea,
+} from '../../components';
+import { LoadCursor } from '../../components/LoadCursor';
 import { PreferencesMenuData } from './data';
 import { ServerData } from './data';
 import { AllFeaturesInCategory } from './PreferenceTypes';
@@ -115,43 +123,52 @@ const RecordEditorModal = (props: {
   );
 
   return (
-    <Modal width={50} height={35}>
-      <Stack fill vertical>
-        <Stack.Item>
-          <Section title={`Update ${prefData?.name}`} fill>
-            <TextArea
-              autoFocus
-              fluid
-              height="20rem"
-              maxLength={maxLength}
-              onEscape={onClose}
-              onChange={(_, value) => {
-                setText(value);
-                act('set_preference', {
-                  preference: prefId,
-                  value: value,
-                });
-              }}
-              value={text}
-            />
-          </Section>
-        </Stack.Item>
-        <Stack.Item>
-          <Stack fill>
-            <Stack.Item grow>
-              <Box textColor="label" textAlign="right">
-                {text.length}
-                {maxLength ? `/${maxLength}` : ''} characters
-              </Box>
+    <Dimmer>
+      <LoadCursor width="75rem" height="50rem">
+        <Box width="75rem" height="50rem" className="Modal">
+          <Stack fill vertical>
+            <Stack.Item height="100%">
+              <Section title={`Update ${prefData?.name}`} fill>
+                <TextArea
+                  monospace
+                  autoFocus
+                  fluid
+                  height="100%"
+                  maxLength={maxLength}
+                  onEscape={onClose}
+                  onEnter={onClose}
+                  onChange={(_, value) => {
+                    setText(value);
+                    act('set_preference', {
+                      preference: prefId,
+                      value: value,
+                    });
+                  }}
+                  value={text}
+                />
+              </Section>
             </Stack.Item>
             <Stack.Item>
-              <Button color="good" onClick={() => onSubmit(text)}>
-                Done
-              </Button>
+              <Stack fill>
+                <Stack.Item textColor="#666" /* ooOooo spooooky */>
+                  <sup>Shift+Enter to insert new lines</sup>
+                </Stack.Item>
+                <Stack.Item grow>
+                  <Box textColor="label" textAlign="right">
+                    {text.length}
+                    {maxLength ? `/${maxLength}` : ''} characters
+                  </Box>
+                </Stack.Item>
+                <Stack.Item>
+                  <Button color="good" onClick={() => onSubmit(text)}>
+                    Done
+                  </Button>
+                </Stack.Item>
+              </Stack>
             </Stack.Item>
           </Stack>
-        </Stack.Item>
-      </Stack>
-    </Modal>
+        </Box>
+      </LoadCursor>
+    </Dimmer>
   );
 };

@@ -166,7 +166,7 @@ export const JobsPage = (props) => {
                     </NoticeBox>
                   </Stack.Item>
                 )}
-                {!data.jobs[selectedJob]?.playtime_required.time_left && (
+                {!!data.jobs[selectedJob]?.playtime_required.time_left && (
                   <Stack.Item>
                     <NoticeBox>
                       You need more department playtime in{' '}
