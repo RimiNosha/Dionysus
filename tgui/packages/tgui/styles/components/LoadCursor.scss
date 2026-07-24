@@ -1,0 +1,35 @@
+/*
+ Stolen and heavily tweaked Bootstra.386 load cursor
+*/
+.LoadCursor {
+  &__wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+    width: 100%;
+    height: 100%;
+    background: #000084;
+  }
+
+  &__bar {
+    position: absolute;
+    right: 0;
+    z-index: 9999999;
+    width: 100%;
+    height: 20px;
+    margin-top: -20px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #000084;
+  }
+
+  &__loadcursor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+    font-weight: bold;
+    color: #ffffff;
+  }
+}
