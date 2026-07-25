@@ -151,10 +151,7 @@ export type PreferencesMenuData = {
       [otherKey: string]: unknown;
       random_body: RandomSetting;
     };
-    pii: {
-      [otherKey: string]: unknown;
-      real_name: string;
-    };
+    pii: Record<string, unknown>;
     randomization: Record<string, RandomSetting>;
     secondary_features: Record<string, unknown>;
     supplemental_features: Record<string, unknown>;

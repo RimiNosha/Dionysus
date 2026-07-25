@@ -9,6 +9,7 @@ import { CharacterSelect } from './CharacterSelectPage';
 import { PreferencesMenuData } from './data';
 import { JobsPage } from './JobsPage';
 import { LorePage } from './LorePage';
+import { OOCPage } from './OOCPage';
 import { DioPrefsPage, HIDDEN_PAGES } from './Pages';
 import { SpeciesPage } from './SpeciesPage';
 
@@ -36,6 +37,9 @@ export const DioPrefs = (props) => {
       break;
     case DioPrefsPage.LORE:
       page = <LorePage />;
+      break;
+    case DioPrefsPage.OOC:
+      page = <OOCPage />;
       break;
     default:
       page = <CharacterSelect />;

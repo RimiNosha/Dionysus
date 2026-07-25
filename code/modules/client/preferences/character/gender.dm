@@ -4,10 +4,10 @@
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "gender"
 	priority = PREFERENCE_PRIORITY_GENDER
-	feature_identifier = PREFERENCE_FEATURE_DROPDOWN
+	category = PREFERENCE_CATEGORY_EMPLOYEE_PII
 
 /datum/preference/choiced/gender/init_possible_values()
-	return list(MALE, FEMALE, PLURAL)
+	return list(MALE, FEMALE, PLURAL, NEUTER)
 
 /datum/preference/choiced/gender/apply_to_human(mob/living/carbon/human/target, value)
 	if(!target.dna.species.sexes)

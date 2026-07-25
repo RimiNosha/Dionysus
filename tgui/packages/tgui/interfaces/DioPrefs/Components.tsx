@@ -76,7 +76,7 @@ export const MainFeature = (props: {
           isOpen && (
             <TrackOutsideClicks onOutsideClick={props.handleClose}>
               <ChoicedSelection
-                name={catalog.name}
+                name={catalog.name!!}
                 catalog={catalog}
                 selected={currentValue}
                 supplementalFeatures={catalog.supplemental_features}
@@ -108,7 +108,7 @@ export const MainFeature = (props: {
             <Box
               className={classes([
                 'preferences32x32',
-                catalog.icons![currentValue],
+                catalog.icons ? catalog.icons[currentValue] : '',
                 'centered-image',
               ])}
               style={{

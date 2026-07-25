@@ -107,7 +107,7 @@ export const LorePage = (props) => {
   );
 };
 
-const RecordEditorModal = (props: {
+export const RecordEditorModal = (props: {
   onClose: () => void;
   onSubmit: (text: string) => void;
   prefId: string;
@@ -119,7 +119,7 @@ const RecordEditorModal = (props: {
   const maxLength = prefData?.max_length as number | undefined;
   const [text, setText] = useLocalState<string>(
     `dioPrefs_${prefId}`,
-    data.character_preferences.pii[prefId] as string,
+    data.character_preferences.misc[prefId] as string,
   );
 
   return (
@@ -150,14 +150,8 @@ const RecordEditorModal = (props: {
             </Stack.Item>
             <Stack.Item>
               <Stack fill>
-                <Stack.Item textColor="#666" /* ooOooo spooooky */>
+                <Stack.Item grow textColor="#666" /* ooOooo spooooky */>
                   <sup>Shift+Enter to insert new lines</sup>
-                </Stack.Item>
-                <Stack.Item grow>
-                  <Box textColor="label" textAlign="right">
-                    {text.length}
-                    {maxLength ? `/${maxLength}` : ''} characters
-                  </Box>
                 </Stack.Item>
                 <Stack.Item>
                   <Button color="good" onClick={() => onSubmit(text)}>

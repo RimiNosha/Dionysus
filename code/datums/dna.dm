@@ -76,6 +76,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	var/scrambled = FALSE
 	///Current body size, used for proper re-sizing and keeping track of that
 	var/current_body_size = BODY_SIZE_NORMAL
+	var/list/inspection_text
 
 /datum/dna/New(mob/living/new_holder)
 	if(istype(new_holder))

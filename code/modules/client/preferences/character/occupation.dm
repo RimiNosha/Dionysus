@@ -3,8 +3,7 @@
 	explanation = "Employer"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "employer"
-	cyclable = FALSE
-	feature_identifier = PREFERENCE_FEATURE_DROPDOWN
+	feature_identifier = PREFERENCE_FEATURE_NONE
 
 /datum/preference/choiced/employer/apply_to_human(mob/living/carbon/human/target, value)
 	return

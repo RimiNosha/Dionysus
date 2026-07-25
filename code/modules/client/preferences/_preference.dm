@@ -402,9 +402,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 	abstract_type = /datum/preference/choiced
 
-	///Defines whether get_button() should include cycle arrows
-	var/cyclable = TRUE
-	feature_identifier = PREFERENCE_FEATURE_DROPDOWN
+	feature_identifier = PREFERENCE_FEATURE_DROPDOWN_SWITCHER
 
 	/// A list of the four co-ordinates to crop to, if `generate_icons` is enabled. Useful for icons whose main contents are smaller than 32x32. Please keep it square. (x1, y1, x2, y2)
 	var/list/crop_area
@@ -634,6 +632,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	abstract_type = /datum/preference/text
 	feature_identifier = PREFERENCE_FEATURE_SHORT_TEXT
 	var/max_length = 50
+	var/placeholder
 
 /datum/preference/text/deserialize(input, datum/preferences/preferences)
 	return STRIP_HTML_SIMPLE(input, max_length)
@@ -647,6 +646,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /datum/preference/text/compile_constant_data()
 	. = ..()
 	.["max_length"] = max_length
+	.["placeholder"] = placeholder
 
 ///Holds any kind of abstract list data you'd like it to. MUST impliment `is_valid`!
 /datum/preference/blob

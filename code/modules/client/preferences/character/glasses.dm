@@ -3,7 +3,7 @@
 	savefile_key = "glasses"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	priority = PREFERENCE_PRIORITY_QUIRKS
-	feature_identifier = PREFERENCE_FEATURE_DROPDOWN_SWITCHER
+	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
 
 /datum/preference/choiced/glasses/init_possible_values()
 	return GLOB.nearsighted_glasses

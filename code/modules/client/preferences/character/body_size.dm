@@ -4,7 +4,7 @@
 	priority = PREFERENCE_PRIORITY_BODY_TYPE
 	savefile_key = "body_size"
 	relevant_species_trait = BODY_RESIZABLE
-	feature_identifier = PREFERENCE_FEATURE_NUMBER
+	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
 
 /datum/preference/choiced/body_size/init_possible_values()
 	return list("Short", "Normal", "Tall")

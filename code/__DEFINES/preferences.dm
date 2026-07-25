@@ -171,3 +171,12 @@
 #define TRAIT_NEGATIVE "negative"
 #define TRAIT_POSITIVE "positive"
 #define TRAIT_NEUTRAL "neutral"
+
+/// Values in this section are only ever used for inspection
+#define INSPECTION_ZONE_GENERAL "broad"
+#define INSPECTION_ZONE_PREVIEW "preview"
+#define INSPECTION_ZONE_ARMS "arms"
+#define INSPECTION_ZONE_LEGS "legs"
+#define INSPECTION_ZONE_HEAD "head"
+#define INSPECTION_ZONE_CHEST "chest"
+#define INSPECTION_ZONE_OOC "ooc"

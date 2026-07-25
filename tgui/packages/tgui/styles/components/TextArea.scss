@@ -87,3 +87,10 @@ $border-radius: Input.$border-radius !default;
   border-color: #777;
   color: #777;
 }
+
+.TextArea__maxlength {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #666;
+}

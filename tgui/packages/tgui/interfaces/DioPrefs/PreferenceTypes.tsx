@@ -5,13 +5,14 @@
 // If you change this, make sure to update the preferences define file too.
 
 import { useBackend } from '../../backend';
-import { Stack } from '../../components';
+import { LabeledList } from '../../components';
 import { PreferencesMenuData } from './data';
 import {
   CheckboxInput,
   CheckboxInputInverse,
   FeatureColorInput,
   FeatureDropdownInput,
+  FeatureDropdownSwitcherInput,
   FeatureIconnedDropdownInput,
   FeatureNumberInput,
   FeatureShortTextInput,
@@ -30,9 +31,10 @@ export const FEATURE_ID_TO_COMPONENT: Record<
   checkbox: CheckboxInput,
   checkbox_inverse: CheckboxInputInverse,
   dropdown: FeatureDropdownInput,
+  dropdown_switcher: FeatureDropdownSwitcherInput,
   iconned_dropdown: FeatureIconnedDropdownInput,
   number: FeatureNumberInput,
-  large_text: FeatureTextInput,
+  long_text: FeatureTextInput,
   short_text: FeatureShortTextInput,
   tri_color: FeatureTriColorInput,
 };
@@ -60,7 +62,7 @@ export const PreferenceDataComponent = (props: {
             value={data.character_preferences[props.prefCategory][props.prefId]}
           />
         ) : (
-          'INVALID FEATURE FOR ' + props.prefId
+          `INVALID FEATURE ${prefData.feature} FOR ${props.prefId}`
         );
       }}
     />
@@ -73,31 +75,32 @@ export const AllFeaturesInCategory = (props: { category: string }) => {
   return (
     <ServerPreferencesFetcher
       render={(serverData) => {
+        if (!serverData) {
+          return;
+        }
+
         return (
-          <Stack fill vertical>
+          <LabeledList>
             {Object.keys(data.character_preferences[props.category]).map(
               (k) => {
-                if (!serverData || serverData[k].feature === 'none') {
+                if (serverData[k].feature === 'none') {
                   return;
                 }
                 return (
-                  <Stack.Item key={k}>
-                    <Stack>
-                      <Stack.Item width="50%">
-                        {serverData[k].name!!}
-                      </Stack.Item>
-                      <Stack.Item width="50%">
-                        <PreferenceDataComponent
-                          prefCategory={props.category}
-                          prefId={k}
-                        />
-                      </Stack.Item>
-                    </Stack>
-                  </Stack.Item>
+                  <LabeledList.Item
+                    key={k}
+                    label={serverData[k].name!!}
+                    verticalAlign="top"
+                  >
+                    <PreferenceDataComponent
+                      prefCategory={props.category}
+                      prefId={k}
+                    />
+                  </LabeledList.Item>
                 );
               },
             )}
-          </Stack>
+          </LabeledList>
         );
       }}
     />

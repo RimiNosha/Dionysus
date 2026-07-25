@@ -73,6 +73,7 @@ export const TextArea = forwardRef(
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [scrolledAmount, setScrolledAmount] = useState(0);
+    const [valueLength, setValueLength] = useState(value?.length || 0);
 
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
       if (event.key === KEY.Enter) {
@@ -195,7 +196,10 @@ export const TextArea = forwardRef(
               onChange?.(event, event.target.value);
             }
           }}
-          onChange={(event) => onInput?.(event, event.target.value)}
+          onChange={(event) => {
+            setValueLength(event.target.value.length);
+            onInput?.(event, event.target.value);
+          }}
           onKeyDown={handleKeyDown}
           onScroll={() => {
             if (displayedValue && textareaRef.current) {
@@ -208,6 +212,11 @@ export const TextArea = forwardRef(
             color: displayedValue ? 'rgba(0, 0, 0, 0)' : 'inherit',
           }}
         />
+        {props.maxLength && (
+          <Box className="TextArea__maxlength">
+            {valueLength}/{props.maxLength}
+          </Box>
+        )}
       </Box>
     );
   },

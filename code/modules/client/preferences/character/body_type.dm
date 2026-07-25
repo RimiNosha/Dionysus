@@ -5,7 +5,7 @@
 	priority = PREFERENCE_PRIORITY_BODY_TYPE
 	savefile_key = "body_type"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
-	feature_identifier = PREFERENCE_FEATURE_DROPDOWN
+	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
 
 /datum/preference/choiced/body_type/init_possible_values()
 	return list(USE_GENDER, MALE, FEMALE)

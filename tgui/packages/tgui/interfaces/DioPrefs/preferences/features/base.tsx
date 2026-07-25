@@ -235,6 +235,79 @@ export const FeatureDropdownInput = (
   );
 };
 
+export const FeatureDropdownSwitcherInput = (
+  props: FeatureValueProps<string, string, FeatureChoicedServerData> & {
+    disabled?: boolean;
+  },
+) => {
+  const serverData = props.serverData;
+  if (!serverData) {
+    return null;
+  }
+
+  const displayNames =
+    serverData.display_names ||
+    Object.fromEntries(
+      serverData.choices.map((choice) => [
+        choice,
+        capitalizeFirstLetter(choice),
+      ]),
+    );
+
+  return (
+    <Box>
+      <Box inline width="calc(100% - 4.5rem)">
+        <StandardizedDropdown
+          choices={sortStrings(serverData.choices)}
+          disabled={props.disabled || isFeatureLocked(serverData)}
+          displayNames={displayNames}
+          onSetValue={props.handleSetValue}
+          value={props.value}
+        />
+      </Box>
+      <Box inline ml="4px">
+        <Button
+          mr="0"
+          style={{ cornerShape: 'bevel', borderRadius: '0.6rem 0 0 0.6rem' }}
+          onClick={() => {
+            let index = serverData.choices.findIndex((v) => v === props.value);
+            if (index === -1) {
+              return;
+            }
+            if (index === 0) {
+              index = serverData.choices.length - 1;
+            } else {
+              index--;
+            }
+            props.handleSetValue(serverData.choices[index]);
+          }}
+        >
+          {'<'}
+        </Button>
+      </Box>
+      <Box inline>
+        <Button
+          style={{ cornerShape: 'bevel', borderRadius: '0 0.6rem 0.6rem 0' }}
+          onClick={() => {
+            let index = serverData.choices.findIndex((v) => v === props.value);
+            if (index === -1) {
+              return;
+            }
+            if (index === serverData.choices.length - 1) {
+              index = 0;
+            } else {
+              index++;
+            }
+            props.handleSetValue(serverData.choices[index]);
+          }}
+        >
+          {'>'}
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
 export type FeatureWithIcons<T> = Feature<
   { value: T },
   T,
@@ -379,6 +452,12 @@ export const FeatureTextInput = (props: FeatureValueProps<string>) => {
       disabled={isFeatureLocked(props.serverData)}
       height="100px"
       value={props.value}
+      maxLength={props.serverData?.max_length as number}
+      placeholder={
+        typeof props.serverData?.placeholder === 'string'
+          ? props.serverData.placeholder
+          : undefined
+      }
       onChange={(_, value) => {
         if (!isFeatureLocked(props.serverData)) {
           props.handleSetValue(value);
@@ -394,6 +473,12 @@ export const FeatureShortTextInput = (props: FeatureValueProps<string>) => {
       disabled={isFeatureLocked(props.serverData)}
       width="100%"
       value={props.value}
+      maxLength={props.serverData?.max_length as number}
+      placeholder={
+        typeof props.serverData?.placeholder === 'string'
+          ? props.serverData.placeholder
+          : undefined
+      }
       onChange={(_, value) => {
         if (!isFeatureLocked(props.serverData)) {
           props.handleSetValue(value);

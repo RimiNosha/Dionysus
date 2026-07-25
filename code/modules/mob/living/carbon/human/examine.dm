@@ -371,13 +371,10 @@
 
 	var/flavor_text_link
 	/// The first 1-FLAVOR_PREVIEW_LIMIT characters in the mob's "examine_text" variable. FLAVOR_PREVIEW_LIMIT is defined in flavor_defines.dm.
-	var/preview_text = trim(copytext_char((examine_text), 1, FLAVOR_PREVIEW_LIMIT))
+	var/preview_text = get_inspection_text(INSPECTION_ZONE_GENERAL)
 	if(preview_text)
 		if (!(skipface))
-			if(length_char(examine_text) <= FLAVOR_PREVIEW_LIMIT)
-				flavor_text_link += "[preview_text]"
-			else
-				flavor_text_link += "[preview_text]... [button_element(src, "Look Closer?", "open_examine_panel=1")]"
+			flavor_text_link += "[preview_text]... [button_element(src, "Look Closer?", "open_examine_panel=1")]"
 		else
 			flavor_text_link = span_notice("...?")
 		if (flavor_text_link)
