@@ -86,5 +86,9 @@ $color-secondary: #c4c4c4;
       'text-color': #000000,
       'text-color-selected': #000000));
 
-  @include meta.load-css('../interfaces/DioPrefs.scss')
+  @include meta.load-css('../interfaces/DioPrefs.scss');
+
+  @include meta.load-css('../components/LoadCursor.scss',
+    $with: ("background-color": $color-primary,
+      "cursor-color": $dio-red));
 }

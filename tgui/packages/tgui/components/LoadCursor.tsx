@@ -111,37 +111,34 @@ export const LoadCursor: React.FC<{
   }, []);
 
   return (
-    <Box {...computeBoxProps(rest)} position="relative" ref={childRef}>
+    <div {...computeBoxProps(rest)} className="loadCursor" ref={childRef}>
       {children}
-      <div
+      <Box
         style={{
           visibility: state.hideWrap ? 'hidden' : 'visible',
           height: state.wrapHeight,
         }}
         className="LoadCursor__wrapper"
       />
-      <div
+      <Box
         style={{
           visibility: state.hideWrap ? 'hidden' : 'visible',
           width: state.barWidth,
-          right: 0,
           bottom: state.barBottom,
         }}
         className="LoadCursor__bar"
       >
-        &#9604;
-      </div>
-      <div
+        <Box className="LoadCursor__scancursor" />
+      </Box>
+      <Box
         style={{
           visibility: state.hideCursor ? 'hidden' : 'visible',
           right: state.cursorRight,
           bottom: state.cursorBottom,
         }}
-        className="LoadCursor__loadcursor"
-      >
-        &#9604;
-      </div>
-    </Box>
+        className="LoadCursor__rescancursor"
+      />
+    </div>
   );
 };
 
