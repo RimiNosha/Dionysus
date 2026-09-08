@@ -2625,7 +2625,6 @@
 #include "code\modules\client\preferences\character\skin_tone.dm"
 #include "code\modules\client\preferences\character\species.dm"
 #include "code\modules\client\preferences\character\stored_appearance.dm"
-#include "code\modules\client\preferences\character\underwear_color.dm"
 #include "code\modules\client\preferences\character\uplink_location.dm"
 #include "code\modules\client\preferences\character\augments\_augment.dm"
 #include "code\modules\client\preferences\character\augments\augment_bodypart.dm"
