@@ -32,9 +32,8 @@
   /* Fixes https://github.com/omgovich/react-colorful/issues/139 */
   border-bottom: 12px solid #000;
   border-radius: 8px 8px 0 0;
-  background-image: linear-gradient(to top,
-      rgba(0, 0, 0, 255),
-      rgba(0, 0, 0, 0)),
+  background-image:
+    linear-gradient(to top, rgba(0, 0, 0, 255), rgba(0, 0, 0, 0)),
     linear-gradient(to right, rgba(255, 255, 255, 255), rgba(255, 255, 255, 0));
 }
 
@@ -68,14 +67,16 @@
 }
 
 .react-colorful__hue {
-  background: linear-gradient(to right,
-      #f00 0%,
-      #ff0 17%,
-      #0f0 33%,
-      #0ff 50%,
-      #00f 67%,
-      #f0f 83%,
-      #f00 100%);
+  background: linear-gradient(
+    to right,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
 }
 
 .react-colorful__r {
@@ -153,7 +154,7 @@
   padding: 1px;
 
   div {
-    background-color: #AAA;
+    background-color: #aaa;
     padding: 1px;
 
     div {

@@ -24,13 +24,12 @@ $background-color: base.$color-bg !default;
   }
 
   &__PopperContainer {
-    >:first-child {
+    > :first-child {
       width: 100%;
     }
   }
 
   &__CharacterSelect {
-
     &__Container {
       width: 100%;
       height: 100%;
@@ -130,7 +129,7 @@ $background-color: base.$color-bg !default;
 
     &_positive {
       .Icon {
-        -webkit-text-fill-color: green
+        -webkit-text-fill-color: green;
       }
     }
 
@@ -189,7 +188,6 @@ $background-color: base.$color-bg !default;
   }
 
   @keyframes marqueeIfOverflowing {
-
     0%,
     10%,
     90%,

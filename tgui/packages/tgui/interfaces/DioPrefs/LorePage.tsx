@@ -8,7 +8,7 @@ import {
   TextArea,
 } from '../../components';
 import { LoadCursor } from '../../components/LoadCursor';
-import { PreferencesMenuData } from './data';
+import { PreferenceData, PreferencesMenuData } from './data';
 import { ServerData } from './data';
 import { AllFeaturesInCategory } from './PreferenceTypes';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
@@ -115,7 +115,7 @@ export const RecordEditorModal = (props: {
 }) => {
   const { data, act } = useBackend<PreferencesMenuData>();
   const { onClose, onSubmit, prefId, serverData } = props;
-  const prefData = serverData[prefId];
+  const prefData = serverData[prefId] as PreferenceData;
   const maxLength = prefData?.max_length as number | undefined;
   const [text, setText] = useLocalState<string>(
     `dioPrefs_${prefId}`,
