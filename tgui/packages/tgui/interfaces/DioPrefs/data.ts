@@ -196,7 +196,7 @@ export type PreferenceData = {
 };
 
 export type ServerData = {
-  [otherKey: string]: PreferenceData;
+  [otherKey: string]: unknown;
   jobs: PreferenceData & {
     departments: Record<string, Department>;
     jobs: Record<string, Job>;
@@ -208,7 +208,7 @@ export type ServerData = {
   random: PreferenceData & {
     randomizable: string[];
   };
-  species: PreferenceData & Record<string, Species>;
+  species: Record<string, Species>;
   species_previews: PreferenceData &
     Record<
       string,

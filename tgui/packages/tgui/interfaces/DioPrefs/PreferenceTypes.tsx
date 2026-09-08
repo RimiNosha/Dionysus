@@ -6,7 +6,7 @@
 
 import { useBackend } from '../../backend';
 import { LabeledList } from '../../components';
-import { PreferencesMenuData } from './data';
+import { PreferenceData, PreferencesMenuData } from './data';
 import {
   CheckboxInput,
   CheckboxInputInverse,
@@ -50,7 +50,7 @@ export const PreferenceDataComponent = (props: {
           return;
         }
         const { act, data } = useBackend<PreferencesMenuData>();
-        const prefData = serverData[props.prefId];
+        const prefData = serverData[props.prefId] as PreferenceData;
         return FEATURE_ID_TO_COMPONENT[prefData.feature] ? (
           <FeatureValueInput
             act={(action, data) => {
@@ -83,13 +83,14 @@ export const AllFeaturesInCategory = (props: { category: string }) => {
           <LabeledList>
             {Object.keys(data.character_preferences[props.category]).map(
               (k) => {
-                if (serverData[k].feature === 'none') {
+                const prefData = serverData[k] as PreferenceData;
+                if (prefData.feature === 'none') {
                   return;
                 }
                 return (
                   <LabeledList.Item
                     key={k}
-                    label={serverData[k].name!!}
+                    label={prefData.name!!}
                     verticalAlign="top"
                   >
                     <PreferenceDataComponent

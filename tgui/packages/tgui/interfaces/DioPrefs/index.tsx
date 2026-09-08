@@ -69,7 +69,7 @@ export const DioPrefs = (props) => {
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}
                 >
-                  <h3>{data.character_preferences.pii.real_name}</h3>
+                  <h3>{data.character_preferences.pii.real_name as string}</h3>
                 </Stack.Item>
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}
