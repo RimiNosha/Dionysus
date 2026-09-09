@@ -88,28 +88,33 @@ export const CharacterPreview = (props) => {
                 />
               </Stack>
             ) : (
-              <Box>
-                <ByondUi
-                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  params={{ id: data.character_preview_view[0], type: 'map' }}
-                />
-                <ByondUi
-                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  params={{ id: data.character_preview_view[1], type: 'map' }}
-                />
-                <ByondUi
-                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  params={{ id: data.character_preview_view[2], type: 'map' }}
-                />
-                <ByondUi
-                  width={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  height={`${CHARACTER_PORTRAIT_SIZE}px`}
-                  params={{ id: data.character_preview_view[3], type: 'map' }}
-                />
-              </Box>
+              // Better a blank box than a BSOD in dev.
+              // Happens if your game refreshes tgui with an old tgui prefs window from a previous server session open at the same time, and then close the new one and accidentally start using the old one.
+              // Why tgui doesn't auto clense old windows on connect, I have no clue.
+              data.character_preview_view && (
+                <Box>
+                  <ByondUi
+                    width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    height={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    params={{ id: data.character_preview_view[0], type: 'map' }}
+                  />
+                  <ByondUi
+                    width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    height={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    params={{ id: data.character_preview_view[1], type: 'map' }}
+                  />
+                  <ByondUi
+                    width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    height={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    params={{ id: data.character_preview_view[2], type: 'map' }}
+                  />
+                  <ByondUi
+                    width={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    height={`${CHARACTER_PORTRAIT_SIZE}px`}
+                    params={{ id: data.character_preview_view[3], type: 'map' }}
+                  />
+                </Box>
+              )
             )
           }
         />

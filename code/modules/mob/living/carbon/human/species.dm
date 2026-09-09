@@ -18,6 +18,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/id
 	///This is the fluff name. They are displayed on health analyzers and in the character setup menu. Must be `\improper`.
 	var/name
+	/// A list of species datums this species is the parent of.
+	var/list/datum/species/subspecies
 	/// The formatting of the name of the species in plural context. Defaults to "[name]\s" if unset.
 	/// Ex "[Plasmamen] are weak", "[Mothmen] are strong", "[Lizardpeople] don't like", "[Golems] hate"
 	var/plural_form

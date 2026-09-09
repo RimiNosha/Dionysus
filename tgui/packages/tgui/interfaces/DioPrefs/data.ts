@@ -35,6 +35,8 @@ export type Name = {
   group: string;
 };
 
+export type SpeciesList = Record<string, Species>;
+
 export type Species = {
   desc: string[];
   diet?: {
@@ -49,6 +51,8 @@ export type Species = {
   name: string;
 
   sexes: BooleanLike;
+
+  subspecies: SpeciesList;
 
   traits: {
     negative: Trait[];
@@ -208,7 +212,7 @@ export type ServerData = {
   random: PreferenceData & {
     randomizable: string[];
   };
-  species: Record<string, Species>;
+  species: SpeciesList;
   species_previews: PreferenceData &
     Record<
       string,

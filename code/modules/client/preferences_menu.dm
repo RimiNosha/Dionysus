@@ -195,8 +195,6 @@
 /datum/preferences_menu/ui_static_data(mob/user)
 	var/list/data = list()
 
-	// Fuck maps and especially this dogshit """engine""", I have better shit to do.
-	// If someone wants to make this a map, then good fucking luck, I wasted five hours on this fucking garbage.
 	data["character_preview_view"] = character_preview_view.assigned_maps()
 
 	data["overflow_role"] = SSjob.GetJobType(SSjob.overflow_role).id

@@ -44,21 +44,45 @@
 /datum/preference/choiced/species/compile_constant_data()
 	var/list/data = list()
 
+	// This may serialize multiple levels of supspecies, but the frontend may not render it nicely
+	// Get someone who actually enjoys whatever the hell is going on there to do it properly - Rimi
+	var/list/species_by_id = list()
+	var/list/subspecies = list()
 	for (var/species_id in get_selectable_species())
 		var/species_type = GLOB.species_list[species_id]
-		var/datum/species/species = new species_type()
+		var/datum/species/species = new species_type
+		species_by_id[species.id] = species
+		if (length(species.subspecies))
+			subspecies += species.subspecies
 
-		data[species_id] = list()
-		data[species_id]["name"] = species.name
-		data[species_id]["desc"] = species.get_species_description()
-		data[species_id]["lore"] = species.get_species_lore()
-		data[species_id]["icon"] = sanitize_css_class_name(species.name)
-		data[species_id]["use_skintones"] = species.use_skintones
-		data[species_id]["sexes"] = species.sexes
-		data[species_id]["enabled_features"] = species.get_features()
-		data[species_id]["traits"] = species.get_notable_traits()
-		data[species_id]["diet"] =  species.get_species_diet()
+	for (var/species_id in species_by_id)
+		var/datum/species/species = species_by_id[species_id]
+		// Parent species handle serialization of these.
+		if (species.type in subspecies)
+			continue
 
-		qdel(species)
+		data[species.id] = serialize_species(species)
 
 	return data
+
+/datum/preference/choiced/species/proc/serialize_species(datum/species/species)
+
+	var/list/subspecies_list
+
+	if (length(species.subspecies))
+		subspecies_list = list()
+		for (var/datum/species/subspecies as anything in species.subspecies)
+			subspecies_list[initial(subspecies.id)] = serialize_species(new subspecies)
+
+	return list(
+		"name" = species.name,
+		"desc" = species.get_species_description(),
+		"lore" = species.get_species_lore(),
+		"icon" = sanitize_css_class_name(species.name),
+		"use_skintones" = species.use_skintones,
+		"sexes" = species.sexes,
+		"enabled_features" = species.get_features(),
+		"traits" = species.get_notable_traits(),
+		"diet" = species.get_species_diet(),
+		"subspecies" = subspecies_list,
+	)
