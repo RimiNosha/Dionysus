@@ -63,7 +63,8 @@
 				return FALSE
 
 			// SAFETY: `write_preference` performs validation checks
-			if (!preferences.write_preference(requested_preference, value))
+			if (!preferences.update_preference(requested_preference, value))
+				preferences.write_preference(requested_preference, value)
 				return FALSE
 
 			if (istype(requested_preference, /datum/preference/name))
