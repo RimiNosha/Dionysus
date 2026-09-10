@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/preferences = list()
 
 	for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
-		if (!preference.is_accessible(src))
+		if (!preference.is_accessible(src) || preference.savefile_identifier != PREFERENCE_SAVEFILE_CHARACTER)
 			continue
 
 		LAZYINITLIST(preferences[preference.category])
@@ -155,6 +155,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				preferences[category] += append_character_preferences[category]
 			else
 				preferences[category] = append_character_preferences[category]
+
+	return preferences
+
+/datum/preferences/proc/compile_player_preferences(mob/user)
+	var/list/preferences = list()
+
+	for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
+		if (!preference.is_accessible(src) || preference.savefile_identifier != PREFERENCE_SAVEFILE_PLAYER)
+			continue
+
+		LAZYINITLIST(preferences[preference.category])
+
+		var/value = read_preference(preference.type)
+		var/data = preference.compile_ui_data(user, value, src)
+
+		preferences[preference.category][preference.savefile_key] = data
 
 	return preferences
 

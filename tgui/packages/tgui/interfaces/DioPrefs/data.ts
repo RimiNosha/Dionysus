@@ -167,6 +167,10 @@ export type PreferencesMenuData = {
 
   content_unlocked: BooleanLike;
 
+  game_preferences: {
+    [otherKey: string]: Record<string, unknown>;
+  };
+
   jobs: Record<
     string,
     {

@@ -21,6 +21,18 @@ const binaryInsertPreference = binaryInsertWith<PreferenceChild>(
 
 const sortByName = sortBy<[string, PreferenceChild[]]>(([name]) => name);
 
+const categories = [
+  'ACCESSIBILITY',
+  'ADMIN',
+  'GAMEPLAY',
+  'GHOST',
+  'SOUND',
+  'CHAT',
+  'RUNECHAT',
+  'TOOLTIPS',
+  'UI',
+];
+
 export const GamePreferencesPage = (props) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
@@ -32,94 +44,107 @@ export const GamePreferencesPage = (props) => {
         if (!serverData) {
           return;
         }
-        for (const [prefId, value] of Object.entries(
-          data.character_preferences.game_preferences,
+        for (const [_, entry] of Object.entries(
+          categories.map((v) => [v, data.game_preferences[v]]),
         )) {
-          const prefEntry = serverData[prefId] as PreferenceData | undefined;
-          if (!prefEntry) {
-            console.log(prefId);
+          let entryEntries = Object.entries(entry);
+          console.log(entry);
+          const category = entryEntries[0][0];
+          const preferences = entryEntries[1][1];
+          console.log(category);
+          console.log(preferences);
+          if (!preferences) {
             continue;
           }
+          for (const [prefId, value] of Object.entries(preferences)) {
+            const prefEntry = serverData[prefId] as PreferenceData | undefined;
+            if (!prefEntry) {
+              continue;
+            }
 
-          const feature = FEATURE_ID_TO_COMPONENT[prefEntry!!.feature];
+            const feature = FEATURE_ID_TO_COMPONENT[prefEntry!!.feature];
 
-          let nameInner: ReactNode = prefEntry?.name || prefId;
+            let nameInner: ReactNode = prefEntry?.name || prefId;
 
-          if (prefEntry.description) {
-            nameInner = (
-              <Box
-                as="span"
-                style={{
-                  borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
-                }}
-              >
+            if (prefEntry.description) {
+              nameInner = (
+                <Box
+                  as="span"
+                  style={{
+                    borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
+                  }}
+                >
+                  {nameInner}
+                </Box>
+              );
+            }
+
+            let name: ReactNode = (
+              <Flex.Item grow={1} pr={2} basis={0} ml={2}>
                 {nameInner}
-              </Box>
-            );
-          }
-
-          let name: ReactNode = (
-            <Flex.Item grow={1} pr={2} basis={0} ml={2}>
-              {nameInner}
-            </Flex.Item>
-          );
-
-          if (prefEntry.description) {
-            name = (
-              <Tooltip content={prefEntry.description} position="bottom-start">
-                {name}
-              </Tooltip>
-            );
-          }
-
-          const child = (
-            <Flex align="center" key={prefId} pb={2}>
-              {name}
-
-              <Flex.Item grow={1} basis={0}>
-                {(feature && (
-                  <FeatureValueInput
-                    feature={feature}
-                    featureId={prefId}
-                    value={value}
-                    act={act}
-                  />
-                )) || (
-                  <Box as="b" color="red">
-                    ...is not filled out properly!!!
-                  </Box>
-                )}
               </Flex.Item>
-            </Flex>
-          );
+            );
 
-          const entry = {
-            name: feature?.name || prefId,
-            children: child,
-          };
+            if (prefEntry.description) {
+              name = (
+                <Tooltip
+                  content={prefEntry.description}
+                  position="bottom-start"
+                >
+                  {name}
+                </Tooltip>
+              );
+            }
 
-          const category = (prefEntry?.category as string) || 'ERROR';
+            const child = (
+              <Flex align="center" key={prefId} pb={2}>
+                {name}
 
-          gamePreferences[category] = binaryInsertPreference(
-            gamePreferences[category] || [],
-            entry,
+                <Flex.Item grow={1} basis={0}>
+                  {(feature && (
+                    <FeatureValueInput
+                      feature={feature}
+                      featureId={prefId}
+                      value={value}
+                      act={act}
+                    />
+                  )) || (
+                    <Box as="b" color="red">
+                      ...is not filled out properly!!!
+                    </Box>
+                  )}
+                </Flex.Item>
+              </Flex>
+            );
+
+            const entry = {
+              name: feature?.name || prefId,
+              children: child,
+            };
+
+            const category = (prefEntry?.category as string) || 'ERROR';
+
+            gamePreferences[category] = binaryInsertPreference(
+              gamePreferences[category] || [],
+              entry,
+            );
+          }
+
+          const gamePreferenceEntries: [string, ReactNode][] = sortByName(
+            Object.entries(gamePreferences),
+          ).map(([category, preferences]) => {
+            return [category, preferences.map((entry) => entry.children)];
+          });
+
+          return (
+            <TabbedMenu
+              categoryEntries={gamePreferenceEntries}
+              contentProps={{
+                fontSize: 1.5,
+              }}
+            />
           );
         }
-
-        const gamePreferenceEntries: [string, ReactNode][] = sortByName(
-          Object.entries(gamePreferences),
-        ).map(([category, preferences]) => {
-          return [category, preferences.map((entry) => entry.children)];
-        });
-
-        return (
-          <TabbedMenu
-            categoryEntries={gamePreferenceEntries}
-            contentProps={{
-              fontSize: 1.5,
-            }}
-          />
-        );
       }}
     />
   );

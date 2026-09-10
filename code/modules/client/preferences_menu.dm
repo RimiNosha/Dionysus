@@ -170,6 +170,7 @@
 	data["preview_selection"] = preferences.preview_pref
 
 	data["character_preferences"] = preferences.compile_character_preferences(user)
+	data["player_preferences"] = preferences.compile_player_preferences(user)
 
 	// character_preview_view.update_body()
 

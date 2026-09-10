@@ -90,16 +90,22 @@
 		if (toggle_name == "member_public" && !preferences.unlock_content)
 			continue
 
-		new_game_preferences[toggle_name] = (preferences.toggles & legacy_toggles[toggle_name]) != 0
+		var/datum/preference/preference = GLOB.preference_entries_by_key
+
+		LAZYINITLIST(new_game_preferences[preference.category])
+		new_game_preferences[preference.category][toggle_name] = (preferences.toggles & legacy_toggles[toggle_name]) != 0
 
 	for (var/toggle_name in legacy_chat_toggles)
 		if (!is_admin && (toggle_name in admin_only_chat_toggles))
 			continue
 
-		new_game_preferences[toggle_name] = (preferences.chat_toggles & legacy_chat_toggles[toggle_name]) != 0
+		var/datum/preference/preference = GLOB.preference_entries_by_key
+
+		LAZYINITLIST(new_game_preferences[preference.category])
+		new_game_preferences[preference.category][toggle_name] = (preferences.chat_toggles & legacy_chat_toggles[toggle_name]) != 0
 
 	return list(
-		PREFERENCE_CATEGORY_GAME_PREFERENCES = new_game_preferences,
+		"game_preferences" = new_game_preferences
 	)
 
 /datum/preference_middleware/legacy_toggles/pre_set_preference(mob/user, preference, value)
