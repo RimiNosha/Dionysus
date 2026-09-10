@@ -145,17 +145,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		preferences[preference.category][preference.savefile_key] = data
 
-	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
-		var/list/append_character_preferences = preference_middleware.get_character_preferences(user)
-		if (isnull(append_character_preferences))
-			continue
-
-		for (var/category in append_character_preferences)
-			if (category in preferences)
-				preferences[category] += append_character_preferences[category]
-			else
-				preferences[category] = append_character_preferences[category]
-
 	return preferences
 
 /datum/preferences/proc/compile_player_preferences(mob/user)
