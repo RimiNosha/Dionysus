@@ -44,19 +44,15 @@ export const GamePreferencesPage = (props) => {
         if (!serverData) {
           return;
         }
-        const entries = categories.map((v) => [v, data.player_preferences[v]]);
-        const length = entries.length;
 
-        for (let i = 0; i < length; i++) {
-          console.log(i);
-          console.log(entries.length);
-          const entry = entries[i];
+        for (const entry of categories.map((v) => [
+          v,
+          data.player_preferences[v],
+        ])) {
+          // This isn't ideal. I stopped caring 3 hours ago.
           let entryEntries = Object.entries(entry);
-          console.log(entry);
           const category = entryEntries[0][1] || 'ERROR';
           const preferences = entryEntries[1][1];
-          console.log(category);
-          console.log(preferences);
           if (!preferences) {
             continue;
           }
