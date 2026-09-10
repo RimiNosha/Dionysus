@@ -167,10 +167,6 @@ export type PreferencesMenuData = {
 
   content_unlocked: BooleanLike;
 
-  game_preferences: {
-    [otherKey: string]: Record<string, unknown>;
-  };
-
   jobs: Record<
     string,
     {
@@ -184,9 +180,13 @@ export type PreferencesMenuData = {
   >;
 
   keybindings: Record<string, string[]>;
-  name_to_use: string;
 
+  name_to_use: string;
   overflow_role: string;
+
+  player_preferences: {
+    [otherKey: string]: Record<string, unknown>;
+  };
   preview_options: string;
   preview_selection: string;
 

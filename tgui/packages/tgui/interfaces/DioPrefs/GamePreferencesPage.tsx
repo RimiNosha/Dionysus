@@ -44,12 +44,16 @@ export const GamePreferencesPage = (props) => {
         if (!serverData) {
           return;
         }
-        for (const [_, entry] of Object.entries(
-          categories.map((v) => [v, data.game_preferences[v]]),
-        )) {
+        const entries = categories.map((v) => [v, data.player_preferences[v]]);
+        const length = entries.length;
+
+        for (let i = 0; i < length; i++) {
+          console.log(i);
+          console.log(entries.length);
+          const entry = entries[i];
           let entryEntries = Object.entries(entry);
           console.log(entry);
-          const category = entryEntries[0][0];
+          const category = entryEntries[0][1] || 'ERROR';
           const preferences = entryEntries[1][1];
           console.log(category);
           console.log(preferences);
@@ -122,29 +126,27 @@ export const GamePreferencesPage = (props) => {
               children: child,
             };
 
-            const category = (prefEntry?.category as string) || 'ERROR';
-
             gamePreferences[category] = binaryInsertPreference(
               gamePreferences[category] || [],
               entry,
             );
           }
-
-          const gamePreferenceEntries: [string, ReactNode][] = sortByName(
-            Object.entries(gamePreferences),
-          ).map(([category, preferences]) => {
-            return [category, preferences.map((entry) => entry.children)];
-          });
-
-          return (
-            <TabbedMenu
-              categoryEntries={gamePreferenceEntries}
-              contentProps={{
-                fontSize: 1.5,
-              }}
-            />
-          );
         }
+
+        const gamePreferenceEntries: [string, ReactNode][] = sortByName(
+          Object.entries(gamePreferences),
+        ).map(([category, preferences]) => {
+          return [category, preferences.map((entry) => entry.children)];
+        });
+
+        return (
+          <TabbedMenu
+            categoryEntries={gamePreferenceEntries}
+            contentProps={{
+              fontSize: 1.5,
+            }}
+          />
+        );
       }}
     />
   );
