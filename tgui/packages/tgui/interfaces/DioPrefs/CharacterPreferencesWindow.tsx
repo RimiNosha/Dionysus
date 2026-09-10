@@ -10,7 +10,7 @@ import { PreferencesMenuData } from './data';
 import { JobsPage } from './JobsPage';
 import { LorePage } from './LorePage';
 import { OOCPage } from './OOCPage';
-import { DioPrefsPage, HIDDEN_PAGES } from './Pages';
+import { DioPrefsPage, HIDDEN_PAGES, PAGES_ORDERED } from './Pages';
 import { SpeciesPage } from './SpeciesPage';
 
 export const CharacterPreferencesWindow = (props) => {
@@ -74,13 +74,13 @@ export const CharacterPreferencesWindow = (props) => {
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}
                 >
-                  {Object.entries(DioPrefsPage).map(([key, value]) => {
+                  {PAGES_ORDERED.map((value) => {
                     if (HIDDEN_PAGES.includes(value)) {
                       return;
                     }
                     return (
                       <Button
-                        key={key}
+                        key={value}
                         selected={value === currentPage}
                         onClick={() => setCurrentPage(value)}
                       >
