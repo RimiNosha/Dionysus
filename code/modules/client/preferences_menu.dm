@@ -238,11 +238,18 @@
 	if (!isnull(character_preview_view) && !(character_preview_view.preview1 in user.client?.screen))
 		user.client?.register_map_obj(character_preview_view)
 
-	if (tab)
-		current_window = tab
-		update_static_data(usr)
-
 	ui = SStgui.try_update_ui(user, src, ui)
+
+	if (tab != null)
+		current_window = tab
+		if (tab == PREFERENCE_TAB_CHARACTER && ui)
+			// Swapping from game prefs to character prefs leaves the window on a loading screen for a hot second for some reason.
+			// So we'll just close and reopen the window.
+			ui.close()
+			ui = SStgui.try_update_ui(user, src, null)
+		else
+			update_static_data(usr)
+
 	if(!ui)
 		character_preview_view = create_character_preview_view(user)
 		ui = new(user, src, "DioPrefs")
