@@ -1,6 +1,8 @@
 /// During map rotation, this will help determine the chosen map.
 /datum/preference/choiced/preferred_map
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Preferred map"
+	category = PREFERENCE_CATEGORY_GAME_GAMEPLAY
+	description = "During map rotation, prefer this map be chosen. This does not affect the map vote, only random rotation when a vote is not held."
 	savefile_key = "preferred_map"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

@@ -1,6 +1,7 @@
 /// The scaling method to show the world in, e.g. nearest neighbor
 /datum/preference/choiced/scaling_method
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Scaling method"
+	category = PREFERENCE_CATEGORY_GAME_UI
 	savefile_key = "scaling_method"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

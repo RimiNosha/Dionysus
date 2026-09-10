@@ -1,5 +1,6 @@
 /datum/preference/toggle/auto_fit_viewport
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Auto fit viewport"
+	category = PREFERENCE_CATEGORY_GAME_UI
 	savefile_key = "auto_fit_viewport"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

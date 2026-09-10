@@ -291,7 +291,7 @@ ROUNDSTART_RACES lizard
 #ROUNDSTART_RACES moth
 #ROUNDSTART_RACES shadow
 #ROUNDSTART_RACES teshari
-#ROUNDSTART_RACES ipc
+ROUNDSTART_RACES ipc
 #ROUNDSTART_RACES saurian
 
 ## Races that are better than humans in some ways, but worse in others

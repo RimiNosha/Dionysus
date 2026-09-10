@@ -1,6 +1,8 @@
 /// Whether or not to toggle ambient occlusion, the shadows around people
 /datum/preference/toggle/bloom
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "See bloom"
+	category = PREFERENCE_CATEGORY_GAME_GAMEPLAY
+	description = "Enable Bloom"
 	savefile_key = "seebloom"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 	default_value = TRUE

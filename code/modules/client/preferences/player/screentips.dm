@@ -1,5 +1,7 @@
 /datum/preference/choiced/enable_screentips
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Enable screentips"
+	category = PREFERENCE_CATEGORY_GAME_UI
+	description = "Enables screen tips, the text you see when hovering over something. When set to \"Only with tips\", will only show when there is more information than just the name, such as what right-clicking it does."
 	savefile_key = "screentip_pref"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 
@@ -27,7 +29,9 @@
 	return ..(input, preferences)
 
 /datum/preference/color/screentip_color
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Screentips color"
+	category = PREFERENCE_CATEGORY_GAME_UI
+	description = "The color of screen tips, the text you see when hovering over something."
 	savefile_key = "screentip_color"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

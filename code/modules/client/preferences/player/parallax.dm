@@ -2,7 +2,9 @@
 /datum/preference/choiced/parallax
 	savefile_key = "parallax"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Parallax (fancy space)"
+	category = PREFERENCE_CATEGORY_GAME_GAMEPLAY
+	description = ""
 
 /datum/preference/choiced/parallax/init_possible_values()
 	return list(

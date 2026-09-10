@@ -87,8 +87,10 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /// Represents an individual preference.
 /datum/preference
 	abstract_type = /datum/preference
-	/// The display default name when inserted into the chargen
+	/// The display name
 	var/explanation
+
+	var/description
 
 	/// The key inside the savefile to use.
 	/// This is also sent to the UI.
@@ -360,7 +362,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 /datum/preference/proc/compile_constant_data()
 	SHOULD_NOT_SLEEP(TRUE)
 
-	var/list/data = list("name" = explanation, "feature" = feature_identifier, "locked" = locked)
+	var/list/data = list("name" = explanation, "description" = description, "feature" = feature_identifier, "locked" = locked)
 	if (length(sub_preferences))
 		for (var/sub_preference in sub_preferences)
 			var/datum/preference/sub_preference_instance = GLOB.preference_entries[sub_preference]

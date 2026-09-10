@@ -1,6 +1,8 @@
 /// Switches between mouse buttons for MODsuit active modules
 /datum/preference/choiced/mod_select
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "MOD active module key"
+	category = PREFERENCE_CATEGORY_GAME_GAMEPLAY
+	description = "The key you need to use an active MODsuit module."
 	savefile_key = "mod_select"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

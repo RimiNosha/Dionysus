@@ -1,5 +1,7 @@
 /datum/preference/toggle/widescreen
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Enable widescreen"
+	category = PREFERENCE_CATEGORY_GAME_UI
+	description = "Enables widescreen support"
 	savefile_key = "widescreenpref"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 	default_value = FALSE

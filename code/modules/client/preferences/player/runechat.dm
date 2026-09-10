@@ -1,20 +1,24 @@
 /datum/preference/toggle/enable_runechat
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Enable Runechat"
+	category = PREFERENCE_CATEGORY_GAME_RUNECHAT
 	savefile_key = "chat_on_map"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 
 /datum/preference/toggle/enable_runechat_non_mobs
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Enable Runechat on objects"
+	category = PREFERENCE_CATEGORY_GAME_RUNECHAT
 	savefile_key = "see_chat_non_mob"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 
 /datum/preference/toggle/see_rc_emotes
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Enable Runechat emotes"
+	category = PREFERENCE_CATEGORY_GAME_RUNECHAT
 	savefile_key = "see_rc_emotes"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 
 /datum/preference/numeric/max_chat_length
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Max chat length"
+	category = PREFERENCE_CATEGORY_GAME_RUNECHAT
 	savefile_key = "max_chat_length"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

@@ -243,7 +243,7 @@
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		character_preview_view = create_character_preview_view(user)
-		ui = new(user, src, current_window == PREFERENCE_TAB_CHARACTER ? "DioPrefs" : "PreferencesMenu")
+		ui = new(user, src, "DioPrefs")
 		ui.set_autoupdate(FALSE)
 		ui.open()
 		character_preview_view.display_to(user, ui.window)

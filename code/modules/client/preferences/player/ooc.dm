@@ -1,6 +1,8 @@
 /// The color admins will speak in for OOC.
 /datum/preference/color/ooc_color
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "OOC color"
+	category = PREFERENCE_CATEGORY_GAME_CHAT
+	description = "The color of your OOC messages."
 	savefile_key = "ooccolor"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

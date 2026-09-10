@@ -1,5 +1,7 @@
 /datum/preference/numeric/pixel_size
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Pixel Scaling"
+	category = PREFERENCE_CATEGORY_GAME_UI
+	description = ""
 	savefile_key = "pixel_size"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

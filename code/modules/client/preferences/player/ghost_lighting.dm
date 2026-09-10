@@ -7,7 +7,9 @@ GLOBAL_LIST_INIT(ghost_lighting_options, list(
 
 /// How bright a ghost's lighting plane is
 /datum/preference/choiced/ghost_lighting
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Ghost Lighting"
+	category = PREFERENCE_CATEGORY_GAME_GHOST
+	description = "Effects the brightness of lights for ghosts"
 	savefile_key = "ghost_lighting"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

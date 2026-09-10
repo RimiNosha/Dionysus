@@ -10,6 +10,7 @@ import { PreferenceData, PreferencesMenuData } from './data';
 import {
   CheckboxInput,
   CheckboxInputInverse,
+  createDropdownInput,
   FeatureColorInput,
   FeatureDropdownInput,
   FeatureDropdownSwitcherInput,
@@ -21,6 +22,8 @@ import {
   FeatureValue,
   FeatureValueInput,
 } from './preferences/features/base';
+import { FpsInput as FeatureFpsInput } from './preferences/features/game_preferences/FpsInput';
+import { UIStyleInput as FeatureUIStyleInput } from './preferences/features/game_preferences/UIStyleInput';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 export const FEATURE_ID_TO_COMPONENT: Record<
@@ -37,6 +40,13 @@ export const FEATURE_ID_TO_COMPONENT: Record<
   long_text: FeatureTextInput,
   short_text: FeatureShortTextInput,
   tri_color: FeatureTriColorInput,
+  fps: FeatureFpsInput,
+  ui_style: FeatureUIStyleInput,
+  scaling_method: createDropdownInput({
+    blur: 'Bilinear',
+    distort: 'Nearest Neighbor',
+    normal: 'Point Sampling',
+  }),
 };
 
 export const PreferenceDataComponent = (props: {

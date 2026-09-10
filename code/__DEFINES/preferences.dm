@@ -106,17 +106,15 @@
 /// This preference is account specific.
 #define PREFERENCE_SAVEFILE_PLAYER "player"
 
+/// Open the character preferences window
+#define PREFERENCE_TAB_CHARACTER 0
+
 /// Open the game preferences window
 #define PREFERENCE_TAB_GAME 1
 
 /// Open the keybindings window
 #define PREFERENCE_TAB_KEYBINDINGS 2
 
-/// Open the game preferences window
-#define PREFERENCE_TAB_CHARACTER 3
-
-/// Will be put under the game preferences window.
-#define PREFERENCE_CATEGORY_GAME_PREFERENCES "game_preferences"
 /// This preference has to be rendered with another.
 #define PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES "supplemental_features"
 // These will be in the appearance menu.
@@ -135,6 +133,17 @@
 #define PREFERENCE_CATEGORY_EMPLOYEE_META "meta"
 /// These will be in the ooc info menu.
 #define PREFERENCE_CATEGORY_OOC "ooc"
+
+#define PREFERENCE_CATEGORY_GAME_ACCESSIBILITY "ACCESSIBILITY"
+#define PREFERENCE_CATEGORY_GAME_ADMIN "ADMIN"
+#define PREFERENCE_CATEGORY_GAME_GAMEPLAY "GAMEPLAY"
+#define PREFERENCE_CATEGORY_GAME_GHOST "GHOST"
+#define PREFERENCE_CATEGORY_GAME_SOUND "SOUND"
+#define PREFERENCE_CATEGORY_GAME_CHAT "CHAT"
+#define PREFERENCE_CATEGORY_GAME_RUNECHAT "RUNECHAT"
+#define PREFERENCE_CATEGORY_GAME_TOOLTIPS "TOOLTIPS"
+#define PREFERENCE_CATEGORY_GAME_UI "UI"
+
 
 // Playtime is tracked in minutes
 /// The time needed to unlock hardcore random mode in preferences

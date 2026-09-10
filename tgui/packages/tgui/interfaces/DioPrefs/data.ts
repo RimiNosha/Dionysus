@@ -194,6 +194,7 @@ export type PreferencesMenuData = {
 
 export type PreferenceData = {
   [otherKey: string]: unknown;
+  description?: string;
   feature: string;
   locked?: BooleanLike;
   name?: string;

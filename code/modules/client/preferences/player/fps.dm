@@ -1,5 +1,7 @@
 /datum/preference/numeric/fps
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "FPS"
+	category = PREFERENCE_CATEGORY_GAME_GAMEPLAY
+	description = "Sets the maximum FPS for the client"
 	savefile_key = "clientfps"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

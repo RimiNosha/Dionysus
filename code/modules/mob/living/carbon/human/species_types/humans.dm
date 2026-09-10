@@ -1,4 +1,7 @@
 /datum/species/human
+	subspecies = list(
+		/datum/species/lizard
+	)
 	name = "\improper Human"
 	id = SPECIES_HUMAN
 	default_color = "FFFFFF"

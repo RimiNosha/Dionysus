@@ -1,5 +1,7 @@
 /datum/preference/toggle/monochrome_ghost
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "See Monochrome as Ghost"
+	category = PREFERENCE_CATEGORY_GAME_GHOST
+	description = ""
 	savefile_key = "monochrome_ghost"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
 

@@ -2,7 +2,9 @@
 /datum/preference/toggle/ghost_hud
 	savefile_key = "ghost_hud"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Ghost HUD"
+	category = PREFERENCE_CATEGORY_GAME_GHOST
+	description = "Enable HUD buttons for ghosts."
 
 /datum/preference/toggle/ghost_hud/apply_to_client(client/client, value)
 	if (isobserver(client?.mob))
@@ -12,7 +14,9 @@
 /datum/preference/choiced/ghost_orbit
 	savefile_key = "ghost_orbit"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Ghost orbit"
+	category = PREFERENCE_CATEGORY_GAME_GHOST
+	description = "The shape in which your ghost will orbit. Requires BYOND membership."
 
 /datum/preference/choiced/ghost_orbit/init_possible_values()
 	return list(
@@ -37,4 +41,6 @@
 /datum/preference/toggle/inquisitive_ghost
 	savefile_key = "inquisitive_ghost"
 	savefile_identifier = PREFERENCE_SAVEFILE_PLAYER
-	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	explanation = "Ghost inquisitiveness"
+	category = PREFERENCE_CATEGORY_GAME_GHOST
+	description = "Clicking on something as a ghost will examine it."
