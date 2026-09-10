@@ -21,18 +21,6 @@ const binaryInsertPreference = binaryInsertWith<PreferenceChild>(
 
 const sortByName = sortBy<[string, PreferenceChild[]]>(([name]) => name);
 
-const categories = [
-  'ACCESSIBILITY',
-  'ADMIN',
-  'GAMEPLAY',
-  'GHOST',
-  'SOUND',
-  'CHAT',
-  'RUNECHAT',
-  'TOOLTIPS',
-  'UI',
-];
-
 export const GamePreferencesPage = (props) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
@@ -45,13 +33,10 @@ export const GamePreferencesPage = (props) => {
           return;
         }
 
-        for (const entry of categories.map((v) => [
-          v,
-          data.player_preferences[v],
-        ])) {
+        for (const entry of Object.entries(data.player_preferences)) {
           // This isn't ideal. I stopped caring 3 hours ago.
           let entryEntries = Object.entries(entry);
-          const category = entryEntries[0][1] || 'ERROR';
+          const category = (entryEntries[0][1] as string) || 'ERROR';
           const preferences = entryEntries[1][1];
           if (!preferences) {
             continue;
