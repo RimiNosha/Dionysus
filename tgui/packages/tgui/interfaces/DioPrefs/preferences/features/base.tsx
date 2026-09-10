@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Dropdown,
+  Flex,
   Input,
   NumberInput,
   Stack,
@@ -255,8 +256,8 @@ export const FeatureDropdownSwitcherInput = (
     );
 
   return (
-    <Box>
-      <Box inline width="calc(100% - 4.5rem)">
+    <Flex direction="row">
+      <Box inline width="100%">
         <StandardizedDropdown
           choices={sortStrings(serverData.choices)}
           disabled={props.disabled || isFeatureLocked(serverData)}
@@ -265,7 +266,7 @@ export const FeatureDropdownSwitcherInput = (
           value={props.value}
         />
       </Box>
-      <Box inline ml="4px">
+      <Box inline ml="2px">
         <Button
           mr="0"
           style={{ cornerShape: 'bevel', borderRadius: '0.6rem 0 0 0.6rem' }}
@@ -304,7 +305,7 @@ export const FeatureDropdownSwitcherInput = (
           {'>'}
         </Button>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
