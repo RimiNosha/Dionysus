@@ -20,7 +20,6 @@
 
 // /datum/preference/color/facial_hair_gradient
 // 	explanation = "Facial Hair Gradient Color"
-// 	is_sub_preference = TRUE
 // 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 // 	savefile_key = "facial_hair_gradient_color"
 // 	relevant_species_trait = FACEHAIR
@@ -68,7 +67,6 @@
 // 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 // 	savefile_key = "hair_gradient_color"
 // 	relevant_species_trait = HAIR
-// 	is_sub_preference = TRUE
 // 	feature_identifier = PREFERENCE_FEATURE_COLOR
 
 // /datum/preference/color/hair_gradient/apply_to_human(mob/living/carbon/human/target, value)

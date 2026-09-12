@@ -37,24 +37,16 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(ears, GLOB.ears_list)
 // 	savefile_key = "feature_horns"
 // 	relevant_mutant_bodypart = "horns"
 // 	explanation = "Horns"
-// 	color_feature = "horns_color"
-// 	crop_area = list(11, 22, 21, 32) // We want just the head area.
+// 	color_feature = /datum/preference/color/mutant/horns
+// 	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
 
 // MUTANT_CHOICED_NEW(horns, GLOB.horns_list)
 
 // /datum/preference/choiced/mutant/horns/generate_icon_state(datum/sprite_accessory/sprite_accessory, original_icon_state, suffix)
-
 // 	if(icon_exists(sprite_accessory.icon, "m_horns_[original_icon_state]_FRONT[suffix]"))
 // 		return "m_horns_[original_icon_state]_FRONT[suffix]"
 
 // 	return "m_horns_[original_icon_state]_ADJ[suffix]"
-
-// /datum/preference/color/mutant/horns/is_accessible(datum/preferences/preferences)
-// 	. = ..()
-// 	if(. || !preferences)
-// 		return
-
-// 	return preferences.read_preference(/datum/preference/choiced/species) == /datum/species/lizard
 
 // /datum/preference/color/mutant/horns
 // 	savefile_key = "horns_color"

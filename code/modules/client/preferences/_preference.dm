@@ -107,6 +107,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	/// See the documentation in [code/__DEFINES/preferences.dm].
 	var/savefile_identifier
 
+	/// The frontend feature (input) used to preview and set the preference. See the PREFERENCE_FEATURE defines for valid values.
 	var/feature_identifier
 
 	/// The priority of when to apply this preference.
@@ -136,10 +137,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	var/requires_accessible = FALSE
 
 	/// A typepath for a sub preference. Ex: Hair Style's sub_preferences is /datum/preference/color/hair_color
-	var/sub_preferences
-
-	/// Is this type a sub preference?
-	var/is_sub_preference = FALSE
+	var/list/sub_preferences
 
 	/// Can this preference be edited by the user ever?
 	var/locked = FALSE

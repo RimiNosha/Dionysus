@@ -96,7 +96,6 @@
 /datum/preference/color/underwear_color
 	savefile_key = "underwear_color"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
-	is_sub_preference = TRUE
 	feature_identifier = PREFERENCE_FEATURE_TRI_COLOR
 
 /datum/preference/color/underwear_color/apply_to_human(mob/living/carbon/human/target, value)
