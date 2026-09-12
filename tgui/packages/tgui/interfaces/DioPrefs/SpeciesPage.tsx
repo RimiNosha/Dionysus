@@ -24,6 +24,8 @@ export const SpeciesPage = (props) => {
           return;
         }
 
+        const { act } = useBackend();
+
         const calcDepth = () => {
           return (
             (index / (Object.values(serverData.species).length * 4)) * maxDepth
@@ -161,6 +163,12 @@ export const SpeciesPage = (props) => {
                         position="absolute"
                         left="0"
                         className="Button--big"
+                        onClick={() =>
+                          act('set_preference', {
+                            preference: 'species',
+                            value: previewSpecies,
+                          })
+                        }
                       >
                         Confirm
                       </Button>
