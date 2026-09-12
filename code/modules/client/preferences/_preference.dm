@@ -457,7 +457,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
 	var/icon/human_icon = sprite_accessory.get_base_preview_icon()
 
-	var/icon/iconsheet = build_external_organ_icon(relevant_mutant_bodypart, sprite_accessory, MALE, color, sprite_accessory.color_src)
+	var/icon/iconsheet = build_external_organ_icon(relevant_mutant_bodypart, sprite_accessory, MALE, color)
 	var/list/generated_icon_states = icon_states(iconsheet)
 
 	var/icon/icon_to_return
