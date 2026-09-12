@@ -108,6 +108,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	key_bindings = deep_copy_list(GLOB.default_hotkeys)
 	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
+	if(C)
+		C.prefs = src // Some client prefs rely on the client actually having it's prefs object.
+
 	var/loaded_preferences_successfully = load_preferences()
 	if(loaded_preferences_successfully)
 		if(load_character())
