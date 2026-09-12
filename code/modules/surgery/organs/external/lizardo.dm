@@ -13,7 +13,7 @@
 	layers = list(BODY_ADJ_LAYER)
 
 	feature_key = "horns"
-	preference = "feature_lizard_horns"
+	preference = "feature_horns"
 
 	dna_block = DNA_HORNS_BLOCK
 
