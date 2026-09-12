@@ -14,11 +14,28 @@
 			var/datum/preference/choiced/choiced_preference = preference
 			choiced_preference.init_possible_values()
 
+		if (istype(preference, /datum/preference/choiced/mutant))
+			var/datum/preference/choiced/mutant/mutant = preference
+			if (!mutant.relevant_mutant_bodypart)
+				Fail("[mutant.type] doesn't specify relevant_mutant_bodypart", "code/modules/unit_tests/preferences.dm", 20)
+			if (!islist(mutant.sprite_accessory))
+				Fail("[mutant.type] doesn't specify sprite_accessory", "code/modules/unit_tests/preferences.dm", 22)
+			if (!mutant.organ_type_to_use)
+				Fail("[mutant.type] doesn't specify organ_type_to_use", "code/modules/unit_tests/preferences.dm", 24)
+
+		if (istype(preference, /datum/preference/color/mutant))
+			var/datum/preference/color/mutant/mutant = preference
+			if (!mutant.choiced_preference_datum)
+				Fail("[mutant.type] doesn't specify choiced_preference_datum", "code/modules/unit_tests/preferences.dm", 29)
+
 		// Smoke-test is_valid
 		preference.is_valid(TRUE)
 		preference.is_valid("string")
 		preference.is_valid(100)
 		preference.is_valid(list(1, 2, 3))
+		preference.is_valid(null)
+		preference.is_valid(/datum/unit_test)
+		preference.is_valid(new /datum/unit_test)
 
 /// Requires all preferences to have a valid, unique savefile_identifier.
 /datum/unit_test/preferences_valid_savefile_key
