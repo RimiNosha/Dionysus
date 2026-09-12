@@ -107,7 +107,7 @@
 		return
 
 	for(var/image_layer in layers)
-		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, global.layer2text[image_layer])
+		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, GLOB.layer2text["[image_layer]"])
 
 		for(var/obj/item/bodypart/BP as anything in owner.bodyparts - owner.get_bodypart(BODY_ZONE_CHEST))
 			if(!IS_ORGANIC_LIMB(BP))

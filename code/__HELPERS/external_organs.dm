@@ -6,13 +6,13 @@
 	// I'm not a fan of this, but I'm here for results, not speed at all costs.
 	var/list/color_layers
 	if(sprite_datum.color_src == TRI_COLOR_LAYERS)
-		color_layers = global.layer_text_color
+		color_layers = GLOB.layer_text_color
 	else
 		var/static/list/null_list = list(null)
 		color_layers = null_list // lazy but keeps it simple, stupid
 
 	for(var/image_layer in layers)
-		var/layer_text = global.layer2text["[image_layer]"]
+		var/layer_text = GLOB.layer2text["[image_layer]"]
 		var/icon/layer_icon
 
 		for(var/color_layer_index = 1, color_layer_index <= length(color_layers), color_layer_index++)

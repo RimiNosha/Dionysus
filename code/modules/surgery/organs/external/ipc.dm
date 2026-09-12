@@ -100,7 +100,7 @@
 	. = ..()
 
 	for(var/image_layer in layers)
-		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, global.layer2text[image_layer])
+		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, GLOB.layer2text["[image_layer]"])
 
 		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
 			continue
@@ -184,7 +184,7 @@
 	. = ..()
 
 	for(var/image_layer in layers)
-		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, global.layer2text[image_layer])
+		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, GLOB.layer2text["[image_layer]"])
 
 		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
 			continue
@@ -235,7 +235,7 @@
 	. = ..()
 
 	for(var/image_layer in layers)
-		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, global.layer2text[image_layer])
+		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, GLOB.layer2text["[image_layer]"])
 
 		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
 			continue

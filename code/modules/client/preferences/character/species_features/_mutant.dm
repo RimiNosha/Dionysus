@@ -109,8 +109,8 @@
 
 
 	for(var/index in 1 to 3)
-		for(var/layer in global.layer2text)
-			var/icon_state = build_sprite_accessory_icon_state(initial(pref.organ_type_to_use.render_key) || initial(pref.organ_type_to_use.feature_key), accessory, MALE, global.layer2text[layer], color_layers[index])
+		for(var/layer in GLOB.layer2text)
+			var/icon_state = build_sprite_accessory_icon_state(initial(pref.organ_type_to_use.render_key) || initial(pref.organ_type_to_use.feature_key), accessory, MALE, GLOB.layer2text[layer], color_layers[index])
 			if (index == 1 || icon_exists(accessory.icon, icon_state))
 				return_value += value[index]
 				break // This color layer is being used, we don't need to look any further

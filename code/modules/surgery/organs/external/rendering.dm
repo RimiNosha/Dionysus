@@ -1,27 +1,26 @@
-GLOBAL_REAL_VAR(layer2text) = list(
+GLOBAL_LIST_INIT(layer2text, list(
 	"[BODY_BEHIND_LAYER]" = "BEHIND",
 	"[BODY_ADJ_LAYER]" = "ADJ",
 	"[FRONT_MUTATIONS_LAYER]" = "FRONT_UNDER",
 	"[BODY_FRONT_LAYER]" = "FRONT",
-)
-GLOBAL_REAL_VAR(layer_text) = list(
+))
+GLOBAL_LIST_INIT(layer_text, list(
 	"BEHIND",
 	"ADJ",
 	"FRONT_UNDER",
 	"FRONT",
-)
-GLOBAL_REAL_VAR(layer_values) = list(
+))
+GLOBAL_LIST_INIT(layer_values, list(
 	BODY_BEHIND_LAYER,
 	BODY_ADJ_LAYER,
 	FRONT_MUTATIONS_LAYER,
 	BODY_FRONT_LAYER,
-)
-
-GLOBAL_REAL_VAR(layer_text_color) = list(
+))
+GLOBAL_LIST_INIT(layer_text_color, list(
 	"primary",
 	"secondary",
 	"tertiary",
-)
+))
 
 GLOBAL_LIST_EMPTY(organ_overlays_cache)
 
@@ -93,10 +92,10 @@ GLOBAL_LIST_EMPTY(organ_overlays_cache)
 /obj/item/organ/proc/build_overlays(physique, image_dir)
 	RETURN_TYPE(/list)
 	. = list()
-	var/icon/finished_icon = build_external_organ_icon(render_key || feature_key, sprite_datum, physique, draw_color, color_source, layers, appearance_mods)
+	var/icon/finished_icon = build_external_organ_icon(render_key || feature_key, sprite_datum, physique, draw_color, layers, appearance_mods)
 	for(var/image_layer in layers)
 
-		var/image/overlay = image(finished_icon, global.layer2text["[image_layer]"], layer = -image_layer, dir = image_dir)
+		var/image/overlay = image(finished_icon, GLOB.layer2text["[image_layer]"], layer = -image_layer, dir = image_dir)
 
 		if(sprite_datum.em_block)
 			overlay.overlays += emissive_blocker(overlay.icon, overlay.icon_state, overlay.alpha)
