@@ -52,3 +52,14 @@
 			TEST_FAIL("[preference_type] has a non-unique savefile_key `[preference.savefile_key]`!")
 
 		known_savefile_keys += preference.savefile_key
+
+/datum/unit_test/preferences_can_serialize
+
+/datum/unit_test/preferences_can_serialize/Run()
+	var/datum/preferences/preferences = new(new /datum/client_interface)
+	preferences.ui_data()
+	preferences.ui_static_data()
+	var/datum/asset/prefs_assets = GLOB.asset_datums[/datum/asset/spritesheet/preferences]
+	prefs_assets.register() // Forces generation of icons
+	var/datum/asset/json/prefs_constants = GLOB.asset_datums[/datum/asset/json/preferences]
+	prefs_constants.generate() // Forces generation of static data
