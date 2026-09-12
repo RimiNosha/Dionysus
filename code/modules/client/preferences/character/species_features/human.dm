@@ -36,17 +36,14 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(ears, GLOB.ears_list)
 /datum/preference/choiced/mutant/horns
 	savefile_key = "feature_horns"
 	relevant_mutant_bodypart = "horns"
+	greyscale_color = COLOR_DARK_BROWN
 	explanation = "Horns"
 	color_feature = /datum/preference/color/mutant/horns
 	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
+	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
+	organ_type_to_use = /obj/item/organ/horns
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(horns, GLOB.horns_list)
-
-/datum/preference/choiced/mutant/horns/generate_icon_state(datum/sprite_accessory/sprite_accessory, original_icon_state, suffix)
-	if(icon_exists(sprite_accessory.icon, "m_horns_[original_icon_state]_FRONT[suffix]"))
-		return "m_horns_[original_icon_state]_FRONT[suffix]"
-
-	return "m_horns_[original_icon_state]_ADJ[suffix]"
 
 /datum/preference/color/mutant/horns
 	savefile_key = "horns_color"

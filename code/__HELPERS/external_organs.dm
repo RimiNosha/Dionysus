@@ -1,4 +1,4 @@
-/proc/build_external_organ_icon(key, datum/sprite_accessory/sprite_datum, physique, draw_color, list/layers = global.layer_values, list/appearance_mods)
+/proc/build_external_organ_icon(key, datum/sprite_accessory/sprite_datum, physique, draw_color, list/layers = GLOB.layer_values, list/appearance_mods)
 	RETURN_TYPE(/icon)
 
 	var/icon/return_icon = icon()
