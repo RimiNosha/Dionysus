@@ -43,6 +43,9 @@
 	)
 
 /datum/preference/toggle/legacy_toggle/apply_to_client(client/client, value)
+	if (istype(client, /datum/client_interface))
+		return // Do not try to apply to fake clients
+
 	var/legacy_flag = legacy_toggles[savefile_key]
 	if (!isnull(legacy_flag))
 		if (value)
