@@ -46,9 +46,9 @@
 	var/legacy_flag = legacy_toggles[savefile_key]
 	if (!isnull(legacy_flag))
 		if (value)
-			client.prefs.toggles |= legacy_flag
+			client?.prefs?.toggles |= legacy_flag
 		else
-			client.prefs.toggles &= ~legacy_flag
+			client?.prefs?.toggles &= ~legacy_flag
 
 		// I know this looks silly, but this is the only one that cares
 		// and NO NEW LEGACY TOGGLES should ever be added.
@@ -59,10 +59,10 @@
 				client?.stoptitlemusic()
 
 		if(legacy_flag == SOUND_SHIP_AMBIENCE)
-			client.mob.refresh_looping_ambience()
+			client?.mob?.refresh_looping_ambience()
 
 		if(legacy_flag == SOUND_AMBIENCE)
-			client.update_ambience_pref()
+			client?.update_ambience_pref()
 		return TRUE
 	return FALSE
 
