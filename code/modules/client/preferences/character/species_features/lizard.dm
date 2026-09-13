@@ -4,7 +4,8 @@
 	greyscale_color = COLOR_DARK_BROWN
 	explanation = "Frills"
 	color_feature = /datum/preference/color/mutant/lizard_frills
-	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
+	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
+	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
 	organ_type_to_use = /obj/item/organ/frills
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_frills, GLOB.frills_list)
@@ -20,7 +21,8 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_frills, GLOB.frills_list)
 	greyscale_color = COLOR_DARK_BROWN
 	explanation = "Snout"
 	color_feature = /datum/preference/color/mutant/lizard_snout
-	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
+	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
+	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
 	organ_type_to_use = /obj/item/organ/snout
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_snout, GLOB.snouts_list)
@@ -39,7 +41,8 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_snout, GLOB.snouts_list)
 	greyscale_color = COLOR_DARK_BROWN
 	explanation = "Spines"
 	color_feature = /datum/preference/color/mutant/lizard_spines
-	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
+	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
+	category = PREFERENCE_CATEGORY_APPEARANCE_TORSO
 	organ_type_to_use = /obj/item/organ/spines
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_spines, GLOB.spines_list)
@@ -58,10 +61,14 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_spines, GLOB.spines_list)
 	greyscale_color = COLOR_DARK_BROWN
 	explanation = "Tail"
 	color_feature = /datum/preference/color/mutant/lizard_tail
-	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.	category = PREFERENCE_CATEGORY_APPEARANCE_HEAD
+	crop_area = PREF_CROP_AREA_HEAD // We want just the head area.
+	category = PREFERENCE_CATEGORY_APPEARANCE_GROIN
 	organ_type_to_use = /obj/item/organ/tail
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_tail, GLOB.tails_list_lizard)
+
+/datum/preference/choiced/mutant/lizard_tail/create_default_value()
+	return "Smooth"
 
 /datum/preference/color/mutant/lizard_tail
 	savefile_key = "lizard_tail_color"
@@ -73,6 +80,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_tail, GLOB.tails_list_lizard)
 	savefile_key = "feature_lizard_legs"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	relevant_mutant_bodypart = "legs"
+	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
 
 /datum/preference/choiced/lizard_legs/init_possible_values()
 	return assoc_to_keys(GLOB.legs_list)
