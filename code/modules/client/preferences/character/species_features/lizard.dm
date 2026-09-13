@@ -25,6 +25,9 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_frills, GLOB.frills_list)
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_snout, GLOB.snouts_list)
 
+/datum/preference/choiced/mutant/lizard_snout/create_default_value()
+	return "Round"
+
 /datum/preference/color/mutant/lizard_snout
 	savefile_key = "lizard_snout_color"
 	relevant_mutant_bodypart = "lizard_snout"
@@ -40,6 +43,9 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_snout, GLOB.snouts_list)
 	organ_type_to_use = /obj/item/organ/spines
 
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_spines, GLOB.spines_list)
+
+/datum/preference/choiced/mutant/lizard_spines/create_default_value()
+	return "Short"
 
 /datum/preference/color/mutant/lizard_spines
 	savefile_key = "lizard_spines_color"
