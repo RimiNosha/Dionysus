@@ -69,6 +69,9 @@
 		return TRUE
 	return FALSE
 
+/datum/preference/toggle/legacy_toggle/create_default_value()
+	return category != PREFERENCE_CATEGORY_GAME_ADMIN
+
 #define OLD_TOGGLE(CATEGORY, NAME, EXPLANATION) /datum/preference/toggle/legacy_toggle/##NAME { \
 	savefile_key = #NAME; \
 	explanation = ##EXPLANATION; \
