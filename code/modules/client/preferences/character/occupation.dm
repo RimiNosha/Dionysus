@@ -47,6 +47,8 @@
 	if(!islist(input))
 		return create_default_value()
 
+	var/has_high = FALSE
+
 	for(var/thing in input)
 		if(!istext(thing) || !SSjob.GetJob(thing))
 			input -= thing
@@ -54,5 +56,10 @@
 
 		if(!isnum(input[thing]) || !(input[thing] in list(JP_LOW, JP_MEDIUM, JP_HIGH)))
 			input -= thing
+		if (input[thing] == JP_HIGH)
+			if (has_high)
+				input[thing] = JP_MEDIUM
+			else
+				has_high = TRUE
 
 	return input

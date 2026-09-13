@@ -81,7 +81,9 @@ export type Job = {
   css_class: string;
   department: string;
   description: string[];
+  display_title: string;
   flavor: string[];
+  is_head: BooleanLike;
   sub_department?: string;
   tips: string[];
 };
