@@ -97,6 +97,13 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	H.create_dna()
 	H.dna.initialize_dna(skip_index = TRUE)
 
+	for (var/path in GLOB.preference_entries)
+		var/datum/preference/color/mutant/pref = GLOB.preference_entries[path]
+		if (!istype(pref))
+			continue
+
+		H.dna.features["[pref.relevant_mutant_bodypart]_color"] = COLOR_VIBRANT_LIME
+
 	H.dna.features["ears"] = get_consistent_feature_entry(GLOB.ears_list)
 	H.dna.features["ethcolor"] = COLOR_WHITE
 	H.dna.features["frills"] = get_consistent_feature_entry(GLOB.frills_list)
