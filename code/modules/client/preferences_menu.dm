@@ -64,8 +64,9 @@
 
 			// SAFETY: `write_preference` performs validation checks
 			if (!preferences.update_preference(requested_preference, value))
-				preferences.write_preference(requested_preference, value)
 				return FALSE
+
+			preferences.write_preference(requested_preference, value)
 
 			if (istype(requested_preference, /datum/preference/name))
 				preferences.tainted_character_profiles = TRUE
