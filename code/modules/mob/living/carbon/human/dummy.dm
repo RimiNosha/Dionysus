@@ -102,7 +102,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 		if (!istype(pref))
 			continue
 
-		H.dna.features["[pref.relevant_mutant_bodypart]_color"] = COLOR_VIBRANT_LIME
+		H.dna.features["[pref.relevant_mutant_bodypart]_color"] = list(COLOR_VIBRANT_LIME, COLOR_VIBRANT_LIME, COLOR_VIBRANT_LIME)
 
 	H.dna.features["ears"] = get_consistent_feature_entry(GLOB.ears_list)
 	H.dna.features["ethcolor"] = COLOR_WHITE
