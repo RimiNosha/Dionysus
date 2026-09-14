@@ -2,8 +2,15 @@ import { FA_ICON_EXTERNAL_LINK } from 'common/fa_icons';
 import { classes } from 'common/react';
 
 import { useBackend, useLocalState } from '../../backend';
-import { Box, Button, Icon, NoticeBox, Stack } from '../../components';
-import { JobPriority, PreferencesMenuData } from './data';
+import {
+  Box,
+  Button,
+  Dropdown,
+  Icon,
+  NoticeBox,
+  Stack,
+} from '../../components';
+import { Job, JobPriority, PreferencesMenuData, ServerData } from './data';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
 
 const JOB_PORTRAIT_SIZE = 160;
@@ -19,14 +26,16 @@ export const JobsPage = (props) => {
           return;
         }
 
-        const [selectedJob, setSelectedJob] = useLocalState<string>(
+        const [selectedJob] = useLocalState<string>(
           'DioPrefs_selectedJob',
           Object.keys(serverData.jobs.jobs)[0],
         );
 
         const selectedJobObj = serverData.jobs.jobs[selectedJob];
-        // const requiredTime = selectedJobObj.time_requirement;
-        const priorities = data.character_preferences.misc.job_priority || [];
+        const alternateTitles =
+          data.character_preferences.misc.alternate_titles || {};
+
+        let canShowTitles = true;
 
         return (
           <Stack fill>
@@ -34,100 +43,12 @@ export const JobsPage = (props) => {
               <Box overflowY="scroll" height="730px">
                 {Object.entries(serverData.jobs.jobs).map(([jobId, job]) => {
                   return (
-                    <Box
+                    <JobListEntry
                       key={jobId}
-                      width="100%"
-                      height="42px"
-                      onClick={() => setSelectedJob(jobId)}
-                      style={{ cursor: 'pointer', userSelect: 'none' }}
-                      backgroundColor={selectedJob === jobId ? '#e0e26842' : ''}
-                    >
-                      <Stack>
-                        <Stack.Item mt="3px" ml="3px">
-                          <Box
-                            width="36px"
-                            height="36px"
-                            style={{
-                              boxShadow: job.sub_department
-                                ? `inset 3px 3px ${serverData.jobs.departments[job.sub_department].color}, inset -2px -2px ${serverData.jobs.departments[job.sub_department].color}`
-                                : '',
-                            }}
-                            backgroundColor={
-                              serverData.jobs.departments[job.department].color
-                            }
-                            position="relative"
-                          >
-                            <Box
-                              position="absolute"
-                              left="4px"
-                              top="4px"
-                              overflow="hidden"
-                              width="32px"
-                              height="32px"
-                            >
-                              <Box
-                                mt="28px"
-                                className={`preferences32x32 job___${job.css_class}`}
-                                style={{ transform: 'scale(3)' }}
-                              />
-                            </Box>
-                          </Box>
-                        </Stack.Item>
-                        <Stack.Item mt="6px">
-                          <Stack vertical>
-                            <Stack.Item>{job.display_title}</Stack.Item>
-                            <Stack.Item mt="4px">
-                              <Stack>
-                                <PriorityButton
-                                  color="grey"
-                                  name="No priority"
-                                  enabled={!priorities[jobId]}
-                                  modifier={
-                                    data.jobs[jobId]?.banned ? 'off' : ''
-                                  }
-                                  onClick={() => {
-                                    setJobPriority(jobId);
-                                  }}
-                                />
-                                <PriorityButton
-                                  color="orange"
-                                  name="Low priority"
-                                  enabled={priorities[jobId] === 1}
-                                  modifier={
-                                    data.jobs[jobId]?.banned ? 'off' : ''
-                                  }
-                                  onClick={() => {
-                                    setJobPriority(jobId, 1);
-                                  }}
-                                />
-                                <PriorityButton
-                                  color="yellow"
-                                  name="Medium priority"
-                                  enabled={priorities[jobId] === 2}
-                                  modifier={
-                                    data.jobs[jobId]?.banned ? 'off' : ''
-                                  }
-                                  onClick={() => {
-                                    setJobPriority(jobId, 2);
-                                  }}
-                                />
-                                <PriorityButton
-                                  color="green"
-                                  name="High priority (limit of 1)"
-                                  enabled={priorities[jobId] === 3}
-                                  modifier={
-                                    data.jobs[jobId]?.banned ? 'off' : ''
-                                  }
-                                  onClick={() => {
-                                    setJobPriority(jobId, 3);
-                                  }}
-                                />
-                              </Stack>
-                            </Stack.Item>
-                          </Stack>
-                        </Stack.Item>
-                      </Stack>
-                    </Box>
+                      job={job}
+                      jobId={jobId}
+                      serverData={serverData}
+                    />
                   );
                 })}
               </Box>
@@ -139,34 +60,59 @@ export const JobsPage = (props) => {
                     {selectedJobObj.display_title}
                   </h1>
                 </Stack.Item>
-                {data.jobs[selectedJob]?.banned && (
+                {data.jobs[selectedJob]?.banned && !(canShowTitles = false) && (
                   <Stack.Item>
                     <NoticeBox color="bad">
                       You are banned from this job.
                     </NoticeBox>
                   </Stack.Item>
                 )}
-                {!!data.jobs[selectedJob]?.account_days_left && (
-                  <Stack.Item>
-                    <NoticeBox>
-                      Your account is too new! (
-                      {data.jobs[selectedJob]?.account_days_left} days left for
-                      this job.)
-                    </NoticeBox>
-                  </Stack.Item>
-                )}
-                {!!data.jobs[selectedJob]?.playtime_required.time_left && (
-                  <Stack.Item>
-                    <NoticeBox>
-                      You need more department playtime in{' '}
-                      {data.jobs[selectedJob]?.playtime_required.department}! (
-                      {Math.round(
-                        (data.jobs[selectedJob]?.playtime_required.time_left /
-                          60) *
-                          100,
-                      ) / 100}{' '}
-                      hours left for this job.)
-                    </NoticeBox>
+                {!!data.jobs[selectedJob]?.account_days_left &&
+                  !(canShowTitles = false) && (
+                    <Stack.Item>
+                      <NoticeBox>
+                        Your account is too new! (
+                        {data.jobs[selectedJob]?.account_days_left} days left
+                        for this job.)
+                      </NoticeBox>
+                    </Stack.Item>
+                  )}
+                {!!data.jobs[selectedJob]?.playtime_required.time_left &&
+                  !(canShowTitles = false) && (
+                    <Stack.Item>
+                      <NoticeBox>
+                        You need more department playtime in{' '}
+                        {data.jobs[selectedJob]?.playtime_required.department}!
+                        (
+                        {Math.round(
+                          (data.jobs[selectedJob]?.playtime_required.time_left /
+                            60) *
+                            100,
+                        ) / 100}{' '}
+                        hours left for this job.)
+                      </NoticeBox>
+                    </Stack.Item>
+                  )}
+                {canShowTitles && selectedJobObj.alt_titles.length > 1 && (
+                  <Stack.Item
+                    style={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    <Dropdown
+                      width="200px"
+                      options={selectedJobObj.alt_titles}
+                      selected={
+                        alternateTitles[selectedJob] ||
+                        selectedJobObj.display_title
+                      }
+                      onSelected={(value) => {
+                        const alt_titles = alternateTitles || {};
+                        alt_titles[selectedJob] = value;
+                        act('set_preference', {
+                          preference: 'alternate_titles',
+                          value: alt_titles,
+                        });
+                      }}
+                    />
                   </Stack.Item>
                 )}
                 <Stack.Item>
@@ -275,5 +221,116 @@ const PriorityButton = (props: {
         width={`${PRIORITY_BUTTON_SIZE}px`}
       />
     </Stack.Item>
+  );
+};
+
+const JobListEntry = (props: {
+  job: Job;
+  jobId: string;
+  serverData: ServerData;
+}) => {
+  const { serverData, jobId, job } = props;
+
+  const { data } = useBackend<PreferencesMenuData>();
+
+  const [selectedJob, setSelectedJob] = useLocalState<string>(
+    'DioPrefs_selectedJob',
+    Object.keys(serverData.jobs.jobs)[0],
+  );
+  const priorities = data.character_preferences.misc.job_priority || [];
+
+  const cantPlay =
+    data.jobs[jobId]?.banned ||
+    data.jobs[jobId]?.account_days_left ||
+    data.jobs[jobId]?.playtime_required?.time_left;
+
+  return (
+    <Box
+      key={jobId}
+      width="100%"
+      height="42px"
+      onClick={() => setSelectedJob(jobId)}
+      style={{ cursor: 'pointer', userSelect: 'none' }}
+      backgroundColor={selectedJob === jobId ? '#e0e26842' : ''}
+    >
+      <Stack>
+        <Stack.Item mt="3px" ml="3px">
+          <Box
+            width="36px"
+            height="36px"
+            style={{
+              boxShadow: job.sub_department
+                ? `inset 3px 3px ${serverData.jobs.departments[job.sub_department].color}, inset -2px -2px ${serverData.jobs.departments[job.sub_department].color}`
+                : '',
+            }}
+            backgroundColor={serverData.jobs.departments[job.department].color}
+            position="relative"
+          >
+            <Box
+              position="absolute"
+              left="4px"
+              top="4px"
+              overflow="hidden"
+              width="32px"
+              height="32px"
+            >
+              <Box
+                mt="28px"
+                className={`preferences32x32 job___${job.css_class}`}
+                style={{ transform: 'scale(3)' }}
+              />
+            </Box>
+          </Box>
+        </Stack.Item>
+        <Stack.Item mt="6px">
+          <Stack vertical>
+            <Stack.Item>
+              {data.character_preferences.misc.alternate_titles[jobId] ||
+                job.display_title}
+            </Stack.Item>
+            <Stack.Item mt="4px">
+              <Stack>
+                <PriorityButton
+                  color="grey"
+                  name="No priority"
+                  enabled={!priorities[jobId]}
+                  modifier={cantPlay ? 'off' : ''}
+                  onClick={() => {
+                    setJobPriority(jobId);
+                  }}
+                />
+                <PriorityButton
+                  color="orange"
+                  name="Low priority"
+                  enabled={priorities[jobId] === 1}
+                  modifier={cantPlay ? 'off' : ''}
+                  onClick={() => {
+                    setJobPriority(jobId, 1);
+                  }}
+                />
+                <PriorityButton
+                  color="yellow"
+                  name="Medium priority"
+                  enabled={priorities[jobId] === 2}
+                  modifier={cantPlay ? 'off' : ''}
+                  onClick={() => {
+                    setJobPriority(jobId, 2);
+                  }}
+                />
+                <PriorityButton
+                  color="green"
+                  name="High priority (limit of 1)"
+                  enabled={priorities[jobId] === 3}
+                  modifier={cantPlay ? 'off' : ''}
+                  onClick={() => {
+                    setJobPriority(jobId, 3);
+                  }}
+                />
+              </Stack>
+            </Stack.Item>
+          </Stack>
+        </Stack.Item>
+      </Stack>
+    </Box>
   );
 };

@@ -148,6 +148,7 @@ export type PreferencesMenuData = {
     features: Record<string, string>;
     game_preferences: Record<string, unknown>;
     misc: {
+      alternate_titles: Record<string, string>;
       gender: Gender;
       job_priority: Record<string, JobPriority>;
       joblessrole: JoblessRole;
