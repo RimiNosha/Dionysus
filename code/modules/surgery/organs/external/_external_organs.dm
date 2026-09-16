@@ -58,7 +58,7 @@
 		//   Do nothing
 
 		if(ORGAN_COLOR_DNA)
-			color = owner.dna.features["[feature_key]_color"]
+			draw_color = owner.dna.features["[feature_key]_color"]
 
 	color = draw_color
 	return TRUE
