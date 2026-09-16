@@ -10,16 +10,11 @@
 	// Test lizards as their own thing so we can get more coverage on their features
 
 	var/mob/living/carbon/human/lizard = allocate(/mob/living/carbon/human/dummy/consistent)
-	var/mcolor = list("#099", "#099", "#099")
-	lizard.skin_tone = mcolor[1]
+	lizard.skin_tone = "#099"
 	lizard.dna.features["tail_lizard"] = "Light Tiger"
-	lizard.dna.features["tail_lizard_color"] = mcolor
 	lizard.dna.features["snout"] = "Sharp + Light"
-	lizard.dna.features["snout_color"] = mcolor
 	lizard.dna.features["horns"] = "Simple"
-	lizard.dna.features["horns_color"] = mcolor
 	lizard.dna.features["frills"] = "Aquatic"
-	lizard.dna.features["frills_color"] = mcolor
 	lizard.dna.features["legs"] = "Normal Legs"
 	lizard.dna.features["spines"] = "None"
 	lizard.set_species(/datum/species/lizard)

@@ -1,6 +1,9 @@
 /proc/build_external_organ_icon(key, datum/sprite_accessory/sprite_datum, physique, draw_color, list/layers = GLOB.layer_values, list/appearance_mods)
 	RETURN_TYPE(/icon)
 
+	if (!draw_color)
+		draw_color = list("#099", "#099", "#099")
+
 	var/icon/return_icon = icon()
 
 	// I'm not a fan of this, but I'm here for results, not speed at all costs.
@@ -25,7 +28,7 @@
 				continue
 
 			var/icon/color_layer_icon = icon(sprite_datum.icon, finished_icon_state)
-			if(sprite_datum.color_src && draw_color)
+			if(sprite_datum.color_src)
 				if(sprite_datum.color_src == TRI_COLOR_LAYERS && islist(draw_color))
 					color_layer_icon.Blend(sanitize_hexcolor(draw_color[color_layer_index]), ICON_MULTIPLY)
 				else if (islist(draw_color))
