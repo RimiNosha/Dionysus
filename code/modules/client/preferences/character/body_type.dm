@@ -6,6 +6,7 @@
 	savefile_key = "body_type"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
+	feature_identifier = PREFERENCE_FEATURE_DROPDOWN_SWITCHER
 
 /datum/preference/choiced/body_type/init_possible_values()
 	return list(USE_GENDER, MALE, FEMALE)

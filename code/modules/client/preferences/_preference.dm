@@ -142,11 +142,6 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	/// Can this preference be edited by the user ever?
 	var/locked = FALSE
 
-/datum/preference/New()
-	. = ..()
-	if (abstract_type != type && savefile_identifier == PREFERENCE_SAVEFILE_CHARACTER && !feature_identifier)
-		CRASH("[type] has no feature identifier!")
-
 /// Called on the saved input when retrieving.
 /// Also called by the value sent from the user through UI. Do not trust it.
 /// Input is the value inside the savefile, output is to tell other code

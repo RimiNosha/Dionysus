@@ -62,13 +62,6 @@ export const CharacterPreferencesWindow = (props) => {
                 <Stack.Item
                   style={{ display: 'flex', justifyContent: 'center' }}
                 >
-                  <Button selected>Character</Button>
-                  <Button>Game</Button>
-                </Stack.Item>
-                <Stack.Divider />
-                <Stack.Item
-                  style={{ display: 'flex', justifyContent: 'center' }}
-                >
                   <h3>{data.character_preferences.pii.real_name as string}</h3>
                 </Stack.Item>
                 <Stack.Item

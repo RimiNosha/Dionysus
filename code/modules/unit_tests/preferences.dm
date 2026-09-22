@@ -28,8 +28,13 @@
 			if (!mutant.choiced_preference_datum)
 				Fail("[mutant.type] doesn't specify choiced_preference_datum", "code/modules/unit_tests/preferences.dm", 29)
 
+		if (!preference.explanation)
+			Fail("[preference_type] has no explanation!")
+
+		if (preference.feature_identifier == "None" && preference.category != "misc")
+			Fail("[preference_type] has a category that's auto handled, yet doesn't have a feature identifier!")
+
 		// Smoke-test is_valid
-		preference.is_valid(TRUE)
 		preference.is_valid("string")
 		preference.is_valid(100)
 		preference.is_valid(list(1, 2, 3))
