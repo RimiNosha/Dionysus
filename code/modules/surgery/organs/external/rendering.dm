@@ -95,7 +95,7 @@ GLOBAL_LIST_EMPTY(organ_overlays_cache)
 	var/icon/finished_icon = build_external_organ_icon(render_key || feature_key, sprite_datum, physique, draw_color, layers, appearance_mods)
 	for(var/image_layer in layers)
 
-		var/image/overlay = image(finished_icon, GLOB.layer2text["[image_layer]"], layer = -image_layer, dir = image_dir)
+		var/image/overlay = image(finished_icon, icon_state = GLOB.layer2text["[image_layer]"], layer = -image_layer, dir = image_dir)
 
 		if(sprite_datum.em_block)
 			overlay.overlays += emissive_blocker(overlay.icon, overlay.icon_state, overlay.alpha)
