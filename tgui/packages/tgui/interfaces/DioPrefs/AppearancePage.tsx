@@ -22,9 +22,6 @@ export const AppearancePage = (props) => {
   const [currentFeatureMenu, setCurrentFeatureMenu] = useState<null | string>(
     null,
   );
-  if (!data.character_preferences) {
-    return;
-  }
 
   return (
     <ServerPreferencesFetcher
