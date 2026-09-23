@@ -22,6 +22,9 @@ export const AppearancePage = (props) => {
   const [currentFeatureMenu, setCurrentFeatureMenu] = useState<null | string>(
     null,
   );
+  if (!data.character_preferences) {
+    return;
+  }
 
   return (
     <ServerPreferencesFetcher
@@ -50,24 +53,27 @@ export const AppearancePage = (props) => {
                     }
                   >
                     {!!serverData &&
-                      !!data.character_preferences[
-                        selectedPart ? selectedPart.id : 'general'
-                      ] &&
                       Object.entries(
                         data.character_preferences[
                           selectedPart ? selectedPart.id : 'general'
-                        ] +
-                          (selectedPart && selectedPart.additionalPrefs
-                            ? selectedPart.additionalPrefs.flatMap(
-                                (e) => data.character_preferences[e],
-                              )
-                            : []),
+                        ] || [],
                       )
-                        .filter(
-                          (e) =>
-                            (serverData[e[0]] as FeatureChoicedServerData)
-                              .feature === 'icon_box',
+                        .concat(
+                          selectedPart && selectedPart.additionalPrefs
+                            ? selectedPart.additionalPrefs.flatMap((e) =>
+                                Object.entries(
+                                  data.character_preferences[e] || [],
+                                ),
+                              )
+                            : [],
                         )
+                        .filter((e) => {
+                          console.log(e);
+                          return (
+                            (serverData[e[0]] as FeatureChoicedServerData)
+                              .feature === 'icon_box'
+                          );
+                        })
                         .map((feature, index) => {
                           const [id, value] = feature;
                           return (
@@ -102,19 +108,20 @@ export const AppearancePage = (props) => {
                   >
                     <LabeledList>
                       {!!serverData &&
-                        !!data.character_preferences[
-                          selectedPart ? selectedPart.id : 'general'
-                        ] &&
                         Object.entries(
                           data.character_preferences[
                             selectedPart ? selectedPart.id : 'general'
-                          ] +
-                            (selectedPart && selectedPart.additionalPrefs
-                              ? selectedPart.additionalPrefs.flatMap(
-                                  (e) => data.character_preferences[e],
-                                )
-                              : []),
+                          ] || [],
                         )
+                          .concat(
+                            selectedPart && selectedPart.additionalPrefs
+                              ? selectedPart.additionalPrefs.flatMap((e) =>
+                                  Object.entries(
+                                    data.character_preferences[e] || [],
+                                  ),
+                                )
+                              : [],
+                          )
                           .filter(
                             (e) =>
                               (serverData[e[0]] as FeatureChoicedServerData)
