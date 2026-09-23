@@ -5,6 +5,7 @@
 	savefile_key = "species"
 	priority = PREFERENCE_PRIORITY_SPECIES
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/choiced/species/deserialize(input, datum/preferences/preferences)
 	// The input should never be null here.

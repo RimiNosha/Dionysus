@@ -19,6 +19,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(hairstyle, GLOB.hairstyles_list)
 	return ..() && accessory.name != "Bald"
 
 /datum/preference/color/mutant/hair_color
+	explanation = "Hair Color"
 	savefile_key = "hair_color"
 	exclude_species_traits = list(NONHUMANHAIR)
 	choiced_preference_datum = /datum/preference/choiced/mutant/hairstyle
@@ -48,6 +49,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(facial_hairstyle, GLOB.facial_hairstyles_list
 	return ..() && accessory.name != "Shaved"
 
 /datum/preference/color/mutant/facial_hair_color
+	explanation = "Facial Hair Color"
 	savefile_key = "facial_hair_color"
 	exclude_species_traits = list(NONHUMANHAIR)
 	choiced_preference_datum = /datum/preference/choiced/mutant/facial_hairstyle

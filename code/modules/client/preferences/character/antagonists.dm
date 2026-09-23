@@ -1,7 +1,9 @@
 /datum/preference/blob/antagonists
+	explanation = "Antagonists"
 	savefile_key = "antagonists"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/blob/antagonists/create_default_value()
 	. = list()

@@ -4,6 +4,7 @@
 	savefile_key = "jumpsuit_style"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_ICON_BOX
+	category = PREFERENCE_CATEGORY_APPEARANCE_TORSO
 
 /datum/preference/choiced/jumpsuit/init_possible_values()
 	var/list/values = list(
@@ -25,6 +26,7 @@
 	savefile_key = "socks"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_ICON_BOX
+	category = PREFERENCE_CATEGORY_APPEARANCE_LEGS
 
 /datum/preference/choiced/socks/init_possible_values()
 	return GLOB.socks_list
@@ -49,6 +51,7 @@
 	savefile_key = "undershirt"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_ICON_BOX
+	category = PREFERENCE_CATEGORY_APPEARANCE_TORSO
 
 /datum/preference/choiced/undershirt/init_possible_values()
 	return GLOB.undershirt_list
@@ -94,9 +97,11 @@
 	return "Nude"
 
 /datum/preference/color/underwear_color
+	explanation = "Underwear Color"
 	savefile_key = "underwear_color"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	feature_identifier = PREFERENCE_FEATURE_TRI_COLOR
+	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
 
 /datum/preference/color/underwear_color/apply_to_human(mob/living/carbon/human/target, value)
 	target.underwear_color = value

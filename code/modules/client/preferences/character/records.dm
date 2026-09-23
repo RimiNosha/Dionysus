@@ -3,6 +3,7 @@
 	abstract_type = /datum/preference/text/record
 	max_length = 8192
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/text/record/medical
 	explanation = "Medical Records"

@@ -115,16 +115,18 @@
 /// Open the keybindings window
 #define PREFERENCE_TAB_KEYBINDINGS 2
 
-/// This preference has to be rendered with another.
+/// These are rendered by another preference.
 #define PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES "supplemental_features"
 // These will be in the appearance menu.
 #define PREFERENCE_CATEGORY_APPEARANCE_HEAD "head"
 #define PREFERENCE_CATEGORY_APPEARANCE_LEFT_ARM "left_arm"
 #define PREFERENCE_CATEGORY_APPEARANCE_RIGHT_ARM "right_arm"
+#define PREFERENCE_CATEGORY_APPEARANCE_ARMS "arms"
 #define PREFERENCE_CATEGORY_APPEARANCE_GROIN "groin"
 #define PREFERENCE_CATEGORY_APPEARANCE_TORSO "torso"
 #define PREFERENCE_CATEGORY_APPEARANCE_LEFT_LEG "left_leg"
 #define PREFERENCE_CATEGORY_APPEARANCE_RIGHT_LEG "right_leg"
+#define PREFERENCE_CATEGORY_APPEARANCE_LEGS "legs"
 #define PREFERENCE_CATEGORY_APPEARANCE_GENERAL "general"
 // These will be in the employee menu.
 #define PREFERENCE_CATEGORY_EMPLOYEE_PII "pii"
@@ -133,6 +135,8 @@
 #define PREFERENCE_CATEGORY_EMPLOYEE_META "meta"
 /// These will be in the ooc info menu.
 #define PREFERENCE_CATEGORY_OOC "ooc"
+/// These are handled manually on the TGUI side.
+#define PREFERENCE_CATEGORY_MISC "misc"
 
 #define PREFERENCE_CATEGORY_GAME_ACCESSIBILITY "ACCESSIBILITY"
 #define PREFERENCE_CATEGORY_GAME_ADMIN "ADMIN"

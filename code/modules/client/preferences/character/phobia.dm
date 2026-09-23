@@ -1,6 +1,9 @@
 /datum/preference/choiced/phobia
+	explanation = "Phobia"
 	savefile_key = "phobia"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
+	category = PREFERENCE_CATEGORY_EMPLOYEE_META
+	feature_identifier = PREFERENCE_FEATURE_DROPDOWN_SWITCHER
 
 /datum/preference/choiced/phobia/init_possible_values()
 	return GLOB.phobia_types

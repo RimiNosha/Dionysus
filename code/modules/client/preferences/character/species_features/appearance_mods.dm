@@ -1,9 +1,11 @@
 // RIMI TODO: Remove this and instead make these apply from mutant prefs.
 /datum/preference/appearance_mods
+	explanation = "Appearance Mods"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "appearance_mods"
 	priority = PREFERENCE_PRIORITY_APPEARANCE_MODS
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/appearance_mods/deserialize(input, datum/preferences/preferences)
 	var/list/input_list = input:Copy()

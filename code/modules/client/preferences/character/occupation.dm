@@ -3,7 +3,8 @@
 	explanation = "Employer"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "employer"
-	feature_identifier = PREFERENCE_FEATURE_NONE
+	feature_identifier = PREFERENCE_FEATURE_DROPDOWN_SWITCHER
+	category = PREFERENCE_CATEGORY_EMPLOYEE_LOYALTIES
 
 /datum/preference/choiced/employer/apply_to_human(mob/living/carbon/human/target, value)
 	return
@@ -33,9 +34,11 @@
 
 /// Associative list of job:integer, where integer is a priority between 1 and 4
 /datum/preference/blob/job_priority
+	explanation = "Job Priority"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "job_priority"
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/blob/job_priority/create_default_value()
 	return list()

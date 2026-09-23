@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 	/// The category of preference, for use by the PreferencesMenu.
 	/// This isn't used for anything other than as a key for UI data.
 	/// It is up to the PreferencesMenu UI itself to interpret it.
-	var/category = "misc"
+	var/category
 
 	/// What savefile should this preference be read from?
 	/// Valid values are PREFERENCE_SAVEFILE_CHARACTER and PREFERENCE_SAVEFILE_PLAYER.

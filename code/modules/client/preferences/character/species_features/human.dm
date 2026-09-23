@@ -12,6 +12,7 @@
 PREFERENCES_SET_MUTANT_CHOICE_LIST(tail_human, GLOB.tails_list_human)
 
 /datum/preference/color/mutant/tail_human
+	explanation = "Tail Color"
 	savefile_key = "tail_human_color"
 	relevant_mutant_bodypart = "tail"
 	choiced_preference_datum = /datum/preference/choiced/mutant/tail_human
@@ -29,6 +30,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(tail_human, GLOB.tails_list_human)
 PREFERENCES_SET_MUTANT_CHOICE_LIST(ears, GLOB.ears_list)
 
 /datum/preference/color/mutant/ears
+	explanation = "Ears Color"
 	savefile_key = "ears_color"
 	relevant_mutant_bodypart = "ears"
 	choiced_preference_datum = /datum/preference/choiced/mutant/ears
@@ -46,6 +48,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(ears, GLOB.ears_list)
 PREFERENCES_SET_MUTANT_CHOICE_LIST(horns, GLOB.horns_list)
 
 /datum/preference/color/mutant/horns
+	explanation = "Horns Color"
 	savefile_key = "horns_color"
 	relevant_mutant_bodypart = "horns"
 	choiced_preference_datum = /datum/preference/choiced/mutant/horns

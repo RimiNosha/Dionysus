@@ -1,8 +1,10 @@
 /datum/preference/blob/languages
+	explanation = "Known Languages"
 	priority = PREFERENCE_PRIORITY_APPEARANCE_MODS //run after everything mostly
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "languages"
 	feature_identifier = PREFERENCE_FEATURE_NONE
+	category = PREFERENCE_CATEGORY_MISC
 
 /datum/preference/blob/languages/deserialize(input, datum/preferences/preferences)
 	if(!islist(input))

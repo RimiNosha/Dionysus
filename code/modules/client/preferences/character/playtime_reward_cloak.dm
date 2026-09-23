@@ -2,9 +2,11 @@
 /// gained over 5K playtime hours.
 /// If true, it allows the user to get a cool looking roundstart cloak.
 /datum/preference/toggle/playtime_reward_cloak
+	explanation = "Playtime Reward Cloak"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "playtime_reward_cloak"
 	feature_identifier = PREFERENCE_FEATURE_CHECKBOX
+	category = PREFERENCE_CATEGORY_APPEARANCE_TORSO
 
 /datum/preference/toggle/playtime_reward_cloak/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))

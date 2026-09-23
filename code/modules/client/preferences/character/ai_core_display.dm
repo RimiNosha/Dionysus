@@ -1,8 +1,10 @@
 /// What to show on the AI screen
 /datum/preference/choiced/ai_core_display
+	explanation = "AI Core Display"
 	savefile_identifier = PREFERENCE_SAVEFILE_CHARACTER
 	savefile_key = "preferred_ai_core_display"
-	feature_identifier = PREFERENCE_FEATURE_ICON_BOX
+	feature_identifier = PREFERENCE_FEATURE_ICONNED_DROPDOWN_SWITCHER
+	category = PREFERENCE_CATEGORY_APPEARANCE_GENERAL
 
 /datum/preference/choiced/ai_core_display/init_possible_values()
 	return GLOB.ai_core_display_screens - "Portrait"

@@ -14,6 +14,7 @@ export type Rect = {
 };
 
 export type Part = {
+  additionalPrefs?: string[];
   id:
     | 'head'
     | 'left_arm'

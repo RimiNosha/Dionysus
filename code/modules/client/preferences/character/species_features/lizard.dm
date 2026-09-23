@@ -11,6 +11,7 @@
 PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_frills, GLOB.frills_list)
 
 /datum/preference/color/mutant/lizard_frills
+	explanation = "Frills Color"
 	savefile_key = "lizard_frills_color"
 	relevant_mutant_bodypart = "lizard_frills"
 	choiced_preference_datum = /datum/preference/choiced/mutant/lizard_frills
@@ -31,6 +32,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_snout, GLOB.snouts_list)
 	return "Round"
 
 /datum/preference/color/mutant/lizard_snout
+	explanation = "Snout Color"
 	savefile_key = "lizard_snout_color"
 	relevant_mutant_bodypart = "lizard_snout"
 	choiced_preference_datum = /datum/preference/choiced/mutant/lizard_snout
@@ -51,6 +53,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_spines, GLOB.spines_list)
 	return "Short"
 
 /datum/preference/color/mutant/lizard_spines
+	explanation = "Spines Color"
 	savefile_key = "lizard_spines_color"
 	relevant_mutant_bodypart = "lizard_spines"
 	choiced_preference_datum = /datum/preference/choiced/mutant/lizard_spines
@@ -71,6 +74,7 @@ PREFERENCES_SET_MUTANT_CHOICE_LIST(lizard_tail, GLOB.tails_list_lizard)
 	return "Smooth"
 
 /datum/preference/color/mutant/lizard_tail
+	explanation = "Tail Color"
 	savefile_key = "lizard_tail_color"
 	relevant_mutant_bodypart = "lizard_tail"
 	choiced_preference_datum = /datum/preference/choiced/mutant/lizard_tail

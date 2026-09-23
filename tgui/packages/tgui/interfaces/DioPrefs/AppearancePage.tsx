@@ -56,7 +56,12 @@ export const AppearancePage = (props) => {
                       Object.entries(
                         data.character_preferences[
                           selectedPart ? selectedPart.id : 'general'
-                        ],
+                        ] +
+                          (selectedPart && selectedPart.additionalPrefs
+                            ? selectedPart.additionalPrefs.flatMap(
+                                (e) => data.character_preferences[e],
+                              )
+                            : []),
                       )
                         .filter(
                           (e) =>
@@ -103,7 +108,12 @@ export const AppearancePage = (props) => {
                         Object.entries(
                           data.character_preferences[
                             selectedPart ? selectedPart.id : 'general'
-                          ],
+                          ] +
+                            (selectedPart && selectedPart.additionalPrefs
+                              ? selectedPart.additionalPrefs.flatMap(
+                                  (e) => data.character_preferences[e],
+                                )
+                              : []),
                         )
                           .filter(
                             (e) =>
@@ -165,11 +175,13 @@ const parts: Part[] = [
     id: 'left_arm',
     name: 'Left Arm',
     pos: { x: CENTER + 7, y: 17, width: 5, height: 12 },
+    additionalPrefs: ['arms'],
   },
   {
     id: 'right_arm',
     name: 'Right Arm',
     pos: { x: CENTER - 7, y: 17, width: 5, height: 12 },
+    additionalPrefs: ['arms'],
   },
   {
     id: 'groin',
@@ -185,10 +197,12 @@ const parts: Part[] = [
     id: 'left_leg',
     name: 'Left Leg',
     pos: { x: CENTER + 5, y: 28, width: 10, height: 8 },
+    additionalPrefs: ['legs'],
   },
   {
     id: 'right_leg',
     name: 'Right Leg',
     pos: { x: CENTER - 5, y: 28, width: 10, height: 8 },
+    additionalPrefs: ['legs'],
   },
 ];
