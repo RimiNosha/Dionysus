@@ -328,18 +328,16 @@ SUBSYSTEM_DEF(shuttle)
 
 	call_reason = trim(html_encode(call_reason))
 
-	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH && seclevel2num(get_security_level()) > SEC_LEVEL_GREEN)
+	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH && SSsecurity_level.current_level.value)
 		to_chat(user, span_alert("You must provide a reason."))
 		return
 
 	var/area/signal_origin = get_area(user)
 	var/emergency_reason = "\nNature of emergency:\n\n[call_reason]"
-	var/security_num = seclevel2num(get_security_level())
-	switch(security_num)
-		if(SEC_LEVEL_RED,SEC_LEVEL_DELTA)
-			emergency.request(null, signal_origin, html_decode(emergency_reason), 1) //There is a serious threat we gotta move no time to give them five minutes.
-		else
-			emergency.request(null, signal_origin, html_decode(emergency_reason), 0)
+	if (SSsecurity_level.current_level.value >= SSsecurity_level.security_levels[/datum/security_level/red].value)
+		emergency.request(null, signal_origin, html_decode(emergency_reason), TRUE) //There is a serious threat we gotta move no time to give them five minutes.
+	else
+		emergency.request(null, signal_origin, html_decode(emergency_reason), FALSE)
 
 	var/datum/radio_frequency/frequency = SSpackets.return_frequency(FREQ_STATUS_DISPLAYS)
 
@@ -362,7 +360,7 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/auto_end()
 	if(EMERGENCY_IDLE_OR_RECALLED)
 		SSshuttle.emergency.request(silent = TRUE)
-		priority_announce("The shift has come to an end and the shuttle called. [SSsecurity_level.current_level == SEC_LEVEL_RED ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [emergency.timeLeft(600)] minutes.", FLAVOR_CENTCOM_NAME, sound_type = ANNOUNCER_SHUTTLECALLED)
+		priority_announce("The shift has come to an end and the shuttle called. [SSsecurity_level.current_level.auto_end_body]It will arrive in [emergency.timeLeft(600)] minutes.", FLAVOR_CENTCOM_NAME, sound_type = ANNOUNCER_SHUTTLECALLED)
 		log_game("Round end vote passed. Shuttle has been auto-called.")
 		message_admins("Round end vote passed. Shuttle has been auto-called.")
 	emergency_no_recall = TRUE
@@ -405,18 +403,9 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/canRecall()
 	if(!emergency || emergency.mode != SHUTTLE_CALL || admin_emergency_no_recall || emergency_no_recall)
 		return
-	var/security_num = seclevel2num(get_security_level())
-	switch(security_num)
-		if(SEC_LEVEL_GREEN)
-			if(emergency.timeLeft(1) < emergency_call_time)
-				return
-		if(SEC_LEVEL_BLUE)
-			if(emergency.timeLeft(1) < emergency_call_time * 0.5)
-				return
-		else
-			if(emergency.timeLeft(1) < emergency_call_time * 0.25)
-				return
-	return 1
+	if (emergency.timeLeft(1) < emergency_call_time * (SSsecurity_level.current_level.shuttle_modifier / 2))
+		return // If it's over half way there, too bad tot buddy, you're locking the fuck in
+	return TRUE
 
 /datum/controller/subsystem/shuttle/proc/autoEvac()
 	if (!SSticker.IsRoundInProgress())

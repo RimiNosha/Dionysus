@@ -319,6 +319,7 @@ const PageMain = (props) => {
   const { act, data } = useBackend();
   const {
     alertLevel,
+    alertLevels,
     alertLevelTick,
     aprilFools,
     callShuttleReasonMinLength,
@@ -419,17 +420,14 @@ const PageMain = (props) => {
             </Flex.Item>
 
             <Flex.Item>
-              <AlertButton
-                alertLevel="green"
-                showAlertLevelConfirm={showAlertLevelConfirm}
-                setShowAlertLevelConfirm={setShowAlertLevelConfirm}
-              />
-
-              <AlertButton
-                alertLevel="blue"
-                showAlertLevelConfirm={showAlertLevelConfirm}
-                setShowAlertLevelConfirm={setShowAlertLevelConfirm}
-              />
+              {alertLevels.map((e) => (
+                <AlertButton
+                  key={e}
+                  alertLevel={e}
+                  showAlertLevelConfirm={showAlertLevelConfirm}
+                  setShowAlertLevelConfirm={setShowAlertLevelConfirm}
+                />
+              ))}
             </Flex.Item>
           </Flex>
         </Section>

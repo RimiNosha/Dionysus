@@ -27,7 +27,7 @@
 	name = "Red Alert"
 
 /datum/keycard_auth_action/red_alert/trigger()
-		set_security_level(SEC_LEVEL_RED)
+		SSsecurity_level.set_level(/datum/security_level/red)
 
 /datum/keycard_auth_action/bsa_firing_toggle
 	name = "Bluespace Artillery Unlock"

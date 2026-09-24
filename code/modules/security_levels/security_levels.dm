@@ -1,90 +1,68 @@
-/proc/set_security_level(level)
-	switch(level)
-		if("green")
-			level = SEC_LEVEL_GREEN
-		if("blue")
-			level = SEC_LEVEL_BLUE
-		if("red")
-			level = SEC_LEVEL_RED
-		if("delta")
-			level = SEC_LEVEL_DELTA
+// Security level datums. These should house any custom alert functionality of a security level.
 
-	//Will not be announced if you try to set to the same level as it already is
-	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != SSsecurity_level.current_level)
-		switch(level)
-			if(SEC_LEVEL_GREEN)
-				priority_announce(CONFIG_GET(string/alert_green), sub_title = "Security level lowered to green.", do_not_modify = TRUE)
+#define SEC_LEVEL_GREEN 0
+#define SEC_LEVEL_BLUE SEC_LEVEL_GREEN + 1
+#define SEC_LEVEL_RED SEC_LEVEL_BLUE + 1
+#define SEC_LEVEL_DELTA SEC_LEVEL_RED + 1
 
-				if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
-					if(SSsecurity_level.current_level >= SEC_LEVEL_RED)
-						SSshuttle.emergency.modTimer(4)
-					else
-						SSshuttle.emergency.modTimer(2)
+/datum/security_level
+	abstract_type = /datum/security_level
+	/// This is used to decide alert titles and icons of things that change depending on security levels. This should be one word, and lowercase.
+	var/name = "ERROR"
+	/// How bad and fucked up is this security level? Levels of the same value will be treated as adjacent.
+	var/value
+	var/announce_sound = ANNOUNCER_DEFAULT
+	var/body
+	var/body_downto
+	var/shuttle_modifier
+	var/auto_end_body
 
-			if(SEC_LEVEL_BLUE)
-				if(SSsecurity_level.current_level < SEC_LEVEL_BLUE)
-					priority_announce(CONFIG_GET(string/alert_blue_upto), sub_title = "Security level elevated to blue.", do_not_modify = TRUE, sound_type = ANNOUNCER_ALERT)
+/datum/security_level/proc/get_title(change)
+	return "Security level [change ? (change == SECURITY_LEVEL_LOWERED ? "lowered" : "raised") : "changed"] to [name]."
 
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
-						SSshuttle.emergency.modTimer(0.5)
+/datum/security_level/proc/get_body(change)
+	return change == SECURITY_LEVEL_LOWERED ? body_downto : body
 
-				else
-					priority_announce(CONFIG_GET(string/alert_blue_downto), sub_title = "Security level lowered to blue.", do_not_modify = TRUE, sound_type = ANNOUNCER_ALERT)
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
-						SSshuttle.emergency.modTimer(2)
+/datum/security_level/proc/on_change(change)
+	return // Use this proc to play extra sounds or something.
 
-			if(SEC_LEVEL_RED)
-				if(SSsecurity_level.current_level < SEC_LEVEL_RED)
-					priority_announce(CONFIG_GET(string/alert_red_upto), sub_title = "Security level elevated to red.", do_not_modify = TRUE, sound_type = ANNOUNCER_ALERT)
+/* -- Alert Entries -- */
 
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
-						if(SSsecurity_level.current_level == SEC_LEVEL_GREEN)
-							SSshuttle.emergency.modTimer(0.25)
-						else
-							SSshuttle.emergency.modTimer(0.5)
-				else
-					priority_announce(CONFIG_GET(string/alert_red_upto), sub_title = "Security level lowered to red.", do_not_modify = TRUE, sound_type = ANNOUNCER_ALERT)
+/datum/security_level/green
+	name = "green"
+	value = SEC_LEVEL_GREEN
+	shuttle_modifier = 2
 
-			if(SEC_LEVEL_DELTA)
-				priority_announce(CONFIG_GET(string/alert_delta), sub_title = "Security level elevated to delta.", do_not_modify = TRUE, sound_type = ANNOUNCER_ALERT)
+/datum/security_level/green/get_body(raised)
+	return "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 
-				if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
-					if(SSsecurity_level.current_level == SEC_LEVEL_GREEN)
-						SSshuttle.emergency.modTimer(0.25)
-					else if(SSsecurity_level.current_level == SEC_LEVEL_BLUE)
-						SSshuttle.emergency.modTimer(0.5)
+/datum/security_level/blue
+	name = "blue"
+	value = SEC_LEVEL_BLUE
+	announce_sound = ANNOUNCER_ALERT
+	body = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
+	body_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
+	shuttle_modifier = 1
 
-		SSsecurity_level.set_level(level)
+/datum/security_level/red
+	name = "red"
+	value = SEC_LEVEL_RED
+	announce_sound = ANNOUNCER_ALERT
+	body = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
+	body_downto = "The station's destruction has been averted. There is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
+	auto_end_body = "Red Alert state confirmed: Dispatching priority shuttle. "
+	shuttle_modifier = 0.5
 
-/proc/get_security_level()
-	switch(SSsecurity_level.current_level)
-		if(SEC_LEVEL_GREEN)
-			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
-		if(SEC_LEVEL_RED)
-			return "red"
-		if(SEC_LEVEL_DELTA)
-			return "delta"
+/datum/security_level/delta
+	name = "delta"
+	value = SEC_LEVEL_DELTA
+	announce_sound = ANNOUNCER_ALERT
+	body = "Destruction of the station is imminent. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	body_downto = "Somehow, the station is in a better situation than before, however, it is still going to explode."
+	shuttle_modifier = 0.5
 
-/proc/num2seclevel(num)
-	switch(num)
-		if(SEC_LEVEL_GREEN)
-			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
-		if(SEC_LEVEL_RED)
-			return "red"
-		if(SEC_LEVEL_DELTA)
-			return "delta"
-
-/proc/seclevel2num(seclevel)
-	switch( lowertext(seclevel) )
-		if("green")
-			return SEC_LEVEL_GREEN
-		if("blue")
-			return SEC_LEVEL_BLUE
-		if("red")
-			return SEC_LEVEL_RED
-		if("delta")
-			return SEC_LEVEL_DELTA
+// These really shouldn't be used outside of here.
+#undef SEC_LEVEL_GREEN
+#undef SEC_LEVEL_BLUE
+#undef SEC_LEVEL_RED
+#undef SEC_LEVEL_DELTA

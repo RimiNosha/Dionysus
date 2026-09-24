@@ -283,12 +283,10 @@
 ///obj/docking_port/mobile/emergency/request(obj/docking_port/stationary/S, area/signalOrigin, reason, redAlert, set_coefficient=null) //ORIGINAL
 /obj/docking_port/mobile/emergency/request(obj/docking_port/stationary/S, area/signalOrigin, reason, redAlert, set_coefficient=null, silent=FALSE)
 	if(!isnum(set_coefficient))
-		var/security_num = seclevel2num(get_security_level())
-		switch(security_num)
-			if(SEC_LEVEL_GREEN)
-				set_coefficient = 1
-			else
-				set_coefficient = 0.5
+		if(SSsecurity_level.current_level.value)
+			set_coefficient = 0.5
+		else
+			set_coefficient = 1
 
 	var/call_time = SSshuttle.emergency_call_time * set_coefficient * engine_coeff
 	switch(mode)
@@ -537,7 +535,7 @@
 	var/obj/machinery/computer/shuttle/C = getControlConsole()
 	if(!istype(C, /obj/machinery/computer/shuttle/pod))
 		return ..()
-	if(SSsecurity_level.current_level >= SEC_LEVEL_RED || (C && (C.obj_flags & EMAGGED)))
+	if(SSsecurity_level.current_level >= SSsecurity_level.security_levels[/datum/security_level/red].value || (C && (C.obj_flags & EMAGGED)))
 		if(launch_status == UNLAUNCHED)
 			launch_status = EARLY_LAUNCHED
 			return ..()
@@ -587,7 +585,7 @@
 
 	if(obj_flags & EMAGGED)
 		return
-	locked = new_level < SEC_LEVEL_RED
+	locked = new_level < SSsecurity_level.security_levels[/datum/security_level/red].value
 
 /obj/docking_port/stationary/random
 	name = "escape pod"
@@ -694,7 +692,7 @@
 /obj/item/storage/pod/can_interact(mob/user)
 	if(!..())
 		return FALSE
-	if(SSsecurity_level.current_level >= SEC_LEVEL_RED || unlocked)
+	if(SSsecurity_level.current_level >= SSsecurity_level.security_levels[/datum/security_level/red].value || unlocked)
 		return TRUE
 	to_chat(user, "The storage unit will only unlock during a Red or Delta security alert.")
 	return FALSE

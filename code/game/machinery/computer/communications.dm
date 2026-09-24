@@ -188,13 +188,15 @@
 					playsound(src, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 					return
 
-			var/new_sec_level = seclevel2num(params["newSecurityLevel"])
-			if (new_sec_level != SEC_LEVEL_GREEN && new_sec_level != SEC_LEVEL_BLUE)
+			var/datum/security_level/new_sec_level = SSsecurity_level.security_levels_by_name[params["newSecurityLevel"]]
+			if (!new_sec_level)
+				return
+			if (new_sec_level.value > SSsecurity_level.security_levels[/datum/security_level/blue].value)
 				return
 			if (SSsecurity_level.current_level == new_sec_level)
 				return
 
-			set_security_level(new_sec_level)
+			SSsecurity_level.set_level(new_sec_level)
 
 			to_chat(usr, span_notice("Authorization confirmed. Modifying security level."))
 			playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
@@ -498,7 +500,13 @@
 				data["shuttleCalled"] = FALSE
 				data["shuttleLastCalled"] = FALSE
 				data["aprilFools"] = SSevents.holidays && SSevents.holidays[APRIL_FOOLS]
-				data["alertLevel"] = get_security_level()
+				data["alertLevel"] = SSsecurity_level.current_level.name
+				var/list/alert_levels = list()
+				for (var/level in SSsecurity_level.security_level_value_to_security_levels)
+					if (text2num(level) <= SSsecurity_level.security_levels[/datum/security_level/blue].value)
+						for (var/datum/security_level/level_instance as anything in SSsecurity_level.security_level_value_to_security_levels[level])
+							alert_levels += level_instance.name
+				data["alertLevels"] = alert_levels
 				data["authorizeName"] = authorize_name
 				data["canLogOut"] = !issilicon(user)
 				data["shuttleCanEvacOrFailReason"] = SSshuttle.canEvac(user)
