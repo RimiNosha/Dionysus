@@ -378,7 +378,7 @@
 /// Scales a given value to a new modifier, based on the maximum value.
 /// Good for stuff like scaling shuttle call times.
 /proc/scale_to_modifier(current_value, max_value, old_modifier, new_modifier)
-    var/norm = current_value / max_value
-    var/mod_ratio = new_modifier / old_modifier
-    var/result = norm * mod_ratio
-    return max(0, min(max_value, result))
+	var/norm = current_value / max_value
+	var/mod_ratio = new_modifier / old_modifier
+	var/result = norm * mod_ratio
+	return max(0, min(max_value, result))
