@@ -273,8 +273,8 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/static/list/security_levels
-	if (!security_levels)
+	var/static/list/security_levels = list()
+	if (!length(security_levels))
 		for (var/sec_level_name in SSsecurity_level.security_levels_by_name)
 			security_levels += sec_level_name
 
