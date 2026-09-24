@@ -58,7 +58,8 @@ SUBSYSTEM_DEF(security_level)
 		return
 
 	var/difference = 0
-	difference = (level.value <=> current_level.value) 
+	difference ||= level.value > current_level.value && 1
+	difference ||= level.value < current_level.value && -1
 
 	priority_announce(level.get_body(difference), sub_title = level.get_title(difference), sound_type = level.announce_sound, do_not_modify = TRUE)
 
