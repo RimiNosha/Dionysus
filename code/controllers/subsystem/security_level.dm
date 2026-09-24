@@ -61,11 +61,12 @@ SUBSYSTEM_DEF(security_level)
 	difference ||= level.value > current_level.value && 1
 	difference ||= level.value < current_level.value && -1
 
-	priority_announce(level.get_body(difference), sub_title = level.get_title(difference), do_not_modify = TRUE)
+	priority_announce(level.get_body(difference), sub_title = level.get_title(difference), sound_type = level.announce_sound, do_not_modify = TRUE)
 
 	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
 		SSshuttle.emergency.callTime = scale_to_modifier(SSshuttle.emergency.callTime, SSshuttle.emergency_call_time, SSsecurity_level.current_level.shuttle_modifier, level.shuttle_modifier)
 
+	level.on_change(difference)
 	current_level = level
 	SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, level)
 	SSblackbox.record_feedback("tally", "security_level_changes", 1, level.name)
