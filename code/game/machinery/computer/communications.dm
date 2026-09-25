@@ -501,12 +501,6 @@
 				data["shuttleLastCalled"] = FALSE
 				data["aprilFools"] = SSevents.holidays && SSevents.holidays[APRIL_FOOLS]
 				data["alertLevel"] = SSsecurity_level.current_level.name
-				var/list/alert_levels = list()
-				for (var/level in SSsecurity_level.security_level_value_to_security_levels)
-					if (text2num(level) <= SSsecurity_level.security_levels[/datum/security_level/blue].value)
-						for (var/datum/security_level/level_instance as anything in SSsecurity_level.security_level_value_to_security_levels[level])
-							alert_levels += level_instance.name
-				data["alertLevels"] = alert_levels
 				data["authorizeName"] = authorize_name
 				data["canLogOut"] = !issilicon(user)
 				data["shuttleCanEvacOrFailReason"] = SSshuttle.canEvac(user)
@@ -597,10 +591,17 @@
 		ui.open()
 
 /obj/machinery/computer/communications/ui_static_data(mob/user)
+	var/list/alert_levels = list()
+	for (var/level in SSsecurity_level.security_level_value_to_security_levels)
+		if (text2num(level) <= SSsecurity_level.security_levels[/datum/security_level/blue].value)
+			for (var/datum/security_level/level_instance as anything in SSsecurity_level.security_level_value_to_security_levels[level])
+				alert_levels += level_instance.name
+
 	return list(
 		"callShuttleReasonMinLength" = CALL_SHUTTLE_REASON_LENGTH,
 		"maxStatusLineLength" = MAX_STATUS_LINE_LENGTH,
 		"maxMessageLength" = MAX_MESSAGE_LEN,
+		"alertLevels" = alert_levels,
 	)
 
 /obj/machinery/computer/communications/Topic(href, href_list)
