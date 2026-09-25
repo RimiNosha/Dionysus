@@ -273,9 +273,14 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/level = input("Select security level to change to","Set Security Level") as null|anything in list("green","blue","red","delta")
+	var/static/list/security_levels = list()
+	if (!length(security_levels))
+		for (var/sec_level_name in SSsecurity_level.security_levels_by_name)
+			security_levels += sec_level_name
+
+	var/level = input("Select security level to change to","Set Security Level") as null|anything in security_levels
 	if(level)
-		set_security_level(level)
+		SSsecurity_level.set_level(SSsecurity_level.security_levels_by_name[level])
 
 		log_admin("[key_name(usr)] changed the security level to [level]")
 		message_admins("[key_name_admin(usr)] changed the security level to [level]")
@@ -328,4 +333,3 @@
 	message_admins("[key_name_admin(usr)] added mob ability [ability_type] to mob [marked_mob].")
 	log_admin("[key_name(usr)] added mob ability [ability_type] to mob [marked_mob].")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Add Mob Ability") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-

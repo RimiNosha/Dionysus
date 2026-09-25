@@ -28,7 +28,7 @@ GLOBAL_VAR(nuke_time_left)
 	var/safety = TRUE
 	var/obj/item/disk/nuclear/auth = null
 	use_power = NO_POWER_USE
-	var/previous_level = ""
+	var/datum/security_level/previous_level
 	var/obj/item/nuke_core/core = null
 	var/deconstruction_state = NUKESTATE_INTACT
 	var/lights = ""
@@ -44,7 +44,7 @@ GLOBAL_VAR(nuke_time_left)
 	STOP_PROCESSING(SSobj, core)
 	update_appearance()
 	SSpoints_of_interest.make_point_of_interest(src)
-	previous_level = get_security_level()
+	previous_level = SSsecurity_level.current_level
 	GLOB.nuke_time_left = get_time_left()
 
 /obj/machinery/nuclearbomb/Destroy()
@@ -415,7 +415,7 @@ GLOBAL_VAR(nuke_time_left)
 	safety = !safety
 	if(safety)
 		if(timing)
-			set_security_level(previous_level)
+			SSsecurity_level.set_level(previous_level)
 			for(var/obj/item/pinpointer/nuke/syndicate/S in GLOB.pinpointer_list)
 				S.switch_mode_to(initial(S.mode))
 				S.alert = FALSE
@@ -433,7 +433,7 @@ GLOBAL_VAR(nuke_time_left)
 	if(timing)
 		message_admins("\The [src] was armed at [ADMIN_VERBOSEJMP(our_turf)] by [ADMIN_LOOKUPFLW(usr)].")
 		log_game("\The [src] was armed at [loc_name(our_turf)] by [key_name(usr)].")
-		previous_level = get_security_level()
+		previous_level = SSsecurity_level.current_level
 		detonation_timer = world.time + (timer_set * 10)
 		for(var/obj/item/pinpointer/nuke/syndicate/S in GLOB.pinpointer_list)
 			S.switch_mode_to(TRACK_INFILTRATOR)
@@ -441,12 +441,12 @@ GLOBAL_VAR(nuke_time_left)
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NUKE_DEVICE_ARMED, src)
 
 		countdown.start()
-		set_security_level("delta")
+		SSsecurity_level.set_level(/datum/security_level/delta)
 	else
 		message_admins("\The [src] at [ADMIN_VERBOSEJMP(our_turf)] was disarmed by [ADMIN_LOOKUPFLW(usr)].")
 		log_game("\The [src] at [loc_name(our_turf)] was disarmed by [key_name(usr)].")
 		detonation_timer = null
-		set_security_level(previous_level)
+		SSsecurity_level.set_level(previous_level)
 		for(var/obj/item/pinpointer/nuke/syndicate/S in GLOB.pinpointer_list)
 			S.switch_mode_to(initial(S.mode))
 			S.alert = FALSE
@@ -578,7 +578,7 @@ GLOBAL_VAR(nuke_time_left)
 	detonation_timer = null
 	exploding = FALSE
 	exploded = TRUE
-	set_security_level(previous_level)
+	SSsecurity_level.set_level(previous_level)
 	for(var/obj/item/pinpointer/nuke/syndicate/S in GLOB.pinpointer_list)
 		S.switch_mode_to(initial(S.mode))
 		S.alert = FALSE

@@ -61,7 +61,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/keycard_auth, 26)
 	var/list/data = list()
 	data["waiting"] = waiting
 	data["auth_required"] = event_source ? event_source.event : 0
-	data["red_alert"] = (seclevel2num(get_security_level()) >= SEC_LEVEL_RED) ? 1 : 0
+	data["red_alert"] = SSsecurity_level.current_level.value >= SSsecurity_level.security_levels[/datum/security_level/red].value
 	data["bsa_unlock"] = GLOB.bsa_unlock
 	return data
 

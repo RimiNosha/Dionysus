@@ -44,7 +44,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount/loaded, 28)
 /obj/machinery/defibrillator_mount/examine(mob/user)
 	. = ..()
 	if(defib)
-		if(SSsecurity_level.current_level >= SEC_LEVEL_RED)
+		if(SSsecurity_level.current_level >= SSsecurity_level.security_levels[/datum/security_level/red].value)
 			. += span_notice("Due to a security situation, its locking clamps can be toggled by swiping any ID.")
 		else
 			. += span_notice("Its locking clamps can be [clamps_locked ? "dis" : ""]engaged by swiping an ID with access.")
@@ -110,7 +110,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount/loaded, 28)
 		return
 	var/obj/item/card/id = I.GetID()
 	if(id)
-		if(check_access(id) || SSsecurity_level.current_level >= SEC_LEVEL_RED) //anyone can toggle the clamps in red alert!
+		if(check_access(id) || SSsecurity_level.current_level >= SSsecurity_level.security_levels[/datum/security_level/red].value) //anyone can toggle the clamps in red alert!
 			if(!defib)
 				to_chat(user, span_warning("You can't engage the clamps on a defibrillator that isn't there."))
 				return
