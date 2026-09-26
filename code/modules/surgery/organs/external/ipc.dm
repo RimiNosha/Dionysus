@@ -104,7 +104,7 @@
 
 		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
 			continue
-		var/image/secondary = image(sprite_datum.icon, "[state2use]_secondary")
+		var/image/secondary = image(sprite_datum.icon, icon_state = "[state2use]_secondary", layer = -BODY_ADJ_LAYER)
 		var/list/colors = owner?.dna?.features["[feature_key]_color"]
 		if (istype(colors) && length(colors))
 			secondary.color = colors[2]
