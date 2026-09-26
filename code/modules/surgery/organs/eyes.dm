@@ -121,8 +121,8 @@
 	if(!myhead)
 		return
 
-	var/mutable_appearance/eye_left = mutable_appearance(myhead.eyes_icon_file, "[eye_icon_state]_l", -BODY_LAYER)
-	var/mutable_appearance/eye_right = mutable_appearance(myhead.eyes_icon_file, "[eye_icon_state]_r", -BODY_LAYER)
+	var/mutable_appearance/eye_left = mutable_appearance(myhead.eyes_icon_file, "[eye_icon_state]_l", -EYE_LAYER)
+	var/mutable_appearance/eye_right = mutable_appearance(myhead.eyes_icon_file, "[eye_icon_state]_r", -EYE_LAYER)
 	var/mutable_appearance/sclera
 	if(myhead.eye_sclera)
 		sclera = mutable_appearance(myhead.eyes_icon_file, "eyes_sclera", -BODY_LAYER)
