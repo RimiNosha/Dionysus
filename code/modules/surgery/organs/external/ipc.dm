@@ -115,10 +115,10 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	var/image/I = image(sprite_datum.icon, icon_state = "eyes")
+	var/image/I = image(sprite_datum.icon, icon_state = "eyes", layer = -EYE_LAYER)
 	I.color = H.eye_color_left
 	. += I
-	. += emissive_appearance(sprite_datum.icon, "eyes", alpha = 90)
+	. += emissive_appearance(sprite_datum.icon, "eyes", -EYE_LAYER, alpha = 90)
 
 /obj/item/organ/saurian_tail
 	name = "tail"
