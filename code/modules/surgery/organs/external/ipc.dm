@@ -104,7 +104,7 @@
 
 		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
 			continue
-		var/image/secondary = image(sprite_datum.icon, "[state2use]_secondary", layer = BODY_ADJ_LAYER)
+		var/image/secondary = image(sprite_datum.icon, "[state2use]_secondary")
 		var/list/colors = owner?.dna?.features["[feature_key]_color"]
 		if (istype(colors) && length(colors))
 			secondary.color = colors[2]
@@ -115,10 +115,10 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	var/image/I = image(sprite_datum.icon, "eyes", layer = -EYE_LAYER)
+	var/image/I = image(sprite_datum.icon, "eyes")
 	I.color = H.eye_color_left
 	. += I
-	. += emissive_appearance(sprite_datum.icon, "eyes", -EYE_LAYER, alpha = 90)
+	. += emissive_appearance(sprite_datum.icon, "eyes", alpha = 90)
 
 /obj/item/organ/saurian_tail
 	name = "tail"
