@@ -115,7 +115,7 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	var/image/I = image(sprite_datum.icon, "eyes")
+	var/image/I = image(sprite_datum.icon, icon_state = "eyes")
 	I.color = H.eye_color_left
 	. += I
 	. += emissive_appearance(sprite_datum.icon, "eyes", alpha = 90)
