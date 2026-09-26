@@ -96,30 +96,6 @@
 		return TRUE
 	return FALSE
 
-/obj/item/organ/saurian_screen/build_overlays(physique, image_dir)
-	. = ..()
-
-	for(var/image_layer in layers)
-		var/state2use = build_sprite_accessory_icon_state(render_key || feature_key, sprite_datum, physique, GLOB.layer2text["[image_layer]"])
-
-		if(!icon_exists(sprite_datum.icon, "[state2use]_secondary", FALSE))
-			continue
-		var/image/secondary = image(sprite_datum.icon, "[state2use]_secondary")
-		var/list/colors = owner?.dna?.features["[feature_key]_color"]
-		if (istype(colors) && length(colors))
-			secondary.color = colors[2]
-		. += secondary
-
-	if(!ishuman(owner))
-		return
-
-	var/mob/living/carbon/human/H = owner
-
-	var/image/I = image(sprite_datum.icon, "eyes", layer = -EYE_LAYER)
-	I.color = H.eye_color_left
-	. += I
-	. += emissive_appearance(sprite_datum.icon, "eyes", -EYE_LAYER, alpha = 90)
-
 /obj/item/organ/saurian_tail
 	name = "tail"
 	desc = "A severed tail. What did you cut this off of?"
