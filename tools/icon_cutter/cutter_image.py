@@ -1,15 +1,23 @@
 from copy import deepcopy
+from io import BytesIO
 
 from PIL import Image, PngImagePlugin
 import tomllib
 import math
+import oxipng
 
-from . import cutter_shapes
+from . import cutter_shapes, door_stitch, basic_cutter
 
 from .dirs import *
 
-BITMASK_SLICE = "BitmaskSlice"
-SMOOTH_DIAGONALLY = "smooth_diagonally"
+MODE_BITMASK_SLICE = "BitmaskSlice"
+MODE_DOOR = "Door"
+VALID_MODES = [
+    MODE_BITMASK_SLICE,
+    MODE_DOOR,
+]
+
+CUTTER_SMOOTH_DIAGONALLY = "smooth_diagonally"
 
 # This is kinda fugly but
 def process_templates(toml: dict, templates):
@@ -33,11 +41,15 @@ def cut(toml_path: str, templates: dict):
 
     toml = process_templates(toml, templates)
 
-    if toml["mode"] != BITMASK_SLICE:
+    if toml["mode"] not in VALID_MODES:
         print("Unsupported mode: " + toml["mode"])
         return
 
-    if toml[SMOOTH_DIAGONALLY]:
+    if toml["mode"] == MODE_DOOR:
+        basic_cutter.make_dmi(img_path, door_stitch.DOOR_DMI_ENTRY_PRESET, (toml["output_icon_size"]["x"], toml["output_icon_size"]["y"]), silent=True)
+        return
+
+    if toml[CUTTER_SMOOTH_DIAGONALLY]:
         icon_states_to_iter = cutter_shapes.OUTPUT_DIAGONALS
     else:
         icon_states_to_iter = cutter_shapes.OUTPUT_CARDINALS
@@ -133,5 +145,15 @@ version = 4.0
     dmi_str += "\n# END DMI"
 
     png_info = PngImagePlugin.PngInfo()
+    png_info.gamma = 0
+    png_info.icc_profile = None
+    png_info.chunks = []
     png_info.add_text("Description", dmi_str, zip=True)
-    image.save(file, "png", pnginfo=png_info)
+
+    bytes_io = BytesIO()
+    image.save(bytes_io, "PNG", pnginfo=png_info, compress_level=0, optimize=False)
+    bytes_io.seek(0)
+
+    out_image = oxipng.optimize_from_memory(bytes_io.read())
+    with open(file, "wb") as file_out:
+        file_out.write(out_image)

@@ -104,7 +104,6 @@
 			/datum/species = TRUE,
 			// Some types to remove them and their subtypes
 			/mob/living/carbon/human/species = FALSE,
-			/mob/living/simple_animal/hostile/syndicate/mecha_pilot = FALSE,
 		))
 		// Some particular types to disallow if they're too broad/abstract
 		// Not in the above typecache generator because it includes subtypes and this doesn't.
@@ -140,7 +139,6 @@
 											  /obj/projectile/bullet/honker = 15,
 											  /obj/projectile/temp = 15,
 											  /obj/projectile/ion = 15,
-											  /obj/projectile/magic/door = 15,
 											  /obj/projectile/magic/locker = 15,
 											  /obj/projectile/magic/fetch = 15,
 											  /obj/projectile/beam/emitter = 15,

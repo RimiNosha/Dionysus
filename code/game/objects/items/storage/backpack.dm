@@ -98,7 +98,6 @@
 	righthand_file = 'icons/mob/inhands/equipment/backpack_righthand.dmi'
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
-	item_flags = NO_MAT_REDEMPTION
 
 TYPEINFO_DEF(/obj/item/storage/backpack/holding)
 	default_armor = list(BLUNT = 0, PUNCTURE = 0, SLASH = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 60, ACID = 50)
@@ -109,7 +108,6 @@ TYPEINFO_DEF(/obj/item/storage/backpack/holding)
 	icon_state = "holdingpack"
 	inhand_icon_state = "holdingpack"
 	resistance_flags = FIRE_PROOF
-	item_flags = NO_MAT_REDEMPTION
 
 /obj/item/storage/backpack/holding/Initialize()
 	. = ..()
@@ -642,30 +640,6 @@ TYPEINFO_DEF(/obj/item/storage/backpack/holding)
 	for(var/i in 1 to 9)
 		new /obj/item/ammo_box/magazine/smgm45(src)
 
-/obj/item/storage/backpack/duffelbag/syndie/ammo/mech
-	desc = "A large duffel bag, packed to the brim with various exosuit ammo."
-
-/obj/item/storage/backpack/duffelbag/syndie/ammo/mech/PopulateContents()
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/storage/belt/utility/syndicate(src)
-
-/obj/item/storage/backpack/duffelbag/syndie/ammo/mauler
-	desc = "A large duffel bag, packed to the brim with various exosuit ammo."
-
-/obj/item/storage/backpack/duffelbag/syndie/ammo/mauler/PopulateContents()
-	new /obj/item/mecha_ammo/lmg(src)
-	new /obj/item/mecha_ammo/lmg(src)
-	new /obj/item/mecha_ammo/lmg(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/scattershot(src)
-	new /obj/item/mecha_ammo/missiles_he(src)
-	new /obj/item/mecha_ammo/missiles_he(src)
-	new /obj/item/mecha_ammo/missiles_he(src)
-
 /obj/item/storage/backpack/duffelbag/syndie/c20rbundle
 	desc = "A large duffel bag containing a C-20r, some magazines, and a cheap looking suppressor."
 
@@ -750,4 +724,3 @@ TYPEINFO_DEF(/obj/item/storage/backpack/holding)
 	desc = "A large duffel bag for holding extra police gear."
 	slowdown = 0
 	supports_variations_flags = NONE
-

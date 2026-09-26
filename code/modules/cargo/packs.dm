@@ -424,16 +424,6 @@
 					/obj/item/melee/baton/security/loaded)
 	crate_name = "stun baton crate"
 
-/datum/supply_pack/security/wall_flash
-	name = "Wall-Mounted Flash Crate"
-	desc = "Contains four wall-mounted flashes. Requires Security access to open."
-	cost = CARGO_CRATE_VALUE * 2
-	contains = list(/obj/item/storage/box/wall_flash,
-					/obj/item/storage/box/wall_flash,
-					/obj/item/storage/box/wall_flash,
-					/obj/item/storage/box/wall_flash)
-	crate_name = "wall-mounted flash crate"
-
 /datum/supply_pack/security/constable
 	name = "Traditional Equipment Crate"
 	desc = "Spare equipment found in a warehouse."
@@ -653,25 +643,6 @@
 	contains = list(/obj/machinery/shieldgen,
 					/obj/machinery/shieldgen)
 	crate_name = "anti-breach shield projector crate"
-
-/datum/supply_pack/engineering/ripley
-	name = "APLU MK-I Crate"
-	desc = "A do-it-yourself kit for building an ALPU MK-I \"Ripley\", designed for lifting and carrying heavy equipment, and other station tasks. Batteries not included."
-	cost = CARGO_CRATE_VALUE * 10
-	access_view = ACCESS_ROBOTICS
-	contains = list(/obj/item/mecha_parts/chassis/ripley,
-					/obj/item/mecha_parts/part/ripley_torso,
-					/obj/item/mecha_parts/part/ripley_right_arm,
-					/obj/item/mecha_parts/part/ripley_left_arm,
-					/obj/item/mecha_parts/part/ripley_right_leg,
-					/obj/item/mecha_parts/part/ripley_left_leg,
-					/obj/item/stock_parts/capacitor,
-					/obj/item/stock_parts/scanning_module,
-					/obj/item/circuitboard/mecha/ripley/main,
-					/obj/item/circuitboard/mecha/ripley/peripherals,
-					/obj/item/mecha_parts/mecha_equipment/drill,
-					/obj/item/mecha_parts/mecha_equipment/hydraulic_clamp)
-	crate_name= "\improper APLU MK-I kit"
 
 /datum/supply_pack/engineering/conveyor
 	name = "Conveyor Assembly Crate"
@@ -1043,16 +1014,6 @@
 	cost = CARGO_CRATE_VALUE + (/datum/material/wood::value_per_unit * MINERAL_MATERIAL_AMOUNT * 50)
 	contains = list(/obj/item/stack/sheet/mineral/wood/fifty)
 	crate_name = "wood planks crate"
-
-/datum/supply_pack/materials/rcd_ammo
-	name = "RCD Ammo"
-	desc = "Contains four raw material cartridges that can be used to quickly recharge any RCD."
-	cost = CARGO_CRATE_VALUE * 8.5
-	contains = list(/obj/item/rcd_ammo,
-					/obj/item/rcd_ammo,
-					/obj/item/rcd_ammo/large,
-					/obj/item/rcd_ammo/large,)
-	crate_name = "rcd ammo crate"
 
 /datum/supply_pack/materials/foamtank
 	name = "Firefighting Foam Tank Crate"

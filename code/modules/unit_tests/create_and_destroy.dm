@@ -67,8 +67,6 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 	ignore += typesof(/mob/living/simple_animal/pet/gondola/gondolapod)
 	//No heart to give
 	ignore += typesof(/obj/structure/ethereal_crystal)
-	//No linked console
-	ignore += typesof(/mob/camera/ai_eye/remote/base_construction)
 	//See above
 	ignore += typesof(/mob/camera/ai_eye/remote/shuttle_docker)
 	//Hangs a ref post invoke async, which we don't support. Could put a qdeleted check but it feels hacky
@@ -77,8 +75,6 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 	ignore += typesof(/obj/effect/timestop)
 	//Invoke async in init, skippppp
 	ignore += typesof(/mob/living/silicon/robot/model)
-	//This lad also sleeps
-	ignore += typesof(/obj/item/hilbertshotel)
 	//Stacks baseturfs, can't be tested here
 	ignore += typesof(/obj/effect/landmark/ctf)
 	//Our system doesn't support it without warning spam from unregister calls on things that never registered
@@ -87,8 +83,6 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 	ignore += typesof(/obj/item/pinpointer/shuttle)
 	//This spawns beams as a part of init, which can sleep past an async proc. This hangs a ref, and fucks us. It's only a problem here because the beam sleeps with CHECK_TICK
 	ignore += typesof(/obj/structure/alien/resin/flower_bud)
-	//Needs a linked mecha
-	ignore += typesof(/obj/effect/skyfall_landingzone)
 	//Expects a mob to holderize, we have nothing to give
 	ignore += typesof(/obj/item/mob_holder)
 	//Needs cards passed into the initilazation args

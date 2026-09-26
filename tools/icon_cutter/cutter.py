@@ -2,9 +2,13 @@ import os
 import os.path
 import sys
 import tomllib
+import PIL
 from datetime import datetime
 
 from . import cutter_image
+
+print("Using python " + sys.version)
+print("PIL " + PIL.__version__)
 
 time = datetime.now()
 

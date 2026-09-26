@@ -81,52 +81,6 @@
 
 //Pod objects
 
-//Window
-/obj/structure/window/reinforced/shuttle/survival_pod
-	name = "pod window"
-	icon = 'icons/obj/smooth_structures/pod_window.dmi'
-	icon_state = "pod_window-0"
-	base_icon_state = "pod_window"
-	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_SURVIVAL_TITANIUM_POD
-	smoothing_groups_with = SMOOTH_GROUP_SURVIVAL_TITANIUM_POD
-
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/north
-	dir = NORTH
-
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/east
-	dir = EAST
-
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/west
-	dir = WEST
-
-/obj/structure/window/reinforced/survival_pod
-	name = "pod window"
-	icon = 'icons/obj/lavaland/survival_pod.dmi'
-	icon_state = "pwindow"
-
-//Door
-/obj/machinery/door/airlock/survival_pod
-	name = "airlock"
-	assemblytype = /obj/structure/door_assembly/door_assembly_pod
-	smoothing_groups = SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_SURVIVAL_TITANIUM_POD
-
-/obj/machinery/door/airlock/survival_pod/glass
-	opacity = FALSE
-	glass = TRUE
-
-/obj/structure/door_assembly/door_assembly_pod
-	name = "pod airlock assembly"
-	base_name = "pod airlock"
-	airlock_type = /obj/machinery/door/airlock/survival_pod
-	glass_type = /obj/machinery/door/airlock/survival_pod/glass
-
-//Windoor
-/obj/machinery/door/window/survival_pod
-	icon = 'icons/obj/lavaland/survival_pod.dmi'
-	icon_state = "windoor"
-	base_state = "windoor"
-
 //Table
 /obj/structure/table/survival_pod
 	icon = 'icons/obj/lavaland/survival_pod.dmi'

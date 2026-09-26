@@ -165,24 +165,6 @@
 	category = list( "Electronics")
 	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_OMNI
 
-/datum/design/airlock_board
-	name = "Airlock Electronics"
-	id = "airlock_board"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/electronics/airlock
-	category = list( "Electronics")
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_OMNI
-
-/datum/design/firelock_board
-	name = "Firelock Circuitry"
-	id = "firelock_board"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/electronics/firelock
-	category = list( "Electronics")
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_OMNI
-
 /datum/design/airalarm_electronics
 	name = "Air Alarm Electronics"
 	id = "airalarm_electronics"
@@ -191,42 +173,6 @@
 	build_path = /obj/item/electronics/airalarm
 	category = list( "Electronics")
 	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_OMNI
-
-/datum/design/firealarm_electronics
-	name = "Fire Alarm Electronics"
-	id = "firealarm_electronics"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/electronics/firealarm
-	category = list( "Electronics")
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_OMNI
-
-/datum/design/airlock_painter
-	name = "Airlock Painter"
-	id = "airlock_painter"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/airlock_painter
-	category = list(DCAT_PAINTER)
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_SERVICE | DESIGN_FAB_OMNI
-
-/datum/design/airlock_painter/decal
-	name = "Decal Painter"
-	id = "decal_painter"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/airlock_painter/decal
-	category = list(DCAT_PAINTER)
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_SERVICE | DESIGN_FAB_OMNI
-
-/datum/design/airlock_painter/decal/tile
-	name = "Tile Sprayer"
-	id = "tile_sprayer"
-	build_type = AUTOLATHE | FABRICATOR
-	materials = list(/datum/material/steel = 50, /datum/material/glass = 50)
-	build_path = /obj/item/airlock_painter/decal/tile
-	category = list(DCAT_PAINTER)
-	mapload_design_flags = DESIGN_FAB_ENGINEERING | DESIGN_FAB_SERVICE | DESIGN_FAB_OMNI
 
 /datum/design/paint_sprayer
 	name = "Paint Sprayer"
@@ -995,14 +941,6 @@
 	materials = list(/datum/material/steel = 75)
 	build_path = /obj/item/chisel
 	category = list(DCAT_MISC_TOOL)
-
-/datum/design/control
-	name = "Blast Door Controller"
-	id = "blast"
-	build_type = AUTOLATHE
-	materials = list(/datum/material/steel = 100, /datum/material/glass = 50)
-	build_path = /obj/item/assembly/control
-	category = list(DCAT_ASSEMBLY)
 
 /datum/design/razor
 	name = "Electric Razor"

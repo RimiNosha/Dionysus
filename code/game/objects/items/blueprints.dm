@@ -159,8 +159,6 @@
 		/area/centcom/asteroid,
 		/area/centcom/tdome,
 		/area/centcom/wizard_station,
-		/area/misc/hilbertshotel,
-		/area/misc/hilbertshotelstorage
 	)
 	for (var/type in SPECIALS)
 		if ( istype(A,type) )
@@ -238,10 +236,4 @@
 
 	for(var/obj/machinery/atmospherics/components/unary/vent_pump/vent in area)
 		vent.name = replacetext(vent.name,oldtitle,title)
-
-	for(var/obj/machinery/door/door in area)
-		door.name = replacetext(door.name,oldtitle,title)
-
-	for(var/obj/machinery/firealarm/firepanel in area)
-		firepanel.name = replacetext(firepanel.name,oldtitle,title)
 	//TODO: much much more. Unnamed airlocks, cameras, etc.

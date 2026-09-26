@@ -441,13 +441,7 @@
 		/datum/design/welding_helmet,
 		/datum/design/cable_coil,
 		/datum/design/apc_board,
-		/datum/design/airlock_board,
-		/datum/design/firelock_board,
 		/datum/design/airalarm_electronics,
-		/datum/design/firealarm_electronics,
-		/datum/design/airlock_painter,
-		/datum/design/airlock_painter/decal,
-		/datum/design/airlock_painter/decal/tile,
 		/datum/design/paint_sprayer,
 		/datum/design/emergency_oxygen,
 		/datum/design/iron,
@@ -508,7 +502,6 @@
 		/datum/design/plastic_box,
 		/datum/design/sticky_tape,
 		/datum/design/chisel,
-		/datum/design/control,
 		/datum/design/paperroll,
 		/datum/design/beacon,
 		/datum/design/plasticducky,
@@ -516,4 +509,3 @@
 		/datum/design/oven_tray,
 		/datum/design/data,
 	)
-

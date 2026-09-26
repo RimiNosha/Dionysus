@@ -14,7 +14,7 @@
 	density = FALSE
 	can_atmos_pass = CANPASS_ALWAYS
 	smoothing_groups = SMOOTH_GROUP_WALLS
-	smoothing_groups_with = SMOOTH_GROUP_GRILLE + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
+	smoothing_groups_with = SMOOTH_GROUP_GRILLE + SMOOTH_GROUP_WALLS
 	uses_integrity = TRUE
 	max_integrity = /datum/material/steel::wall_integrity * 0.5
 	/// The material that the girder walls are made of.
@@ -51,7 +51,7 @@
 		'icons/construction/wall/girder_reinforced/wall/wall_2.dmi',
 	)
 	var/integrity_pct = atom_integrity / max_integrity
-	var/wanted_state = MAP(integrity_pct, 0, 1, 0, 2)
+	var/wanted_state = round(MAP(integrity_pct, 0, 1, 0, 2))
 	if(material_reinforcement)
 		icon = reinforced_icons[wanted_state]
 		// icon_state should be set by smoothing

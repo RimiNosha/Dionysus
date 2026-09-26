@@ -188,13 +188,15 @@
 					playsound(src, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 					return
 
-			var/new_sec_level = seclevel2num(params["newSecurityLevel"])
-			if (new_sec_level != SEC_LEVEL_GREEN && new_sec_level != SEC_LEVEL_BLUE)
+			var/datum/security_level/new_sec_level = SSsecurity_level.security_levels_by_name[params["newSecurityLevel"]]
+			if (!new_sec_level)
+				return
+			if (new_sec_level.value > SSsecurity_level.security_levels[/datum/security_level/blue].value)
 				return
 			if (SSsecurity_level.current_level == new_sec_level)
 				return
 
-			set_security_level(new_sec_level)
+			SSsecurity_level.set_level(new_sec_level)
 
 			to_chat(usr, span_notice("Authorization confirmed. Modifying security level."))
 			playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
@@ -393,21 +395,6 @@
 
 			state = STATE_MAIN
 			playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
-		if ("toggleEmergencyAccess")
-			if(emergency_access_cooldown(usr)) //if were in cooldown, dont allow the following code
-				return
-			if (!authenticated_as_silicon_or_captain(usr))
-				return
-			if (GLOB.emergency_access)
-				revoke_maint_all_access()
-				log_game("[key_name(usr)] disabled emergency maintenance access.")
-				message_admins("[ADMIN_LOOKUPFLW(usr)] disabled emergency maintenance access.")
-				deadchat_broadcast(" disabled emergency maintenance access at [span_name("[get_area_name(usr, TRUE)]")].", span_name("[usr.real_name]"), usr, message_type = DEADCHAT_ANNOUNCEMENT)
-			else
-				make_maint_all_access()
-				log_game("[key_name(usr)] enabled emergency maintenance access.")
-				message_admins("[ADMIN_LOOKUPFLW(usr)] enabled emergency maintenance access.")
-				deadchat_broadcast(" enabled emergency maintenance access at [span_name("[get_area_name(usr, TRUE)]")].", span_name("[usr.real_name]"), usr, message_type = DEADCHAT_ANNOUNCEMENT)
 		// Request codes for the Captain's Spare ID safe.
 		if("requestSafeCodes")
 			if(SSjob.assigned_captain)
@@ -513,7 +500,7 @@
 				data["shuttleCalled"] = FALSE
 				data["shuttleLastCalled"] = FALSE
 				data["aprilFools"] = SSevents.holidays && SSevents.holidays[APRIL_FOOLS]
-				data["alertLevel"] = get_security_level()
+				data["alertLevel"] = SSsecurity_level.current_level.name
 				data["authorizeName"] = authorize_name
 				data["canLogOut"] = !issilicon(user)
 				data["shuttleCanEvacOrFailReason"] = SSshuttle.canEvac(user)
@@ -539,7 +526,6 @@
 
 				if (authenticated_as_silicon_or_captain(user))
 					data["canToggleEmergencyAccess"] = TRUE
-					data["emergencyAccess"] = GLOB.emergency_access
 
 					data["alertLevelTick"] = alert_level_tick
 					data["canMakeAnnouncement"] = TRUE
@@ -605,10 +591,17 @@
 		ui.open()
 
 /obj/machinery/computer/communications/ui_static_data(mob/user)
+	var/list/alert_levels = list()
+	for (var/level in SSsecurity_level.security_level_value_to_security_levels)
+		if (text2num(level) <= SSsecurity_level.security_levels[/datum/security_level/blue].value)
+			for (var/datum/security_level/level_instance as anything in SSsecurity_level.security_level_value_to_security_levels[level])
+				alert_levels += level_instance.name
+
 	return list(
 		"callShuttleReasonMinLength" = CALL_SHUTTLE_REASON_LENGTH,
 		"maxStatusLineLength" = MAX_STATUS_LINE_LENGTH,
 		"maxMessageLength" = MAX_MESSAGE_LEN,
+		"alertLevels" = alert_levels,
 	)
 
 /obj/machinery/computer/communications/Topic(href, href_list)
