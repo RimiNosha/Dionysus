@@ -125,7 +125,7 @@
 	var/mutable_appearance/eye_right = mutable_appearance(myhead.eyes_icon_file, "[eye_icon_state]_r", -EYE_LAYER)
 	var/mutable_appearance/sclera
 	if(myhead.eye_sclera)
-		sclera = mutable_appearance(myhead.eyes_icon_file, "eyes_sclera", -BODY_LAYER)
+		sclera = mutable_appearance(myhead.eyes_icon_file, "eyes_sclera", -EYE_LAYER)
 		sclera.color = sclera_color
 
 	if(EYECOLOR in myhead.species_flags_list)
