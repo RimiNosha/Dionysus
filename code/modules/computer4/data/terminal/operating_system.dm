@@ -146,7 +146,7 @@
 	get_computer()?.operating_system = null
 
 /// Run a program.
-/datum/c4_file/terminal_program/operating_system/proc/execute_program(datum/c4_file/terminal_program/program)
+/datum/c4_file/terminal_program/operating_system/proc/execute_program(datum/c4_file/terminal_program/program, datum/parsed_cmdline/cmdline)
 	if(!program)
 		return FALSE
 
@@ -178,7 +178,7 @@
 			set_active_program(null)
 			clean_up()
 		else
-			set_active_program(src)
+			set_active_program(src, cmdline)
 
 	return TRUE
 
