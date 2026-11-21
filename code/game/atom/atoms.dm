@@ -1226,14 +1226,6 @@ TYPEINFO_DEF(/atom)
 
 		color = checked_color
 		return
-		if(isnull(checked_color))
-			continue
-		if(islist(checked_color) && length(checked_color))
-			color = checked_color
-			return
-
-		color = checked_color
-		return
 
 	color = null
 

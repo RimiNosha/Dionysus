@@ -157,7 +157,7 @@
 		add_processing_program(program)
 
 	set_active_program(program)
-	program.execute(src)
+	program.execute(src, cmdline)
 	return TRUE
 
 /// Close a program.
@@ -178,7 +178,7 @@
 			set_active_program(null)
 			clean_up()
 		else
-			set_active_program(src, cmdline)
+			set_active_program(src)
 
 	return TRUE
 

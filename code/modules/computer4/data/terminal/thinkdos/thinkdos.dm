@@ -55,7 +55,7 @@
 	else
 		println("Type 'help' to get started.")
 
-/datum/c4_file/terminal_program/operating_system/thinkdos/parse_std_in(text)
+/datum/c4_file/terminal_program/operating_system/thinkdos/parse_cmdline(text)
 	RETURN_TYPE(/list/datum/parsed_cmdline)
 
 	var/list/split_raw = splittext(text, THINKDOS_SYMBOL_SEPARATOR)
@@ -77,7 +77,7 @@
 	println(encoded_in)
 	write_log(encoded_in)
 
-	var/list/datum/parsed_cmdline/parsed_cmdlines = parse_std_in(text)
+	var/list/datum/parsed_cmdline/parsed_cmdlines = parse_cmdline(text)
 	if(!length(parsed_cmdlines)) //okay
 		return TRUE
 
