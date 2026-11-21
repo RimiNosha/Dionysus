@@ -43,7 +43,7 @@
 	RETURN_TYPE(/datum/c4_file/terminal_program/operating_system)
 	return get_computer()?.operating_system
 
-/*
+/**
  * Called by the operating system when a user enters text into the input field.
  * Don't call directly, call os.try_std_in() instead
  */
@@ -59,4 +59,3 @@
 /// Called by computers to forward commands from peripherals to programs. Should probably be on OS but oh well.
 /datum/c4_file/terminal_program/proc/peripheral_input(obj/item/peripheral/invoker, command, datum/signal/packet)
 	return
-
