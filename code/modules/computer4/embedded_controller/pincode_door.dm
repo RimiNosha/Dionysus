@@ -33,8 +33,12 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/c4_embedded_controller/airlock_pinpad
 	dwell_time = 0
 	control_mode = RTOS_CMODE_BOLTS
 
+/obj/machinery/c4_embedded_controller/airlock_pinpad/bolt/locked_roundstart
+	unlock_on_roundstart = FALSE
+
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/c4_embedded_controller/airlock_pinpad/secure, 24)
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/c4_embedded_controller/airlock_pinpad/bolt, 24)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/c4_embedded_controller/airlock_pinpad/bolt/locked_roundstart, 24)
 
 /obj/machinery/c4_embedded_controller/airlock_pinpad/setup_default_configuration(datum/c4_file/record/conf_db, obj/item/disk/data/floppy)
 	. = ..()
