@@ -19,18 +19,16 @@
 	construction_type = /obj/item/pipe/directional
 	pipe_state = "pump"
 	vent_movement = NONE
-	network_flags = NETWORK_FLAG_GEN_ID
+
+	network_flags = NETWORK_FLAG_GEN_ID | NETWORK_FLAG_JOIN_FREQUENCY
+	net_class = NETCLASS_PRESSURE_PUMP
 
 	power_rating = 7500
 
 	///Pressure that the pump will reach when on
 	var/target_pressure = ONE_ATMOSPHERE
-	///Frequency for radio signaling
-	var/frequency = 0
 	///ID for radio signaling
 	var/id = null
-	///Connection to the radio processing
-	var/datum/radio_frequency/radio_connection
 	//Last power draw, for the progress bar in the UI
 	var/last_power_draw = 0
 
@@ -55,12 +53,6 @@
 		update_appearance()
 	return ..()
 
-/obj/machinery/atmospherics/components/binary/pump/Destroy()
-	SSpackets.remove_object(src,frequency)
-	if(radio_connection)
-		radio_connection = null
-	return ..()
-
 /obj/machinery/atmospherics/components/binary/pump/update_icon_nopipes()
 	icon_state = (on && is_operational) ? "pump_on-[set_overlay_offset(piping_layer)]" : "pump_off-[set_overlay_offset(piping_layer)]"
 
@@ -79,18 +71,6 @@
 		update_parents()
 		ATMOS_USE_POWER(draw)
 		last_power_draw = draw
-
-
-/**
- * Called in atmos_init(), used to change or remove the radio frequency from the component
- * Arguments:
- * * -new_frequency: the frequency that should be used for the radio to attach to the component, use 0 to remove the radio
- */
-/obj/machinery/atmospherics/components/binary/pump/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = SSpackets.add_object(src, frequency, filter = RADIO_ATMOSIA)
 
 /**
  * Called in atmos_init(), send the component status to the radio device connected
@@ -144,11 +124,6 @@
 				target_pressure = clamp(pressure, 0, MAX_PUMP_PRESSURE)
 				investigate_log("was set to [target_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_appearance()
-
-/obj/machinery/atmospherics/components/binary/pump/atmos_init()
-	..()
-	if(frequency)
-		set_frequency(frequency)
 
 /obj/machinery/atmospherics/components/binary/pump/receive_signal(datum/signal/signal)
 	var/list/payload = signal.data[PKT_PAYLOAD]

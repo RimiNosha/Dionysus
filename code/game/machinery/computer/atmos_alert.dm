@@ -6,21 +6,13 @@
 	icon_keyboard = "atmos_key"
 	light_color = LIGHT_COLOR_CYAN
 
-	network_flags = NETWORK_FLAG_GEN_ID
+	network_flags = NETWORK_FLAG_GEN_ID | NETWORK_FLAG_JOIN_FREQUENCY
 
 	var/list/priority_alarms = list()
 	var/list/minor_alarms = list()
-	var/receive_frequency = FREQ_ATMOS_ALARMS
-	var/datum/radio_frequency/radio_connection
 
-
-/obj/machinery/computer/atmos_alert/Initialize(mapload)
-	. = ..()
-	set_frequency(receive_frequency)
-
-/obj/machinery/computer/atmos_alert/Destroy()
-	SSpackets.remove_object(src, receive_frequency)
-	return ..()
+	connection_frequency = FREQ_ATMOS_ALARMS
+	default_connection_frequency_inbound_filter = RADIO_ATMOSIA
 
 /obj/machinery/computer/atmos_alert/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -58,11 +50,6 @@
 				minor_alarms -= zone
 				. = TRUE
 	update_appearance()
-
-/obj/machinery/computer/atmos_alert/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, receive_frequency)
-	receive_frequency = new_frequency
-	radio_connection = SSpackets.add_object(src, receive_frequency, RADIO_ATMOSIA)
 
 /obj/machinery/computer/atmos_alert/receive_signal(datum/signal/signal)
 	SHOULD_CALL_PARENT(FALSE) //TODO: RECONCILE TAGS AND NETIDS

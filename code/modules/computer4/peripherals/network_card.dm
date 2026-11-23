@@ -52,17 +52,22 @@
 	radio_connection = SSpackets.add_object(src, new_frequency)
 
 /// Post a signal. Has safety checks, so calling this with a timer is OK.
-/obj/item/peripheral/network_card/wireless/proc/post_signal(datum/signal/packet, filter)
+/obj/item/peripheral/network_card/wireless/proc/post_signal(datum/signal/packet, filter, frequency)
 	if(!master_pc?.is_operational || !radio_connection)
 		return
 
 	packet.data[PKT_HEAD_SOURCE_ADDRESS] = network_id
 	// Rewrite the author so we don't get the packet we just sent back.
 	packet.author = WEAKREF(src)
-	radio_connection.post_signal(packet, filter)
 
-/obj/item/peripheral/network_card/wireless/proc/deferred_post_signal(datum/signal/packet, filter, time)
-	addtimer(CALLBACK(src, PROC_REF(post_signal), packet, filter), time)
+	var/datum/radio_frequency/used_freq = radio_connection
+	if(frequency)
+		used_freq = SSpackets.return_frequency(frequency)
+
+	used_freq?.post_signal(packet, filter)
+
+/obj/item/peripheral/network_card/wireless/proc/deferred_post_signal(datum/signal/packet, filter, frequency, time)
+	addtimer(CALLBACK(src, PROC_REF(post_signal), packet, filter, frequency), time)
 
 /obj/item/peripheral/network_card/wireless/receive_signal(datum/signal/signal)
 	if(!master_pc)

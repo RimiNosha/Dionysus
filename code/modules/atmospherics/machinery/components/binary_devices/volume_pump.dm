@@ -19,18 +19,16 @@
 	construction_type = /obj/item/pipe/directional
 	pipe_state = "volumepump"
 	vent_movement = NONE
-	network_flags = NETWORK_FLAG_GEN_ID
+
+	network_flags = NETWORK_FLAG_GEN_ID | NETWORK_FLAG_JOIN_FREQUENCY
+	net_class = NETCLASS_VOLUME_PUMP
 
 	power_rating = 15000
 
 	///Transfer rate of the component in L/s
 	var/transfer_rate = ATMOS_DEFAULT_VOLUME_PUMP
-	///Frequency for radio signaling
-	var/frequency = 0
 	///ID for radio signaling
 	var/id = null
-	///Connection to the radio processing
-	var/datum/radio_frequency/radio_connection
 	//Last power draw, for the progress bar in the UI
 	var/last_power_draw = 0
 
@@ -53,10 +51,6 @@
 		investigate_log("was set to [transfer_rate] L/s by [key_name(user)]", INVESTIGATE_ATMOS)
 		balloon_alert(user, "volume output set to [transfer_rate] L/s")
 		update_appearance()
-	return ..()
-
-/obj/machinery/atmospherics/components/binary/volume_pump/Destroy()
-	SSpackets.remove_object(src,frequency)
 	return ..()
 
 /obj/machinery/atmospherics/components/binary/volume_pump/update_icon_nopipes()
@@ -94,17 +88,6 @@
 
 
 /**
- * Called in atmos_init(), used to change or remove the radio frequency from the component
- * Arguments:
- * * -new_frequency: the frequency that should be used for the radio to attach to the component, use 0 to remove the radio
- */
-/obj/machinery/atmospherics/components/binary/volume_pump/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = SSpackets.add_object(src, frequency, filter = RADIO_ATMOSIA)
-
-/**
  * Called in atmos_init(), send the component status to the radio device connected
  */
 /obj/machinery/atmospherics/components/binary/volume_pump/proc/broadcast_status()
@@ -134,11 +117,6 @@
 	data["last_draw"] = last_power_draw
 	data["max_power"] = power_rating
 	return data
-
-/obj/machinery/atmospherics/components/binary/volume_pump/atmos_init()
-	. = ..()
-
-	set_frequency(frequency)
 
 /obj/machinery/atmospherics/components/binary/volume_pump/ui_act(action, params)
 	. = ..()

@@ -17,16 +17,17 @@
 	use_power = IDLE_POWER_USE
 	power_rating = 45000
 
-	network_flags = NETWORK_FLAG_GEN_ID
+	network_flags = NETWORK_FLAG_GEN_ID | NETWORK_FLAG_JOIN_FREQUENCY
+	net_class = NETCLASS_DP_VENT_PUMP
+
+	connection_frequency = FREQ_ATMOS_CONTROL
+	default_connection_frequency_inbound_filter = RADIO_TO_AIRALARM
 
 	hide = TRUE
 	initial_volume = ATMOS_DEFAULT_VOLUME_PUMP
-	///Variable for radio frequency
-	var/frequency = FREQ_ATMOS_CONTROL
+
 	///Variable for radio id
 	var/id = null
-	///Stores the radio connection
-	var/datum/radio_frequency/radio_connection
 	///Indicates that the direction of the pump, if 0 is siphoning, if 1 is releasing
 	var/pump_direction = 1
 	///Set the maximum allowed external pressure
@@ -38,21 +39,19 @@
 	///Set the flag for the pressure bound
 	var/pressure_checks = EXT_BOUND
 
-	var/radio_filter_in
+	/// The radio filter to send outbound packets on.
 	var/radio_filter_out
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/Initialize(mapload)
 	. = ..()
 	if(!id_tag)
 		id_tag = net_id
+
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/Destroy()
 	var/area/vent_area = get_area(src)
 	if(vent_area)
 		vent_area.air_vent_info -= id_tag
 		GLOB.air_vent_names -= id_tag
-
-	SSpackets.remove_object(src, frequency)
-	radio_connection = null
 	return ..()
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/update_name()
@@ -133,19 +132,6 @@
 
 	SAFE_ZAS_UPDATE(loc)
 
-//Radio remote control
-
-/**
- * Called in atmos_init(), used to change or remove the radio frequency from the component
- * Arguments:
- * * -new_frequency: the frequency that should be used for the radio to attach to the component, use 0 to remove the radio
- */
-/obj/machinery/atmospherics/components/binary/dp_vent_pump/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = SSpackets.add_object(src, frequency, radio_filter_in)
-
 /**
  * Called in atmos_init(), send the component status to the radio device connected
  */
@@ -174,10 +160,12 @@
 	radio_connection.post_signal(signal, filter = radio_filter_out)
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/atmos_init()
-	radio_filter_in = frequency==FREQ_ATMOS_CONTROL?(RADIO_FROM_AIRALARM):null
-	radio_filter_out = frequency==FREQ_ATMOS_CONTROL?(RADIO_TO_AIRALARM):null
-	if(frequency)
-		set_frequency(frequency)
+	default_connection_frequency_inbound_filter = connection_frequency ==FREQ_ATMOS_CONTROL?(RADIO_FROM_AIRALARM):null
+	radio_filter_out = connection_frequency ==FREQ_ATMOS_CONTROL?(RADIO_TO_AIRALARM):null
+	// Refreshes the filter on the inbound connection.
+	if(connection_frequency)
+		set_connection_frequency(connection_frequency, filter = default_connection_frequency_inbound_filter)
+
 	broadcast_status()
 	..()
 
@@ -253,11 +241,11 @@
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_ordmix
 	id = INCINERATOR_ORDMIX_DP_VENTPUMP
-	frequency = FREQ_AIRLOCK_CONTROL
+	connection_frequency = FREQ_AIRLOCK_CONTROL
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_atmos
 	id = INCINERATOR_ATMOS_DP_VENTPUMP
-	frequency = FREQ_AIRLOCK_CONTROL
+	connection_frequency = FREQ_AIRLOCK_CONTROL
 
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/layer2
 	piping_layer = 2

@@ -282,8 +282,8 @@
 				"message" = html_decode(message),
 			)
 		),
-		logging_data = user
 	)
+	pda_message.logging_data = list("user_keyname" = key_name(user))
 
 	netcard_cache.post_signal(pda_message)
 	// Log it in our logs

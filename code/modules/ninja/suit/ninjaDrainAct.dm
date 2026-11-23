@@ -122,11 +122,6 @@
 		if(!ninja_antag)
 			return
 
-
-
-//COMMUNICATIONS CONSOLE//
-/obj/machinery/computer/communications/ninjadrain_act(obj/item/clothing/suit/space/space_ninja/ninja_suit, mob/living/carbon/human/ninja, obj/item/clothing/gloves/space_ninja/ninja_gloves)
-
 //WIRE//
 /obj/structure/cable/ninjadrain_act(obj/item/clothing/suit/space/space_ninja/ninja_suit, mob/living/carbon/human/ninja, obj/item/clothing/gloves/space_ninja/ninja_gloves)
 	if(!ninja_suit || !ninja || !ninja_gloves)

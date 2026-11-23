@@ -89,7 +89,7 @@
 		src,
 		packetv2(payload = list(
 			"tag" = id_tag,
-			PKT_ARG_CMD = "update" //Doesn't matter.
+			PKT_ARG_CMD = NET_COMMAND_UPDATE //Doesn't matter.
 		))
 	)
 	post_signal(signal, RADIO_AIRLOCK)

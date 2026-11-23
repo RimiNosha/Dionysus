@@ -68,4 +68,3 @@
 /datum/computer_file/program/signal_commander/proc/set_frequency(new_frequency)
 	signal_frequency = new_frequency
 	radio_connection = SSpackets.return_frequency(signal_frequency)
-	return

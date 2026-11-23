@@ -10,7 +10,7 @@
  * * do_not_modify (boolean) Whether or not station announcers can add to this message.
  * * players (list or null) The players we're sending to. If null, send to all players.
  */
-/proc/priority_announce(text = "", super_title = "Station Announcement", sub_title = "", sound_type = ANNOUNCER_DEFAULT, send_to_newscaster, do_not_modify = FALSE, list/players)
+/proc/priority_announce(text = "", super_title = "Station Announcement", sub_title = "", sound_type = ANNOUNCER_DEFAULT, send_to_newscaster = FALSE, do_not_modify = FALSE, list/players, sound/override_sound)
 	if(!text)
 		return
 

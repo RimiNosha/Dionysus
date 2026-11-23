@@ -58,6 +58,9 @@
 	var/datum/looping_sound/telephone/ring/outgoing/outring_loop
 	COOLDOWN_DECLARE(scan_cooldown)
 
+	/// A payload added to ping responses.
+	var/list/ping_reply_payload
+
 /obj/machinery/telephone/Initialize(mapload)
 	//These need to be above the supercall for color reasons
 	handset = new(src)
@@ -74,14 +77,20 @@
 /obj/machinery/telephone/LateInitialize()
 	. = ..()
 	if(!friendly_name)
-		friendly_name = get_area(src)
-		friendly_name = format_text(friendly_name:name) //~
-	recalculate_name()
+		friendly_name = format_text(astype(get_area(src), /area).name)
+	update_appearance(UPDATE_NAME)
 
-///Recalculate our name.
-/obj/machinery/telephone/proc/recalculate_name()
-	ping_addition = list("user_id"=friendly_name) //Preload this so we can staple this to the ping packet.
+/obj/machinery/telephone/create_ping_reply(datum/signal/ping_signal)
+	var/datum/signal/reply = ..()
+	var/list/payload = reply?.data[PKT_PAYLOAD]
+	if(payload)
+		payload += ping_reply_payload.Copy()
+	return reply
+
+/obj/machinery/telephone/update_name(updates)
+	ping_reply_payload = list("user_id"=friendly_name)
 	name = "phone - [friendly_name][placard_name ? " - [placard_name]" : null]"
+	return ..()
 
 /obj/machinery/telephone/Destroy()
 	if(!QDELETED(handset))
@@ -181,7 +190,7 @@
 			if(!new_friendly_name)
 				return ITEM_INTERACT_SUCCESS
 			friendly_name = new_friendly_name
-			recalculate_name()
+			update_appearance(UPDATE_NAME)
 
 		if("Set Placard")
 			var/new_placard_name = input(user, "New Placard?", "Re-writing [placard_name]", placard_name) as null|text
@@ -234,14 +243,14 @@
 	switch(signal.data[PKT_PAYLOAD][PKT_ARG_CMD])
 		if(NET_COMMAND_PING_REPLY)//Add new phone to database
 			if(signal.data[PKT_HEAD_NETCLASS] == NETCLASS_P2P_PHONE) //Another phone!
-				discovered_phones[signal.data[PKT_HEAD_SOURCE_ADDRESS]]=signal.data["user_id"]
+				discovered_phones[signal.data[PKT_HEAD_SOURCE_ADDRESS]]=signal.data[PKT_PAYLOAD]["user_id"]
 				return RECEIVE_SIGNAL_FINISHED
 
 		if("tel_ring")//Incoming ring
 			if(active_caller || handset_state == HANDSET_OFFHOOK)//We're either calling, or about to call, Just tell them to fuck off.
 				post_signal(create_signal(signal.data[PKT_HEAD_SOURCE_ADDRESS], list(PKT_ARG_CMD="tel_busy"))) //Busy signal, Reject call.
 				return RECEIVE_SIGNAL_FINISHED
-			receive_call(list(signal.data[PKT_HEAD_SOURCE_ADDRESS],signal.data["caller_id"]))
+			receive_call(list(signal.data[PKT_HEAD_SOURCE_ADDRESS],signal.data[PKT_PAYLOAD]["caller_id"]))
 			return RECEIVE_SIGNAL_FINISHED
 
 		if("tel_ready")//Remote side pickup
@@ -620,14 +629,14 @@
 /obj/item/p2p_phone_handset/proc/handle_voicedata(datum/signal/v_signal)
 	if(!v_signal)
 		CRASH("Handset was asked to handle a packet that didn't exist.")
-	//cache for sanic speed :3
-	var/list/v_sig_data = v_signal.data
+
+	var/list/payload = v_signal.data[PKT_PAYLOAD]
 	var/list/radio_bullshit_override = list("span"="radio", "name"=callstation.active_caller[CALLER_NAME])
 
-	var/atom/movable/virtualspeaker/admission_of_defeat = v_sig_data["virtualspeaker"]
+	var/atom/movable/virtualspeaker/admission_of_defeat = payload["virtualspeaker"]
 	var/sound/funnysound
 	if(admission_of_defeat.voice_type)
-		var/funnysound_index = copytext_char(v_sig_data["message"], -1)
+		var/funnysound_index = copytext_char(payload["message"], -1)
 		switch(funnysound_index)
 			if("?")
 				funnysound = voice_type2sound[admission_of_defeat.voice_type]["?"]
@@ -638,13 +647,13 @@
 
 
 	playsound(src, funnysound || 'sound/effects/radio/syndie.ogg', funnysound ? 300 : 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, falloff_exponent = 0)
-	var/rendered = compose_message(v_sig_data["virtualspeaker"], v_sig_data["language"], v_sig_data["message"], radio_bullshit_override, v_sig_data["spans"], v_sig_data["message_mods"])
+	var/rendered = compose_message(payload["virtualspeaker"], payload["language"], payload["message"], radio_bullshit_override, payload["spans"], payload["message_mods"])
 	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(2, src)-src)
 		if(!hearing_movable)//theoretically this should use as anything because it shouldnt be able to get nulls but there are reports that it does.
 			stack_trace("somehow theres a null returned from get_hearers_in_view() in send_speech!")
 			continue
 
-		hearing_movable.Hear(rendered, v_sig_data["virtualspeaker"], v_sig_data["language"], v_sig_data["message"], radio_bullshit_override, v_sig_data["spans"], v_sig_data["message_mods"], speaker_location(), message_range = INFINITY)
+		hearing_movable.Hear(rendered, payload["virtualspeaker"], payload["language"], payload["message"], radio_bullshit_override, payload["spans"], payload["message_mods"], speaker_location(), message_range = INFINITY)
 
 
 #undef STATE_WAITING

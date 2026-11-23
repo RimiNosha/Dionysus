@@ -11,10 +11,10 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	circuit = /obj/item/circuitboard/computer/atmos_control
 	light_color = LIGHT_COLOR_CYAN
 
-	network_flags = NETWORK_FLAG_GEN_ID
+	network_flags = NETWORK_FLAG_GEN_ID | NETWORK_FLAG_JOIN_FREQUENCY
 
-	var/frequency = FREQ_ATMOS_STORAGE
-	var/datum/radio_frequency/radio_connection
+	connection_frequency = FREQ_ATMOS_STORAGE
+	default_connection_frequency_inbound_filter = RADIO_ATMOSIA
 
 	/// Which sensors/input/outlets do we want to listen to.
 	/// Assoc of list[chamber_id] = readable_chamber_name
@@ -35,7 +35,6 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	. = ..()
 
 	GLOB.atmos_air_controllers += src
-	set_frequency(frequency)
 
 	sensor_info = list()
 	input_info = list()
@@ -43,7 +42,6 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 
 /obj/machinery/computer/atmos_control/Destroy()
 	GLOB.atmos_air_controllers -= src
-	SSpackets.remove_object(src, frequency)
 	return ..()
 
 /obj/machinery/computer/atmos_control/receive_signal(datum/signal/signal)
@@ -78,11 +76,6 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 
 	if(payload["sigtype"] == "destroyed")
 		info_list[tag_data[1]] = null
-
-/obj/machinery/computer/atmos_control/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = SSpackets.add_object(src, frequency, RADIO_ATMOSIA)
 
 /// Reconnect only works for station based chambers.
 /obj/machinery/computer/atmos_control/proc/reconnect(mob/user)

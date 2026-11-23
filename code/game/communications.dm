@@ -212,7 +212,9 @@ GLOBAL_LIST_INIT(freq2icon, list(
 	var/list/filter_list
 
 	///Admin logging
-	var/logging_data
+	var/list/logging_data
+	/// The ckey responsible for the packet's creation
+	var/logging_ckey
 
 	///Does this packet contain anything but standard data?
 	///Anything that captures packets should either generate garbage data or discard these packets.
@@ -238,6 +240,8 @@ GLOBAL_LIST_INIT(freq2icon, list(
 /datum/signal/proc/Copy()
 	var/list/cloned_data = DeepCopyData()
 	var/datum/signal/clone = new type(author, cloned_data, transmission_method, logging_data)
+	if(logging_data)
+		clone.logging_data = logging_data
 	clone.passed_bridges = src.passed_bridges?.Copy()
 	return clone
 

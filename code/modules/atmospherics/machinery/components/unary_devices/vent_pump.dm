@@ -21,9 +21,14 @@
 	shift_underlay_only = FALSE
 	pipe_state = "uvent"
 	vent_movement = VENTCRAWL_ALLOWED | VENTCRAWL_CAN_SEE | VENTCRAWL_ENTRANCE_ALLOWED
+
 	network_flags = NETWORK_FLAG_GEN_ID
+	net_class = NETCLASS_VENT_PUMP
 
 	power_rating = 30000
+
+	connection_frequency = FREQ_ATMOS_CONTROL
+	default_connection_frequency_inbound_filter = RADIO_ATMOSIA
 
 	///Direction of pumping the gas (RELEASING or SIPHONING)
 	var/pump_direction = RELEASING
@@ -37,14 +42,8 @@
 	// INT_BOUND: Do not pass internal_pressure_bound
 	// NO_BOUND: Do not pass either
 
-	///Frequency id for connecting to the NTNet
-	var/frequency = FREQ_ATMOS_CONTROL
-	///Reference to the radio datum
-	var/datum/radio_frequency/radio_connection
-	///Radio connection to the air alarm
-	var/radio_filter_out
 	///Radio connection from the air alarm
-	var/radio_filter_in
+	var/radio_filter_out
 
 	var/can_hibernate = TRUE
 
@@ -60,9 +59,6 @@
 	if(vent_area)
 		vent_area.air_vent_info -= id_tag
 		GLOB.air_vent_names -= id_tag
-
-	SSpackets.remove_object(src,frequency)
-	radio_connection = null
 	return ..()
 
 /obj/machinery/atmospherics/components/unary/vent_pump/update_icon_nopipes()
@@ -167,13 +163,6 @@
 			pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.returnPressure()) //increasing the pressure here
 
 	return pressure_delta
-//Radio remote control
-
-/obj/machinery/atmospherics/components/unary/vent_pump/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = SSpackets.add_object(src, frequency, radio_filter_in)
 
 /obj/machinery/atmospherics/components/unary/vent_pump/proc/broadcast_status()
 	if(!radio_connection)
@@ -181,7 +170,7 @@
 
 	var/datum/signal/signal = create_signal(payload = list(
 		"tag" = id_tag,
-		"frequency" = frequency,
+		"frequency" = connection_frequency,
 		"device" = "VP",
 		"timestamp" = world.time,
 		"power" = on,
@@ -213,10 +202,13 @@
 
 /obj/machinery/atmospherics/components/unary/vent_pump/atmos_init()
 	//some vents work his own spesial way
-	radio_filter_in = frequency==FREQ_ATMOS_CONTROL?(RADIO_FROM_AIRALARM):null
-	radio_filter_out = frequency==FREQ_ATMOS_CONTROL?(RADIO_TO_AIRALARM):null
-	if(frequency)
-		set_frequency(frequency)
+	default_connection_frequency_inbound_filter = connection_frequency == FREQ_ATMOS_CONTROL ? (RADIO_FROM_AIRALARM):null
+	radio_filter_out = connection_frequency == FREQ_ATMOS_CONTROL ? (RADIO_TO_AIRALARM) : null
+
+	// Refreshes the inbound radio filter
+	if(connection_frequency)
+		set_connection_frequency(connection_frequency, filter = default_connection_frequency_inbound_filter)
+
 	broadcast_status()
 	..()
 

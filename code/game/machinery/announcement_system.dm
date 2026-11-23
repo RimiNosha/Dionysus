@@ -17,6 +17,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	circuit = /obj/item/circuitboard/machine/announcement_system
 
 	network_flags = NETWORK_FLAG_GEN_ID // Generate an ID so we can send PDA messages with a valid source.
+	net_class = NETCLASS_AAS
 
 	var/datum/radio_frequency/common_freq
 

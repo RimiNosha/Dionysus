@@ -377,13 +377,7 @@
 		return
 
 	if(trim(reason))
-		SSshuttle.requestEvac(src, reason)
-
-	// hack to display shuttle timer
-	if(!EMERGENCY_IDLE_OR_RECALLED)
-		var/obj/machinery/computer/communications/C = locate() in INSTANCES_OF(/obj/machinery/computer/communications)
-		if(C)
-			C.post_status("shuttle")
+		SSshuttle.mobRequestEvac(src, reason)
 
 /mob/living/silicon/ai/can_interact_with(atom/A)
 	. = ..()

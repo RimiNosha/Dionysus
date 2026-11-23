@@ -15,6 +15,12 @@
 /// You should have a VERY good reason for this to be set on anything not of type [/obj/machinery/power]
 #define NETWORK_FLAG_POWERNET_DATANODE (1<<2)
 
+/// When set_frequency is called, run add_object() to add the machine as a listener.
+#define NETWORK_FLAG_JOIN_FREQUENCY (1<<3)
+
+/// Has behavior for data not sent to its net_id.
+#define NETWORK_FLAG_NEED_NOT_DEST (1<<4)
+
 /// Standard set of network flags, for use by most network-connected equipment.
 #define NETWORK_FLAGS_STANDARD_CONNECTION (NETWORK_FLAG_GEN_ID | NETWORK_FLAG_USE_DATATERMINAL)
 
@@ -28,9 +34,23 @@
 #define NETCLASS_BUTTON "WNET_BUTTON"
 #define NETCLASS_ADAPTER "WNET_BUTTON"
 #define NETCLASS_AIRLOCK "PNET_AIRLOCK"
+#define NETCLASS_COMMS_DISH "PNET_COMMS_DISH"
+#define NETCLASS_AAS "PNET_ANNOUNCEMENT_SYS"
+#define NETCLASS_COMPUTER "PNET_CONSOLE"
+#define NETCLASS_EMBEDDED_CONTROLLER "PNET_MACHINE_CONTROLLER"
 
 // Atmos equipment netclasses
 #define NETCLASS_PIPE_METER "PNET_PIPE_METER"
+#define NETCLASS_GAS_SENSOR "PNET_AIR_SENSOR"
+#define NETCLASS_OUTLET_INJECTOR "PNET_OUTLET_INJECTOR"
+#define NETCLASS_AIR_ALARM "PNET_AIR_ALARM"
+#define NETCLASS_DP_VENT_PUMP "PNET_DP_VENT_PUMP"
+#define NETCLASS_PASSIVE_GATE "PNET_PASSIVE_GATE"
+#define NETCLASS_PRESSURE_VALVE "PNET_VALVE"
+#define NETCLASS_PRESSURE_PUMP "PNET_PIPE_PUMP"
+#define NETCLASS_VOLUME_PUMP "PNET_PIPE_VOLUME_PUMP"
+#define NETCLASS_VENT_PUMP "PNET_VENT_PUMP"
+#define NETCLASS_VENT_SCRUBBER "PNET_VENT_SCRUBBER"
 
 // Packet fields
 // not honestly thrilled with having these be defines but kapu wants it that way
@@ -59,6 +79,7 @@
 //* PAYLOAD FIELDS*//
 /// Command (type) of a packet
 #define PKT_ARG_CMD "command"
+#define PKT_ARG_AUTH "auth"
 
 // Pagers
 /// Packet arg for pager types
@@ -74,6 +95,21 @@
 
 // PDA Text Message
 #define NETCMD_PDAMESSAGE "pda_message"
+
+// COMMASTER / Shuttle Display
+#define NET_COMMAND_CALL_SHUTTLE "call_shuttle"
+	/// Shuttle call reason
+	#define PKT_ARG_CALL_REASON "call_reason"
+
+/// Recall the shuttle
+#define NET_COMMAND_RECALL_SHUTTLE "recall_shuttle"
+
+// Update status displays
+#define NET_COMMAND_UPDATE "update"
+// Change the status of the display based on args
+#define NET_COMMAND_STATDISPLAY_SET "set_display"
+	#define PKT_ARG_STATDISPLAY_MODE "mode"
+	#define PKT_ARG_STATDISPLAY_PICTURE "picture"
 
 // EC Slave Update Request
 #define NETCMD_UPDATE_REQUEST "update_rq"

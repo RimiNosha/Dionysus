@@ -10,9 +10,7 @@
 	power_channel = AREA_USAGE_ENVIRON
 
 	var/master_tag
-	var/frequency = FREQ_AIRLOCK_CONTROL
-
-	var/datum/radio_frequency/radio_connection
+	connection_frequency = FREQ_AIRLOCK_CONTROL
 
 	var/on = TRUE
 	var/alert = FALSE
@@ -63,15 +61,3 @@
 		radio_connection.post_signal(signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
 	update_appearance()
-
-/obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
-	frequency = new_frequency
-	radio_connection = SSpackets.return_frequency(frequency)
-
-/obj/machinery/airlock_sensor/Initialize(mapload)
-	. = ..()
-	set_frequency(frequency)
-
-/obj/machinery/airlock_sensor/Destroy()
-	SSpackets.remove_object(src,frequency)
-	return ..()
