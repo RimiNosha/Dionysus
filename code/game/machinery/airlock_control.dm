@@ -39,10 +39,11 @@
 	. = ..()
 	if(.)
 		return
-	var/datum/signal/signal = new(src, list(
+
+	var/datum/signal/signal = create_signal(payload = list(
 		"tag" = master_tag,
-		"command" = "cycle"
-	))
+		PKT_ARG_CMD = "cycle"
+	), transmission_method = TRANSMISSION_RADIO)
 
 	radio_connection.post_signal(signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 	z_flick("airlock_sensor_cycle", src)
@@ -53,20 +54,19 @@
 		var/pressure = round(air_sample.returnPressure(),0.1)
 		alert = (pressure < ONE_ATMOSPHERE*0.8)
 
-		var/datum/signal/signal = new(src, list(
+		var/datum/signal/signal = create_signal(payload = list(
 			"tag" = id_tag,
 			"timestamp" = world.time,
 			"pressure" = num2text(pressure)
-		))
+		), transmission_method = TRANSMISSION_RADIO)
 
 		radio_connection.post_signal(signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
 	update_appearance()
 
 /obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
-	SSpackets.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = SSpackets.add_object(src, frequency, RADIO_AIRLOCK)
+	radio_connection = SSpackets.return_frequency(frequency)
 
 /obj/machinery/airlock_sensor/Initialize(mapload)
 	. = ..()

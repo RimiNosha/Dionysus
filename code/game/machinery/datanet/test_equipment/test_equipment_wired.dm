@@ -17,8 +17,8 @@
 	. = ..()
 	if(.)
 		return
-	transmission_terminal.post_signal(create_signal(NET_ADDRESS_PING, list()))
 
+	transmission_terminal.post_signal(create_signal(NET_ADDRESS_PING, list()))
 
 /obj/machinery/test_equipment/wired/say_emphasis(input)
 	//Fuck off and don't decorate debug text
@@ -45,7 +45,7 @@
 	if(!jsonified_text)
 		return
 	var/list/datablob = json_decode(jsonified_text)
-	var/datum/signal/pretransmission_signal = new(src, datablob) //This is split out for debugging reasons.
+	var/datum/signal/pretransmission_signal = new(src, packetv2(payload = datablob)) //This is split out for debugging reasons.
 	transmission_terminal.post_signal(pretransmission_signal)
 
 /obj/machinery/test_equipment/wired/receive_signal(datum/signal/signal)
