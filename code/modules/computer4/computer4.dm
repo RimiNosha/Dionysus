@@ -275,13 +275,14 @@ TYPEINFO_DEF(/obj/machinery/computer4)
 /obj/machinery/computer4/ui_data(mob/user)
 	tgui_last_accessed[user.ckey] ||= ""
 	var/list/data = list(
-		"displayHTML" = text_buffer,
+		"terminalContent" = text_buffer,
 		"terminalActive" = !!operating_system?.active_program,
 		"floppy" = inserted_disk,
 		"windowName" = name,
 		"user" = user,
 		"fontColor" = screen_font_color,
 		"bgColor" = screen_bg_color,
+		"inputMode" = operating_system?.input_mode || "line",
 		"inputValue" = tgui_last_accessed[user.ckey],
 	)
 	return data

@@ -73,9 +73,7 @@
 	if(.)
 		return
 
-	var/encoded_in = html_encode(text)
-	println(encoded_in)
-	write_log(encoded_in)
+	write_log(html_encode(text))
 
 	var/list/datum/parsed_cmdline/parsed_cmdlines = parse_cmdline(text)
 	if(!length(parsed_cmdlines)) //okay

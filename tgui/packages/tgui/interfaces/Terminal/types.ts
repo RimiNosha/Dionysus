@@ -20,11 +20,18 @@ export type PeripheralData = {
 export type TerminalData = {
   bgColor: string;
   ckey: string;
-  displayHTML: string;
   fontColor: string;
+  inputMode: InputMode;
   inputValue: string;
   loadTimestamp: number;
+  noScroll: boolean;
   peripherals: Array<PeripheralData>;
   terminalActive: BooleanLike;
+  terminalContent: string;
   windowName: string;
 };
+
+export enum InputMode {
+  DIRECT = 'direct',
+  LINE = 'line',
+}

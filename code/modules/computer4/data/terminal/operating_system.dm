@@ -19,6 +19,11 @@
 	/// Halt And Catch Fire (Prevents STDIN, closest we can get to a HALT state.)
 	var/deadlocked = FALSE
 
+	/// The input mode for the frontend to use. Should be set via `set_input_mode`.
+	/// - direct: Sends every keystroke.
+	/// - line: Sends whole lines. TGUI has a line buffer that can't be read until the user presses enter.
+	var/input_mode = "line"
+
 /datum/c4_file/terminal_program/operating_system/Destroy()
 	if(length(processing_programs))
 		clean_up()
@@ -103,16 +108,21 @@
 	return get_file(path_info.file_name, found_folder, include_folders = TRUE)
 
 /// Write to the terminal.
-/datum/c4_file/terminal_program/operating_system/proc/println(text, update_ui = TRUE)
+/datum/c4_file/terminal_program/operating_system/proc/print(text, update_ui = TRUE)
 	if(isnull(text) || !is_operational())
 		return FALSE
 
-
 	var/obj/machinery/computer4/computer = get_computer()
-	computer.text_buffer += "[text]\n"
+	computer.text_buffer += text
+
 	if(update_ui)
 		SStgui.update_uis(computer)
+
 	return TRUE
+
+/// Write to the terminal.
+/datum/c4_file/terminal_program/operating_system/proc/println(text, update_ui = TRUE)
+	return print("[text]\n", update_ui)
 
 /// Clear the screen completely.
 /datum/c4_file/terminal_program/operating_system/proc/clear_screen(fully = FALSE)
@@ -122,6 +132,7 @@
 	get_computer().text_buffer = ""
 	if(!fully)
 		println("Screen cleared.")
+
 	return TRUE
 
 /datum/c4_file/terminal_program/operating_system/proc/get_log_folder()
@@ -131,6 +142,10 @@
 /datum/c4_file/terminal_program/operating_system/proc/try_std_in(text)
 	if(!text || !is_operational())
 		return FALSE
+
+	if (input_mode == "line") {
+		println(text) // Don't like this? Then you didn't want line mode. Use direct.
+	}
 
 	return active_program?.std_in(text)
 
@@ -235,3 +250,9 @@
 
 
 	unload_program(active_program)
+
+/datum/c4_file/terminal_program/operating_system/proc/set_input_mode(input_mode)
+	var/static/list/input_modes = list("line", "direct") // TGUI can't be changed during runtime so igaf about this being a static list being tucked away in here
+	if (!(input_mode in input_modes))
+		CRASH("Invalid input mode \"[input_mode]\" given!")
+	src.input_mode = input_mode

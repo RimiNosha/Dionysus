@@ -9,14 +9,21 @@
 import { useBackend } from '../../backend';
 import { Stack } from '../../components';
 import { Window } from '../../layouts';
-import { InputAndButtonsSection } from './InputAndButtonsSection';
 import { PeripheralsSection } from './PeripheralsSection';
-import { TerminalOutputSection } from './TerminalOutputSection';
+import { TerminalOutputSection } from './TerminalSection';
 import type { TerminalData } from './types';
 
 export const Terminal = (props) => {
   const { data } = useBackend<TerminalData>();
-  const { bgColor, displayHTML, fontColor, peripherals, windowName } = data;
+  const {
+    bgColor,
+    fontColor,
+    inputMode,
+    inputValue,
+    peripherals,
+    terminalContent,
+    windowName,
+  } = data;
 
   return (
     <Window theme="retro-dark" title={windowName} width={670} height={500}>
@@ -25,12 +32,11 @@ export const Terminal = (props) => {
           <Stack.Item grow>
             <TerminalOutputSection
               bgColor={bgColor}
-              displayHTML={displayHTML}
               fontColor={fontColor}
+              inputMode={inputMode}
+              inputValue={inputValue}
+              terminalContent={terminalContent}
             />
-          </Stack.Item>
-          <Stack.Item>
-            <InputAndButtonsSection />
           </Stack.Item>
           <Stack.Item>
             <PeripheralsSection peripherals={peripherals} />

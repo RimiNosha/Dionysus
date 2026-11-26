@@ -41,6 +41,13 @@ export const PeripheralsSection = (props: PeripheralsSectionProps) => {
           </Button>
         );
       })}
+      <Button
+        icon="repeat"
+        style={{ right: 0, position: 'absolute' }}
+        onClick={() => act('restart')}
+        my={0.25}
+        tooltip="Restart"
+      />
     </Section>
   );
 };

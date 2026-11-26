@@ -3,8 +3,8 @@ import { classes } from 'common/react';
 import { useBackend } from '../backend';
 import { Box, Button, Flex, Grid } from '../components';
 import { Window } from '../layouts';
-import { TerminalOutputSection } from './Terminal/TerminalOutputSection';
-import { type TerminalData } from './Terminal/types';
+import { TerminalOutputSection } from './Terminal/TerminalSection';
+import { InputMode, type TerminalData } from './Terminal/types';
 
 // This ui is so many manual overrides and !important tags
 // and hand made width sets that changing pretty much anything
@@ -50,7 +50,7 @@ const ControllerKeypad = (props) => {
 
 export const EmbeddedController = (props) => {
   const { act, data } = useBackend<TerminalData>();
-  const { displayHTML, bgColor, fontColor } = data;
+  const { terminalContent, bgColor, fontColor } = data;
 
   return (
     <Window width={412} height={638} theme="retro">
@@ -69,9 +69,10 @@ export const EmbeddedController = (props) => {
           >
             <TerminalOutputSection
               bgColor={bgColor}
-              displayHTML={displayHTML}
+              terminalContent={terminalContent}
               fontColor={fontColor}
-              noscroll
+              inputMode={InputMode.DIRECT}
+              inputValue=""
             />
           </Box>
           <Flex mb={1.5} justify="center">
